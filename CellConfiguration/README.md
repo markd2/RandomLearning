@@ -18,6 +18,9 @@ other link(s):
 * https://www.biteinteractive.com/cell-content-configuration-in-ios-14/
 * Apple doc link from V: https://developer.apple.com/documentation/uikit/uicollectionviewcell/3600949-contentconfiguration
 
+Questions from Mikey
+* Does that supplant cell viewmodels? Are they cell viewmodels?
+
 
 ==================================================
 
