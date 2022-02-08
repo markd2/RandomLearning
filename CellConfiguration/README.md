@@ -12,6 +12,7 @@ IDEARS
   - play with reserved layout size
   - look at the different UI*Configuration thingies available
   - UIListContentView in our own custom views
+  - custom configuration in a table view - can I see the flow of state changes?
   - something more complicated
 
 other link(s):
@@ -20,6 +21,21 @@ other link(s):
 
 Questions from Mikey
 * Does that supplant cell viewmodels? Are they cell viewmodels?
+
+==================================================
+# Stuffs
+
+* [ ] UIContentConfiguration - object that produces a content view
+      - makeContentView: UIContentView
+      - updatedConfigurationForState(UIConfigurationState) -> instancetype
+* [ ] UIContentView - view with a settable property that is a content configuration
+      - id configuration
+* [ ] UIConfigurationState 
+      - initWithTraitCollection / traitCollection accessor
+      - customStateForKey:
+      - setCustomState:forKey
+      - objectForKeyedSubscript
+
 
 
 ==================================================
@@ -535,3 +551,132 @@ No matter how complex or custom your cells are, you'll be able to take advantage
 configurations.
 
 @28:20 We've covered all the essentials of modern cell configuration.  _(sales pitch elided)_
+
+
+==================================================
+# Developer's guide to Cell Content Configuration
+
+Matt Neuberg, https://www.biteinteractive.com/cell-content-configuration-in-ios-14/
+  (go read that and toss him some views. These are just my notes.)
+
+Remember this kind of stuff?
+
+```
+func cellForRowAtIndexPath {
+    let cell = tableView.dequeReusableCell
+    let label = ... // like get from the cell
+    label.text = "Snorgle"
+    return cell
+```
+
+This the data source, it should have no business knowing the cell contains a label.
+It (the _data_ source) should just supply the cell with _data_.  How the cell renders
+that data is no business of the data source.
+
+So, the standard rejoinder is to make your own UITableViewCell subclass, and add a `configure` method.
+That breaks the dependency between the data source and the cell
+
+```
+....
+cell.configure(text: "Snorgle")
+```
+
+Cells should be self-configuring.  duh.  Apple catches up with iOS 14
+"As usual with Apple, this architecture is twice as elaborate and complicated as it needs to be"
+_(#lolz)_
+
+
+- UIContentConfiguration - object that produces a content view
+- UIContentView - view with a settable property that is a content configuration
+
+(a bit circular) They're protocols.  Can delcare the content configuration object as struct
+
+This is the rock-bottom pair of configuration and view:
+
+```
+class BlahContentView: UIView, UIContentView {
+    var configuration: UIContentConfiguration
+
+    init(_ configuration: UIContentConfiguration) {
+        self.configuration = configuration
+        super.initframe: .zero)
+    }
+
+    required init?( ... get bent )
+}
+
+struct BlahConfiguration: UIContentConfiguration {
+    func makeContentView() -> UIVuew & UIContentView {
+        return BlahContentView(self)
+    }
+
+    func updated(for state: UIConfigurationState) -> MyContentConfiguration {
+        return self
+    }
+}
+```
+
+The idea is 
+  * a content view contains and configures views
+  * a content configuration communicates data to the content view
+
+So, make it do stuff.  The content view is a single label, centered.
+So the minimum going to need is that text
+
+```
+struct SnorgleConfiguration: UIContentConfiguration {
+    var text = ""
+
+    func makeContentView() -> UIVuew & UIContentView {
+        return SnorgleContentView(self)
+    }
+
+    func updated(for state: UIConfigurationState) -> MyContentConfiguration {
+        return self
+    }
+}      
+```
+
+by giving the configuration a text property.
+
+The content view is the workhorse:
+  - separate the configuration of the view from the application of the data that comes in from the config object
+  - in the content view initializer, configure the content view,
+    - give it subviews as needed
+  - at the end of the init, and in a setter observer on the `configuration` property, apply the data
+    - that way the timing doesn't matter - get it at init time, or have it set when needed
+
+```
+class SnorgleContentView UIView, UIContentView {
+    var configuration: UIContentConfiguration {
+        didSet {
+            self.configure(configuration: configuration)
+        }
+    }
+
+    let label = UILabel()
+
+    init(_ configuration: UIContentConfiguration) {
+        self.configuration = configuration
+        super.init(frame: .zero)
+
+        addSubview(label)
+        // configure lavel, set constraints
+        configure(configuration: configuration)
+    }
+
+    required init?(coder) // blahblah
+
+    func configure(configuration: UIContentConfiguration) {
+        guard let configuration = configuration as? SnorgleContentConfiguration else { return }
+        label.text = configuration.text
+    }
+}
+```
+
+_(that's a fair amount of ceremony)_
+
+OBTW, all of this is totally independent of tableviews etc
+
+(stopped at "The idea of a configurable cell")
+
