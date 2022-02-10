@@ -13,11 +13,16 @@ IDEARS
   - look at the different UI*Configuration thingies available
   - UIListContentView in our own custom views
   - custom configuration in a table view - can I see the flow of state changes?
+  - The two biteinteractive approaches to plumbing a switch through
+    - and try it via diffable data sources
+  - And with combine as the conduit?
   - something more complicated
 
 other link(s):
 * https://www.biteinteractive.com/cell-content-configuration-in-ios-14/
+* https://www.biteinteractive.com/user-interactive-cell-configurations-in-ios-14/
 * Apple doc link from V: https://developer.apple.com/documentation/uikit/uicollectionviewcell/3600949-contentconfiguration
+* https://swiftsenpai.com/development/uicollectionview-list-custom-cell/
 
 Questions from Mikey
 * Does that supplant cell viewmodels? Are they cell viewmodels?
@@ -35,8 +40,9 @@ Questions from Mikey
       - customStateForKey:
       - setCustomState:forKey
       - objectForKeyedSubscript
-
-
+* [ ] UIListContentConfiguration
+      - and all the various properties
+* [ ] UIAction (not related this, but an example uses this. Also new in iOS 14)
 
 ==================================================
 
@@ -676,7 +682,238 @@ class SnorgleContentView UIView, UIContentView {
 
 _(that's a fair amount of ceremony)_
 
-OBTW, all of this is totally independent of tableviews etc
+OBTW, all of this is totally independent of tableviews etc.
 
-(stopped at "The idea of a configurable cell")
+What is a tableview cell?  it's a cell with a _content configuration property_.  When the property
+is set, the cell effectively rips out its own contentView and replaces it with the content
+view that came from the configuration object.  _(ooooh, does this mean we don't have to subclass
+the cells any more?)_
+
+So here's a datasource method:
+
+```
+override func tableView(cellForRowAt) {
+    let cell = tableView.dequeueueue
+    var config = SnorgleConfiguration()
+    config.text = "blah"
+    cell.contentConfiguration = config
+    return cell
+}
+```
+
+so yay, the cell is self-configuring.
+
+The tableview cell has a contentConfiguration property.
+
+Built-in Configs
+
+If we want standard tableview appearance, we don't have to build our own stuff (yay)
+
+UIListContentConfiguration, and a tableview cell will automatically dispense one when we ask for
+its defaultContentConfiguration.
+
+Now for even simpler
+
+```
+override func tableVieW(cellForRowAt) {
+    let cell = dequeue
+    var config = cell.defaultContentConfiguration()
+    config.text = "Hello, Sailor" // _nothing happpens here_
+    cell.contentConfiguration = config
+    return cell
+}
+```
+
+that changes the look though (text is left aligned).  To get it back to the original
+
+```
+var config = cell.defaultContentConfiguration()
+config.text = "Blah"
+config.textProperties.alignment = .center
+cell.contentConfiguration = config
+```
+
+Apple is signaling the deprecation of things like tetxLabel, detailTextlabel, and imageView.
+The config objects have text, secondaryText, thirdBreakfast, and image properties (also
+attributedText and secondaryAttributedText and thirdAttributedBreakfast)
+
+Three big things didn't cover
+
+* States - e.g. highlighted / selected, along with other states like UI (light/dork) that might
+  change, size class, etc. 
+  `func updated(for state: UIConfigurationState) -> BlahContentConfiguration` is where you'd adapt to
+  changes there
+
+* Backgrounds - there's a `backgroundConfiguration` property, so can do for the background what we did
+  for the content.  "whole other kettle of fish, needs to be discussed in connection with states"
+
+* collection views - UICVCell also has a contentConfiguration and backgroundConfiguration, so :alot:
+  of the stuff applies.  In general a collection view cell does not dispense a default configuration.
+  Can also use the UIListContentConfiguration.  Also a UICollectionViewListCell that does dispense
+  a UIListContentConfiguration as its defaultContentConfiguration.
+
+----------
+
+https://www.biteinteractive.com/user-interactive-cell-configurations-in-ios-14/
+
+_(so, my brain was going to the "ok that's great for static cells, but how do you hook
+up controls?  and then there's a link to this!)_
+
+So, what about _user-interactive_ cell content?
+
+Say the cell has a UISwitch.  The switch rflects a piece of the tableview's model data.
+Presumably you have a model object for each row of the table, and it contains a bool.
+if it's true, the switch is on.  if false, switch is off. _(that part is easy)_
+
+what happens when the user toggles the switch?  Some ideas are using target/action
+
+```
+let toggle = // the UISwitch
+toggle.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+```
+
+Dude's favorite way:
+* the switch is passed to the callback
+* walk up the view hierarchy / responder chain until come to the cell
+* ask the tableview what row the cell is
+* now can update the model data
+
+
+(this is kind of slick)
+
+```
+extension UIResponder {
+    func next<T: UIResponder>(ofType: T.Type) -> T? {
+        let r = self.next
+        if let r = r as? T ?? r?.next(ofType: T.self) {
+            return r
+        } else {
+            return nil
+        }
+    }
+}
+```
+
+
+and used
+
+```
+@objc func switchChanged(_ senderprize_: UISwitch) {
+    if let cell = sender.next(ofType: UITableViewCell.self) {
+        if let indexPath = self.tableView.indexPath(for: cell) {
+            // update the model at the indexpath
+        }
+    }
+}
+```
+
+But now if you have a cell content configuration object, the direct connection 
+between the uiswitch and thecell and the data source goes away.
+
+So have three places to tweak:
+
+* the content configuration object needs a property.  That's pretty much all configuration
+  objects really have. So needs to be a property that allows us to establish a communications
+  conduit between the switch in the cell and the tableview's data source
+
+* In the configuration objects' content view, we need to _respond_ to that property to configure
+  the actual UISwitch in the interface.  The content view is the view, so it's the thing
+  that knows about the switch - target/action here
+
+* the data source's cellForRowAt, need to set that property in such a way that
+  we get called back so can updatre the data model when we are called back
+
+Looking at two ways
+
+Protocol and Delegate
+The content configuration object has a delegate, and keeps a referne to it in
+a property (say `delegate`)
+
+The content view knows of a message that is allowed to end to that delegate.
+
+so, example
+
+```
+protocol SwitchListener: AnyObject {
+    func switchChangedTo(_: Bool, sender: UIView)
+}
+```
+
+then content configuration will have 
+
+```
+weak var delegate: SwitchListener?
+```
+
+and then in the content view configuration
+
+```
+toggle.addAction(UIAction { action in
+    if let sender = action.sender as? UISwitch {
+        (configuratin as? Config)?.delegate?.switchChangedTo(sender.isOn, sender: sender)
+    }, for: .valueChanged)
+```
+
+then the data source assigns confg.delegate = self
+
+then all that remains is for the datasource (self) to conform to the protocol.
+*that*'s the place that does a indexPath(for: cell)
+
+```
+extension ViewController: SwitchListener {
+    func switchChangedTo(_ newValue: Bool, sender: UIView) {
+        if let cell = sender.next(ofType: UITableViewCell.self) {
+            if let ip = self.tableView.indexPath(for: cell) {
+                self.list[ip.row] = newValue
+            }
+        }
+    }
+}         
+```
+
+"It works, but I don't like it." - a lot of work, and stuff scattered around in different places.
+And there's two distinct signals - the UISwitch sends a signal to the action, which sends
+a different signal to the delegate.
+
+A Property that's a function (closure)
+
+Rather than give the configuration object a reference to an object that implmement
+a function, just give it a function
+
+```
+var isOnChanged: ((Bool, UIView) -> Void)?
+```
+
+content view configures the switch - calls the content configuration object
+property's function
+
+```
+toggle.addAction(UIAction { action in
+    if let sender = action.sender as? UISwitch {
+        (configuration as? Config)?.isOnChanged?(sender.isOn, sender)
+    }
+}, for: .valueChanged)
+```
+
+and in the data source
+
+```
+config.isOnChanged = { [weak self] isOn, value in
+    if let cell = v.next(ofType: UITAbleViewCell.self) {
+        if let ip = self?.tableView.indexPath(for: cell) {
+            self?.list[ip.row] = isOn
+        }
+    }
+}
+```
+
+oh, and watch the [weak self] for memory leaks
+
+_(so why not capture the index path here and avoid the groveling around the view hieraerchy?)_
+
+==================================================
+
+https://swiftsenpai.com/development/uicollectionview-list-custom-cell/
+
+_(like above, these are just my notes.  If its useful go toss them a a view 
 
