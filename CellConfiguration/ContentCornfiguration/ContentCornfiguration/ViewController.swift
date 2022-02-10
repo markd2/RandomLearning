@@ -6,14 +6,22 @@ class ViewController: UIViewController {
     @IBOutlet var containerView: CustomContainerView!
     @IBOutlet var secondContainerView: CustomContainerView!
 
+    var flags = Array(repeating: false, count: 42)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SNORGLE")
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "SNORGLE")
 
-        let config = SnorgleContentConfiguration(text: "hello greeeble")
+        var config = SnorgleContentConfiguration(text: "hello greeeble", flag: false)
+        config.toggled = { [weak self] onOff in
+            guard let self = self else { return }
+            config.flag = onOff
+            self.containerView.contentConfiguration = config
+        }
         containerView.contentConfiguration = config
+
 /*
         var listConfig = UIListContentConfiguration. ()
         listConfig.text = "ohai"
@@ -27,7 +35,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 42
+        return flags.count
     }
     
     func tableView(_ tableView: UITableView, 
@@ -44,7 +52,15 @@ extension ViewController: UITableViewDataSource {
             config.image = UIImage(systemName: "tortoise")
             cell.contentConfiguration = config
         case 2:
-            let config = SnorgleContentConfiguration(text: "hello \(indexPath)")
+            var config = SnorgleContentConfiguration(text: "hello \(indexPath)",
+                                                     flag: flags[indexPath.row])
+            config.toggled = { [weak self] onOff in
+                guard let self = self else { return }
+                self.flags[indexPath.row] = onOff
+                config.flag = onOff
+                cell.contentConfiguration = config
+            }
+
             cell.contentConfiguration = config
         default:
             print("AHHHHH!!!")
@@ -63,7 +79,7 @@ extension ViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SNORGLE", for: indexPath)
 
-        let config = SnorgleContentConfiguration(text: "hello \(indexPath)")
+        let config = SnorgleContentConfiguration(text: "hello \(indexPath)", flag: false)
         cell.contentConfiguration = config
         
         return cell
@@ -102,7 +118,28 @@ class SnorgleView: UIView, UIContentView {
         // add subviews
         addSubview(label)
 
-        pin(label)
+        let constraints = [
+          leftAnchor.constraint(equalTo: label.leftAnchor),
+          topAnchor.constraint(equalTo: label.topAnchor),
+          bottomAnchor.constraint(equalTo: label.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+
+        let toggle = UISwitch()
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        toggle.isOn = (configuration as? SnorgleContentConfiguration)?.flag ?? false
+        addSubview(toggle)
+        
+        toggle.addAction(UIAction { [weak self] action in
+                             (configuration as? SnorgleContentConfiguration)?.toggled(toggle.isOn)
+                         }, for: .valueChanged)
+        
+        let constraints2 = [
+          toggle.centerYAnchor.constraint(equalTo: label.centerYAnchor),
+          toggle.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 8),
+          toggle.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints2)
   
         configure(configuration: configuration)
     }
@@ -114,12 +151,18 @@ class SnorgleView: UIView, UIContentView {
     func configure(configuration: UIContentConfiguration) {
         guard let configuration = configuration as? SnorgleContentConfiguration else { return }
         label.text = configuration.text
+        if configuration.flag {
+            label.text = "ON " + configuration.text
+        }
     }
 
 }
 
 struct SnorgleContentConfiguration: UIContentConfiguration {
     var text: String
+    var flag: Bool
+    var toggled: (Bool) -> () = { _ in  }
+    
 
     func makeContentView() -> UIView & UIContentView {
         return SnorgleView(self)
