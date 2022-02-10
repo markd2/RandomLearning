@@ -6,7 +6,7 @@ class ViewController: UIViewController {
     @IBOutlet var containerView: CustomContainerView!
     @IBOutlet var secondContainerView: CustomContainerView!
 
-    var flags = Array(repeating: false, count: 42)
+    var flags = Array(repeating: false, count: 20)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,8 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, 
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        print("CELL FOR \(indexPath)")
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SNORGLE", for: indexPath)
 
@@ -51,6 +53,7 @@ extension ViewController: UITableViewDataSource {
             config.text = "celconf \(indexPath)"
             config.image = UIImage(systemName: "tortoise")
             cell.contentConfiguration = config
+            print("    SETTING \(config.text)")
         case 2:
             var config = SnorgleContentConfiguration(text: "hello \(indexPath)",
                                                      flag: flags[indexPath.row])
@@ -130,7 +133,7 @@ class SnorgleView: UIView, UIContentView {
         toggle.isOn = (configuration as? SnorgleContentConfiguration)?.flag ?? false
         addSubview(toggle)
         
-        toggle.addAction(UIAction { [weak self] action in
+        toggle.addAction(UIAction { action in
                              (configuration as? SnorgleContentConfiguration)?.toggled(toggle.isOn)
                          }, for: .valueChanged)
         
