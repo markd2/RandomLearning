@@ -35,13 +35,21 @@ extension ViewController: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SNORGLE", for: indexPath)
 
-        if indexPath.row % 2 == 0 {
+        switch indexPath.row % 3 {
+        case 0:
             cell.textLabel?.text = "\(indexPath)"
-        } else {
+        case 1:
+            var config = cell.defaultContentConfiguration()
+            config.text = "celconf \(indexPath)"
+            config.image = UIImage(systemName: "tortoise")
+            cell.contentConfiguration = config
+        case 2:
             let config = SnorgleContentConfiguration(text: "hello \(indexPath)")
             cell.contentConfiguration = config
+        default:
+            print("AHHHHH!!!")
         }
-        
+
         return cell
     }
 }
