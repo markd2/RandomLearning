@@ -55,8 +55,13 @@
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="g7m-20-3Q4"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rso-JC-fPB" customClass="CustomContainerView" customModule="ContentCornfiguration" customModuleProvider="target">
+                                <rect key="frame" x="61" y="586" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QOA-Zl-Zjj" customClass="CustomContainerView" customModule="ContentCornfiguration" customModuleProvider="target">
-                                <rect key="frame" x="61" y="413" width="240" height="128"/>
+                                <rect key="frame" x="61" y="420" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -74,6 +79,7 @@
                     <connections>
                         <outlet property="collectionView" destination="EgP-Me-Geo" id="lDH-Rl-Jrf"/>
                         <outlet property="containerView" destination="QOA-Zl-Zjj" id="M5E-P3-H6h"/>
+                        <outlet property="secondContainerView" destination="rso-JC-fPB" id="yi2-Hu-Xck"/>
                         <outlet property="tableView" destination="bKz-5c-4cl" id="agI-S0-ms6"/>
                     </connections>
                 </viewController>

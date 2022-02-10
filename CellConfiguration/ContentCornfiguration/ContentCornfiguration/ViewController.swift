@@ -4,6 +4,7 @@ class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var containerView: CustomContainerView!
+    @IBOutlet var secondContainerView: CustomContainerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,6 +14,14 @@ class ViewController: UIViewController {
 
         let config = SnorgleContentConfiguration(text: "hello greeeble")
         containerView.contentConfiguration = config
+/*
+        var listConfig = UIListContentConfiguration. ()
+        listConfig.text = "ohai"
+        listConfig.image = UIImage(systemName: "tortoise")
+
+        let config2 = UIListContentView.init(configuration: listConfig)
+        secondContainerView.contentConfiguration = config2
+*/
     }
 }
 
