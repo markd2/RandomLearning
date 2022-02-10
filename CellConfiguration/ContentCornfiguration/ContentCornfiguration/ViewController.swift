@@ -3,12 +3,16 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var containerView: CustomContainerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SNORGLE")
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "SNORGLE")
+
+        let config = SnorgleContentConfiguration(text: "hello greeeble")
+        containerView.contentConfiguration = config
     }
 }
 
@@ -49,6 +53,18 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
+extension UIView {
+    func pin(_ thing2: UIView) {
+        let constraints = [
+          leftAnchor.constraint(equalTo: thing2.leftAnchor),
+          topAnchor.constraint(equalTo: thing2.topAnchor),
+          bottomAnchor.constraint(equalTo: thing2.bottomAnchor),
+          rightAnchor.constraint(equalTo: thing2.rightAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+}
+
 // --------------------------------------------------
 
 class SnorgleView: UIView, UIContentView {
@@ -69,14 +85,8 @@ class SnorgleView: UIView, UIContentView {
         // add subviews
         addSubview(label)
 
-        let constraints = [
-          leftAnchor.constraint(equalTo: label.leftAnchor),
-          topAnchor.constraint(equalTo: label.topAnchor),
-          bottomAnchor.constraint(equalTo: label.bottomAnchor),
-          rightAnchor.constraint(equalTo: label.rightAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
-        
+        pin(label)
+  
         configure(configuration: configuration)
     }
     
@@ -101,6 +111,24 @@ struct SnorgleContentConfiguration: UIContentConfiguration {
     func updated(for state: UIConfigurationState) -> SnorgleContentConfiguration {
         return self
     }
-    
-
 }
+
+// --------------------------------------------------
+
+class CustomContainerView: UIView {
+    var innerView: (UIView & UIContentView)?
+
+    var contentConfiguration: UIContentConfiguration? {
+        didSet {
+            innerView?.removeFromSuperview()
+            guard let contentConfiguration = contentConfiguration else { return }
+            let view = contentConfiguration.makeContentView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(view)
+            pin(view)
+
+            innerView = view
+        }
+    }
+}
+
