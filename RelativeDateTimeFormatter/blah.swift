@@ -7,10 +7,29 @@ let formatter = RelativeDateTimeFormatter()
 let date1 = 0.dateFrom
 let hundredSecondsFromNow = 100.dateFrom
 
-let blah = formatter.localizedString(for: hundredSecondsFromNow,
-                                     relativeTo: date1)
-print(blah)
+let dates: [Int] = [-24 * 60 * 60 * 5,
+                    -60 * 60,
+                    -15,
+                    0,
+                    15,
+                    60 * 60,
+                    24 * 60 * 60 * 2]
 
+print("numeric")
+formatter.dateTimeStyle = .numeric
+dates.forEach {
+    let blah = formatter.localizedString(for: $0.dateFrom,
+                                         relativeTo: date1)
+    print("\($0) - \(blah)")
+}
+
+print("\nnamed")
+formatter.dateTimeStyle = .named
+dates.forEach {
+    let blah = formatter.localizedString(for: $0.dateFrom,
+                                         relativeTo: date1)
+    print("\($0) - \(blah)")
+}
 
 
 extension Double {
