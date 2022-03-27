@@ -35,12 +35,9 @@ func duplicateEncode(_ word: String) -> String {
         countedSet.add(String(character))
     }
 
-    var blah = ""
-
-    for character in word.lowercased() {
-        blah += countedSet.count(for: String(character)) == 1 ? "(" : ")"
-    }
-    return blah
+    return word.lowercased().map { character in
+        countedSet.count(for: String(character)) == 1 ? "(" : ")"
+    }.joined(separator: "")
 }
 
 
