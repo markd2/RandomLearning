@@ -1,5 +1,7 @@
 #!/usr/bin/swift
 
+import Foundation
+
 // The goal of this exercise is to convert a string to a new string where
 // each character in the new string is "(" if that character appears
 // only once in the original string, or ")" if that character appears
@@ -27,19 +29,16 @@ let tests: [Pair] = [
 ]
 
 func duplicateEncode(_ word: String) -> String {
-    var charCount: [String: Int] = [:]
+    let countedSet = NSCountedSet()
 
     for character in word.lowercased() {
-        var count = charCount[String(character), default: 0]
-        count += 1
-        charCount[String(character)] = count
+        countedSet.add(String(character))
     }
 
     var blah = ""
 
     for character in word.lowercased() {
-        let count = charCount[String(character)]
-        blah += count == 1 ? "(" : ")"
+        blah += countedSet.count(for: String(character)) == 1 ? "(" : ")"
     }
     return blah
 }
