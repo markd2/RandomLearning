@@ -16,7 +16,14 @@ let tests: [Pair] = [
 ]
 
 func maskify(_ string: String) -> String {
-    return ""
+    guard string.count >= 4 else {
+        return string
+    }
+    
+    let suffix = String(string.suffix(4))
+    let prefix = String(repeating: "#", count: string.count - 4)
+
+    return prefix + suffix
 }
 
 var failwaffle = false
