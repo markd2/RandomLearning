@@ -19,14 +19,9 @@ let tests: [Pair] = [
 func spinWords(_ string: String) -> String {
     let words = string.split(separator: " ")
 
-    let spun = words.map { (word) -> String in
-        if word.count < 5 {
-            return String(word)
-        } else {
-            return String(word.reversed())
-        }
-    }
-    return spun.joined(separator: " ")
+    return words.map { (word) -> String in
+        (word.count < 5) ? String(word) : String(word.reversed())
+    }.joined(separator: " ")
 }
 
 var failwaffle = false
