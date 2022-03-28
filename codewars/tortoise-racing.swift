@@ -17,6 +17,11 @@
 import Foundation
 
 // slow/fast are in feet per hour
+// and of course the actual solution is much cleverer.  oh well.
+//   -   guard v1 <= v2 else { return nil }
+//       let speedDifference = (v2 - v1)
+//        let resultInSeconds = g * 3600 / speedDifference
+//        return [resultInSeconds/3600, resultInSeconds%3600/60, resultInSeconds%3600%60]
 func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
     guard slow < fast else { return nil }
 
