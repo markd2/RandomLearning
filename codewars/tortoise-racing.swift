@@ -42,6 +42,8 @@ func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
         let fastCatchUpTime = catchUpDistance / fastSpeed
         totalSeconds += fastCatchUpTime
 
+        // print("catchUp \(catchUpDistance) took \(fastCatchUpTime)s, resulting in \(slowPosition) vs \(fastPosition).  Total \(totalSeconds)")
+
         // during that time, slow moved this much
         let slowMove = slowSpeed * fastCatchUpTime
 
@@ -53,7 +55,8 @@ func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
     print("float seconds \(floatSeconds) nee \(totalSeconds)")
     let hour = Int(floatSeconds) / (60 * 60)
     let minute = (Int(floatSeconds) - (hour * 60*60)) / 60
-    let seconds = Int(floatSeconds) % 60
+    // 0.49 fudge factor to properly round fractional seconds
+    let seconds = Int(round(totalSeconds - 0.49)) % 60
 
     return [hour, minute, seconds]
 }
@@ -64,7 +67,10 @@ let testcases: [((Int, Int, Int), (Int, Int, Int))] = [
   ((820, 850, 550), (18, 20, 0)),
   ((279, 314, 77), (2, 12, 0)),
   ((570, 712, 71), (0, 30, 0)),
-  ((720, 850, 37), (0, 17, 4))
+  ((720, 850, 37), (0, 17, 4)),
+  ((615, 739, 148), (1, 11, 36)),
+  ((193, 421, 110), (0, 28, 56)),
+  ((285, 480, 145), (0, 44, 36))
 ]
 
 var failwaffle = false
