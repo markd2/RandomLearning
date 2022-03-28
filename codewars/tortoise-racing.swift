@@ -18,41 +18,37 @@ import Foundation
 
 // slow/fast are in feet per hour
 func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
-    var slowPos = slow
-    var fastPos = fast
+    let slowSpeed = Double(slow) / 3600 // feet per second
+    let fastSpeed = Double(fast) / 3600
 
-    var accumulator = Double(headstart) / Double(slow)
+    // and they're off!
+    var slowPosition = Double(headstart)
+    var fastPosition = 0.0
 
-    // how long it takes fast to get to headstart (hours)
-    func catchup(_ fast: Int, _ headstart: Int) -> Double {
-        return Double(headstart) / Double(fast)
+    var totalSeconds = 0.0
+
+    while true {
+        // once they cross, game over
+        guard (totalSeconds * slowSpeed + Double(headstart)) > (totalSeconds * fastSpeed) else {
+            break
+        }
+
+        let catchUpDistance = slowPosition - fastPosition
+        guard catchUpDistance > 0 else { break }
+
+        // time to close the distance
+        let fastCatchUpTime = catchUpDistance / fastSpeed
+        totalSeconds += fastCatchUpTime
+
+        // during that time, slow moved this much
+        let slowMove = slowSpeed * fastCatchUpTime
+
+        fastPosition = slowPosition
+        slowPosition += slowMove
     }
-    
-    let time = catchup(fast, headstart)
-    slowPos = headstart
 
-    print("time \(time)")
-    accumulator += time
 
-    var newDistance = Double(slow) * time
-    fastPos = Int(newDistance)
-    
-    print("\(slowPos) vs \(fastPos)")
-
-    while newDistance > 0 {
-        let newTime = catchup(fast, Int(newDistance))
-        print("time \(newTime)")
-        accumulator += newTime
-
-        newDistance = Double(slow) * newTime
-        slowPos = fastPos
-        fastPos = Int(newDistance)
-        print("\(slowPos) vs \(fastPos)")
-    }
-    print("new distance is \(newDistance)")
-    print("accumulator is \(accumulator)")
-
-    let floatSeconds = accumulator * 60 * 60
+    let floatSeconds = Double(totalSeconds)
     let hour = Int(floatSeconds) / (60 * 60)
     let minute = (Int(floatSeconds) - (hour * 60*60)) / 60
     let seconds = Int(floatSeconds) % 60
@@ -62,7 +58,7 @@ func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
 
 let testcases: [((Int, Int, Int), (Int, Int, Int))] = [
   ((720, 850, 70), (0, 32, 18)),
-//  ((80, 91, 37), (3, 21, 49))
+  ((80, 91, 37), (3, 21, 49))
 ]
 
 var failwaffle = false
@@ -77,3 +73,59 @@ for kase in testcases {
 if !failwaffle {
     print("success")
 }
+
+/* ok moose, let's think about this.
+
+ * say thing1 moves at 50 m/s
+ * thing 2 moves at 100 m/s
+ * thing1 has a 200 m head start
+
+initial position:
+|  time  | thing1dist | thing2dist | 
+|   0    |      200   |       0    | - start.  fast takes 2 seconds to catch up 200m
+|   2    |      ???   |     200    | - in those two seconds, slow moves 100
+|   2    |      300   |     200    | - fast takes 1 second to catch up 100m
+|   3    |      ???   |     300    | - in that one second, slow moves 50
+|   3    |      350   |     300    | - fast takes .5 second to catch up 50m
+|   3.5  |      ???   |     350    | - in that half second, slow moves 25
+|   3.5  |      375   |     350    | - fast takes .25 second to catch up 25m
+|   3.75 |      ???   |     375    | - in that quarter second, slow moves 12.5
+|   3.75 |    387.5   |     375    | - fast takes .125 second to catch up 12.5m
+|  3.875 |    ?????   |   387.5    | - in that .125 second, slow moves 0.07m
+| 3.945  |    ?????   |
+
+continue until it converse
+ - it takes 2 seconds to catch up.
+|        |      ???   |     200    || - in that 2 seconds, slow dude moved 100 m
+|   2    |      200   |     200    |  100  | - it takes 1 second to catch up
+
+so code-styleZ
+
+current time = 0
+while racing {
+    what's the distance between slow and fast?
+    how much time does it take fast to move that distance?
+    how much does slow move in that time?
+    fastPosition = slowPosition
+    slowPosition = slow speed * time
+    time += amount of time
+}
+
+
+OR, another way
+
+since the time is hour - based, we can calculate distance moved per second
+
+then have a timer
+
+for timer = 0 ... Inf {
+    slowPosition = headStart + timer * slowSpeed
+    fastPosition = timer * fastSpeed
+}
+
+and then loop until fast is > slow.  That helps avoid the xeno's paradox
+
+The examples have a three hour race, so that would be 10K iterations, vs probably a
+handlful for the explicit integration.  oh well.
+
+*/
