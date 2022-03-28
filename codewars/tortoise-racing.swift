@@ -49,8 +49,8 @@ func race(_ slow: Int, _ fast: Int, _ headstart: Int) -> [Int]? {
         slowPosition += slowMove
     }
 
-
-    let floatSeconds = Double(totalSeconds)
+    let floatSeconds = round(Double(totalSeconds))
+    print("float seconds \(floatSeconds) nee \(totalSeconds)")
     let hour = Int(floatSeconds) / (60 * 60)
     let minute = (Int(floatSeconds) - (hour * 60*60)) / 60
     let seconds = Int(floatSeconds) % 60
