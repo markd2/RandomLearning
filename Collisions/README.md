@@ -9,7 +9,7 @@ in games.  So I'm going to read through that, make notes, and maybe try
 out some algoriddims.  (I'm reading it through [O'Reilly Learning](https://www.oreilly.com) ~Safari~.  I'm a technical book junkie, so the platform is heaven for me.
 Oh, also [Physics for Game Developers](https://www.oreilly.com/library/view/physics-for-game/9781449361037/) and [Beginning Math and Physics for Game Programmers](https://www.oreilly.com/library/view/beginning-math-and/0735713901/)
 
-
+* also interesting - using simd instructions with vectors. https://developer.apple.com/documentation/accelerate/working_with_vectors
 
 
 

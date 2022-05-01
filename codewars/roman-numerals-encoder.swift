@@ -7,8 +7,57 @@ import Foundation
 // convert a number to its roman numeral representation
 // "remember there can't be more than three identical symbols in a row"
 
-func solution(_ number:Int) -> String {
-    return ""
+func solution(_ number: Int) -> String {
+    var number = number
+
+    let lookup: [Int: String] = [
+      1000: "M",
+      500: "D",
+      100: "C",
+      50: "L",
+      10: "X",
+      5: "V",
+      1: "I"
+    ]
+
+    var accumulator: [String: Int] = [:]
+    let keys = lookup.keys.sorted().reversed()
+
+    blah:
+    for amount in keys {
+
+        guard let letter = lookup[amount] else {
+            print("uhr, shouldn't happen \(amount)")
+            continue
+        }
+
+        while number >= amount {
+            accumulator[letter] = accumulator[letter, default: 0] + 1
+
+            number -= amount
+        }
+    }
+
+    var result = ""
+    for (amount, prior) in zip(keys, keys.dropFirst().appending(keys.first)) {
+        guard let letter = lookup[amount] else {
+            print("uhr, shouldn't happen \(amount)")
+            continue
+        }
+
+        let count = accumulator[letter] ?? 0
+        if count == 4 {
+            let higherAmount = keys[prior]
+            let higherLetter = lookup[higherAmount]
+            result += "\(letter)\(higherLetter)"
+        } else {
+            for _ in 0 ..< count {
+                result += letter
+            }
+        }
+    }
+    
+    return "\(result)"
 }
 
 let testcases: [(Int, String)] = [
