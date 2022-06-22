@@ -1,6 +1,6 @@
 # Data-Oriented Design
 
-* _Data-Oriented Design_ book  by Richard Fabian - https://www.dataorienteddesign.com/dodmain/
+* _Data-Oriented Design_ book  by Richard Fabian - https://www.amazon.com/Data-oriented-design-engineering-resources-schedules/dp/1916478700
     - don't get the Kindle version - it's one of those "adhere to the pagination of the printed book" versions
     - could defintely use an editor (so many run-on sentences...) and better layout (keeping code samples 
       near their discussion), but a ton of cool ideas
