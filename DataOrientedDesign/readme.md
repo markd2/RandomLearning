@@ -7,6 +7,8 @@
 * _Data-Oriented Design and C++_ talk by Mike Acton - https://www.youtube.com/watch?v=rX0ItVEVjHc
     - amusing that it hits the audience like a lead balloon.  
 * _OOP is Dead, Long Live Data-oriented Design_ talk by Stoyan Nikolov - https://www.youtube.com/watch?v=yy8jQgmhbAU&t=2794s
+* _Data Oriented Programming: Reduce complexity by rethinking data_ - https://www.amazon.com/Data-Oriented-Programming-Unlearning-Yehonathan-Sharvit/dp/1617298573/ref=pd_lpo_1?pd_rd_i=1617298573&psc=1
+    - haven't read yet - comes out July 2022
 
 ## Cachce as cache can
 
