@@ -18,7 +18,9 @@
 * _Data-Oriented Demo: SOA, composition_ - video by Jonathan Blow - https://www.youtube.com/watch?v=ZHqFrNyLlpA
     - only watched the first bit.  Some "OO makes it hard to do X", some on structure of arrays, and how
       it's expressed in the new language.
-
+* _Efficiency with Algorithms, Performance and Data Structures_ - talk by Chandler Carruth cppcon - https://www.youtube.com/watch?v=fHNmRkzxHWs&t=13s
+    - nice definitions of efficiency and performance (lighting up all the transistors)
+    - includes the Jeff Dean latency chart around 37:10
 
 And to consume:
 
@@ -38,3 +40,8 @@ And to consume:
 
 * Judy Array - https://en.wikipedia.org/wiki/Judy_array
 * Cache-friendly linear binary search in _Data-Oriented Design_
+
+## Tools
+
+- https://drawsql.app/ - (haven't used yet) - designing and visualizing 
+  database design, could be useful for diagramming DoD
