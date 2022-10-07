@@ -1,9 +1,19 @@
 # Oontz Oontz Oontz Oontz
 
+
 * [My Soundclown](https://soundcloud.com/borkware)
+
+Edumacation
+
 * https://www.proaudioears.com/ - Dance Music Production's ear training games. (HARD!)
 * https://dancemusicproduction.com/ - Dance Music Production (SubClub gets access to all the DMP tutorial DVD content, which goes pretty deep)
 
+Plugins
+
+* https://www.soundtoys.com/ - Sound Toys
+* Xfer Records (Steve Duda)
+    - LFO Tool - https://xferrecords.com/products/lfo-tool
+    - Serum Wavetable Synthesizer - https://xferrecords.com/products/serum
 
 
 # Stuff Gleaned from Videos
@@ -37,3 +47,12 @@ Picking samples from [DMP French house](https://www.dancemusicproduction.com/pro
   - ignore the bass, concentrae on the high frequency instruments
   - try to sample out of context of the original record
   - sample a little more than intended for the Stockhausen Effect
+
+
+### Transients
+
+1176 compressor on a rock drum. The FET tends to clamp donw and
+distort the transient, adds punch, and brings snare to the front
+of the mix.
+
+Transient engery can move the sound forward (or back) in the mix
