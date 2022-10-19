@@ -49,6 +49,17 @@ Picking samples from [DMP French house](https://www.dancemusicproduction.com/pro
   - try to sample out of context of the original record
   - sample a little more than intended for the Stockhausen Effect
 
+Making a funky bass
+  - take your chord
+  - essentially triplets for each beat
+  - raise the middle up an octave
+  - fiddle with shorter notes to give some drive
+  - echo boy, some distortion (Decapitator)
+  - Tube Tech CL1B compressor for some groove.
+    - Which I don't have.  It's an optical compressor. NI VC-2A is an opto, but doesn't seem to have direct control over the usual compressor parameters
+    - longer attack, bass will sweep in lower freq more prominent
+    - fast attack stage more prominent
+
 
 ### Transients
 
@@ -72,7 +83,7 @@ Types and Uses
   - sounds flat, not 3-D sound
     - (sounds kind of weird)
 * Room - adds depth
-  - smaller rooms, living rooms. Short decay times and close reflections.
+  - smaller rooms, living rooms. Short decay times and closer reflections.
 * Plate - adds width and dimension
   - a huge vibrating metal plate with contact microphones
   - always sound bright with metallic edge. And heavily diffused (describes how close the reflections)
