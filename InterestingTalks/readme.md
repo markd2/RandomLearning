@@ -16,3 +16,13 @@ In no particular order.
 * https://www.youtube.com/watch?v=TPbroUDHG0s - _Game Development in Eight Bits_ (Kevin Zurawel, 2021, Strange Loop Conference)
     - How NES graphics work, and cool shortcuts done to make things work
     - Also mentions Nasir Gebelli.
+* https://www.youtube.com/watch?v=yG1OZ69H_-o - _Garbage In, Garbage Out: Arguing about Undefined Behavior_ (Chandler Carruth, 2016, CppCon)
+    - Anything by Chandler is entertaining and illuminating.
+* https://www.youtube.com/watch?v=uzF4u9KgUWI - _Practical Performance Practices_ (Jason Turner, 2016, CppCon)
+    - Anything by Jason Turner is entertaining and illuminating.
+    - Specific advice on better performing patterns.
+* https://www.youtube.com/watch?v=zBkNBP00wJE - _Rich Code for Tiny Computer_ (Jason Turner, 2016, CppCon)
+    - C++ on the Commodore 64 (sort of), witnessing zero-cost abstractions.
+* https://www.youtube.com/watch?v=o_AIw9bGogo - _The Tragedy of systemd_ (Benno Rice, 2019, Linux.conf.au)
+    - History of unix launch systems (init, inetd), overview of systemd-like systems (launchd), a discussion of (macos) launchd, a bit on how sysytemd works, how nerds handle change, and how we can generally be better as a community when faced with change.
+
