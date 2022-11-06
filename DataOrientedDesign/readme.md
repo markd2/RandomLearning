@@ -45,3 +45,8 @@ And to consume:
 
 - https://drawsql.app/ - (haven't used yet) - designing and visualizing 
   database design, could be useful for diagramming DoD
+
+## Sessions to watch
+
+* _C++ Seasoning_ - Sean Parent (https://www.youtube.com/watch?v=W2tWOdzgXHA).
+  (slides: https://sean-parent.stlab.cc/presentations/2013-09-11-cpp-seasoning/cpp-seasoning.pdf)
