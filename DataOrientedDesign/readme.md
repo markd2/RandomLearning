@@ -46,7 +46,10 @@ And to consume:
 - https://drawsql.app/ - (haven't used yet) - designing and visualizing 
   database design, could be useful for diagramming DoD
 
-## Sessions to watch
+## Sessions to watch / concepts to research
 
 * _C++ Seasoning_ - Sean Parent (https://www.youtube.com/watch?v=W2tWOdzgXHA).
   (slides: https://sean-parent.stlab.cc/presentations/2013-09-11-cpp-seasoning/cpp-seasoning.pdf)
+* Aspect Oriented Programming - mentioned in "Data-Oriented Design" when talking about
+  using tables to register interest in events.  _"This coding style is somewhat
+  reminiscent of Aspect-Oriented Programming"_, page 80
