@@ -116,3 +116,20 @@ Types and Uses
 * A clear focused "lead" is usually helpful to guide the audience.
 * Keep air pushing through the sub, even if it's not a bass heavy part. If a sub disappears fully and it's not a breakdown or something, the whole room will wonder why and it is very distracting.
 * Use MIDI to sidechain because it will trigger faster and it's easier to edit/bump up a tad/pull back a bit.
+
+and a reply (not me!) 
+
+I feel like the "Cut reverb tails abruptly" is 100% a stylistic
+decision, but a very useful one to be aware of. I like to interchange
+it depending on the situation. Cutting a reverb off like that makes me
+think of the effect dance music has when it cuts from space to
+space. It's like instantly teleporting from one space to another.
+
+A more artistic way you could think about it is, the listener
+travelling through a tunnel at a very high speed, and in there is a
+bunch of reverberation, but at the end of that measure, the reverb
+stops suddenly when they exit the tunnel and no longer hear
+reverb. That's why I think it's a very stylistic decision. As artists,
+we're painting with sound and teleporting people to these worlds of
+their imagination.
+
