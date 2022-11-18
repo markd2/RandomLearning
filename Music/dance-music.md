@@ -103,3 +103,16 @@ Types and Uses
   - Cutoff
 
 * Can use LFO tool hi-band cutoff to remove zero-crossing click (or leftover hats from samples)
+
+
+# Stuff gleaned from Slack
+
+* Find a schematic of dB levels for your genre with a breakdown, for a place to start. for example, kick -6dB, subbass -12dB, pads/non-main-melodies -14dB, main melodies -12dB, vocals -10 to -6dB, effects -18dB, snare matching loudness of kick(depends on the type of snare for dB)
+* After you have the rough schematic, use a pink noise generator and isolate each instrument until you can just barely hear it while playing pink noise at -6dB.
+* Izotope's Tonal Balance Control can really show you what is wrong with first iterations of an arrangement/mix.
+* Cut reverb tails abruptly (fade out, not Phil Collins style) to sound more modern, don't let tails step on the next note (unless you're going for a washed out vibe)
+* Use clipping with your gain staging to cut peaks, using oversampling to get the most of digital world (cut peaks will be less distorted with oversampling, in theory)
+* Use arrangement to fix mix issues, less is often more, but not always.
+* A clear focused "lead" is usually helpful to guide the audience.
+* Keep air pushing through the sub, even if it's not a bass heavy part. If a sub disappears fully and it's not a breakdown or something, the whole room will wonder why and it is very distracting.
+* Use MIDI to sidechain because it will trigger faster and it's easier to edit/bump up a tad/pull back a bit.
