@@ -25,4 +25,22 @@ In no particular order.
     - C++ on the Commodore 64 (sort of), witnessing zero-cost abstractions.
 * https://www.youtube.com/watch?v=o_AIw9bGogo - _The Tragedy of systemd_ (Benno Rice, 2019, Linux.conf.au)
     - History of unix launch systems (init, inetd), overview of systemd-like systems (launchd), a discussion of (macos) launchd, a bit on how sysytemd works, how nerds handle change, and how we can generally be better as a community when faced with change.
-
+* https://www.youtube.com/watch?v=9-IWMbJXoLM - _What Unix Cost Us_ (Benno Rice, 2020, Linux.conf.au)
+    - Is everything a file?  Are processors and C in a deadly embrace trying to act like PDP-11s but also trying to be fast?  How some ideas of the past might not be useful for current computing.
+* https://www.youtube.com/watch?v=BCqGjGzWI48 - _The New COBOL_ (Benno Rice, 2019, PyCon AU)
+    - Is COBOL a language we can/should look down on?
+    - (and support your maintainers)
+* https://www.youtube.com/watch?v=cj02_UeUnGQ - _A Political History of X_ (Keith Packard, 2020, Linux.conf.au)
+    - History of X window system from someone who was there
+    - and also the chaos that was the late 80s / early 90s unix workstation platforms
+* https://www.youtube.com/watch?v=Ib7tFvw34DM - _The Trouble with FreeBSD_ (Benno Rice, 2017, Linux.conf.au)
+    - A history of FreeBSD, "why we can't have nice things" (e.g. Rust's automated communication tools) and the style of FreeBSD governance, bad personalities, gamergate.
+* https://www.youtube.com/watch?v=ELeZAKCN4tY - _Can C++ be 10x Simpler & Safer?_ (Herb Sutter, 2022, cppcon)
+    - cppfront, modernizing c++'s syntax, and strongly encouraging use of
+      correct practices, while maintaining interoperability using a model
+      similar to the original front. Instead of emitting C, it emits c++.
+* https://www.youtube.com/watch?v=omrY53kbVoA - _Carbon Language: An expermental successor to C++_ (Chandler Carruth, 2022, cppcon)
+    - along similar lines, exploring ways of taking out C++ footguns that 
+      complicate everyone's lives.
+* https://www.youtube.com/watch?v=NNol7fRGo2E - _A tour of the ARM architecture and its Linux Support_ (Thomas Petazzoni, 2017, linux conf au)
+    - the early part of all the variants of ARM, and explaining some of the chip nomenclature is interesting

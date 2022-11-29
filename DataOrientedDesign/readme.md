@@ -28,6 +28,10 @@ And to consume:
 * _Eficiency with Algorithms, Performance with Data Structures" - talk by Chandler Carruth - https://youtube.com/watch?v=fHNmRkzxHWs
 * _Data Oriented Programming: Reduce complexity by rethinking data_ book - https://www.amazon.com/Data-Oriented-Programming-Unlearning-Yehonathan-Sharvit/dp/1617298573/ref=pd_lpo_1?pd_rd_i=1617298573&psc=1
     - haven't read yet - comes out July 2022
+* _Dungeon Siege Architecture" https://www.gamedevs.org/uploads/data-driven-game-object-system.pdf | https://dungeonsiege.fandom.com/wiki/Guide:_Siege_University_-_301:_Introduction_to_Dungeon_Siege_Architecture
+    - recommended in Chapter 4, Component Based Objects
+* _10000 Update() calls_ - https://blogs.unity3d.com/2015/12/23/1k-update-calls
+    - also recommended in Chapter 4, something about crossing C++ and scripting language (C#) boundary and calling `Update()` on every tick, and "why the move to managers makes so much sense"
 
 ## Cachce as cache can
 
