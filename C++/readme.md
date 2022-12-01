@@ -5,6 +5,8 @@ because, why not %-)
 ### Linkage
 
 * https://en.cppreference.com/w/ - C++ Reference (ooh, also has a C reference)
+* https://en.cppreference.com/w/cpp/language/operator_precedence - operator precedence
+* https://learning.oreilly.com/library/view/discovering-modern-c/9780136798477/app03.xhtml#secC_2 - annotated operator summary
 
 ### Bookage
 
