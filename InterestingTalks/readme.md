@@ -44,3 +44,4 @@ In no particular order.
       complicate everyone's lives.
 * https://www.youtube.com/watch?v=NNol7fRGo2E - _A tour of the ARM architecture and its Linux Support_ (Thomas Petazzoni, 2017, linux conf au)
     - the early part of all the variants of ARM, and explaining some of the chip nomenclature is interesting
+* https://www.youtube.com/watch?v=Mb8WwKS6ajk - _Advent of Code: Behind the Scenes_ (Eric Wastl, 2021, Google TechTalks)
