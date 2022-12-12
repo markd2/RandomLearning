@@ -45,3 +45,5 @@ In no particular order.
 * https://www.youtube.com/watch?v=NNol7fRGo2E - _A tour of the ARM architecture and its Linux Support_ (Thomas Petazzoni, 2017, linux conf au)
     - the early part of all the variants of ARM, and explaining some of the chip nomenclature is interesting
 * https://www.youtube.com/watch?v=Mb8WwKS6ajk - _Advent of Code: Behind the Scenes_ (Eric Wastl, 2021, Google TechTalks)
+* https://youtube.com/watch?v=sSee-aDjtmw - _How do our ideas about coding affect the software we create?_ (Christin Gorman, 2022, NDC Conferences)
+  - is programming more STEM ore more management and documentation?
