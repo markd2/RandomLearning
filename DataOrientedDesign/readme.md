@@ -32,6 +32,11 @@ And to consume:
     - recommended in Chapter 4, Component Based Objects
 * _10000 Update() calls_ - https://blogs.unity3d.com/2015/12/23/1k-update-calls
     - also recommended in Chapter 4, something about crossing C++ and scripting language (C#) boundary and calling `Update()` on every tick, and "why the move to managers makes so much sense"
+* _The Massively Vectorized Virtual Machine_ - (though not finding a section with that name).  Here are some posts in the orbit of Autodesk Stingray (discontinued 2018)
+  - http://bitsquid.blogspot.com/2012/09/a-data-oriented-data-driven-system-for.html (A Data-Oriented, Data-Driven System for Vector Fields - Part 1)
+  - http://bitsquid.blogspot.com/2012/10/a-data-oriented-data-driven-system-for.html (Part 2)
+  - http://bitsquid.blogspot.com/2012/10/a-data-oriented-data-driven-system-for_17.html (Part 3)
+  
 
 ## Cachce as cache can
 
