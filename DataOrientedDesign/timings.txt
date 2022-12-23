@@ -1,0 +1,44 @@
+# KeyLookup
+
+# Intel Lappy
+
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 5280.851096ms
+
+Average  9788.34us (sd 1100.89us) for test [Full anim key - linear search]
+Average  6867.22us (sd 481.22us) for test [Data only key - linear search]
+Average  6257.18us (sd 474.14us) for test [Full anim key - binary search]
+Average  5993.04us (sd 440.73us) for test [Data only key - binary search]
+Average  4626.59us (sd 389.31us) for test [Pre-indexed - binary search]
+Average  3366.88us (sd 217.89us) for test [Pre-indexed - linear search]
+-----
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 5314.589759ms
+
+Average 10021.74us (sd 919.65us) for test [Full anim key - linear search]
+Average  6868.01us (sd 315.18us) for test [Data only key - linear search]
+Average  6253.32us (sd 351.40us) for test [Full anim key - binary search]
+Average  5977.85us (sd 269.19us) for test [Data only key - binary search]
+Average  4592.88us (sd 170.73us) for test [Pre-indexed - binary search]
+Average  3368.42us (sd 143.23us) for test [Pre-indexed - linear search]
+
+----------
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 5436.456175ms
+
+Average 10090.87us (sd 1085.05us) for test [Full anim key - linear search]
+Average  7051.96us (sd 588.12us) for test [Data only key - linear search]
+Average  6427.66us (sd 449.97us) for test [Full anim key - binary search]
+Average  6147.55us (sd 501.92us) for test [Data only key - binary search]
+Average  4712.50us (sd 343.12us) for test [Pre-indexed - binary search]
+Average  3417.05us (sd 247.44us) for test [Pre-indexed - linear search]
+
