@@ -11,10 +11,14 @@ Target: x86_64-apple-darwin21.6.0
 Thread model: posix
 InstalledDir: /Applications/Xcode-13-3-rc.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
+Mac mini (M1, 2020)
+16 GB
+
 
 # KeyLookup
 
-# Intel Lappy
+## 145 nodes
+### Intel Lappy
 
 Animation key lookup tests
 Clumped precached keys = 11 clumps of 16 keys (max key = 176)
@@ -55,4 +59,91 @@ Average  6427.66us (sd 449.97us) for test [Full anim key - binary search]
 Average  6147.55us (sd 501.92us) for test [Data only key - binary search]
 Average  4712.50us (sd 343.12us) for test [Pre-indexed - binary search]
 Average  3417.05us (sd 247.44us) for test [Pre-indexed - linear search]
+
+------------------------------
+
+### M1 Mini (first gen)
+
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 3325.254792ms
+
+Average  6850.17us (sd 405.04us) for test [Full anim key - linear search]
+Average  5012.30us (sd 818.97us) for test [Data only key - linear search]
+Average  4249.73us (sd 508.14us) for test [Full anim key - binary search]
+Average  3128.21us (sd 270.10us) for test [Data only key - binary search]
+Average  2849.52us (sd 202.31us) for test [Pre-indexed - linear search]
+Average  2424.17us (sd 244.47us) for test [Pre-indexed - binary search]
+
+----------
+./KeyLookup.out
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 3339.290542ms
+
+Average  6930.98us (sd 374.44us) for test [Full anim key - linear search]
+Average  5012.71us (sd 737.58us) for test [Data only key - linear search]
+Average  4258.62us (sd 455.68us) for test [Full anim key - binary search]
+Average  3132.77us (sd 260.64us) for test [Data only key - binary search]
+Average  2848.94us (sd 190.53us) for test [Pre-indexed - linear search]
+Average  2422.14us (sd 206.96us) for test [Pre-indexed - binary search]
+----------
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 3325.541875ms
+
+Average  6850.30us (sd 387.66us) for test [Full anim key - linear search]
+Average  5005.67us (sd 722.23us) for test [Data only key - linear search]
+Average  4251.62us (sd 468.37us) for test [Full anim key - binary search]
+Average  3118.16us (sd 268.69us) for test [Data only key - binary search]
+Average  2850.72us (sd 175.99us) for test [Pre-indexed - linear search]
+Average  2419.54us (sd 215.81us) for test [Pre-indexed - binary search]
+
+
+## 1450 nodes
+
+static const int NUM_QUERIES = 10000;
+static const int NUM_NODES = 1450;
+
+### Intel Lappy
+
+### M1Mini
+
+Each hierarchy has 1450 nodes.
+Each hierarchy is queried 10000 times
+Managed 7 trials in 21548.448459ms
+
+Average  1112.97ms (sd 13.22ms) for test [Full anim key - linear search]
+Average   519.19ms (sd 7.85ms) for test [Data only key - linear search]
+Average   492.31ms (sd 0.13ms) for test [Full anim key - binary search]
+Average   366.01ms (sd 0.17ms) for test [Data only key - binary search]
+Average   306.84ms (sd 0.33ms) for test [Pre-indexed - linear search]
+Average   279.56ms (sd 2.21ms) for test [Pre-indexed - binary search]
+
+----------
+
+Average  1145.25ms (sd 0.58ms) for test [Full anim key - linear search]
+Average   521.14ms (sd 6.56ms) for test [Data only key - linear search]
+Average   494.15ms (sd 4.10ms) for test [Full anim key - binary search]
+Average   366.30ms (sd 0.15ms) for test [Data only key - binary search]
+Average   307.12ms (sd 0.25ms) for test [Pre-indexed - linear search]
+Average   279.12ms (sd 0.13ms) for test [Pre-indexed - binary search]
+
+----------
+
+Average  1137.17ms (sd 12.09ms) for test [Full anim key - linear search]
+Average   520.61ms (sd 6.90ms) for test [Data only key - linear search]
+Average   490.96ms (sd 4.55ms) for test [Full anim key - binary search]
+Average   366.26ms (sd 0.13ms) for test [Data only key - binary search]
+Average   306.83ms (sd 0.19ms) for test [Pre-indexed - linear search]
+Average   278.80ms (sd 0.19ms) for test [Pre-indexed - binary search]
 
