@@ -1,3 +1,17 @@
+# Hardwares
+
+MacBook Pro (16-inch, 2019)
+2.6 GHz 6-Core Intel Core i7
+16 GB 2667 MHz DDR4
+
+Monteray 12.6 (21G115)
+
+Apple clang version 13.1.6 (clang-1316.0.21.2)
+Target: x86_64-apple-darwin21.6.0
+Thread model: posix
+InstalledDir: /Applications/Xcode-13-3-rc.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+
+
 # KeyLookup
 
 # Intel Lappy
