@@ -18,6 +18,7 @@ See talks over in Interesting Talks in this repo.
 
 To consume (recommendations from the book):
 * https://www.youtube.com/watch?v=PVYdHDm0q6Y (Hourglass APIs)
+* via Liscio - https://eigen.tuxfamily.org/dox/TopicInsideEigenExample.html - template beauty
 
 ### Randomage
 
