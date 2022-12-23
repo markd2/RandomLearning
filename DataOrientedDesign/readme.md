@@ -36,7 +36,13 @@ And to consume:
   - http://bitsquid.blogspot.com/2012/09/a-data-oriented-data-driven-system-for.html (A Data-Oriented, Data-Driven System for Vector Fields - Part 1)
   - http://bitsquid.blogspot.com/2012/10/a-data-oriented-data-driven-system-for.html (Part 2)
   - http://bitsquid.blogspot.com/2012/10/a-data-oriented-data-driven-system-for_17.html (Part 3)
-  
+* _Single-Assignment C_ : https://www.sac-home.org/index  
+* _What Every Programming Should Know About Memory_ : https://akkadia.org/drepper/cpumemory.pdf - PDF by Ulrich Drepper (2007)
+* _Slashdot interview with Alexander Stepanov and Daniel E. Rose_ : https://interviews.slashdot.org/story/15/01/19/159242
+  - huh. TIL Slashdot is still a thing.
+  - From DoD Book: "some decisions made when STL was first conceived have negative consequences with today's hardware"
+    - specifically node-based data structures. (e.g. a B* tree being a better choice than red-black)
+* _Evolve your Hierarchy_  : https://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/, converting Tony Hawk code to components.
 
 ## Cachce as cache can
 
@@ -44,6 +50,9 @@ And to consume:
 * Apple M1 has 128-byte cache line
     - some sysctls to use - https://news.ycombinator.com/item?id=25660467
     - hardware properties and topology - https://cpufun.substack.com/p/more-m1-fun-hardware-information
+* `sysctl -a hw machdep.cpu`
+* _The M1 doubles the line size, doubles the L1 data cache (i.e. same number of lines), quadruples the L1 instruction cache (i.e. double the lines), and has a 16x larger L2 cache, but no L3 cache."_ (https://news.ycombinator.com/item?id=25660626)
+    - _sysctl on m1 contains the cache sizes for the little cores (since those are CPUs 0-3) big cores (CPU4-7) have 192KB L1I and 128KB L1D._
 
 ### Cache-friendly data structures
 

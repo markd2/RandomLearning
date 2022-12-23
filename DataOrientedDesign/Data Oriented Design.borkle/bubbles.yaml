@@ -20,20 +20,20 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 6.624140625e+2
-  - 3.0909375e+2
+  - 5.6209765625e+2
+  - 1.3178515625e+2
   width: 1.5e+2
   connections:
     indexes:
     - location: 3
-      length: 4
+      length: 6
   _effectiveHeight: 1.4e+1
 - ID: 3
   text: Instruments and cache misses
   formattingOptions: []
   position:
-  - 6.456015625e+2
-  - 2.420625e+2
+  - 5.4528515625e+2
+  - 6.475390625e+1
   width: 1e+2
   connections:
     indexes:
@@ -44,8 +44,8 @@
   text: Turn the Dungeon example into a larger game
   formattingOptions: []
   position:
-  - 7.9678125e+2
-  - 2.4137109375e+2
+  - 6.9646484375e+2
+  - 6.40625e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -56,8 +56,8 @@
   text: DoD Changes to Borkle itself?
   formattingOptions: []
   position:
-  - 7.89140625e+2
-  - 3.554765625e+2
+  - 6.8882421875e+2
+  - 1.7816796875e+2
   width: 1e+2
   connections:
     indexes:
@@ -68,11 +68,36 @@
   text: The various C++ examples - run, measure.  Try with Swift
   formattingOptions: []
   position:
-  - 6.14359375e+2
-  - 3.7975390625e+2
+  - 5.923984375e+2
+  - 2.355078125e+2
   width: 1e+2
   connections:
     indexes:
     - location: 2
       length: 1
   _effectiveHeight: 5.6e+1
+- ID: 7
+  text: Point and click adventure using Table-based finite state machiens (e.g. pg
+    203)
+  formattingOptions: []
+  position:
+  - 3.381328125e+2
+  - 8.224609375e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 8
+  text: Something with the table-oriented health / weapon timer from pg 216
+  formattingOptions: []
+  position:
+  - 3.8079296875e+2
+  - 1.9241796875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+  _effectiveHeight: 4.2e+1
