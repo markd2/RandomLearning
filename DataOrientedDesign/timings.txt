@@ -64,6 +64,8 @@ Average  3417.05us (sd 247.44us) for test [Pre-indexed - linear search]
 
 ### M1 Mini (first gen)
 
+64 byte assumed cache line (it's actually 128)
+
 Animation key lookup tests
 Clumped precached keys = 11 clumps of 16 keys (max key = 176)
 
@@ -263,3 +265,119 @@ Average 17172.49ms (sd nanms) for test [Full anim key - binary search]
 Average 13734.38ms (sd nanms) for test [Data only key - binary search]
 Average 13319.23ms (sd nanms) for test [Pre-indexed - binary search]
 Average 13122.26ms (sd nanms) for test [Pre-indexed - linear search]
+
+
+## m1
+
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 97603.472458ms
+
+Average 29291.72ms (sd nanms) for test [Full anim key - linear search]
+Average 23334.03ms (sd nanms) for test [Full anim key - binary search]
+Average 15590.30ms (sd nanms) for test [Data only key - linear search]
+Average 11737.39ms (sd nanms) for test [Data only key - binary search]
+Average  9622.71ms (sd nanms) for test [Pre-indexed - binary search]
+Average  8024.72ms (sd nanms) for test [Pre-indexed - linear search]
+
+Animation key lookup tests
+Clumped precached keys = 11 clumps of 16 keys (max key = 176)
+
+----------
+
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 97735.034000ms
+
+Average 28232.32ms (sd nanms) for test [Full anim key - linear search]
+Average 23611.55ms (sd nanms) for test [Full anim key - binary search]
+Average 15794.78ms (sd nanms) for test [Data only key - linear search]
+Average 12014.34ms (sd nanms) for test [Data only key - binary search]
+Average  9862.09ms (sd nanms) for test [Pre-indexed - binary search]
+Average  8217.37ms (sd nanms) for test [Pre-indexed - linear search]
+
+----------
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 98670.262292ms
+
+Average 29092.83ms (sd nanms) for test [Full anim key - linear search]
+Average 23561.47ms (sd nanms) for test [Full anim key - binary search]
+Average 15799.45ms (sd nanms) for test [Data only key - linear search]
+Average 12107.00ms (sd nanms) for test [Data only key - binary search]
+Average  9898.94ms (sd nanms) for test [Pre-indexed - binary search]
+Average  8208.84ms (sd nanms) for test [Pre-indexed - linear search]
+
+### M1 Mini (first gen)
+
+128 byte cache line
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 3362.087375ms
+
+Average  6848.47us (sd 408.37us) for test [Full anim key - linear search]
+Average  5048.19us (sd 810.11us) for test [Data only key - linear search]
+Average  4271.01us (sd 515.68us) for test [Full anim key - binary search]
+Average  3136.37us (sd 274.42us) for test [Data only key - binary search]
+Average  2953.22us (sd 215.28us) for test [Pre-indexed - linear search]
+Average  2505.63us (sd 252.17us) for test [Pre-indexed - binary search]
+
+Each hierarchy has 145 nodes.
+Each hierarchy is queried 1000 times
+Managed 128 trials in 3421.449667ms
+
+Average  6944.61us (sd 431.30us) for test [Full anim key - linear search]
+Average  5121.60us (sd 736.40us) for test [Data only key - linear search]
+Average  4377.88us (sd 530.37us) for test [Full anim key - binary search]
+Average  3186.81us (sd 287.20us) for test [Data only key - binary search]
+Average  2999.99us (sd 206.55us) for test [Pre-indexed - linear search]
+Average  2561.10us (sd 245.86us) for test [Pre-indexed - binary search]
+
+
+### Lorge chunkage
+
+Animation key lookup tests
+Clumped precached keys = 27 clumps of 32 keys (max key = 864)
+
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 97612.829375ms
+
+Average 28397.83ms (sd nanms) for test [Full anim key - linear search]
+Average 23094.39ms (sd nanms) for test [Full anim key - binary search]
+Average 15338.38ms (sd nanms) for test [Data only key - linear search]
+Average 11665.92ms (sd nanms) for test [Data only key - binary search]
+Average 10178.22ms (sd nanms) for test [Pre-indexed - binary search]
+Average  8935.56ms (sd nanms) for test [Pre-indexed - linear search]
+% !!
+./KeyLookup.out
+Animation key lookup tests
+Clumped precached keys = 27 clumps of 32 keys (max key = 864)
+
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 98351.024500ms
+
+Average 28312.79ms (sd nanms) for test [Full anim key - linear search]
+Average 23073.89ms (sd nanms) for test [Full anim key - binary search]
+Average 15483.89ms (sd nanms) for test [Data only key - linear search]
+Average 11884.60ms (sd nanms) for test [Data only key - binary search]
+Average 10498.33ms (sd nanms) for test [Pre-indexed - binary search]
+Average  9094.94ms (sd nanms) for test [Pre-indexed - linear search]
+% !!
+./KeyLookup.out
+Animation key lookup tests
+Clumped precached keys = 27 clumps of 32 keys (max key = 864)
+
+Each hierarchy has 145000 nodes.
+Each hierarchy is queried 1000 times
+Managed 1 trials in 97710.369875ms
+
+Average 28423.96ms (sd nanms) for test [Full anim key - linear search]
+Average 23083.08ms (sd nanms) for test [Full anim key - binary search]
+Average 15346.80ms (sd nanms) for test [Data only key - linear search]
+Average 11682.80ms (sd nanms) for test [Data only key - binary search]
+Average 10181.27ms (sd nanms) for test [Pre-indexed - binary search]
+Average  8989.87ms (sd nanms) for test [Pre-indexed - linear search]
+
