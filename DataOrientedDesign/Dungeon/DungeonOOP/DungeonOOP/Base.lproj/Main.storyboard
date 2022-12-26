@@ -721,6 +721,9 @@
                             <constraint firstItem="Qra-et-id5" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="c6U-yV-EBH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dungeonView" destination="Qra-et-id5" id="Cvi-Pu-ucq"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

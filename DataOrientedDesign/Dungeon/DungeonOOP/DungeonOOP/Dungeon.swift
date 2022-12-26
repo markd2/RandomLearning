@@ -1,5 +1,6 @@
 
 import Foundation
+import AppKit
 
 class Dungeon {
     var name: String
@@ -20,6 +21,16 @@ class Room {
         self.name = name
         self.bounds = bounds
         self.doors = doors // there's a potential retain cycle
+    }
+
+    func draw() {
+        NSColor.white.set()
+        NSBezierPath.fill(bounds)
+        NSColor.black.set()
+        NSBezierPath.stroke(bounds)
+
+        let title = bounds.insetBy(dx: 5, dy: 1)
+        (name as NSString).draw(in: title)
     }
 }
 

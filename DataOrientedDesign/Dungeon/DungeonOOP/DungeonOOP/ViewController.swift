@@ -1,23 +1,24 @@
-//
-//  ViewController.swift
-//  DungeonOOP
-//
-//  Created by Mark Dalrymple on 12/26/22.
-//
-
 import Cocoa
 
 class ViewController: NSViewController {
+    var dungeon: Dungeon!
+    @IBOutlet var dungeonView: OOPDungeonView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let roomSize = CGSize(width: 50, height: 30)
+        let offset = CGPoint(x: 10, y: 10)
 
-        // Do any additional setup after loading the view.
+        dungeon = Generator().generateGrid(offset: offset,
+                                           widthRoomCount: 10,
+                                           heightRoomCount: 15,
+                                           roomSize: roomSize,
+                                           doorSize: 15)
+        dungeonView.dungeon = dungeon
     }
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
         }
     }
 
