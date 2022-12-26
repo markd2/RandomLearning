@@ -21,6 +21,43 @@ class Generator {
             cursor.y += roomSize.height + doorSize
         }
 
+        // now that we have rooms, we can make doors.  Make a complete
+        // set of doors, so everyone gets a right and bottom door
+
+        for row in 0 ..< heightRoomCount {
+            for column in 0 ..< widthRoomCount {
+                var doors: [Door] = []
+
+                let roomIndex = row * widthRoomCount + column
+                let rightIndex = roomIndex + 1
+                let downIndex = roomIndex + widthRoomCount
+
+                let room = rooms[roomIndex]
+                if row < heightRoomCount - 1 {
+                    let down = rooms[downIndex]
+                    let door = Door(name: "\(doors.count)",
+                                    side1: room,
+                                    side2: down,
+                                    locked: (row + column) % 4 == 0,
+                                    damaged: false,
+                                    material: .wood)
+                    doors.append(door)
+                }
+                if column < widthRoomCount - 1 {
+                    let right = rooms[rightIndex]
+                    let door = Door(name: "\(doors.count)",
+                                    side1: room,
+                                    side2: right,
+                                    locked: (row + column) % 5 == 0,
+                                    damaged: false,
+                                    material: .stone)
+                    doors.append(door)
+                }
+
+                room.doors = doors
+            }
+        }
+
         let dungeon = Dungeon(name: "Dungeon", rooms: rooms)
         return dungeon
     }
