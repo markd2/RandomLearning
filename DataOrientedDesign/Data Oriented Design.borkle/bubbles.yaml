@@ -101,3 +101,123 @@
     - location: 2
       length: 1
   _effectiveHeight: 4.2e+1
+- ID: 9
+  text: PRESO
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.5901953125e+2
+  - 3.6271875e+2
+  width: 2.2e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 10
+  text: OOP Bad, mmmmkay?
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.122890625e+2
+  - 5.2501953125e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 3
+  _effectiveHeight: 2.8e+1
+- ID: 11
+  text: Code/Data coupled
+  formattingOptions: []
+  position:
+  - 9.89140625e+1
+  - 4.66171875e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 12
+  text: Objects all over address space
+  formattingOptions: []
+  position:
+  - 2.284375e+2
+  - 4.7305859375e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 13
+  text: vtables involve an extra indirection / cache miss / mispredict
+  formattingOptions: []
+  position:
+  - 4.2859375e+1
+  - 5.3639453125e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 14
+  text: Table Normalization
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 4.2506640625e+2
+  - 4.9817578125e+2
+  width: 1.2e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 15
+  text: Use of Cachelines
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 6.6451953125e+2
+  - 5.35859375e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 16
+  text: Binary Search
+  formattingOptions: []
+  position:
+  - 6.451328125e+2
+  - 4.8522265625e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 15
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 17
+  text: Flags in the extra bytes
+  formattingOptions: []
+  position:
+  - 8.0833984375e+2
+  - 4.8816796875e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 15
+      length: 1
+  _effectiveHeight: 2.8e+1
