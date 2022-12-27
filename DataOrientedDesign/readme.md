@@ -1,6 +1,6 @@
 # Data-Oriented Design
 
-* [Dungeon](dungeon) - play with stuff in a real (toy) application
+* [Dungeon](Dungeon) - play with stuff in a real (toy) application
 
 
 "Helping set up things the way you want in memory without loss of efficiency and high-level expressiveness"
