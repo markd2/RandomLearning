@@ -239,8 +239,8 @@
   text: Traps
   formattingOptions: []
   position:
-  - 9.61982421875001e+2
-  - 1.6992578125e+2
+  - 9.80696910511365e+2
+  - 2.23977627840909e+2
   width: 1e+2
   connections:
     indexes:
@@ -251,32 +251,32 @@
   text: Potions
   formattingOptions: []
   position:
-  - 8.95901692708333e+2
-  - 2.04909505208328e+2
+  - 1.17092655066288e+3
+  - 4.1813393702651e+2
   width: 1e+2
   connections:
     indexes:
-    - location: 23
+    - location: 58
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 21
   text: Keys (for particular door in particular room)
   formattingOptions: []
   position:
-  - 9.04583333333333e+2
-  - 3.52634114583328e+2
+  - 9.18074100378788e+2
+  - 3.94111387310601e+2
   width: 1e+2
   connections:
     indexes:
-    - location: 23
+    - location: 57
       length: 1
   _effectiveHeight: 4.2e+1
 - ID: 22
   text: Exit
   formattingOptions: []
   position:
-  - 1.019599609375e+3
-  - 3.24411458333328e+2
+  - 1.12483753551136e+3
+  - 3.71964725378783e+2
   width: 1e+2
   connections:
     indexes:
@@ -285,15 +285,25 @@
   _effectiveHeight: 1.4e+1
 - ID: 23
   text: '"hunt for keys to unlock doors to escape"'
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
   formattingOptions: []
   position:
-  - 9.44524739583332e+2
-  - 2.49505859374999e+2
+  - 9.63239228219696e+2
+  - 3.03557705965908e+2
   width: 1.5e+2
   connections:
     indexes:
     - location: 19
-      length: 4
+      length: 1
+    - location: 22
+      length: 1
+    - location: 38
+      length: 1
+    - location: 57
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 24
   text: Oop bad
@@ -328,20 +338,24 @@
   text: Converting existing data structures and relationships into something linear
   formattingOptions: []
   position:
-  - 1.23033528645833e+3
-  - 2.17595055416667e+2
-  width: 1e+2
+  - 1.4917734966856e+3
+  - 3.20279714507576e+2
+  width: 1.6e+2
   connections:
     indexes:
     - location: 27
       length: 3
-  _effectiveHeight: 7e+1
+    - location: 41
+      length: 1
+    - location: 52
+      length: 1
+  _effectiveHeight: 4.2e+1
 - ID: 27
   text: because we've connected and given meaning to the structure of data
   formattingOptions: []
   position:
-  - 1.36203125e+3
-  - 2.00541012291667e+2
+  - 1.66857599431818e+3
+  - 2.84855642973485e+2
   width: 1.7e+2
   connections:
     indexes:
@@ -352,8 +366,8 @@
   text: '"collections of linear storable data entries"'
   formattingOptions: []
   position:
-  - 1.35880533854167e+3
-  - 2.7242578125e+2
+  - 1.66535008285985e+3
+  - 3.56740411931818e+2
   width: 1e+2
   connections:
     indexes:
@@ -365,11 +379,421 @@
     relational model of arrays"'
   formattingOptions: []
   position:
-  - 1.22294596354167e+3
-  - 3.55690755208339e+2
+  - 1.49390832149622e+3
+  - 2.11113340435612e+2
   width: 1.9e+2
   connections:
     indexes:
     - location: 26
       length: 1
   _effectiveHeight: 5.6e+1
+- ID: 30
+  text: EF Codd
+  formattingOptions: []
+  position:
+  - 1.70337713068181e+3
+  - 6.30667613636384e+1
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 33
+      length: 5
+  _effectiveHeight: 1.4e+1
+- ID: 31
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.50332386363636e+3
+  - 6.12150565454545e+2
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 32
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.20805752840909e+3
+  - 6.09146306818175e+2
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 33
+  text: '"A Relational Model for Large Shared Data Banks"'
+  formattingOptions: []
+  position:
+  - 1.44473366477273e+3
+  - 1.5243605227271e+1
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 34
+  text: "Insert, update, delete, que\x10ry"
+  formattingOptions: []
+  position:
+  - 1.55602272727273e+3
+  - 7.04850824999983e+1
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 35
+  text: Reduce the need to maintan a deep understanding of how the data was laid out
+    to use it well
+  formattingOptions: []
+  position:
+  - 1.49052201704544e+3
+  - 1.19671874999998e+2
+  width: 2e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 36
+  text: claimed to reduce the likeyhood of introducing internal inconsistencies
+  formattingOptions: []
+  position:
+  - 1.72805752840908e+3
+  - 1.15921872272732e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 37
+  text: '"Further Nomalization of the Data Base Relational Model"'
+  formattingOptions: []
+  position:
+  - 1.68857954545453e+3
+  - 1.46363636363697e+1
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 38
+  text: Timed events
+  formattingOptions: []
+  position:
+  - 1.05987571022727e+3
+  - 2.6674573863637e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+    - location: 39
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 39
+  text: Say a gas trap that fills rooms slowly
+  formattingOptions: []
+  position:
+  - 1.08956676136363e+3
+  - 2.03563920454552e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 38
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 40
+  text: Monsters on patrol
+  formattingOptions: []
+  position:
+  - 1.12404119318181e+3
+  - 3.09924005681824e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 38
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 41
+  text: Converting from the "network model" (hierarchical)
+  formattingOptions: []
+  position:
+  - 1.49471235795454e+3
+  - 4.06699573863642e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 42
+  text: The structure of any data is a trade-off
+  formattingOptions: []
+  position:
+  - 1.0404580965909e+3
+  - 5.74203125000006e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 43
+      length: 6
+    - location: 50
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 43
+  text: performance
+  formattingOptions: []
+  position:
+  - 1.10426136363636e+3
+  - 5.20570312500006e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 44
+  text: readability
+  formattingOptions: []
+  position:
+  - 1.18431107954545e+3
+  - 5.6085795454546e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 45
+  text: maintenance
+  formattingOptions: []
+  position:
+  - 1.14902698863636e+3
+  - 6.26071022727279e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 46
+  text: future-proofing
+  formattingOptions: []
+  position:
+  - 9.18142755681812e+2
+  - 6.36561079545461e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 47
+  text: extendability
+  formattingOptions: []
+  position:
+  - 9.48497869318175e+2
+  - 5.23290482954552e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 48
+  text: reuse
+  formattingOptions: []
+  position:
+  - 8.96075994318176e+2
+  - 5.85829545454551e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 49
+  text: "The most flexible database in common use is the file system  - primary\x10
+    key is a path, and a string for the data"
+  formattingOptions: []
+  position:
+  - 1.31360440340908e+3
+  - 5.18059659090915e+2
+  width: 2.5e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 4.2e+1
+- ID: 50
+  text: The more complex the tables get, the less future proof and less maintanable,
+    but higher performance and readability
+  formattingOptions: []
+  position:
+  - 9.79108664772721e+2
+  - 6.72725852272733e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 42
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 51
+  text: '"games are so complex they odn''t appear to have databases. They are so complex
+    for the sake of performance they have forgotten they are merely a data transform"'
+  formattingOptions: []
+  position:
+  - 1.60726562499999e+3
+  - 4.76625000000005e+2
+  width: 2.4e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 5.6e+1
+- ID: 52
+  text: Relational model calls for atomicity when working with data
+  formattingOptions: []
+  position:
+  - 1.31362571022726e+3
+  - 3.24583096590914e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+    - location: 53
+      length: 1
+    - location: 55
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 53
+  text: Like images / audio - yes, they're big, but you can't really cut them up without
+    them losing integrity
+  formattingOptions: []
+  position:
+  - 1.29216264204544e+3
+  - 1.99050426136369e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 54
+  text: Normalizing
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 1.05054154829544e+3
+  - 8.40274680397732e+2
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 55
+  text: the idea of "meaningful boundary"
+  formattingOptions:
+  - options: 1
+    rangeStart: 13
+    rangeLength: 19
+  position:
+  - 1.31761008522726e+3
+  - 4.03908380681823e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 56
+  text: When normalizing, try to stay at the level of nouns / the namable pieces
+  formattingOptions: []
+  position:
+  - 1.31537286931817e+3
+  - 6.78485795454552e+2
+  width: 1.8e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 4.2e+1
+- ID: 57
+  text: pickups
+  formattingOptions: []
+  position:
+  - 9.79804687499985e+2
+  - 3.49281250000005e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+    - location: 23
+      length: 1
+    - location: 58
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 58
+  text: things that affect player stats
+  formattingOptions: []
+  position:
+  - 1.04174360795453e+3
+  - 4.15232954545459e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 20
+      length: 1
+    - location: 57
+      length: 1
+    - location: 59
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 59
+  text: Armor
+  formattingOptions: []
+  position:
+  - 1.15272017045453e+3
+  - 4.56667613636368e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 58
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 60
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.72223721590908e+3
+  - 8.46000000000004e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 61
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.69264204545453e+3
+  - 1.43421732954546e+3
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 60
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 62
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.77145182291659e+2
+  - 8.90860029375031e+2
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
