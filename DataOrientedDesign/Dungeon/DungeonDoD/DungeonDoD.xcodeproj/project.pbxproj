@@ -14,6 +14,7 @@
 		7DBC36482959F39A00AB3A73 /* DungeonDoDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36472959F39A00AB3A73 /* DungeonDoDTests.swift */; };
 		7DBC36522959F39A00AB3A73 /* DungeonDoDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36512959F39A00AB3A73 /* DungeonDoDUITests.swift */; };
 		7DBC36542959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36532959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift */; };
+		7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		7DBC364D2959F39A00AB3A73 /* DungeonDoDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DungeonDoDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DBC36512959F39A00AB3A73 /* DungeonDoDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDoDUITests.swift; sourceTree = "<group>"; };
 		7DBC36532959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDoDUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoDDungeonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				7DBC36392959F39900AB3A73 /* Assets.xcassets */,
 				7DBC363B2959F39900AB3A73 /* Main.storyboard */,
 				7DBC363E2959F39900AB3A73 /* DungeonDoD.entitlements */,
+				7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */,
 			);
 			path = DungeonDoD;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DBC36382959F39900AB3A73 /* ViewController.swift in Sources */,
+				7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */,
 				7DBC36362959F39900AB3A73 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
