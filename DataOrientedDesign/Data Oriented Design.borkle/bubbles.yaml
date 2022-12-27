@@ -109,8 +109,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.5901953125e+2
-  - 3.6271875e+2
+  - 1.7930859375e+2
+  - 5.919921875e+2
   width: 2.2e+2
   connections:
     indexes: []
@@ -123,8 +123,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.122890625e+2
-  - 5.2501953125e+2
+  - 2.32578125e+2
+  - 7.5429296875e+2
   width: 1e+2
   connections:
     indexes:
@@ -135,8 +135,8 @@
   text: Code/Data coupled
   formattingOptions: []
   position:
-  - 9.89140625e+1
-  - 4.66171875e+2
+  - 1.19203125e+2
+  - 6.954453125e+2
   width: 1e+2
   connections:
     indexes:
@@ -147,8 +147,8 @@
   text: Objects all over address space
   formattingOptions: []
   position:
-  - 2.284375e+2
-  - 4.7305859375e+2
+  - 2.487265625e+2
+  - 7.0233203125e+2
   width: 1e+2
   connections:
     indexes:
@@ -159,8 +159,8 @@
   text: vtables involve an extra indirection / cache miss / mispredict
   formattingOptions: []
   position:
-  - 4.2859375e+1
-  - 5.3639453125e+2
+  - 6.31484375e+1
+  - 7.6566796875e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -175,8 +175,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 4.2506640625e+2
-  - 4.9817578125e+2
+  - 4.4535546875e+2
+  - 7.2744921875e+2
   width: 1.2e+2
   connections:
     indexes: []
@@ -189,8 +189,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 6.6451953125e+2
-  - 5.35859375e+2
+  - 6.8480859375e+2
+  - 7.651328125e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -201,8 +201,8 @@
   text: Binary Search
   formattingOptions: []
   position:
-  - 6.451328125e+2
-  - 4.8522265625e+2
+  - 6.65421875e+2
+  - 7.1449609375e+2
   width: 1e+2
   connections:
     indexes:
@@ -213,11 +213,163 @@
   text: Flags in the extra bytes
   formattingOptions: []
   position:
-  - 8.0833984375e+2
-  - 4.8816796875e+2
+  - 7.47343098958333e+2
+  - 6.948828125e+2
   width: 1e+2
   connections:
     indexes:
     - location: 15
       length: 1
   _effectiveHeight: 2.8e+1
+- ID: 18
+  text: DUNGEON CHAPTER
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 9.40091145833334e+2
+  - 6.162890625e+1
+  width: 1.3e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 19
+  text: Traps
+  formattingOptions: []
+  position:
+  - 9.61982421875001e+2
+  - 1.6992578125e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 20
+  text: Potions
+  formattingOptions: []
+  position:
+  - 8.95901692708333e+2
+  - 2.04909505208328e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 21
+  text: Keys (for particular door in particular room)
+  formattingOptions: []
+  position:
+  - 9.04583333333333e+2
+  - 3.52634114583328e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 22
+  text: Exit
+  formattingOptions: []
+  position:
+  - 1.019599609375e+3
+  - 3.24411458333328e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 23
+  text: '"hunt for keys to unlock doors to escape"'
+  formattingOptions: []
+  position:
+  - 9.44524739583332e+2
+  - 2.49505859374999e+2
+  width: 1.5e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 4
+  _effectiveHeight: 2.8e+1
+- ID: 24
+  text: Oop bad
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 1.04002278645834e+3
+  - 1.15781901041665e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 25
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 25
+  text: Because in languages like, C++ you need instances before you can relate them,
+    so have to create all rooms before creating the doors that connect them
+  formattingOptions: []
+  position:
+  - 1.18661458333334e+3
+  - 4.44570312499986e+1
+  width: 2.3e+2
+  connections:
+    indexes:
+    - location: 24
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 26
+  text: Converting existing data structures and relationships into something linear
+  formattingOptions: []
+  position:
+  - 1.23033528645833e+3
+  - 2.17595055416667e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 27
+      length: 3
+  _effectiveHeight: 7e+1
+- ID: 27
+  text: because we've connected and given meaning to the structure of data
+  formattingOptions: []
+  position:
+  - 1.36203125e+3
+  - 2.00541012291667e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 28
+  text: '"collections of linear storable data entries"'
+  formattingOptions: []
+  position:
+  - 1.35880533854167e+3
+  - 2.7242578125e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 29
+  text: '"migrate from a web of connected complex objects to a simpler to reason about
+    relational model of arrays"'
+  formattingOptions: []
+  position:
+  - 1.22294596354167e+3
+  - 3.55690755208339e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 5.6e+1
