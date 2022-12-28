@@ -692,7 +692,11 @@
   - 8.40274680397732e+2
   width: 1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 62
+      length: 1
+    - location: 65
+      length: 2
   _effectiveHeight: 1.4e+1
 - ID: 55
   text: the idea of "meaningful boundary"
@@ -788,12 +792,137 @@
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 62
-  text: ''
+  text: 1. Go from object graph to messy tables, with NULLs and multiple items per
+    cell
   formattingOptions: []
   position:
-  - 9.77145182291659e+2
-  - 8.90860029375031e+2
-  width: 1e+2
+  - 9.46027994791659e+2
+  - 8.81594404375031e+2
+  width: 1.7e+2
   connections:
-    indexes: []
-  _effectiveHeight: 1.4e+1
+    indexes:
+    - location: 54
+      length: 1
+    - location: 63
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 63
+  text: 2. reduce the number of elements of each cell to 1
+  formattingOptions: []
+  position:
+  - 9.61375e+2
+  - 9.7251171875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 62
+      length: 1
+    - location: 64
+      length: 1
+    - location: 67
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 64
+  text: and increase number of elements to 1 where currently NULL
+  formattingOptions: []
+  position:
+  - 9.64640625e+2
+  - 1.03093359375e+3
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 63
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 65
+  text: BCNF normal form is probably as far as you normally need need to go
+  formattingOptions: []
+  position:
+  - 9.76015625e+2
+  - 7.70421875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 54
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 66
+  text: May want to normalize your data for hot./cold access patterns
+  formattingOptions: []
+  position:
+  - 1.17746484375e+3
+  - 7.789296875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 54
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 67
+  text: 'First Normal Form:
+
+    every cell contains one and only one atomic value.
+
+    And Every Row is Distinct'
+  formattingOptions: []
+  position:
+  - 1.156890625e+3
+  - 9.0777734375e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 63
+      length: 1
+    - location: 68
+      length: 2
+  _effectiveHeight: 5.6e+1
+- ID: 68
+  text: can consider tables to be more like sets where the whole row is the set value
+  formattingOptions: []
+  position:
+  - 1.34330859375e+3
+  - 8.5759375e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 67
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 69
+  text: The key is often used to order the sorting of the table in physical media
+  formattingOptions: []
+  position:
+  - 1.36540234375e+3
+  - 9.3724609375e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 67
+      length: 1
+    - location: 70
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 70
+  text: key should be uniquie and small as possible
+  formattingOptions: []
+  position:
+  - 1.54412890625e+3
+  - 9.005703125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 69
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 71
+  text: But, it could be the entire row is also the key
+  formattingOptions: []
+  position:
+  - 1.54604296875e+3
+  - 9.483515625e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 69
+      length: 1
+  _effectiveHeight: 2.8e+1
