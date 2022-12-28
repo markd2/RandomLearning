@@ -1,6 +1,8 @@
 
 import Foundation
 
+typealias SmallID = UInt8
+
 class Dungeon {
     var rooms: Table<Room> = Table<Room>()
     var doors: Table<Door> = Table<Door>()
@@ -8,7 +10,7 @@ class Dungeon {
 }
 
 struct Room {
-    let id: UInt8
+    let id: SmallID
     let name: String
     let bounds: CGRect
 }
@@ -20,7 +22,7 @@ enum DoorMaterial {
 }
 
 struct Door {
-    let id: UInt8
+    let id: SmallID
     let name: String
     let locked: Bool
     let damaged: Bool
@@ -28,8 +30,9 @@ struct Door {
 }
 
 struct RoomDoor {
-    let doorId: UInt8
-    let roomId: UInt8
+    let doorId: SmallID
+    let fromRoomId: SmallID
+    let toRoomId: SmallID
 }
 
 class Table<RowType> {
