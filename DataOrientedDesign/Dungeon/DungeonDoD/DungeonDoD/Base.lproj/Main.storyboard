@@ -721,6 +721,9 @@
                             <constraint firstAttribute="bottom" secondItem="d37-kq-5az" secondAttribute="bottom" constant="20" symbolic="YES" id="mtl-IG-ueF"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dungeonView" destination="d37-kq-5az" id="XPD-I3-vmy"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

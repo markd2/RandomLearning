@@ -16,6 +16,7 @@
 		7DBC36542959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36532959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift */; };
 		7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */; };
 		7DBC3669295BBB9C00AB3A73 /* Tables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC3668295BBB9C00AB3A73 /* Tables.swift */; };
+		7DBC366B295BBF5E00AB3A73 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC366A295BBF5E00AB3A73 /* Generator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		7DBC36532959F39A00AB3A73 /* DungeonDoDUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonDoDUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoDDungeonView.swift; sourceTree = "<group>"; };
 		7DBC3668295BBB9C00AB3A73 /* Tables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tables.swift; sourceTree = "<group>"; };
+		7DBC366A295BBF5E00AB3A73 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		7DBC36342959F39900AB3A73 /* DungeonDoD */ = {
 			isa = PBXGroup;
 			children = (
+				7DBC366A295BBF5E00AB3A73 /* Generator.swift */,
 				7DBC36352959F39900AB3A73 /* AppDelegate.swift */,
 				7DBC36372959F39900AB3A73 /* ViewController.swift */,
 				7DBC36392959F39900AB3A73 /* Assets.xcassets */,
@@ -261,6 +264,7 @@
 				7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */,
 				7DBC3669295BBB9C00AB3A73 /* Tables.swift in Sources */,
 				7DBC36362959F39900AB3A73 /* AppDelegate.swift in Sources */,
+				7DBC366B295BBF5E00AB3A73 /* Generator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
