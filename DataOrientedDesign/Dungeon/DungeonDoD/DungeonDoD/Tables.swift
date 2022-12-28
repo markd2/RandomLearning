@@ -1,7 +1,7 @@
 
 import Foundation
 
-typealias SmallID = UInt8
+typealias SmallID = UInt16
 
 class Dungeon {
     var rooms: Table<Room> = Table<Room>()
