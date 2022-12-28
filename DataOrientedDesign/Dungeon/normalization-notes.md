@@ -89,11 +89,10 @@ a cell into one cell.
 | d4   | false  | false   | stone    | 3  |
 
 **ROOMDOORS**
-| door id | room id |
-| 0       | 0       |
-| 1       | 2       |
-| 2       | 2       |
-| 2       | 3       |
+| door id | from room id | to room id |
+| 1       | 1       | 2 |
+| 2       | 2       | 3 |
+| 3       | 1       | 4 |
 
 So let's start an implementation with this.
 
