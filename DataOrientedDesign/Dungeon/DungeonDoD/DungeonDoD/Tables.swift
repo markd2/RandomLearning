@@ -44,3 +44,21 @@ class Table<RowType> {
 }
 
 
+extension Table<Room> {
+    func roomForId(_ roomId: SmallID) -> Room {
+        guard let room = storage.first(where: { $0.id == roomId } ) else {
+            fatalError("should have found \(roomId) in room collection")
+        }
+        return room
+    }
+}
+
+
+extension Table<RoomDoor> {
+    func roomsForDoorId(_ doorId: SmallID) -> [SmallID] {
+        let blah = storage
+          .filter { $0.doorId == doorId }
+          .flatMap { [$0.fromRoomId, $0.toRoomId] }
+        return blah
+    }
+}

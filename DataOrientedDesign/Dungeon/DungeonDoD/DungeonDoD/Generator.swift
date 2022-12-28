@@ -27,8 +27,9 @@ class Generator {
 
                 // to the right
                 if column < widthRoomCount - 1 {
+                    let locked = (row + column) % 4 == 0
                     dungeon.doors.add(Door(id: doorId, name: "\(doorId)",
-                                           locked: false, damaged: false,
+                                           locked: locked, damaged: false,
                                            material: .stone))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
@@ -38,8 +39,9 @@ class Generator {
 
                 // down
                 if row < heightRoomCount - 1 {
+                    let locked = (row + column) % 5 == 0
                     dungeon.doors.add(Door(id: doorId, name: "\(doorId)",
-                                           locked: false, damaged: false,
+                                           locked: locked, damaged: false,
                                            material: .stone))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
