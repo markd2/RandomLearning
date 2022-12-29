@@ -31,8 +31,12 @@ class Generator {
                 let roomIndex = row * widthRoomCount + column
                 let rightIndex = roomIndex + 1
                 let downIndex = roomIndex + widthRoomCount
+                let leftIndex = roomIndex - 1
+                let upIndex = roomIndex - widthRoomCount
 
                 let room = rooms[roomIndex]
+
+                // down
                 if row < heightRoomCount - 1 {
                     let down = rooms[downIndex]
                     let locked = (row == 0 || column == 0) ? false : (row + column) % 4 == 0
@@ -44,6 +48,7 @@ class Generator {
                                     material: .wood)
                     doors.append(door)
                 }
+                // right
                 if column < widthRoomCount - 1 {
                     let right = rooms[rightIndex]
                     let locked = (row == 0 || column == 0) ? false : (row + column) % 5 == 0
@@ -54,6 +59,21 @@ class Generator {
                                     damaged: false,
                                     material: .stone)
                     doors.append(door)
+                }
+
+                // up
+                if row > 0 {
+                    let up = rooms[upIndex]
+                    if let door = up.doorConnectedTo(room: room) {
+                        doors.append(door)
+                    }
+                }
+
+                if column > 0 {
+                    let left = rooms[leftIndex]
+                    if let door = left.doorConnectedTo(room: room) {
+                        doors.append(door)
+                    }
                 }
 
                 room.doors = doors
