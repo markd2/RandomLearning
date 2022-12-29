@@ -55,6 +55,7 @@ class Generator {
             cursor.y += roomSize.height + doorSize
         }
 
+        dungeon.playerRoom = dungeon.rooms.storage[0].id
         return dungeon
     }
 }
