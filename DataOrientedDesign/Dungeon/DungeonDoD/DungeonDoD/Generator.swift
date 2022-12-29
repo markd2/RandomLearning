@@ -34,11 +34,13 @@ class Generator {
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
                                                   toRoomId: roomId + 1,
-                                                  direction: .right))
+                                                  direction: .right,
+                                                  locked: locked))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId + 1,
                                                   toRoomId: roomId,
-                                                  direction: .left))
+                                                  direction: .left,
+                                                  locked: locked))
                     doorId += 1
                 }
 
@@ -51,11 +53,13 @@ class Generator {
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
                                                   toRoomId: roomId + SmallID(widthRoomCount),
-                                                  direction: .down))
+                                                  direction: .down,
+                                                  locked: locked))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId + SmallID(widthRoomCount),
                                                   toRoomId: roomId,
-                                                  direction: .up))
+                                                  direction: .up,
+                                                  locked: locked))
                     doorId += 1
                 }
 

@@ -41,6 +41,7 @@ struct RoomDoor {
     let fromRoomId: SmallID
     let toRoomId: SmallID
     let direction: Direction
+    let locked: Bool
 }
 
 class Table<RowType> {
