@@ -940,7 +940,7 @@
   formattingOptions:
   - options: 2
     rangeStart: 460
-    rangeLength: 56
+    rangeLength: 52
   position:
   - 2.427578125e+2
   - 9.219609375e+2
@@ -948,3 +948,58 @@
   connections:
     indexes: []
   _effectiveHeight: 9.8e+1
+- ID: 73
+  text: Interesting
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.09078515625e+3
+  - 1.13712109375e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 74
+      length: 3
+  _effectiveHeight: 1.4e+1
+- ID: 74
+  text: (OOP) When adding player movement logic, the "move:direction" moved from VC
+    to Dungeon to Player before actually doing anything - like "who owns the current
+    player location?"
+  formattingOptions: []
+  position:
+  - 1.331890625e+3
+  - 1.10922265625e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 75
+  text: Hit a (OOP) bug where only the right/below rooms were added to the room, not
+    the top/left.  A side effect of how the generator did its thing
+  formattingOptions: []
+  position:
+  - 1.0469140625e+3
+  - 1.19040625e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 76
+  text: (OOP) Moving L->R, honors lockage, but R->L moves right through
+  formattingOptions: []
+  position:
+  - 1.23428125e+3
+  - 1.24451953125e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+  _effectiveHeight: 4.2e+1
