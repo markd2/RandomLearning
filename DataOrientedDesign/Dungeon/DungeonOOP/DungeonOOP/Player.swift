@@ -16,7 +16,7 @@ class Player {
     }
 
     func attemptMove(direction: Direction) -> Bool {
-        let connectedRooms = dungeon.connectedRooms(to: currentRoom)
+        let connectedRooms = dungeon.connectedRooms(to: currentRoom, includeLocked: false)
 
         for connection in connectedRooms {
             if direction == .right && connection.bounds.minX > currentRoom.bounds.maxX {

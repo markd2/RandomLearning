@@ -11,8 +11,8 @@ class Dungeon {
         self.rooms = rooms
     }
 
-    func connectedRooms(to room: Room) -> [Room] {
-        let rooms = room.doors.map { ($0.side1 == room) ? $0.side2 : $0.side1 }
+    func connectedRooms(to room: Room, includeLocked: Bool) -> [Room] {
+        let rooms = room.doors.compactMap { (includeLocked || !$0.locked) ? (($0.side1 == room) ? $0.side2 : $0.side1) : nil }
         return rooms
     }
 }
