@@ -46,6 +46,10 @@ And to consume:
   - From DoD Book: "some decisions made when STL was first conceived have negative consequences with today's hardware"
     - specifically node-based data structures. (e.g. a B* tree being a better choice than red-black)
 * _Evolve your Hierarchy_  : https://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/, converting Tony Hawk code to components.
+* _Data Oriented Design (DigiPen)_ : https://www.youtube.com/watch?v=16ZF9XqkfRY
+* _Data-oriented Design in practice_ : https://www.youtube.com/watch?v=NWMx1Q66c14
+* _Game Programming Patterns_ : https://smile.amazon.com/Game-Programming-Patterns-Robert-Nystrom/dp/0990582906
+    - recommendation from one of the Underdogs!
 
 ## Cachce as cache can
 
