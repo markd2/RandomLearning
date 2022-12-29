@@ -3,6 +3,9 @@ import Quartz
 
 class OOPDungeonView: NSView {
     var dungeon: Dungeon!
+    var player: Player!
+
+    override var acceptsFirstResponder: Bool { return true }
 
     override func draw(_ rect: CGRect) {
         NSColor.lightGray.set()
@@ -15,7 +18,7 @@ class OOPDungeonView: NSView {
         guard let dungeon = dungeon else { return }
 
         for room in dungeon.rooms {
-            room.draw()
+            room.draw(highlighted: room == player.currentRoom)
         }
     }
 

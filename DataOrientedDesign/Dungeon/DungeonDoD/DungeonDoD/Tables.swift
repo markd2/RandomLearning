@@ -1,12 +1,19 @@
 
 import Foundation
 
+enum Direction {
+    case up, down, left, right
+}
+
+
 typealias SmallID = UInt16
 
 class Dungeon {
     var rooms: Table<Room> = Table<Room>()
     var doors: Table<Door> = Table<Door>()
     var roomDoor: Table<RoomDoor> = Table<RoomDoor>()
+    var playerRoom: SmallID = 0
+
 }
 
 struct Room {
@@ -33,6 +40,8 @@ struct RoomDoor {
     let doorId: SmallID
     let fromRoomId: SmallID
     let toRoomId: SmallID
+    let direction: Direction
+    let locked: Bool
 }
 
 class Table<RowType> {
@@ -59,6 +68,7 @@ extension Table<RoomDoor> {
         let blah = storage
           .filter { $0.doorId == doorId }
           .flatMap { [$0.fromRoomId, $0.toRoomId] }
+          .uniqued()
         return blah
     }
 }

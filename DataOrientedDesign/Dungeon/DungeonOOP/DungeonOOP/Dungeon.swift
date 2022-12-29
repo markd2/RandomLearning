@@ -10,21 +10,33 @@ class Dungeon {
         self.name = name
         self.rooms = rooms
     }
+
+    func connectedRooms(to room: Room, includeLocked: Bool) -> [Room] {
+        let rooms = room.doors.compactMap { (includeLocked || !$0.locked) ? (($0.side1 == room) ? $0.side2 : $0.side1) : nil }
+        return rooms
+    }
 }
 
-class Room {
+class Room: Equatable {
+    var id: UUID
     var name: String
     var bounds: CGRect
     var doors: [Door]
     
     init(name: String, bounds: CGRect, doors: [Door]) {
+        id = UUID()
         self.name = name
         self.bounds = bounds
         self.doors = doors // there's a potential retain cycle
     }
+    func doorConnectedTo(room: Room) -> Door? {
+        let relatedDoors = doors.filter { $0.side1 == room || $0.side2 == room }
+        guard relatedDoors.count <= 1 else { fatalError("multiple doors from \(name) to \(room.name)") }
+        return relatedDoors.first
+    }
 
-    func draw() {
-        NSColor.white.set()
+    func draw(highlighted: Bool) {
+        (highlighted ? NSColor.yellow : NSColor.white).set()
         NSBezierPath.fill(bounds)
         NSColor.black.set()
         NSBezierPath.stroke(bounds)
@@ -35,6 +47,11 @@ class Room {
         for door in doors {
             door.draw()
         }
+    }
+
+    // Equatable
+    static func == (lhs: Room, rhs: Room) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

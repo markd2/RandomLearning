@@ -3,7 +3,10 @@ import AppKit
 class DoDDungeonView: NSView {
     var dungeon: Dungeon!
 
+    override var acceptsFirstResponder: Bool { return true }
+
     override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
         self.window?.backgroundColor = .purple
     }
 
@@ -26,7 +29,11 @@ class DoDDungeonView: NSView {
     }
 
     func drawRoom(_ room: Room) {
-        NSColor.white.set()
+        if room.id != dungeon.playerRoom {
+            NSColor.white.set()
+        } else {
+            NSColor.yellow.set()
+        }
         NSBezierPath.fill(room.bounds)
         NSColor.black.set()
         NSBezierPath.stroke(room.bounds)
