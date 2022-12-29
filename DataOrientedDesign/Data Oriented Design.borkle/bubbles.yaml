@@ -956,13 +956,15 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.09078515625e+3
-  - 1.13712109375e+3
+  - 1.1753671875e+3
+  - 1.26373828125e+3
   width: 1.6e+2
   connections:
     indexes:
     - location: 74
-      length: 3
+      length: 5
+    - location: 81
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 74
   text: (OOP) When adding player movement logic, the "move:direction" moved from VC
@@ -970,8 +972,8 @@
     player location?"
   formattingOptions: []
   position:
-  - 1.331890625e+3
-  - 1.10922265625e+3
+  - 1.48770703125e+3
+  - 1.01884375e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -983,8 +985,8 @@
     the top/left.  A side effect of how the generator did its thing
   formattingOptions: []
   position:
-  - 1.0469140625e+3
-  - 1.19040625e+3
+  - 1.20273046875e+3
+  - 1.10002734375e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -995,11 +997,78 @@
   text: (OOP) Moving L->R, honors lockage, but R->L moves right through
   formattingOptions: []
   position:
-  - 1.23428125e+3
-  - 1.24451953125e+3
+  - 1.45001953125e+3
+  - 1.18984765625e+3
   width: 1.6e+2
   connections:
     indexes:
     - location: 73
       length: 1
   _effectiveHeight: 4.2e+1
+- ID: 77
+  text: 'DoD:  got a weird "EXC_BAD_ADDRESS code=1", "memory read failed for 0x0"'
+  formattingOptions: []
+  position:
+  - 1.06261328125e+3
+  - 1.301140625e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+    - location: 79
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 78
+  text: 'DoD: got an assertion failure with the assumption that we get two doors for
+    roomsForDoorID - now that we have bidi doors, violates that'
+  formattingOptions: []
+  position:
+  - 1.30733203125e+3
+  - 1.2937265625e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+    - location: 80
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 79
+  text: went away on its own. I blame xcode / swift
+  formattingOptions: []
+  position:
+  - 9.5121875e+2
+  - 1.24946875e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 77
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 80
+  text: Fix was adding a uniqued() method (short) and call in the roomForDoorID chain.
+    Much faster and simpler than the OOP equivalent
+  formattingOptions: []
+  position:
+  - 1.4917109375e+3
+  - 1.3054296875e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 81
+  text: (Both) Keys stopped working.  Need to have accepts first responder on the
+    view and the VC :-(
+  formattingOptions: []
+  position:
+  - 9.6157421875e+2
+  - 1.141828125e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+  _effectiveHeight: 5.6e+1
