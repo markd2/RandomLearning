@@ -25,11 +25,6 @@ class ViewController: NSViewController {
         dungeonView.player = player
     }
 
-    override var representedObject: Any? {
-        didSet {
-        }
-    }
-    
     override var acceptsFirstResponder: Bool { return true }
 
     override func keyDown(with event: NSEvent) {
