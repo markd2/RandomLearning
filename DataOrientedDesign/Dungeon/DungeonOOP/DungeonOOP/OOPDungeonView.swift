@@ -5,6 +5,8 @@ class OOPDungeonView: NSView {
     var dungeon: Dungeon!
     var player: Player!
 
+    override var acceptsFirstResponder: Bool { return true }
+
     override func draw(_ rect: CGRect) {
         NSColor.lightGray.set()
         NSBezierPath.fill(rect)

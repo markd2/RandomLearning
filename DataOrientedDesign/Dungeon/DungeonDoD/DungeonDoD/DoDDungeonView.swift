@@ -3,7 +3,10 @@ import AppKit
 class DoDDungeonView: NSView {
     var dungeon: Dungeon!
 
+    override var acceptsFirstResponder: Bool { return true }
+
     override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
         self.window?.backgroundColor = .purple
     }
 
