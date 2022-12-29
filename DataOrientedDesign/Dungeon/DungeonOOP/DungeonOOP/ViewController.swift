@@ -2,6 +2,7 @@ import Cocoa
 
 class ViewController: NSViewController {
     var dungeon: Dungeon!
+    var player: Player!
     @IBOutlet var dungeonView: OOPDungeonView!
 
     override func viewDidLoad() {
@@ -15,6 +16,7 @@ class ViewController: NSViewController {
                                            roomSize: roomSize,
                                            doorSize: 15)
         dungeonView.dungeon = dungeon
+        player = Player(name: "Splunge", currentRoom: dungeon.rooms.first!, dungeon: dungeon)
     }
 
     override var representedObject: Any? {

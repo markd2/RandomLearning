@@ -17,6 +17,7 @@
 		7DBC36612959F40B00AB3A73 /* OOPDungeonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36602959F40B00AB3A73 /* OOPDungeonView.swift */; };
 		7DBC36632959F8C900AB3A73 /* Dungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36622959F8C900AB3A73 /* Dungeon.swift */; };
 		7DBC36652959FB9C00AB3A73 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC36642959FB9C00AB3A73 /* Generator.swift */; };
+		7DCF14DB295DEE0300CDF900 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF14DA295DEE0300CDF900 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7DBC36602959F40B00AB3A73 /* OOPDungeonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOPDungeonView.swift; sourceTree = "<group>"; };
 		7DBC36622959F8C900AB3A73 /* Dungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dungeon.swift; sourceTree = "<group>"; };
 		7DBC36642959FB9C00AB3A73 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		7DCF14DA295DEE0300CDF900 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				7DBC36602959F40B00AB3A73 /* OOPDungeonView.swift */,
 				7DBC36622959F8C900AB3A73 /* Dungeon.swift */,
 				7DBC36642959FB9C00AB3A73 /* Generator.swift */,
+				7DCF14DA295DEE0300CDF900 /* Player.swift */,
 			);
 			path = DungeonOOP;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				7DBC36012959F38A00AB3A73 /* ViewController.swift in Sources */,
 				7DBC36612959F40B00AB3A73 /* OOPDungeonView.swift in Sources */,
 				7DBC35FF2959F38A00AB3A73 /* AppDelegate.swift in Sources */,
+				7DCF14DB295DEE0300CDF900 /* Player.swift in Sources */,
 				7DBC36652959FB9C00AB3A73 /* Generator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

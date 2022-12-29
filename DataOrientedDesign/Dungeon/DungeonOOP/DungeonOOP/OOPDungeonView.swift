@@ -3,6 +3,7 @@ import Quartz
 
 class OOPDungeonView: NSView {
     var dungeon: Dungeon!
+    var player: Player!
 
     override func draw(_ rect: CGRect) {
         NSColor.lightGray.set()
