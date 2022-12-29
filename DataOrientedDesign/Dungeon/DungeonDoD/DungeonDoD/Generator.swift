@@ -27,25 +27,35 @@ class Generator {
 
                 // to the right
                 if column < widthRoomCount - 1 {
-                    let locked = (row + column) % 4 == 0
+                    let locked = (row == 0 || column == 0) ? false : (row + column) % 4 == 0
                     dungeon.doors.add(Door(id: doorId, name: "\(doorId)",
                                            locked: locked, damaged: false,
                                            material: .stone))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
-                                                  toRoomId: roomId + 1))
+                                                  toRoomId: roomId + 1,
+                                                  direction: .right))
+                    dungeon.roomDoor.add(RoomDoor(doorId: doorId,
+                                                  fromRoomId: roomId + 1,
+                                                  toRoomId: roomId,
+                                                  direction: .left))
                     doorId += 1
                 }
 
                 // down
                 if row < heightRoomCount - 1 {
-                    let locked = (row + column) % 5 == 0
+                    let locked = (row == 0 || column == 0) ? false : (row + column) % 5 == 0
                     dungeon.doors.add(Door(id: doorId, name: "\(doorId)",
                                            locked: locked, damaged: false,
                                            material: .stone))
                     dungeon.roomDoor.add(RoomDoor(doorId: doorId,
                                                   fromRoomId: roomId,
-                                                  toRoomId: roomId + SmallID(widthRoomCount)))
+                                                  toRoomId: roomId + SmallID(widthRoomCount),
+                                                  direction: .down))
+                    dungeon.roomDoor.add(RoomDoor(doorId: doorId,
+                                                  fromRoomId: roomId + SmallID(widthRoomCount),
+                                                  toRoomId: roomId,
+                                                  direction: .up))
                     doorId += 1
                 }
 
