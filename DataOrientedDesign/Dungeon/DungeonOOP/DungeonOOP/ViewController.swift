@@ -24,7 +24,12 @@ class ViewController: NSViewController {
         didSet {
         }
     }
-
+    
+    override var acceptsFirstResponder: Bool { return true }
+    override func keyDown(with event: NSEvent) {
+        print("oop: |\(event.characters)| and |\(event.keyCode)|")
+    }
+    
 
 }
 
