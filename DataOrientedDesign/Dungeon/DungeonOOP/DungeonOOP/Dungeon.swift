@@ -3,10 +3,6 @@ import Foundation
 import AppKit
 
 class Dungeon {
-    enum Direction {
-        case up, down, left, right
-    }
-
     var name: String
     var rooms: [Room]
 
@@ -15,10 +11,10 @@ class Dungeon {
         self.rooms = rooms
     }
 
-    func attemptMove(direction: Direction) {
-        print("lets move \(direction)")
+    func connectedRooms(to room: Room) -> [Room] {
+        let rooms = room.doors.map { ($0.side1 == room) ? $0.side2 : $0.side1 }
+        return rooms
     }
-
 }
 
 class Room: Equatable {
@@ -32,6 +28,11 @@ class Room: Equatable {
         self.name = name
         self.bounds = bounds
         self.doors = doors // there's a potential retain cycle
+    }
+    func doorConnectedTo(room: Room) -> Door? {
+        let relatedDoors = doors.filter { $0.side1 == room || $0.side2 == room }
+        guard relatedDoors.count <= 1 else { fatalError("multiple doors from \(name) to \(room.name)") }
+        return relatedDoors.first
     }
 
     func draw(highlighted: Bool) {

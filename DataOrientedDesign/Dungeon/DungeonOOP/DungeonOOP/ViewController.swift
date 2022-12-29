@@ -34,16 +34,23 @@ class ViewController: NSViewController {
 
     override func keyDown(with event: NSEvent) {
         var done = true
+        var moved = false
+
+        defer {
+            if moved {
+                dungeonView.needsDisplay = true
+            }
+        }
 
         switch event.characters {
         case "w":
-            dungeon.attemptMove(direction: .up)
+            moved = player.attemptMove(direction: .up)
         case "a":
-            dungeon.attemptMove(direction: .left)
+            moved = player.attemptMove(direction: .left)
         case "s":
-            dungeon.attemptMove(direction: .down)
+            moved = player.attemptMove(direction: .down)
         case "d":
-            dungeon.attemptMove(direction: .right)
+            moved = player.attemptMove(direction: .right)
         default:
             done = false
         }
@@ -53,13 +60,13 @@ class ViewController: NSViewController {
         done = true
         switch event.keyCode {
         case kUpArrowKeyCode:
-            dungeon.attemptMove(direction: .up)
+            moved = player.attemptMove(direction: .up)
         case kLeftArrowKeyCode:
-            dungeon.attemptMove(direction: .left)
+            moved = player.attemptMove(direction: .left)
         case kDownArrowKeyCode:
-            dungeon.attemptMove(direction: .down)
+            moved = player.attemptMove(direction: .down)
         case kRightArrowKeyCode:
-            dungeon.attemptMove(direction: .right)
+            moved = player.attemptMove(direction: .right)
         default:
             done = false
         }
