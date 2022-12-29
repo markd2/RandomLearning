@@ -201,8 +201,8 @@
   text: Binary Search
   formattingOptions: []
   position:
-  - 6.65421875e+2
-  - 7.1449609375e+2
+  - 5.79453125e+2
+  - 6.889140625e+2
   width: 1e+2
   connections:
     indexes:
@@ -926,3 +926,25 @@
     - location: 69
       length: 1
   _effectiveHeight: 2.8e+1
+- ID: 72
+  text: ' look at DoD as writing code with a pattern similar to what finally runs
+    on the CPU. When you do that, it''s much easier to reason about how it will run
+    on actual hardware.
+
+
+    Other coding paradigms that don''t at all resemble the procedural nature of CPU
+    execution rely quite a bit on the promises and capabilities of the language/compiler
+    to deliver "zero-cost abstractions". Because, in the end, whatever you write gets
+    translated to procedural machine code.  - Random Comment of Data Oriented Design
+    In Practice talk'
+  formattingOptions:
+  - options: 2
+    rangeStart: 460
+    rangeLength: 56
+  position:
+  - 2.427578125e+2
+  - 9.219609375e+2
+  width: 4.9e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 9.8e+1
