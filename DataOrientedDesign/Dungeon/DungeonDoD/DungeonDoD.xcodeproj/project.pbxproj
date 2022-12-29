@@ -17,6 +17,7 @@
 		7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */; };
 		7DBC3669295BBB9C00AB3A73 /* Tables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC3668295BBB9C00AB3A73 /* Tables.swift */; };
 		7DBC366B295BBF5E00AB3A73 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC366A295BBF5E00AB3A73 /* Generator.swift */; };
+		7DCF14DD295E1DE300CDF900 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF14DC295E1DE300CDF900 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoDDungeonView.swift; sourceTree = "<group>"; };
 		7DBC3668295BBB9C00AB3A73 /* Tables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tables.swift; sourceTree = "<group>"; };
 		7DBC366A295BBF5E00AB3A73 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		7DCF14DC295E1DE300CDF900 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				7DBC363E2959F39900AB3A73 /* DungeonDoD.entitlements */,
 				7DBC3666295B9BC300AB3A73 /* DoDDungeonView.swift */,
 				7DBC3668295BBB9C00AB3A73 /* Tables.swift */,
+				7DCF14DC295E1DE300CDF900 /* Array+Extensions.swift */,
 			);
 			path = DungeonDoD;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DBC36382959F39900AB3A73 /* ViewController.swift in Sources */,
+				7DCF14DD295E1DE300CDF900 /* Array+Extensions.swift in Sources */,
 				7DBC3667295B9BC300AB3A73 /* DoDDungeonView.swift in Sources */,
 				7DBC3669295BBB9C00AB3A73 /* Tables.swift in Sources */,
 				7DBC36362959F39900AB3A73 /* AppDelegate.swift in Sources */,

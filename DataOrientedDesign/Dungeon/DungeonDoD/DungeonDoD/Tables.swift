@@ -59,6 +59,7 @@ extension Table<RoomDoor> {
         let blah = storage
           .filter { $0.doorId == doorId }
           .flatMap { [$0.fromRoomId, $0.toRoomId] }
+          .uniqued()
         return blah
     }
 }
