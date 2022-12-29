@@ -12,19 +12,21 @@ class Dungeon {
     }
 }
 
-class Room {
+class Room: Equatable {
+    var id: UUID
     var name: String
     var bounds: CGRect
     var doors: [Door]
     
     init(name: String, bounds: CGRect, doors: [Door]) {
+        id = UUID()
         self.name = name
         self.bounds = bounds
         self.doors = doors // there's a potential retain cycle
     }
 
-    func draw() {
-        NSColor.white.set()
+    func draw(highlighted: Bool) {
+        (highlighted ? NSColor.yellow : NSColor.white).set()
         NSBezierPath.fill(bounds)
         NSColor.black.set()
         NSBezierPath.stroke(bounds)
@@ -35,6 +37,11 @@ class Room {
         for door in doors {
             door.draw()
         }
+    }
+
+    // Equatable
+    static func == (lhs: Room, rhs: Room) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

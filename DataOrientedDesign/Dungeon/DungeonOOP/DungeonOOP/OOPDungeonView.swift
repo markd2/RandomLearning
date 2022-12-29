@@ -16,7 +16,7 @@ class OOPDungeonView: NSView {
         guard let dungeon = dungeon else { return }
 
         for room in dungeon.rooms {
-            room.draw()
+            room.draw(highlighted: room == player.currentRoom)
         }
     }
 

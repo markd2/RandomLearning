@@ -15,8 +15,9 @@ class ViewController: NSViewController {
                                            heightRoomCount: 15,
                                            roomSize: roomSize,
                                            doorSize: 15)
-        dungeonView.dungeon = dungeon
         player = Player(name: "Splunge", currentRoom: dungeon.rooms.first!, dungeon: dungeon)
+        dungeonView.dungeon = dungeon
+        dungeonView.player = player
     }
 
     override var representedObject: Any? {
