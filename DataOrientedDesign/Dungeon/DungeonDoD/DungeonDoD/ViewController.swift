@@ -31,7 +31,7 @@ class ViewController: NSViewController {
         let roomId = dungeon.playerRoom
 
         dungeon.roomDoor.storage.forEach { roomDoor in
-            if roomDoor.fromRoomId == roomId && roomDoor.direction == direction {
+            if roomDoor.fromRoomId == roomId && roomDoor.direction == direction && !roomDoor.locked {
                 dungeon.playerRoom = roomDoor.toRoomId
                 dungeonView.needsDisplay = true
             }
