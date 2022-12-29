@@ -3,6 +3,10 @@ import Foundation
 import AppKit
 
 class Dungeon {
+    enum Direction {
+        case up, down, left, right
+    }
+
     var name: String
     var rooms: [Room]
 
@@ -10,6 +14,11 @@ class Dungeon {
         self.name = name
         self.rooms = rooms
     }
+
+    func attemptMove(direction: Direction) {
+        print("lets move \(direction)")
+    }
+
 }
 
 class Room: Equatable {

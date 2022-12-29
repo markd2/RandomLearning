@@ -1,5 +1,10 @@
 import Cocoa
 
+let kLeftArrowKeyCode:  UInt16  = 123
+let kRightArrowKeyCode: UInt16  = 124
+let kDownArrowKeyCode:  UInt16  = 125
+let kUpArrowKeyCode:    UInt16  = 126
+
 class ViewController: NSViewController {
     var dungeon: Dungeon!
     var player: Player!
@@ -26,8 +31,40 @@ class ViewController: NSViewController {
     }
     
     override var acceptsFirstResponder: Bool { return true }
+
     override func keyDown(with event: NSEvent) {
-        print("oop: |\(event.characters)| and |\(event.keyCode)|")
+        var done = true
+
+        switch event.characters {
+        case "w":
+            dungeon.attemptMove(direction: .up)
+        case "a":
+            dungeon.attemptMove(direction: .left)
+        case "s":
+            dungeon.attemptMove(direction: .down)
+        case "d":
+            dungeon.attemptMove(direction: .right)
+        default:
+            done = false
+        }
+
+        if done { return }
+
+        done = true
+        switch event.keyCode {
+        case kUpArrowKeyCode:
+            dungeon.attemptMove(direction: .up)
+        case kLeftArrowKeyCode:
+            dungeon.attemptMove(direction: .left)
+        case kDownArrowKeyCode:
+            dungeon.attemptMove(direction: .down)
+        case kRightArrowKeyCode:
+            dungeon.attemptMove(direction: .right)
+        default:
+            done = false
+        }
+
+        if done { return }
     }
     
 
