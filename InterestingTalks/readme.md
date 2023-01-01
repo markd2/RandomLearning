@@ -47,3 +47,13 @@ In no particular order.
 * https://www.youtube.com/watch?v=Mb8WwKS6ajk - _Advent of Code: Behind the Scenes_ (Eric Wastl, 2021, Google TechTalks)
 * https://youtube.com/watch?v=sSee-aDjtmw - _How do our ideas about coding affect the software we create?_ (Christin Gorman, 2022, NDC Conferences)
   - is programming more STEM ore more management and documentation?
+* https://www.youtube.com/watch?v=16ZF9XqkfRY - _Data-Oriented Design_ (Sean Middleditch, 2013, DigiPen Game Engine Architecture Club)
+  - fantastic, pragmatic introduction to DoD with very little axe grinding
+* https://www.youtube.com/watch?v=zyVTxGpEO30 - _Practical Creativity_ - (Raph Koster, 2014, Game Developer Conference)
+  - really fascinating deep dive in to games and creativity, and how seemingling different games 
+    might actually be the same fundamental systems but expressed differently (e.g. PacMan as
+    node visiting, leading to Qbert)
+  - has a book: A Theory of Fun - https://theoryoffun.com/
+  - had a reference to Ludonarrative Dissonance - https://en.wikipedia.org/wiki/Ludonarrative_dissonance
+  - also referenced "Game a Week"- https://agameaweek.com/ - dude who literally makes a game a week
+
