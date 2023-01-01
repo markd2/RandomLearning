@@ -78,3 +78,194 @@ And to consume:
 * Aspect Oriented Programming - mentioned in "Data-Oriented Design" when talking about
   using tables to register interest in events.  _"This coding style is somewhat
   reminiscent of Aspect-Oriented Programming"_, page 80
+
+
+
+## Talk notes
+
+### DigiPen GEAC
+
+(Game Engine Architecture Club)
+
+https://www.youtube.com/watch?v=16ZF9XqkfRY
+
+* DoD focuses on making tightly packed contiguous chunks of memory for data structures
+* Focues on algoirthms that process a single task (e.g. physics) in a single
+  tight loop before moving on to the next task (e.g. graphics)
+  - not mixing and matching
+* Maximizes efficiency, simplifies architecture
+
+* Focuses on POD (plain old data), simple c-like structure
+* external (to the type) methods/logic
+* Focuses on data rather than the behavior
+
+* Stresses removal of data dependencies (like component systems)
+* each composite type (struct/class) should have all data it needs
+  in itsel, with no dependencies (pointers/implied references) to
+  other types
+* Makes it easy(?) to multi-thread and write efficient processing
+  loops over data
+
+* DoD is mainly for performance
+
+* OOP problem with `update` on objects - updating all the things in
+  a loop, on a per-object basis doing physics/graphcs/other for one, the
+  those three for the next, and the next
+
+* modern CPUs have deep pipelines (like an automobile factory)
+  - any pipeline stall and the wait state cna have serious impacts 
+    on performance
+  - stalls happen when one instruction must wait for a previous
+    one to completely execute
+  - compiler deals with this is most cases, but branch-heavy code can cause stalls
+  - branching (an if, or indirect jump from a virtual function call)
+  - code iterating over a collection of arbitrary componts and invoking
+    virtual functions incur a lot of branches (and branch prediction
+    can't really help there)
+
+* CPU Pipeline
+  - instruction fetch
+  - decode
+  - scheduling
+  - dispatch to execution units
+  - read
+  - execute
+  - write back
+  * Intel Core has 14 stages, AMD bulldozer 16-19, Pentium 4 had 20
+
+Pipeline stall is when a large part of this pipeline is empty.
+
+* Wait State - when CPU is stuck waiting for a memory access
+  - random memory acccess can potentially take dozens or even hundreds
+    of CPU cycles to service (2013 talk)  (like a i7, 180 cycles)
+  - possibly the most serios performance problem when using modern CPUs
+  - "in large AAA games, this can be the biggest bottleneck aside from
+    graphics"
+
+DRAM memory 
+  - low power through capacitors, requires periodic refreshing. e.g. delay
+  - organized into banks, rows, row-bank cache
+    - access levels to the ram itself.
+  - inconsistent latency due to bank access patterns, row refreshes
+  - avoid hitting ram
+
+SRAM
+  - constant power, much faster than DRAM and power hungry
+  - not suitable for modern multi-gig memorysizes
+  - CPU caches uses SRAM
+  - data/instructions can be prefetched so memory access latencies
+    are incurred while the CPU is doing useful work
+  - requires data be in contiguous packed memory wihtout indirections,
+    not spread all over RAM
+
+Data access hierarchy: registers -> L1/2/3 -> DRAM Row Banks (sequential access) -> network/filesystem
+
+When thinking of algo/datastructure design, keep as much of data you're
+working with closer to the registers, otherwise CPU in wait state.
+
+"cache coherency / cache friendliness"
+
+naive oop memory layout
+
+```
+                 Graphics component
+                /
+| game object 1|- physics component
+                \
+                 Logic component
+
+                 Graphics component
+                /
+| game object 2|- physics component
+                \
+                 Logic component
+```
+
+each a dynamic memory allocation lord knows where, requiring pointer
+indirection.
+
+* eveyrone should read "what ever programmer needs to know about memory"
+
+- also about simplifying design
+- all problems in CS can be solved by another layer of indirection
+  .. except for the problem of too many layers of indirection
+
+focusing on POD helps alleviate that - removing layers of indirction.
+
+- oop programming naturally leads to lots of indirection
+  - encapsulation, abstract data types, interfaces - are all coding
+    to the abstraction instead of directly manipulating data
+  - can grow to be unweildy, confusing, error-prone, and lead to 
+    performance problems.
+
+- Dod removes concepts like encapsulation and interface abstraction
+- abstract data types (templates) can still be used.
+
+"clean vs flexible"
+
+Dod can be cleaner for some defintiinos - removes complicated
+abstractions lets the the programming direeclty achived a desire
+result ,efficiently and without fuss
+
+for heavy iteration, it can get in the way.
+
+Abstractions and indriections do solve problems and allow for more 
+runtime flexibility.
+
+"many folks find OOP/DOD to be horrificlly messy"  Some systems
+make more sense with OOP or DOD than others do.
+
+Using it in a game engine
+  - truth - your game is not suffering from performance poblems that
+    will be solved by DOD
+  - most AAA games can get by just fine w/o making use of DOD in
+    core logic and game object code.
+  - your problems are probalby all suboptimal D3D/OpenGL
+
+DOD performance benefits don't kick until you get to very large games
+with very large numbers of objects
+
+Some places where it's extremely important
+  - physics, all parts, but especially ray testing
+  - graphics all parts, but especially particle engines, culling, batching
+    - particle engines, could have hundreds of thousands of objects, and
+      making an object for each is crazypants
+
+Many parts of game engines do not really need DOD to have adequate
+performances - can benefit from the extra flexibility
+  - game logic (always a hairy mess of nastiness)
+  - AI
+  - tools (excepting online lightmap calcuation and large scale batch operations)x
+
+Some game engines that focus entirely on DOD - entity systems
+  - "Entity systems are the future of mmorpgs" (LOOKUP)
+  - Artemis Entity System framework (Java, super simple design)
+
+Entity sytems assign each compoent to a system that manages those
+components
+Components have no logic and are idealy PD
+entity game objects are only an identifier used to associate components
+together.
+
+the code that updates the component is part of a system. internally
+an array of the compnents, a mappiong for id->component, and designed to
+be seperably - components should have no dependencies upon each other.
+
+Presenter doesn't like the entity system, forces you to make all
+your components in this DOD manner
+
+A Conservative appraoch
+  - data only components (no logic, e.g. virtual methods) as much as possible, but no
+    explicit ban on logic components
+  - each components' associated factory has an allocator, and can
+    use a tightly packed contiguous pool allocator when necessary
+  - allocate logic components together as possible
+    - one loop for all logic
+    - only logic components have an `update`, and logic components
+      only used for actual logic and AI
+
+And actually profile code, use things that'll count cache misses
+
+Keep it simple. Don't sweat DOD vs OOP unless you have to
+
+
