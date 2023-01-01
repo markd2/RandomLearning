@@ -942,8 +942,8 @@
     rangeStart: 460
     rangeLength: 52
   position:
-  - 2.427578125e+2
-  - 9.219609375e+2
+  - 6.6796875e+1
+  - 1.01369921875e+3
   width: 4.9e+2
   connections:
     indexes: []
@@ -1072,3 +1072,44 @@
     - location: 73
       length: 1
   _effectiveHeight: 5.6e+1
+- ID: 82
+  text: DigiPen Club Talk
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 4.003203125e+2
+  - 8.911015625e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 83
+  text: Lots of useful interesting stuff
+  formattingOptions: []
+  position:
+  - 5.813828125e+2
+  - 8.1058203125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 82
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 84
+  text: The diagram of the physics stuff (so very specific targeted application of
+    DoD vs The Book going full on  relational database
+  formattingOptions: []
+  position:
+  - 6.458046875e+2
+  - 8.788125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 82
+      length: 1
+  _effectiveHeight: 7e+1
