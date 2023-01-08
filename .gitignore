@@ -4,6 +4,10 @@
 
 oopack
 
+### Javar ###
+
+*.class
+
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
