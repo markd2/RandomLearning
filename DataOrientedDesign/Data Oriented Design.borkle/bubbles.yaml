@@ -109,8 +109,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.7930859375e+2
-  - 5.919921875e+2
+  - 1.81421875e+2
+  - 4.1321875e+2
   width: 2.2e+2
   connections:
     indexes: []
@@ -123,8 +123,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.32578125e+2
-  - 7.5429296875e+2
+  - 2.3469140625e+2
+  - 5.7551953125e+2
   width: 1e+2
   connections:
     indexes:
@@ -135,8 +135,8 @@
   text: Code/Data coupled
   formattingOptions: []
   position:
-  - 1.19203125e+2
-  - 6.954453125e+2
+  - 1.2131640625e+2
+  - 5.16671875e+2
   width: 1e+2
   connections:
     indexes:
@@ -147,8 +147,8 @@
   text: Objects all over address space
   formattingOptions: []
   position:
-  - 2.487265625e+2
-  - 7.0233203125e+2
+  - 2.5083984375e+2
+  - 5.2355859375e+2
   width: 1e+2
   connections:
     indexes:
@@ -159,8 +159,8 @@
   text: vtables involve an extra indirection / cache miss / mispredict
   formattingOptions: []
   position:
-  - 6.31484375e+1
-  - 7.6566796875e+2
+  - 6.526171875e+1
+  - 5.8689453125e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -175,8 +175,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 4.4535546875e+2
-  - 7.2744921875e+2
+  - 4.4746875e+2
+  - 5.4867578125e+2
   width: 1.2e+2
   connections:
     indexes: []
@@ -189,8 +189,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 6.8480859375e+2
-  - 7.651328125e+2
+  - 6.86921875e+2
+  - 5.86359375e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -201,8 +201,8 @@
   text: Binary Search
   formattingOptions: []
   position:
-  - 5.79453125e+2
-  - 6.889140625e+2
+  - 5.8156640625e+2
+  - 5.10140625e+2
   width: 1e+2
   connections:
     indexes:
@@ -213,8 +213,8 @@
   text: Flags in the extra bytes
   formattingOptions: []
   position:
-  - 7.47343098958333e+2
-  - 6.948828125e+2
+  - 7.49456380208333e+2
+  - 5.16109375e+2
   width: 1e+2
   connections:
     indexes:
@@ -942,12 +942,12 @@
     rangeStart: 460
     rangeLength: 52
   position:
-  - 6.6796875e+1
-  - 1.01369921875e+3
-  width: 4.9e+2
+  - 4.456875e+2
+  - 8.064765625e+2
+  width: 3.8e+2
   connections:
     indexes: []
-  _effectiveHeight: 9.8e+1
+  _effectiveHeight: 1.4e+2
 - ID: 73
   text: Interesting
   fillColorRGB:
@@ -1080,8 +1080,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 4.003203125e+2
-  - 8.911015625e+2
+  - 4.0243359375e+2
+  - 7.12328125e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1092,8 +1092,8 @@
   text: Lots of useful interesting stuff
   formattingOptions: []
   position:
-  - 5.813828125e+2
-  - 8.1058203125e+2
+  - 5.8349609375e+2
+  - 6.3180859375e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1105,11 +1105,117 @@
     DoD vs The Book going full on  relational database
   formattingOptions: []
   position:
-  - 6.458046875e+2
-  - 8.788125e+2
+  - 6.4791796875e+2
+  - 7.000390625e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 82
       length: 1
   _effectiveHeight: 7e+1
+- ID: 85
+  text: Data Oriented Design
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 4.7546875e+1
+  - 8.6607421875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 86
+      length: 1
+    - location: 88
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 86
+  text: vs Data Oriented Programming
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 5.93203125e+1
+  - 9.318203125e+2
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 85
+      length: 1
+    - location: 87
+      length: 1
+    - location: 89
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 87
+  text: vs Data Driven Programming
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 4.480859375e+1
+  - 1.00506640625e+3
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 86
+      length: 1
+    - location: 90
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 88
+  text: motivated by efficent usage of the CPU cache.  Mainly used in video game development
+    - objective is performance
+  formattingOptions: []
+  position:
+  - 1.67125e+2
+  - 7.7511328125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 85
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 89
+  text: Data is represented by generic immutable (system) data structures, maps and
+    vectors, and manipulated by general purpose functions like map/filter/select/group/sort,
+    etc.  Objective is to reduce complexity of the system
+  formattingOptions: []
+  position:
+  - 2.486875e+2
+  - 8.6037109375e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 86
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 90
+  text: Create domain specific languages (DSLs) made out of descriptive data. A branch
+    of declarative programming.  (That's all I know about it)
+  formattingOptions: []
+  position:
+  - 3.300390625e+1
+  - 1.070109375e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 87
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 91
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.30921875e+2
+  - 6.866640625e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
