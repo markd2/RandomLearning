@@ -1,0 +1,118 @@
+
+(pickups)
+Pickup Id | Mesh ID | TextureID | Type
+----------+---------+-----------+--------
+k1        | msh.key | tex.key   | KEY
+k2        | msh.key | tex.key   | KEY
+k3        | msh.key | tex.key   | KEY
+p1        | msh.pot | tex.pot   | POTION
+p2        | msh.pot | tex.pot   | POTION
+a1        | msh.arm | tex.arm   | ARMOR
+
+(pickup tints)
+Pickup Id | colorTint
+----------+----------
+k1        | copper
+k2        | silver
+k3        | gold
+p1        | green
+p2        | purple
+
+(rooms)
+RoomID | Mesh ID     | Texture ID  | Position | isStart | isExit
+-------+-------------+-------------+----------+---------+-------
+r1     | msh.start   | tex.rmstart |   0,0    | true    | false 
+r2     | msh.trap    | tex.trap    | -20,0    | false   | false
+r3     | msh.generic | tex.rm      | -10,20   | false   | false
+r4     | msh.generic | tex.rm      | -30,20   | false   | false
+r5     | msh.trap    | tex.trap    |  20,10   | false   | true
+
+(rooms, more normalized)
+RoomID | Mesh ID     | Texture ID  | Position |
+-------+-------------+-------------+----------+
+r1     | msh.start   | tex.rmstart |   0,0    |
+r2     | msh.trap    | tex.trap    | -20,0    |
+r3     | msh.generic | tex.rm      | -10,20   |
+r4     | msh.generic | tex.rm      | -30,20   |
+r5     | msh.trap    | tex.trap    |  20,10   |
+
+(special)
+RoomID | isStart | isExit
+-------+---------+-------
+r1     | true    | false 
+r5     | false   | true
+
+(pickups)
+
+RoomID | PickupID
+-------+---------
+r2     | k1
+r3     | k2
+r3     | a1
+r3     | p1
+r4     | k3
+r4     | p2
+
+(doors)
+
+(no nulls necessary)
+FromRoom | ToRoom
+---------+-------
+r1       | r2
+r1       | r3
+r2       | r1
+r2       | r4
+r3       | r1
+r3       | r2
+r3       | r5
+r4       | r2
+
+(locked doors)
+FromRoom | ToRoom | LockedWidth
+---------+--------+------------
+r1       | r3     | k1
+r2       | r4     | k2
+r3       | r5     | k3
+
+(traps)
+RoomID | TrapDamage
+-------+-----------
+r2     | 10hp
+r5     | 25hp
+
+(monster)
+MonsterID | Attack | HP
+----------+--------+---
+m1        | 2      | 5
+m2        | 4      | 10
+
+(monster rooms)
+MonsterID | RoomID
+----------+-------
+m1        | r1
+m2        | r2
+
+
+ID | Kind    | Name              | HP | Max HP 
+---+---------+-------------------+----+--------
+p1 | player  | Bork              | 75 | 100    
+a1 | ai      | John Bigboote     | 25 |  25     
+a2 | ai      | John Edwards      | 20 |  25 
+a3 | ai      | John Kim Chi      | 15 |  25 
+a4 | ai      | John Littlejohn   | 25 |  25 
+a5 | ai      | John Many Jars    | 25 |  25 
+a6 | ai      | John Smallberries | 25 |  25 
+a7 | ai      | John Whorfin      | 48 |  50 
+a8 | ai      | John Ya Ya        | 25 |  25 
+
+(needs healing)
+ID
+--
+p1
+a2
+a3
+a7
+
+
+
+
