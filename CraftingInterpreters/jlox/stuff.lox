@@ -1,0 +1,7 @@
+// this is a comment
+(( )){ } // grouping stuffs
+!*+-/=<> <= == // operators
+"string"
+"this is a
+string"
+()()
