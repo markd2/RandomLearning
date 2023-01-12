@@ -12,6 +12,9 @@
     - Finished, a lot of cool ideas (like the cache-aware linear binary search). Would have liked to have
       seen actual data oriented design before the code dump in chapter 16.  "just add stuff to a table",
       well, what does that actually look like?  The OOP hate got tedious.
+* _Game Programming Patterns_ book by Robert Nystrom - https://www.amazon.com/Game-Programming-Patterns-Robert-Nystrom/dp/0990582906
+    - I've only read the "Data Locality" chapter so far, and it's a great overview of
+      many things the Fabian book talks about.
 * _Data-Oriented Design and C++_ talk by Mike Acton - https://www.youtube.com/watch?v=rX0ItVEVjHc
     - amusing that it hits the audience like a lead balloon.  
 * _OOP is Dead, Long Live Data-oriented Design_ talk by Stoyan Nikolov - https://www.youtube.com/watch?v=yy8jQgmhbAU&t=2794s
@@ -24,6 +27,10 @@
 * _Efficiency with Algorithms, Performance and Data Structures_ - talk by Chandler Carruth cppcon - https://www.youtube.com/watch?v=fHNmRkzxHWs&t=13s
     - nice definitions of efficiency and performance (lighting up all the transistors)
     - includes the Jeff Dean latency chart around 37:10
+* _The Art of Writing Efficient Programs: An Advanced Programmer's Guide to efficient hardware utilization and compiler optimizations using C++ Examples_ - book by Fedor G. Pikus - https://www.amazon.com/Art-Writing-Efficient-Programs-optimizations/dp/1800208111
+    - hugely information dense
+    - covers memory architecture, locking strategies, micro benchmarking (and its pitfals)
+    - If you can, read from O'Reilly(a.k.a. Safari Bookshelf).  The printed versions's display of source code is eye-bleedingly terrible.
 
 And to consume:
 
@@ -48,10 +55,9 @@ And to consume:
 * _Evolve your Hierarchy_  : https://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/, converting Tony Hawk code to components.
 * _Data Oriented Design (DigiPen)_ : https://www.youtube.com/watch?v=16ZF9XqkfRY
 * _Data-oriented Design in practice_ : https://www.youtube.com/watch?v=NWMx1Q66c14
-* _Game Programming Patterns_ : https://smile.amazon.com/Game-Programming-Patterns-Robert-Nystrom/dp/0990582906
-    - recommendation from one of the Underdogs!
 
-## Cachce as cache can
+
+## Cache as cache can
 
 * Intel 64-bit has 64-byte cache line
 * Apple M1 has 128-byte cache line
