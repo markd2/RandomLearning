@@ -77,7 +77,7 @@ class Scanner {
             line++;
             break;
 
-            // sring literals
+            // string literals
         case '"': 
             string();
             break;
@@ -142,8 +142,9 @@ class Scanner {
             advance();
             while (isDigit(peek())) advance();
 
-            addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
         }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
     }
 
     private char advance() {
