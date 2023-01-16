@@ -1,5 +1,6 @@
 package com.borkware.lox;
 
+import java.util.ArrayList;
 import java.util.List;
 import static com.borkware.lox.TokenType.*;
 
@@ -14,10 +15,22 @@ class Parser {
         this.tokens = tokens;
     }
 
-    Expr parse() {
+    // program -> declaration* EOF
+    List<Stmt> parse() {
+        List<Stmt> statements = new ArrayList<>();
+        while (!isAtEnd()) {
+            statements.add(declaration());
+        }
+        return statements; 
+    }
+
+    // declaration -> varDecl | statement
+    private Stmt declaration() {
         try {
-            return expression();
+            if (match(VAR)) return varDeclaration();
+            return statement();
         } catch (ParseError error) {
+            synchronize(); // panic mode!
             return null;
         }
     }
@@ -25,6 +38,38 @@ class Parser {
     // expression -> equality
     private Expr expression() {
         return equality();
+    }
+
+    // statement -> exprStmt | printStmt
+    private Stmt statement() {
+        if (match(PRINT)) return printStatement();
+        return expressionStatement();
+    }
+
+    // printStmt -> "print" expression ";"
+    private Stmt printStatement() {
+        Expr value = expression();
+        consume(SEMICOLON, "Expect ';' after value");
+        return new Stmt.Print(value);
+    }
+
+    // varDecl -> "var" IDENTIFIER ( "=" expression )? ";"
+    private Stmt varDeclaration() {
+        Token name = consume(IDENTIFIER, "Expect variable name");
+        Expr initializer = null;
+
+        if (match(EQUAL)) {
+            initializer = expression();
+        }
+
+        consume(SEMICOLON, "Expect ';' after variable declaration");
+        return new Stmt.Var(name, initializer);
+    }
+
+    private Stmt expressionStatement() {
+        Expr expr = expression();
+        consume(SEMICOLON, "Expect ';' after expression");
+        return new Stmt.Expression(expr);
     }
 
     // equality -> comparison ( ("!=" | "==") comparison)*
@@ -86,7 +131,8 @@ class Parser {
         return primary();
     }
 
-    // primary -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")"
+    // primary -> NUMBER | STRING | "true" | "false" 
+    //                   | "nil" | "(" expression ")" | IDENTIFIER
     private Expr primary() {
         if (match(FALSE)) return new Expr.Literal(false);
         if (match(TRUE)) return new Expr.Literal(true);
@@ -94,6 +140,10 @@ class Parser {
 
         if (match(NUMBER, STRING)) {
             return new Expr.Literal(previous().literal);
+        }
+
+        if (match(IDENTIFIER)) {
+            return new Expr.Variable(previous());
         }
 
         if (match(LEFT_PAREN)) {
