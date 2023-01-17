@@ -1,19 +1,6 @@
-var a = "global a";
-var b = "globule b";
-var c = "global c";
 
-{
-        var a = "outer a";
-        var b = "outer b";
-        {  var a = "inner a";
-        print a; print b; print c;
-} print a; print b; print c; }
-print a;
-print b;
-print c;
-
-var oop = 1;
-{
-   var oop = oop + 2;
-    print oop;
+if (1 == 2) {
+  print "one!";
+} else {
+  print "two!!";
 }
