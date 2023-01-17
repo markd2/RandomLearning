@@ -1,9 +1,13 @@
-// this is a comment
-(( )){ } // grouping stuffs
-!*+-/=<> <= == // operators
-"string"
-"this is a
-string"
-()()
-3.1415
-true if (greeble == nil)
+var a = "global a";
+var b = "globule b";
+var c = "global c";
+
+{
+        var a = "outer a";
+        var b = "outer b";
+        {  var a = "inner a";
+        print a; print b; print c;
+} print a; print b; print c; }
+print a;
+print b;
+print c;
