@@ -11,3 +11,9 @@ var c = "global c";
 print a;
 print b;
 print c;
+
+var oop = 1;
+{
+   var oop = oop + 2;
+    print oop;
+}
