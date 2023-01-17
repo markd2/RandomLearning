@@ -50,4 +50,14 @@ class AstPrinter implements Expr.Visitor<String> {
                 new Expr.Literal(45.67)));
         System.out.println(new AstPrinter().print(expression));
     }
+
+    @Override
+    public String visitVariableExpr(Expr.Variable blah) {
+        return "";
+    }
+
+    @Override
+    public String visitAssignExpr(Expr.Assign blah) {
+        return "";
+    }
 }
