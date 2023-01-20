@@ -60,4 +60,9 @@ class AstPrinter implements Expr.Visitor<String> {
     public String visitAssignExpr(Expr.Assign blah) {
         return "";
     }
+
+    @Override
+    public String visitLogicalExpr(Expr.Logical blah) {
+        return "";
+    }
 }
