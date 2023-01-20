@@ -7,3 +7,10 @@ if (1 == 2) {
 
 print "hi" or 3;
 print nil or "yes";
+
+var a = 10;
+
+while (a > 0) {
+    print a;
+    a = a - 1;
+}
