@@ -22,8 +22,20 @@ for (var x = 0; x < 20; x = x + 1) {
 var a = 0;
 var temp;
 
+
 for (var b = 1; a < 10000; b = temp + b) {
   print a;
    temp = a;
   a = b;
 }
+
+var start = clock();
+
+for (var c = 1; c < 100000000; c = c + 1) {
+}
+
+var end = clock();
+
+print "elapsed";
+print end - start;
+
