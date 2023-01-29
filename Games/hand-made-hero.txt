@@ -1,0 +1,21 @@
+Handmade Hero videos (without Q&A)
+current: 026
+
+
+past: 000-024
+Interesting:
+  - 013 - user input from platform layer to game layer
+  - 014 - single big allocation - permanent (frame-to-frame) and transient storage
+  - 020 - gather input / update(render prep) / render / wait  flip
+        - only partly watched (audio sync / write cursor)
+  - 021 - dynamic loading of code DLLs - pretty cool
+        - because all the memory and whatnot is given to the game, can reload
+          all the game code and give it the memory.
+  - 023 - kind of cool idea of recording events and playing them back (in 
+          conjunction with the live code reloading)
+          Also, the single allocated block being the entire savable game state
+  - 024 & 025 - skipped - all windows platform layer stuff
+  - 026 - game architecture (and urban planning analogy), unified update and render mode,
+          "Loading Screen" vs "Streaming" for getting resources
+
+   
