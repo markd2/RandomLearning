@@ -1,5 +1,5 @@
 Handmade Hero videos (without Q&A)
-current: 026
+next: 28
 
 
 past: 000-024
@@ -17,5 +17,7 @@ Interesting:
   - 024 & 025 - skipped - all windows platform layer stuff
   - 026 - game architecture (and urban planning analogy), unified update and render mode,
           "Loading Screen" vs "Streaming" for getting resources
+  - 027 - concerete architecture talk.  Explore and then lock-in for the next
+          point towards the destination. Also starting on the software renderer,
+          fp coordinates for rectangles
 
-   
