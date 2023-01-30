@@ -56,4 +56,6 @@ In no particular order.
   - has a book: A Theory of Fun - https://theoryoffun.com/
   - had a reference to Ludonarrative Dissonance - https://en.wikipedia.org/wiki/Ludonarrative_dissonance
   - also referenced "Game a Week"- https://agameaweek.com/ - dude who literally makes a game a week
+* https://www.youtube.com/watch?v=HqsEHG0QJXU - _Back to Basics: Templates_ - (Nicolai Josuttis, 2022, CppCon)
+  - amusing the complexity in this "Back To Basics" #lolzC++
 
