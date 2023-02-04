@@ -96,3 +96,12 @@ var aaa = "global";
     var aaa = "block";
     showA();
 }
+
+//fun bad() {
+//    var a = "oop";
+//    var a = "ack";
+//    print a;
+//}
+
+// return "hello";
+
