@@ -73,3 +73,26 @@ fun fib(n) {
 for (var i = 0; i < 28; i = i + 1) {
     print fib(i);
 }
+
+fun makeCounter() {
+    var i = 0;
+    fun count() {
+        i = i + 1;
+        print i;
+    }
+
+    return count;
+}
+
+var counter = makeCounter();
+counter();
+counter();
+print "---";
+var aaa = "global";
+{
+    fun showA() { print aaa; }
+
+    showA();
+    var aaa = "block";
+    showA();
+}
