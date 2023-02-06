@@ -116,3 +116,10 @@ class Breakfast {
 }
 
 print Breakfast;
+
+class Bagel { }
+var bagel = Bagel();
+print bagel;
+bagel.splunge = "hello";
+
+print bagel.splunge;
