@@ -105,3 +105,14 @@ var aaa = "global";
 
 // return "hello";
 
+class Breakfast {
+    cook() {
+        print "Eggs a-frying";
+    }
+
+    serve(whom) {
+        print "enjoy your aigs " + whom + ".";
+    }
+}
+
+print Breakfast;
