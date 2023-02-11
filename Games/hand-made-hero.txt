@@ -1,5 +1,5 @@
 Handmade Hero videos (without Q&A)
-next: 28
+next: 29
 
 
 past: 000-024
@@ -20,4 +20,6 @@ Interesting:
   - 027 - concerete architecture talk.  Explore and then lock-in for the next
           point towards the destination. Also starting on the software renderer,
           fp coordinates for rectangles
-
+  - 028 - drawing a tile map.  more explore/learn. RGB explanation.
+          0.0 -> 1.0 universal dimension free way of representing an amount,
+          player sprint with origin in center bottom
