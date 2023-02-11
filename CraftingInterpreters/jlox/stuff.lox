@@ -123,3 +123,11 @@ print bagel;
 bagel.splunge = "hello";
 
 print bagel.splunge;
+
+class Bacon {
+    eat() {
+        print "nom nom nom";
+    }
+}
+
+Bacon().eat();
