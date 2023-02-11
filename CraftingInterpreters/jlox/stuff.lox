@@ -137,8 +137,11 @@ class Cake {
         var adjective = "deelishious";
         print "The " + this.flavor + " cake is " + adjective + "!";
     }
+    init() {
+        this.flavor = "Almighty";
+    }   
 }
 
 var cake = Cake();
-cake.flavor = "Almighty";
+// cake.flavor = "Almighty";
 cake.taste();
