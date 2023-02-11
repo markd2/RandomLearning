@@ -219,6 +219,11 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         ((LoxInstance)object).set(expr.name, value);
         return value;
     }
+
+    @Override
+    public Object visitThisExpr(Expr.This expr) {
+        return lookUpVariable(expr.keyword, expr);
+    }
     
     @Override
     public Object visitUnaryExpr(Expr.Unary expr) {

@@ -131,3 +131,14 @@ class Bacon {
 }
 
 Bacon().eat();
+
+class Cake {
+    taste() {
+        var adjective = "deelishious";
+        print "The " + this.flavor + " cake is " + adjective + "!";
+    }
+}
+
+var cake = Cake();
+cake.flavor = "Almighty";
+cake.taste();
