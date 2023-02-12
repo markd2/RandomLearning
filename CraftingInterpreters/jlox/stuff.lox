@@ -145,3 +145,28 @@ class Cake {
 var cake = Cake();
 // cake.flavor = "Almighty";
 cake.taste();
+
+
+class AA {
+    method() {
+       print("AA method");
+    }     
+}
+
+
+class BB < AA {
+    method() {
+       print("BB method");
+    }     
+    test() {
+        super.method();
+    }     
+}
+
+class CC < BB {}
+
+CC().test();
+CC().method();
+
+
+
