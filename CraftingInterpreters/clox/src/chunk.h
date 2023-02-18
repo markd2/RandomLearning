@@ -14,14 +14,15 @@ typedef enum OpCode {
 typedef struct Chunk {
     int capacity;
     int count;
-    uint8_t *code;
 
+    uint8_t *code;
+    int *lines;
     ValueArray constants;
 } Chunk;
 
 void initChunk(Chunk *chunk);
 void freeChunk(Chunk *chunk); // also clears freed Chunk structure
-void writeChunk(Chunk *chunk, uint8_t byte);
+void writeChunk(Chunk *chunk, uint8_t byte, int line);
 int addConstant(Chunk *chunk, Value value);
 
 

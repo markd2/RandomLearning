@@ -11,9 +11,9 @@ typedef struct ValueArray {
     Value *values;
 } ValueArray;
 
-void initValueArray(ValueArray *value);
-void freeValueArray(ValueArray *value); // also clears freed ValueArray structure
-void writeValueArray(ValueArray *value, uint8_t byte);
+void initValueArray(ValueArray *valueArray);
+void freeValueArray(ValueArray *valueArray); // also clears freed ValueArray structure
+void writeValueArray(ValueArray *valueArray, Value value);
 
 void printValue(Value value);
 
