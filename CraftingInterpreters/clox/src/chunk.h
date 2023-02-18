@@ -7,6 +7,7 @@
 // Love ya, Chunks!
 
 typedef enum OpCode {
+    OP_CONSTANT, // one byte - which onstant to load from constants array.
     OP_RETURN
 } OpCode;
 

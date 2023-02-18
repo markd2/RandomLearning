@@ -1,6 +1,8 @@
 #include "value.h"
 
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "memory.h"
 
 void initValueArray(ValueArray *array) {
@@ -28,3 +30,7 @@ void writeValueArray(ValueArray *array, uint8_t byte) {
 
 } // writeValueArray
 
+
+void printValue(Value value) {
+    printf("%g", value);
+} // printValue

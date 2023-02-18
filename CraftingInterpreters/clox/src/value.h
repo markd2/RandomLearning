@@ -15,5 +15,7 @@ void initValueArray(ValueArray *value);
 void freeValueArray(ValueArray *value); // also clears freed ValueArray structure
 void writeValueArray(ValueArray *value, uint8_t byte);
 
+void printValue(Value value);
+
 
 #endif // clox_value_h
