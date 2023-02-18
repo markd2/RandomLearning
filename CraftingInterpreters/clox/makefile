@@ -1,5 +1,8 @@
-all: clox
+CC=clang
+TARGET=clox
 
-clox: main.c
-	gcc -g -arch arm64 main.c -o clox
+all: main.o misc.o
+	$(CC) -g -arch arm64 -o $(TARGET)
 
+clean:
+	rm *.o $(TARGET)
