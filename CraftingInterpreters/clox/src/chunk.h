@@ -8,6 +8,14 @@
 
 typedef enum OpCode {
     OP_CONSTANT, // one byte - which onstant to load from constants array.
+
+    OP_ADD,
+    OP_SUBTRACT,
+    OP_MULTIPLY,
+    OP_DIVIDE,
+
+    OP_NEGATE,
+
     OP_RETURN
 } OpCode;
 

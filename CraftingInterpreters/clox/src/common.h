@@ -5,6 +5,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <stdio.h> // ook ook
+
 #define DEBUG_TRACE_EXECUTION 1
 
 #endif // clox_common_h
