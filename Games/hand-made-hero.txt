@@ -1,11 +1,12 @@
 Handmade Hero videos (without Q&A)
-next: 29
+next: 30
 
 
 past: 000-024
 Interesting:
   - 013 - user input from platform layer to game layer
-  - 014 - single big allocation - permanent (frame-to-frame) and transient storage
+  - 014 - single big allocation - permanent (frame-to-frame) and
+          transient storage
   - 020 - gather input / update(render prep) / render / wait  flip
         - only partly watched (audio sync / write cursor)
   - 021 - dynamic loading of code DLLs - pretty cool
@@ -15,11 +16,18 @@ Interesting:
           conjunction with the live code reloading)
           Also, the single allocated block being the entire savable game state
   - 024 & 025 - skipped - all windows platform layer stuff
-  - 026 - game architecture (and urban planning analogy), unified update and render mode,
-          "Loading Screen" vs "Streaming" for getting resources
+  - 026 - game architecture (and urban planning analogy), unified
+          update and render mode, "Loading Screen" vs "Streaming" for
+          getting resources
   - 027 - concerete architecture talk.  Explore and then lock-in for the next
           point towards the destination. Also starting on the software renderer,
           fp coordinates for rectangles
   - 028 - drawing a tile map.  more explore/learn. RGB explanation.
           0.0 -> 1.0 universal dimension free way of representing an amount,
-          player sprint with origin in center bottom
+          player sprite with origin in center bottom
+  - 029 - Basic Tile Map Collision Checking - pixel position of player to 
+          grid indexes. Mapping 2-D array into 1-D sequence of bytes.
+          Tile accessor (given x, y, give a tile value), _unchecked_, so the
+          caller knows to check bounds first.  Sparse storage of multiple
+          tile maps (vs dense giant cube of tilemaps)
+
