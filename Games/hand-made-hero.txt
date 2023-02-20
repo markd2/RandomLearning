@@ -1,5 +1,5 @@
 Handmade Hero videos (without Q&A)
-next: 30
+next: 31
 
 
 past: 000-024
@@ -30,4 +30,6 @@ Interesting:
           Tile accessor (given x, y, give a tile value), _unchecked_, so the
           caller knows to check bounds first.  Sparse storage of multiple
           tile maps (vs dense giant cube of tilemaps)
+  - 030 - Moving Between Tile Maps - mainly working with various coordinate
+          system (still densely packed), and code cleanup/refactorings
 
