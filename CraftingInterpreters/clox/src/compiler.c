@@ -15,6 +15,7 @@ typedef struct Parser {
 } Parser;
 
 static Parser parser;
+static Chunk *compilingChunk;
 
 
 static void errorAt(Token *token, const char *message) {
@@ -67,8 +68,69 @@ static void consume(TokenType type, const char *message) {
     errorAtCurrent(message);
 } // consume
 
+
+static Chunk *currentChunk(void) {
+    return compilingChunk;
+} // currentChunk
+
+
+static inline void emitByte(uint8_t byte) {
+    writeChunk(currentChunk(), byte, parser.previous.line);
+} // emitByte
+
+
+static void emitBytes(uint8_t byte1, uint8_t byte2) {
+    emitByte(byte1);
+    emitByte(byte2);
+} // emitByte
+
+
+static void emitReturn() {
+    emitByte(OP_RETURN);
+} // emitReturn
+
+
+static uint8_t makeConstant(Value value) {
+    int constant = addConstant(currentChunk(), value);
+    if (constant > UINT8_MAX) {
+        error("Too many constants in one chunk");
+        return 0;
+    }
+    return (uint8_t)constant;
+} // makeConstant
+
+
+static void grouping(void) {
+    expression();
+    consume(TOKEN_RIGHT_PAREN, "Expect ')' after expression");
+} // grouping
+
+
+static void endCompiler(void) {
+    emitReturn();
+} // endCompiler
+
+
+static void emitConstant(Value value) {
+    emitBytes(OP_CONSTANT, makeConstant(value));
+} // emitConstant
+
+
+static void number(void) {
+    double value = strtod(parser.previous.start, NULL);
+    emitConstant(value);
+} // number
+
+
+static void expression(void) {
+} // expression
+
+// --------------------------------------------------
+
+
 bool compile(const char *source, Chunk *chunk) {
     initScanner(source);
+    compilingChunk = chunk;
 
     parser.hadError = false;
     parser.panicMode = false;
@@ -76,5 +138,6 @@ bool compile(const char *source, Chunk *chunk) {
     advance();
     expression();
     consume(TOKEN_EOF, "Expect end of expression");
+    endCompiler();
     return !parser.hadError;
 } // compile
