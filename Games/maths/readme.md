@@ -14,3 +14,8 @@ to see if two lines you're dragging around are orthogonal (ignoring the
 vertical case because I'm lazy)
 
 ![](assets/orthogonality.gif)
+
+And here with projecting the line past the endpoints
+
+![](assets/line-projection.gif)
+
