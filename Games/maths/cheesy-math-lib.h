@@ -30,4 +30,16 @@ typedef struct CheesyPoint {
 CheesySlopeInterceptLine slopeInterceptFromPoints(CheesyPoint p1, CheesyPoint p2);
 double evalYForSlopeIntercept(CheesySlopeInterceptLine line, double x);
 
+
+typedef enum CheesyLineIntersectionType {
+    kLineIntersects, // slopes differ so one point of intersection
+    kLineOverlaps,   // slopes same, y-intercept the same, so overlapping
+    kLineParallel    // slopes sane, y-intercept different, so parallel
+} CheesyLineIntersectionType;
+
+
+CheesyLineIntersectionType intersectionTypeOf(CheesySlopeInterceptLine line1,
+                                              CheesySlopeInterceptLine line2,
+                                              double epsilon);
+
 #endif // CHEESY_MATH_LIB_H

@@ -17,8 +17,6 @@ double orthogonalSlope(double slope) {
 
 
 bool areSlopesOrthogonal(double slope1, double slope2, double epsilon) {
-    printf("%f %f -> %f ... %f\n", slope1, slope2, slope1 * slope2,
-        (slope1 * slope2 - -1));
     return (fabs(slope1 * slope2 - -1)) < epsilon;
 } // areSlopesOrthogonal
 
@@ -45,3 +43,23 @@ CheesySlopeInterceptLine slopeInterceptFromPoints(CheesyPoint p1, CheesyPoint p2
 double evalYForSlopeIntercept(CheesySlopeInterceptLine line, double x) {
     return line.slope * x + line.yIntercept;
 } // evalYForSlopeIntercept
+
+
+CheesyLineIntersectionType intersectionTypeOf(CheesySlopeInterceptLine line1,
+                                              CheesySlopeInterceptLine line2,
+                                              double epsilon) {
+    // see if slopes differ
+    if (fabs(line1.slope - line2.slope) > epsilon) {
+        return kLineIntersects;
+
+    } else {
+        // same slope
+        if (fabs(line1.yIntercept - line2.yIntercept) < epsilon) {
+            // same yIntercept
+            return kLineOverlaps;
+        } else {
+            return kLineParallel;
+        }
+    }
+
+} // intersectionTypeOf

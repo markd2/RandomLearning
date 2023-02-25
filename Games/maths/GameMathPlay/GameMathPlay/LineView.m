@@ -2,6 +2,8 @@
 
 #import "cheesy-math-lib.h"
 
+static const CGFloat kLineWidth = 3.0;
+
 @interface LineView ()
 
 @property (assign, nonatomic) CGPoint line1start;
@@ -65,7 +67,7 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
     [dashedBez stroke];
 
     NSBezierPath *bez = NSBezierPath.new;
-    bez.lineWidth = 3;
+    bez.lineWidth = kLineWidth;
     bez.lineCapStyle = NSLineCapStyleRound;
 
     [bez moveToPoint: start];
@@ -113,6 +115,35 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
 } // orthogonal_p
 
 
+- (CheesyLineIntersectionType) lineRelationship {
+    CheesyPoint line1start = *((CheesyPoint*) &_line1start);
+    CheesyPoint line1end = *((CheesyPoint*) &_line1end);
+
+    CheesyPoint line2start = *((CheesyPoint*) &_line2start);
+    CheesyPoint line2end = *((CheesyPoint*) &_line2end);
+
+    CheesySlopeInterceptLine line1 = 
+        slopeInterceptFromPoints(line1start, line1end);
+    CheesySlopeInterceptLine line2 = 
+        slopeInterceptFromPoints(line2start, line2end);
+
+    double epsilon = 0.005; // dialed in until it felt right
+    CheesyLineIntersectionType relationship = intersectionTypeOf(line1, line2,
+                                                                 epsilon);
+
+    if (relationship == kLineParallel) {
+        // hard to get overlap with human moosing, so factor in line width
+        double y1 = evalYForSlopeIntercept(line1, 0);
+        double y2 = evalYForSlopeIntercept(line2, 0);
+        if (fabs(y1 - y2) < kLineWidth / 2.0) {
+            relationship = kLineOverlaps;
+        }
+    }
+
+    return relationship;
+} // lineRelationship
+
+
 - (void)drawRect: (NSRect) dirtyRect {
     [super drawRect: dirtyRect];
 
@@ -130,6 +161,26 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
     if ([self orthogonal_p]) {
         [@"Yay Orthogonal" drawAtPoint: CGPointMake(5, 20)  withAttributes: @{}];
     }
+
+    NSString *intersect;
+
+    CheesyLineIntersectionType relationship = [self lineRelationship];
+    switch (relationship) {
+    case kLineIntersects:
+        intersect = @"intersect";
+        break;
+    case kLineOverlaps:
+        intersect = @"overlap";
+        break;
+    case kLineParallel: {
+        intersect = @"parallel";
+        break;
+    }
+    default:
+        intersect = @"???";
+        break;
+    }
+    [intersect drawAtPoint: CGPointMake(5, 30)  withAttributes: @{}];
 
 } // drawRect
 
