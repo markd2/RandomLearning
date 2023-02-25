@@ -19,3 +19,7 @@ And here with projecting the line past the endpoints
 
 ![](assets/line-projection.gif)
 
+Showing line relationships (intersect / parallel / overlapping)
+
+![](assets/line-relationships.gif)
+
