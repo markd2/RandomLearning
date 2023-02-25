@@ -43,6 +43,27 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
 - (void) drawLineFrom: (CGPoint) start  to: (CGPoint) end {
     const CGFloat radius = 10.0;
 
+    // draw the projection of the lines out to 'infinity'
+
+    NSBezierPath *dashedBez = NSBezierPath.new;
+    CGFloat dasher[] = { 2.0, 2.0 };
+    [dashedBez setLineDash: dasher  count: sizeof(dasher) / sizeof(*dasher)  phase: 0.0];
+    
+    CheesySlopeInterceptLine line = slopeInterceptFromPoints(*((CheesyPoint*)&start),
+                                                             *((CheesyPoint*)&end));
+    double farLeftX = CGRectGetMinX(self.bounds) - 100;
+    double farLeftY = evalYForSlopeIntercept(line, farLeftX);
+
+    double farRightX = CGRectGetMaxX(self.bounds) + 100;
+    double farRightY = evalYForSlopeIntercept(line, farRightX);
+
+    [NSColor.grayColor set];
+    CGPoint farLeft = (CGPoint) { farLeftX, farLeftY };
+    CGPoint farRight = (CGPoint) { farRightX, farRightY };
+    [dashedBez moveToPoint: farLeft];
+    [dashedBez lineToPoint: farRight];
+    [dashedBez stroke];
+
     NSBezierPath *bez = NSBezierPath.new;
     bez.lineWidth = 3;
     bez.lineCapStyle = NSLineCapStyleRound;
