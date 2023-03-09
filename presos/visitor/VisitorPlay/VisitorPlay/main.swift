@@ -1,10 +1,10 @@
 import Foundation
 
-struct Expr {
+struct Value {
     let value: Int
     
     func accept(visitor: ASTVisitor) {
-        return visitor.visitExpr(expr: self)
+        return visitor.visitValue(value: self)
     }
 }
 
@@ -21,15 +21,15 @@ enum Token {
 }
 
 class Binary {
-    let left: Expr
+    let left: Value
     let op: Token
-    let right: Expr
+    let right: Value
 
     func accept(visitor: ASTVisitor) {
         return visitor.visitBinary(binary: self)
     }
     
-    internal init(left: Expr, op: Token, right: Expr) {
+    internal init(left: Value, op: Token, right: Value) {
         self.left = left
         self.op = op
         self.right = right
@@ -48,23 +48,23 @@ class Binary {
 // --------------------------------------------------
 
 protocol ASTVisitor {
-    func visitExpr(expr: Expr)
+    func visitValue(value: Value)
     func visitToken(token: Token)
     func visitBinary(binary: Binary)
 }
 
 // --------------------------------------------------
 
-let blah = Binary(left: Expr(value: 23),
+let blah = Binary(left: Value(value: 23),
                   op: .add,
-                  right: Expr(value: 42))
+                  right: Value(value: 42))
                   
 print("evaluating value: \(blah.evaluateValue())\n")
 
 
 class Printer: ASTVisitor {
-    func visitExpr(expr: Expr) {
-        print(expr.value)
+    func visitValue(value: Value) {
+        print(value.value)
     }
 
     func visitToken(token: Token) {
@@ -93,10 +93,10 @@ blah.accept(visitor: printer)
 class Evenator: ASTVisitor {
     var isValid = true
 
-    func visitExpr(expr: Expr) {
-        if expr.value % 2 == 1 {
+    func visitValue(value: Value) {
+        if value.value % 2 == 1 {
             isValid = false
-            print("ERROR - \(expr.value) is not even")
+            print("ERROR - \(value.value) is not even")
         }
     }
 
@@ -111,8 +111,13 @@ class Evenator: ASTVisitor {
     }
 }
 
+print("\n")
+
 let evenator = Evenator()
 blah.accept(visitor: evenator)
 if !evenator.isValid {
     print("SADGE")
 }
+
+print("\n")
+
