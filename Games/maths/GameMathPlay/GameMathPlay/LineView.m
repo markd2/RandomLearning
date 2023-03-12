@@ -85,6 +85,13 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
     bez = [NSBezierPath bezierPathWithOvalInRect: control2];
     [bez stroke];
 
+    CheesyPoint midpoint = cheesyMidpoint(*((CheesyPoint*)&start), *((CheesyPoint*)&end));
+
+    CGRect midpointRect = rectAroundPoint(*((CGPoint*)&midpoint), radius / 2);
+    [NSColor.grayColor set];
+    bez = [NSBezierPath bezierPathWithOvalInRect: midpointRect];
+    [bez stroke];
+
 } // drawLineFrom
 
 

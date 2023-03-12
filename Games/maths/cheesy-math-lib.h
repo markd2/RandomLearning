@@ -27,6 +27,8 @@ typedef struct CheesyPoint {
 double cheesySlopeBetweenPoints(CheesyPoint cp1, CheesyPoint cp2);
 double cheesyDistance(CheesyPoint cp1, CheesyPoint cp2);
 
+CheesyPoint cheesyMidpoint(CheesyPoint cp1, CheesyPoint cp2);
+
 // --------------------------------------------------
 
 typedef struct CheesySlopeInterceptLine {

@@ -11,10 +11,17 @@ double cheesyDistance(CheesyPoint cp1, CheesyPoint cp2) {
 } // cheesyDistance
 
 
+CheesyPoint cheesyMidpoint(CheesyPoint cp1, CheesyPoint cp2) {
+    CheesyPoint point = { (cp1.x + cp2.x) / 2.0,
+                          (cp1.y + cp2.y) / 2.0 };
+    return point;
+} // cheesyMidpoint
+
+
 double cheesySlopeBetweenPoints(CheesyPoint cp1, CheesyPoint cp2) {
     // division by zero? YOLO
     return (cp2.y - cp1.y) / (cp2.x / cp1.y);
-}
+} // cheesySlopeBetweenPoints
 
 
 double slopeBetweenPoints(double *P1, double *P2) {
