@@ -100,6 +100,22 @@ static uint8_t makeConstant(Value value) {
 } // makeConstant
 
 
+static void expression(void) {
+} // expression
+
+
+static void unary(void) {
+    TokenType operatorType = parser.previous.type;
+
+    expression();
+
+    switch (operatorType) {
+    case TOKEN_MINUS: emitByte(OP_NEGATE); break;
+    default: return;
+    }
+
+} // unary
+
 static void grouping(void) {
     expression();
     consume(TOKEN_RIGHT_PAREN, "Expect ')' after expression");
@@ -121,9 +137,6 @@ static void number(void) {
     emitConstant(value);
 } // number
 
-
-static void expression(void) {
-} // expression
 
 // --------------------------------------------------
 
