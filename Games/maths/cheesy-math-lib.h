@@ -16,10 +16,7 @@ double orthogonalSlope(double slope);
 /// are the two slopes orthogonal?
 bool areSlopesOrthogonal(double slope1, double slope2, double epsilon);
 
-typedef struct CheesySlopeInterceptLine {
-    double slope;
-    double yIntercept;
-} CheesySlopeInterceptLine;
+// --------------------------------------------------
 
 // because I'm lame, this needs to be castable to a (double *)
 typedef struct CheesyPoint {
@@ -27,8 +24,28 @@ typedef struct CheesyPoint {
     double y;
 } CheesyPoint;
 
+double cheesySlopeBetweenPoints(CheesyPoint cp1, CheesyPoint cp2);
+double cheesyDistance(CheesyPoint cp1, CheesyPoint cp2);
+
+// --------------------------------------------------
+
+typedef struct CheesySlopeInterceptLine {
+    double slope;
+    double yIntercept;
+} CheesySlopeInterceptLine;
+
 CheesySlopeInterceptLine slopeInterceptFromPoints(CheesyPoint p1, CheesyPoint p2);
 double evalYForSlopeIntercept(CheesySlopeInterceptLine line, double x);
+
+// --------------------------------------------------
+
+typedef struct CheesyPointSlopeLine {
+    CheesyPoint point;
+    double slope;
+} CheesyPointSlopeLine;
+
+CheesyPointSlopeLine pointSlopeFromPoints(CheesyPoint p1, CheesyPoint p2);
+double evalYForPointSlope(CheesyPointSlopeLine line, double x);
 
 
 typedef enum CheesyLineIntersectionType {
