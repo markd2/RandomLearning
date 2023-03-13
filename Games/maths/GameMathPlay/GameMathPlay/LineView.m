@@ -162,6 +162,11 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
     [self drawLineFrom: self.line2start
                     to: self.line2end];
 
+    CheesyPointSlopeLine ps1 = pointSlopeFromPoints(*((CheesyPoint*)&_line1start),
+                                                    *((CheesyPoint*)&_line1end));
+    CheesyPointSlopeLine ps2 = pointSlopeFromPoints(*((CheesyPoint*)&_line2start),
+                                                    *((CheesyPoint*)&_line2end));
+
     [NSColor.blackColor set];
     NSFrameRect(self.bounds);
 
@@ -173,9 +178,16 @@ static inline CGRect rectAroundPoint(CGPoint point, CGFloat radius) {
 
     CheesyLineIntersectionType relationship = [self lineRelationship];
     switch (relationship) {
-    case kLineIntersects:
+    case kLineIntersects: {
         intersect = @"intersect";
+        CheesyPoint intersectionCheesyPoint = intersectionPointOfLines(ps1, ps2);
+        CGRect intersectionRect = rectAroundPoint(*((CGPoint*)&intersectionCheesyPoint), 6);
+        [NSColor.greenColor set];
+        NSBezierPath *bez = [NSBezierPath bezierPathWithOvalInRect: intersectionRect];
+        [bez fill];
+
         break;
+    }
     case kLineOverlaps:
         intersect = @"overlap";
         break;

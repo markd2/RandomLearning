@@ -75,8 +75,28 @@ CheesyPointSlopeLine pointSlopeFromPoints(CheesyPoint p1, CheesyPoint p2) {
 
 
 double evalYForPointSlope(CheesyPointSlopeLine line, double x) {
-    return 0;
+    // (y - y1) = m(x - x1)
+
+YOU WERE HERE - trying to get intersection point drawing in the right place.
+right now it's completeky off. not sure if it's the PSL format or this
+evalautor
+    double y = line.slope * (x - line.point.x) + line.point.y;
+    
+    return y;
 } // evalYForPointSlope
+
+
+CheesyPoint intersectionPointOfLines(CheesyPointSlopeLine line1,
+                                     CheesyPointSlopeLine line2) {
+    
+    double x = (line1.slope * line1.point.x - line2.slope * line2.point.x + line2.point.y - line1.point.y) / (line1.slope - line2.slope);
+    double y = evalYForPointSlope(line1, x);
+
+    CheesyPoint point = { x, y };
+    printf("(%f, %f)", x, y);
+    return point;
+} // intersectionPointOfLines
+
 
 
 
