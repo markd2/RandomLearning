@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+// import * as _ from 'lodash'
 
 console.log("Snorgle")
 
@@ -41,4 +41,39 @@ const person2: Person = {
     last: "Cat",
     cute: true
 }
+
+function tvPow(x: number, y: number): string {
+    return Math.pow(x, y).toString();
+}
+
+// can also use void return type annotation
+
+// tvPow("hello", "Sailor") // type error
+
+let blah = tvPow(5, 10)
+console.log(blah)
+
+const arr: number[] = []   // number[] -is-like-> [Number]
+arr.push(1);
+// arr.push("23"); // error
+// arr.push(false); // error
+
+const arrMeHearties: Person[] = []
+
+// Tuples - fixed length array where each element has its own type
+type SomeTupile = [number, string, boolean]
+const tupiles: SomeTupile = [1, "23", false];
+
+
+// ? for optionals
+
+// Generics
+
+class Observable<T> {
+   constructor(public value: T) { }
+}
+
+let x: Observable<number>;
+let y: Observable<Person>;
+let z = new Observable(23); // implicit
 
