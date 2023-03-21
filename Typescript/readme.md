@@ -30,3 +30,9 @@ Asked someone I trust about TS (and React) suggestions.
   - In React, stick with Functional Components and get good with
     Hooks. Learn how to make your own Hooks if you can.
 
+
+### Emacs mode
+
+Looks like the typescript-mode is EOL (https://github.com/emacs-typescript/typescript.el), but emacs 29 will be including it in the core.
+
+
