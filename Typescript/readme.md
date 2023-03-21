@@ -30,9 +30,19 @@ Asked someone I trust about TS (and React) suggestions.
   - In React, stick with Functional Components and get good with
     Hooks. Learn how to make your own Hooks if you can.
 
+### Other stuffs
+
+* https://basarat.gitbook.io/typescript/ - Typescript Deep Dive. Recommended by Fireship.
+
 
 ### Emacs mode
 
-Looks like the typescript-mode is EOL (https://github.com/emacs-typescript/typescript.el), but emacs 29 will be including it in the core.
+* Looks like the typescript-mode is EOL (https://github.com/emacs-typescript/typescript.el), but emacs 29 will be including it in the core.
+* TIDE - https://github.com/ananthakumaran/tide - TypeScript Interactive Development Environment for Emacs - linked by the deep dive book (is available via melpa)
 
+### Random notes
 
+* doing the fireship TypeScript - the Basics
+  - npm install lodash
+  - npm install --save-dev @types/lodash
+  
