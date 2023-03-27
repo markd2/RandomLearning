@@ -6,7 +6,19 @@
 // between 2 and 100_000 barriers
 
 func maxArea(_ height: [Int]) -> Int {
-    return 49
+    var maxWater = 0
+    let count = height.count
+
+    // brute force first for correctness
+    for left in 0 ..< count {
+        for right in left + 1 ..< count {
+            let min = min(height[left], height[right])
+            let area = min * (right - left)
+            maxWater = max(maxWater, area)
+        }
+    }
+
+    return maxWater
 }
 
 
@@ -21,3 +33,5 @@ let expectedOutput2 = 1
 if maxArea(height2) != expectedOutput2 {
     print("bummer 2")
 }
+
+
