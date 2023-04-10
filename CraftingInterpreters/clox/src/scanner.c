@@ -66,7 +66,8 @@ static bool match(char expected) {
 
 
 static char peek(void) {
-    return *scanner.current;
+    if (isAtEnd()) return '\0';
+    return scanner.current[1];
 } // peek
 
 
