@@ -67,7 +67,7 @@ static bool match(char expected) {
 
 static char peek(void) {
     if (isAtEnd()) return '\0';
-    return scanner.current[1];
+    return *scanner.current;
 } // peek
 
 
@@ -78,20 +78,27 @@ static char peekNext(void) {
 
 
 static void nomWhitespace(void) {
-    // this was kind of rewritten poorly by bork
     while (true) {
         char c = peek();
-        if (isspace(c)) {
+        switch (c) {
+        case ' ':  printf("nomming space\n");
+        case '\r':
+        case '\t':
             advance();
-            if (c == '\n') scanner.line++;
-
-        } else if (c == '/') {
+            break;
+        case '\n':
+            scanner.line++;
+            advance();
+            break;
+        case '/':
             if (peekNext() == '/') {
+                // A comment goes until the end of the line.
                 while (peek() != '\n' && !isAtEnd()) advance();
             } else {
                 return;
             }
-        } else {
+            break;
+        default:
             return;
         }
     }
@@ -219,6 +226,7 @@ Token scanToken(void) {
     case '"': return string();
     }
     
+    printf("unexpected character \('%c' - 0x%02x)\n", c, c);
     return errorToken("Unexpected character");
 } // scanToken
 
