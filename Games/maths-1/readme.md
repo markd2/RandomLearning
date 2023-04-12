@@ -23,3 +23,5 @@ Showing line relationships (intersect / parallel / overlapping)
 
 ![](assets/line-relationships.gif)
 
+and stopping here.  Lots of errors and generally poor code in the book.
+Starting afresh with Game Physics Cookbook up in ../maths
