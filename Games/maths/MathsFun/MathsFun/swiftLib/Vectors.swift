@@ -163,3 +163,13 @@ func distance(_ pt1: Vec3, _ pt2: Vec3) -> Double {
     let connector = pt1 - pt2
     return connector.magnitude
 }
+
+extension Double {
+    var radiansToDegrees: Double {
+        self * 180 / .pi
+    }
+
+    var degreesToRadians: Double {
+        self * .pi / 180
+    }
+}

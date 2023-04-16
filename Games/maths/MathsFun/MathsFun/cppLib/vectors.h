@@ -1,6 +1,9 @@
 #ifndef MATH_VECTORS_H
 #define MATH_VECTORS_H
 
+#define RAD2DEG(x) ((x) * 57.295754f)
+#define DEG2RAD(x) ((x) * 0.0174533f)
+
 typedef struct vec2 {
     union {
         struct {
