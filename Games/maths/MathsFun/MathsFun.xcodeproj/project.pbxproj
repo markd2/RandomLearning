@@ -12,6 +12,7 @@
 		7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00929E7954C0087F375 /* MainMenu.xib */; };
 		7D93A00D29E7954C0087F375 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00C29E7954C0087F375 /* main.m */; };
 		7D93A01729E7A2010087F375 /* vectors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01629E7A2010087F375 /* vectors.cpp */; };
+		7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01A29EC7D9D0087F375 /* Vectors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		7D93A00E29E7954C0087F375 /* MathsFun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MathsFun.entitlements; sourceTree = "<group>"; };
 		7D93A01529E79E6A0087F375 /* vectors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vectors.h; path = cppLib/vectors.h; sourceTree = "<group>"; };
 		7D93A01629E7A2010087F375 /* vectors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vectors.cpp; path = cppLib/vectors.cpp; sourceTree = "<group>"; };
+		7D93A01929EC7D9D0087F375 /* MathsFun-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MathsFun-Bridging-Header.h"; sourceTree = "<group>"; };
+		7D93A01A29EC7D9D0087F375 /* Vectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vectors.swift; path = swiftLib/Vectors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 		7D93A00329E795490087F375 /* MathsFun */ = {
 			isa = PBXGroup;
 			children = (
+				7D93A01829EC7D8C0087F375 /* SwiftLib */,
 				7D93A01429E79E500087F375 /* CppLib */,
 				7D93A00429E795490087F375 /* AppDelegate.h */,
 				7D93A00529E795490087F375 /* AppDelegate.m */,
@@ -74,6 +78,15 @@
 				7D93A01629E7A2010087F375 /* vectors.cpp */,
 			);
 			name = CppLib;
+			sourceTree = "<group>";
+		};
+		7D93A01829EC7D8C0087F375 /* SwiftLib */ = {
+			isa = PBXGroup;
+			children = (
+				7D93A01A29EC7D9D0087F375 /* Vectors.swift */,
+				7D93A01929EC7D9D0087F375 /* MathsFun-Bridging-Header.h */,
+			);
+			name = SwiftLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +120,7 @@
 				TargetAttributes = {
 					7D93A00029E795490087F375 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -147,6 +161,7 @@
 			files = (
 				7D93A00D29E7954C0087F375 /* main.m in Sources */,
 				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
+				7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */,
 				7D93A00629E795490087F375 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MathsFun/MathsFun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -297,6 +313,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.MathsFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MathsFun/MathsFun-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -305,6 +324,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MathsFun/MathsFun.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -323,6 +343,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.MathsFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MathsFun/MathsFun-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
