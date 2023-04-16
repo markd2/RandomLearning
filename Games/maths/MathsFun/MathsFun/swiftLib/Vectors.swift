@@ -130,6 +130,18 @@ struct Vec3: Equatable {
         let v = self * (1.0 / magnitude)
         asArray = v.asArray
     }
+
+    func cross(_ rhs: Vec3) -> Vec3 {
+        var result = Vec3()
+
+        let rx = y * rhs.z - z * rhs.y
+        let ry = z * rhs.x - x * rhs.z
+        let rz = x * rhs.y - y * rhs.x
+
+        result.asArray = [rx, ry, rz]
+
+        return result
+    }
 }
 
 func distance(_ pt1: Vec2, _ pt2: Vec2) -> Double {

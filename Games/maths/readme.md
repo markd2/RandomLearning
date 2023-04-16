@@ -5,7 +5,7 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
 # Notes
 
 * Dot Product: A dot B is a0 * b0 + a1 * b2 + a2 * b2 ...
-  - directional relationship between A and B, how much A is pointing in the direction of B
+  - scalar directional relationship between A and B, how much A is pointing in the direction of B
   - if dot product > 0 : vectors point in the same direction
   - if dot product < 0 : vectors point in opposite direction
   - if dot product == 0 : vectors are perpendicular
@@ -13,7 +13,7 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
     - `dot = |A| |B| cos(theta)`
 
 * Magnitude (Length): `|A|`
-  - essentially distance from origin to the point represented by A
+  - scalar value, essentially distance from origin to the point represented by A
   - also is sqrt(dot(A, A))
   - square roots are expensive, so "squared" flavor is common (so dot(A, A))
 
@@ -21,4 +21,9 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
   - divide each component by the length (magnitude) of the vector
   - equivalent, multiply by the reciprocal
   - notated by V-hat
+
+* Cross Product: `A x B`
+  - a new vector perpendicular to A and B
+  - just 3D vectors (2D vectors degenerate into a scalar)
+  - `(Ay * Bz - Az * By, Ax * Bz - Az * Bx, Ax * By - Ay * Bx)`
 

@@ -208,4 +208,23 @@ final class VectorsTest: XCTestCase {
         v1.normalize()
         XCTAssertEqual(v1.magnitude, 1.0, accuracy: 0.0001)
     }
+
+    func testCrossProduct() {
+        // basis vectors
+        let i = Vec3(x: 1, y: 0, z: 0)
+        let j = Vec3(x: 0, y: 1, z: 0)
+        let k = Vec3(x: 0, y: 0, z: 1)
+
+        let minusI = i * -1
+        let minusJ = j * -1
+        let minusK = k * -1
+
+        XCTAssertEqual(i.cross(j), k)
+        XCTAssertEqual(j.cross(k), i)
+        XCTAssertEqual(k.cross(i), j)
+
+        XCTAssertEqual(j.cross(i), minusK)
+        XCTAssertEqual(k.cross(j), minusI)
+        XCTAssertEqual(i.cross(k), minusJ)
+    }
 }

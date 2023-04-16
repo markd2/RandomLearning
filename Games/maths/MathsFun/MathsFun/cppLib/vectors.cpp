@@ -112,3 +112,13 @@ vec2 Normalized(vec2 &v) {
 vec3 Normalized(vec3 &v) {
     return v * (1.0f / Magnitude(v));
 } // Normalizd (vec3)
+
+vec3 Cross(const vec3 &lhs, const vec3 &rhs) {
+    vec3 result;
+
+    result.x = lhs.y * rhs.z - lhs.z * rhs.y;
+    result.y = lhs.z * rhs.x - lhs.x * rhs.z;
+    result.z = lhs.x * rhs.y - lhs.y * rhs.x;
+
+    return result;
+} // Cross (vec3)

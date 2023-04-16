@@ -68,4 +68,6 @@ void Normalize(vec3 &v);
 vec2 Normalized(vec2 &v);
 vec3 Normalized(vec3 &v);
 
+vec3 Cross(const vec3 &lhs, const vec3 &rhs);
+
 #endif // MATH_VECTORS_H
