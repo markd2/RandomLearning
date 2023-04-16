@@ -13,7 +13,18 @@
 		7D93A00D29E7954C0087F375 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00C29E7954C0087F375 /* main.m */; };
 		7D93A01729E7A2010087F375 /* vectors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01629E7A2010087F375 /* vectors.cpp */; };
 		7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01A29EC7D9D0087F375 /* Vectors.swift */; };
+		7D93A02A29EC85560087F375 /* VectorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A02929EC85560087F375 /* VectorsTest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D93A02429EC85360087F375 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D939FF929E795490087F375 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D93A00029E795490087F375;
+			remoteInfo = MathsFun;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,10 +38,19 @@
 		7D93A01629E7A2010087F375 /* vectors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vectors.cpp; path = cppLib/vectors.cpp; sourceTree = "<group>"; };
 		7D93A01929EC7D9D0087F375 /* MathsFun-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MathsFun-Bridging-Header.h"; sourceTree = "<group>"; };
 		7D93A01A29EC7D9D0087F375 /* Vectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vectors.swift; path = swiftLib/Vectors.swift; sourceTree = "<group>"; };
+		7D93A02029EC85360087F375 /* MathsFunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathsFunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D93A02929EC85560087F375 /* VectorsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VectorsTest.swift; path = MathsFun/swiftLib/VectorsTest.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7D939FFE29E795490087F375 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D93A01D29EC85360087F375 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -44,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				7D93A00329E795490087F375 /* MathsFun */,
+				7D93A02129EC85360087F375 /* MathsFunTests */,
 				7D93A00229E795490087F375 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				7D93A00129E795490087F375 /* MathsFun.app */,
+				7D93A02029EC85360087F375 /* MathsFunTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +111,14 @@
 			name = SwiftLib;
 			sourceTree = "<group>";
 		};
+		7D93A02129EC85360087F375 /* MathsFunTests */ = {
+			isa = PBXGroup;
+			children = (
+				7D93A02929EC85560087F375 /* VectorsTest.swift */,
+			);
+			path = MathsFunTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +139,24 @@
 			productReference = 7D93A00129E795490087F375 /* MathsFun.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7D93A01F29EC85360087F375 /* MathsFunTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D93A02629EC85360087F375 /* Build configuration list for PBXNativeTarget "MathsFunTests" */;
+			buildPhases = (
+				7D93A01C29EC85360087F375 /* Sources */,
+				7D93A01D29EC85360087F375 /* Frameworks */,
+				7D93A01E29EC85360087F375 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D93A02529EC85360087F375 /* PBXTargetDependency */,
+			);
+			name = MathsFunTests;
+			productName = MathsFunTests;
+			productReference = 7D93A02029EC85360087F375 /* MathsFunTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -116,11 +164,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					7D93A00029E795490087F375 = {
 						CreatedOnToolsVersion = 14.0.1;
 						LastSwiftMigration = 1400;
+					};
+					7D93A01F29EC85360087F375 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 7D93A00029E795490087F375;
 					};
 				};
 			};
@@ -138,6 +191,7 @@
 			projectRoot = "";
 			targets = (
 				7D93A00029E795490087F375 /* MathsFun */,
+				7D93A01F29EC85360087F375 /* MathsFunTests */,
 			);
 		};
 /* End PBXProject section */
@@ -149,6 +203,13 @@
 			files = (
 				7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */,
 				7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D93A01E29EC85360087F375 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +227,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D93A01C29EC85360087F375 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D93A02A29EC85560087F375 /* VectorsTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7D93A02529EC85360087F375 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D93A00029E795490087F375 /* MathsFun */;
+			targetProxy = 7D93A02429EC85360087F375 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7D93A00929E7954C0087F375 /* MainMenu.xib */ = {
@@ -348,6 +425,44 @@
 			};
 			name = Release;
 		};
+		7D93A02729EC85360087F375 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2HBB3G8HCG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.MathsFunTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathsFun.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathsFun";
+			};
+			name = Debug;
+		};
+		7D93A02829EC85360087F375 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2HBB3G8HCG;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.MathsFunTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathsFun.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathsFun";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -365,6 +480,15 @@
 			buildConfigurations = (
 				7D93A01229E7954C0087F375 /* Debug */,
 				7D93A01329E7954C0087F375 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D93A02629EC85360087F375 /* Build configuration list for PBXNativeTarget "MathsFunTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D93A02729EC85360087F375 /* Debug */,
+				7D93A02829EC85360087F375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
