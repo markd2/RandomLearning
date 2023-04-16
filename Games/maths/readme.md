@@ -13,4 +13,8 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
     - `dot = |A| |B| cos(theta)`
 
 * Length: `|A|`
+  - essentially distance from origin to the point represented by A
+  - also is sqrt(dot(A, A))
+  - square roots are expensive, so "squared" flavor is common (so dot(A, A))
+
 

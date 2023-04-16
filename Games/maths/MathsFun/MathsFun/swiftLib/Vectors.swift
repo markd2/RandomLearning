@@ -48,6 +48,13 @@ struct Vec2: Equatable {
         return x * rhs.x + y * rhs.y
     }
 
+    var magnitude: Double {
+        sqrt(dot(self))
+    }
+
+    var magnitudeSquared: Double {
+        dot(self)
+    }
 }
 
 struct Vec3: Equatable {
@@ -97,6 +104,22 @@ struct Vec3: Equatable {
     func dot(_ rhs: Vec3) -> Double {
         return x * rhs.x + y * rhs.y + z * rhs.z
     }
+
+    var magnitude: Double {
+        sqrt(dot(self))
+    }
+
+    var magnitudeSquared: Double {
+        dot(self)
+    }
 }
 
+func distance(_ pt1: Vec2, _ pt2: Vec2) -> Double {
+    let connector = pt1 - pt2
+    return connector.magnitude
+}
 
+func distance(_ pt1: Vec3, _ pt2: Vec3) -> Double {
+    let connector = pt1 - pt2
+    return connector.magnitude
+}

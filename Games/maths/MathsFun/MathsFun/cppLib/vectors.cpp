@@ -70,3 +70,29 @@ float Dot(const vec2 &lhs, const vec2 &rhs) {
 float Dot(const vec3 &lhs, const vec3 &rhs) {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;;
 } // Dot vec3
+
+float Magnitude(const vec2 &v) {
+    return sqrtf(Dot(v, v));
+} // magnitude vec2
+
+float Magnitude(const vec3 &v) {
+    return sqrtf(Dot(v, v));
+} // magnitude vec3
+
+float MagnitudeSq(const vec2 &v) {
+    return Dot(v, v);
+} // magnitudeSq vec2
+
+float MagnitudeSq(const vec3 &v) {
+    return Dot(v, v);
+} // magnitudeSq vec3
+
+float Distance(const vec2 &pt1, const vec2 &pt2) {
+    vec2 connector = pt1 - pt2;
+    return Magnitude(connector);
+} // Distance (vec2)
+
+float Distance(const vec3 &pt1, const vec3 &pt2) {
+    vec3 connector = pt1 - pt2;
+    return Magnitude(connector);
+} // Distance (vec3)

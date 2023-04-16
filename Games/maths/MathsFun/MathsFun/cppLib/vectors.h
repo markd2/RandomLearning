@@ -52,4 +52,14 @@ bool operator!=(const vec3 &lhs, const vec3 &rhs);
 float Dot(const vec2 &lhs, const vec2 &rhs);
 float Dot(const vec3 &lhs, const vec3 &rhs);
 
+float Magnitude(const vec2 &v);
+float Magnitude(const vec3 &v);
+
+float MagnitudeSq(const vec2 &v);
+float MagnitudeSq(const vec3 &v);
+
+// treating vectors as points
+float Distance(const vec2 &pt1, const vec2 &pt2);
+float Distance(const vec3 &pt1, const vec3 &pt2);
+
 #endif // MATH_VECTORS_H

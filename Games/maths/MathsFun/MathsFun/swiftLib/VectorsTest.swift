@@ -74,6 +74,37 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(v1.dot(v2), expected)
     }
 
+    func testMagnitude() {
+        let v1 = Vec2(x: 2.0, y: 4.0)
+        let expected1 = 4.47213595499958
+        XCTAssertEqual(v1.magnitude, expected1)
+
+        let v2 = Vec2(x: 1.0, y: 0.0)
+        let expected2 = 1.0
+        XCTAssertEqual(v2.magnitude, expected2)
+
+        let v3 = Vec2(x: 0.0, y: 1.0)
+        let expected3 = 1.0
+        XCTAssertEqual(v3.magnitude, expected3)
+    }
+
+    func testMagnitudeSquared() {
+        let v1 = Vec2(x: 2.0, y: 4.0)
+        let expected1 = 20.0
+        XCTAssertEqual(v1.magnitudeSquared, expected1)
+
+        let v2 = Vec2(x: 1.0, y: 0.0)
+        let expected2 = 1.0
+        XCTAssertEqual(v2.magnitudeSquared, expected2)
+    }
+
+    func testDistance() {
+        let v1 = Vec2(x: 1.0, y: 2.0)
+        let v2 = Vec2(x: 5.5, y: -2.5)
+        let expected = 6.363961030678928
+        XCTAssertEqual(distance(v1, v2), expected)
+    }
+
     // --------------------------------------------------
     // Vec3D
 
@@ -123,6 +154,37 @@ final class VectorsTest: XCTestCase {
         let v2 = Vec3(x: -5.0, y: 0.25, z: 3.5)
         let expected = -16.575
         XCTAssertEqual(v1.dot(v2), expected)
+    }
+
+    func testMagnitude3() {
+        let v1 = Vec3(x: 2.0, y: 4.0, z: -5.5)
+        let expected1 = 7.088723439378913
+        XCTAssertEqual(v1.magnitude, expected1)
+
+        let v2 = Vec3(x: 1.0, y: 0.0, z: 0.0)
+        let expected2 = 1.0
+        XCTAssertEqual(v2.magnitude, expected2)
+
+        let v3 = Vec3(x: 0.0, y: 0.0, z: 1.0)
+        let expected3 = 1.0
+        XCTAssertEqual(v3.magnitude, expected3)
+    }
+
+    func testMagnitudeSquared3() {
+        let v1 = Vec3(x: 2.0, y: 4.0, z: -5.5)
+        let expected1 = 50.25
+        XCTAssertEqual(v1.magnitudeSquared, expected1)
+
+        let v2 = Vec3(x: 0.0, y: 0.0, z: 1.0)
+        let expected2 = 1.0
+        XCTAssertEqual(v2.magnitudeSquared, expected2)
+    }
+    
+    func testDistance3() {
+        let v1 = Vec3(x: 1.0, y: 2.0, z: 3.0)
+        let v2 = Vec3(x: 5.5, y: -2.5, z: 3.5)
+        let expected = 6.383572667401852
+        XCTAssertEqual(distance(v1, v2), expected)
     }
 
 }
