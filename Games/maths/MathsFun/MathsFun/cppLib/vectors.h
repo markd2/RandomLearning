@@ -32,8 +32,8 @@ typedef struct vec3 {
     float &operator[](int i) {
         return asArray[i];
     }
-    vec2() : x(0.0f), y(0.0f) { }
-    vec2(float _x, float _y) : x(_x), y(_y) { }
+    vec3() : x(0.0f), y(0.0f), z(0.0f) { }
+    vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
 } vec3;
 
 vec2 operator+(const vec2 &lhs, const vec2 &rhs);
