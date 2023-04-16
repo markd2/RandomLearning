@@ -1,7 +1,7 @@
 import Foundation
 
 func absRelFPCompare(_ x: Double, _ y: Double) -> Bool {
-    let absolute = fabs(x - y) <= Double.ulpOfOne
+    let absolute = fabs(x - y) <= Double.ulpOfOne * 10
     let relative = fmax(1.0, fmax(fabs(x), fabs(y)))
     return absolute && relative != 0
 }
