@@ -11,6 +11,7 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
   - if dot product == 0 : vectors are perpendicular
   - Can also use to find the exact angle between the vectors
     - `dot = |A| |B| cos(theta)`
+    - expensive... (ends up needing two square roots and an inverse cosine)
 
 * Magnitude (Length): `|A|`
   - scalar value, essentially distance from origin to the point represented by A

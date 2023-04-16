@@ -116,6 +116,14 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(v1.magnitude, 1.0, accuracy: 0.0001)
     }
 
+    func testAngle() {
+        let v1 = Vec2(x: 0, y: 1)
+        let v2 = Vec2(x: 1, y: 0)
+
+        XCTAssertEqual(v1.angle(v2), v2.angle(v1))
+        XCTAssertEqual(v1.angle(v2), 1.57075, accuracy: 0.0001) // π / 2
+    }
+
     // --------------------------------------------------
     // Vec3D
 
@@ -227,4 +235,13 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(k.cross(j), minusI)
         XCTAssertEqual(i.cross(k), minusJ)
     }
+
+    func testAngle3() {
+        let v1 = Vec3(x: 0, y: 1, z: 0)
+        let v2 = Vec3(x: 0, y: 0, z: 1)
+
+        XCTAssertEqual(v1.angle(v2), v2.angle(v1))
+        XCTAssertEqual(v1.angle(v2), 1.57075, accuracy: 0.0001) // π / 2
+    }
+
 }

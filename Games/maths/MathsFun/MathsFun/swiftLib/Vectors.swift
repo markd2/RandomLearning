@@ -64,6 +64,11 @@ struct Vec2: Equatable {
         let v = self * (1.0 / magnitude)
         asArray = v.asArray
     }
+
+    func angle(_ rhs: Vec2) -> Double {
+        let m = sqrt(magnitudeSquared * rhs.magnitudeSquared);
+        return acos(dot(rhs) / m);
+    }
 }
 
 struct Vec3: Equatable {
@@ -141,6 +146,11 @@ struct Vec3: Equatable {
         result.asArray = [rx, ry, rz]
 
         return result
+    }
+
+    func angle(_ rhs: Vec3) -> Double {
+        let m = sqrt(magnitudeSquared * rhs.magnitudeSquared);
+        return acos(dot(rhs) / m);
     }
 }
 

@@ -122,3 +122,14 @@ vec3 Cross(const vec3 &lhs, const vec3 &rhs) {
 
     return result;
 } // Cross (vec3)
+
+float Angle(const vec2 &lhs, const vec2 &rhs) {
+    float m = sqrt(MagnitudeSq(lhs) * MagnitudeSq(rhs));
+    return acos(Dot(lhs, rhs) / m);
+} // Angle (vec2)
+
+float Angle(const vec3 &lhs, const vec3 &rhs) {
+    float m = sqrt(MagnitudeSq(lhs) * MagnitudeSq(rhs));
+    return acos(Dot(lhs, rhs) / m);
+} // Angle (vec3)
+
