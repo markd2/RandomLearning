@@ -42,6 +42,12 @@ struct Vec2: Equatable {
     static func ==(lhs: Vec2, rhs: Vec2) -> Bool {
         return absRelFPCompare(lhs.x, rhs.x) && absRelFPCompare(lhs.y, rhs.y)
     }
+
+
+    func dot(_ rhs: Vec2) -> Double {
+        return x * rhs.x + y * rhs.y
+    }
+
 }
 
 struct Vec3: Equatable {
@@ -86,6 +92,10 @@ struct Vec3: Equatable {
         return absRelFPCompare(lhs.x, rhs.x) 
           && absRelFPCompare(lhs.y, rhs.y)
           && absRelFPCompare(lhs.z, rhs.z)
+    }
+
+    func dot(_ rhs: Vec3) -> Double {
+        return x * rhs.x + y * rhs.y + z * rhs.z
     }
 }
 

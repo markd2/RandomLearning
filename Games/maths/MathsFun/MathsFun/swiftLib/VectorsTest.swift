@@ -67,6 +67,13 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(v3, expected)
     }
 
+    func testDot() {
+        let v1 = Vec2(x: 2.5, y: 11.7)
+        let v2 = Vec2(x: -5.0, y: 0.25)
+        let expected = -9.575
+        XCTAssertEqual(v1.dot(v2), expected)
+    }
+
     // --------------------------------------------------
     // Vec3D
 
@@ -109,6 +116,13 @@ final class VectorsTest: XCTestCase {
         let expected = Vec3(x: 3.5, y: 0.14, z: -7.7)
 
         XCTAssertEqual(v3, expected)
+    }
+
+    func testDot3() {
+        let v1 = Vec3(x: 2.5, y: 11.7, z: -2.0)
+        let v2 = Vec3(x: -5.0, y: 0.25, z: 3.5)
+        let expected = -16.575
+        XCTAssertEqual(v1.dot(v2), expected)
     }
 
 }

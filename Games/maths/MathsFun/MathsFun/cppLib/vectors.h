@@ -49,4 +49,7 @@ bool operator==(const vec3 &lhs, const vec3 &rhs);
 bool operator!=(const vec2 &lhs, const vec2 &rhs);
 bool operator!=(const vec3 &lhs, const vec3 &rhs);
 
+float Dot(const vec2 &lhs, const vec2 &rhs);
+float Dot(const vec3 &lhs, const vec3 &rhs);
+
 #endif // MATH_VECTORS_H

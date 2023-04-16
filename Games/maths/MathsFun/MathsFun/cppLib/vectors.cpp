@@ -57,9 +57,16 @@ bool operator==(const vec3 &lhs, const vec3 &rhs) {
 
 bool operator!=(const vec2 &lhs, const vec2 &rhs) {
     return !(lhs == rhs);
-} // operaetor!= vec2
+} // operator!= vec2
 
 bool operator!=(const vec3 &lhs, const vec3 &rhs) {
     return !(lhs == rhs);
-} // operaetor!= vec3
+} // operator!= vec3
 
+float Dot(const vec2 &lhs, const vec2 &rhs) {
+    return lhs.x * rhs.x + lhs.y * rhs.y;
+} // Dot vec2
+
+float Dot(const vec3 &lhs, const vec3 &rhs) {
+    return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;;
+} // Dot vec3
