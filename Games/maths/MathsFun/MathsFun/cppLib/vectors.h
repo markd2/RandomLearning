@@ -62,4 +62,10 @@ float MagnitudeSq(const vec3 &v);
 float Distance(const vec2 &pt1, const vec2 &pt2);
 float Distance(const vec3 &pt1, const vec3 &pt2);
 
+void Normalize(vec2 &v);
+void Normalize(vec3 &v);
+
+vec2 Normalized(vec2 &v);
+vec3 Normalized(vec3 &v);
+
 #endif // MATH_VECTORS_H

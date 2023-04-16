@@ -55,6 +55,15 @@ struct Vec2: Equatable {
     var magnitudeSquared: Double {
         dot(self)
     }
+
+    var normalized: Vec2 {
+        self * (1.0 / magnitude)
+    }
+
+    mutating func normalize() {
+        let v = self * (1.0 / magnitude)
+        asArray = v.asArray
+    }
 }
 
 struct Vec3: Equatable {
@@ -111,6 +120,15 @@ struct Vec3: Equatable {
 
     var magnitudeSquared: Double {
         dot(self)
+    }
+
+    var normalized: Vec3 {
+        self * (1.0 / magnitude)
+    }
+
+    mutating func normalize() {
+        let v = self * (1.0 / magnitude)
+        asArray = v.asArray
     }
 }
 

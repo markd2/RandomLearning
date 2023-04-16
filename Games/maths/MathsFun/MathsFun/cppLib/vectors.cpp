@@ -96,3 +96,19 @@ float Distance(const vec3 &pt1, const vec3 &pt2) {
     vec3 connector = pt1 - pt2;
     return Magnitude(connector);
 } // Distance (vec3)
+
+void Normalize(vec2 &v) {
+    v = v * (1.0f / Magnitude(v));
+} // Normalize (vec2)
+
+void Normalize(vec3 &v) {
+    v = v * (1.0f / Magnitude(v));
+} // Normalize (vec3)
+
+vec2 Normalized(vec2 &v) {
+    return v * (1.0f / Magnitude(v));
+} // Normalizd (vec2)
+
+vec3 Normalized(vec3 &v) {
+    return v * (1.0f / Magnitude(v));
+} // Normalizd (vec3)

@@ -105,6 +105,17 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(distance(v1, v2), expected)
     }
 
+    func testNormalization() {
+        var v1 = Vec2(x: 10.0, y: -5.7)
+        XCTAssertNotEqual(v1.magnitude, 1.0)
+
+        let v2 = v1.normalized
+        XCTAssertEqual(v2.magnitude, 1.0, accuracy: 0.0001)
+
+        v1.normalize()
+        XCTAssertEqual(v1.magnitude, 1.0, accuracy: 0.0001)
+    }
+
     // --------------------------------------------------
     // Vec3D
 
@@ -187,4 +198,14 @@ final class VectorsTest: XCTestCase {
         XCTAssertEqual(distance(v1, v2), expected)
     }
 
+    func testNormalization3() {
+        var v1 = Vec3(x: 10.0, y: -5.7, z: 0.2)
+        XCTAssertNotEqual(v1.magnitude, 1.0)
+
+        let v2 = v1.normalized
+        XCTAssertEqual(v2.magnitude, 1.0, accuracy: 0.0001)
+
+        v1.normalize()
+        XCTAssertEqual(v1.magnitude, 1.0, accuracy: 0.0001)
+    }
 }

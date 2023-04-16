@@ -12,9 +12,13 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
   - Can also use to find the exact angle between the vectors
     - `dot = |A| |B| cos(theta)`
 
-* Length: `|A|`
+* Magnitude (Length): `|A|`
   - essentially distance from origin to the point represented by A
   - also is sqrt(dot(A, A))
   - square roots are expensive, so "squared" flavor is common (so dot(A, A))
 
+* Normalizing: Making a vector in the same direction as a given direction, but a magnitude of 1.0
+  - divide each component by the length (magnitude) of the vector
+  - equivalent, multiply by the reciprocal
+  - notated by V-hat
 
