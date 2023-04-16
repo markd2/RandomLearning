@@ -44,7 +44,7 @@ struct Vec2: Equatable {
     }
 }
 
-struct Vec3 {
+struct Vec3: Equatable {
     var asArray: [Double]
     var x: Double { return asArray[0] }
     var y: Double { return asArray[1] }
@@ -56,6 +56,36 @@ struct Vec3 {
 
     init(x: Double, y: Double, z: Double) {
         asArray = [x, y, z]
+    }
+
+    static func +(lhs: Vec3, rhs: Vec3) -> Vec3 {
+        return Vec3(x: lhs.x + rhs.x,
+                    y: lhs.y + rhs.y,
+                    z: lhs.z + rhs.z)
+    }
+
+    static func -(lhs: Vec3, rhs: Vec3) -> Vec3 {
+        return Vec3(x: lhs.x - rhs.x,
+                    y: lhs.y - rhs.y,
+                    z: lhs.z - rhs.z)
+    }
+
+    static func *(lhs: Vec3, rhs: Vec3) -> Vec3 {
+        return Vec3(x: lhs.x * rhs.x,
+                    y: lhs.y * rhs.y,
+                    z: lhs.z * rhs.z)
+    }
+
+    static func *(lhs: Vec3, rhs: Double) -> Vec3 {
+        return Vec3(x: lhs.x * rhs,
+                    y: lhs.y * rhs,
+                    z: lhs.z * rhs)
+    }
+
+    static func ==(lhs: Vec3, rhs: Vec3) -> Bool {
+        return absRelFPCompare(lhs.x, rhs.x) 
+          && absRelFPCompare(lhs.y, rhs.y)
+          && absRelFPCompare(lhs.z, rhs.z)
     }
 }
 
