@@ -11,16 +11,19 @@
 		7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00729E7954C0087F375 /* Assets.xcassets */; };
 		7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00929E7954C0087F375 /* MainMenu.xib */; };
 		7D93A00D29E7954C0087F375 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00C29E7954C0087F375 /* main.m */; };
+		7D93A01729E7A2010087F375 /* vectors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01629E7A2010087F375 /* vectors.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D93A00429E795490087F375 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7D93A00529E795490087F375 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7D93A00529E795490087F375 /* AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
 		7D93A00729E7954C0087F375 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D93A00A29E7954C0087F375 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7D93A00C29E7954C0087F375 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D93A00E29E7954C0087F375 /* MathsFun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MathsFun.entitlements; sourceTree = "<group>"; };
+		7D93A01529E79E6A0087F375 /* vectors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vectors.h; path = cppLib/vectors.h; sourceTree = "<group>"; };
+		7D93A01629E7A2010087F375 /* vectors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vectors.cpp; path = cppLib/vectors.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,7 @@
 		7D93A00329E795490087F375 /* MathsFun */ = {
 			isa = PBXGroup;
 			children = (
+				7D93A01429E79E500087F375 /* CppLib */,
 				7D93A00429E795490087F375 /* AppDelegate.h */,
 				7D93A00529E795490087F375 /* AppDelegate.m */,
 				7D93A00729E7954C0087F375 /* Assets.xcassets */,
@@ -61,6 +65,15 @@
 				7D93A00E29E7954C0087F375 /* MathsFun.entitlements */,
 			);
 			path = MathsFun;
+			sourceTree = "<group>";
+		};
+		7D93A01429E79E500087F375 /* CppLib */ = {
+			isa = PBXGroup;
+			children = (
+				7D93A01529E79E6A0087F375 /* vectors.h */,
+				7D93A01629E7A2010087F375 /* vectors.cpp */,
+			);
+			name = CppLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D93A00D29E7954C0087F375 /* main.m in Sources */,
+				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
 				7D93A00629E795490087F375 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
