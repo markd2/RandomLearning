@@ -76,4 +76,10 @@ vec3 Cross(const vec3 &lhs, const vec3 &rhs);
 float Angle(const vec2 &lhs, const vec2 &rhs);
 float Angle(const vec3 &lhs, const vec3 &rhs);
 
+vec2 Project(const vec2 &length, const vec2 &direction);
+vec3 Project(const vec3 &length, const vec3 &direction);
+
+vec2 Perpendicular(const vec2 &length, const vec2 &direction);
+vec3 Perpendicular(const vec3 &length, const vec3 &direction);
+
 #endif // MATH_VECTORS_H

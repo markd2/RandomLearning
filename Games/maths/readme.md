@@ -28,3 +28,12 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
   - just 3D vectors (2D vectors degenerate into a scalar)
   - `(Ay * Bz - Az * By, Ax * Bz - Az * Bx, Ax * By - Ay * Bx)`
 
+* Projection
+  - gives the length of A in the direction of B
+    - proj-subB-A
+      - (A dot B over magnitude(B)-squared) scalar-multiplied to B
+      - gives us the parallel component
+    - perp-subB-A, which s A - proj-subB-A
+      - A minus A dot B / magnitude(B)-squared) scalar-multiplkied to B
+
+

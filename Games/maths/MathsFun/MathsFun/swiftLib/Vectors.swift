@@ -19,6 +19,10 @@ struct Vec2: Equatable {
         asArray = [x, y]
     }
 
+    var cgPoint: CGPoint {
+        CGPoint(x: x, y: y)
+    }
+
     static func +(lhs: Vec2, rhs: Vec2) -> Vec2 {
         return Vec2(x: lhs.x + rhs.x,
                     y: lhs.y + rhs.y)
@@ -68,6 +72,15 @@ struct Vec2: Equatable {
     func angle(_ rhs: Vec2) -> Double {
         let m = sqrt(magnitudeSquared * rhs.magnitudeSquared);
         return acos(dot(rhs) / m);
+    }
+
+    func project(onTo: Vec2) -> Vec2 {
+        let dot = dot(onTo)
+        return onTo * (dot / magnitudeSquared)
+    }
+
+    func perpendicular(to: Vec2) -> Vec2 {
+        to - project(onTo: to)
     }
 }
 
@@ -151,6 +164,15 @@ struct Vec3: Equatable {
     func angle(_ rhs: Vec3) -> Double {
         let m = sqrt(magnitudeSquared * rhs.magnitudeSquared);
         return acos(dot(rhs) / m);
+    }
+
+    func project(onTo: Vec3) -> Vec3 {
+        let dot = dot(onTo)
+        return onTo * (dot / magnitudeSquared)
+    }
+
+    func perpendicular(to: Vec3) -> Vec3 {
+        to - project(onTo: to)
     }
 }
 

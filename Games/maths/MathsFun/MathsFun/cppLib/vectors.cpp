@@ -133,3 +133,23 @@ float Angle(const vec3 &lhs, const vec3 &rhs) {
     return acos(Dot(lhs, rhs) / m);
 } // Angle (vec3)
 
+vec2 Project(const vec2 &length, const vec2 &direction) {
+    float dot = Dot(length, direction);
+    float magSquare = MagnitudeSq(direction);
+    return direction * (dot / magSquare);
+} // Project (vec2)
+
+vec3 Project(const vec3 &length, const vec3 &direction) {
+    float dot = Dot(length, direction);
+    float magSquare = MagnitudeSq(direction);
+    return direction * (dot / magSquare);
+} // Project (vec3)
+
+vec2 Perpendicular(const vec2 &length, const vec2 &direction) {
+    return length - Project(length, direction);
+} // Perpendicular (vec2)
+
+vec3 Perpendicular(const vec3 &length, const vec3 &direction) {
+    return length - Project(length, direction);
+} // Perpendicular (vec3)
+
