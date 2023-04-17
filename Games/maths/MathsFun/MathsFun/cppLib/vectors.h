@@ -82,4 +82,7 @@ vec3 Project(const vec3 &length, const vec3 &direction);
 vec2 Perpendicular(const vec2 &length, const vec2 &direction);
 vec3 Perpendicular(const vec3 &length, const vec3 &direction);
 
+vec2 Reflection(const vec2 &vec, const vec2 &normal);
+vec3 Reflection(const vec3 &vec, const vec3 &normal);
+
 #endif // MATH_VECTORS_H

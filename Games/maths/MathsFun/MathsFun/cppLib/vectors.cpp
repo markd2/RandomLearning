@@ -153,3 +153,16 @@ vec3 Perpendicular(const vec3 &length, const vec3 &direction) {
     return length - Project(length, direction);
 } // Perpendicular (vec3)
 
+vec2 Reflection(const vec2 &vec, const vec2 &normal) {
+    float d = Dot(vec, normal);
+    return vec - normal * (d * 2.0f);
+//    return sourceVector - normal * (d * 2.0f);  // errata submitted
+} // Reflection (vec2)
+
+vec3 Reflection(const vec3 &vec, const vec3 &normal) {
+    float d = Dot(vec, normal);
+    return vec - normal * (d * 2.0f);
+//    return sourceVector - normal * (d * 2.0f);
+} // Reflection (vec3)
+
+

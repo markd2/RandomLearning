@@ -36,4 +36,8 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
     - perp-subB-A, which s A - proj-subB-A
       - A minus A dot B / magnitude(B)-squared) scalar-multiplkied to B
 
-
+* Reflection: Given a vector and a normal, find vector R reflected around the normal
+  - R = vector - 2(V dot N-hat)N-hat
+    - where N-hat is a unit-length vector
+    - (V dot N-hat)N-hat projects V on to N
+      - so if N is not normalized, can use -2 projN of V

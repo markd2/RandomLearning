@@ -82,6 +82,12 @@ struct Vec2: Equatable {
     func perpendicular(to: Vec2) -> Vec2 {
         to - project(onTo: to)
     }
+
+    /// around should be normalized?
+    func reflected(around: Vec2) -> Vec2 {
+        let dot = dot(around)
+        return self - around * (dot * 2)
+    }
 }
 
 struct Vec3: Equatable {
@@ -173,6 +179,12 @@ struct Vec3: Equatable {
 
     func perpendicular(to: Vec3) -> Vec3 {
         to - project(onTo: to)
+    }
+
+    /// around should be normalized?
+    func reflected(around: Vec3) -> Vec3 {
+        let dot = dot(around)
+        return self - around * (dot * 2)
     }
 }
 
