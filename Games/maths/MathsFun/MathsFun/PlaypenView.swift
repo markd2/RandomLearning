@@ -6,6 +6,12 @@ class PlaypenView: NSView {
         let interactable: Bool
         var origin: CGPoint
         var vector: Vec2
+        
+        func endpoints(radius: CGFloat) -> (origin: CGRect, vector: CGRect) {
+            let originRect = CGRect.rect(centeredAt: origin, radius: radius)
+            let vectorRect = CGRect.rect(centeredAt: vector.cgPoint, radius: radius)
+            return (originRect, vectorRect)
+        }
     }
 
     var vectors: [Vector] = []
@@ -20,14 +26,30 @@ class PlaypenView: NSView {
             lineWidth = 1.0
         }
 
-        let bezPath = NSBezierPath()
-        bezPath.lineWidth = lineWidth
+        let linePath = NSBezierPath()
+        linePath.lineWidth = lineWidth
 
-        bezPath.removeAllPoints()
-        bezPath.move(to: vector.origin)
-        bezPath.line(to: vector.vector.cgPoint)
+        linePath.removeAllPoints()
+        linePath.move(to: vector.origin)
+        linePath.line(to: vector.vector.cgPoint)
+        linePath.stroke()
 
-        bezPath.stroke()
+        if vector.interactable {
+
+            let radius: CGFloat = 10
+            let (originRect, vectorRect) = vector.endpoints(radius: radius)
+
+            let originPath = NSBezierPath(ovalIn: originRect)
+            let vectorPath = NSBezierPath(ovalIn: vectorRect)
+
+            NSColor.red.set()
+            originPath.fill()
+            vectorPath.fill()
+
+            NSColor.black.set()
+            originPath.stroke()
+            vectorPath.stroke()
+        }
     }
 
     func add(vector: Vector) {
@@ -50,3 +72,14 @@ class PlaypenView: NSView {
     override var isFlipped: Bool { return true }
 
 } // PlaypenView
+
+
+extension CGRect {
+    /// Radius is kind of weird for a rectangle call, but this is
+    /// a call for generating a rectangle around a circle to give to
+    /// something (say a BezierPath)
+    static func rect(centeredAt: CGPoint, radius: CGFloat) -> CGRect {
+        CGRect(x: centeredAt.x - radius / 2.0, y: centeredAt.y - radius / 2.0,
+               width: radius, height: radius)
+    }
+}
