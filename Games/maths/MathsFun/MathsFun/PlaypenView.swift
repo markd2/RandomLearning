@@ -2,19 +2,35 @@ import Cocoa;
 
 class PlaypenView: NSView {
 
-    struct Vector {
+    class Vector {
         let interactable: Bool
         var origin: CGPoint
         var vector: Vec2
+
+        init(interactable: Bool, origin: CGPoint, vector: Vec2) {
+            self.interactable = interactable
+            self.origin = origin
+            self.vector = vector
+        }
         
         func endpoints(radius: CGFloat) -> (origin: CGRect, vector: CGRect) {
+
             let originRect = CGRect.rect(centeredAt: origin, radius: radius)
-            let vectorRect = CGRect.rect(centeredAt: vector.cgPoint, radius: radius)
+            let vectorRect = CGRect.rect(centeredAt: origin.offsetBy(vector), 
+                                         radius: radius)
             return (originRect, vectorRect)
         }
     }
 
     var vectors: [Vector] = []
+    let radius: CGFloat = 10
+
+    var trackingVector: Vector?
+    enum TrackingItem {
+        case origin
+        case vector
+    }
+    var trackingItem: TrackingItem?
 
     private func render(vector: Vector) {
         let lineWidth: CGFloat
@@ -31,12 +47,10 @@ class PlaypenView: NSView {
 
         linePath.removeAllPoints()
         linePath.move(to: vector.origin)
-        linePath.line(to: vector.vector.cgPoint)
+        linePath.line(to: vector.origin.offsetBy(vector.vector))
         linePath.stroke()
 
         if vector.interactable {
-
-            let radius: CGFloat = 10
             let (originRect, vectorRect) = vector.endpoints(radius: radius)
 
             let originPath = NSBezierPath(ovalIn: originRect)
@@ -44,6 +58,7 @@ class PlaypenView: NSView {
 
             NSColor.red.set()
             originPath.fill()
+            NSColor.purple.set()
             vectorPath.fill()
 
             NSColor.black.set()
@@ -71,7 +86,50 @@ class PlaypenView: NSView {
 
     override var isFlipped: Bool { return true }
 
+    
+
 } // PlaypenView
+
+extension PlaypenView {
+    override func mouseDown(with event: NSEvent) {
+        let localPoint = convert(event.locationInWindow, from: nil)
+
+        vectors.filter { $0.interactable }.forEach { vector in
+            let (originRect, vectorRect) = vector.endpoints(radius: radius)
+            if originRect.contains(localPoint) {
+                trackingVector = vector
+                trackingItem = .origin
+            } else if vectorRect.contains(localPoint) {
+                trackingVector = vector
+                trackingItem = .vector
+            }
+        }
+    }
+    
+    private func dragTo(point: CGPoint) {
+        guard let trackingVector, let trackingItem else { return }
+
+        switch trackingItem {
+        case .origin:
+            trackingVector.origin = point
+        case .vector:
+            let origin = trackingVector.origin
+            trackingVector.vector = Vec2(x: point.x - origin.x,
+                                         y: point.y - origin.y)
+        }
+        needsDisplay = true
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        let localPoint = convert(event.locationInWindow, from: nil)
+        dragTo(point: localPoint)
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        trackingVector = nil
+        trackingItem = nil
+    }
+}
 
 
 extension CGRect {

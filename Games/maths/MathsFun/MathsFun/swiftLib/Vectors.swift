@@ -207,3 +207,9 @@ extension Double {
         self * .pi / 180
     }
 }
+
+extension CGPoint {
+    func offsetBy(_ vector: Vec2) -> CGPoint {
+        CGPoint(x: x + vector.x, y: y + vector.y)
+    }
+}
