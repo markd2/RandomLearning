@@ -12,27 +12,34 @@
 #import <iostream>
 
 @interface AppDelegate ()
-
 @property (strong) IBOutlet NSWindow *window;
+@property (strong) NSMutableArray *windowControllers;
 @end // extension
 
 @implementation AppDelegate
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
-    vec3 right = { 1.0f, 0.0f, 0.3f };
-    std::cout << "oop " << right.x << std::endl;
-    std::cout << "ack " << right[1] << std::endl;
-    std::cout << "blah " << right.asArray[2] << std::endl;
+    self.windowControllers = [NSMutableArray new];
 } // applicationDidFinishLaunching
 
 
-- (void) applicationWillTerminate: (NSNotification *) aNotification {
-    // Insert code here to tear down your application
-}
+- (void) showViewControllerNamed: (NSString *) vcClassName {
+    Class clas = NSClassFromString(vcClassName);
+    if (clas == Nil) {
+        NSString *swiftClassName = [@"MathsFun." stringByAppendingString: vcClassName];
+        clas = NSClassFromString(swiftClassName);
+    }
+    assert(clas);
+    id wc = [[clas alloc] initWithWindowNibName: vcClassName];
+    [wc showWindow: self];
+
+    [self.windowControllers addObject: wc];
+
+} // showViewControllerNamed
 
 
-- (BOOL) applicationSupportsSecureRestorableState: (NSApplication *) app {
-    return YES;
-}
+- (IBAction) showProjections: (NSButton *) sender {
+    [self showViewControllerNamed: @"Projections"];
+} // showProjections
 
 @end // AppDelegate
