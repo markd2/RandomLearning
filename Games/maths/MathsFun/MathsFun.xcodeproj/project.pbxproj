@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D13096929F20CC600EE81B9 /* Projections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13096729F20CC600EE81B9 /* Projections.swift */; };
 		7D13096A29F20CC600EE81B9 /* Projections.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D13096829F20CC600EE81B9 /* Projections.xib */; };
+		7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */; };
 		7D93A00629E795490087F375 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00529E795490087F375 /* AppDelegate.m */; };
 		7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00729E7954C0087F375 /* Assets.xcassets */; };
 		7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00929E7954C0087F375 /* MainMenu.xib */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		7D13096729F20CC600EE81B9 /* Projections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projections.swift; sourceTree = "<group>"; };
 		7D13096829F20CC600EE81B9 /* Projections.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Projections.xib; sourceTree = "<group>"; };
+		7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaypenView.swift; sourceTree = "<group>"; };
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D93A00429E795490087F375 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D93A00529E795490087F375 /* AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				7D93A00E29E7954C0087F375 /* MathsFun.entitlements */,
 				7D13096729F20CC600EE81B9 /* Projections.swift */,
 				7D13096829F20CC600EE81B9 /* Projections.xib */,
+				7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */,
 			);
 			path = MathsFun;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				7D93A00D29E7954C0087F375 /* main.m in Sources */,
 				7D13096929F20CC600EE81B9 /* Projections.swift in Sources */,
+				7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */,
 				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
 				7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */,
 				7D93A00629E795490087F375 /* AppDelegate.m in Sources */,

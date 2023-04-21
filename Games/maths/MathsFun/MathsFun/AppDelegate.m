@@ -20,6 +20,8 @@
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     self.windowControllers = [NSMutableArray new];
+
+    [self showProjections: nil];
 } // applicationDidFinishLaunching
 
 
