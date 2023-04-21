@@ -6,6 +6,7 @@ class PlaypenView: NSView {
         let interactable: Bool
         var origin: CGPoint
         var vector: Vec2
+        var color: NSColor?
 
         init(interactable: Bool, origin: CGPoint, vector: Vec2) {
             self.interactable = interactable
@@ -22,6 +23,7 @@ class PlaypenView: NSView {
         }
     }
 
+    var vectorMoved: (() -> Void)?
     var vectors: [Vector] = []
     let radius: CGFloat = 10
 
@@ -34,11 +36,12 @@ class PlaypenView: NSView {
 
     private func render(vector: Vector) {
         let lineWidth: CGFloat
+
         if vector.interactable {
-            NSColor.black.set()
+            (vector.color ?? NSColor.black).set()
             lineWidth = 2.0
         } else {
-            NSColor.lightGray.set()
+            (vector.color ?? NSColor.lightGray).set()
             lineWidth = 1.0
         }
 
@@ -112,10 +115,12 @@ extension PlaypenView {
         switch trackingItem {
         case .origin:
             trackingVector.origin = point
+            vectorMoved?()
         case .vector:
             let origin = trackingVector.origin
             trackingVector.vector = Vec2(x: point.x - origin.x,
                                          y: point.y - origin.y)
+            vectorMoved?()
         }
         needsDisplay = true
     }
