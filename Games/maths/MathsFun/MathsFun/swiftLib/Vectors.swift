@@ -76,11 +76,11 @@ struct Vec2: Equatable {
 
     func project(onTo: Vec2) -> Vec2 {
         let dot = dot(onTo)
-        return onTo * (dot / magnitudeSquared)
+        return onTo * (dot / onTo.magnitudeSquared)
     }
 
     func perpendicular(to: Vec2) -> Vec2 {
-        to - project(onTo: to)
+        self - project(onTo: to)
     }
 
     /// around should be normalized?
@@ -174,11 +174,11 @@ struct Vec3: Equatable {
 
     func project(onTo: Vec3) -> Vec3 {
         let dot = dot(onTo)
-        return onTo * (dot / magnitudeSquared)
+        return onTo * (dot / onTo.magnitudeSquared)
     }
 
     func perpendicular(to: Vec3) -> Vec3 {
-        to - project(onTo: to)
+        self - project(onTo: to)
     }
 
     /// around should be normalized?
