@@ -182,9 +182,9 @@ struct Vec3: Equatable {
     }
 
     /// around should be normalized?
-    func reflected(around: Vec3) -> Vec3 {
-        let dot = dot(around)
-        return self - around * (dot * 2)
+    func reflected(around normal: Vec3) -> Vec3 {
+        let dot = dot(normal)
+        return self - (normal * (dot * 2))
     }
 }
 
