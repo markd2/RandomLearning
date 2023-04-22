@@ -21,7 +21,7 @@
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     self.windowControllers = [NSMutableArray new];
 
-    [self showProjections: nil];
+    [self showReflection: nil];
 } // applicationDidFinishLaunching
 
 
@@ -43,5 +43,9 @@
 - (IBAction) showProjections: (NSButton *) sender {
     [self showViewControllerNamed: @"Projections"];
 } // showProjections
+
+- (IBAction) showReflection: (NSButton *) sender {
+    [self showViewControllerNamed: @"Reflection"];
+} // showReflection
 
 @end // AppDelegate
