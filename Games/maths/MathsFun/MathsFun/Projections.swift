@@ -53,11 +53,11 @@ class Projections: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        xAxisProjection.color = .purple
-        yAxisProjection.color = .orange
+        xAxisProjection.color = .black
+        yAxisProjection.color = .black
 
-        xAxisPerpendicular.color = .green
-        yAxisPerpendicular.color = .blue
+        xAxisPerpendicular.color = .gray
+        yAxisPerpendicular.color = .gray
 
         playpen.add(vector: movableVector)
         playpen.add(vector: upVector)
@@ -89,14 +89,14 @@ class Projections: NSWindowController {
         xAxisProjection.vector = pj1
 
         let pp1 = movableVector.vector.perpendicular(to: leftVector.vector)
-        xAxisPerpendicular.vector = pp1
+        xAxisPerpendicular.vector = pp1 * -1
         xAxisPerpendicular.origin = movableVector.origin.offsetBy(movableVector.vector)
         
         let pj2 = movableVector.vector.project(onTo: upVector.vector)
         yAxisProjection.vector = pj2
 
         let pp2 = movableVector.vector.perpendicular(to: upVector.vector)
-        yAxisPerpendicular.vector = pp2
+        yAxisPerpendicular.vector = pp2 * -1
         yAxisPerpendicular.origin = movableVector.origin.offsetBy(movableVector.vector)
     }
     
