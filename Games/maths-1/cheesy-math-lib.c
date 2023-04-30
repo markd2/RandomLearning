@@ -77,12 +77,12 @@ CheesyPointSlopeLine pointSlopeFromPoints(CheesyPoint p1, CheesyPoint p2) {
 double evalYForPointSlope(CheesyPointSlopeLine line, double x) {
     // (y - y1) = m(x - x1)
 
-YOU WERE HERE - trying to get intersection point drawing in the right place.
-right now it's completeky off. not sure if it's the PSL format or this
-evalautor
-    double y = line.slope * (x - line.point.x) + line.point.y;
-    
-    return y;
+//YOU WERE HERE - trying to get intersection point drawing in the right place.
+//right now it's completely off. not sure if it's the PSL format or this
+//evalautor
+//    double y = line.slope * (x - line.point.x) + line.point.y;
+//    
+    return 0;
 } // evalYForPointSlope
 
 
