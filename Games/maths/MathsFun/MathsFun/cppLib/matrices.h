@@ -6,8 +6,8 @@
 typedef struct mat2 {
     union {
         struct {
-            double _11, _12, 
-                   _21, _22;
+            float _11, _12, 
+                  _21, _22;
         };
         float asArray[4];
     };
@@ -21,9 +21,9 @@ typedef struct mat2 {
 typedef struct mat3 {
     union {
         struct {
-            double _11, _12, _13, 
-                   _21, _22, _23,
-                   _31, _32, _33;
+            float _11, _12, _13, 
+                  _21, _22, _23,
+                  _31, _32, _33;
         };
         float asArray[9];
     };
@@ -37,10 +37,10 @@ typedef struct mat3 {
 typedef struct mat4 {
     union {
         struct {
-            double _11, _12, _13, _14, 
-                   _21, _22, _23, _24,
-                   _31, _32, _33, _34,
-                   _41, _42, _43, _44;
+            float _11, _12, _13, _14, 
+                  _21, _22, _23, _24,
+                  _31, _32, _33, _34,
+                  _41, _42, _43, _44;
         };
         float asArray[16];
     };
