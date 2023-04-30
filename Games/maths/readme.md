@@ -4,6 +4,8 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
 
 # Notes
 
+## Vectors
+
 * Dot Product: A dot B is a0 * b0 + a1 * b2 + a2 * b2 ...
   - scalar directional relationship between A and B, how much A is pointing in the direction of B
   - if dot product > 0 : vectors point in the same direction
@@ -41,3 +43,21 @@ Working through _Game Physics Cookbook_ - https://www.packtpub.com/product/game-
     - where N-hat is a unit-length vector
     - (V dot N-hat)N-hat projects V on to N
       - so if N is not normalized, can use -2 projN of V
+
+## Matrices
+
+[PurpleMath](https://www.purplemath.com) under _Advanced Algebra_ was
+given as a source of follow-up info(e)
+
+* Basics
+  - ixj grid of numbers (# of rows x # of columns)
+
+* Inverted
+
+* Minor
+
+* Determinant
+
+* Cofactor
+
+* Adjugate
