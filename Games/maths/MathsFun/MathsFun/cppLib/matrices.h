@@ -51,4 +51,9 @@ typedef struct mat4 {
 
 } mat4;
 
+void Transpose(const float *srcMat, float *dstMat, int srcRows, int srcCols);
+mat2 Transpose(const mat2 &matrix);
+mat3 Transpose(const mat3 &matrix);
+mat4 Transpose(const mat4 &matrix);
+
 #endif // MATH_MATRICES_H

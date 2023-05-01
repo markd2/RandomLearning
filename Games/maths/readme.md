@@ -52,6 +52,9 @@ given as a source of follow-up info(e)
 * Basics
   - ixj grid of numbers (# of rows x # of columns)
 
+* Transpose
+  - matrix constructed by flipping Mij to Mji
+
 * Inverted
 
 * Minor
