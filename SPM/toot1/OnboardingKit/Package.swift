@@ -5,10 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "OnboardingKit",
+    platforms: [
+      .iOS(.v15)
+    ],
     products: [
         .library(
             name: "OnboardingKit",
-            targets: ["NavigationMod"])
+            targets: ["NavigationMod", "LoginMod"])
     ],
     dependencies: [],
     targets: [
@@ -17,6 +20,13 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "NavigationModTests",
-            dependencies: ["NavigationMod"])
+            dependencies: ["NavigationMod"]),
+
+        .target(
+            name: "LoginMod",
+            dependencies: []),
+        .testTarget(
+            name: "LoginModTests",
+            dependencies: ["LoginMod"])
     ]
 )

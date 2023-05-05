@@ -1,22 +1,22 @@
 import UIKit
 import NavigationMod
 
-class LoginViewController: UIViewController {
+public class LoginViewController: UIViewController {
     private let passwordTextField = UITextField()
     private let loginTextField = UITextField()
     private let loginButton = UIButton()
     private let coordinator: AbstractCoordinator
     
-    init(coordinator: AbstractCoordinator) {
+    public init(coordinator: AbstractCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("Splungemonkey")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .orange

@@ -11,6 +11,12 @@ Articles from random googling:
         - Package.swift, readme.md, Sources/, Tests/
     - be sure to add to target's frameworks/libraries/etc
     - "it demands a test target for every module"
+    - bugs:
+      - it goes through the hoops of doing ios availability, when it could have
+        done     platforms: [.iOS(.v15_0)],
+      - "don't worry about error on missing AbstractCoordinator" - did not get that.
+      - "delete the storyboard reference as shown below", but there is no below that shows it.
+
 
 ## SPM DSL TLA
 
