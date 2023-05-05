@@ -1,8 +1,8 @@
 Handmade Hero videos (without Q&A)
-next: 31
+next: 32
 
 
-past: 000-024
+past: 000-031
 Interesting:
   - 013 - user input from platform layer to game layer
   - 014 - single big allocation - permanent (frame-to-frame) and
@@ -32,4 +32,27 @@ Interesting:
           tile maps (vs dense giant cube of tilemaps)
   - 030 - Moving Between Tile Maps - mainly working with various coordinate
           system (still densely packed), and code cleanup/refactorings
-
+  - 031 - (lots of good stuff in this one) Tilemap coordinate systems
+          will show how to do scrolling later, but won't be part of
+          the final game.  Going need to have math
+          functions. . floor/ceil are discrete math functions not
+          taught ordinarily in high school. Disassembly of floor
+          function (:alot: of stuff) - but we just want the next
+          lower number on the number line. Can we do it in more
+          efficient way? (SSE2). Currently things are in pixel
+          coordinates. If change resolution, then a lot of math gets
+          messed up (dude moves twice as fast) Should be able to
+          double/halve resolution of tiles without affecting game
+          play.  So choose units for the game. Also, we're
+          essentially upper-left origin (yay graphics) vs math books
+          (lower-left origin) - "upside down problem".  BUT it's nice
+          to have mapping from math and on the screen.  Updating the
+          various maths to use real-world units. (say 1.4 meters -
+          height of child). Also, why need two indices - tile map,
+          and then coordinate in tile map.  (basically a 2-D virtual
+          memory system for the tiles) - 32bit value for x and y,
+          broken into chunks.  Bottom 4 bits (16) and top 28 bits are
+          separated. Bottom 4 bits are where in a chunk we are.  and
+          top where in the tile map we are.  Packing the two numbers
+          into 1. Don't think about the screen being displayed. The
+          screen is a view that could view multiple tile maps.
