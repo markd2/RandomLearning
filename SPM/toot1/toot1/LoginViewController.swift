@@ -1,4 +1,5 @@
 import UIKit
+import NavigationMod
 
 class LoginViewController: UIViewController {
     private let passwordTextField = UITextField()

@@ -1,15 +1,15 @@
-import Foundation
 import UIKit
+import NavigationMod
 
-class Coordinator: AbstractCoordinator {
+public class Coordinator: AbstractCoordinator {
     
     var navigationController: UINavigationController?
     
-    func goToHomeScreen() {
+    public func goToHomeScreen() {
         navigationController?.pushViewController(HomeViewController(coordinator: self), animated: true)
     }
     
-    func start() -> UIViewController {
+    public func start() -> UIViewController {
         self.navigationController = UINavigationController(rootViewController: LoginViewController(coordinator: self))
         
         return navigationController!

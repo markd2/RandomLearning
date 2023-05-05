@@ -1,11 +1,5 @@
-//
-//  SceneDelegate.swift
-//  toot1
-//
-//  Created by Mark Dalrymple on 5/5/23.
-//
-
 import UIKit
+import NavigationMod
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
