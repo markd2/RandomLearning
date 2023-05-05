@@ -11,7 +11,6 @@
 		7DDB3E6D2A0562890019ACD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E6C2A0562890019ACD1 /* SceneDelegate.swift */; };
 		7DDB3E742A05628A0019ACD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB3E732A05628A0019ACD1 /* Assets.xcassets */; };
 		7DDB3E772A05628A0019ACD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB3E752A05628A0019ACD1 /* LaunchScreen.storyboard */; };
-		7DDB3E832A056A290019ACD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E822A056A290019ACD1 /* HomeViewController.swift */; };
 		7DDB3E892A056DEB0019ACD1 /* OnboardingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7DDB3E882A056DEB0019ACD1 /* OnboardingKit */; };
 		7DDB3E8B2A0570780019ACD1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E8A2A0570780019ACD1 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
@@ -23,7 +22,6 @@
 		7DDB3E732A05628A0019ACD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DDB3E762A05628A0019ACD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DDB3E782A05628A0019ACD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7DDB3E822A056A290019ACD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7DDB3E862A056CA50019ACD1 /* OnboardingKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OnboardingKit; sourceTree = "<group>"; };
 		7DDB3E8A2A0570780019ACD1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +64,6 @@
 				7DDB3E732A05628A0019ACD1 /* Assets.xcassets */,
 				7DDB3E752A05628A0019ACD1 /* LaunchScreen.storyboard */,
 				7DDB3E782A05628A0019ACD1 /* Info.plist */,
-				7DDB3E822A056A290019ACD1 /* HomeViewController.swift */,
 				7DDB3E8A2A0570780019ACD1 /* Coordinator.swift */,
 			);
 			path = toot1;
@@ -152,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DDB3E832A056A290019ACD1 /* HomeViewController.swift in Sources */,
 				7DDB3E8B2A0570780019ACD1 /* Coordinator.swift in Sources */,
 				7DDB3E6B2A0562890019ACD1 /* AppDelegate.swift in Sources */,
 				7DDB3E6D2A0562890019ACD1 /* SceneDelegate.swift in Sources */,

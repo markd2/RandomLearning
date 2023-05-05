@@ -1,6 +1,7 @@
 import UIKit
 import NavigationMod
 import LoginMod
+import HomeMod
 
 public class Coordinator: AbstractCoordinator {
     

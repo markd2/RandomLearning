@@ -11,7 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "OnboardingKit",
-            targets: ["NavigationMod", "LoginMod"])
+            targets: ["NavigationMod", "LoginMod", "HomeMod"])
     ],
     dependencies: [],
     targets: [
@@ -27,6 +27,13 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "LoginModTests",
-            dependencies: ["LoginMod"])
+            dependencies: ["LoginMod"]),
+
+        .target(
+            name: "HomeMod",
+            dependencies: []),
+        .testTarget(
+            name: "HomeModTests",
+            dependencies: ["HomeMod"])
     ]
 )

@@ -16,11 +16,15 @@ Articles from random googling:
         done     platforms: [.iOS(.v15_0)],
       - "don't worry about error on missing AbstractCoordinator" - did not get that.
       - "delete the storyboard reference as shown below", but there is no below that shows it.
+      - no link for the swift book mentioned (Mastering Swift Package Manager - 2021)
+        - https://link.springer.com/book/10.1007/978-1-4842-7049-3
+        - https://learning.oreilly.com/library/view/mastering-swift-package/9781484270493/
 
 
 ## SPM DSL TLA
 
-`import PackageDescription`
+* https://docs.swift.org/package-manager/PackageDescription/index.html
+  - `import PackageDescription`
 
 * Package
   - name
