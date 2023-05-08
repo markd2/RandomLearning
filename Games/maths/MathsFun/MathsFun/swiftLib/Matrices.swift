@@ -1,7 +1,7 @@
 import Foundation
 
 struct Mat2: Equatable {
-    let asArray: [Double]
+    private(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }
@@ -43,11 +43,17 @@ struct Mat2: Equatable {
         }
         return Mat2(contents)
     }
+
+    static func *(lhs: Mat2, rhs: Double) -> Mat2 {
+        var result = lhs
+        result.asArray = result.asArray.map { $0 * rhs }
+        return result
+    }
 }
 
 
 struct Mat3 {
-    let asArray: [Double]
+    private(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }
@@ -105,10 +111,16 @@ struct Mat3 {
         }
         return Mat3(contents)
     }
+
+    static func *(lhs: Mat3, rhs: Double) -> Mat3 {
+        var result = lhs
+        result.asArray = result.asArray.map { $0 * rhs }
+        return result
+    }
 }
 
 struct Mat4 {
-    let asArray: [Double]
+    private(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }
@@ -188,6 +200,13 @@ struct Mat4 {
         }
         return Mat4(contents)
     }
+
+    static func *(lhs: Mat4, rhs: Double) -> Mat4 {
+        var result = lhs
+        result.asArray = result.asArray.map { $0 * rhs }
+        return result
+    }
+
 }
 
 
