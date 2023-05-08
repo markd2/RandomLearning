@@ -25,7 +25,23 @@ struct Mat2: Equatable {
         for i in 0 ..< 4 {
             stuff.append(contents[i])
         }
-        self.asArray = stuff
+        self.init(stuff)
+    }
+
+    init(_ contents: [Double]) {
+        self.asArray = contents
+    }
+
+    func transposed() -> Mat2 {
+        let srcRows = 2
+        let srcCols = 2
+        var contents = self.asArray
+        for i in 0 ..< srcRows * srcCols {
+            let row = i / srcRows
+            let col = i % srcRows
+            contents[i] = asArray[srcCols * col + row]
+        }
+        return Mat2(contents)
     }
 }
 

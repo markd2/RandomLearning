@@ -23,6 +23,10 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(m2._21, 3)
         XCTAssertEqual(m2._22, 4)
         XCTAssertEqual(m2.asArray, [1, 2, 3, 4])
+
+        let contents: [Double] = [5, 6, 7, 8]
+        let m3 = Mat2(contents)
+        XCTAssertEqual(m3.asArray, contents)
     }
 
     func testMat3Construction() throws {
@@ -100,5 +104,15 @@ final class MatricesTest: XCTestCase {
                                     5, 6, 7, 8, 
                                     9, 10, 11, 12,
                                     13, 14, 15, 16])
+    }
+
+    func testMat2Transpose() {
+        let m = Mat2(1, 2, 3, 4)
+        let t = m.transposed()
+
+        XCTAssertEqual(t._11, 1)
+        XCTAssertEqual(t._12, 3)
+        XCTAssertEqual(t._21, 2)
+        XCTAssertEqual(t._22, 4)
     }
 }
