@@ -11,11 +11,12 @@ final class MatricesTest: XCTestCase {
 
     func testMat2Construction() throws {
         let m = Mat2()
-        XCTAssertEqual(m._11, 0)
+        XCTAssertEqual(m._11, 1)
         XCTAssertEqual(m._12, 0)
         XCTAssertEqual(m._21, 0)
-        XCTAssertEqual(m._22, 0)
-        XCTAssertEqual(m.asArray, [0, 0, 0, 0])
+        XCTAssertEqual(m._22, 1)
+        XCTAssertEqual(m.asArray, [1, 0, 
+                                   0, 1])
 
         let m2 = Mat2(1, 2, 3, 4)
         XCTAssertEqual(m2._11, 1)
@@ -31,16 +32,18 @@ final class MatricesTest: XCTestCase {
 
     func testMat3Construction() throws {
         let m = Mat3()
-        XCTAssertEqual(m._11, 0)
+        XCTAssertEqual(m._11, 1)
         XCTAssertEqual(m._12, 0)
         XCTAssertEqual(m._13, 0)
         XCTAssertEqual(m._21, 0)
-        XCTAssertEqual(m._22, 0)
+        XCTAssertEqual(m._22, 1)
         XCTAssertEqual(m._23, 0)
         XCTAssertEqual(m._31, 0)
         XCTAssertEqual(m._32, 0)
-        XCTAssertEqual(m._33, 0)
-        XCTAssertEqual(m.asArray, [0, 0, 0, 0, 0, 0, 0, 0, 0])
+        XCTAssertEqual(m._33, 1)
+        XCTAssertEqual(m.asArray, [1, 0, 0,
+                                   0, 1, 0,
+                                   0, 0, 1])
 
 
         let m2 = Mat3(1, 2, 3,
@@ -60,26 +63,26 @@ final class MatricesTest: XCTestCase {
 
     func testMat4Construction() throws {
         let m = Mat4()
-        XCTAssertEqual(m._11, 0)
+        XCTAssertEqual(m._11, 1)
         XCTAssertEqual(m._12, 0)
         XCTAssertEqual(m._13, 0)
         XCTAssertEqual(m._14, 0)
         XCTAssertEqual(m._21, 0)
-        XCTAssertEqual(m._22, 0)
+        XCTAssertEqual(m._22, 1)
         XCTAssertEqual(m._23, 0)
         XCTAssertEqual(m._24, 0)
         XCTAssertEqual(m._31, 0)
         XCTAssertEqual(m._32, 0)
-        XCTAssertEqual(m._33, 0)
+        XCTAssertEqual(m._33, 1)
         XCTAssertEqual(m._34, 0)
         XCTAssertEqual(m._41, 0)
         XCTAssertEqual(m._42, 0)
         XCTAssertEqual(m._43, 0)
-        XCTAssertEqual(m._44, 0)
-        XCTAssertEqual(m.asArray, [0, 0, 0, 0, 
-                                   0, 0, 0, 0,
-                                   0, 0, 0, 0,
-                                   0, 0, 0, 0])
+        XCTAssertEqual(m._44, 1)
+        XCTAssertEqual(m.asArray, [1, 0, 0, 0, 
+                                   0, 1, 0, 0,
+                                   0, 0, 1, 0,
+                                   0, 0, 0, 1])
         let m2 = Mat4(1, 2, 3, 4,
                       5, 6, 7, 8,
                       9, 10, 11, 12,
@@ -173,6 +176,49 @@ final class MatricesTest: XCTestCase {
                                   9, 10, 11, 12,
                                   13, 14, 15, 16]
         XCTAssertEqual(s.asArray, expected)
+    }
+
+    // ----------
+    func testMat2Multiplication() {
+        let m1 = Mat2(1, 2, 3, 4)
+        let m2 = Mat2(5, 6, 7, 8)
+        let expected: [Double] = [19, 22,
+                                  43, 50]
+        let p = m1 * m2
+        XCTAssertEqual(p.asArray, expected)
+    }
+
+    func testMat3Multiplication() {
+        let m1 = Mat3(1, 2, 3,
+                      4, 5, 6,
+                      7, 8, 9)
+        let m2 = Mat3(10, 11, 12,
+                      13, 14, 15,
+                      16, 17, 18)
+        let expected: [Double] = [84, 90, 96,
+                                  201, 216, 231,
+                                  318, 342, 366]
+                                  
+        let p = m1 * m2
+        XCTAssertEqual(p.asArray, expected)
+    }
+
+    func testMat4Multiplication() {
+        let m1 = Mat4(1, 2, 3, 4,
+                      5, 6, 7, 8,
+                      9, 10, 11, 12,
+                      13, 14, 15, 16)
+        let m2 = Mat4(17, 18, 19, 20,
+                      21, 22, 23, 24,
+                      25, 26, 27, 28,
+                      29, 30, 31, 32)
+        let expected: [Double] = [250, 260, 270, 280,
+                                  618, 644, 670, 696,
+                                  986, 1028, 1070, 1112,
+                                  1354, 1412, 1470, 1528]
+                                  
+        let p = m1 * m2
+        XCTAssertEqual(p.asArray, expected)
     }
 
 }

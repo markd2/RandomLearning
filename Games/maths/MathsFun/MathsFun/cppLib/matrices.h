@@ -12,6 +12,19 @@ typedef struct mat2 {
         float asArray[4];
     };
 
+    inline mat2() {
+        _11 = _22 = 1.0f;
+        _12 = _21 = 0.0f;
+    }
+
+    inline mat2(float f11, float f12,
+                float f21, float f22) {
+        _11 = f11;
+        _12 = f12;
+        _21 = f21;
+        _22 = f22;
+    }
+
     inline float *operator[](int i) {
         return &(asArray[i * 2]);
     }
@@ -27,6 +40,28 @@ typedef struct mat3 {
         };
         float asArray[9];
     };
+
+    inline mat3() {
+        _11 = _22 = _33 = 1.0;
+        _12 = _13 = _21 = 0.0;
+        _23 = _31 = _32 = 0.0;
+    }
+
+    inline mat3(float f11, float f12, float f13,
+                float f21, float f22, float f23,
+                float f31, float f32, float f33) {
+        _11 = f11;
+        _12 = f12;
+        _13 = f13;
+
+        _21 = f21;
+        _22 = f22;
+        _23 = f23;
+
+        _31 = f31;
+        _32 = f32;
+        _33 = f33;
+    }
 
     inline float *operator[](int i) {
         return &(asArray[i * 3]);
@@ -44,6 +79,39 @@ typedef struct mat4 {
         };
         float asArray[16];
     };
+
+    inline mat4() {
+        _11 = _22 = _33 = _44 = 1.0;
+        _12 = _13 = _14 = _21 = 0.0;
+        _23 = _24 = _31 = _32 = 0.0;
+        _34 = _41 = _42 = _43 = 0.0;
+    }
+
+    inline mat4(float f11, float f12, float f13, float f14,
+                float f21, float f22, float f23, float f24,
+                float f31, float f32, float f33, float f34,
+                float f41, float f42, float f43, float f44) {
+                
+        _11 = f11;
+        _12 = f12;
+        _13 = f13;
+        _14 = f14;
+
+        _21 = f21;
+        _22 = f22;
+        _23 = f23;
+        _24 = f24;
+
+        _31 = f31;
+        _32 = f32;
+        _33 = f33;
+        _34 = f34;
+
+        _41 = f41;
+        _42 = f42;
+        _43 = f43;
+        _44 = f44;
+    }
 
     inline float *operator[](int i) {
         return &(asArray[i * 4]);

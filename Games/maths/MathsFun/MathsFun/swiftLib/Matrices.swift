@@ -1,5 +1,23 @@
 import Foundation
 
+private func multiply(matA: [Double], aRows: Int, aCols: Int,
+                      matB: [Double], bRows: Int, bCols: Int) -> [Double] {
+    if (aCols != bRows) { return [] }
+    
+    var out = [Double](repeating: 0.0, count: aRows * bCols)
+    for i in 0 ..< aRows {
+        for j in 0 ..< bCols {
+            out[bCols * i + j] = 0.0;
+            for k in 0 ..< bRows {
+                let a = aCols * i + k;
+                let b = bCols * k + j;
+                out[bCols * i + j] += matA[a] * matB[b];
+            }
+        }
+    }
+    return out
+}
+
 struct Mat2: Equatable {
     private(set) var asArray: [Double]
     var _11: Double {
@@ -16,8 +34,8 @@ struct Mat2: Equatable {
     }
 
     init() {
-        self.asArray = [0, 0,
-                        0, 0]
+        self.asArray = [1, 0,
+                        0, 1]
     }
     
     init(_ contents: Double...) {
@@ -48,6 +66,13 @@ struct Mat2: Equatable {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
         return result
+    }
+    
+    static func *(lhs: Mat2, rhs: Mat2) -> Mat2 {
+        let guts = multiply(matA: lhs.asArray, aRows: 2, aCols: 2,
+                            matB: rhs.asArray, bRows: 2, bCols: 2)
+        let m = Mat2(guts)
+        return m
     }
 }
 
@@ -83,9 +108,9 @@ struct Mat3 {
     }
 
     init() {
-        self.asArray = [0, 0, 0, 
-                        0, 0, 0, 
-                        0, 0, 0]
+        self.asArray = [1, 0, 0, 
+                        0, 1, 0, 
+                        0, 0, 1]
     }
     
     init(_ contents: Double...) {
@@ -116,6 +141,13 @@ struct Mat3 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
         return result
+    }
+
+    static func *(lhs: Mat3, rhs: Mat3) -> Mat3 {
+        let guts = multiply(matA: lhs.asArray, aRows: 3, aCols: 3,
+                            matB: rhs.asArray, bRows: 3, bCols: 3)
+        let m = Mat3(guts)
+        return m
     }
 }
 
@@ -171,10 +203,10 @@ struct Mat4 {
     }
 
     init() {
-        self.asArray = [0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0]
+        self.asArray = [1, 0, 0, 0,
+                        0, 1, 0, 0,
+                        0, 0, 1, 0,
+                        0, 0, 0, 1]
     }
     
     init(_ contents: Double...) {
@@ -207,6 +239,12 @@ struct Mat4 {
         return result
     }
 
+    static func *(lhs: Mat4, rhs: Mat4) -> Mat4 {
+        let guts = multiply(matA: lhs.asArray, aRows: 4, aCols: 4,
+                            matB: rhs.asArray, bRows: 4, bCols: 4)
+        let m = Mat4(guts)
+        return m
+    }
 }
 
 
