@@ -56,4 +56,15 @@ mat2 Transpose(const mat2 &matrix);
 mat3 Transpose(const mat3 &matrix);
 mat4 Transpose(const mat4 &matrix);
 
+mat2 operator *(const mat2 &matrix, float scalar);
+mat3 operator *(const mat3 &matrix, float scalar);
+mat4 operator *(const mat4 &matrix, float scalar);
+
+bool Multiply(float *out, 
+              const float *matA, int aRows, int aCols,
+              const float *matB, int bRows, int bCols);
+mat2 operator *(const mat2 &matA, const mat2 &matB);
+mat3 operator *(const mat3 &matA, const mat3 &matB);
+mat4 operator *(const mat4 &matA, const mat4 &matB);
+
 #endif // MATH_MATRICES_H
