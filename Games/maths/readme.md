@@ -59,13 +59,19 @@ given as a source of follow-up info(e)
   - used for solving systems of linear equations
   - but for this stuff, use them for finding the inverse of a matrix
     - like, is it invertable at all
+    - determinant of zero means not invertable
   - scalar value, `|M|`
   - determinant is the same as the determinant of the transpose
   - subtract the product of the diagonals.
 
+* Minor
+  - the determinant of a smaller matrix cut from a larger matrix.
+  - matrix of minors by finding the minor for each element of a matrix
+  - for a 3x3 matrix, construct the minor by removing row i and column j, then take the determinant
+  - for a 2x2 matrix, remove row i and j, and the determinatn is the remaining value.
+
 * Inverted
 
-* Minor
 
 
 * Cofactor

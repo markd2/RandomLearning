@@ -19,7 +19,7 @@ private func multiply(matA: [Double], aRows: Int, aCols: Int,
 }
 
 struct Mat2: Equatable {
-    private(set) var asArray: [Double]
+    fileprivate(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }
@@ -78,11 +78,15 @@ struct Mat2: Equatable {
         let m = Mat2(guts)
         return m
     }
-}
+    
+    func minor() -> Mat2 {
+        Mat2(_22, _21, _12, _11)
+    }
+} // Mat2
 
 
 struct Mat3 {
-    private(set) var asArray: [Double]
+    fileprivate(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }
@@ -109,6 +113,17 @@ struct Mat3 {
     }
     var _33: Double {
         asArray[8]
+    }
+
+    /// Call with blah[0, 1] rather than blah[0][1]
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            asArray[row * 3 + column]
+        }
+
+        set {
+            asArray[row * 3 + column] = newValue
+        }
     }
 
     init() {
@@ -141,6 +156,33 @@ struct Mat3 {
         return Mat3(contents)
     }
 
+    func cut(row: Int, column: Int) -> Mat2 {
+        var result = Mat2()
+        var index = 0
+
+        for i in 0 ..< 3 {
+            for j in 0 ..< 3 {
+                guard i != row && j != column else { continue }
+                let target = index
+                index += 1  // index++ lolsob
+                let source = 3 * i + j
+                result.asArray[target] = asArray[source]
+            }
+        }
+        return result
+    }
+
+    func minor() -> Mat3 {
+        var result = Mat3()
+
+        for i in 0 ..< 3 {
+            for j in 0 ..< 3 {
+                result[i, j] = cut(row: i, column: j).determinant
+            }
+        }
+        return result
+    }
+
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -156,7 +198,7 @@ struct Mat3 {
 }
 
 struct Mat4 {
-    private(set) var asArray: [Double]
+    fileprivate(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
     }

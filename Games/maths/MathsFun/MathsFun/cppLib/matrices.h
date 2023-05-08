@@ -137,4 +137,8 @@ mat4 operator *(const mat4 &matA, const mat4 &matB);
 
 float Determinant(const mat2 &matrix);
 
+mat2 Cut(const mat3 &mat, int row, int col);
+mat2 Minor(const mat2 &mat);
+mat3 Minor(const mat3 &mat);
+
 #endif // MATH_MATRICES_H

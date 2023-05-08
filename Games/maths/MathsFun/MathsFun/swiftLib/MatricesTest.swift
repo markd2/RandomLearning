@@ -109,6 +109,13 @@ final class MatricesTest: XCTestCase {
                                     13, 14, 15, 16])
     }
 
+    func testMat3Subscripting() {
+        let m = Mat3(1, 2, 3,
+                     4, 5, 6,
+                     7, 8, 9)
+        XCTAssertEqual(m[1, 0], 4)
+    }
+
     // ----------
 
     func testMat2Transpose() {
@@ -227,5 +234,48 @@ final class MatricesTest: XCTestCase {
         let m = Mat2(1, 2, 3, 4)
         let d = m.determinant
         XCTAssertEqual(d, -2)
+    }
+
+    // ----------
+    
+    func testMat3Cut() {
+        let m = Mat3(1, 2, 3,
+                     4, 5, 6,
+                     7, 8, 9)
+
+        let c1 = m.cut(row: 0, column: 0)
+        let expected1: [Double] = [5, 6,
+                                   8, 9]
+        XCTAssertEqual(c1.asArray, expected1)
+
+        let c2 = m.cut(row: 1, column: 1)
+        let expected2: [Double] = [1, 3,
+                                   7, 9]
+        XCTAssertEqual(c2.asArray, expected2)
+
+        let c3 = m.cut(row: 2, column: 0)
+        let expected3: [Double] = [2, 3,
+                                   5, 6]
+        XCTAssertEqual(c3.asArray, expected3)
+    }
+
+    func testMat2Minor() {
+        let maj = Mat2(1, 2,
+                       3, 4)
+        let expected: [Double] = [4, 3,
+                                  2, 1]
+        let min = maj.minor()
+        XCTAssertEqual(min.asArray, expected)
+    }
+
+    func testMat3Minor() {
+        let maj = Mat3(1, 2, 3,
+                       4, 5, 6,
+                       7, 8, 9)
+        let expected: [Double] = [-3, -6, -3,
+                                  -6, -12, -6,
+                                  -3, -6, -3]
+        let min = maj.minor()
+        XCTAssertEqual(min.asArray, expected)
     }
 }
