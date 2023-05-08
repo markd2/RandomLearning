@@ -87,7 +87,23 @@ struct Mat3 {
         for i in 0 ..< 9 {
             stuff.append(contents[i])
         }
-        self.asArray = stuff
+        self.init(stuff)
+    }
+
+    init(_ contents: [Double]) {
+        self.asArray = contents
+    }
+
+    func transposed() -> Mat3 {
+        let srcRows = 3
+        let srcCols = 3
+        var contents = self.asArray
+        for i in 0 ..< srcRows * srcCols {
+            let row = i / srcRows
+            let col = i % srcRows
+            contents[i] = asArray[srcCols * col + row]
+        }
+        return Mat3(contents)
     }
 }
 
@@ -154,7 +170,23 @@ struct Mat4 {
         for i in 0 ..< 16 {
             stuff.append(contents[i])
         }
-        self.asArray = stuff
+        self.init(stuff)
+    }
+
+    init(_ contents: [Double]) {
+        self.asArray = contents
+    }
+
+    func transposed() -> Mat4 {
+        let srcRows = 4
+        let srcCols = 4
+        var contents = self.asArray
+        for i in 0 ..< srcRows * srcCols {
+            let row = i / srcRows
+            let col = i % srcRows
+            contents[i] = asArray[srcCols * col + row]
+        }
+        return Mat4(contents)
     }
 }
 

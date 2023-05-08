@@ -115,4 +115,29 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(t._21, 2)
         XCTAssertEqual(t._22, 4)
     }
+
+    func testMat3Transpose() {
+        let m = Mat3(1, 2, 3,
+                     4, 5, 6,
+                     7, 8, 9)
+        let expected: [Double] = [1, 4, 7,
+                                  2, 5, 8,
+                                  3, 6, 9]
+        let t = m.transposed()
+        XCTAssertEqual(t.asArray, expected)
+    }
+
+    func testMat4Transpose() {
+        let m = Mat4(1, 2, 3, 4,
+                     5, 6, 7, 8,
+                     9, 10, 11, 12,
+                     13, 14, 15, 16)
+        let expected: [Double] = [1, 5, 9, 13,
+                                  2, 6, 10, 14, 
+                                  3, 7, 11, 15,
+                                  4, 8, 12, 16]
+        let t = m.transposed()
+        XCTAssertEqual(t.asArray, expected)
+    }
+
 }
