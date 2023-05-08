@@ -268,6 +268,15 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(min.asArray, expected)
     }
 
+    func testMat2Cofactor() {
+        let maj = Mat2(1, 2,
+                       3, 4)
+        let expected: [Double] = [4, -3,
+                                  -2, 1]
+        let cof = maj.cofactor()
+        XCTAssertEqual(cof.asArray, expected)
+    }
+
     func testMat3Minor() {
         let maj = Mat3(1, 2, 3,
                        4, 5, 6,
@@ -276,6 +285,17 @@ final class MatricesTest: XCTestCase {
                                   -6, -12, -6,
                                   -3, -6, -3]
         let min = maj.minor()
+        XCTAssertEqual(min.asArray, expected)
+    }
+
+    func testMat3Cofactor() {
+        let maj = Mat3(1, 2, 3,
+                       4, 5, 6,
+                       7, 8, 9)
+        let expected: [Double] = [-3, 6, -3,
+                                  6, -12, 6,
+                                  -3, 6, -3]
+        let min = maj.cofactor()
         XCTAssertEqual(min.asArray, expected)
     }
 }

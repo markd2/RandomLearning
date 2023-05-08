@@ -70,10 +70,10 @@ given as a source of follow-up info(e)
   - for a 3x3 matrix, construct the minor by removing row i and column j, then take the determinant
   - for a 2x2 matrix, remove row i and j, and the determinatn is the remaining value.
 
-* Inverted
-
-
-
 * Cofactor
+  - take the minor of the matrix, then multiply each i,j with -1 raised
+    to the i+j power (basically a +1 / -1 checkerboard pattern)
+
+* Inverted
 
 * Adjugate

@@ -141,4 +141,8 @@ mat2 Cut(const mat3 &mat, int row, int col);
 mat2 Minor(const mat2 &mat);
 mat3 Minor(const mat3 &mat);
 
+void Cofactor(float *out, const float *minor, int rows, int cols);
+mat2 Cofactor(const mat2 &mat);
+mat3 Cofactor(const mat3 &mat);
+
 #endif // MATH_MATRICES_H

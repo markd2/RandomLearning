@@ -139,3 +139,27 @@ mat3 Minor(const mat3 &mat) {
     }
     return result;
 } // Minor mat3
+
+void Cofactor(float *out, const float *minor, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < rows; j++) {
+            int targetIndex = cols * j + i;
+            int sourceIndex = cols * j + i;
+            float sign = powf(-1.0f, i + j);
+            out[targetIndex] = minor[sourceIndex] * sign;
+        }
+    }
+} // Cofactor
+
+mat2 Cofactor(const mat2 &mat) {
+    mat2 result;
+    Cofactor(result.asArray, Minor(mat).asArray, 2, 2);
+    return result;
+} // mat2 Cofactor
+
+mat3 Cofactor(const mat3 &mat) {
+    mat3 result;
+    Cofactor(result.asArray, Minor(mat).asArray, 3, 3);
+    return result;
+} // mat3 Cofactor
+

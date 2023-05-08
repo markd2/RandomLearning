@@ -77,6 +77,21 @@ struct Mat2: Equatable {
         _11 * _22 - _12 * _21
     }
 
+    func minor() -> Mat2 {
+        Mat2(_22, _21, _12, _11)
+    }
+
+    func cofactor() -> Mat2 {
+        var minor = minor()
+        for i in 0 ..< 2 {
+            for j in 0 ..< 2 {
+                minor[i, j] *= pow(-1.0, Double(i + j))
+            }
+        }
+        
+        return minor
+    }
+
     static func *(lhs: Mat2, rhs: Double) -> Mat2 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -90,9 +105,6 @@ struct Mat2: Equatable {
         return m
     }
     
-    func minor() -> Mat2 {
-        Mat2(_22, _21, _12, _11)
-    }
 } // Mat2
 
 
@@ -192,6 +204,17 @@ struct Mat3 {
             }
         }
         return result
+    }
+
+    func cofactor() -> Mat3 {
+        var minor = minor()
+        for i in 0 ..< 3 {
+            for j in 0 ..< 3 {
+                minor[i, j] *= pow(-1.0, Double(i + j))
+            }
+        }
+        
+        return minor
     }
 
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
