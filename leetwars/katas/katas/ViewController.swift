@@ -36,11 +36,41 @@ class ViewController: UIViewController {
         }
     }
 
+    var cancellable: AnyCancellable?
+
     @IBAction func thing2() {
-        textView.text += "splungemuffin"
+        let url = URL(string: "https://swapi.dev/api/vehicles")!
+
+        let urlSession = URLSession.shared
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        cancellable = urlSession
+          .dataTaskPublisher(for: url)
+          .tryMap() { element -> Data in
+              guard let httpResponse = element.response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 else {
+                  throw "Spork"
+              }
+              return element.data
+          }
+          .decode(type: WebVehiclePage.self, decoder: decoder)
+        .tryMap() { page -> [Vehicle] in
+            guard let results = page.results else { throw "no results" }
+            return try results.compactMap(Vehicle.init(webVehicle:))
+        }
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { print("received completion \($0)") },
+              receiveValue: { [self] vehicles in
+                  vehicles.forEach {
+                    textView.text += "\($0)\n\n"
+                  }
+              })
     }
 
 }
+
+extension String: Error {}
 
 struct WebVehicle: Codable {
     let name: String?
