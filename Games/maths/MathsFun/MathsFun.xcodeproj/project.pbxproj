@@ -20,6 +20,8 @@
 		7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A01A29EC7D9D0087F375 /* Vectors.swift */; };
 		7D93A02A29EC85560087F375 /* VectorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A02929EC85560087F375 /* VectorsTest.swift */; };
 		7D93E20F29FEACF800B90BD4 /* matrices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D93E20E29FEACF800B90BD4 /* matrices.cpp */; };
+		7DDB3E8D2A0961550019ACD1 /* MatricesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */; };
+		7DDB3E8F2A09615F0019ACD1 /* Matrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		7D93A02929EC85560087F375 /* VectorsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VectorsTest.swift; path = MathsFun/swiftLib/VectorsTest.swift; sourceTree = SOURCE_ROOT; };
 		7D93E20D29FEACE100B90BD4 /* matrices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = matrices.h; path = cppLib/matrices.h; sourceTree = "<group>"; };
 		7D93E20E29FEACF800B90BD4 /* matrices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matrices.cpp; path = cppLib/matrices.cpp; sourceTree = "<group>"; };
+		7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatricesTest.swift; path = MathsFun/swiftLib/MatricesTest.swift; sourceTree = SOURCE_ROOT; };
+		7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrices.swift; path = swiftLib/Matrices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 			children = (
 				7D93A01A29EC7D9D0087F375 /* Vectors.swift */,
 				7D93A01929EC7D9D0087F375 /* MathsFun-Bridging-Header.h */,
+				7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */,
 			);
 			name = SwiftLib;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				7D93A02929EC85560087F375 /* VectorsTest.swift */,
+				7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */,
 			);
 			path = MathsFunTests;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 				7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */,
 				7D13097029F3662E00EE81B9 /* Reflection.swift in Sources */,
 				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
+				7DDB3E8F2A09615F0019ACD1 /* Matrices.swift in Sources */,
 				7D93E20F29FEACF800B90BD4 /* matrices.cpp in Sources */,
 				7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */,
 				7D93A00629E795490087F375 /* AppDelegate.m in Sources */,
@@ -258,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D93A02A29EC85560087F375 /* VectorsTest.swift in Sources */,
+				7DDB3E8D2A0961550019ACD1 /* MatricesTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
