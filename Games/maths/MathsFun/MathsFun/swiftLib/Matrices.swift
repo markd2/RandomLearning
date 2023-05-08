@@ -50,6 +50,17 @@ struct Mat2: Equatable {
         self.asArray = contents
     }
 
+    /// Call with blah[0, 1] rather than blah[0][1]
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            asArray[row * 2 + column]
+        }
+
+        set {
+            asArray[row * 2 + column] = newValue
+        }
+    }
+
     func transposed() -> Mat2 {
         let srcRows = 2
         let srcCols = 2
@@ -265,6 +276,17 @@ struct Mat4 {
 
     init(_ contents: [Double]) {
         self.asArray = contents
+    }
+
+    /// Call with blah[0, 1] rather than blah[0][1]
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            asArray[row * 4 + column]
+        }
+
+        set {
+            asArray[row * 4 + column] = newValue
+        }
     }
 
     func transposed() -> Mat4 {
