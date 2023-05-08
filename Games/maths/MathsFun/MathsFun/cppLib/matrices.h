@@ -135,4 +135,6 @@ mat2 operator *(const mat2 &matA, const mat2 &matB);
 mat3 operator *(const mat3 &matA, const mat3 &matB);
 mat4 operator *(const mat4 &matA, const mat4 &matB);
 
+float Determinant(const mat2 &matrix);
+
 #endif // MATH_MATRICES_H

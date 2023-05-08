@@ -103,4 +103,8 @@ mat4 operator *(const mat4 &matA, const mat4 &matB) {
 } // * mat4
 
 
+float Determinant(const mat2 &matrix) {
+    return matrix._11 * matrix._22 - matrix._12 * matrix._21;
+} // Determinat
+
 

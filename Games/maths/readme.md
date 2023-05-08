@@ -55,11 +55,18 @@ given as a source of follow-up info(e)
 * Transpose
   - matrix constructed by flipping Mij to Mji
 
+* Determinant
+  - used for solving systems of linear equations
+  - but for this stuff, use them for finding the inverse of a matrix
+    - like, is it invertable at all
+  - scalar value, `|M|`
+  - determinant is the same as the determinant of the transpose
+  - subtract the product of the diagonals.
+
 * Inverted
 
 * Minor
 
-* Determinant
 
 * Cofactor
 

@@ -221,4 +221,11 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(p.asArray, expected)
     }
 
+    // ----------
+    
+    func testMat2Determinant() {
+        let m = Mat2(1, 2, 3, 4)
+        let d = m.determinant
+        XCTAssertEqual(d, -2)
+    }
 }

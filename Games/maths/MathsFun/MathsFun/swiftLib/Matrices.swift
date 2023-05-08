@@ -62,6 +62,10 @@ struct Mat2: Equatable {
         return Mat2(contents)
     }
 
+    var determinant: Double {
+        _11 * _22 - _12 * _21
+    }
+
     static func *(lhs: Mat2, rhs: Double) -> Mat2 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
