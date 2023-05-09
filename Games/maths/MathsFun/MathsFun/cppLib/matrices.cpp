@@ -227,4 +227,25 @@ mat4 Adjugate(const mat4 &mat) {
     return Transpose(Cofactor(mat));
 } // mat4 Adjugate
 
+mat2 Inverse(const mat2 &mat) {
+    // this is really expensive, book recommends unrolling all the things.
+    float det = Determinant(mat);
+    if (CMP(det, 0.0f)) { return mat2(); }
+    return Adjugate(mat) * (1.0f / det);
+} // mat2 Inverse
+
+mat3 Inverse(const mat3 &mat) {
+    // this is really expensive, book recommends unrolling all the things.
+    float det = Determinant(mat);
+    if (CMP(det, 0.0f)) { return mat3(); }
+    return Adjugate(mat) * (1.0f / det);
+} // mat3 Inverse
+
+mat4 Inverse(const mat4 &mat) {
+    // this is really expensive, book recommends unrolling all the things.
+    float det = Determinant(mat);
+    if (CMP(det, 0.0f)) { return mat4(); }
+    return Adjugate(mat) * (1.0f / det);
+} // mat4 Inverse
+
 

@@ -83,4 +83,9 @@ given as a source of follow-up info(e)
   - (I think they're just trolling us on these names)
 
 * Inverted
+  - the inverse (M-1), when multiplied to the original matrix, yields the
+    identity matrix.
+  - only square matrices with non-zero determinants can be inverted.
+  - to calcuate, 1/|M| and then use that to scalar multiply the adjugate
+
 

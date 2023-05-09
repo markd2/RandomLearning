@@ -408,4 +408,62 @@ final class MatricesTest: XCTestCase {
                                   -6.0, 24.0, -32.0, -13.0]
         XCTAssertEqual(m.adjugate().asArray, expected)
     }
+
+    func testMat2Inverse() {
+        let m = Mat2(1, 2,
+                     3, 4)
+        let expected: [Double] = [-2.0, 1.0,
+                                  1.5, -0.5]
+        let inverse = m.inverse()
+        XCTAssertEqual(inverse.asArray, expected)
+
+        // and make sure the inverse makes the identity when multiplied
+        let identity = Mat2()
+        XCTAssertEqual(m * inverse, identity)
+    }
+
+    func testMat3Inverse() {
+        let m = Mat3(3, 4, 1,
+                     0, 2, 10,
+                     1, 3, 5)
+        let expected: [Double] = [0.909, 0.773, -1.728,
+                                  -0.455, -0.636, 1.364, 
+                                  0.091, 0.227, -0.273]
+
+        let inverse = m.inverse()
+        for (a, b) in zip(inverse.asArray, expected) {
+            XCTAssertEqual(a, b, accuracy: 0.001)
+        }
+
+        // and make sure the inverse makes the identity when multiplied
+        let identity = Mat3()
+        let i2 = m * inverse
+
+        for (a, b) in zip(i2.asArray, identity.asArray) {
+            XCTAssertEqual(a, b, accuracy: 0.001)
+        }
+    }
+
+    func testMat4Inverse() {
+        let m = Mat4(1, 4, 2, 3,
+                     0, 1, 4, 4,
+                     -1, 0, 1, 0,
+                     2, 0, 4, 1)
+        let expected: [Double] = [0.015, -0.062, -0.585, 0.2, 
+                                  0.308, -0.231, 0.308, 0.0,
+                                  0.0154, -0.062, 0.415, 0.2,
+                                  -0.092, 0.369, -0.492, -0.2]
+        let inverse = m.inverse()
+        for (a, b) in zip(inverse.asArray, expected) {
+            XCTAssertEqual(a, b, accuracy: 0.001)
+        }
+
+        // and make sure the inverse makes the identity when multiplied
+        let identity = Mat4()
+        let i2 = m * inverse
+
+        for (a, b) in zip(i2.asArray, identity.asArray) {
+            XCTAssertEqual(a, b, accuracy: 0.001)
+        }
+    }
 }

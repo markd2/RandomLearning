@@ -155,4 +155,9 @@ mat2 Adjugate(const mat2 &mat);
 mat3 Adjugate(const mat3 &mat);
 mat4 Adjugate(const mat4 &mat);
 
+mat2 Inverse(const mat2 &mat);
+mat3 Inverse(const mat3 &mat);
+mat4 Inverse(const mat4 &mat);
+
+
 #endif // MATH_MATRICES_H

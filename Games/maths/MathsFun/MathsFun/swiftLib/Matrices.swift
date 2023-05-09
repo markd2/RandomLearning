@@ -96,6 +96,14 @@ struct Mat2: Equatable {
         cofactor().transposed()
     }
 
+    func inverse() -> Mat2 {
+        let det = determinant
+        guard !absRelFPCompare(det, 0) else {
+            return Mat2()
+        }
+        return adjugate() * (1.0 / det)
+    }
+
     static func *(lhs: Mat2, rhs: Double) -> Mat2 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -112,7 +120,7 @@ struct Mat2: Equatable {
 } // Mat2
 
 
-struct Mat3 {
+struct Mat3: Equatable {
     fileprivate(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
@@ -237,6 +245,14 @@ struct Mat3 {
         cofactor().transposed()
     }
 
+    func inverse() -> Mat3 {
+        let det = determinant
+        guard !absRelFPCompare(det, 0) else {
+            return Mat3()
+        }
+        return adjugate() * (1.0 / det)
+    }
+
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -249,9 +265,10 @@ struct Mat3 {
         let m = Mat3(guts)
         return m
     }
-}
 
-struct Mat4 {
+} // Mat3
+
+struct Mat4: Equatable {
     fileprivate(set) var asArray: [Double]
     var _11: Double {
         asArray[0]
@@ -397,6 +414,14 @@ struct Mat4 {
         cofactor().transposed()
     }
 
+    func inverse() -> Mat4 {
+        let det = determinant
+        guard !absRelFPCompare(det, 0) else {
+            return Mat4()
+        }
+        return adjugate() * (1.0 / det)
+    }
+
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -409,5 +434,5 @@ struct Mat4 {
         let m = Mat4(guts)
         return m
     }
-}
+} // Mat4
 
