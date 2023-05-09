@@ -146,4 +146,9 @@ void Cofactor(float *out, const float *minor, int rows, int cols);
 mat2 Cofactor(const mat2 &mat);
 mat3 Cofactor(const mat3 &mat);
 
+mat3 Cut(const mat4 &mat, int row, int col);
+mat4 Minor(const mat4 &mat);
+mat4 Cofactor(const mat4 &mat);
+float Determinant(const mat4 &mat);
+
 #endif // MATH_MATRICES_H

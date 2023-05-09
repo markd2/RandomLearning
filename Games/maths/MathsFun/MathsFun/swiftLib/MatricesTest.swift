@@ -259,6 +259,31 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(c3.asArray, expected3)
     }
 
+    func testMat4Cut() {
+        let m = Mat4(1, 2, 3, 4,
+                     5, 6, 7, 8,
+                     9, 10, 11, 12,
+                     13, 14, 15, 16)
+
+        let c1 = m.cut(row: 0, column: 0)
+        let expected1: [Double] = [6, 7, 8,
+                                   10, 11, 12,
+                                   14, 15, 16]
+        XCTAssertEqual(c1.asArray, expected1)
+
+        let c2 = m.cut(row: 1, column: 1)
+        let expected2: [Double] = [1, 3, 4,
+                                   9, 11, 12,
+                                   13, 15, 16]
+        XCTAssertEqual(c2.asArray, expected2)
+
+        let c3 = m.cut(row: 2, column: 3)
+        let expected3: [Double] = [1, 2, 3,
+                                   5, 6, 7,
+                                   13, 14, 15]
+        XCTAssertEqual(c3.asArray, expected3)
+    }
+
     func testMat2Minor() {
         let maj = Mat2(1, 2,
                        3, 4)
@@ -299,11 +324,58 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(min.asArray, expected)
     }
 
+    func testMat4Minor() {
+        // the usual ascending numbers matrix is non-invertable, so all
+        // of the 3x3 determinants will be zero, leading to uninteresting
+        // tests
+        let maj = Mat4(1, 4, 2, 3,
+                       0, 1, 4, 4,
+                       -1, 0, 1, 0,
+                       2, 0, 4, 1)
+
+        let expected: [Double] = [1.0, -20.0, 1.0, 6.0,
+                                  4.0, -15.0, 4.0, 24.0,
+                                  -38.0, -20.0, 27.0, 32.0,
+                                  -13.0, 0.0, -13.0, -13.0]
+
+        let min = maj.minor()
+        XCTAssertEqual(min.asArray, expected)
+    }
+
+    func testMat4Cofactor() {
+        let maj = Mat4(1, 4, 2, 3,
+                       0, 1, 4, 4,
+                       -1, 0, 1, 0,
+                       2, 0, 4, 1)
+        let expected: [Double] = [1.0, 20.0, 1.0, -6.0,
+                                  -4.0, -15.0, -4.0, 24.0,
+                                  -38.0, 20.0, 27.0, -32.0,
+                                  13.0, 0.0, 13.0, -13.0]
+        let cof = maj.cofactor()
+        XCTAssertEqual(cof.asArray, expected)
+    }
+
     func testMat3Determinant() {
         let m = Mat3(1, 2, 3,
                      4, 5, 6,
                      7, 8, 9)
         let determinant = m.determinant
         XCTAssertEqual(determinant, 0)
+    }
+
+    func testMat4Determinant() {
+        let m1 = Mat4(1, 2, 3, 4,
+                      5, 6, 7, 8,
+                      9, 10, 11, 12,
+                      13, 14, 15, 16)
+        let d1 = m1.determinant
+        XCTAssertEqual(d1, 0)
+
+        let m2 = Mat4(4, 3, 2, 2,
+                      0, 1, -3, 3,
+                      0, -1, 3, 3,
+                      0, 3, 1, 1)
+        let d2 = m2.determinant
+        XCTAssertEqual(d2, -240)
     }
 }

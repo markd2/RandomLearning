@@ -336,6 +336,55 @@ struct Mat4 {
         return Mat4(contents)
     }
 
+    func cut(row: Int, column: Int) -> Mat3 {
+        var result = Mat3()
+        var index = 0
+
+        for i in 0 ..< 4 {
+            for j in 0 ..< 4 {
+                guard i != row && j != column else { continue }
+                let target = index
+                index += 1  // index++ lolsob
+                let source = 4 * i + j
+                result.asArray[target] = asArray[source]
+            }
+        }
+        return result
+    }
+
+    func minor() -> Mat4 {
+        var result = Mat4()
+        
+        for i in 0 ..< 4 {
+            for j in 0 ..< 4 {
+                result[i, j] = cut(row: i, column: j).determinant
+            }
+        }
+        return result
+    }
+
+    func cofactor() -> Mat4 {
+        var minor = minor()
+        for i in 0 ..< 4 {
+            for j in 0 ..< 4 {
+                minor[i, j] *= pow(-1.0, Double(i + j))
+            }
+        }
+        return minor
+    }
+
+    var determinant: Double {
+        var result: Double = 0.0
+        let cofactor = cofactor()
+        for j in 0 ..< 4 {
+            // the 0 is first row arbitrary. change to any to any other row
+            // if you wish.
+            let index = 4 * 0 + j  
+            result += asArray[index] * cofactor[0, j]
+        }
+        return result
+    }
+
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -349,5 +398,4 @@ struct Mat4 {
         return m
     }
 }
-
 
