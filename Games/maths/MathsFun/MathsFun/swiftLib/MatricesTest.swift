@@ -298,4 +298,12 @@ final class MatricesTest: XCTestCase {
         let min = maj.cofactor()
         XCTAssertEqual(min.asArray, expected)
     }
+
+    func testMat3Determinant() {
+        let m = Mat3(1, 2, 3,
+                     4, 5, 6,
+                     7, 8, 9)
+        let determinant = m.determinant
+        XCTAssertEqual(determinant, 0)
+    }
 }

@@ -136,6 +136,7 @@ mat3 operator *(const mat3 &matA, const mat3 &matB);
 mat4 operator *(const mat4 &matA, const mat4 &matB);
 
 float Determinant(const mat2 &matrix);
+float Determinant(const mat3 &matrix);
 
 mat2 Cut(const mat3 &mat, int row, int col);
 mat2 Minor(const mat2 &mat);

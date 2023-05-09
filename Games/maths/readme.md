@@ -63,6 +63,9 @@ given as a source of follow-up info(e)
   - scalar value, `|M|`
   - determinant is the same as the determinant of the transpose
   - subtract the product of the diagonals.
+  - Laplace Expansion:
+     - loop through the first row, multiply each elemet with the respective element of the cofactor matrix.
+     - first row is arbitary, can do this with any row of the matrix(!)
 
 * Minor
   - the determinant of a smaller matrix cut from a larger matrix.

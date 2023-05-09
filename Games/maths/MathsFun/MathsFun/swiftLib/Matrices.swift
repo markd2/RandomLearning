@@ -195,6 +195,18 @@ struct Mat3 {
         return result
     }
 
+    var determinant: Double {
+        var result: Double = 0.0
+        let cofactor = cofactor()
+        for j in 0 ..< 3 {
+            // the 0 is first row arbitrary. change to any to any other row
+            // if you wish.
+            let index = 3 * 0 + j  
+            result += asArray[index] * cofactor[0, j]
+        }
+        return result
+    }
+
     func minor() -> Mat3 {
         var result = Mat3()
 

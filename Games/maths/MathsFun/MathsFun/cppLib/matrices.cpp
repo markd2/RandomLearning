@@ -105,7 +105,18 @@ mat4 operator *(const mat4 &matA, const mat4 &matB) {
 
 float Determinant(const mat2 &matrix) {
     return matrix._11 * matrix._22 - matrix._12 * matrix._21;
-} // Determinat
+} // Determinat mat2
+
+float Determinant(const mat3 &matrix) {
+    float result = 0.0f;
+    mat3 cofactor = Cofactor(matrix);
+    for (int j = 0; j < 3; j++) {
+         int index = 3 * 0 + j;
+         result += matrix.asArray[index] * cofactor[0][j];
+    }
+    return result;
+} // Determinant mat3
+
 
 mat2 Cut(const mat3 &mat, int row, int col) {
     mat2 result;
