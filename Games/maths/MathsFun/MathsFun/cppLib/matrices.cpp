@@ -215,3 +215,16 @@ float Determinant(const mat4 &mat) {
     return result;
 } // mat4 Determinant
 
+mat2 Adjugate(const mat2 &mat) {
+    return Transpose(Cofactor(mat));
+} // mat2 Adjugate
+
+mat3 Adjugate(const mat3 &mat) {
+    return Transpose(Cofactor(mat));
+} // mat3 Adjugate
+
+mat4 Adjugate(const mat4 &mat) {
+    return Transpose(Cofactor(mat));
+} // mat4 Adjugate
+
+

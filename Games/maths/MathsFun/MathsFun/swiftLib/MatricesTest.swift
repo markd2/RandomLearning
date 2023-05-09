@@ -378,4 +378,34 @@ final class MatricesTest: XCTestCase {
         let d2 = m2.determinant
         XCTAssertEqual(d2, -240)
     }
+
+    func testMat2Adjugate() {
+        let m = Mat2(1, 2,
+                     3, 4)
+        let expected: [Double] = [4, -2,
+                                  -3, 1]
+        XCTAssertEqual(m.adjugate().asArray, expected)
+    }
+
+    func testMat3Adjugate() {
+        let m = Mat3(3, 4, 1,
+                     0, 2, 10,
+                     1, 3, 5)
+        let expected: [Double] = [-20.0, -17.0, 38.0,
+                                  10.0, 14.0, -30.0,
+                                  -2.0, -5.0, 6.0]
+        XCTAssertEqual(m.adjugate().asArray, expected)
+    }
+
+    func testMat4Adjugate() {
+        let m = Mat4(1, 4, 2, 3,
+                     0, 1, 4, 4,
+                     -1, 0, 1, 0,
+                     2, 0, 4, 1)
+        let expected: [Double] = [1.0, -4.0, -38.0, 13.0, 
+                                  20.0, -15.0, 20.0, 0.0, 
+                                  1.0, -4.0, 27.0, 13.0, 
+                                  -6.0, 24.0, -32.0, -13.0]
+        XCTAssertEqual(m.adjugate().asArray, expected)
+    }
 }

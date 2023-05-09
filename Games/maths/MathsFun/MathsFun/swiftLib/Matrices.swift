@@ -92,6 +92,10 @@ struct Mat2: Equatable {
         return minor
     }
 
+    func adjugate() -> Mat2 {
+        cofactor().transposed()
+    }
+
     static func *(lhs: Mat2, rhs: Double) -> Mat2 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -227,6 +231,10 @@ struct Mat3 {
         }
         
         return minor
+    }
+
+    func adjugate() -> Mat3 {
+        cofactor().transposed()
     }
 
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
@@ -383,6 +391,10 @@ struct Mat4 {
             result += asArray[index] * cofactor[0, j]
         }
         return result
+    }
+
+    func adjugate() -> Mat4 {
+        cofactor().transposed()
     }
 
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {

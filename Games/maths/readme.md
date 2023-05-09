@@ -77,6 +77,10 @@ given as a source of follow-up info(e)
   - take the minor of the matrix, then multiply each i,j with -1 raised
     to the i+j power (basically a +1 / -1 checkerboard pattern)
 
+* Adjugate
+  - the transpose of the cofactor matrix
+  - a.k.a. adjoint
+  - (I think they're just trolling us on these names)
+
 * Inverted
 
-* Adjugate
