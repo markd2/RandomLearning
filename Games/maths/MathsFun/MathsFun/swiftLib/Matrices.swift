@@ -279,6 +279,29 @@ struct Mat3: Equatable {
                     0.0, 0.0, 1.0, 0.0)
     }
 
+    static func axisAngleRotation(_ axis: Vec3, _ angleDegrees: Double) -> Mat3 {
+        let radians = angleDegrees.radians
+
+        let c = cos(radians)
+        let s = sin(radians)
+        let t = 1.0 - c // 1.0 - cos(radians)
+
+        var x = axis.x
+        var y = axis.y
+        var z = axis.z
+
+        if !absRelFPCompare(axis.magnitudeSquared, 1.0) {
+            let scale = 1.0 / axis.magnitude
+            x *= scale
+            y *= scale
+            z *= scale
+        }
+
+        return Mat3(t * x * x + c,     t * x * y + s * z,  t * x * z - s * y,
+                    t * x * y - s * z, t * y * y + c,      t * y * z + s * x,
+                    t * x * z + s * y, t * y * z - s * x,  t * z * z + c)
+    }
+    
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -429,6 +452,29 @@ struct Mat4: Equatable {
                     0.0, 0.0, 0.0, 1.0) 
     }
 
+    static func axisAngleRotation(_ axis: Vec3, _ angleDegrees: Double) -> Mat4 {
+        let radians = angleDegrees.radians
+
+        let c = cos(radians)
+        let s = sin(radians)
+        let t = 1.0 - c // 1.0 - cos(radians)
+
+        var x = axis.x
+        var y = axis.y
+        var z = axis.z
+
+        if !absRelFPCompare(axis.magnitudeSquared, 1.0) {
+            let scale = 1.0 / axis.magnitude
+            x *= scale
+            y *= scale
+            z *= scale
+        }
+
+        return Mat4(t * x * x + c,     t * x * y + s * z,  t * x * z - s * y,  0.0,
+                    t * x * y - s * z, t * y * y + c,      t * y * z + s * x,  0.0,
+                    t * x * z + s * y, t * y * z - s * x,  t * z * z + c,      0.0,
+                    0.0,              0.0,               0.0,               1.0)
+    }
     
     /// Call with blah[0, 1] rather than blah[0][1]
     subscript(row: Int, column: Int) -> Double {

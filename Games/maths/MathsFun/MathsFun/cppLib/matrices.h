@@ -178,5 +178,7 @@ mat3 YRotation3x3(float angleDegrees);
 mat4 ZRotation(float angleDegrees);
 mat3 ZRotation3x3(float angleDegrees);
 
+mat4 AxisAngle(const vec3 &axis, float angleDegrees);
+mat3 AxisAngle3x3(const vec3 &axis, float angleDegrees);
 
 #endif // MATH_MATRICES_H

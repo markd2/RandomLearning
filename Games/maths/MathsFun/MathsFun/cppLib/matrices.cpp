@@ -347,3 +347,50 @@ mat3 ZRotation3x3(float angleDegrees) {
                 -sinf(radians), cosf(radians), 0.0f,
                 0.0f, 0.0f, 1.0f);
 } // ZRotation3x3
+
+mat4 AxisAngle(const vec3 &axis, float angleDegrees) {
+    float angle = DEG2RAD(angleDegrees);
+    float c = cosf(angle);
+    float s = sinf(angle);
+    float t = 1.0f - cosf(angle);
+
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+
+    if (!CMP(MagnitudeSq(axis), 1.0f)) {
+        // normalize
+        float inv_len = 1.0f / Magnitude(axis);  // ??? why not hoist magnitude, and CMP that?
+        x *= inv_len;
+        y *= inv_len;
+        z *= inv_len;
+    }
+
+    return mat4(t * x * x + c,     t * x * y + s * z,  t * x * z - s * y,  0.0f,
+                t * x * y - s * z, t * y * y + c,      t * y * z + s * x,  0.0f,
+                t * x * z + s * y, t * y * z - s * x,  t * z * z + c,      0.0f,
+                0.0f,              0.0f,               0.0f,               1.0);
+} // mat4 axis angle
+
+mat3 AxisAngle3x3(const vec3 &axis, float angleDegrees) {
+    float angle = DEG2RAD(angleDegrees);
+    float c = cosf(angle);
+    float s = sinf(angle);
+    float t = 1.0f - cosf(angle);
+
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+
+    if (!CMP(MagnitudeSq(axis), 1.0f)) {
+        // normalize
+        float inv_len = 1.0f / Magnitude(axis);  // ??? why not hoist magnitude, and CMP that?
+        x *= inv_len;
+        y *= inv_len;
+        z *= inv_len;
+    }
+
+    return mat3(t * x * x + c,     t * x * y + s * z,  t * x * z - s * y,
+                t * x * y - s * z, t * y * y + c,      t * y * z + s * x,
+                t * x * z + s * y, t * y * z - s * x,  t * z * z + c);
+} // mat3 axis angle

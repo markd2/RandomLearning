@@ -112,3 +112,6 @@ so, given a 4x4 matrix like this
       - these are "euler angles" (if I'm getting the terminology correct)
     - can result in gimbal lock, if two or more axes align, resulting in a loss of a degree of rotational freedom.
     - gimbal lock can be avoided with _angle axis matrices_ later in the chapter.
+* Axis-angle rotation
+  - rather than 'rotate around x, then y, then z axis', provide a vector and an angle around which to rotate
+  - it's hairy resulting matrix

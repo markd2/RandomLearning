@@ -104,6 +104,10 @@ struct Vec3: Equatable {
         asArray = [x, y, z]
     }
 
+    init(_ contents: Double...) {
+        self.init(x: contents[0], y: contents[1], z: contents[2])
+    }
+
     static func +(lhs: Vec3, rhs: Vec3) -> Vec3 {
         return Vec3(x: lhs.x + rhs.x,
                     y: lhs.y + rhs.y,
