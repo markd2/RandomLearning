@@ -48,4 +48,8 @@
     [self showViewControllerNamed: @"Reflection"];
 } // showReflection
 
+- (IBAction) showCubes: (NSButton *) sender {
+    [self showViewControllerNamed: @"Cubist"];
+} // showCubes
+
 @end // AppDelegate

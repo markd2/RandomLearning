@@ -22,6 +22,8 @@
 		7D93E20F29FEACF800B90BD4 /* matrices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D93E20E29FEACF800B90BD4 /* matrices.cpp */; };
 		7DDB3E8D2A0961550019ACD1 /* MatricesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */; };
 		7DDB3E8F2A09615F0019ACD1 /* Matrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */; };
+		7DDB3EB22A0BD7B90019ACD1 /* Cubist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDB3EB02A0BD7B90019ACD1 /* Cubist.swift */; };
+		7DDB3EB32A0BD7B90019ACD1 /* Cubist.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB3EB12A0BD7B90019ACD1 /* Cubist.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		7D93E20E29FEACF800B90BD4 /* matrices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matrices.cpp; path = cppLib/matrices.cpp; sourceTree = "<group>"; };
 		7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatricesTest.swift; path = MathsFun/swiftLib/MatricesTest.swift; sourceTree = SOURCE_ROOT; };
 		7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrices.swift; path = swiftLib/Matrices.swift; sourceTree = "<group>"; };
+		7DDB3EB02A0BD7B90019ACD1 /* Cubist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cubist.swift; sourceTree = "<group>"; };
+		7DDB3EB12A0BD7B90019ACD1 /* Cubist.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Cubist.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				7D93A00E29E7954C0087F375 /* MathsFun.entitlements */,
 				7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */,
 				7D13096729F20CC600EE81B9 /* Projections.swift */,
+				7DDB3EB02A0BD7B90019ACD1 /* Cubist.swift */,
+				7DDB3EB12A0BD7B90019ACD1 /* Cubist.xib */,
 				7D13096829F20CC600EE81B9 /* Projections.xib */,
 				7D13096E29F3662E00EE81B9 /* Reflection.swift */,
 				7D13096D29F3662E00EE81B9 /* Reflection.xib */,
@@ -227,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DDB3EB32A0BD7B90019ACD1 /* Cubist.xib in Resources */,
 				7D13096A29F20CC600EE81B9 /* Projections.xib in Resources */,
 				7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */,
 				7D13096F29F3662E00EE81B9 /* Reflection.xib in Resources */,
@@ -249,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D93A00D29E7954C0087F375 /* main.m in Sources */,
+				7DDB3EB22A0BD7B90019ACD1 /* Cubist.swift in Sources */,
 				7D13096929F20CC600EE81B9 /* Projections.swift in Sources */,
 				7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */,
 				7D13097029F3662E00EE81B9 /* Reflection.swift in Sources */,

@@ -159,5 +159,15 @@ mat2 Inverse(const mat2 &mat);
 mat3 Inverse(const mat3 &mat);
 mat4 Inverse(const mat4 &mat);
 
+// --------------------------------------------------
+mat4 Translation(float x, float y, float z);
+mat4 Translation(const vec3 &pos);
+vec3 GetTranslation(const mat4 &mat);
+
+mat4 Scale(float x, float y, float z);
+mat4 Scale(const vec3 &pos);
+vec3 GetScale(const mat4 &mat);
+
+
 
 #endif // MATH_MATRICES_H

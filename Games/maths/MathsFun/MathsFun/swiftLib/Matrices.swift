@@ -338,6 +338,43 @@ struct Mat4: Equatable {
         self.asArray = contents
     }
 
+    static func translation(x: Double, y: Double, z: Double) -> Mat4 {
+        Mat4(1.0, 0.0, 0.0, 0.0,
+             0.0, 1.0, 0.0, 0.0, 
+             0.0, 0.0, 1.0, 0.0,
+             x,   y,   z,   1.0)
+    }
+
+    static func translation(_ vec3: Vec3) -> Mat4 {
+        Mat4(1.0, 0.0, 0.0, 0.0,
+             0.0, 1.0, 0.0, 0.0, 
+             0.0, 0.0, 1.0, 0.0,
+             vec3.x, vec3.y, vec3.z, 1.0)
+        
+    }
+
+    func translation() -> Vec3 {
+        Vec3(x: _41, y: _42, z: _43)
+    }
+    
+    static func scale(x: Double, y: Double, z: Double) -> Mat4 {
+        Mat4(x,   0.0, 0.0, 0.0,
+             0.0, y,   0.0, 0.0, 
+             0.0, 0.0, z,   0.0,
+             0.0, 0.0, 0.0, 1.0);
+    }
+
+    static func scale(_ vec3: Vec3) -> Mat4 {
+        Mat4(vec3.x, 0.0, 0.0, 0.0,
+             0.0, vec3.y, 0.0, 0.0, 
+             0.0, 0.0, vec3.z, 0.0,
+             0.0, 0.0, 0.0, 1.0);
+    }
+
+    func scale() -> Vec3 {
+        Vec3(x: _11, y: _22, z: _33)
+    }
+    
     /// Call with blah[0, 1] rather than blah[0][1]
     subscript(row: Int, column: Int) -> Double {
         get {

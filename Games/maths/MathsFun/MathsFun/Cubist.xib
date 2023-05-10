@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="Cubist" customModule="MathsFun" customModuleProvider="target">
+            <connections>
+                <outlet property="goodiesView" destination="gj6-n1-YZL" id="bo0-oX-bOe"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Cubes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1127"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WbI-Gd-aCg">
+                        <rect key="frame" x="9" y="223" width="84" height="32"/>
+                        <buttonCell key="cell" type="push" title="Splunge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jb6-Pj-eCw">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="splunge" target="-2" id="bYi-Th-rFb"/>
+                        </connections>
+                    </button>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="gj6-n1-YZL">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="214"/>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="WbI-Gd-aCg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="16" id="46c-0A-ajr"/>
+                    <constraint firstItem="gj6-n1-YZL" firstAttribute="top" secondItem="WbI-Gd-aCg" secondAttribute="bottom" constant="16" id="CJ2-yr-UC4"/>
+                    <constraint firstAttribute="bottom" secondItem="gj6-n1-YZL" secondAttribute="bottom" id="N1R-Xd-wkq"/>
+                    <constraint firstAttribute="trailing" secondItem="gj6-n1-YZL" secondAttribute="trailing" id="TaW-hH-SkF"/>
+                    <constraint firstItem="WbI-Gd-aCg" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="dRh-Jt-93Y"/>
+                    <constraint firstItem="gj6-n1-YZL" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="oMf-ka-Bon"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="39" y="144"/>
+        </window>
+    </objects>
+</document>

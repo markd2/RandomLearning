@@ -248,4 +248,47 @@ mat4 Inverse(const mat4 &mat) {
     return Adjugate(mat) * (1.0f / det);
 } // mat4 Inverse
 
+// --------------------------------------------------
+
+mat4 Translation(float x, float y, float z) {
+    return mat4(
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f, 
+        x,    y,    z,    1.0f);
+} // Translation
+
+mat4 Translation(const vec3 &ps) {
+    return mat4(
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f, 
+        ps.x, ps.y, ps.x, 1.0f);
+} // vec3 Translation
+
+vec3 GetTranslation(const mat4 &mat) {
+    return vec3(mat._41, mat._42, mat._43);
+} // GetTranslation
+
+
+mat4 Scale(float x, float y, float z) {
+    return mat4(
+        x,    0.0f, 0.0f, 0.0f,
+        0.0f, y,    0.0f, 0.0f,
+        0.0f, 0.0f, z,    0.0f, 
+        0.0f, 0.0f, 0.0f, 1.0f); 
+} // Scale
+
+mat4 Scale(const vec3 &ps) {
+    return mat4(
+        ps.x, 0.0f, 0.0f, 0.0f,
+        0.0f, ps.y, 0.0f, 0.0f,
+        0.0f, 0.0f, ps.z, 0.0f, 
+        0.0f, 0.0f, 0.0f, 1.0f);
+} // vec3 Scale
+
+vec3 GetScale(const mat4 &mat) {
+    return vec3(mat._41, mat._42, mat._43);
+} // GetScale
+
 

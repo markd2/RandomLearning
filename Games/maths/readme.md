@@ -88,4 +88,23 @@ given as a source of follow-up info(e)
   - only square matrices with non-zero determinants can be inverted.
   - to calcuate, 1/|M| and then use that to scalar multiply the adjugate
 
+## Matrix Transformations
 
+The book is using row-major matrices - kind of a toss up if row-major or
+column-major is used, but with row-major, each scale vector is stored
+horizontally, and so is contiguous in memory.
+
+so, given a 4x4 matrix like this
+
+```
+11 12 13 | 14
+21 22 23 | 24
+31 32 33 | 34
+---------+---
+41 42 43 | 44
+```
+
+* Translation is the bottom vector (41 42 43)
+* Scaling is the diagonal (11 22 33)
+* Rotation is the 3x3, anchored between 11-33
+    - scaling and rotation share values, so they can get intertwingled

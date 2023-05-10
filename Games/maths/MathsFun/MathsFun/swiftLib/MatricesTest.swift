@@ -466,4 +466,24 @@ final class MatricesTest: XCTestCase {
             XCTAssertEqual(a, b, accuracy: 0.001)
         }
     }
+
+    func testMat4Translation() {
+        let t1 = Mat4.translation(x: 2, y: 3, z: 4)
+        let v1 = t1.translation()
+        let expected = Vec3(x: 2, y: 3, z: 4)
+        XCTAssertEqual(v1, expected)
+
+        let t2 = Mat4.translation(expected)
+        XCTAssertEqual(t2.translation(), expected)
+    }
+
+    func testMat4Scale() {
+        let t1 = Mat4.scale(x: 2, y: 3, z: 4)
+        let v1 = t1.scale()
+        let expected = Vec3(x: 2, y: 3, z: 4)
+        XCTAssertEqual(v1, expected)
+
+        let t2 = Mat4.scale(expected)
+        XCTAssertEqual(t2.scale(), expected)
+    }
 }
