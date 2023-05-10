@@ -122,3 +122,13 @@ so, given a 4x4 matrix like this
     - a _point_ is a 1x4 matrix with a W component of 1
 
 Our math lib is right to left - takes the first matrix (say a scale) then applies the next (say a rotation), then the next (say a translate, that'll move things in the rotated scaled system)
+
+View matrix jazz - getting a vertex to become a pixel primarily involves three matrix multiplications
+  - `world` transform from model space to world space (via the transform)
+  - `view` takes from world-space to eye space (a.k.a. view space or camera space)
+  - `projection` takes it from eye space and puts it into normalized device coordinates
+
+Eye space so it's relative to a camera placed at (0, 0, 0) and looking down the positive Z axis
+
+"the inverse of an ortho-normal matrix is the same as the transpose of the matrix"
+  - where ortho-normal is a matrix whose basis vector are orthogonal and of unit length.

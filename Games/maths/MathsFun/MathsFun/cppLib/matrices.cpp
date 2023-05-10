@@ -441,3 +441,16 @@ mat4 Transform(const vec3 &scale, const vec3 &rotationAxis, float rotationDegree
         * AxisAngle(rotationAxis, rotationDegrees)
         * Translation(translate);
 } // axis Transform
+
+mat4 LookAt(const vec3 &position, const vec3 &target, const vec3 &up) {
+    vec3 forward = Normalized(target - position);
+    vec3 right = Normalized(Cross(up, forward));
+    vec3 newUp = Cross(forward, right);
+
+    return mat4( // Transposed rotation!
+        right.x, newUp.x, forward.x, 0.0f,
+        right.y, newUp.y, forward.z, 0.0f,
+        right.z, newUp.y, forward.z, 0.0f,
+        -Dot(right, position), -Dot(newUp, position), -Dot(forward, position), 1.0f
+        );
+} // LookAt

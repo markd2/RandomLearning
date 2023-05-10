@@ -417,9 +417,9 @@ struct Mat4: Equatable {
     func multiplyPoint(_ vec: Vec3) -> Vec3 {
         // hard-codes 1 where the W component would be
         
-        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 1.0 * _41;
-        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 1.0 * _42;
-        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 1.0 * _43;
+        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 1.0 * _41
+        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 1.0 * _42
+        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 1.0 * _43
         
         return Vec3(x, y, z)
     }
@@ -427,9 +427,9 @@ struct Mat4: Equatable {
     func multiplyVector(_ vec: Vec3) -> Vec3 {
         // hard-codes 0 where the W component would be
         
-        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 0.0 * _41;
-        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 0.0 * _42;
-        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 0.0 * _43;
+        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 0.0 * _41
+        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 0.0 * _42
+        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 0.0 * _43
         
         return Vec3(x, y, z)
     }
@@ -602,6 +602,19 @@ struct Mat4: Equatable {
         scale(scalev3)
           * axisAngleRotation(rotationAxis, rotationDegrees)
           * translation(translate)
+    }
+
+    static func lookAt(position: Vec3, target: Vec3, up: Vec3) -> Mat4 {
+        let forward = (target - position).normalized
+        let right = up.cross(forward).normalized
+        let newUp = forward.cross(right)
+
+        return Mat4( // Transposed rotation!
+          right.x, newUp.x, forward.x, 0.0,
+          right.y, newUp.y, forward.z, 0.0,
+          right.z, newUp.y, forward.z, 0.0,
+          -right.dot(position), -newUp.dot(position), -forward.dot(position), 1.0
+        )
     }
 
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {

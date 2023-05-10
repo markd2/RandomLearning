@@ -68,8 +68,8 @@ float Distance(const vec3 &pt1, const vec3 &pt2);
 void Normalize(vec2 &v);
 void Normalize(vec3 &v);
 
-vec2 Normalized(vec2 &v);
-vec3 Normalized(vec3 &v);
+vec2 Normalized(const vec2 &v);
+vec3 Normalized(const vec3 &v);
 
 vec3 Cross(const vec3 &lhs, const vec3 &rhs);
 
