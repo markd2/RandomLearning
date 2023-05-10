@@ -7,11 +7,11 @@ private func multiply(matA: [Double], aRows: Int, aCols: Int,
     var out = [Double](repeating: 0.0, count: aRows * bCols)
     for i in 0 ..< aRows {
         for j in 0 ..< bCols {
-            out[bCols * i + j] = 0.0;
+            out[bCols * i + j] = 0.0
             for k in 0 ..< bRows {
-                let a = aCols * i + k;
-                let b = bCols * k + j;
-                out[bCols * i + j] += matA[a] * matB[b];
+                let a = aCols * i + k
+                let b = bCols * k + j
+                out[bCols * i + j] += matA[a] * matB[b]
             }
         }
     }
@@ -253,6 +253,32 @@ struct Mat3: Equatable {
         return adjugate() * (1.0 / det)
     }
 
+    static func rotation(pitch: Double, yaw: Double, roll: Double) -> Mat3 {
+        zrotation(roll) * xrotation(pitch) * yrotation(yaw)
+    }
+
+    static func xrotation(_ angleDegrees: Double) -> Mat3 {
+        let radians = angleDegrees.radians
+        return Mat3(1.0, 0.0, 0.0,
+                    0.0, cos(radians), sin(radians),
+                    0.0, -sin(radians), cos(radians))
+
+    }
+
+    static func yrotation(_ angleDegrees: Double) -> Mat3 {
+        let radians = angleDegrees.radians
+        return Mat3(cos(radians), 0.0, -sin(radians),
+                    0.0, 1.0, 0.0,
+                    sin(radians), 0.0, cos(radians))
+    }
+
+    static func zrotation(_ angleDegrees: Double) -> Mat3 {
+        let radians = angleDegrees.radians
+        return Mat3(cos(radians), sin(radians), 0.0,
+                    -sin(radians), cos(radians), 0.0,
+                    0.0, 0.0, 1.0, 0.0)
+    }
+
     static func *(lhs: Mat3, rhs: Double) -> Mat3 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }
@@ -361,19 +387,48 @@ struct Mat4: Equatable {
         Mat4(x,   0.0, 0.0, 0.0,
              0.0, y,   0.0, 0.0, 
              0.0, 0.0, z,   0.0,
-             0.0, 0.0, 0.0, 1.0);
+             0.0, 0.0, 0.0, 1.0)
     }
 
     static func scale(_ vec3: Vec3) -> Mat4 {
         Mat4(vec3.x, 0.0, 0.0, 0.0,
              0.0, vec3.y, 0.0, 0.0, 
              0.0, 0.0, vec3.z, 0.0,
-             0.0, 0.0, 0.0, 1.0);
+             0.0, 0.0, 0.0, 1.0)
     }
 
     func scale() -> Vec3 {
         Vec3(x: _11, y: _22, z: _33)
     }
+
+    static func rotation(pitch: Double, yaw: Double, roll: Double) -> Mat4 {
+        zrotation(roll) * xrotation(pitch) * yrotation(yaw)
+    }
+
+    static func xrotation(_ angleDegrees: Double) -> Mat4 {
+        let radians = angleDegrees.radians
+        return Mat4(1.0, 0.0, 0.0, 0.0,
+                    0.0, cos(radians), sin(radians), 0.0,
+                    0.0, -sin(radians), cos(radians), 0.0,
+                    0.0, 0.0, 0.0, 1.0)
+    }
+
+    static func yrotation(_ angleDegrees: Double) -> Mat4 {
+        let radians = angleDegrees.radians
+        return Mat4(cos(radians), 0.0, -sin(radians), 0.0,
+                    0.0, 1.0, 0.0, 0.0,
+                    sin(radians), 0.0, cos(radians), 0.0,
+                    0.0, 0.0, 0.0, 1.0) 
+    }
+
+    static func zrotation(_ angleDegrees: Double) -> Mat4 {
+        let radians = angleDegrees.radians
+        return Mat4(cos(radians), sin(radians), 0.0, 0.0,
+                    -sin(radians), cos(radians), 0.0, 0.0,
+                    0.0, 0.0, 1.0, 0.0,
+                    0.0, 0.0, 0.0, 1.0) 
+    }
+
     
     /// Call with blah[0, 1] rather than blah[0][1]
     subscript(row: Int, column: Int) -> Double {
@@ -473,3 +528,16 @@ struct Mat4: Equatable {
     }
 } // Mat4
 
+
+extension BinaryFloatingPoint {
+    /// radiansToDegrees
+    var degrees : Self {
+        return self * 180 / .pi
+    }
+
+    /// degrees to radians
+    var radians : Self {
+        return self * .pi / 180
+    }
+
+}

@@ -108,3 +108,7 @@ so, given a 4x4 matrix like this
 * Scaling is the diagonal (11 22 33)
 * Rotation is the 3x3, anchored between 11-33
     - scaling and rotation share values, so they can get intertwingled
+    - stored as roll (around z axis), pitch (around x axis), and yaw (around y axis)
+      - these are "euler angles" (if I'm getting the terminology correct)
+    - can result in gimbal lock, if two or more axes align, resulting in a loss of a degree of rotational freedom.
+    - gimbal lock can be avoided with _angle axis matrices_ later in the chapter.

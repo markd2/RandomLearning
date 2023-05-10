@@ -168,6 +168,15 @@ mat4 Scale(float x, float y, float z);
 mat4 Scale(const vec3 &pos);
 vec3 GetScale(const mat4 &mat);
 
+mat4 Rotation(float pitch, float yaw, float roll);
+mat3 Rotation3x3(float pitch, float yaw, float roll);
+
+mat4 XRotation(float angleDegrees);
+mat3 XRotation3x3(float angleDegrees);
+mat4 YRotation(float angleDegrees);
+mat3 YRotation3x3(float angleDegrees);
+mat4 ZRotation(float angleDegrees);
+mat3 ZRotation3x3(float angleDegrees);
 
 
 #endif // MATH_MATRICES_H

@@ -291,4 +291,59 @@ vec3 GetScale(const mat4 &mat) {
     return vec3(mat._41, mat._42, mat._43);
 } // GetScale
 
+mat4 Rotation(float pitch, float yaw, float roll) {
+    return ZRotation(roll) * XRotation(pitch) * YRotation(yaw);
+} // Rotation
 
+mat3 Rotation3x3(float pitch, float yaw, float roll) {
+    return ZRotation3x3(roll) * XRotation3x3(pitch) * YRotation3x3(yaw);
+} // Rotation3x3
+
+mat4 XRotation(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat4(1.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, cosf(radians), sinf(radians), 0.0f,
+                0.0f, -sinf(radians), cosf(radians), 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f);
+
+} // XRoatation
+
+mat3 XRotation3x3(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat3(1.0f, 0.0f, 0.0f,
+                0.0f, cosf(radians), sinf(radians),
+                0.0f, -sinf(radians), cosf(radians));
+} // XRotation3x3
+
+mat4 YRotation(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat4(cosf(radians), 0.0f, -sinf(radians), 0.0f,
+                0.0f, 1.0f, 0.0f, 0.0f,
+                sinf(radians), 0.0f, cosf(radians), 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f); 
+
+} // YRoatation
+
+mat3 YRotation3x3(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat3(cosf(radians), 0.0f, -sinf(radians),
+                0.0f, 1.0f, 0.0f,
+                sinf(radians), 0.0f, cosf(radians));
+
+} // YRotation3x3
+
+mat4 ZRotation(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat4(cosf(radians), sinf(radians), 0.0f, 0.0f,
+                -sinf(radians), cosf(radians), 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f); 
+
+} // ZRoatation
+
+mat3 ZRotation3x3(float angleDegrees) {
+    float radians = DEG2RAD(angleDegrees);
+    return mat3(cosf(radians), sinf(radians), 0.0f,
+                -sinf(radians), cosf(radians), 0.0f,
+                0.0f, 0.0f, 1.0f);
+} // ZRotation3x3

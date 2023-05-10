@@ -486,4 +486,37 @@ final class MatricesTest: XCTestCase {
         let t2 = Mat4.scale(expected)
         XCTAssertEqual(t2.scale(), expected)
     }
+    
+    func testMat3Rotate() {
+        let expected: [Double] = [1, 2, 3,
+                        4, 5, 6,
+                        7, 8, 9]
+        let m = Mat3(expected)
+        // rotating twice in the same direction should end up at the original place
+        let r1 = Mat3.rotation(pitch: 180, yaw: 180, roll: 180)
+        let m2 = r1 * m
+        let m3 = r1 * m2
+
+        // Well, modulo floating point error
+        for (a, b) in zip(m3.asArray, expected) {
+            XCTAssertEqual(a, b, accuracy: 0.00001)
+        }
+    }
+
+    func testMat4Rotate() {
+        let expected: [Double] = [1, 2, 3, 4,
+                                  5, 6, 7, 8,
+                                  9, 10, 11, 12,
+                                  13, 14, 15, 16]
+        let m = Mat4(expected)
+        // rotating twice in the same direction should end up at the original place
+        let r1 = Mat4.rotation(pitch: 180, yaw: 180, roll: 180)
+        let m2 = r1 * m
+        let m3 = r1 * m2
+
+        // Well, modulo floating point error
+        for (a, b) in zip(m3.asArray, expected) {
+            XCTAssertEqual(a, b, accuracy: 0.00001)
+        }
+    }
 }
