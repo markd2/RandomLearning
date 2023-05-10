@@ -592,4 +592,17 @@ final class MatricesTest: XCTestCase {
         XCTAssertEqual(p1.asArray, expected)
     }
 
+    func testMat4TransformConveniences() {
+        let scale = Vec3(1, 2, 3)
+        let rotation = Vec3(60, 120, 180)
+        let translation = Vec3(3, 2, 1)
+        let transform = Mat4.transform(scale: scale, eulerRotation: rotation, translate: translation)
+        
+        let point = Vec3(10, 20, 30)
+        let transformedPoint = transform.multiplyPoint(point)
+        // totally cheating on this one...
+        let expected: [Double] = [16.971143170299754, -95.94228634059948, 4.480762113533167]
+        XCTAssertEqual(transformedPoint.asArray, expected)
+    }
+
 }

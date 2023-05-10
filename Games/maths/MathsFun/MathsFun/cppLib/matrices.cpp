@@ -429,3 +429,15 @@ vec3 MultiplyVector(const vec3 &vec, const mat3 &mat) {
     return result;
 
 } // mat3 MultiplyVector
+
+mat4 Transform(const vec3 &scale, const vec3 &eulerRotation, const vec3 &translate) {
+    return Scale(scale)
+        * Rotation(eulerRotation.x, eulerRotation.y, eulerRotation.z)
+        * Translation(translate);
+} // euler Transform
+
+mat4 Transform(const vec3 &scale, const vec3 &rotationAxis, float rotationDegrees, const vec3 &translate) {
+    return Scale(scale)
+        * AxisAngle(rotationAxis, rotationDegrees)
+        * Translation(translate);
+} // axis Transform

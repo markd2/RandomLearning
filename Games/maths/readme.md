@@ -120,3 +120,5 @@ so, given a 4x4 matrix like this
   - a vector will represent one of two things - a point in space, or a direction and magnitude
     - a _vector_ is a 1x4 matrix with a W component of 0
     - a _point_ is a 1x4 matrix with a W component of 1
+
+Our math lib is right to left - takes the first matrix (say a scale) then applies the next (say a rotation), then the next (say a translate, that'll move things in the rotated scaled system)

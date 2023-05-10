@@ -588,6 +588,22 @@ struct Mat4: Equatable {
         return adjugate() * (1.0 / det)
     }
 
+    /// convenience for constructing a transformation matrix with
+    /// scale, then rotate, then translate
+    static func transform(scale scalev3: Vec3, eulerRotation: Vec3, translate: Vec3) -> Mat4 {
+        scale(scalev3)
+          * rotation(pitch: eulerRotation.x, yaw: eulerRotation.y, roll: eulerRotation.z)
+          * translation(translate)
+    }
+
+    /// convenience for constructing a transformation matrix with
+    /// scale, then rotate, then translate
+    static func transform(scale scalev3: Vec3, rotationAxis: Vec3, rotationDegrees: Double, translate: Vec3) -> Mat4 {
+        scale(scalev3)
+          * axisAngleRotation(rotationAxis, rotationDegrees)
+          * translation(translate)
+    }
+
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }

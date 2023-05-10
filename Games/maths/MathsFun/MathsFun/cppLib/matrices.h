@@ -185,5 +185,7 @@ vec3 MultiplyPoint(const vec3 &vec, const mat4 &mat);
 vec3 MultiplyVector(const vec3 &vec, const mat4 &mat);
 vec3 MultiplyVector(const vec3 &vec, const mat3 &mat);
 
+mat4 Transform(const vec3 &scale, const vec3 &eulerRotation, const vec3 &translate);
+mat4 Transform(const vec3 &scale, const vec3 &rotationAxis, float rotationDegrees, const vec3 &translate);
 
 #endif // MATH_MATRICES_H
