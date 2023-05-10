@@ -557,5 +557,39 @@ final class MatricesTest: XCTestCase {
         }
     }
 
+    func testMat4MultiplyPoint() {
+        let m = Mat4(1, 2, 3, 4,
+                     5, 6, 7, 8,
+                     9, 10, 11, 12,
+                     13, 14, 15, 16)
+        let p = Vec3(1, 2, 3)
+        let p1 = m.multiplyPoint(p)
+
+        let expected: [Double] = [51, 58, 65]
+        XCTAssertEqual(p1.asArray, expected)
+    }
+
+    func testMat4MultiplyVector() {
+        let m = Mat4(1, 2, 3, 4,
+                     5, 6, 7, 8,
+                     9, 10, 11, 12,
+                     13, 14, 15, 16)
+        let p = Vec3(1, 2, 3)
+        let p1 = m.multiplyVector(p)
+
+        let expected: [Double] = [38, 44, 50]
+        XCTAssertEqual(p1.asArray, expected)
+    }
+
+    func testMat3MultiplyVector() {
+        let m = Mat3(1, 2, 3,
+                     4, 5, 6,
+                     7, 8, 9)
+        let p = Vec3(1, 2, 3)
+        let p1 = m.multiplyVector(p)
+
+        let expected: [Double] = [30, 36, 42]
+        XCTAssertEqual(p1.asArray, expected)
+    }
 
 }

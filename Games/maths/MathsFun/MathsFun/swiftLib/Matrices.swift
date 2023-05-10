@@ -253,6 +253,14 @@ struct Mat3: Equatable {
         return adjugate() * (1.0 / det)
     }
 
+    func multiplyVector(_ vec: Vec3) -> Vec3 {
+        let x = vec.dot(Vec3(_11, _21, _31))
+        let y = vec.dot(Vec3(_12, _22, _32))
+        let z = vec.dot(Vec3(_13, _23, _33))
+
+        return Vec3(x, y, z)
+    }
+
     static func rotation(pitch: Double, yaw: Double, roll: Double) -> Mat3 {
         zrotation(roll) * xrotation(pitch) * yrotation(yaw)
     }
@@ -404,6 +412,26 @@ struct Mat4: Equatable {
 
     func translation() -> Vec3 {
         Vec3(x: _41, y: _42, z: _43)
+    }
+
+    func multiplyPoint(_ vec: Vec3) -> Vec3 {
+        // hard-codes 1 where the W component would be
+        
+        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 1.0 * _41;
+        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 1.0 * _42;
+        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 1.0 * _43;
+        
+        return Vec3(x, y, z)
+    }
+    
+    func multiplyVector(_ vec: Vec3) -> Vec3 {
+        // hard-codes 0 where the W component would be
+        
+        let x = vec.x * _11 + vec.y * _21 + vec.z * _31 + 0.0 * _41;
+        let y = vec.x * _12 + vec.y * _22 + vec.z * _32 + 0.0 * _42;
+        let z = vec.x * _13 + vec.y * _23 + vec.z * _33 + 0.0 * _43;
+        
+        return Vec3(x, y, z)
     }
     
     static func scale(x: Double, y: Double, z: Double) -> Mat4 {

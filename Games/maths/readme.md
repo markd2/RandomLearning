@@ -115,3 +115,8 @@ so, given a 4x4 matrix like this
 * Axis-angle rotation
   - rather than 'rotate around x, then y, then z axis', provide a vector and an angle around which to rotate
   - it's hairy resulting matrix
+* Vector / matrix multiplication
+  - are vectors rows or columns?  That affects what side of the matrix the vector lives when multiplying
+  - a vector will represent one of two things - a point in space, or a direction and magnitude
+    - a _vector_ is a 1x4 matrix with a W component of 0
+    - a _point_ is a 1x4 matrix with a W component of 1

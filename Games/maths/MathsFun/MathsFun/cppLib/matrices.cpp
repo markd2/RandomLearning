@@ -394,3 +394,38 @@ mat3 AxisAngle3x3(const vec3 &axis, float angleDegrees) {
                 t * x * y - s * z, t * y * y + c,      t * y * z + s * x,
                 t * x * z + s * y, t * y * z - s * x,  t * z * z + c);
 } // mat3 axis angle
+
+vec3 MultiplyPoint(const vec3 &vec, const mat4 &mat) {
+    // hard-codes 1 where the W component would be
+    vec3 result;
+
+    result.x = vec.x * mat._11 + vec.y * mat._21 + vec.z * mat._31 + 1.0f * mat._41;
+    result.y = vec.x * mat._12 + vec.y * mat._22 + vec.z * mat._32 + 1.0f * mat._42;
+    result.z = vec.x * mat._13 + vec.y * mat._23 + vec.z * mat._33 + 1.0f * mat._43;
+
+    return result;
+
+} // MultiplyPoint
+
+vec3 MultiplyVector(const vec3 &vec, const mat4 &mat) {
+    // hard-codes 0 where the W component would be
+    vec3 result;
+
+    result.x = vec.x * mat._11 + vec.y * mat._21 + vec.z * mat._31 + 0.0f * mat._41;
+    result.y = vec.x * mat._12 + vec.y * mat._22 + vec.z * mat._32 + 0.0f * mat._42;
+    result.z = vec.x * mat._13 + vec.y * mat._23 + vec.z * mat._33 + 0.0f * mat._43;
+
+    return result;
+
+} // mat4 MultiplyVector
+
+vec3 MultiplyVector(const vec3 &vec, const mat3 &mat) {
+    // for whatever reason, book doesn't expand, but does the dot product calls.
+    vec3 result;
+    
+    result.x = Dot(vec, vec3(mat._11, mat._21, mat._31));
+    result.y = Dot(vec, vec3(mat._12, mat._22, mat._32));
+    result.z = Dot(vec, vec3(mat._13, mat._23, mat._33));
+    return result;
+
+} // mat3 MultiplyVector

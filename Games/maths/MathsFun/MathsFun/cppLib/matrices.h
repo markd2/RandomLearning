@@ -181,4 +181,9 @@ mat3 ZRotation3x3(float angleDegrees);
 mat4 AxisAngle(const vec3 &axis, float angleDegrees);
 mat3 AxisAngle3x3(const vec3 &axis, float angleDegrees);
 
+vec3 MultiplyPoint(const vec3 &vec, const mat4 &mat);
+vec3 MultiplyVector(const vec3 &vec, const mat4 &mat);
+vec3 MultiplyVector(const vec3 &vec, const mat3 &mat);
+
+
 #endif // MATH_MATRICES_H
