@@ -10,9 +10,13 @@ class Geometry2DWindowController: NSWindowController {
 
 
 class Geometry2DView: NSView {
-    @Invalidating(.display) var lines: [Line2D] = [
-        Line2D(10, 20, 60, 90),
-        Line2D(40, 90, 90, 100)]
+    @Invalidating(.display)
+    var lines: [Line2D] = [
+      Line2D(10, 20, 60, 90),
+      Line2D(40, 190, 90, 100)]
+
+    @Invalidating(.display)
+    var circles: [Circle] = [Circle(55, 55, 30), Circle(80, 120, 50)]
     
     override func draw(_ dirtyRect: NSRect) {
         let rect = bounds
@@ -23,6 +27,9 @@ class Geometry2DView: NSView {
         NSColor.orange.set()
         lines.forEach { $0.draw() }
 
+        NSColor.purple.set()
+        circles.forEach { $0.draw() }
+
         NSColor.black.set()
         rect.frame()
     }
@@ -31,6 +38,17 @@ class Geometry2DView: NSView {
 extension Line2D {
     func draw() {
         NSBezierPath.strokeLine(from: start, to: end)
+    }
+}
+
+extension Circle {
+    func draw() {
+        let boundsRect = CGRect(x: position.x - radius,
+                                y: position.y - radius,
+                                width: radius * 2,
+                                height: radius * 2)
+        let bezpath = NSBezierPath(ovalIn: boundsRect)
+        bezpath.stroke()
     }
 }
 
