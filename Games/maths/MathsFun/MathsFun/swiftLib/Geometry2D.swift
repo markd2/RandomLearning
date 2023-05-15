@@ -40,3 +40,36 @@ struct Circle: Equatable {
     }
 
 }
+
+struct Rectangle2D: Equatable {
+    let origin: Point2D
+    let size: Vec2
+
+    init(origin: Point2D, size: Vec2) {
+        self.origin = origin
+        self.size = size
+    }
+
+    init(_ contents: Double...) {
+        self.origin = Point2D(x: contents[0], y: contents[1])
+        self.size = Vec2(x: contents[2], y: contents[3])
+    }
+
+    static func fromMinMax(min: Vec2, max: Vec2) -> Rectangle2D {
+        Rectangle2D(origin: min, size: max - min)
+    }
+
+    var min: Vec2 {
+        let p1 = origin
+        let p2 = origin + size
+        return Vec2(x: fmin(p1.x, p2.x), y: fmin(p1.y, p2.y))
+    }
+
+    var max: Vec2 {
+        let p1 = origin
+        let p2 = origin + size
+        return Vec2(x: fmax(p1.x, p2.x), y: fmax(p1.y, p2.y))
+    }
+
+}
+
