@@ -188,7 +188,10 @@ vec3 MultiplyVector(const vec3 &vec, const mat3 &mat);
 mat4 Transform(const vec3 &scale, const vec3 &eulerRotation, const vec3 &translate);
 mat4 Transform(const vec3 &scale, const vec3 &rotationAxis, float rotationDegrees, const vec3 &translate);
 
-// return the view matrix of a camera give its position, the camera target, and and relative up vector
+// return the view matrix of a camera given its position, the camera target, and and relative up vector
 mat4 LookAt(const vec3 &position, const vec3 &target, const vec3 &up);
+
+mat4 Projection(float fov, float aspect, float zNear, float zFar);
+mat4 Ortho(float left, float right, float bottom, float top, float zNear, float zFar);
 
 #endif // MATH_MATRICES_H

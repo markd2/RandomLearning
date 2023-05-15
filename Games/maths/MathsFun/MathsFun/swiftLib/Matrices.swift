@@ -697,6 +697,40 @@ struct Mat4: Equatable {
         )
     }
 
+    static func Projection(fov: Double, aspect: Double, zNear: Double, zFar: Double) -> Mat4 {
+        let tanHalfFov = tan((fov * 0.5).degreesToRadians)
+        let fovY = 1.0 / tanHalfFov // cot(fov/2)
+        let fovX = fovY / aspect // cot(fov/2) / aspect
+        var result = Mat4()
+        result._11 = fovX
+        result._22 = fovY
+        // _33 = far / range
+        result._33 = zFar / (zFar - zNear)
+        result._34 = 1.0
+        // _43 = -near * (far / range)
+        result._43 = -zNear * result._33
+        result._44 = 0
+
+        return result
+    }
+
+    static func Ortho(left: Double, right: Double, bottom: Double, top: Double,
+                      zNear: Double, zFar: Double) -> Mat4 {
+        let _11: Double = 2.0 / (right - left)
+        let _22: Double = 2.0 / (top - bottom)
+        let _33: Double = 1.0 / (zFar - zNear)
+        let _41: Double = (left + right) / (left - right)
+        let _42: Double = (top + bottom) / (bottom - top)
+        let _43: Double = zNear / (zNear - zFar)
+
+        return Mat4(
+          _11, 0.0, 0.0, 0.0, 
+          0.0, _22, 0.0, 0.0,
+          0.0, 0.0, _33, 0.0,
+          _41, _42, _43, 1.0
+        )
+    }
+
     static func *(lhs: Mat4, rhs: Double) -> Mat4 {
         var result = lhs
         result.asArray = result.asArray.map { $0 * rhs }

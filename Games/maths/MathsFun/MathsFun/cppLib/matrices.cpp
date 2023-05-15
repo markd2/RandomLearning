@@ -454,3 +454,41 @@ mat4 LookAt(const vec3 &position, const vec3 &target, const vec3 &up) {
         -Dot(right, position), -Dot(newUp, position), -Dot(forward, position), 1.0f
         );
 } // LookAt
+
+
+mat4 Projection(float fov, float aspect, float zNear, float zFar) {
+    float tanHalfFov = tanf(DEG2RAD((fov * 0.5f)));
+    float fovY = 1.0f / tanHalfFov; // cot(fov/2)
+    float fovX = fovY / aspect;  // cot(fov/2) / aspect
+
+    mat4 result; // identity matrix
+    result._11 = fovX;
+    result._22 = fovY;
+    // _33 = far / range
+    result._33 = zFar / (zFar - zNear);
+    result._34 = 1.0f;
+    // _43 = -near * (far / range)
+    result._43 = zNear;
+    result._44 = 0.0f;
+
+    return result;
+} // Projection
+
+
+mat4 Ortho(float left, float right, float bottom, float top, float zNear, float zFar) {
+    float _11 = 2.0f / (right - left);
+    float _22 = 2.0f / (top - bottom);
+    float _33 = 1.0f / (zFar - zNear);
+    float _41 = (left + right) / (left - right);
+    float _42 = (top + bottom) / (bottom - top);
+    float _43 = zNear / (zNear - zFar);
+
+    return mat4(
+        _11, 0.0f,  0.0f,  0.0f,
+        0.0f, _22,  0.0f,  0.0f,
+        0.0f,  0.0f, _33,  0.0f, 
+        _41, _42, _43, 1.0f
+        );
+
+} // Ortho
+
