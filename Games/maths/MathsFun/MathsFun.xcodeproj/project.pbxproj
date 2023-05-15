@@ -12,6 +12,9 @@
 		7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */; };
 		7D13096F29F3662E00EE81B9 /* Reflection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D13096D29F3662E00EE81B9 /* Reflection.xib */; };
 		7D13097029F3662E00EE81B9 /* Reflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13096E29F3662E00EE81B9 /* Reflection.swift */; };
+		7D13B2F32A12B8AC00D2ACF0 /* geometry2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2F22A12B8AC00D2ACF0 /* geometry2d.cpp */; };
+		7D13B2F62A12B8ED00D2ACF0 /* Geometry2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2F52A12B8ED00D2ACF0 /* Geometry2D.swift */; };
+		7D13B2F82A12B93800D2ACF0 /* Geometry2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */; };
 		7D93A00629E795490087F375 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00529E795490087F375 /* AppDelegate.m */; };
 		7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00729E7954C0087F375 /* Assets.xcassets */; };
 		7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00929E7954C0087F375 /* MainMenu.xib */; };
@@ -42,6 +45,10 @@
 		7D13096B29F20EEC00EE81B9 /* PlaypenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaypenView.swift; sourceTree = "<group>"; };
 		7D13096D29F3662E00EE81B9 /* Reflection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Reflection.xib; sourceTree = "<group>"; };
 		7D13096E29F3662E00EE81B9 /* Reflection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflection.swift; sourceTree = "<group>"; };
+		7D13B2F22A12B8AC00D2ACF0 /* geometry2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = geometry2d.cpp; path = cppLib/geometry2d.cpp; sourceTree = "<group>"; };
+		7D13B2F42A12B8B600D2ACF0 /* geometry2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = geometry2d.h; path = cppLib/geometry2d.h; sourceTree = "<group>"; };
+		7D13B2F52A12B8ED00D2ACF0 /* Geometry2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry2D.swift; path = swiftLib/Geometry2D.swift; sourceTree = "<group>"; };
+		7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry2DTests.swift; path = MathsFun/swiftLib/Geometry2DTests.swift; sourceTree = SOURCE_ROOT; };
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D93A00429E795490087F375 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D93A00529E795490087F375 /* AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -128,6 +135,8 @@
 				7D93A01629E7A2010087F375 /* vectors.cpp */,
 				7D93E20D29FEACE100B90BD4 /* matrices.h */,
 				7D93E20E29FEACF800B90BD4 /* matrices.cpp */,
+				7D13B2F42A12B8B600D2ACF0 /* geometry2d.h */,
+				7D13B2F22A12B8AC00D2ACF0 /* geometry2d.cpp */,
 			);
 			name = CppLib;
 			sourceTree = "<group>";
@@ -138,6 +147,7 @@
 				7D93A01A29EC7D9D0087F375 /* Vectors.swift */,
 				7D93A01929EC7D9D0087F375 /* MathsFun-Bridging-Header.h */,
 				7DDB3E8E2A09615F0019ACD1 /* Matrices.swift */,
+				7D13B2F52A12B8ED00D2ACF0 /* Geometry2D.swift */,
 			);
 			name = SwiftLib;
 			sourceTree = "<group>";
@@ -145,6 +155,7 @@
 		7D93A02129EC85360087F375 /* MathsFunTests */ = {
 			isa = PBXGroup;
 			children = (
+				7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */,
 				7D93A02929EC85560087F375 /* VectorsTest.swift */,
 				7DDB3E8C2A0961550019ACD1 /* MatricesTest.swift */,
 			);
@@ -255,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D13B2F32A12B8AC00D2ACF0 /* geometry2d.cpp in Sources */,
 				7D93A00D29E7954C0087F375 /* main.m in Sources */,
 				7DDB3EB22A0BD7B90019ACD1 /* Cubist.swift in Sources */,
 				7D13096929F20CC600EE81B9 /* Projections.swift in Sources */,
@@ -263,6 +275,7 @@
 				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
 				7DDB3E8F2A09615F0019ACD1 /* Matrices.swift in Sources */,
 				7D93E20F29FEACF800B90BD4 /* matrices.cpp in Sources */,
+				7D13B2F62A12B8ED00D2ACF0 /* Geometry2D.swift in Sources */,
 				7D93A01B29EC7D9D0087F375 /* Vectors.swift in Sources */,
 				7D93A00629E795490087F375 /* AppDelegate.m in Sources */,
 			);
@@ -274,6 +287,7 @@
 			files = (
 				7D93A02A29EC85560087F375 /* VectorsTest.swift in Sources */,
 				7DDB3E8D2A0961550019ACD1 /* MatricesTest.swift in Sources */,
+				7D13B2F82A12B93800D2ACF0 /* Geometry2DTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
