@@ -51,7 +51,7 @@
 		7D13B2F42A12B8B600D2ACF0 /* geometry2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = geometry2d.h; path = cppLib/geometry2d.h; sourceTree = "<group>"; };
 		7D13B2F52A12B8ED00D2ACF0 /* Geometry2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry2D.swift; path = swiftLib/Geometry2D.swift; sourceTree = "<group>"; };
 		7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry2DTests.swift; path = MathsFun/swiftLib/Geometry2DTests.swift; sourceTree = SOURCE_ROOT; };
-		7D13B2F92A12C21400D2ACF0 /* Geometry2DWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry2DWindowController.swift; sourceTree = "<group>"; };
+		7D13B2F92A12C21400D2ACF0 /* Geometry2DWindowController.swift */ = {isa = PBXFileReference; indentWidth = 6; lastKnownFileType = sourcecode.swift; path = Geometry2DWindowController.swift; sourceTree = "<group>"; };
 		7D13B2FA2A12C21400D2ACF0 /* Geometry2DWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Geometry2DWindowController.xib; sourceTree = "<group>"; };
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D93A00429E795490087F375 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };

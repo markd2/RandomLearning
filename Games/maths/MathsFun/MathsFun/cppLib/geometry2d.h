@@ -46,5 +46,10 @@ typedef struct OrientedRectangle {
         position(pos), halfExtents(ext), rotation (rot) { }
 } OrientedRectangle;
 
+bool PointOnLine(const Point2D &point, const Line2D &line);
+bool PointInCircle(const Point2D &point, const Circle &circle);
+bool PointInRectangle(const Point2D &point, const Rectangle2D &rectangle);
+bool PointInOrientedRectangle(const Point2D &point, const OrientedRectangle &rectangle);
+
 #endif // MATH_GEOMETRY_2D
 

@@ -756,5 +756,11 @@ extension BinaryFloatingPoint {
     var radians : Self {
         return self * .pi / 180
     }
+}
 
+extension Vec2 {
+    static func *(lhs: Vec2, rhs: Mat2) -> Vec2 {
+        Vec2(x: lhs._11 * rhs._11 + lhs._12 * rhs._12,
+             y: lhs._11 * rhs._21 + lhs._12 * rhs._22)
+    }
 }

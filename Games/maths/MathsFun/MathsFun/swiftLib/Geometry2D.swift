@@ -23,6 +23,16 @@ struct Line2D: Equatable {
     var lengthSquared: Double {
         (end - start).magnitudeSquared
     }
+
+    func contains(_ point: Point2D?) -> Bool {
+        guard let point else { return false }
+
+        let dx = end.x - start.x
+        let dy = end.y - start.y
+        let m = dy / dx
+        let b = start.y - m * start.x
+        return absRelFPCompare(point.y, m * point.x + b)
+    }
 }
 
 struct Circle: Equatable {
@@ -39,6 +49,15 @@ struct Circle: Equatable {
         self.radius = contents[2]
     }
 
+    func contains(_ point: Point2D?) -> Bool {
+        guard let point else { return false }
+
+        let line = Line2D(start: point, end: position)
+        if line.lengthSquared < radius * radius {
+            return true
+        }
+        return false
+    }
 }
 
 struct Rectangle2D: Equatable {
@@ -70,6 +89,18 @@ struct Rectangle2D: Equatable {
         let p2 = origin + size
         return Vec2(x: fmax(p1.x, p2.x), y: fmax(p1.y, p2.y))
     }
+
+    func contains(_ point: Point2D?) -> Bool {
+        guard let point else { return false }
+
+        let min = self.min
+        let max = self.max
+
+        return min.x <= point.x
+          && min.y <= point.y
+          && point.x <= max.x
+          && point.y <= max.y
+    }
 }
 
 struct OrientedRectangle: Equatable {
@@ -93,5 +124,21 @@ struct OrientedRectangle: Equatable {
         self.position = position
         self.halfExtents = halfExtents
         self.rotationDegrees = rotation
+    }
+
+    func contains(_ point: Point2D?) -> Bool {
+        guard let point else { return false }
+
+        let theta = -rotationDegrees.degreesToRadians
+        let zRotation2x2 = Mat2(
+          cos(theta), sin(theta),
+          -sin(theta), cos(theta))
+
+        let rotVector = (point - position) * zRotation2x2
+        
+        let localRectangle = Rectangle2D(origin: Point2D(),
+                                         size: halfExtents * 2.0)
+        let localPoint = rotVector + halfExtents
+        return localRectangle.contains(localPoint)
     }
 }

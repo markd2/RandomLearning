@@ -11,12 +11,23 @@ struct Vec2: Equatable {
     var x: Double { return asArray[0] }
     var y: Double { return asArray[1] }
 
+    var _11: Double {
+        asArray[0]
+    }
+    var _12: Double {
+        asArray[1]
+    }
+
     init() {
         asArray = [0, 0]
     }
 
     init(x: Double, y: Double) {
         asArray = [x, y]
+    }
+    
+    init(_ point: CGPoint) {
+        self.init(x: point.x, y: point.y)
     }
 
     var cgPoint: CGPoint {
