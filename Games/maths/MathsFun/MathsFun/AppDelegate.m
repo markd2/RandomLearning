@@ -21,7 +21,7 @@
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     self.windowControllers = [NSMutableArray new];
 
-    [self showReflection: nil];
+    [self show2DGeometry: nil];
 } // applicationDidFinishLaunching
 
 
@@ -50,6 +50,10 @@
 
 - (IBAction) showCubes: (NSButton *) sender {
     [self showViewControllerNamed: @"Cubist"];
+} // showCubes
+
+- (IBAction) show2DGeometry: (NSButton *) sender {
+    [self showViewControllerNamed: @"Geometry2DWindowController"];
 } // showCubes
 
 @end // AppDelegate

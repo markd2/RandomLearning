@@ -36,6 +36,15 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="gj6-n1-YZL">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="214"/>
                     </customView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hnp-en-BHs">
+                        <rect key="frame" x="122" y="240" width="275" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Nothing here yet - for when we get 3D stuffs" id="iDR-yG-Ku2">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="WbI-Gd-aCg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="16" id="46c-0A-ajr"/>
