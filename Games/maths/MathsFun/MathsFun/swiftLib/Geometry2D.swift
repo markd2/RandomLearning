@@ -13,7 +13,7 @@ struct Line2D: Equatable {
 
     init(_ contents: Double...) {
         self.start = Point2D(x: contents[0], y: contents[1])
-        self.end = Point2D(x: contents[1], y: contents[2])
+        self.end = Point2D(x: contents[2], y: contents[3])
     }
 
     var length: Double {
@@ -70,6 +70,28 @@ struct Rectangle2D: Equatable {
         let p2 = origin + size
         return Vec2(x: fmax(p1.x, p2.x), y: fmax(p1.y, p2.y))
     }
-
 }
 
+struct OrientedRectangle: Equatable {
+    let position: Point2D
+    let halfExtents: Vec2
+    let rotationDegrees: Double
+
+    init() {
+        self.position = Point2D()
+        self.halfExtents = Vec2(x: 1.0, y: 1.0)
+        self.rotationDegrees = 0.0
+    }
+
+    init(position: Point2D, halfExtents: Vec2) {
+        self.position = position
+        self.halfExtents = halfExtents
+        self.rotationDegrees = 0.0
+    }
+
+    init(position: Point2D, halfExtents: Vec2, rotation: Double) {
+        self.position = position
+        self.halfExtents = halfExtents
+        self.rotationDegrees = rotation
+    }
+}
