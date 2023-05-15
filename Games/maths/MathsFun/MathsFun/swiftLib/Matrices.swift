@@ -328,52 +328,132 @@ struct Mat3: Equatable {
 struct Mat4: Equatable {
     fileprivate(set) var asArray: [Double]
     var _11: Double {
-        asArray[0]
+        get {
+            asArray[0]
+        }
+        set {
+            asArray[0] = newValue
+        }
     }
     var _12: Double {
-        asArray[1]
+        get {
+            asArray[1]
+        }
+        set {
+            asArray[1] = newValue
+        }
     }
     var _13: Double {
-        asArray[2]
+        get {
+            asArray[2]
+        }
+        set {
+            asArray[2] = newValue
+        }
     }
     var _14: Double {
-        asArray[3]
+        get {
+            asArray[3]
+        }
+        set {
+            asArray[3] = newValue
+        }
     }
     var _21: Double {
-        asArray[4]
+        get {
+            asArray[4]
+        }
+        set {
+            asArray[4] = newValue
+        }
     }
     var _22: Double {
-        asArray[5]
+        get {
+            asArray[5]
+        }
+        set {
+            asArray[5] = newValue
+        }
     }
     var _23: Double {
-        asArray[6]
+        get {
+            asArray[6]
+        }
+        set {
+            asArray[6] = newValue
+        }
     }
     var _24: Double {
-        asArray[7]
+        get {
+            asArray[7]
+        }
+        set {
+            asArray[7] = newValue
+        }
     }
     var _31: Double {
-        asArray[8]
+        get {
+            asArray[8]
+        }
+        set {
+            asArray[8] = newValue
+        }
     }
     var _32: Double {
-        asArray[9]
+        get {
+            asArray[9]
+        }
+        set {
+            asArray[9] = newValue
+        }
     }
     var _33: Double {
-        asArray[10]
+        get {
+            asArray[10]
+        }
+        set {
+            asArray[10] = newValue
+        }
     }
     var _34: Double {
-        asArray[11]
+        get {
+            asArray[11]
+        }
+        set {
+            asArray[11] = newValue
+        }
     }
     var _41: Double {
-        asArray[12]
+        get {
+            asArray[12]
+        }
+        set {
+            asArray[12] = newValue
+        }
     }
     var _42: Double {
-        asArray[13]
+        get {
+            asArray[13]
+        }
+        set {
+            asArray[13] = newValue
+        }
     }
     var _43: Double {
-        asArray[14]
+        get {
+            asArray[14]
+        }
+        set {
+            asArray[14] = newValue
+        }
     }
     var _44: Double {
-        asArray[15]
+        get {
+            asArray[15]
+        }
+        set {
+            asArray[15] = newValue
+        }
     }
 
     init() {
