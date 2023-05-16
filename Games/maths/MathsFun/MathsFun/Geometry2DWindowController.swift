@@ -1,7 +1,6 @@
 import Cocoa
 
 class Geometry2DWindowController: NSWindowController {
-
     override func windowDidLoad() {
         super.windowDidLoad()
     }
@@ -10,38 +9,42 @@ class Geometry2DWindowController: NSWindowController {
 
 class Geometry2DView: NSView {
     @Invalidating(.display)
+    var trackingOrigin: Point2D? = nil
+    @Invalidating(.display)
     var trackingPoint: Point2D? = nil
-
+    @Invalidating(.display)
+    var trackingLine: Line2D? = nil
+    
     @Invalidating(.display)
     var lines: [Line2D] = [
-      Line2D(10, 20, 60, 90),
-      Line2D(40, 190, 90, 100)]
-
+        Line2D(10, 20, 60, 90),
+        Line2D(40, 190, 90, 100)]
+    
     @Invalidating(.display)
     var circles: [Circle] = [
-      Circle(370, 10, 15),
-      Circle(370, 30, 15),
-      Circle(370, 50, 15),
-      Circle(370, 70, 15),
-      Circle(255, 75, 90),
-      Circle(80, 120, 50)]
-
+//        Circle(370, 10, 15),
+//        Circle(370, 30, 15),
+//        Circle(370, 50, 15),
+//        Circle(370, 70, 15),
+//        Circle(255, 75, 90),
+        Circle(40, 190, 50)]
+    
     @Invalidating(.display)
     var rectangles: [Rectangle2D] = [
-      Rectangle2D(155, 155, 30, 20),
-      Rectangle2D(50, 255, 88, 88),
-      Rectangle2D(180, 220, 50, 80)]
-
+        Rectangle2D(155, 155, 30, 20),
+        Rectangle2D(50, 255, 88, 88),
+        Rectangle2D(180, 220, 50, 80)]
+    
     @Invalidating(.display)
     var orientedRectangles: [OrientedRectangle] = [
-      OrientedRectangle(position: Point2D(x: 350, y: 200),
-                        halfExtents: Vec2(x: 60, y: 30),
-                        rotation: 66.0),
-      OrientedRectangle(position: Point2D(x: 200, y: 350),
-                        halfExtents: Vec2(x: 20, y: 70),
-                        rotation: 123.0)
+        OrientedRectangle(position: Point2D(x: 350, y: 200),
+                          halfExtents: Vec2(x: 60, y: 30),
+                          rotation: 66.0),
+        OrientedRectangle(position: Point2D(x: 200, y: 350),
+                          halfExtents: Vec2(x: 20, y: 70),
+                          rotation: 123.0)
     ]
-
+    
     override func draw(_ dirtyRect: NSRect) {
         let rect = bounds
 
@@ -55,9 +58,25 @@ class Geometry2DView: NSView {
         }
 
         NSColor.purple.set()
-        circles.forEach {
-            let isHit = $0.contains(trackingPoint)
+        circles.forEach { [self] in
+            // let isHit = $0.contains(trackingPoint)
+            let isHit = $0.intersects(trackingLine)
             $0.draw(fill: isHit)
+#if false
+            if let trackingLine {
+                let ab = trackingLine.end - trackingLine.start
+                let rect = CGRect(x: ab.x - 3, y: ab.y - 3,
+                                  width: 6, height: 6)
+                NSColor.red.set()
+                NSBezierPath.fill(rect)
+
+                let pls = $0.position - trackingLine.start
+                let rect2 = CGRect(x: pls.x - 3, y: pls.y - 3,
+                                  width: 6, height: 6)
+                NSColor.red.set()
+                NSBezierPath.fill(rect2)
+#endif
+            }
         }
 
         NSColor.brown.set()
@@ -70,6 +89,11 @@ class Geometry2DView: NSView {
         orientedRectangles.forEach {
             let isHit = $0.contains(trackingPoint)
             $0.draw(fill: isHit)
+        }
+
+        if let trackingLine {
+            NSColor.blue.set()
+            trackingLine.draw()
         }
 
         NSColor.black.set()
@@ -161,16 +185,21 @@ extension Geometry2DView {
     override func mouseDown(with event: NSEvent) {
         let localPoint = convert(event.locationInWindow, from: nil)
         hitTestShapes(localPoint)
+        trackingOrigin = Point2D(localPoint)
         trackingPoint = Point2D(localPoint)
+        trackingLine = Line2D(start: trackingOrigin!, end: trackingPoint!)
     }
     
     override func mouseDragged(with event: NSEvent) {
         let localPoint = convert(event.locationInWindow, from: nil)
         hitTestShapes(localPoint)
         trackingPoint = Point2D(localPoint)
+        trackingLine = Line2D(start: trackingOrigin!, end: trackingPoint!)
     }
     
     override func mouseUp(with event: NSEvent) {
+        trackingOrigin = nil
         trackingPoint = nil
+        trackingLine = nil
     }
 }

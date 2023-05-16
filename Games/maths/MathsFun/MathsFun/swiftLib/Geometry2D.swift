@@ -58,6 +58,27 @@ struct Circle: Equatable {
         }
         return false
     }
+
+    func intersects(_ line: Line2D?) -> Bool {
+        guard let line else { return false }
+
+        let ab = line.end - line.start
+        let t = (position - line.start).dot(ab) / ab.dot(ab)
+        if t < 0.0 || t > 1.0 {
+            return false
+        }
+
+        let closestPoint = line.start + ab * t
+        let circleToClosest = Line2D(start: position, end: closestPoint)
+        return circleToClosest.lengthSquared < radius * radius
+    }
+}
+
+extension Line2D {
+    func intersects(_ circle: Circle?) -> Bool {
+        guard let circle else { return false }
+        return circle.intersects(self)
+    }
 }
 
 struct Rectangle2D: Equatable {
