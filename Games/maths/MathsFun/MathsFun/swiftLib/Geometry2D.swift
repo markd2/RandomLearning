@@ -122,6 +122,39 @@ struct Rectangle2D: Equatable {
           && point.x <= max.x
           && point.y <= max.y
     }
+
+    func intersects(_ line: Line2D?) -> Bool {
+        guard let line else { return false }
+        if contains(line.start) || contains(line.end) { return true }
+        
+        var norm = (line.end - line.start).normalized
+        norm.x = (norm.x != 0) ? 1.0 / norm.x : 0
+        norm.y = (norm.y != 0) ? 1.0 / norm.y : 0
+
+        let minv = (min - line.start) * norm
+        let maxv = (max - line.start) * norm
+
+        let tmin = fmax(
+          fmin(minv.x, maxv.x),
+          fmin(minv.y, maxv.y))
+        let tmax = fmin(
+          fmax(minv.x, maxv.x),
+          fmax(minv.y, maxv.y))
+
+        if tmax < 0 || tmin > tmax {
+            return false
+        }
+
+        let t = (tmin < 0.0) ? tmax : tmin
+        return t > 0 && t*t < line.lengthSquared
+    }
+}
+
+extension Line2D {
+    func intersects(_ rectangle: Rectangle2D?) -> Bool {
+        guard let rectangle else { return false }
+        return rectangle.intersects(self)
+    }
 }
 
 struct OrientedRectangle: Equatable {
@@ -162,4 +195,31 @@ struct OrientedRectangle: Equatable {
         let localPoint = rotVector + halfExtents
         return localRectangle.contains(localPoint)
     }
+
+    func intersects(_ line: Line2D?) -> Bool {
+        guard let line else { return false }
+        
+        let theta = -rotationDegrees.degreesToRadians
+        let zRotation2x2 = Mat2(
+          cos(theta), sin(theta),
+          -sin(theta), cos(theta))
+
+        let rotVector1 = (line.start - position) * zRotation2x2
+        let rotVector2 = (line.end - position) * zRotation2x2
+        
+        let localLine = Line2D(start: rotVector1 + halfExtents,
+                               end: rotVector2 + halfExtents)
+        let localRectangle = Rectangle2D(origin: Point2D(), size:  halfExtents * 2.0)
+
+        return localRectangle.intersects(localLine)
+    }
 }
+
+extension Line2D {
+    func intersects(_ orectangle: OrientedRectangle?) -> Bool {
+        guard let orectangle else { return false }
+        return orectangle.intersects(self)
+    }
+}
+
+

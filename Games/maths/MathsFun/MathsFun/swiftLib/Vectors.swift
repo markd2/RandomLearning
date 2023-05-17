@@ -8,8 +8,22 @@ func absRelFPCompare(_ x: Double, _ y: Double) -> Bool {
 
 struct Vec2: Equatable {
     var asArray: [Double]
-    var x: Double { return asArray[0] }
-    var y: Double { return asArray[1] }
+    var x: Double {
+        get {
+            asArray[0]
+        }
+        set {
+            asArray[0] = newValue
+        }
+    }
+    var y: Double {
+        get {
+            asArray[1]
+        }
+        set {
+            asArray[1] = newValue
+        }
+    }
 
     var _11: Double {
         asArray[0]

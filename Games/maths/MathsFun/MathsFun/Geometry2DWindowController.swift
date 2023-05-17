@@ -22,11 +22,11 @@ class Geometry2DView: NSView {
     
     @Invalidating(.display)
     var circles: [Circle] = [
-//        Circle(370, 10, 15),
-//        Circle(370, 30, 15),
-//        Circle(370, 50, 15),
-//        Circle(370, 70, 15),
-//        Circle(255, 75, 90),
+        Circle(370, 10, 15),
+        Circle(370, 30, 15),
+        Circle(370, 50, 15),
+        Circle(370, 70, 15),
+        Circle(255, 75, 90),
         Circle(40, 190, 50)]
     
     @Invalidating(.display)
@@ -75,19 +75,21 @@ class Geometry2DView: NSView {
                                   width: 6, height: 6)
                 NSColor.red.set()
                 NSBezierPath.fill(rect2)
-#endif
             }
+#endif
         }
 
         NSColor.brown.set()
         rectangles.forEach {
-            let isHit = $0.contains(trackingPoint)
+            // let isHit = $0.contains(trackingPoint)
+            let isHit = $0.intersects(trackingLine)
             $0.draw(fill: isHit)
         }
 
         NSColor.red.set()
         orientedRectangles.forEach {
-            let isHit = $0.contains(trackingPoint)
+            // let isHit = $0.contains(trackingPoint)
+            let isHit = $0.intersects(trackingLine)
             $0.draw(fill: isHit)
         }
 
