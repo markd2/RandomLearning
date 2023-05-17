@@ -88,8 +88,8 @@ extension Line2D {
 }
 
 struct Rectangle2D: Equatable {
-    let origin: Point2D
-    let size: Vec2
+    var origin: Point2D
+    var size: Vec2
 
     init(origin: Point2D, size: Vec2) {
         self.origin = origin

@@ -14,11 +14,18 @@ class SimpleCollisionsView: NSView {
       CircleItem(circle: Circle(150, 75, 15))
     ]
 
+    var rectangles: [RectangleItem] = [
+      RectangleItem(rectangle: Rectangle2D(10, 10, 50, 30)),
+      RectangleItem(rectangle: Rectangle2D(240, 100, 80, 100)),
+      RectangleItem(rectangle: Rectangle2D(170, 95, 15, 15))
+    ]
+
+
     var trackingItem: DraggableItem?
     var trackingDelta: CGSize?
 
     var draggables: [DraggableItem] {
-        circles
+        circles + rectangles
     }
 
     override func draw(_ dirtyRect: NSRect) {
@@ -95,6 +102,16 @@ extension SimpleCollisionsView {
     }
 }
 
+extension CGPoint {
+    static func -(lhs: CGPoint, rhs: CGPoint) -> CGSize {
+        CGSize(width: lhs.x - rhs.x, height: lhs.y - rhs.y)
+    }
+
+    static func +(lhs: CGPoint, rhs: CGSize) -> CGPoint {
+        CGPoint(x: lhs.x + rhs.width, y: lhs.y + rhs.height)
+    }
+}
+
 protocol DraggableItem {
     var highlighted: Bool { get set }
     func draw()
@@ -133,12 +150,32 @@ class CircleItem: DraggableItem {
     }
 }
 
-extension CGPoint {
-    static func -(lhs: CGPoint, rhs: CGPoint) -> CGSize {
-        CGSize(width: lhs.x - rhs.x, height: lhs.y - rhs.y)
+class RectangleItem: DraggableItem {
+    var rectangle = Rectangle2D(0, 0, 0, 0)
+    var highlighted = false
+
+    init() {
     }
 
-    static func +(lhs: CGPoint, rhs: CGSize) -> CGPoint {
-        CGPoint(x: lhs.x + rhs.width, y: lhs.y + rhs.height)
+    init(rectangle: Rectangle2D) {
+        self.rectangle = rectangle
+    }
+    
+    func draw() {
+        rectangle.draw(fill: highlighted)
+    }
+
+    func hitTest(_ cgpoint: CGPoint) -> Bool {
+        let point = Point2D(cgpoint)
+        return rectangle.contains(point)
+    }
+
+    func clickDelta(from cgpoint: CGPoint) -> CGSize {
+        let origin = rectangle.origin.cgPoint
+        return origin - cgpoint
+    }
+    
+    func moveTo(_ cgpoint: CGPoint) {
+        rectangle.origin = Point2D(cgpoint)
     }
 }
