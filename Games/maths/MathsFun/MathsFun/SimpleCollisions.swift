@@ -74,7 +74,15 @@ class SimpleCollisionsView: NSView {
                     citem2.highlighted = true
                 }
             }
+            for rect in rectangles {
+                if citem1.circle.intersects(rect.rectangle) {
+                    citem1.highlighted = true
+                    rect.highlighted = true
+                }
+            }
         }
+
+        // test rectangles against rectangles
 
         needsDisplay = true
     }

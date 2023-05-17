@@ -142,3 +142,29 @@ bool CircleCircle(const Circle &c1, const Circle &c2) {
 
     return LengthSq(line) <= radiiSum * radiiSum;
 } // CircleCircle
+
+
+bool CircleRectangle(const Circle &circle, const Rectangle2D &rectangle) {
+    vec2 min = GetMin(rectangle);
+    vec2 max = GetMax(rectangle);
+
+    // find closest point on the rectangle
+    Point2D closestPoint = circle.position;
+    if (closestPoint.x < min.x) {
+        closestPoint.x = min.x;
+    }
+    else if (closestPoint.x > max.x) {
+        closestPoint.x = max.x;
+    }
+
+    if (closestPoint.y < min.y) {
+        closestPoint.y = min.y;
+    }
+    else if (closestPoint.y > max.y) {
+        closestPoint.y = max.y;
+    }
+
+    Line2D line(circle.position, closestPoint);
+    return LengthSq(line) <= circle.radius * circle.radius;
+
+} // CircleRectangle

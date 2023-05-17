@@ -78,6 +78,31 @@ struct Circle: Equatable {
         let radiiSum = radius + c2.radius
         return line.lengthSquared <= radiiSum * radiiSum
     }
+    
+    func intersects(_ rect: Rectangle2D) -> Bool {
+        var closestPoint = position
+        let min = rect.min
+        let max = rect.max
+
+        // a clamping we will go...
+        if closestPoint.x < min.x {
+            closestPoint.x = min.x
+        }
+        else if closestPoint.x > max.x {
+            closestPoint.x = max.x
+        }
+
+        if closestPoint.y < min.y {
+            closestPoint.y = min.y
+        }
+        else if closestPoint.y > max.y {
+            closestPoint.y = max.y
+        }
+
+        let line = Line2D(start: position, end: closestPoint)
+        return line.lengthSquared <= radius * radius
+        
+    }
 }
 
 extension Line2D {
@@ -153,6 +178,10 @@ struct Rectangle2D: Equatable {
 
         let t = (tmin < 0.0) ? tmax : tmin
         return t > 0 && t*t < line.lengthSquared
+    }
+
+    func intersects(_ circle: Circle) -> Bool {
+        circle.intersects(self)
     }
 }
 
