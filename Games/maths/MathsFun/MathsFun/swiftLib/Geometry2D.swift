@@ -36,8 +36,8 @@ struct Line2D: Equatable {
 }
 
 struct Circle: Equatable {
-    let position: Point2D
-    let radius: Double
+    var position: Point2D
+    var radius: Double
 
     init(position: Point2D, radius: Double) {
         self.position = position
