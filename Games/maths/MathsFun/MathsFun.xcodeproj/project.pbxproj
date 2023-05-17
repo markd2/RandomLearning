@@ -17,6 +17,8 @@
 		7D13B2F82A12B93800D2ACF0 /* Geometry2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */; };
 		7D13B2FB2A12C21400D2ACF0 /* Geometry2DWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2F92A12C21400D2ACF0 /* Geometry2DWindowController.swift */; };
 		7D13B2FC2A12C21400D2ACF0 /* Geometry2DWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D13B2FA2A12C21400D2ACF0 /* Geometry2DWindowController.xib */; };
+		7D13B2FF2A155BDE00D2ACF0 /* SimpleCollisions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13B2FD2A155BDE00D2ACF0 /* SimpleCollisions.swift */; };
+		7D13B3002A155BDE00D2ACF0 /* SimpleCollisions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D13B2FE2A155BDE00D2ACF0 /* SimpleCollisions.xib */; };
 		7D93A00629E795490087F375 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93A00529E795490087F375 /* AppDelegate.m */; };
 		7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00729E7954C0087F375 /* Assets.xcassets */; };
 		7D93A00B29E7954C0087F375 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D93A00929E7954C0087F375 /* MainMenu.xib */; };
@@ -53,6 +55,8 @@
 		7D13B2F72A12B93800D2ACF0 /* Geometry2DTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry2DTests.swift; path = MathsFun/swiftLib/Geometry2DTests.swift; sourceTree = SOURCE_ROOT; };
 		7D13B2F92A12C21400D2ACF0 /* Geometry2DWindowController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Geometry2DWindowController.swift; sourceTree = "<group>"; };
 		7D13B2FA2A12C21400D2ACF0 /* Geometry2DWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Geometry2DWindowController.xib; sourceTree = "<group>"; };
+		7D13B2FD2A155BDE00D2ACF0 /* SimpleCollisions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCollisions.swift; sourceTree = "<group>"; };
+		7D13B2FE2A155BDE00D2ACF0 /* SimpleCollisions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleCollisions.xib; sourceTree = "<group>"; };
 		7D93A00129E795490087F375 /* MathsFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathsFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D93A00429E795490087F375 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D93A00529E795490087F375 /* AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				7D13096D29F3662E00EE81B9 /* Reflection.xib */,
 				7D13B2F92A12C21400D2ACF0 /* Geometry2DWindowController.swift */,
 				7D13B2FA2A12C21400D2ACF0 /* Geometry2DWindowController.xib */,
+				7D13B2FD2A155BDE00D2ACF0 /* SimpleCollisions.swift */,
+				7D13B2FE2A155BDE00D2ACF0 /* SimpleCollisions.xib */,
 			);
 			path = MathsFun;
 			sourceTree = "<group>";
@@ -252,6 +258,7 @@
 			files = (
 				7DDB3EB32A0BD7B90019ACD1 /* Cubist.xib in Resources */,
 				7D13096A29F20CC600EE81B9 /* Projections.xib in Resources */,
+				7D13B3002A155BDE00D2ACF0 /* SimpleCollisions.xib in Resources */,
 				7D93A00829E7954C0087F375 /* Assets.xcassets in Resources */,
 				7D13B2FC2A12C21400D2ACF0 /* Geometry2DWindowController.xib in Resources */,
 				7D13096F29F3662E00EE81B9 /* Reflection.xib in Resources */,
@@ -281,6 +288,7 @@
 				7D13096C29F20EEC00EE81B9 /* PlaypenView.swift in Sources */,
 				7D13097029F3662E00EE81B9 /* Reflection.swift in Sources */,
 				7D93A01729E7A2010087F375 /* vectors.cpp in Sources */,
+				7D13B2FF2A155BDE00D2ACF0 /* SimpleCollisions.swift in Sources */,
 				7DDB3E8F2A09615F0019ACD1 /* Matrices.swift in Sources */,
 				7D93E20F29FEACF800B90BD4 /* matrices.cpp in Sources */,
 				7D13B2F62A12B8ED00D2ACF0 /* Geometry2D.swift in Sources */,

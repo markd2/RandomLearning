@@ -21,7 +21,7 @@
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     self.windowControllers = [NSMutableArray new];
 
-    [self show2DGeometry: nil];
+    [self showSimpleCollisions: nil];
 } // applicationDidFinishLaunching
 
 
@@ -54,6 +54,10 @@
 
 - (IBAction) show2DGeometry: (NSButton *) sender {
     [self showViewControllerNamed: @"Geometry2DWindowController"];
+} // showCubes
+
+- (IBAction) showSimpleCollisions: (NSButton *) sender {
+    [self showViewControllerNamed: @"SimpleCollisions"];
 } // showCubes
 
 @end // AppDelegate
