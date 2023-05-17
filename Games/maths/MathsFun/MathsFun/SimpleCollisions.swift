@@ -14,8 +14,12 @@ class SimpleCollisionsView: NSView {
       CircleItem(circle: Circle(150, 75, 15))
     ]
 
-    var trackingCircle: CircleItem?
+    var trackingItem: DraggableItem?
     var trackingDelta: CGSize?
+
+    var draggables: [DraggableItem] {
+        circles
+    }
 
     override func draw(_ dirtyRect: NSRect) {
         let rect = bounds
@@ -24,8 +28,8 @@ class SimpleCollisionsView: NSView {
         rect.fill()
 
         NSColor.purple.set()
-        for circleItem in circles {
-            circleItem.draw()
+        for item in draggables {
+            item.draw()
         }
 
         NSColor.black.set()
@@ -33,17 +37,17 @@ class SimpleCollisionsView: NSView {
     }
 
     private func unhighlightEverybody() {
-        for circleItem in circles {
-            circleItem.highlighted = false
+        for var item in draggables {
+            item.highlighted = false
         }
     }
 
     private func hitTestShapes(_ point: CGPoint) {
 
-        for circleItem in circles {
-            if circleItem.hitTest(point) {
-                trackingCircle = circleItem
-                trackingDelta = circleItem.clickDelta(from: point)
+        for item in draggables {
+            if item.hitTest(point) {
+                trackingItem = item
+                trackingDelta = item.clickDelta(from: point)
                 break
             }
         }
@@ -77,21 +81,29 @@ extension SimpleCollisionsView {
     }
     
     override func mouseDragged(with event: NSEvent) {
-        guard let trackingCircle, let trackingDelta else { return }
+        guard let trackingItem, let trackingDelta else { return }
 
         let localPoint = convert(event.locationInWindow, from: nil) + trackingDelta
-        trackingCircle.moveTo(localPoint)
+        trackingItem.moveTo(localPoint)
 
         updateCollisions()
     }
     
     override func mouseUp(with event: NSEvent) {
-        trackingCircle = nil
+        trackingItem = nil
         trackingDelta = nil
     }
 }
 
-class CircleItem {
+protocol DraggableItem {
+    var highlighted: Bool { get set }
+    func draw()
+    func hitTest(_ cgpoint: CGPoint) -> Bool
+    func clickDelta(from cgpoint: CGPoint) -> CGSize
+    func moveTo(_ cgpoint: CGPoint)
+}
+
+class CircleItem: DraggableItem {
     var circle = Circle(0, 0, 0)
     var highlighted = false
 
