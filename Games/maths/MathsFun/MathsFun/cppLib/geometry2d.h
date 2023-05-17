@@ -61,5 +61,7 @@ bool LineOrientedRectangle(const Line2D &line, const OrientedRectangle &rectangl
 #define RectangleLine(rectangle, line) LineRectangle(line, rectangle)
 #define OrientedRectangleLine(or, line) LineOrientedRectangle(line, or)
 
+bool CircleCircle(const Circle &c1, const Circle &c2);
+
 #endif // MATH_GEOMETRY_2D
 

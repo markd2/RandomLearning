@@ -135,3 +135,10 @@ bool LineOrientedRectangle(const Line2D &line, const OrientedRectangle &rectangl
     return LineRectangle(localLine, localRectangle);
 
 } // LineOrientedRectangle
+
+bool CircleCircle(const Circle &c1, const Circle &c2) {
+    Line2D line(c1.position, c2.position);
+    float radiiSum = c1.radius + c2.radius;
+
+    return LengthSq(line) <= radiiSum * radiiSum;
+} // CircleCircle
