@@ -10,7 +10,8 @@ class SimpleCollisions: NSWindowController {
 class SimpleCollisionsView: NSView {
     var circles: [CircleItem] = [
       CircleItem(circle: Circle(100, 100, 30)),
-      CircleItem(circle: Circle(200, 250, 57))
+      CircleItem(circle: Circle(200, 250, 57)),
+      CircleItem(circle: Circle(150, 75, 15))
     ]
 
     var trackingCircle: CircleItem?
@@ -52,8 +53,15 @@ class SimpleCollisionsView: NSView {
     private func updateCollisions() {
         unhighlightEverybody()
 
+        // not interested in performance yet
         for citem1 in circles {
             for citem2 in circles {
+                if citem1 === citem2 { continue }
+
+                if citem1.circle.intersects(citem2.circle) {
+                    citem1.highlighted = true
+                    citem2.highlighted = true
+                }
             }
         }
 
@@ -78,6 +86,8 @@ extension SimpleCollisionsView {
     }
     
     override func mouseUp(with event: NSEvent) {
+        trackingCircle = nil
+        trackingDelta = nil
     }
 }
 

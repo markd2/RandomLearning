@@ -72,6 +72,12 @@ struct Circle: Equatable {
         let circleToClosest = Line2D(start: position, end: closestPoint)
         return circleToClosest.lengthSquared < radius * radius
     }
+
+    func intersects(_ c2: Circle) -> Bool {
+        let line = Line2D(start: position, end: c2.position)
+        let radiiSum = radius + c2.radius
+        return line.lengthSquared <= radiiSum * radiiSum
+    }
 }
 
 extension Line2D {
