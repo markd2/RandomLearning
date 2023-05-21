@@ -20,12 +20,23 @@ class SimpleCollisionsView: NSView {
       RectangleItem(rectangle: Rectangle2D(170, 95, 15, 15))
     ]
 
+    var orientedRectangles: [OrientedRectangleItem] = [
+      OrientedRectangleItem(orientedRectangle: OrientedRectangle(
+                              position: Point2D(x: 337, y: 265),
+                              halfExtents: Vec2(x: 60, y: 30),
+                              rotation: 66.0)),
+      OrientedRectangleItem(orientedRectangle: OrientedRectangle(
+                              position: Point2D(x: 115, y: 192),
+                              halfExtents: Vec2(x: 20, y: 70),
+                              rotation: 123.0))
+    ]
+
 
     var trackingItem: DraggableItem?
     var trackingDelta: CGSize?
 
     var draggables: [DraggableItem] {
-        circles + rectangles
+        circles + rectangles + orientedRectangles
     }
 
     override func draw(_ dirtyRect: NSRect) {
@@ -78,6 +89,12 @@ class SimpleCollisionsView: NSView {
                 if citem1.circle.intersects(rect.rectangle) {
                     citem1.highlighted = true
                     rect.highlighted = true
+                }
+            }
+            for orect in orientedRectangles {
+                if citem1.circle.intersects(orect.orientedRectangle) {
+                    citem1.highlighted = true
+                    orect.highlighted = true
                 }
             }
         }
@@ -185,5 +202,35 @@ class RectangleItem: DraggableItem {
     
     func moveTo(_ cgpoint: CGPoint) {
         rectangle.origin = Point2D(cgpoint)
+    }
+}
+
+class OrientedRectangleItem: DraggableItem {
+    var orientedRectangle = OrientedRectangle(position: Point2D(), halfExtents: Vec2())
+    var highlighted = false
+
+    init() {
+    }
+
+    init(orientedRectangle: OrientedRectangle) {
+        self.orientedRectangle = orientedRectangle
+    }
+    
+    func draw() {
+        orientedRectangle.draw(fill: highlighted)
+    }
+
+    func hitTest(_ cgpoint: CGPoint) -> Bool {
+        let point = Point2D(cgpoint)
+        return orientedRectangle.contains(point)
+    }
+
+    func clickDelta(from cgpoint: CGPoint) -> CGSize {
+        let origin = orientedRectangle.position.cgPoint
+        return origin - cgpoint
+    }
+    
+    func moveTo(_ cgpoint: CGPoint) {
+        orientedRectangle.position = Point2D(cgpoint)
     }
 }

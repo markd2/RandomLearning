@@ -101,7 +101,10 @@ struct Circle: Equatable {
 
         let line = Line2D(start: position, end: closestPoint)
         return line.lengthSquared <= radius * radius
-        
+    }
+    
+    func intersects(_ orientedRectangle: OrientedRectangle) -> Bool {
+        return orientedRectangle.intersects(self)
     }
 }
 
@@ -193,9 +196,9 @@ extension Line2D {
 }
 
 struct OrientedRectangle: Equatable {
-    let position: Point2D
-    let halfExtents: Vec2
-    let rotationDegrees: Double
+    var position: Point2D
+    var halfExtents: Vec2
+    var rotationDegrees: Double
 
     init() {
         self.position = Point2D()
@@ -247,6 +250,21 @@ struct OrientedRectangle: Equatable {
         let localRectangle = Rectangle2D(origin: Point2D(), size:  halfExtents * 2.0)
 
         return localRectangle.intersects(localLine)
+    }
+
+    func intersects(_ circle: Circle?) -> Bool {
+        guard let circle else { return false }
+        
+        let theta = -rotationDegrees.degreesToRadians
+        let zRotation2x2 = Mat2(
+          cos(theta), sin(theta),
+          -sin(theta), cos(theta))
+
+        let r = (circle.position - position) * zRotation2x2
+        let localCircle = Circle(position: r + halfExtents, radius: circle.radius)
+        let localRect = Rectangle2D(origin: Point2D(), size: halfExtents * 2.0)
+
+        return localCircle.intersects(localRect)
     }
 }
 
