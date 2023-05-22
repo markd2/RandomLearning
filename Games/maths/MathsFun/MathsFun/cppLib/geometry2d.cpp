@@ -185,3 +185,17 @@ bool CircleOrientedRectangle(const Circle &circle, const OrientedRectangle &rect
     return CircleRectangle(localCircle, localRect);
 
 } // CircleOrientedRectangle
+
+bool RectangleRectangle(const Rectangle2D &rect1, const Rectangle2D &rect2) {
+    vec2 aMin = GetMin(rect1);
+    vec2 aMax = GetMax(rect1);
+
+    vec2 bMin = GetMin(rect2);
+    vec2 bMax = GetMax(rect2);
+
+    bool overX = ((bMin.x <= aMax.x) && (aMin.x <= bMax.x));
+    bool overY = ((bMin.y <= aMax.y) && (aMin.y <= bMax.y));
+
+    return overX && overY;
+
+} // RctangleRectangle

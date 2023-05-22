@@ -100,7 +100,15 @@ class SimpleCollisionsView: NSView {
         }
 
         // test rectangles against rectangles
-
+        for ritem1 in rectangles {
+            for rect in rectangles {
+                if ritem1 === rect { continue }
+                if ritem1.rectangle.intersects(rect.rectangle) {
+                    ritem1.highlighted = true
+                    rect.highlighted = true
+                }
+            }
+        }
         needsDisplay = true
     }
 }

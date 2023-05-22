@@ -186,6 +186,20 @@ struct Rectangle2D: Equatable {
     func intersects(_ circle: Circle) -> Bool {
         circle.intersects(self)
     }
+
+    func intersects(_ rectangle: Rectangle2D?) -> Bool {
+        guard let rectangle else { return false }
+
+        let aMin = min
+        let bMin = rectangle.min
+        let aMax = max
+        let bMax = rectangle.max
+
+        let overX = ((bMin.x <= aMax.x) && (aMin.x <= bMax.x))
+        let overY = ((bMin.y <= aMax.y) && (aMin.y <= bMax.y))
+
+        return overX && overY
+    }
 }
 
 extension Line2D {

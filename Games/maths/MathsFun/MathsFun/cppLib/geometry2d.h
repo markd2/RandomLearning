@@ -71,5 +71,7 @@ bool CircleRectangle(const Circle &circle, const Rectangle2D &rectangle);
 bool CircleOrientedRectangle(const Circle &circle, const OrientedRectangle &rectangle);
 #define OrientedRectangleCircle(r, c) CircleOrientedRectangle(c, r)
 
+bool RectangleRectangle(const Rectangle2D &rect1, const Rectangle2D &rect2);
+
 #endif // MATH_GEOMETRY_2D
 
