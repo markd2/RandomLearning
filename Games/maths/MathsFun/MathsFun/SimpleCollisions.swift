@@ -125,6 +125,18 @@ extension SimpleCollisionsView {
         trackingItem = nil
         trackingDelta = nil
     }
+    
+    override func scrollWheel(with event: NSEvent) {
+        let localPoint = convert(event.locationInWindow, from: nil)
+
+        for orect in orientedRectangles {
+            if orect.orientedRectangle.contains(Point2D(localPoint)) {
+                orect.orientedRectangle.rotationDegrees -= event.deltaY
+                updateCollisions()
+                break
+            }
+        }
+    }
 }
 
 extension CGPoint {

@@ -23,8 +23,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3cg-MM-aGo">
-                        <rect key="frame" x="8" y="244" width="183" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Click and drag things around!" id="vn8-uI-Uk1">
+                        <rect key="frame" x="8" y="244" width="480" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Click and drag things around! ScrollWheel over an oriented rectangle to rotate!" id="vn8-uI-Uk1">
                             <font key="font" usesAppearanceFont="YES"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
