@@ -73,5 +73,14 @@ bool CircleOrientedRectangle(const Circle &circle, const OrientedRectangle &rect
 
 bool RectangleRectangle(const Rectangle2D &rect1, const Rectangle2D &rect2);
 
+typedef struct Interval2D {
+    float min;
+    float max;
+} Interval2D;
+
+Interval2D GetInterval(const Rectangle2D &rect, const vec2 &axis);
+bool OverlapOnAxis(const Rectangle2D &rect1, const Rectangle2D &rect2, const vec2 &axis);
+bool RectangleRectangleSAT(const Rectangle2D &rect1, const Rectangle2D &rect2);
+
 #endif // MATH_GEOMETRY_2D
 

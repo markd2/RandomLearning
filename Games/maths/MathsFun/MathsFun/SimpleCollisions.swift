@@ -103,7 +103,7 @@ class SimpleCollisionsView: NSView {
         for ritem1 in rectangles {
             for rect in rectangles {
                 if ritem1 === rect { continue }
-                if ritem1.rectangle.intersects(rect.rectangle) {
+                if ritem1.rectangle.intersectsSAT(rect.rectangle) {
                     ritem1.highlighted = true
                     rect.highlighted = true
                 }

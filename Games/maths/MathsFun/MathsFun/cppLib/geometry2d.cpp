@@ -199,3 +199,44 @@ bool RectangleRectangle(const Rectangle2D &rect1, const Rectangle2D &rect2) {
     return overX && overY;
 
 } // RctangleRectangle
+
+Interval2D GetInterval(const Rectangle2D &rect, const vec2 &axis) {
+    Interval2D result;
+
+    vec2 min = GetMin(rect);
+    vec2 max = GetMax(rect);
+
+    vec2 verts[] = {
+        vec2(min.x, min.y), vec2(min.x, max.y),
+        vec2(max.x, max.y), vec2(max.x, min.y),
+    };
+
+    // project each vertex onto the axis, store the smallest and largest values
+    result.min = result.max = Dot(axis, verts[0]);
+
+    for (int i = 1; i < 4; i++) {
+        float projection = Dot(axis, verts[i]);
+        if (projection < result.min) result.min = projection;
+        if (projection > result.max) result.max = projection;
+    }
+
+    return result;
+} // GetInterval
+
+bool OverlapOnAxis(const Rectangle2D &rect1, const Rectangle2D &rect2,
+                   const vec2 &axis) {
+    Interval2D a = GetInterval(rect1, axis);
+    Interval2D b = GetInterval(rect2, axis);
+    return ((b.min <= a.max) && (a.min <= b.max));
+} // OverlapOnAxis
+
+bool RectangleRectangleSAT(const Rectangle2D &rect1, const Rectangle2D &rect2) {
+    vec2 axisToTest[] = { vec2(1, 0), vec2(0, 1) };
+    
+    for (int i = 0; i < 2; i++) {
+        if (!OverlapOnAxis(rect1, rect2, axisToTest[i])) {
+            return false;
+        }
+    }
+    return true;
+} // RectangleRectangleSAT

@@ -2,6 +2,11 @@ import Foundation
 
 typealias Point2D = Vec2
 
+struct Interval2D: Equatable {
+    var min: Double = 0
+    var max: Double = 0
+}
+
 struct Line2D: Equatable {
     let start: Point2D
     let end: Point2D
@@ -157,6 +162,32 @@ struct Rectangle2D: Equatable {
           && point.y <= max.y
     }
 
+    func interval(projectedOnTo axis: Vec2) -> Interval2D {
+        var result = Interval2D()
+        let min = self.min
+        let max = self.max
+
+        let verts = [
+            Vec2(x: min.x, y: min.y),
+            Vec2(x: min.x, y: max.y),
+            Vec2(x: max.x, y: max.y),
+            Vec2(x: max.x, y: min.y),
+        ]
+
+        // project each vertex on to the axis, and accumulate smallest/largest values
+
+        result.min = axis.dot(verts[0])
+        result.max = result.min
+
+        for i in 1 ..< 4 {
+            let projection = axis.dot(verts[i])
+            if projection < result.min { result.min = projection }
+            if projection > result.max { result.max = projection }
+        }
+
+        return result
+    }        
+
     func intersects(_ line: Line2D?) -> Bool {
         guard let line else { return false }
         if contains(line.start) || contains(line.end) { return true }
@@ -200,6 +231,25 @@ struct Rectangle2D: Equatable {
 
         return overX && overY
     }
+
+    func overlaps(rectangle rect2: Rectangle2D, onAxis axis: Vec2) -> Bool {
+        let a = self.interval(projectedOnTo: axis)
+        let b = rect2.interval(projectedOnTo: axis)
+
+        return ((b.min <= a.max) && (a.min <= b.max))
+    }
+
+    func intersectsSAT(_ rect2: Rectangle2D) -> Bool {
+        let axesToTest = [Vec2(x: 1, y: 0), Vec2(x: 0, y: 1)]
+
+        for axis in axesToTest {
+            if !overlaps(rectangle: rect2, onAxis: axis) {
+                return false
+            }
+        }
+        return true
+    }
+
 }
 
 extension Line2D {
