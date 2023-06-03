@@ -12,6 +12,9 @@ classstructemum Blah: CustomDebugStringConvertible {
 
 = Array(repeating: 0, count: 23)
 
+// also this, but called after instantiation and doesn't have elements created
+.reserveCapacity(123)
+
     let sizeSum = sizes.reduce(0) { $0 + $1 }
     let sizeSum = sizes.reduce(into: 0) { $0 += $1 }
 
