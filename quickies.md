@@ -18,3 +18,21 @@ classstructemum Blah: CustomDebugStringConvertible {
 Int.max is INT_MAX 
 
 let padding = String(repeating: " ", count: depth * 4)
+
+string.unicodeScalars
+let fi = string.firstIndex(of: "foot")
+string.endIndex
+string[..<fi] // grab prefix
+Array("string") // perfectly cromulent
+
+string.index(string.startIndex, offsetBy: 23)
+
+forwardScan = string.index(after: forwardScan)
+backwardScan = string.index(before: backwardScan)
+
+
+// strip all but alphanumerics
+let alphanum = CharacterSet.alphanumerics
+let string = String(rawString.unicodeScalars.filter { alphanum.contains($0) })
+CharacterSet.letters / decimalDigits / whitespaces / whitespacesAndNewlines / etc
+    https://developer.apple.com/documentation/foundation/characterset   
