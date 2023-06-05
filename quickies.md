@@ -39,3 +39,6 @@ let alphanum = CharacterSet.alphanumerics
 let string = String(rawString.unicodeScalars.filter { alphanum.contains($0) })
 CharacterSet.letters / decimalDigits / whitespaces / whitespacesAndNewlines / etc
     https://developer.apple.com/documentation/foundation/characterset   
+
+run playground:
+  shift-command-return
