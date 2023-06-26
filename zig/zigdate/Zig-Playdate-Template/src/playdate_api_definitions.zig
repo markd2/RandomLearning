@@ -441,7 +441,7 @@ pub const SoundFormat = enum(c_uint) {
     kSoundADPCMStereo = 5,
 };
 pub inline fn SoundFormatIsStereo(f: SoundFormat) bool {
-    return @enumToInt(f) & 1;
+    return @intFromEnum(f) & 1;
 }
 pub inline fn SoundFormatIs16bit(f: SoundFormat) bool {
     return switch (f) {
@@ -1096,17 +1096,17 @@ pub const JSONValue = extern struct {
     },
 };
 pub inline fn json_intValue(value: JSONValue) c_int {
-    switch (@intToEnum(JSONValueType, value.type)) {
+    switch (@intCast(JSONValueType, value.type)) {
         .JSONInteger => return value.data.intval,
-        .JSONFloat => return @floatToInt(c_int, value.data.floatval),
+        .JSONFloat => return @intFromFloat(c_int, value.data.floatval),
         .JSONString => return std.fmt.parseInt(c_int, std.mem.span(value.data.stringval), 10) catch 0,
         .JSONTrue => return 1,
         else => return 0,
     }
 }
 pub inline fn json_floatValue(value: JSONValue) f32 {
-    switch (@intToEnum(JSONValueType, value.type)) {
-        .JSONInteger => return @intToFloat(f32, value.data.intval),
+    switch (@intCast(JSONValueType, value.type)) {
+        .JSONInteger => return @floatFromInt(f32, value.data.intval),
         .JSONFloat => return value.data.floatval,
         .JSONString => return 0,
         .JSONTrue => return @floatCast(f32, 1.0),
@@ -1114,13 +1114,13 @@ pub inline fn json_floatValue(value: JSONValue) f32 {
     }
 }
 pub inline fn json_boolValue(value: JSONValue) c_int {
-    return if (@intToEnum(JSONValueType, value.type) == .JSONString)
-        @boolToInt(value.data.stringval[0] != 0)
+    return if (@intCast(JSONValueType, value.type) == .JSONString)
+        @intFromBool(value.data.stringval[0] != 0)
     else
         json_intValue(value);
 }
 pub inline fn json_stringValue(value: JSONValue) [*c]u8 {
-    return if (@intToEnum(JSONValueType, value.type) == .JSONString)
+    return if (@intCast(JSONValueType, value.type) == .JSONString)
         value.data.stringval
     else
         null;

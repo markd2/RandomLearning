@@ -26,7 +26,7 @@ fn update_and_render(userdata: ?*anyopaque) callconv(.C) c_int {
     const playdate = @ptrCast(*pdapi.PlaydateAPI, @alignCast(@alignOf(pdapi.PlaydateAPI), userdata.?));
     const to_draw = "Hello from Zig!";
 
-    playdate.graphics.clear(@enumToInt(pdapi.LCDSolidColor.ColorWhite));
+    playdate.graphics.clear(@intFromEnum(pdapi.LCDSolidColor.ColorWhite));
     const pixel_width = playdate.graphics.drawText(to_draw, to_draw.len, .UTF8Encoding, 0, 0);
     _ = pixel_width;
     playdate.graphics.drawBitmap(g_playdate_image, pdapi.LCD_COLUMNS / 2 - 16, pdapi.LCD_ROWS / 2 - 16, .BitmapUnflipped);

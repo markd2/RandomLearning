@@ -36,4 +36,6 @@ src/main.zig:29:29: error: invalid builtin function: '@enumToInt'
 
 * opened issue https://github.com/DanB91/Zig-Playdate-Template/issues/1
 
+- turns out the built-ins got renamed. (@blahFromSplunge)
+
 
