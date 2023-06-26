@@ -113,6 +113,7 @@ const fnord_bork =
   - Zig does not perform unsafe type coercions
   - floating point type for C ABIs: c_longdouble
   - `unreachable`
+  - `type`
 
 * if
   - usual suspects.  ==, <, >, !=
@@ -154,6 +155,13 @@ while (blah < 10) : (blah += 3) {
     - dig into a tuple with [0], [1], etc
   - @bitReverse(integer: anytype) T
     - value to reverse.
+  - math functions @sqrt / @exp / @sin / @log / @cos / @floor etc
+  - type casting @as / @errorFromInt / @floatFromInt / @ptrFromInt / @intFromPtr / @intFromEnum
+  - some esoterica like @call, @compileLog, @embedFile (cool!), @src
+  - @This - returns innermost struct/enum/union that a function call is inside
+    - capital b/c it works on a type
+  - @typeInfo - returns information about any type in a TypeInfo union
+  - @TypeOf - returns type common to all input parameters. (c.f. "peer type resolution")
 
 * functions
   - `fn name(arg: u8) u8 { return 23; }`
@@ -414,4 +422,4 @@ outer_bloke: {
   - can also break and return a value  `break :outer_bloke 24;`
 
 
-(got up to 64)
+(got up to 66 - starting of comptime)
