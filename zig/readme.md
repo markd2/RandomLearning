@@ -37,6 +37,7 @@ var greeble: u16 = 65531;
   - can put format specifiers in the braces
   - e.g. `u` for utf-8 character, `s` for utf-8 string
   - `c` for ascii character
+  - {x:0>6} - x for lower-case hex, : separator, 0 padding character, alignment > (right), width (use padding to force width)
 
 * arrays
   * basics
@@ -67,6 +68,7 @@ const d = [_]u8{ 1, 2, 3 } ** 3; // 1,2,3,1,2,3,1,2,3
   - `for (<item array>) | item | { ... work with item }`
   - can also get the index - supply a second condition and a second capture value
   - `for (items, 0..) | item, index | { ...`
+  - can capture as a poitner `for (&aliens) |*alien| {`
 
 * strings
   - arrays of bytes
@@ -83,6 +85,7 @@ const fnord_bork =
 * special types / values
   - `usize` - for sizes, like size_t
   - `undefined` - when declaring memory, without putting anything in to it
+    - in debug builds, writes 10101010 its (0xAA) to be eaiser to spot.
   - open-ended range: `0..`, useful in for loops for the index
   - u13 is a 13 bit integer (!)
 
@@ -90,6 +93,8 @@ const fnord_bork =
   - usual suspects.  ==, <, >, !=
   - only `bool` values - no coercing / truthy/falsy
   - also expressions  `const blah: u8 = if (splunge) 1 else 2;`
+  - `unreachable` for branches - reaching it is an error
+    - "terminated immediately"
 
 * while
   - usual suspects, including `break` and `continue`
@@ -109,11 +114,168 @@ while (blah < 10) : (blah += 3) {
 
 * at-functions
   - not sure what these actually are yet
-  - @import
-  - @intCast(u32, i)
+  - @import - pull in inter faces
+  - @intCast(u32, i) - cast types
+  - @intFromEnum(x) - convert an enum case to its corresponding number
 
 * functions
   - `fn name(arg: u8) u8 { return 23; }`
   - procedures need to have `void` return
+  - return `!void` - infer error types on the return
+    - https://ziglang.org/documentation/master/#Inferred-Error-Sets
+    - inferred error sets interact badly with function pointers and recursion
+    - also makes the function generic
 
 * errors
+  - interesting - error traces. https://ziglang.org/documentation/master/#Error-Return-Traces
+  - errors are values. Named so can identify things
+  - created in "error sets", collections of named errors
+```zig
+const NumberError = error {
+    TooBig,
+    TooSmol,
+    TooFour,
+};
+```
+  - returned (along with useful work) via "error union"
+    - `var text: ErrorSet!Text = getText("oop.ack")
+  - can catch and use a default (which is kind of icky)
+    - `blah = canFail() catch 23;`
+  - generalzied form (note trailing semicolon):
+```zig
+canFail() catch |err| {
+    if (err == SplungeError.GreebleBork) { ... }
+};
+```
+  - idiomatic error handling
+```zig
+    return detectProblems(n) catch |err| {
+        if (err == MyNumberError.TooSmall) {
+            return 10;
+        }
+        return err;
+    };
+```
+  - sugared by `try`: `try detectProblems(666);`
+    - does not look like exceptions, more like swift's if-based try
+    - can't ignore errors
+  - if for handling errors
+```zig
+if (blah) |value| { // use value
+} else |err| { // an error
+```
+  - can also do a switch on the errors
+```zig
+if (blah) |value| { ...
+} else |err| switch(err) {
+    ...
+}
+```
+
+* defer
+  - like swift
+  - also an`errdefer`, only called if a try fails.
+
+* switch
+  - match possible values of an expression and perform a different action.  Note the commas
+```zig
+switch (splunge) {
+    1 => doSomething(),
+    2 => doSomethingElse(),
+    else => {
+        // freak out
+        return Error.TooMuchSplunge;
+    }
+}
+```
+  - can also be used as an expression
+```zig
+const oopack = switch (x) {
+    1 => 23,
+    2 => 44,
+    ...
+}
+```
+
+* enums
+  - like C enums - give names to numeric values
+```zig
+const Fruit = enum { orange, bananananaa, tomato };
+const my_flute = Fruit.tomato;
+```
+  - can specify the storage size: `const Blah = enum(u8){ oop = 16 };
+  - can extract the integer with @intFromEnum()
+  - when doing a switch, don't have to write the full name. e.g.
+```zig
+    const class_name = switch (c.class) {
+        .wizard => "Wizard",
+        .thief => "Thief",
+        .bard => "Bard",
+        .warrior => "Warrior",
+    };
+```
+
+* structs
+  - define via `const Point = struct{ x: u32, y: u32, z: u32 };`
+  - make via `const point = Point( .x=3, .y=16, .z=27 };`
+  - can attach functions to structs (and other 'type definitions')
+```zig
+const Blah = struct {
+    pub fn howdy() void { // print hello }
+};
+```
+  - it's namespaced:  `Blah.howdy()`
+  - if the first argument is an instance / pointer to struct, can use it as a method. Looks like no guidance on preferred this/self form?
+```zig
+const Splort = struct {
+    pub fn a(self: Splort) void {}
+    pub fn b(this: *Splort, other: u8) void {}
+    pub fn c(splort: *const Splort) void {}
+};
+then can call like
+var sport = Splort()
+splort.a()
+splort.b(23)
+splort.c()
+```
+  - enums can have methods too (cool!)
+
+* pointers
+  - C like
+```zig
+var blah: u8 = 5;
+var splunge: *u8 = &blah;
+var oop = splunge.*
+```
+  - variable pointers and constant pointers - `const blah: u8 = 5; &blah` is a const pointer
+  - can always make a const pointer to a mutable value, but can't make var pointer to a constant value.  (preventing coercion to a mutable type)
+    - `const b: *const u8 = &a;`
+  - like C, use pointers to pass by reference
+```zig
+fn makeFive(x: *u8) void {
+    x.* = 5; // fix me!
+}
+```
+  - for structs, use the same syntax for structs or pointers to structs(!)
+```zig
+var pv: *Vertex = &v1;
+const blah = pv.x;
+```
+
+* Optionals
+  - `var splunge: ?u32 = 10;`
+    - splunge can hold a value or null
+  - for null pointer values, use ?* type (
+```zig
+    const blah: ?*Vertex = null
+```
+  - Swift's `??` operator is called `orelse`
+    - `var blah = splunge orelse 23;`
+  - `.?` is sugar over that + unreachable
+    - `const blah = splunge.?`
+    - note how it parallels the pointer dereference syntax style
+  - there's four ways of expressing "no value"
+    - undefined - not a value
+    - null - is a value, just "not there"
+    - error
+    - void - a "zero bit type" (take up no space)
