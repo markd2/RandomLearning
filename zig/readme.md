@@ -114,6 +114,12 @@ const fnord_bork =
   - floating point type for C ABIs: c_longdouble
   - `unreachable`
   - `type`
+  - numeric literals are `comptime_int` or `comptime_float`
+    - they get inlined at usage points
+    - for vars with const values, need to explicitly provide a type, so 
+      the compiler knows how many bytes to use
+  - `anytype` - tell the compiler to infer the actual type at compile time.
+  - underscore useful for "using" a value by ignoring it
 
 * if
   - usual suspects.  ==, <, >, !=
@@ -162,6 +168,8 @@ while (blah < 10) : (blah += 3) {
     - capital b/c it works on a type
   - @typeInfo - returns information about any type in a TypeInfo union
   - @TypeOf - returns type common to all input parameters. (c.f. "peer type resolution")
+  - @compileError - stop compilation with an error
+  - @intCast
 
 * functions
   - `fn name(arg: u8) u8 { return 23; }`
@@ -421,5 +429,26 @@ outer_bloke: {
   - works with continue too
   - can also break and return a value  `break :outer_bloke 24;`
 
-
-(got up to 66 - starting of comptime)
+* comptime
+  - explicitly request compile time evaluation
+  - const comptime constants have types like comptime_int and comptime_float
+  - comptime var usage `var blah = 5;` is right out, unless annotated by `comptime`
+    - `comptime var blah = 5;`
+  - `@compileLog("Count at compile time: ", count);` for caveman debugging during comptime, with an error at the end
+  - decorate a function parameter with comptime to enforce the parameter
+    is known at compile time.  `fn blah(comptime fmt: []const u8)`
+    - the format string parser runs entirely at compile time
+  - types are only available at comptime
+    - use `anytype` placeholder to infer the actual type at compile time
+    - `fn blah(thing: anytype) void { ... }`
+    - can use @TypeOf(), @typeInfo(), @typeName(), @hasDecl(), and
+      @hasField() to determine more about the type (zigling 70)
+    - typeof and hasdecl for ducktyping
+  - "decl" is a method declared in a struct (maybe more?) namespace
+  - `inline for` for comptime loops
+```zig
+inline for( .{ u8, u16, u32, u64 }) |T| {
+    print("{} ", .{ @typeInfo(T).Int.bits });
+}
+```
+  - `inline while`, like inline for, but while-styles
