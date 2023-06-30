@@ -56,11 +56,18 @@ const oop = [_]u8{ 1, 2 };
 const ack = [_]u8{ 42, 666 };
 const oopack = a ++ b;
 ```
-
   - `**` to repeat an array (at compile time)
 ```zig
 const d = [_]u8{ 1, 2, 3 } ** 3; // 1,2,3,1,2,3,1,2,3
 ```
+  - sentinel-terminated arrays.  Zig will put in the sentinal (usually a zero),
+    with the sential value after the colon in the []. But whatever it is, has to be the same type as the data being terminated
+```zig
+const a: [4:0]u32       =  [4:0]u32{1, 2, 3, 4};  // array
+const b: [:0]const u32  = &[4:0]u32{1, 2, 3, 4};  // slice
+const c: [*:0]const u32 = &[4:0]u32{1, 2, 3, 4};  // pointers
+```
+  - the latter makes it possible to safely find the end of the many-item pointer without knowing its length up froint
 
 * slice
   - essentially a pointer plus length
@@ -95,6 +102,8 @@ const fnord_bork =
     \\Greeble Bork
 ;
 ```
+  - they're C strings: `@TypeOf("foo") == *const [3:0]u8`
+  - string literals in zig are generally considered to be of type: `[N:0]const u8`, which can also be coerced to: `[N]const u8` and `[]const u8`
 
 * special types / values
   - `usize` - for sizes, like size_t
@@ -170,6 +179,9 @@ while (blah < 10) : (blah += 3) {
   - @TypeOf - returns type common to all input parameters. (c.f. "peer type resolution")
   - @compileError - stop compilation with an error
   - @intCast
+  - @cImport - parses C code and imports the functions, types, variables, and compatible macro definitions into a new empty struct type, and then returns that type
+  - @ptrCast(type, value)
+  - @"odd identifier" - same as swift's `\`odd identifier\``
 
 * functions
   - `fn name(arg: u8) u8 { return 23; }`
@@ -292,6 +304,46 @@ splort.b(23)
 splort.c()
 ```
   - enums can have methods too (cool!)
+  - typeName of structs is "<filename>.Structname"
+  - anonymous structs
+```zig
+fn Bar() type { return struct {}; } // given type name Bar
+@typeName(struct {}) is "struct:<position in source>"
+```
+  - coupled with comptime, can do generics?
+```zig
+given
+fn Circle(comptime T: type) type {
+    return struct {
+        center_x: T,
+        center_y: T,
+        radius: T,
+    };
+}
+
+can do
+    var circle1 = Circle(i32) { ...
+    var circle1 = Circle(f32) { ...
+```
+  - struct value literal, brace with leading dot, always evaluated entirely at compile time (hence being literal)
+```zig
+.{ center_x = 15, .center_y = 12, .radius = 6 }
+```
+  - digging into a totally anonymous struct.  Looks like the actual fundamental type can always be determined, so it can error check field usage
+```zig
+     fn bar(foo: anytype) void {
+         print("a:{} b:{}\n", .{foo.a, foo.b});
+     }
+```
+  - anonymous structs without field names are tuples.  assigns numeric field names.  But blah.0 is an error, can quote with @"", blah.@"0" (ugh?). can also assign this, and then pass that identifier as the second argument of print.
+```zig
+.{ 123, "bork" }
+```
+  - can use anonymous struct litearls to make an anonymos lis (by having
+    the type out front
+```zig
+const blah: [3]u32 = .{1, 2, 3}; // anonymous list
+const bloob = .{1, 2, 3} // tuple
 
 * pointers
   - C like
@@ -452,3 +504,36 @@ inline for( .{ u8, u16, u32, u64 }) |T| {
 }
 ```
   - `inline while`, like inline for, but while-styles
+  - can put `comptime` in front of any expression to force it at compile time.
+  - some comptime happenings are implicit
+    - global scope
+    - type declarations (vars/function signatures/structures/unions/enums)
+    - test expressions in inline for / while loops
+    - expression passed to @cImport()
+
+* async
+  - `suspend` returns control to the caller, but leaves the stack frame in-place
+  - to call a suspendful function, use async
+```zig
+fn thingWithSuspenders() void {
+    suspend {}
+}
+var blah = async thingWithSuspenders();
+```
+  - if call an async function withotu the async keyword, the function from
+    which you called said function becomes async itself
+  - main cannot be async
+  - give control back by using `resume` with the frame (return of the async
+    function
+```zig
+fun tihngWithSuspenders() void {
+    suspend {}
+}
+var frame = async tihngWithSuspenders();
+resume frame;
+```
+  - basically coroutines
+
+* To Look In To
+  - MultiArrayList (from Practical DoD talk)
+

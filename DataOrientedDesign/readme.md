@@ -275,3 +275,6 @@ And actually profile code, use things that'll count cache misses
 Keep it simple. Don't sweat DOD vs OOP unless you have to
 
 
+* Zig: Practical DoD - how the Zig self-hosted compiler uses data oriented design techniques - https://vimeo.com/649009599
+* http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/ - operation costs in cpu clock cycles (ITHare).  2016, so a bit out of date, but still interesting.
+* Handles are the better pointers - https://floooh.github.io/2018/06/17/handles-vs-pointers.html
