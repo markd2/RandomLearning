@@ -537,3 +537,6 @@ resume frame;
 * To Look In To
   - MultiArrayList (from Practical DoD talk)
 
+* ecosystem
+  - zig init exe
+  - zig build test
