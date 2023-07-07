@@ -10,6 +10,7 @@
   - run a single exercise with `zig build -Dn=5`, or `zig build -Dn=5 start` to begin at a particular one
   - or `zig run exercises/001_hello.zig`
 * https://github.com/DanB91/Zig-Playdate-Template
+* https://www.youtube.com/watch?v=vHWiDx_l4V0 - What's a memory allocator anyway?
 
 ### Random notes
 
@@ -536,7 +537,49 @@ resume frame;
 
 * To Look In To
   - MultiArrayList (from Practical DoD talk)
+  - ErrorSets (road to zig @33:00)
 
 * ecosystem
   - zig init exe
   - zig build test
+  - debug memory allocator
+
+* Four build modes
+  - debug - catch problems and crash
+  - release-fast - takes out guard rails, optimize all the way
+    - don't recommend for web.  maybe for video game
+  - release-safe - tunrs on optimziation and keeps checks
+  - release-small - undefined behavior and small binary size, checks gone
+  - can mix at the scope level.
+    - web team, don't use release-fast use release-safe
+    - but found a bottleneck, so this function. use release-fast
+
+* Hashing
+  - https://devlog.hexops.com/2022/zig-hashmaps-explained/
+    - explanation driven by https://devlog.hexops.com/categories/build-an-ecs/
+  - std.StringHashMap - good default hashing function for string keys
+  - std.AutoHashMap - good default hashing function for most data types
+    - does not support slices (e.g. []const u8) b/c it's a pointer to an
+      array, so ambiguous if you want to has the array elements or the
+      pointer itself.
+  - std.HashMap
+    - bring your own hashing function.  Can use for any slice type
+    - optimized for lookup times primarily, insert/removal secondarily
+  - std.ArrayHashMap
+    - iterating over the hashmap i order of magnitude faster
+    - b/c/ contiguous array
+    - insertion order preserved
+    - can index into the underlying data
+    - deletions mirror ArrayList
+      - swapRemove / orderedRemove
+  - also Unmanaged variants - doesn't carry the allocator internally, instead
+    pass it in each method. Saves a few bytes.
+  - HashMap / ArrayHashMap, it wants a context and a max load percentage
+    - c.f. context: https://zig.news/andrewrk/how-to-use-hash-map-contexts-to-save-memory-when-doing-a-string-table-3l33
+
+* Sets
+  - a hashmap with a void value
+```zig
+    var intHash = std.AutoHashMap(u8, void).init(std.heap.page_allocator);
+    try intHash.put(2, {}); // {} is a value of type void
+```
