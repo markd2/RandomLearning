@@ -11,7 +11,72 @@
 	</array>
 	<key>bookmarksSelectionInfo</key>
 	<dict>
+		<key>0EE3600B-2287-4A8D-9042-3C026C5129CC</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>35157ACC-4080-42B6-858C-4F44573E3692</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>36BB9B60-2194-44D4-B9C9-850945C4EA91</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>38E73D6B-A35F-4C5F-96A3-FE9BC4D2F1DA</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>595A091E-C07E-48C3-9C28-7CBFE68EC956</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>74DD6A4F-527E-4717-8098-FDB7DBED2BEF</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>9020A471-8D6D-4871-99BF-EDE3C8466237</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>9FFCD4FA-744F-4E16-99B9-BF1F892522CC</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>A3A9ADE1-F3C2-4F94-86D7-F6115D306474</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>A47BAED3-F1B0-4EAD-A4D3-3A9A6BA225CA</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>A9E7982C-2E8C-4CD1-B842-904EB254E50E</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>DCCE6EF9-D883-4193-B7BE-D8E7D3430A96</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>E19D2474-B935-4730-B25B-19A1B26B9CAF</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>E9740BE4-257C-4869-ABBF-4708C9CE835E</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -48,7 +113,7 @@
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>496 167 1000 678 0 0 2048 1127 </string>
+	<string>735 85 1000 678 0 0 2048 1127 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>

@@ -88,7 +88,129 @@
 
 <ul>
 <li>
-<p class="topLevelItemTitle">Untitled Document</p>
+<p class="topLevelItemTitle">Ziggity Doo Dah</p>
+<p class="itemText">Take Off Every "ZIG" for Grace Justice!</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">ziglang.org</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://github.com/ratfactor/ziglings</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Errors</p>
+<p class="itemText">ErrorSet - e.g. !void</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">errdefer - call the deferred block only if an error causes early return</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">the errdefer is only good for the scope it's in, so don't expect errordefer called in a loop to cause a bunch of defers that will run on an error</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Operators</p>
+<p class="itemText">Operators</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There's the usual things like + / - . etc</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Out of the box, tend to cause overflow.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There's also wrapping (twos-complement wrapping) with like +% / +%=<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There's also saturating (clamps to ends of the usable range) with like +| and +|=</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Bitshift left, and a saturating bit shift left</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Logical operator are words "and" and/or "or"</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Literals</p>
+<p class="itemText">0xabcd for hex</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">0o755 for octal</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">0b01011010 for binary</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">can put in underscores</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const mask = 0b1_1111_1111;</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">const rw_r__r__ = 0o6_4_4</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Comptime</p>
+<p class="itemText">Stuff done at compile time</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Save cycles at runtime</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Can use for generics</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Testing</p>
+<p class="itemText">zig test file.zig</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">test "groovy description" {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>try std.testing.expect(addOne(41) == 42)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">use std.testing.allocator to catch memory leaks</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Allocators</p>
+<p class="itemText">The testing allocator will gripe about memory leaks in tests.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Pointers</p>
+<p class="itemText">Pointer to one item</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pointer to a known number of items (a.k.a. slice)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pointer to a sentinel-terminated set of items</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pointer to never-never-land</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first address C's overloaded "pointer points to one or many" concept</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">WYSIWYG</p>
+<p class="itemText">Zig tries really hard to be wysiwyg</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- no operator overloading</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- no hidden control flow</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- no shadowing of variables from an outer scope</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- explicit marking of parameters as unused (which I find annoying...)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- no implicit allocations</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Optionals</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Optimizations</p>
+<p class="itemText">Result location:<span class="Apple-converted-space">  </span>when a function returns a newly created value, it will automatically put it into the function’s return location instead of making a copy. Previously, this was only a potential optimization from LLVM, but now it’s guaranteed by Zig.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Build modes</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- debug - safety checks on, optimizations off</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- release fast - optimizations on and safety off</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- release safe - safety checks on, optimizations on</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- release small - size optimizations on and safety off</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- supply as -O parameter</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">@setRunti...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Variables</p>
+<p class="itemText">const/var/etc</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">also threadlocal</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">things in the top level scope are comptime</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Platforms</p>
+<p class="itemText">Playdate:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://github.com/DanB91/Zig-Playdate-Template</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://github.com/DanB91/UPWARD-for-Playdate</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">iOS:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://zig.news/kristoff/zig-adventures-on-ios-getting-started-3n8f</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
 </ul>
 

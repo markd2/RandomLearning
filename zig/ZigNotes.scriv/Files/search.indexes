@@ -1,4 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
-    <Documents/>
+    <Documents>
+        <Document ID="9020A471-8D6D-4871-99BF-EDE3C8466237">
+            <Title>Variables</Title>
+            <Text>const/var/etc
+
+also threadlocal
+
+things in the top level scope are comptime
+
+</Text>
+        </Document>
+        <Document ID="36BB9B60-2194-44D4-B9C9-850945C4EA91">
+            <Title>Errors</Title>
+            <Text>ErrorSet - e.g. !void
+
+errdefer - call the deferred block only if an error causes early return
+the errdefer is only good for the scope it's in, so don't expect errordefer called in a loop to cause a bunch of defers that will run on an error</Text>
+        </Document>
+        <Document ID="A47BAED3-F1B0-4EAD-A4D3-3A9A6BA225CA">
+            <Title>WYSIWYG</Title>
+            <Text>Zig tries really hard to be wysiwyg
+- no operator overloading
+- no hidden control flow
+- no shadowing of variables from an outer scope
+- explicit marking of parameters as unused (which I find annoying...)
+- no implicit allocations
+</Text>
+        </Document>
+        <Document ID="E9740BE4-257C-4869-ABBF-4708C9CE835E">
+            <Title>Platforms</Title>
+            <Text>Stuff done at compile time
+
+Save cycles at runtime
+
+Can use for generics
+
+</Text>
+        </Document>
+        <Document ID="74DD6A4F-527E-4717-8098-FDB7DBED2BEF">
+            <Title>Operators</Title>
+            <Text>Operators
+
+There's the usual things like + / - . etc
+Out of the box, tend to cause overflow.
+There's also wrapping (twos-complement wrapping) with like +% / +%= 
+There's also saturating (clamps to ends of the usable range) with like +| and +|=
+
+Bitshift left, and a saturating bit shift left
+
+Logical operator are words "and" and/or "or"</Text>
+        </Document>
+        <Document ID="0EE3600B-2287-4A8D-9042-3C026C5129CC">
+            <Title>Optimizations</Title>
+            <Text>Result location:  when a function returns a newly created value, it will automatically put it into the function’s return location instead of making a copy. Previously, this was only a potential optimization from LLVM, but now it’s guaranteed by Zig.
+
+Build modes
+- debug - safety checks on, optimizations off
+- release fast - optimizations on and safety off
+- release safe - safety checks on, optimizations on
+- release small - size optimizations on and safety off
+- supply as -O parameter
+
+@setRuntimeSafety to control runtime safety features on a per-block level
+
+reaching `unreachable` is a check.  If it can be statically determined at comptime, turns in to a compile-time error</Text>
+        </Document>
+        <Document ID="9FFCD4FA-744F-4E16-99B9-BF1F892522CC">
+            <Title>Ziggity Doo Dah</Title>
+            <Text>Take Off Every "ZIG" for Grace Justice!
+
+
+ziglang.org
+https://github.com/ratfactor/ziglings
+
+</Text>
+        </Document>
+        <Document ID="595A091E-C07E-48C3-9C28-7CBFE68EC956">
+            <Title>Platforms</Title>
+        </Document>
+        <Document ID="35157ACC-4080-42B6-858C-4F44573E3692">
+            <Title>Allocators</Title>
+            <Text>The testing allocator will gripe about memory leaks in tests.
+
+</Text>
+        </Document>
+        <Document ID="E19D2474-B935-4730-B25B-19A1B26B9CAF">
+            <Title>Platforms</Title>
+            <Text>zig test file.zig
+
+test "groovy description" {
+    try std.testing.expect(addOne(41) == 42)
+}
+
+use std.testing.allocator to catch memory leaks
+
+</Text>
+        </Document>
+        <Document ID="A9E7982C-2E8C-4CD1-B842-904EB254E50E">
+            <Title>Literals</Title>
+            <Text>0xabcd for hex
+0o755 for octal
+0b01011010 for binary
+can put in underscores
+
+const mask = 0b1_1111_1111;
+const rw_r__r__ = 0o6_4_4
+</Text>
+        </Document>
+        <Document ID="38E73D6B-A35F-4C5F-96A3-FE9BC4D2F1DA">
+            <Title>Platforms</Title>
+            <Text>Playdate:
+https://github.com/DanB91/Zig-Playdate-Template
+https://github.com/DanB91/UPWARD-for-Playdate
+
+iOS:
+https://zig.news/kristoff/zig-adventures-on-ios-getting-started-3n8f
+</Text>
+        </Document>
+        <Document ID="DCCE6EF9-D883-4193-B7BE-D8E7D3430A96">
+            <Title>Pointers</Title>
+            <Text>Pointer to one item
+Pointer to a known number of items (a.k.a. slice)
+Pointer to a sentinel-terminated set of items
+Pointer to never-never-land
+
+The first address C's overloaded "pointer points to one or many" concept
+</Text>
+        </Document>
+    </Documents>
 </SearchIndexes>
