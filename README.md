@@ -7,6 +7,19 @@ learning and notes and sample code in.  This is it.
 
 Also, making a list of videos watched
 
+### July 8, 2023
+
+htmx in 100 Seconds - Fireship - https://www.youtube.com/watch?v=r-GSGH2RxJs
+
+### July 7, 2023
+
+What's Going on With Star Citizen in 2023? What happened in the 3.18 update - Space Tomato - https://www.youtube.com/watch?v=slsX4vMQG3E
+HW News - Intel Arc Shows How It's Done, EVGA Phasing Out, GPD Ally Competitor - Gamer's Nexus - https://www.youtube.com/watch?v=UdbanI3rNwo
+- Paizo's Open License Changes TTRPGs FOREVER - Dungeon Craft - https://www.youtube.com/watch?v=KOqL_H7ebb0
+- The Perfect Event After That Patch? // Escape from Tarkov News - NoiceGuy Tarkov - https://www.youtube.com/watch?v=yn8cr0ku30I
+- The Struggle to relax: Why ADHD makes it tough - How to ADHD - https://www.youtube.com/watch?v=X9WSVb1A9Mc
+- Are these software myths true or false? - Dave Farley / GOTO  Conference - https://www.youtube.com/watch?v=eAQpd531LWE
+- Zig's I/O and Concurrency Story - King Protty - King Protty - https://www.youtube.com/watch?v=Ul8OO4vQMTw
 
 ### July 6, 2023
 
@@ -24,7 +37,8 @@ Also, making a list of videos watched
 - How saying No can change the way you live - How to ADHD - https://www.youtube.com/watch?v=vKmT-cYDGGU
 - Foxhole - Tilted Tortle stream (background) - https://www.twitch.tv/tiltedtortle - my favorite/only vtuber.
 - Frostpunk - FormerlyKnownAsEmily (background) - https://www.twitch.tv/formerlyknownasemily
-
+- The Refreid Bean Secrets Mexican Restaurants Use - Arnie Tex - https://www.youtube.com/watch?v=H_lEE5TynVs
+- How Mexican Food Conquered the USA - Pike Productions - https://www.youtube.com/watch?v=nCKWRVNQCJE
 
 
 ### July 5, 2023
