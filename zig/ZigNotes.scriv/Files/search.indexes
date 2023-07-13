@@ -29,12 +29,18 @@ the errdefer is only good for the scope it's in, so don't expect errordefer call
 </Text>
         </Document>
         <Document ID="E9740BE4-257C-4869-ABBF-4708C9CE835E">
-            <Title>Platforms</Title>
+            <Title>Comptime</Title>
             <Text>Stuff done at compile time
 
 Save cycles at runtime
 
 Can use for generics
+
+Test and enforce static properties of your code using the full language, not just the type system.
+
+Sandboxed/interpreted - made to behave like the target, so if the target is big endian, then you need to have your comptime do that. A step inside semantic analysis (from 3 things you might like about zig) - needs to be lazy, b/c of cycles.  Types only evaluated as needed
+
+anytype is a placeholder that will be determined at compile time
 
 </Text>
         </Document>
@@ -73,6 +79,23 @@ reaching `unreachable` is a check.  If it can be statically determined at compti
 
 ziglang.org
 https://github.com/ratfactor/ziglings
+
+* Baking data into executables is super simple
+* Using a C library easier than in C (no need to muck around with makefiles - just build.zig)
+
+* Simplicity
+* can cross-compile c/c++/objc, includes runtime linkages so can cross-compile (say on mac and cross-compile to a specific linux)
+* beat clang for linking apple silicon
+* zig build to replace make/cmake/etc
+* all in a 40 meg dependency-free tarball
+* Complete bidirectional C ABI compatibility
+ 
+"try zig for a couple of days, then try Rust for a couple of weeks, and see what you prefer"
+</Text>
+        </Document>
+        <Document ID="82A14E21-7E46-4451-9188-E5305CC036BA">
+            <Title>Structs</Title>
+            <Text>Can have functions.  "They look a bit like methods, but are more like namespcaes and syntax sugar" (From  the Zig and Go Programming Showdown)
 
 </Text>
         </Document>

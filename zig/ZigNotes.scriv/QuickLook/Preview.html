@@ -95,7 +95,15 @@
 <p class="itemText"><p class="p1"><span class="s1">ziglang.org</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1">https://github.com/ratfactor/ziglings</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1"></p>
+<p class="itemText"><p class="p1"><span class="s1">* Baking data into executables is super simple</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* Using a C library easier than in C (no need to muck around with makefiles - just build.zig)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* Simplicity</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* can cross-compile c/c++/objc, includes runtime linkages so can cross-compile (say on mac and cross-compile to a specific linux)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* beat clang for linking apple silicon</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* zig build to replace make/cmake/etc</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* all in a 40 meg dependency-free tarball</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* C...</p>
 </li>
 <li>
 <p class="topLevelItemTitle">Errors</p>
@@ -135,6 +143,16 @@
 <p class="itemText"><p class="p1"><span class="s1">Save cycles at runtime</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">Can use for generics</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Test and enforce static properties of your code using the full language, not just the type system.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Sandboxed/interpreted - made to behave like the target, so if the target is big endian, then you need to have your comptime do that. A step inside semantic analysis (from 3 things you might like about zig) - needs to be lazy, b/c of cycles.<span class="Apple-converted-space">  </span>Types only evaluated as needed</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">anytype is a placeholder that will be determined at ...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Structs</p>
+<p class="itemText">Can have functions.<span class="Apple-converted-space">  </span>"They look a bit like methods, but are more like namespcaes and syntax sugar" (From<span class="Apple-converted-space">  </span>the Zig and Go Programming Showdown)</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1"></p>
 </li>

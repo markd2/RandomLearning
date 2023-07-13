@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.1-15588" Device="SqueakyToy" Author="" Modified="2023-07-08 09:50:52 -0400" ModID="2DF330C7-E289-47EE-AB9D-D465534F4FEB">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.1-15588" Device="SqueakyToy" Author="" Modified="2023-07-13 09:18:13 -0400" ModID="C58099A2-51F1-47AA-80E9-73CAA14DB9E0">
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
@@ -7,13 +7,13 @@
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <Children>
-                <BinderItem UUID="9FFCD4FA-744F-4E16-99B9-BF1F892522CC" Type="Text" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:48:37 -0400">
+                <BinderItem UUID="9FFCD4FA-744F-4E16-99B9-BF1F892522CC" Type="Text" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-10 17:42:36 -0400">
                     <Title>Ziggity Doo Dah</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>93,0</TextSelection>
+                        <TextSelection>637,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
                 <BinderItem UUID="36BB9B60-2194-44D4-B9C9-850945C4EA91" Type="Text" Created="2023-07-06 20:48:50 -0400" Modified="2023-07-06 21:01:06 -0400">
@@ -43,13 +43,22 @@
                         <TextSelection>131,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="E9740BE4-257C-4869-ABBF-4708C9CE835E" Type="Text" Created="2023-07-06 20:52:27 -0400" Modified="2023-07-06 20:58:32 -0400">
+                <BinderItem UUID="E9740BE4-257C-4869-ABBF-4708C9CE835E" Type="Text" Created="2023-07-06 20:52:27 -0400" Modified="2023-07-10 21:17:43 -0400">
                     <Title>Comptime</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>74,0</TextSelection>
+                        <TextSelection>514,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="82A14E21-7E46-4451-9188-E5305CC036BA" Type="Text" Created="2023-07-10 21:06:47 -0400" Modified="2023-07-10 21:07:25 -0400">
+                    <Title>Structs</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>144,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
                 <BinderItem UUID="E19D2474-B935-4730-B25B-19A1B26B9CAF" Type="Text" Created="2023-07-06 20:52:23 -0400" Modified="2023-07-06 20:58:39 -0400">
@@ -203,12 +212,12 @@
     </StatusSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2023-07-09 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="14" Characters="179" Date="2023-07-08 09:49:21 -0400"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2023-07-14 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2023-07-13 09:18:12 -0400"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2023-07-08 00:00:00 -0400">
-        <DraftWordCount>14</DraftWordCount>
-        <DraftCharCount>179</DraftCharCount>
+    <RecentWritingHistory Date="2023-07-13 00:00:00 -0400">
+        <DraftWordCount>0</DraftWordCount>
+        <DraftCharCount>0</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
