@@ -7,7 +7,7 @@
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <Children>
-                <BinderItem UUID="9FFCD4FA-744F-4E16-99B9-BF1F892522CC" Type="Text" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-10 17:42:36 -0400">
+                <BinderItem UUID="9FFCD4FA-744F-4E16-99B9-BF1F892522CC" Type="Text" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-13 11:12:56 -0400">
                     <Title>Ziggity Doo Dah</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -61,13 +61,13 @@
                         <TextSelection>144,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="E19D2474-B935-4730-B25B-19A1B26B9CAF" Type="Text" Created="2023-07-06 20:52:23 -0400" Modified="2023-07-06 20:58:39 -0400">
+                <BinderItem UUID="E19D2474-B935-4730-B25B-19A1B26B9CAF" Type="Text" Created="2023-07-06 20:52:23 -0400" Modified="2023-07-13 10:51:44 -0400">
                     <Title>Testing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>144,0</TextSelection>
+                        <TextSelection>285,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
                 <BinderItem UUID="35157ACC-4080-42B6-858C-4F44573E3692" Type="Text" Created="2023-07-06 20:57:03 -0400" Modified="2023-07-06 20:58:25 -0400">
@@ -124,13 +124,13 @@
                         <TextSelection>77,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="38E73D6B-A35F-4C5F-96A3-FE9BC4D2F1DA" Type="Text" Created="2023-07-08 09:49:25 -0400" Modified="2023-07-08 09:50:51 -0400">
+                <BinderItem UUID="38E73D6B-A35F-4C5F-96A3-FE9BC4D2F1DA" Type="Text" Created="2023-07-08 09:49:25 -0400" Modified="2023-07-13 11:01:43 -0400">
                     <Title>Platforms</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>179,0</TextSelection>
+                        <TextSelection>180,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
             </Children>
@@ -216,10 +216,10 @@
         <PreviousSession Words="0" Characters="0" Date="2023-07-13 10:48:44 -0400"/>
     </ProjectTargets>
     <RecentWritingHistory Date="2023-07-13 00:00:00 -0400">
-        <DraftWordCount>0</DraftWordCount>
-        <DraftCharCount>0</DraftCharCount>
+        <DraftWordCount>79</DraftWordCount>
+        <DraftCharCount>505</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
-    <PrintSettings PaperSize="611.999993,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>
