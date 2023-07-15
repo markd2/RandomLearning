@@ -7,13 +7,57 @@ learning and notes and sample code in.  This is it.
 
 Also, making a list of videos watched
 
-### July 8, 2023
+### July 13, 2023 (Thursday)
 
-htmx in 100 Seconds - Fireship - https://www.youtube.com/watch?v=r-GSGH2RxJs
+- Escape from Tarkov (background) - MisMagpie - https://www.twitch.tv/mismagpie
+- LGBTQ+ Sandwich - You Suck At Cooking - https://www.youtube.com/watch?v=W-wXPg-fVQ8
+- The Whoppenheimer - Bosnian Ape Society - https://www.youtube.com/watch?v=3NoOmD1Hy28
+- Making Systems Programming Accessible (Zig) -  Andrew Kelley - https://www.youtube.com/watch?v=Qncdi-Fg0-I
+- Control - Intelligame - https://www.twitch.tv/intelligame . (background)
 
-### July 7, 2023
+### July 12, 2023 (Wednesday)
 
-What's Going on With Star Citizen in 2023? What happened in the 3.18 update - Space Tomato - https://www.youtube.com/watch?v=slsX4vMQG3E
+- Taco Bell's Crispy Chicken Tacos are Horrible - The Report of the Week - https://www.youtube.com/watch?v=nWXHfAc_zYY
+- My Hips Aren't Alright - DJ Cummerbund - https://www.youtube.com/watch?v=rFZwi2Z9G7A
+- They Finally admitted this was a major issue (4090 power connectors / 12v-2x6) - Jayz TwoCents - https://www.youtube.com/watch?v=eXVancEZOP0
+- A paracentric keyway that doesn't matter - Lock Picking Lawyer - https://www.youtube.com/watch?v=Kx0U2rNKnUo
+- HW News - Ultra-Small Intel Arc GPU, 12V-2x6 Connector, More AM4 CPUs, 4060 Ti 16GB - Gamers Nexus - https://www.youtube.com/watch?v=W5bzOPitCVk
+- System Shock Remake - Zero Punctuation - https://www.youtube.com/watch?v=n0vobmz2nsc
+- gkurve: simpler vector graphics - Stephen Gutekanst - Software You Can Love 2022 - Zig Showtime - https://www.youtube.com/watch?v=QTybQ-5MlrE
+- The Cycle Frontier is DEAD...what happened? - DeadlySlob - https://www.youtube.com/watch?v=SnJ0Pg_Nrg0
+- Overwhelm Part One: How to Tackle the Clutter - How to ADHD - https://www.youtube.com/watch?v=7TGWeblZ0c8
+- Somatics and Sound at the ER - morning tea - katieZ - https://www.youtube.com/watch?v=HMClR_MHRlE
+
+### July 11, 2023 (Tuesday)
+
+- THIS is Left-Stick Flying (Star Citizsen) - BlackMaze - https://www.youtube.com/watch?v=oPfLvUs4N6w
+- A Jr Dev for Life? - The Primeagen - https://www.youtube.com/watch?v=61lVNkvk9AU
+
+### July 10, 2023 (Monday)
+
+- Tailwind is ugly code, but... - The Primeagen - https://www.youtube.com/watch?v=t-eR4hA7obg
+- Rendering Slideshows with 16,000 fps - Rene Schallenr (Zig Showtime) - https://www.youtube.com/watch?v=YKYNVAwaMik&t=12s
+- 3 things you might like about Zig - Loris Cro - https://www.youtube.com/watch?v=3DxjZmLBizI
+- Too Many Coffee Creamers: A Taste Test - James Hoffmann - https://www.youtube.com/watch?v=ehZd8LHA2Tg
+- The Story of Factoro, the game that only increases in prices - Escapist - https://www.youtube.com/watch?v=TP5-pfBmZss
+- This Game Costs $200 - Dangerously Funny - https://www.youtube.com/watch?v=OPGaJtLKRuE
+
+### July 9, 2023 (Sunday)
+
+- This Steam Game is Free - Dangerously Funny - https://www.youtube.com/watch?v=8-jsJTeFSYk
+- Master Lock Has Always Been Master Lock - Lock Picking Lawyer - https://www.youtube.com/watch?v=bIy7LL9ygeE
+- Star Citizen, bets ship for pad ramming - Wicket Wookie - https://www.youtube.com/watch?v=8H4lYyuVYLA
+- The Timeless Business of Steakhouses - Modern MBA - https://www.youtube.com/watch?v=Bb3Ndqf3qHk
+- Secrets of a $182 Billion Chip Maker: AMD's Labs - Gamers Nexus - https://www.youtube.com/watch?v=7H4eg2jOvVw
+
+### July 8, 2023 (Saturdy)
+
+- htmx in 100 Seconds - Fireship - https://www.youtube.com/watch?v=r-GSGH2RxJs
+- The 9 Tailors - Lord Peter Wimsey
+
+### July 7, 2023 (Friday)
+
+- What's Going on With Star Citizen in 2023? What happened in the 3.18 update - Space Tomato - https://www.youtube.com/watch?v=slsX4vMQG3E
 HW News - Intel Arc Shows How It's Done, EVGA Phasing Out, GPD Ally Competitor - Gamer's Nexus - https://www.youtube.com/watch?v=UdbanI3rNwo
 - Paizo's Open License Changes TTRPGs FOREVER - Dungeon Craft - https://www.youtube.com/watch?v=KOqL_H7ebb0
 - The Perfect Event After That Patch? // Escape from Tarkov News - NoiceGuy Tarkov - https://www.youtube.com/watch?v=yn8cr0ku30I
@@ -77,11 +121,3 @@ HW News - Intel Arc Shows How It's Done, EVGA Phasing Out, GPD Ally Competitor -
 - Expert Talk: Zig Programming Language and Linters - GOTO conference - https://www.youtube.com/watch?v=zKmZmiOU6qE
 - One Rule to Rule Them All - Dave Thomas - YOW!2002 - https://www.youtube.com/watch?v=QvK3Pxmwcyc&t=2694s
 - An Addictive Alternatives to DAWs - Benn Jordan - https://www.youtube.com/watch?v=rtTWtzWav8I
-
-
-
-
-
-
-
-
