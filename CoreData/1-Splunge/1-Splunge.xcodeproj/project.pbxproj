@@ -13,6 +13,8 @@
 		7D948CC82A73149700F07026 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D948CC62A73149700F07026 /* Main.storyboard */; };
 		7D948CCA2A73149800F07026 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D948CC92A73149800F07026 /* Assets.xcassets */; };
 		7D948CCD2A73149800F07026 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D948CCB2A73149800F07026 /* LaunchScreen.storyboard */; };
+		7D948CD72A7314DD00F07026 /* Splunge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D948CD42A7314DD00F07026 /* Splunge.xcdatamodeld */; };
+		7D948CD82A7314DD00F07026 /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D948CD62A7314DD00F07026 /* StorageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		7D948CC92A73149800F07026 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D948CCC2A73149800F07026 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D948CCE2A73149800F07026 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D948CD52A7314DD00F07026 /* Splunge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Splunge.xcdatamodel; sourceTree = "<group>"; };
+		7D948CD62A7314DD00F07026 /* StorageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		7D948CBF2A73149700F07026 /* 1-Splunge */ = {
 			isa = PBXGroup;
 			children = (
+				7D948CD42A7314DD00F07026 /* Splunge.xcdatamodeld */,
+				7D948CD62A7314DD00F07026 /* StorageProvider.swift */,
 				7D948CC02A73149700F07026 /* AppDelegate.swift */,
 				7D948CC22A73149700F07026 /* SceneDelegate.swift */,
 				7D948CC42A73149700F07026 /* ViewController.swift */,
@@ -140,7 +146,9 @@
 			files = (
 				7D948CC52A73149700F07026 /* ViewController.swift in Sources */,
 				7D948CC12A73149700F07026 /* AppDelegate.swift in Sources */,
+				7D948CD72A7314DD00F07026 /* Splunge.xcdatamodeld in Sources */,
 				7D948CC32A73149700F07026 /* SceneDelegate.swift in Sources */,
+				7D948CD82A7314DD00F07026 /* StorageProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +366,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7D948CD42A7314DD00F07026 /* Splunge.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7D948CD52A7314DD00F07026 /* Splunge.xcdatamodel */,
+			);
+			currentVersion = 7D948CD52A7314DD00F07026 /* Splunge.xcdatamodel */;
+			path = Splunge.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7D948CB52A73149700F07026 /* Project object */;
 }
