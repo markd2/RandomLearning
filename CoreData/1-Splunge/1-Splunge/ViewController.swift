@@ -8,12 +8,23 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet var textfield: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        _ = StorageProvider.shared
     }
 
+    @IBAction func splunge() {
+        guard let name = textfield.text,
+            !name.isEmpty else {
+            return
+        }
+        StorageProvider.shared.saveMovie(named: name)
+        textfield.text = ""
+    }
 
 }
 
