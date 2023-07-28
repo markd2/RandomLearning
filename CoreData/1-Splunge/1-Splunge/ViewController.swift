@@ -28,7 +28,15 @@ class ViewController: UIViewController {
             !name.isEmpty else {
             return
         }
-        StorageProvider.shared.saveMovie(named: name)
+        
+        if let indexPath = tableview.indexPathForSelectedRow {
+            let movie = movies[indexPath.row]
+            movie.name = name
+            StorageProvider.shared.updateMovies()
+        } else {
+            StorageProvider.shared.saveMovie(named: name)
+        }
+
         textfield.text = ""
         refreshMovies()
         tableview.reloadData()

@@ -5,6 +5,7 @@ it %-)  Most of these notes come from _Practical Core Data_ by Donny
 Wals.  Swing by their [Gumroad page](https://donnywals.gumroad.com) and toss
 some bucks their direction.
 
+----------
 
 Standing up the stack:
 
@@ -79,13 +80,57 @@ Fetch request contains
   - sorting rules
   - etc
 
+Simple fetch ever-thang:
+
+```swift
+func getAllMovies() -> [Movie] {
+    let fetchRequest = Movie.fetchRequest() // NSFetchRequest<Movie>
+    do {
+        return try persistentContainer.viewContext.fetch(fetchRequest)
+    } catch {
+        print("Failed to fetch movies: \(error)")
+        return []
+    }
+}
+```
 
 
-### Random errors
+And simple deleting:
 
-using a mac app for the first thing, and seem to get different errors
-randomly. Here's a smattering
+```swift
+func getAllMovies() -> [Movie] {
+    let fetchRequest = Movie.fetchRequest() // NSFetchRequest<Movie>
+    do {
+        return try persistentContainer.viewContext.fetch(fetchRequest)
+    } catch {
+        print("Failed to fetch movies: \(error)")
+        return []
+    }
+}
+```
 
-* 2023-07-27 16:45:39.392645-0400 1-SplungeData[16107:1226405] [client] No error handler for XPC error: Connection invalid
-* 2023-07-27 16:43:34.859419-0400 1-SplungeData[15948:1221632] [Window] Warning: Window SwiftUI.AppKitWindow 0x11e741990 ordered front from a non-active application and may order beneath the active application's windows.
+Every managed object has a unique objectID.
+
+Every managed object is bound to a single managed object context, and
+every managed object is unique within its context.  - so the above code
+saying "hey nuke this movie" is totally good, since it's unambiguous
+(via the objectID) what needs to get deleted.  be sure to save the context
+to persist the change.
+
+Updating an object is "set its properties" and then save the context.  beware
+that if the user can back out of the editing, and you're adjusting the
+managed object's propertie in-situ, you'll need to rollback on the
+managed object context.
+
+Can ask an object what context it belongs to
+
+```swift
+movie.managedObjectContext?.rollback()
+```
+
+But that does rollback everything.  Can isolate modifications by using
+multiple managed object contexts., and dedicating a specific context
+to making modifications.
+
+----------
 

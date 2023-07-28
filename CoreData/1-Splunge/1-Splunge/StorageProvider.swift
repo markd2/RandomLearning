@@ -49,5 +49,14 @@ extension StorageProvider {
             print("failed to save after deleting: \(error)")
         }
     }
+    
+    func updateMovies() {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("failed to save after updating: \(error)")
+        }
+    }
 }
 
