@@ -10,11 +10,17 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var textfield: UITextField!
+    @IBOutlet var tableview: UITableView!
+    
+    private var movies: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "Splunge")
+        
         _ = StorageProvider.shared
+        refreshMovies()
     }
 
     @IBAction func splunge() {
@@ -24,7 +30,34 @@ class ViewController: UIViewController {
         }
         StorageProvider.shared.saveMovie(named: name)
         textfield.text = ""
+        refreshMovies()
+        tableview.reloadData()
     }
 
+    func refreshMovies() {
+        movies = StorageProvider.shared.getAllMovies()
+        let names = movies.compactMap { $0.name }
+        print(names)
+    }
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "Splunge",
+            for: indexPath)
+            
+        let movie = movies[indexPath.row];
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = movie.name
+        cell.contentConfiguration = content
+        
+        return cell
+    }
+    
+}

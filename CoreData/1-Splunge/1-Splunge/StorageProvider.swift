@@ -28,3 +28,15 @@ class StorageProvider {
     }
 }
 
+extension StorageProvider {
+    func getAllMovies() -> [Movie] {
+        let fetchRequest = Movie.fetchRequest() // NSFetchRequest<Movie>
+        do {
+            return try persistentContainer.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch movies: \(error)")
+            return []
+        }
+    }
+}
+
