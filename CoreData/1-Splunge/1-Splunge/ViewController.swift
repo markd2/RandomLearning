@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
@@ -58,6 +58,16 @@ extension ViewController: UITableViewDataSource {
         cell.contentConfiguration = content
         
         return cell
+    }
+    
+    func tableView(_ tableview: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            let movie = movies[indexPath.row]
+            movies.remove(at: indexPath.row)
+            StorageProvider.shared.deleteMovie(movie)
+            tableview.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
 }
