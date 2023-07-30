@@ -1,6 +1,8 @@
 # Take off every "ZIG" for great justice!
 
 * https://ziglang.org/
+* Tarball download page - https://ziglang.org/download/
+* won't launch?  Double-click the zig executable. Get the "no zig 4 u" smackdown. Go to settings (Privacy and securty), do the "open anyway" thing.  You're good until the next version.
 * "Rust is trying to be a better C++, Zig is trying to be a better C"
 * when installing, brew install zig --HEAD failed with an error: _No head is defined for zig_.  Looks like that's just broken.  Going with the latest tag from homebrew.
    - also exists https://ziglang.org/download/
@@ -11,6 +13,12 @@
   - or `zig run exercises/001_hello.zig`
 * https://github.com/DanB91/Zig-Playdate-Template
 * https://www.youtube.com/watch?v=vHWiDx_l4V0 - What's a memory allocator anyway?
+* https://learnxinyminutes.com/docs/zig/ - Learn Zig in Y minutes.  Nice handy cheat-sheet.
+* https://learning.oreilly.com/playlists/be2da543-f290-46a4-8db6-96e4f5793a96/ (Assimilate Zig - Alfredo Dez and Noah Gift, on O'Reilly)
+  - https://github.com/nogibjj/assimilate-zig
+  - huh. Looks like "Never used this before. let's look at the website and download and build things" :-(
+* Zig mode is pretty annoying with the "reformat on save".  *I* want to decide
+  when vertical whitespace gets reduced and when functions get rewrapped.
 
 ### Random notes
 
@@ -583,3 +591,47 @@ resume frame;
     var intHash = std.AutoHashMap(u8, void).init(std.heap.page_allocator);
     try intHash.put(2, {}); // {} is a value of type void
 ```
+
+----------
+## Playdate stuff
+
+Actual Zig in playdate code is over in my playdate repo in the Zampler directory: https://github.com/markd2/Playdate/tree/main/zigdate/Zampler
+
+I'm adding a "card" system over there like the C sampler I did a while back.
+Right now having difficulty creating the menu items.
+
+The Playdate  `addOptionsMenuItem` looks like
+
+```C
+PDMenuItem* (*addOptionsMenuItem)(
+    const char *title,
+    const char** optionTitles, 
+    int optionsCount,
+    PDMenuItemCallbackFunction* f, void* userdata);
+```
+
+DanB's got a wrapper for that.
+
+```zig
+pub inline fn add_options_menu_item(
+    title: [:0]const u8,
+    callback: ?pddefs.PDMenuItemCallbackFunction,
+    option_titles: [][*c]const u8,
+    userdata: ?*anyopaque,
+) *pddefs.PDMenuItem {
+    return pd.system.addOptionsMenuItem(
+        title.ptr,
+        option_titles.ptr,
+        @as(c_int, @intCast(option_titles.len)),
+        callback,
+        userdata,
+    ).?;
+}
+```
+
+and am having difficulties getting things into that [][*c]const u8.
+
+pulling apart that declaration
+
+* [] - a slice
+* [*c] - https://ziglearn.org/chapter-4/ says "outside of automatically translated C code, the uage of `[*c]` is almost always a bad idea and should almost never be used".
