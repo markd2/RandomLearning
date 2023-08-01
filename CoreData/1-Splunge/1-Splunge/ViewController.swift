@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         
         if let indexPath = tableview.indexPathForSelectedRow {
             let movie = movies[indexPath.row]
-            movie.name = name
+            movie.title = name
             StorageProvider.shared.updateMovies()
         } else {
             StorageProvider.shared.saveMovie(named: name)
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 
     func refreshMovies() {
         movies = StorageProvider.shared.getAllMovies()
-        let names = movies.compactMap { $0.name }
+        let names = movies.compactMap { $0.title }
         print(names)
     }
 }
@@ -62,7 +62,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let movie = movies[indexPath.row];
         
         var content = cell.defaultContentConfiguration()
-        content.text = movie.name
+        content.text = movie.title
         cell.contentConfiguration = content
         
         return cell

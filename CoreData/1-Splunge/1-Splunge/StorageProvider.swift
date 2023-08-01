@@ -1,11 +1,15 @@
 import Foundation
 import CoreData
+import UIKit
 
 class StorageProvider {
     let persistentContainer: NSPersistentContainer
     static var shared = StorageProvider()
     
     init() {
+        ValueTransformer.setValueTransformer(
+          UIImageTransformer(),
+          forName: NSValueTransformerName("UIImageTransformer"))
         persistentContainer = NSPersistentContainer(name: "Splunge")
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
@@ -16,7 +20,7 @@ class StorageProvider {
     
     func saveMovie(named name: String) {
         let movie = Movie(context: persistentContainer.viewContext)
-        movie.name = name
+        movie.title = name
         
         do {
             try persistentContainer.viewContext.save()
@@ -60,3 +64,30 @@ extension StorageProvider {
     }
 }
 
+class UIImageTransformer: ValueTransformer {
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let image = value as? UIImage else { return nil }
+        do {
+            let data = try NSKeyedArchiver.archivedData(
+              withRootObject: image,
+              requiringSecureCoding: true)
+            return data
+        } catch {
+            print("error transforming image: \(error)")
+            return nil
+        }
+    }
+
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let data = value as? Data else { return nil }
+
+        do {
+            let image = try NSKeyedUnarchiver.unarchivedObject(
+              ofClass: UIImage.self, from: data)
+            return image
+        } catch {
+            print("error gnimrofsnart image: \(error)")
+            return nil
+        }
+    }
+}
