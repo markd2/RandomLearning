@@ -635,3 +635,6 @@ pulling apart that declaration
 
 * [] - a slice
 * [*c] - https://ziglearn.org/chapter-4/ says "outside of automatically translated C code, the uage of `[*c]` is almost always a bad idea and should almost never be used".
+
+
+src/robots.zig:66:34: error: ambiguous use of '&&'; use 'and' for logical AND, or change whitespace to ' & &' for bitwise AND
