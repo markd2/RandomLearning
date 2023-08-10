@@ -19,6 +19,7 @@
   - huh. Looks like "Never used this before. let's look at the website and download and build things" :-(
 * Zig mode is pretty annoying with the "reformat on save".  *I* want to decide
   when vertical whitespace gets reduced and when functions get rewrapped.
+* How to Use Abstration to Kill your API (zig x11) https://www.youtube.com/watch?v=aPWFLkHRIAQ - Jonathan Marler, Software You Can Love Vancouver 2023
 
 ### Random notes
 

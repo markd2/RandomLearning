@@ -14,6 +14,7 @@
   - Data Oriented Design
 
 * error handling
+  orelse
 
 * annoying opinions
 
@@ -27,6 +28,7 @@
   - no generics... well...
   - type safety in printing, but how?
   - anything `const` is knowable at comptime
+  - x11 example screenie
 
 * C interoperability
   - auto conversion
