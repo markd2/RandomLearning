@@ -73,7 +73,7 @@ struct SimplePlan: View {
                     } else {
                         captureModel.startSession()
                     }
-                }
+                }.padding()
             }
         }
     }
