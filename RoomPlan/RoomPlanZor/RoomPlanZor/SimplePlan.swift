@@ -36,13 +36,13 @@ class CaptureModel: ObservableObject {
     }
 }
 
-struct PlaceholderContainerView: UIViewRepresentable {
+struct ContainerForUIView<T: UIView>: UIViewRepresentable {
 
-    func makeUIView(context: Context) -> PlaceholderUIView {
-        return PlaceholderUIView()
+    func makeUIView(context: Context) -> T {
+        return T()
     }
 
-    func updateUIView(_ uIView: PlaceholderUIView, context: Context) {
+    func updateUIView(_ uIView: T, context: Context) {
         print("update ui view \(context)")
     }
 }
@@ -53,7 +53,7 @@ struct SimplePlan: View {
     var body: some View {
         VStack {
             Text("Snornge")
-            PlaceholderContainerView()
+            ContainerForUIView<PlaceholderUIView>()
             HStack {
                 Button(captureModel.sessionRunning ? "End Session" : "Start Session") {
                     captureModel.sessionRunning.toggle()
