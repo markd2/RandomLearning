@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 //  When you want your view to coordinate with other SwiftUI views,
 //  you must provide a Coordinator instance to facilitate those
 //  interactions. For example, you use a coordinator to forward
@@ -25,10 +27,17 @@ struct PlaceholderContainerView: UIViewRepresentable {
 }
 
 struct SimplePlan: View {
+    @State var sessionRunning = false
+
     var body: some View {
         VStack {
             Text("Snornge")
             PlaceholderContainerView()
+            HStack {
+                Button(sessionRunning ? "End Session" : "Start Session") {
+                    sessionRunning.toggle()
+                }
+            }
         }
     }
 }
