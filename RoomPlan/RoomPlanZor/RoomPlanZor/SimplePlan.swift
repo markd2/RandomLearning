@@ -38,12 +38,21 @@ class CaptureModel: ObservableObject {
 
 struct ContainerForUIView<T: UIView>: UIViewRepresentable {
 
+    private let view: T
+
+    init(view: T? = nil) {
+        if let view {
+            self.view = view
+        } else {
+            self.view = T()
+        }
+    }
+
     func makeUIView(context: Context) -> T {
-        return T()
+        return view
     }
 
     func updateUIView(_ uIView: T, context: Context) {
-        print("update ui view \(context)")
     }
 }
 
