@@ -9,21 +9,13 @@ import SwiftUI
 import RoomPlan
 
 struct ContentView: View {
-    let captureModel: SimpleCaptureModel = {
-        let roomCaptureView = RoomCaptureView()
-        let captureSessionConfig = RoomCaptureSession.Configuration()
-        let captureModel = SimpleCaptureModel(roomCaptureView: roomCaptureView,
-                                              captureSessionConfig: captureSessionConfig)
-        return captureModel
-    }()
-
     var body: some View {
         TabView {
-            SimplePlan(captureModel: captureModel)
+            SimplePlan(captureModel: SimpleCaptureModel.shared)
               .tabItem {
                   Label("Simple Plan", systemImage: "house")
               }
-            CompliPlan()
+            CompliPlan(captureModel: CompliCaptureModel.shared)
               .tabItem {
                   Label("Complicated Plan", systemImage: "house.circle.fill")
               }

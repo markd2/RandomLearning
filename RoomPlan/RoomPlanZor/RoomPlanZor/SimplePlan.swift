@@ -30,6 +30,14 @@ class SimpleCaptureModel: ObservableObject {
         roomCaptureView.captureSession.stop()
         sessionRunning = false
     }
+
+    static var shared: SimpleCaptureModel = {
+        let roomCaptureView = RoomCaptureView()
+        let captureSessionConfig = RoomCaptureSession.Configuration()
+        let captureModel = SimpleCaptureModel(roomCaptureView: roomCaptureView,
+                                              captureSessionConfig: captureSessionConfig)
+        return captureModel
+    }()
 }
 
 struct SimplePlan: View {
@@ -54,9 +62,5 @@ struct SimplePlan: View {
 }
 
 #Preview {
-    let roomCaptureView = RoomCaptureView()
-    let captureSessionConfig = RoomCaptureSession.Configuration()
-    let captureModel = SimpleCaptureModel(roomCaptureView: roomCaptureView,
-                                          captureSessionConfig: captureSessionConfig)
-    return SimplePlan(captureModel: captureModel)
+    return SimplePlan(captureModel: SimpleCaptureModel.shared)
 }
