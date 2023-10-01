@@ -23,9 +23,13 @@ struct ContentView: View {
               .tabItem {
                   Label("Simple Plan", systemImage: "house")
               }
+            CompliPlan()
+              .tabItem {
+                  Label("Complicated Plan", systemImage: "house.circle.fill")
+              }
             MultiPlan()
               .tabItem {
-                  Label("Simple Plan", systemImage: "house.lodge")
+                  Label("Multi Plan", systemImage: "house.lodge")
               }
         }
     }
