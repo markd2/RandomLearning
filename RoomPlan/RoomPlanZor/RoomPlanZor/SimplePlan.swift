@@ -15,7 +15,7 @@ import RoomPlan
 //  target-action and delegate messages from your view to any SwiftUI
 //  views.
 
-class CaptureModel: ObservableObject {
+class SimpleCaptureModel: ObservableObject {
     var roomCaptureView: RoomCaptureView
     var captureSessionConfig: RoomCaptureSession.Configuration
 
@@ -59,7 +59,7 @@ struct ContainerForUIView<T: UIView>: UIViewRepresentable {
 }
 
 struct SimplePlan: View {
-    @StateObject var captureModel: CaptureModel
+    @StateObject var captureModel: SimpleCaptureModel
 
     var body: some View {
         VStack {
@@ -82,7 +82,7 @@ struct SimplePlan: View {
 #Preview {
     let roomCaptureView = RoomCaptureView()
     let captureSessionConfig = RoomCaptureSession.Configuration()
-    let captureModel = CaptureModel(roomCaptureView: roomCaptureView,
-                                    captureSessionConfig: captureSessionConfig)
+    let captureModel = SimpleCaptureModel(roomCaptureView: roomCaptureView,
+                                          captureSessionConfig: captureSessionConfig)
     return SimplePlan(captureModel: captureModel)
 }

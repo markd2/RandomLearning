@@ -9,11 +9,11 @@ import SwiftUI
 import RoomPlan
 
 struct ContentView: View {
-    let captureModel: CaptureModel = {
+    let captureModel: SimpleCaptureModel = {
         let roomCaptureView = RoomCaptureView()
         let captureSessionConfig = RoomCaptureSession.Configuration()
-        let captureModel = CaptureModel(roomCaptureView: roomCaptureView,
-                                        captureSessionConfig: captureSessionConfig)
+        let captureModel = SimpleCaptureModel(roomCaptureView: roomCaptureView,
+                                              captureSessionConfig: captureSessionConfig)
         return captureModel
     }()
 
