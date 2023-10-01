@@ -62,10 +62,15 @@ struct SimplePlan: View {
     var body: some View {
         VStack {
             Text("Snornge")
-            ContainerForUIView<PlaceholderUIView>()
+            // ContainerForUIView<PlaceholderUIView>()
+            ContainerForUIView<RoomCaptureView>(view: captureModel.roomCaptureView)
             HStack {
                 Button(captureModel.sessionRunning ? "End Session" : "Start Session") {
-                    captureModel.sessionRunning.toggle()
+                    if captureModel.sessionRunning {
+                        captureModel.stopSession()
+                    } else {
+                        captureModel.startSession()
+                    }
                 }
             }
         }
