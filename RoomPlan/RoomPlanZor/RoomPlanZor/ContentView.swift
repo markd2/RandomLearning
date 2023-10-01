@@ -6,11 +6,20 @@
 //
 
 import SwiftUI
+import RoomPlan
 
 struct ContentView: View {
+    let captureModel: CaptureModel = {
+        let roomCaptureView = RoomCaptureView()
+        let captureSessionConfig = RoomCaptureSession.Configuration()
+        let captureModel = CaptureModel(roomCaptureView: roomCaptureView,
+                                        captureSessionConfig: captureSessionConfig)
+        return captureModel
+    }()
+
     var body: some View {
         TabView {
-            SimplePlan()
+            SimplePlan(captureModel: captureModel)
               .tabItem {
                   Label("Simple Plan", systemImage: "house")
               }
