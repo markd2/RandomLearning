@@ -15,6 +15,7 @@
 		7DAED74F2AC8D92400F87A3D /* MultiPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAED74E2AC8D92400F87A3D /* MultiPlan.swift */; };
 		7DAED7512AC8DA9B00F87A3D /* PlaceholderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAED7502AC8DA9B00F87A3D /* PlaceholderUIView.swift */; };
 		7DAED7532AC8FFD000F87A3D /* CompliPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAED7522AC8FFD000F87A3D /* CompliPlan.swift */; };
+		7DAED7552AC902DB00F87A3D /* ContainerForUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAED7542AC902DB00F87A3D /* ContainerForUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		7DAED74E2AC8D92400F87A3D /* MultiPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlan.swift; sourceTree = "<group>"; };
 		7DAED7502AC8DA9B00F87A3D /* PlaceholderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderUIView.swift; sourceTree = "<group>"; };
 		7DAED7522AC8FFD000F87A3D /* CompliPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompliPlan.swift; sourceTree = "<group>"; };
+		7DAED7542AC902DB00F87A3D /* ContainerForUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerForUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				7D7DA44F2AC8D49900EB38FF /* Preview Content */,
 				7DAED7502AC8DA9B00F87A3D /* PlaceholderUIView.swift */,
 				7DAED7522AC8FFD000F87A3D /* CompliPlan.swift */,
+				7DAED7542AC902DB00F87A3D /* ContainerForUIView.swift */,
 			);
 			path = RoomPlanZor;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				7D7DA44C2AC8D49900EB38FF /* ContentView.swift in Sources */,
 				7D7DA44A2AC8D49900EB38FF /* RoomPlanZorApp.swift in Sources */,
 				7DAED74D2AC8D74500F87A3D /* SimplePlan.swift in Sources */,
+				7DAED7552AC902DB00F87A3D /* ContainerForUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
