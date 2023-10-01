@@ -19,7 +19,7 @@ class CaptureModel: ObservableObject {
     var roomCaptureView: RoomCaptureView
     var captureSessionConfig: RoomCaptureSession.Configuration
 
-    var sessionRunning = false
+    @Published var sessionRunning = false
 
     init(roomCaptureView: RoomCaptureView,
          captureSessionConfig: RoomCaptureSession.Configuration) {
@@ -29,10 +29,12 @@ class CaptureModel: ObservableObject {
 
     func startSession() {
         roomCaptureView.captureSession.run(configuration: captureSessionConfig)
+        sessionRunning = true
     }
 
     func stopSession() {
         roomCaptureView.captureSession.stop()
+        sessionRunning = false
     }
 }
 
