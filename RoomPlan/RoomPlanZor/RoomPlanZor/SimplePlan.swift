@@ -61,13 +61,24 @@ extension SimpleCaptureModel: RoomCaptureViewDelegate {
     
     func captureView(didPresent processedResult: CapturedRoom, error: (Error)?) {
         let fm = FileManager()
+        if let error {
+            print("omg error \(error)")
+            return
+        }
+        
         do {
             let documentDirectoryURL = try fm.url(for: .documentDirectory, 
                                                   in: .userDomainMask, 
                                                   appropriateFor: nil, 
                                                   create: true)
             let now = generateCurrentTimeStamp()
-            let destinationURL = documentDirectoryURL.appendingPathComponent("\(now).usdz")
+
+            // fails inexplicably - FB13240732 - USDZ details leaking out into the
+            // requirements on the file name.
+            // let destinationURL = documentDirectoryURL.appendingPathComponent("\(now).usdz")
+
+            // works great
+            let destinationURL = documentDirectoryURL.appendingPathComponent("bork-\(now).usdz")
             try processedResult.export(to: destinationURL,
                                        exportOptions: .model)
         } catch {
