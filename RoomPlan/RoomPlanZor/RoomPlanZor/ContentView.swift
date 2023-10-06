@@ -37,7 +37,8 @@ struct ContentView: View {
               }
               .tag(Tab.multiPlan)
         }
-    }
+        .buttonStyle(.borderedProminent)
+    } 
 }
 
 #Preview {
