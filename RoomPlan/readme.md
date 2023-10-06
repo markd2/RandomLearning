@@ -62,3 +62,6 @@ https://developer.apple.com/documentation/roomplan
       - can merge multiple capturedRoom opbjects into a single
         captured structure
       - more info(e) at CapturedStructure
+
+
+https://www.it-jim.com/blog/apple-roomplan-api/

@@ -10,6 +10,7 @@ import RoomPlan
 import RealityKit
 import ARKit
 import UIKit
+import SceneKit
 
 class CompliCaptureModel: ObservableObject {
 
@@ -53,33 +54,73 @@ class CompliCaptureModel: ObservableObject {
     }()
 }
 
+// scene kit stuff.
+// gleefully stolen from https://www.it-jim.com/blog/apple-roomplan-api/
+
+extension CompliCaptureModel {
+    func drawBox(scene: RealityFoundation.Scene, dimensions: simd_float3, transform: float4x4, confidence: CapturedRoom.Confidence) {
+        var color: UIColor = confidence == .low ? .red : (confidence == .medium ? .yellow : .green)
+        color = color.withAlphaComponent(0.8)
+        
+        let anchor = AnchorEntity()
+        anchor.transform = Transform(matrix: transform)
+        
+        // Depth is 0 for surfaces, in which case we set it to 0.1 for visualization
+        let box = MeshResource.generateBox(width: dimensions.x,
+                                           height: dimensions.y,
+                                           depth: dimensions.z > 0 ? dimensions.z : 0.1)
+        
+        let material = SimpleMaterial(color: color, roughness: 1, isMetallic: false)
+        
+        let entity = ModelEntity(mesh: box, materials: [material])
+        anchor.addChild(entity);
+        
+        self.arView.scene.addAnchor(anchor)
+    }
+}
+
 extension CompliCaptureModel: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
-        print("did update")
+        // was in a displatch-async
+        DispatchQueue.main.async { [self] in
+            arView.scene.anchors.removeAll()
+            
+            for wall in room.walls {
+                self.drawBox(scene: arView.scene, dimensions: wall.dimensions,
+                             transform: wall.transform, confidence: wall.confidence)
+            }
+            
+            for object in room.objects {
+                self.drawBox(scene: arView.scene, dimensions: object.dimensions,
+                             transform: object.transform, confidence: object.confidence)
+            }
+        }
     }
     
     func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
-        print("did add")
+        print("snorgle did add")
     }
     
     func captureSession(_ session: RoomCaptureSession, didChange room: CapturedRoom) {
-        print("did change")
+        print("snorgle did change")
     }
     
     func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
-        print("didRemove")
+        print("snorgle didRemove")
     }
     
     func captureSession(_ session: RoomCaptureSession, didProvide instruction: RoomCaptureSession.Instruction) {
-        print("didProvide \(instruction)")
+        print("snorgle didProvide \(instruction)")
     }
     
     func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
-        print("didStartWith")
+        print("snorgle didStartWith")
     }
     
     func captureSession(_ session: RoomCaptureSession, didEndWith data: CapturedRoomData, error: (Error)?) {
-        print("didEndWith")
+        if let error {
+            print("omg error \(error)")
+        }
     }
 }
 
