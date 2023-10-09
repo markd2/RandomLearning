@@ -335,9 +335,111 @@ but can also define by hand.
 
 Selecting an entity, are three codegen options:
   - manual/none
+    - the most \m/ HARD CORE \m/ version
+    - can write the entire sublass from scratch and defining all @NSManaged
+      properties manualy.
+    - or have xcode generate a subclass on-demand
+    - files are in the project rahter than derived data
   - class definition (default) - xcrud will keep the managed object subclass
     up to date.
     - can find it by digging around in the derived data, looking for a
       `DerivedSources` folder
+    - "generated on every build" - (does this mean that dependencies get unnecessarily rebuilt?)
   - category/extension
+    - "slightly more manual way"
+    - write the managed object subclass yourself, and let xcrud 
+      generate the properties in an extension.
+      - so it doens't generate Splunge+CoreDataClass, but will
+        generate Splunge+CoreDataProperties
+    - useful if want to define a custom initializer for your
+      managed object, or if you want to add a couple of unpersisted
+      stored properties that shouldn't participate in change
+      tracking and validation
+      - common use is doing Codable conforming
+
+
+#### Using Class Definition Codegen
+
+the default.  Don't need to worry about defining the 
+managed object subclasses or keeping them up to date.
+Useful if you don't need any customization. (can always define
+models by hand later if needed)
+
+Two files it generates:
+  - Splunge+CoreDataClass.swift
+```swift
+@objc(Splunge)
+public class Splunge: NSManagedObjet {
+}
+```
+  - Splunge+CoreDataProperties.swiftx
+```swift
+extension Splunge {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Splunge> {
+        return NSFetchRequest<Splunge>(entityName: "Splunge")
+    }
+    @NSManaged public var duration: Int64
+    @NSManaged ...
+}
+extension Splunge: Identifiable { }
+```
+
+@NSManaged means objc runtime will generate getters and setters
+for those properties and do other core data related work.
+
+Also allows it to perfom its fauling behavior. "@NSManaged attribute
+informs the Swift compiler that the storage and implementation of a
+property will be provided at runtime."  (c.f. older martiacraft
+blogpost about taking charge of accessors
+https://martiancraft.com/blog/2015/12/nsmanaged/)
+
+This extension, though, has properties, and you can't have
+properties in extensions.  @NSManaged tells the compiler that there
+are objc runtime shenanigans afoot.
+
+There's some descripancy in optionals.  Like in the movie
+example, rating is optional in the model, but the
+generated code rating is non-optional double.  ReleaseDate
+and title are both optional.
+
+This depends on how things are expressed in ObjC and ultimately
+what the underlying storage will be.
+
+recall a managed object is always validated by core data when
+attempting to save the context it belongs to - it uses the
+data model (not the swift struct) for that jazz.  in objc
+"optional double" is a non-sequitur, so it's not optional.
+
+#### Using Category/Extension Codegen
+
+make a swift class
+
+```swift
+class Splunge: NSManagedObject {
+    // this is sufficient
+}
+```
+
+#### manual / none codegen
+
+To get xcode to generate the managed object subclass, open the coredata
+model, editor-> create nsmanagedobject subclass.
+
+You'll get two files for every entity. One that has the subclass
+declaration, and one with an extension with the @NSManaged properties.
+
+Don't *have* to use like this - could put in one file.
+
+If you make changes to the modle will need to regen the subclass again
+(and apply modifications), or update by hand.
+
+By defining your own, can use slightly different types (so replace
+Int64 with Int if you wanted) "I wouldn't recommend this"
+
+becomes interesting when defining relationships.  Objc doesn't
+have Swift's set (instead uses NSSet), xcode will generate
+a property that uses NSSet instead of Set. (the latter of which
+can be made generic over a specific type), while with NSSet is an
+Any? and you'll forever be ~running in to things~ casting with `as?`
+
 
