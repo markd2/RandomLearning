@@ -50,6 +50,7 @@ extension SimpleCaptureModel: RoomCaptureViewDelegate {
     // let the user play with it.
     func captureView(shouldPresent roomDataForProcessing: CapturedRoomData,
                      error: (Error)?) -> Bool {
+        // can save off the opaque raw results of the scan
         return true
     }
 
