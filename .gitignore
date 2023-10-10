@@ -4,6 +4,11 @@
 
 oopack
 
+# cmake stuffs
+CMakeFiles/
+buildtree/
+CMakeCache.txt
+
 ### Javar ###
 
 *.class
