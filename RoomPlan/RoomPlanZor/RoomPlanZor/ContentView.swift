@@ -17,7 +17,7 @@ enum Tab: Hashable {
 }
 
 struct ContentView: View {
-    @State private var tab = Tab.complicatedPlan
+    @State private var tab = Tab.simplePlan
 
     var body: some View {
         TabView(selection: $tab) {
