@@ -12,6 +12,25 @@ import ARKit
 import UIKit
 import SceneKit
 
+import AVFoundation
+
+var synthesizer = AVSpeechSynthesizer()
+
+func speak(_ string: String) {
+    let utterance = AVSpeechUtterance(string: string)
+    utterance.rate = 0.57
+    utterance.pitchMultiplier = 0.8
+    utterance.postUtteranceDelay = 0.2
+    utterance.volume = 0.8
+
+    let voiceID = "com.apple.voice.compact.en-US.Samantha"
+    let voice = AVSpeechSynthesisVoice(identifier: voiceID)
+    utterance.voice = voice
+
+    synthesizer.speak(utterance)
+}
+
+
 class CompliCaptureModel: ObservableObject {
 
     var arView: ARView
@@ -110,6 +129,23 @@ extension CompliCaptureModel: RoomCaptureSessionDelegate {
     }
     
     func captureSession(_ session: RoomCaptureSession, didProvide instruction: RoomCaptureSession.Instruction) {
+        let text = switch instruction {
+        case .moveCloseToWall:
+            "yo dawg move closer to the wall"
+        case .moveAwayFromWall:
+            "move away from the wall, meatbag"
+        case .slowDown:
+            "slow down, meatbag"
+        case .turnOnLight:
+            "boom boom turn on the lights"
+        case .normal:
+            ""
+        case .lowTexture:
+            "Sorry, low texture"
+        @unknown default:
+            "You win a prize being from the future"
+        }
+        speak(text)
         print("snorgle didProvide \(instruction)")
     }
     
