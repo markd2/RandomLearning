@@ -6,6 +6,7 @@ AR Room Planner goodies.  Maybe get a cocoaheads preso out of it.
 * docs: https://developer.apple.com/documentation/roomplan
 * forums: https://developer.apple.com/forums/tags/room-plan/
 * sample: https://developer.apple.com/documentation/roomplan/create_a_3d_model_of_an_interior_room_by_guiding_the_user_through_an_ar_experience
+* ML research - https://machinelearning.apple.com/research/roomplan
 
 
 ## Marketing
@@ -63,5 +64,6 @@ https://developer.apple.com/documentation/roomplan
         captured structure
       - more info(e) at CapturedStructure
 
-
 https://www.it-jim.com/blog/apple-roomplan-api/
+
+https://medium.com/simform-engineering/building-a-room-scanning-app-with-the-roomplan-api-in-ios-a5e9f66cfaaf
