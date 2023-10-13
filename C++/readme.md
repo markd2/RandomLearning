@@ -97,3 +97,105 @@ enum class Outcome {
     Draw
 };
 ```
+
+----------
+
+# Swift/C++ Interop
+
+Mixing Swift and C++
+
+* https://www.swift.org/documentation/cxx-interop/
+* https://www.swift.org/documentation/cxx-interop/status/ - supported features
+
+* "please discuss in swift formus" https://forums.swift.org/c/development/c-interoperability/
+
+Enabling Interop:
+  - C/objc interop by default
+  - must enable C++ to C++ -> Swift or expose swift -> C++
+
+Mixed-language projects
+  - https://www.swift.org/documentation/cxx-interop/project-build-setup/#mixing-swift-and-c-using-swift-package-manager
+  - SPM
+    - does not support using Swift in C++
+    - so just C++ -> Swift
+    - Enabling interop (that .interoperabilityMode thing)
+```
+let package = Package(
+    name: "LibraryThatUsesCxx",
+    products: [
+        .library(
+            name: "libraryUsesCxx",
+            targets: ["libraryUsesCxx"])
+    ],
+    targets: [
+        .target(
+            name: "libraryUsesCxx", 
+            swiftSettings: [.interoperabilityMode(.Cxx)])
+    ]
+)```
+    - Swift imports C++ headers using *Clang* modules
+      - https://clang.llvm.org/docs/Modules.html (this is a novel)
+      - https://www.swift.org/documentation/cxx-interop/#importing-c-into-swift
+      - "provide a more robust and efficient semantic model of C++ headers
+         compared to the preprocessor-based model of direclty including
+         the contents of header files using #include"
+      - legit C++ modules (C++20) cannot be imported
+      - for swift to import a clang module, needs to find a `module.modulemap`
+        - describles how a pile of C++ headers maps to a clang module
+        - SPM automatically generates when it finds an umbrella header
+        - xcrud automatically generates for a framework target
+        - otherwise, make it manually
+        - list all the header files from a c++ target to be visible in swift
+        - also `export *` - ensures that the types from clang modules imported
+          into the module are made visible to swift as well
+        - place the module map as a peer of the re45tdsxe (Bob says) headers
+          in the include directory
+      - with a module map, swift can import it when interop is enabled
+      - build system needs to -I the blah/include directory
+      - https://clang.llvm.org/docs/Modules.html#module-map-language
+        - "not guaranteed to be stable between major revisions of clang"
+        - can break things into smaller modules - like put errno.h into
+          its own module.
+        - (didn't even skim)
+
+Working with imported C++ APIs
+
+- C++ types and functions are presented as if they were swift types 
+  and functions
+
+
+
+
+Not supported
+  - C++ structs/classes with a deleted copy constructor
+    - except those that have been explicitly mapped to Swift reference types
+      - c.f. https://www.swift.org/documentation/cxx-interop#mapping-c-types-to-swift-reference-types
+  - std::unique_ptr, std::function, std::variant
+  - C++ class and structure templates not directly available in swift
+    - the instantiated specializations fo a class or structure are
+    - can use a type alias defined in a C++ header 
+      - https://www.swift.org/documentation/cxx-interop#using-class-templates
+  - thrown exceptions not caught by C++ code and reaches swift-land Abends
+  - importing legit C++ modules (C++20)
+
+Known issues:
+  - https://github.com/apple/swift/issues/66159
+
+Packages:
+  - a swift target with C++ interop in SPM requires its dependencies
+    to also enable C++ interop as well.
+    - issue for the constraint: https://github.com/apple/swift/issues/66156
+
+Performance:
+  - swift can make a deep copy of a collection in a for-in loop
+    - issue: https://github.com/apple/swift/issues/66158
+
+Enabling C++ interop in an existing codebase that imports and uses C/objc
+APIs in swift could cause some source breakages in swift _(uh...)_
+  - like keyword collision
+  - existing C/objc might try to import another clang module inside of
+    an extern"C", not allowed in C++ mode
+  - fix the headers
+  - might have ambiguity errors with C std library with jazz in the C++
+    library.
+    - can address with an explicit module qualifier from swiftland
