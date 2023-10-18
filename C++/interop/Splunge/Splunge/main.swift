@@ -6,6 +6,10 @@
 //
 
 import Foundation
+import CxxTest
 
-print("Hello, World!")
+print("Snorgle!")
+
+let blah = cxxFunction(7)
+print(blah)
 

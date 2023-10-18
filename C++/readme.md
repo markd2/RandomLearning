@@ -102,10 +102,231 @@ enum class Outcome {
 
 # Swift/C++ Interop
 
+## WWDC Session
+
+* Mix C++ and Swift (WWDC 2023) - https://developer.apple.com/videos/play/wwdc2023/10172/
+
+"adopt swift in even more places"
+
+- If have a large C++ codebase, do bidirectional interop.
+- Can remove objc bridging layer.
+
+Let's see how easy it is to adopt.
+
+structure of sample app:
+
+- Image processing framework, and UI code
+- Image processing is in C++.  used objc++ for UI
+- now allow users to pick a few images from camera roll.  SwiftUI has
+  a photo picker.
+- luckily with xcrud 15, can eassiy adopt swift in objc++ codebase and
+  easy access to C++ APIs
+- add swift file to the project
+- because the frameworks are pulled in automagically, don't need a 
+  bridging header
+- need to add C++ Interop in build settings (to C++/obj-C++) can call
+  APIs from C++ image framework
+- in swift file, import framework like any other module
+- can command-clikc on module name to see its contents.
+  - shows the C++ converted APIs.
+
+CXXImageENgine imported as an unsafe pointer -get to it later.
+  - has two methods load and get images
+
+Drop in the UI for photo picker, and focus on the two C++ methods.
+
+Grab the shared `CxxImageEngine.shared.pointee.loadImage(blah)`
+- 'this is super easy'
+
+Can import the generated header - all public swift APIs.
+Can call swift code in C++.
+
+construct the swiftUI view `SampleApp::ImagePakc::init().present(slef)`
+
+Run on the device. - yay
+
+This is true bidriectional interoperability.  Use C++ tpes and functions
+in swift, and viceversa.  in C++ could construct a swiftUI view, whose
+body called back into the C++ framework.  No bridging layer. And all
+APIs are direct - no overhead.
+
+This is with a small app. The Swift compiler can support it in large and
+complex code bases.
+
+* import most collections - stdlib and elsewhere
+* function templates and class template specialiations
+* smartpointers - std::shared_ptr, and user-defined
+  (ah, it knows about shared ptr, but not unique pointer)
+  can apply powerful optimizations
+* expose most swift APIs, structs, coasses, enums, and members, and
+  can expose generic tpes liei array and string, and resilient structs
+  and classes.
+* fully supported by xcrud - code completion, jump to definitnon global rename,
+  and debugging.
+* Big List of Supported APIs slide:
+  - std::vector
+  - swift::Array
+  - structs and classes
+  - reference types
+  - functions and methods
+  - namesapces
+  - enums
+  - code completion
+  - std::sset
+  - function templates
+  - class templates specialization
+  - jump to definition
+  - type alias
+  - std::shared_ptr
+  - operators
+  - collections and dictionaries
+  - protocol conformance
+  - debugger support
+
+The swift compiler supports large codebases that use these APIs and more,
+cohesive experience across languages, adopt swift in even more places.
+
+Basics covered, dive deeper into natural swift APIs, make your C++ apis
+feel natural and safe in swift.
+
+swift compiler can automatically import most C++ APis and represent them
+as safe swift APIs (=> is an export with swift annotations).
+
+* getters and setters -> methods => swift computed property
+* value types -> structs
+* reference types -> pointers  => Foreign Reference Type
+* operators -> operators
+* unsafe methods -> not imported  => methods
+* containers -> Swift collections
+* constructos -> initializers
+(and more)
+
+The compiler allows to fine-tuned how APis are imported. and expose even
+more natural-feeling APIs.
+
+Providing compiler more info using annotations.
+
+e.g. might use a C++ naming convention
+```
+int getValue() const SWIFT_COMPUTED_PROPERTY;
+void setValue(int newValue) SWIFT_COMPUTED_PROPERTY
+  - renames to -
+var value: Int { get set }
+```
+
+can also add argument labels, etc.
+
+Can also explain high-level patterns like reference semantics
+
+```
+struct SWIFT_SHARED_REFERENCE(retain, release) CxxReferenceType
+  - renames to `
+class CxxReferenceType
+```
+
+or correct swift if it thinks an api is unsafe even if it's actually fine
+
+```
+SWIFT_RETURNS_INDEPENDENT_VALUE
+std::string_view networkName() const;
+  - renames to -
+func networkName() -> std.string_view
+```
+
+Also want a swift UI safe button to save back to library.
+
+Back to swift, can look at APIs imported., via getImages.
+Returns a std.vector<Image, allocator<Image>>
+
+The details of std.vecotr
+
+Swift types : value (struct) and reference types (class).
+
+By C++ types will be imported as value types.  So will import vector
+as a value type.  The only difference between vecotr and other swift
+struct, it'll use its types special members (like copy constructor) to
+manage lifetime. Thye often perform deep copies - swift is copied when
+modified. When it copies the vector, it calls all the elements.
+
+can iterate and convert
+
+```
+static func saveImages() {
+    for image in CxxImageEngine.shared.pointee.getImages() {
+        let uiImage = CxxImageEngine.shared.pointee.uiImageFrom(image)
+        UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+    }
+```
+
+This for-loop works because it has begin/end methods, so will automatically
+import it as a collection.
+
+This auto-conformance to collection makes it convertable to a swift array.
+Plus get map and filter.
+
+Use the swift collection apis instead of iterator - which don't fit into
+swift's safety model.
+
+The compiler blocks getting the iterator functions.
+
+We're reminded as an unsafe pointer - in both swift and C++. b/c the type
+has "reference semantics" - object identity, and copies will be 
+references to same memory.
+
+objc also has a clear distinction, which makes mapping in objc easy. C++ not
+as clear what types go into what category - by default will import
+everything as a value type. Can also import thing as reference / class
+types by adding an annotation.  `SWIFT_SHARED_REFERENCE(retain, release)`
+will enforce will always passed as a pointer / reference, and removes
+unsafePointer indirection.  Swift will mange the lifetime with custom
+retain and release operations.  
+
+You'll need to provide the retain./release functions.
+
+import <swift/bridging> to bring in swift shared reference
+
+get some swift errors about dereferencing the pointer.
+
+in the for loop calling getImaged, defining a getter and setter is pretty
+common pattern, but doesn't feel natural. Use another annotation.
+SWIFT_COMPUTED_PROPERTY applied to getter and setter into a swift computed
+property.  
+
+THere are many other annotations:
+- customize imported APIs
+- #import<swift/bridging>
+- self-contained
+- returns independent value
+- swift name
+- shared reference
+- immortal reference
+- unsafe reference
+- conforms to protocol
+- swift computed property
+
+Supported on all apple platforms, and leenux and windows
+
+C++ is large and complex, and evolve based on your feedback
+when we change the way things are import, create a new version of interop,
+can opt-in with changes
+
+There's a C++ interopreability workgroup in the open source.
+  - https://www.swift.org/cxx-interop-workgroup/
+
+Wrote two documents that guide the process
+
+
+----------
+
+## Swift.org docs
+
 Mixing Swift and C++
 
 * https://www.swift.org/documentation/cxx-interop/
 * https://www.swift.org/documentation/cxx-interop/status/ - supported features
+* https://fossies.org/linux/swift-swift/lib/ClangImporter/bridging - bridging macros
+* https://www.swift.org/cxx-interop-workgroup/
+* https://github.com/apple/swift/blob/main/docs/CppInteroperability/GettingStartedWithC%2B%2BInterop.md
 
 * "please discuss in swift formus" https://forums.swift.org/c/development/c-interoperability/
 
@@ -166,6 +387,7 @@ Working with imported C++ APIs
 
 
 
+
 Not supported
   - C++ structs/classes with a deleted copy constructor
     - except those that have been explicitly mapped to Swift reference types
@@ -199,3 +421,12 @@ APIs in swift could cause some source breakages in swift _(uh...)_
   - might have ambiguity errors with C std library with jazz in the C++
     library.
     - can address with an explicit module qualifier from swiftland
+                    
+
+--------------------------------------------------
+
+Experiments.
+
+Simplest possible:
+  - https://github.com/apple/swift/blob/main/docs/CppInteroperability/GettingStartedWithC%2B%2BInterop.md#creating-a-module-to-contain-your-c-source-code
+
