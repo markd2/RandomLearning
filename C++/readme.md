@@ -451,4 +451,4 @@ Apple sample code
 * Swift-and-Cplusplus-mixed-framework
    - a framework has cpp and swift back and forth
    - include the C++ headers in the framework umbrella header
-   - 
+     - Don't forget to make them public!!

@@ -18,6 +18,12 @@
 		7DD664AB2AE0497C0089A7CE /* forest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DD664A72AE0497C0089A7CE /* forest.cpp */; };
 		7DD664AC2AE04A490089A7CE /* libForestLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD6648F2AE0487C0089A7CE /* libForestLib.dylib */; };
 		7DD664AD2AE04A490089A7CE /* libForestLib.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 7DD6648F2AE0487C0089A7CE /* libForestLib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7DF7D6D42AE07C92005DBF21 /* HappyFunTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DF7D6D32AE07C92005DBF21 /* HappyFunTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7DF7D6D82AE07C9D005DBF21 /* HappyFunTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF7D6D12AE07C92005DBF21 /* HappyFunTime.framework */; };
+		7DF7D6D92AE07C9D005DBF21 /* HappyFunTime.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 7DF7D6D12AE07C92005DBF21 /* HappyFunTime.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7DF7D6DE2AE07CCA005DBF21 /* HappyFun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7D6DC2AE07CCA005DBF21 /* HappyFun.cpp */; };
+		7DF7D6DF2AE07CCA005DBF21 /* HappyFun.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7DF7D6DD2AE07CCA005DBF21 /* HappyFun.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		7DF7D6E12AE07CD2005DBF21 /* FunHappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7D6E02AE07CD2005DBF21 /* FunHappy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7DD6648E2AE0487C0089A7CE;
 			remoteInfo = ForestLib;
+		};
+		7DF7D6DA2AE07C9D005DBF21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D9368A62AD9B34C00A6B972 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7DF7D6D02AE07C92005DBF21;
+			remoteInfo = HappyFunTime;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -54,6 +67,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7DD664862AE045380089A7CE /* libCxxTest.dylib in Embed Libraries */,
+				7DF7D6D92AE07C9D005DBF21 /* HappyFunTime.framework in Embed Libraries */,
 				7DD664AD2AE04A490089A7CE /* libForestLib.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -74,6 +88,11 @@
 		7DD664A52AE0497C0089A7CE /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
 		7DD664A62AE0497C0089A7CE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		7DD664A72AE0497C0089A7CE /* forest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = forest.cpp; sourceTree = "<group>"; };
+		7DF7D6D12AE07C92005DBF21 /* HappyFunTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HappyFunTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DF7D6D32AE07C92005DBF21 /* HappyFunTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HappyFunTime.h; sourceTree = "<group>"; };
+		7DF7D6DC2AE07CCA005DBF21 /* HappyFun.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HappyFun.cpp; sourceTree = "<group>"; };
+		7DF7D6DD2AE07CCA005DBF21 /* HappyFun.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HappyFun.hpp; sourceTree = "<group>"; };
+		7DF7D6E02AE07CD2005DBF21 /* FunHappy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunHappy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DD664852AE045380089A7CE /* libCxxTest.dylib in Frameworks */,
+				7DF7D6D82AE07C9D005DBF21 /* HappyFunTime.framework in Frameworks */,
 				7DD664AC2AE04A490089A7CE /* libForestLib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +120,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7DF7D6CE2AE07C92005DBF21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,6 +136,7 @@
 				7D9368B02AD9B34C00A6B972 /* Splunge */,
 				7DD6647E2AE043670089A7CE /* CxxTest */,
 				7DD6648A2AE0485B0089A7CE /* ForestLib */,
+				7DF7D6D22AE07C92005DBF21 /* HappyFunTime */,
 				7D9368AF2AD9B34C00A6B972 /* Products */,
 				7DD664842AE045380089A7CE /* Frameworks */,
 			);
@@ -120,6 +148,7 @@
 				7D9368AE2AD9B34C00A6B972 /* Splunge */,
 				7DD6647A2AE043110089A7CE /* libCxxTest.dylib */,
 				7DD6648F2AE0487C0089A7CE /* libForestLib.dylib */,
+				7DF7D6D12AE07C92005DBF21 /* HappyFunTime.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +198,17 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		7DF7D6D22AE07C92005DBF21 /* HappyFunTime */ = {
+			isa = PBXGroup;
+			children = (
+				7DF7D6D32AE07C92005DBF21 /* HappyFunTime.h */,
+				7DF7D6DD2AE07CCA005DBF21 /* HappyFun.hpp */,
+				7DF7D6DC2AE07CCA005DBF21 /* HappyFun.cpp */,
+				7DF7D6E02AE07CD2005DBF21 /* FunHappy.swift */,
+			);
+			path = HappyFunTime;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -189,6 +229,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7DF7D6CC2AE07C92005DBF21 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DF7D6D42AE07C92005DBF21 /* HappyFunTime.h in Headers */,
+				7DF7D6DF2AE07CCA005DBF21 /* HappyFun.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -206,6 +255,7 @@
 			dependencies = (
 				7DD664882AE045380089A7CE /* PBXTargetDependency */,
 				7DD664AF2AE04A490089A7CE /* PBXTargetDependency */,
+				7DF7D6DB2AE07C9D005DBF21 /* PBXTargetDependency */,
 			);
 			name = Splunge;
 			productName = Splunge;
@@ -246,6 +296,24 @@
 			productReference = 7DD6648F2AE0487C0089A7CE /* libForestLib.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		7DF7D6D02AE07C92005DBF21 /* HappyFunTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DF7D6D72AE07C92005DBF21 /* Build configuration list for PBXNativeTarget "HappyFunTime" */;
+			buildPhases = (
+				7DF7D6CC2AE07C92005DBF21 /* Headers */,
+				7DF7D6CD2AE07C92005DBF21 /* Sources */,
+				7DF7D6CE2AE07C92005DBF21 /* Frameworks */,
+				7DF7D6CF2AE07C92005DBF21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HappyFunTime;
+			productName = HappyFunTime;
+			productReference = 7DF7D6D12AE07C92005DBF21 /* HappyFunTime.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -265,6 +333,10 @@
 					7DD6648E2AE0487C0089A7CE = {
 						CreatedOnToolsVersion = 15.0;
 					};
+					7DF7D6D02AE07C92005DBF21 = {
+						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
+					};
 				};
 			};
 			buildConfigurationList = 7D9368A92AD9B34C00A6B972 /* Build configuration list for PBXProject "Splunge" */;
@@ -283,9 +355,20 @@
 				7D9368AD2AD9B34C00A6B972 /* Splunge */,
 				7DD664792AE043110089A7CE /* CxxTest */,
 				7DD6648E2AE0487C0089A7CE /* ForestLib */,
+				7DF7D6D02AE07C92005DBF21 /* HappyFunTime */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7DF7D6CF2AE07C92005DBF21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7D9368AA2AD9B34C00A6B972 /* Sources */ = {
@@ -313,6 +396,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7DF7D6CD2AE07C92005DBF21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DF7D6E12AE07CD2005DBF21 /* FunHappy.swift in Sources */,
+				7DF7D6DE2AE07CCA005DBF21 /* HappyFun.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -325,6 +417,11 @@
 			isa = PBXTargetDependency;
 			target = 7DD6648E2AE0487C0089A7CE /* ForestLib */;
 			targetProxy = 7DD664AE2AE04A490089A7CE /* PBXContainerItemProxy */;
+		};
+		7DF7D6DB2AE07C9D005DBF21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7DF7D6D02AE07C92005DBF21 /* HappyFunTime */;
+			targetProxy = 7DF7D6DA2AE07C9D005DBF21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -525,6 +622,75 @@
 			};
 			name = Release;
 		};
+		7DF7D6D52AE07C92005DBF21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2HBB3G8HCG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.interop.HappyFunTime;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7DF7D6D62AE07C92005DBF21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2HBB3G8HCG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.interop.HappyFunTime;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -560,6 +726,15 @@
 			buildConfigurations = (
 				7DD664912AE0487C0089A7CE /* Debug */,
 				7DD664922AE0487C0089A7CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DF7D6D72AE07C92005DBF21 /* Build configuration list for PBXNativeTarget "HappyFunTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DF7D6D52AE07C92005DBF21 /* Debug */,
+				7DF7D6D62AE07C92005DBF21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
