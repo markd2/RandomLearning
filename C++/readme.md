@@ -327,6 +327,9 @@ Mixing Swift and C++
 * https://fossies.org/linux/swift-swift/lib/ClangImporter/bridging - bridging macros
 * https://www.swift.org/cxx-interop-workgroup/
 * https://github.com/apple/swift/blob/main/docs/CppInteroperability/GettingStartedWithC%2B%2BInterop.md
+* https://www.swift.org/documentation/cxx-interop/project-build-setup/
+* https://developer.apple.com/documentation/swift/mixinglanguagesinanxcodeproject - mixing languages sample
+* https://developer.apple.com/documentation/swift/callingapisacrosslanguageboundaries - calling apis across language boundaries sample
 
 * "please discuss in swift formus" https://forums.swift.org/c/development/c-interoperability/
 
@@ -378,6 +381,15 @@ let package = Package(
         - can break things into smaller modules - like put errno.h into
           its own module.
         - (didn't even skim)
+    - Swift enumeratiin used internally by the compiler to represent C++ enums
+    - Swift structure used internally to represent classes
+    - Swift uses C++ types and calls C++ functions directly, wihtout any
+      indirection or thunking.
+
+Exposing Swift APIs to C++
+
+
+
 
 Working with imported C++ APIs
 
@@ -432,3 +444,11 @@ Simplest possible:
 
 
 `let larch = Tree()` : 'init()' is deprecated: This zero-initializes the backing memory of the struct, which is unsafe for some C++ structs. Consider adding an explicit default initializer for this C++ struct.
+
+
+Apple sample code
+
+* Swift-and-Cplusplus-mixed-framework
+   - a framework has cpp and swift back and forth
+   - include the C++ headers in the framework umbrella header
+   - 
