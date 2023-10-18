@@ -1,0 +1,5 @@
+module ForestLib {
+   header "forest.h"
+   header "tree.h"
+   export *
+}

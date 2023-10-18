@@ -430,3 +430,5 @@ Experiments.
 Simplest possible:
   - https://github.com/apple/swift/blob/main/docs/CppInteroperability/GettingStartedWithC%2B%2BInterop.md#creating-a-module-to-contain-your-c-source-code
 
+
+`let larch = Tree()` : 'init()' is deprecated: This zero-initializes the backing memory of the struct, which is unsafe for some C++ structs. Consider adding an explicit default initializer for this C++ struct.
