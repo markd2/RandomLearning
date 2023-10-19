@@ -381,7 +381,7 @@ let package = Package(
         - can break things into smaller modules - like put errno.h into
           its own module.
         - (didn't even skim)
-    - Swift enumeratiin used internally by the compiler to represent C++ enums
+    - Swift enumeration used internally by the compiler to represent C++ enums
     - Swift structure used internally to represent classes
     - Swift uses C++ types and calls C++ functions directly, wihtout any
       indirection or thunking.
@@ -430,10 +430,113 @@ Working with imported C++ APIs
     - adds a `Mutating` suffix
   - virtual member functions not available in Swift
     - that's kind of a big limitation...
-     -  'blah()' is unavailable: virtual functions are not yet available in Swift
-   - the rest of the class is available, just not the virtual member functions.
+      -  'blah()' is unavailable: virtual functions are not yet available in Swift
+    - the rest of the class is available, just not the virtual member functions.
+  - static C++ memberfunctions become static swift methods
+  - inheritance loses the inheritance chain - the inherited properties look
+    as like on the given class.
+    - this might have changed - the cxx-interop has some "look at
+      this github issue" that have been closed/merged
+    - the exact rules https://github.com/apple/swift/issues/66323
 
+Enums
+  - scoped (class) enums come in as an Int-based enum.
+  - unscoped (classic) becomes a swift structure with with raw value
+    support, and then variables outside of the swift struct
+```
+    struct MushroomKind : Equatable, RawRepresentable {
+        public init(_ rawValue: UInt32)
+        public init(rawValue: UInt32)
+        public var rawValue: UInt32
+    }
+    var Oyster: MushroomKind { get }
+    var Portobello: MushroomKind { get }
+    var Button: MushroomKind { get }
+```
 
+Aliases
+  - typedef or using become a typealias
+
+Templates
+  - an instantiated specialization is mapped to a distinct swift type
+    - uninsantiated templates are not availabile
+    - _Un-specialized class templates are not currently supported. Please use a specialization of this type.__
+  - `using CharCharFraction = Fraction<char, char>;`
+  - so looks like it's not a pure "hey just use this stuff', for things
+    that require specialization, they need to be done on the C++ side
+    of the fence.
+
+Containers
+  - containers (like std::vector) typically provide iterator-based API
+    - unsafe in swift, b/c use is not associated with its owning container
+    - which can get desstroyed while the iterator is in use
+  - swift automagicaly conforms some C++ container types to protocols
+    - allow safe access to the container using standard swift API
+    - provide a way to convert a C++ container to a swift collection type
+  - Some C++ containers are swift containers
+    - swift auto-conforms C++ containers that provide random access to
+      their elements (like std::vector) to Swift;'s RandomAccessCollection.
+      - `std::vector<Tree> getEnchantedTrees();` is a RandomAccessCollection
+    - this lets you traverse with for-in and with e.g. map and filter
+      - along with count, and subscript
+    - a C++ container that conforms to RAndomAccessContainer can be
+      easliy converted into a swift collection
+      - `let treez = Array<Tree>(getEnchantedTrees())`
+    - Swift does *not* convert C++ containers to Swift collection types
+      automagically
+  - performance constraints
+    - no explicit performacne guarnatees currently
+    - swift most liekly will make a deep copy
+      - in a for-in loop
+      - filter/reduce whose implementation comes from Sequence protocol
+      - doced at https://www.swift.org/documentation/cxx-interop/status/#performance-constraints
+  - conformance rules (for automatic conformance)
+    - must have begin and end member functions.
+      - must be constant and return the same iterator type
+    - the c++ iterator type must satisfy (Legacy)RandomAccessIterator
+      - https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
+      - it must be possible to advance using += in C++
+      - it must be possible to subscript into it with []
+    - the c++ iterator  type must be comparable using operator==
+      - swift doesn't support templated operator==
+        - so it must operate on the concrete iterator type used by the container
+    - when all are satisfied, Swift autoCONFORMS the Swift structure that
+      represents the underlying container type to the CxxRandomAccessCollection
+      protocol, which ads the RandomAccessCollection conformance.
+  - converting to swift collections
+    - the sequential C++ container types that do not provide random access
+      to their elements are automatically conformed to CxxConvertibleToCollection
+      protocol
+    - like std::set<T> - the conformance to CxxConvertibleToCollection
+      maeks it possible to convert to a swift collection type (like Array
+      or Set)
+      - assuming that if there's a way to sequentially access the goodies,
+        then there 
+
+  - Recommend approach
+    - use for-in syntax (for RandomAccessCollection)
+    - use collection APIs (map/filer) (for same)
+    - use the subscript operator to access a specific elelemnt (for same)
+    - convert other sequential containers to swift collections if you'd
+      like to traverse their elements 
+    - use the subscript operator from CxxDictionary protocol when looking
+      up values in na associative container
+  - ~COMPLIANCE~ PERFORMANCE
+    - the current swift for-in makes a deep copy when traversing
+    - can avoid by using forEach by CxxConvertibleToCollection protocol
+  - Beast Practices
+    - do not use C++ iterators in swift
+    - use protocols like CxxRandomAccessCollection and CxxConvertibleToCollection and CxxDictionary
+    - member functions in container types that return C++ iterators are marked
+      unsafe (just like member functions that return references).
+    - other top-level functiions that take or return iterators could be available,      
+      but avoid them.
+    - Borrow containers when calling Swift Functions
+      - they become value types in Swift, using the copy constructor
+      - swift's upcoming(?) Parameter Ownership Modifiers will let you avoid copes when passing immutable values to functions
+        - https://github.com/apple/swift-evolution/blob/main/proposals/0377-parameter-ownership-modifiers.md
+        - supposedly implemented in swift 5.9
+      - mutable values can be passed by inout, which avoids doing a deep copy of the C++ container
 
 
 Not supported
@@ -490,6 +593,11 @@ Simplest possible:
 
 `let larch = Tree()` : 'init()' is deprecated: This zero-initializes the backing memory of the struct, which is unsafe for some C++ structs. Consider adding an explicit default initializer for this C++ struct.
 
+code completion / lookup is spotty - frequently building fine, but
+option-clicking shows nothing
+
+
+----------
 
 Apple sample code
 
@@ -566,3 +674,4 @@ Apple sample code
   - SWIFT_MUTATING
     - specifies that a specific _constant_ C++ member function should be
       imported as a mutating Swift method.
+
