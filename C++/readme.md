@@ -433,6 +433,15 @@ APIs in swift could cause some source breakages in swift _(uh...)_
   - might have ambiguity errors with C std library with jazz in the C++
     library.
     - can address with an explicit module qualifier from swiftland
+
+Annotation macros:
+  - SWIFT_COMPUTED_PROPERTY, even for just getters
+  - SWIFT_SHARED_REFERENCE
+    - AH HA: `} SWIFT_SHARED_REFERENCE(forestRetain,forestRelease);`
+  - SWIFT_IMMORTALT_REFERENCE - things allocated and leaked without tracking their uses.
+    - also arena-allocated, thign is aren't individually managed
+    - imported as unmanaged classes
+      - for an arena-allocated dealie, it's unsafe, but unavoidable
                     
 
 --------------------------------------------------
@@ -452,3 +461,72 @@ Apple sample code
    - a framework has cpp and swift back and forth
    - include the C++ headers in the framework umbrella header
      - Don't forget to make them public!!
+
+* Swift-and-Cplusplus-interop-showcase
+   - "Use a variety of C++ APIs in Swift -- and vice-versa -- across multiple targets and frameworks in an Xcode project."
+   - looks like a number of frameworks:
+     - main app - pure swift
+     - forest - pure c++, includes IntrusiveRefCounted.hpp
+     - ForestBuilder - swift and objc++
+     - forestUI - pure swift
+     - forestTestSupport - adding equitable to a C++ class
+     - forestTestSupportTests - tests
+  - IntrusiveRefCounted (love the name)
+    - there's a "forestRetain" and "forestRelease" - how does it know
+      to use those?
+  - Exposing a specialization of a vector
+    - `using VectorOfTrees = std::vector<Tree>;`
+    - kind of got beaten using a vector of swift types
+      - inside the same framework, looks like circular includes
+      - using a pointer to the swift type was fine
+      - trying to pull the multi-langauge framework into the pure-C++
+        library was giving objc(++) compiler problems. Which I'd like to
+        paste here, but xcode decided to stop hanging on to build logs (!)
+  - SWIFT_COMPUTED_PROPERTY, even for just getters
+    - annotating a setting automatically makes a getter, so no write-only
+      properties.
+  - SWIFT_SHARED_REFERENCE
+    - AH HA: `} SWIFT_SHARED_REFERENCE(forestRetain,forestRelease);`
+    - allows Swift to reference it as a reference-counted reference type
+    - reference-counted types that are passed around by pointer or reference in C++
+      - either have retain/release opertions that inc/dec a reference count  
+        stored intrusively in the object, or non-intrusively with a 
+        shared pointer type like std::shared_ptr
+    - the macro expects two arguments / retain and release function
+      - take one arg, return void, arg is pointer to the type (not a base type)
+    - imported as a reference type
+    - no example shared_ptr in the apple samples.
+  - SWIFT_UNSAFE_REFERENCE - like immportal, but it communicates different
+    semantics - this type is intended to be used unsafely rather than
+    living for the duration of the proogram
+    - the programmer must validate that any reference to such an object
+      is valid themselves.
+    - the macro is _identical_ to immportal
+  - SWIFT_RETURNS_INDEPENDENT_VALUE - added to C++ member functions to let
+    Swift know that it doesn't return a dependent reference or a dependent
+    view
+    - basically you're not returning an interior reference value.
+    - like a "const char *getName() const" - if it's returning a static
+      string, then it should be marked as returning an independent value.
+      But if you extract a char* from a std::string, then don't use this.
+  - SWIFT_SELF_CONTAINED - it's not a view type.  All member functions
+    that return the self contained type are assumed to be safe in Swift
+    - a.k.a. owns and controls the lifetime of all of the objects it references
+    - allows swift to import methods that return a class or struct type that's
+      annotated thusly
+  - SWIFT_NAME - providing a different name for C++ types and functions
+    in swift
+    - e.g. `class Error {...} SWIFT_NAME("CxxLibraryError");`
+    - and `void sendCopy(const std::string &) SWIFT_NAME(send(_:));`
+  - SWIFT_CONFORMS_TO (swift.org only talks about template specialization,
+    but the header seems to imply that non-template works as well)
+    - conform all specializations of a class template to
+      a swift protocol automatically.
+    - makes all specialiations conform to a protocol.
+    - makes it possible to add functionality to all specializations of
+      a class template in Swift by using a protocol extension
+    - also lets you use any specialization in constrainted generic code witout
+      explicit conformances
+  - SWIFFT_MUTATING
+    - specifies that a specific _constant_ C++ member function should be
+      imported as a mutating Swift method.
