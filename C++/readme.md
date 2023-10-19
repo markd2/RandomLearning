@@ -395,7 +395,43 @@ Working with imported C++ APIs
 
 - C++ types and functions are presented as if they were swift types 
   and functions
-
+  - looks like no names unless use SWIFT_NAME
+  - structs/classes (which are actually nearly the same in C++)
+    come in as struct types by default and are value types
+    - always copied
+    - can mark mutating memberfunctions with SWIFT_MUTATING
+    - If there's a copy constructor, Swift will use it when
+      a value is copied.  Same with destructors
+    - C++ deleted copy constructors are not availble in swift
+      - non-copyable but have a move consstructor will be available
+        in the future
+    - types passed around with a pointer or a reference, might not
+      make sense to map them to value types - can be annotated to
+      map to reference types instead.
+  - public constructors (that aren't copy/move) become initializers
+  - public data members become properties
+  - member functions become methods
+    - constant member functions are `nonmutating`
+    - unannotated member functions are `mutating`
+  - consnt member functions must not mutate the object
+    - the compiler makes assumptions about const member functions
+      - could cause swift to not observing the mutation of the instance
+  - member functions returning references are unsafe by default
+    - including pointers, and objects that contain references or
+      pointers)
+    - they're often returning pointers inside of `this`
+      - so if the outer object goes away...
+    - swift renames: prefexed with two underscores and suffex with unsafe
+    - e.g. `const Tree &getRootTree() const { ... }` becomes __getRootTreeUnsafe
+  - c++ allows member functions tobe overloaded based on `const`
+    - they both become methods
+    - swift renames the mutating method to avoid having two ambiguious
+      methods with same name and arguments
+    - adds a `Mutating` suffix
+  - virtual member functions not available in Swift
+    - that's kind of a big limitation...
+     -  'blah()' is unavailable: virtual functions are not yet available in Swift
+   - the rest of the class is available, just not the virtual member functions.
 
 
 
@@ -527,6 +563,6 @@ Apple sample code
       a class template in Swift by using a protocol extension
     - also lets you use any specialization in constrainted generic code witout
       explicit conformances
-  - SWIFFT_MUTATING
+  - SWIFT_MUTATING
     - specifies that a specific _constant_ C++ member function should be
       imported as a mutating Swift method.
