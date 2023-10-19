@@ -10,3 +10,21 @@ public:
 private:
     TreeKind kind;
 };
+
+
+template<class T, class U>
+class Fraction {
+public:
+  T numerator;
+  U denominator;
+
+  Fraction(const T &num, const U &denom) {
+    numerator = num;
+    denominator = denom;
+  }
+};
+
+Fraction<int, float> getMagicNumber();
+
+using CharCharFraction = Fraction<char, char>;
+

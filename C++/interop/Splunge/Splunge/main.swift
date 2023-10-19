@@ -27,3 +27,9 @@ print(ook)
 let snork2 = FunHappy(printInvocation: true) // Swift
 let ook2 = snork2.happyfun(10)
 print(ook2)
+
+let oop = getMagicNumber()
+print(oop)
+
+let greeble2 = CharCharFraction(2, 10);
+
