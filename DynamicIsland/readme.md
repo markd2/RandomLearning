@@ -3,13 +3,83 @@
 * on iPhongs 14 pro, an all 15s.
 * ActivityKit handles the display
   - https://developer.apple.com/documentation/activitykit
-* Displaying live data using live activityies Lively
+* Displaying live data using live activities Lively
   - https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities
 * https://developer.apple.com/documentation/widgetkit/dynamicisland
   - dynamic island wedgie
 * HIG
   - https://developer.apple.com/design/human-interface-guidelines/live-activities
+* WWDC
+  - https://developer.apple.com/videos/play/wwdc2023/10184 - Meet Activity kit
+  - https://developer.apple.com/videos/play/wwdc2023/10194 - design dynamic liev activities
+* Updating live activities with ActivityKit push notification
+s
+  - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
+* ObToot: https://www.answertopia.com/swiftui/a-swiftui-live-activity-tutorial/
 
+
+### Displaying live data with live activities
+
+https://developer.apple.com/design/human-interface-guidelines/always-on
+
+Live acativities show your app's most current data on the phong or pad
+lock screen, and on the DIsland.
+
+To offer live activities, add code to your EXISTING WIDGET EXTENSION or
+create a new wedgie extension.
+
+Live activities use widgetkit functionality and swiftUI for their user
+interface.
+
+ActivityKit's role is to handle the life cycle of each live activity.
+Use its api to request, update, and end a live activity and to receive 
+activity kit poosh notifications.
+
+(enumerates the different forms)
+  - to add support for live activities, you must support *all* presentations
+
+Constraints
+  - can be active up to 8 hours unless app or hooman ends it
+    - removed from DIsland, but it remains on the lock screen
+      - until removal, or 4 hours
+    - so a max of 12 hoursx
+  - the systemr equires image assets to use a resolution smaller or equal
+    to the size of the presentation for a device
+    - if it's bigger, the system might fail to start the live activity
+    - e.g. the minimal shouldn't exceed 45x36.67 points
+  - each live activity runs in its own sandbox
+    - cannot access the network or receive location updates
+      - unlike a widget
+    - to update the dynamic data of an active live activity, use
+      ActivityKit in your app or allow your live activities to receive
+      ActivityKit Push Notifications 
+  - the updated dynamic data for both ActivityKit updates and poosh 
+    notifications can't exceed 4kb in size
+
+Adding Support
+
+- "although live activities leverage widgetkit's functionality, they
+  aren't widgets"
+  - in contrast to the timeline mechanism to update the widget's UI,
+    update the LA via activity kit or with AKpoosh
+  - you can create a widget extension to adopt live activities without
+    offering a widget
+    - consider offering both to allow peeps to add glanceable info nd
+      a personal touch to their device
+
+1. Create a widget extension.  Be sure to selected "include live activity"
+   - c.f. https://developer.apple.com/documentation/WidgetKit and https://developer.apple.com/documentation/WidgetKit/Creating-a-Widget-Extension
+   - I have no idea what a "Configuration App Intent" is, so turning off for
+     the playpen
+   - get an _Activate "TattooExtension" scheme? -This scheme has been
+     created for the "(null)" target. Choose Activate to use this
+     scheme for building and debugging. Schemes can be chosen in the
+     toolbar or Product menu._
+     - that null target fills me with hope and confidence that everything
+       will work Just Fine.
+     - crossing fingers and activtating
+   - nice touch, it has a working(?) set of widgets out of the template
+2. If have an Info(e).plist, add Supports Live Activities to it = YES
 
 ### HIG
 
@@ -63,7 +133,9 @@ top.
       overlyas the home screen or another app.
     - only happens when your Live Activity contains an alert configuration
   - StandBy - displays the live activity in the minimal detched appearance
+    - landscape orientation, charging, angled to face the room.
     - tap to see the lock screen appearance, scaled to fill the screen.
+
 
 * Beast Practices
   - offer a live activity for tasks and live events that have a defined
