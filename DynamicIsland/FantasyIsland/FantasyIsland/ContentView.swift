@@ -21,6 +21,7 @@ class ContentViewModel: ObservableObject {
     private var errorMessage = ""
     private var timer: Timer?
     @Published var count = 0
+    @Published var splunge = ""
 
     var currentActivity: Activity<TattooAttributes>?
     
@@ -28,17 +29,22 @@ class ContentViewModel: ObservableObject {
         currentActivity = activity
     }
 
+    func stopIt() {
+        Task {
+            guard let currentActivity  else { return }
+            
+            await currentActivity.end(nil, dismissalPolicy: .immediate)
+            timer?.invalidate()
+            timer = nil
+            count = 0
+            self.currentActivity = nil
+        }
+    }
+
     func goLive() {
         guard canUseLiveActivities else { return }
 
-        if let currentActivity {
-            Task {
-                await currentActivity.end(nil, dismissalPolicy: .immediate)
-            }
-        }
-        timer?.invalidate()
-        timer = nil
-        count = 0
+        stopIt()
 
         do {
             let tattoo = TattooAttributes(name: "Splunge")
@@ -53,6 +59,13 @@ class ContentViewModel: ObservableObject {
                 print("lub dub")
                 self.update(alert: false)
                 self.count += 1
+            }
+
+            Task {
+                for await state in activity.activityStateUpdates {
+                    self.splunge = "\(state)"
+                }
+                print("bye bye")
             }
         } catch {
             errorMessage = "can't start \(error)"
@@ -107,11 +120,17 @@ struct ContentView: View {
 
             Button("Roark") {
                 print("huh")
-                viewModel.goLive()
+                if viewModel.currentActivity == nil {
+                    viewModel.goLive()
+                } else {
+                    viewModel.stopIt()
+                }
             }.padding()
 
             Text(viewModel.canUseLiveActivities ? "Can use live activities" : "No live activities for you")
-            Text(viewModel.canPushFrequently ? "Can push frequently" : "No frequent pooshes for you")
+            Text(viewModel.canPushFrequently ? "Can push frequently" : "No frequent pooshes for you").padding()
+
+            Text(viewModel.splunge)
         }
         .padding()
     }
