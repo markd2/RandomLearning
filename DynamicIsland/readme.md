@@ -20,6 +20,10 @@ s
 * animating - https://developer.apple.com/documentation/WidgetKit/Animating-data-updates-in-widgets-and-live-activities
 * snapple code: https://developer.apple.com/documentation/widgetkit/emoji_rangers_supporting_live_activities_interactivity_and_animations
   - it's kind of huge
+* unrelated, but relavent to my intersts for backgroudn timers
+  - "You need to schedule a notification in future"
+* caveman debugging really broken in xcode 15.
+  - maybe https://lapcatsoftware.com/articles/2023/10/5.html
 
 ### Displaying live data with live activities
 
@@ -127,6 +131,39 @@ Adding Support
   - Using said code
     - The operation couldn’t be completed. (com.apple.ActivityKit.ActivityInput error 0.)
     - "resolved this by ensuring the application target had the push capability added"
+  - not shown in the app (makes sense), so need to background 
+
+* Updating
+  - use the update function of the Activity object you got, giving it a new
+    ContentState.
+  - can have an AlertConfiguration - if not nil when calling the update
+    - its existance means this is an alert and gets special treatment
+  - The activity.update is an async method
+    - so Task, or async coloring
+  - staleDate: The date when the system considers the live activity to be
+    out of date, so it'll change to .stale
+  - relevanceScore: relative ordering of live activities from the app, in case
+    there's multiple in-flight. (otherwise sorted by date, so what was
+    presented first).  Also controls the order on the lock screen.
+  - can do an update via APN
+
+* Ending
+  - can do via APN
+  - there's also an `end` method, give it the final contentstate to display.
+    (or nil)
+  - also a dismissal policy
+    - default - keeps around on the lock screen for four hours
+      - state doesn't turn to dismissed until the system or user removes itx
+    - immediate - get rid of it now
+    - after(Date)
+
+* Activity States
+  - active
+  - ended - is visible, but won't update its content)
+  - dismissed - ended and is no longer visible b/c person/system removed it
+  - stale - like user moves out of a network connection so the live activity
+    doesn't get updates.  Specifying a stale date triggers this when it
+    expires
 
 ### Activity Authorization Info
 
