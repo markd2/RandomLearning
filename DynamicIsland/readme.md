@@ -7,7 +7,7 @@
   - https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities
 * https://developer.apple.com/documentation/widgetkit/dynamicisland
   - dynamic island wedgie
-* HIG
+* HIG (x)
   - https://developer.apple.com/design/human-interface-guidelines/live-activities
 * WWDC
   - https://developer.apple.com/videos/play/wwdc2023/10184 - Meet Activity kit
@@ -16,7 +16,10 @@
 s
   - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
 * ObToot: https://www.answertopia.com/swiftui/a-swiftui-live-activity-tutorial/
-
+* Adding interactivity - https://developer.apple.com/documentation/WidgetKit/Adding-interactivity-to-widgets-and-Live-Activities
+* animating - https://developer.apple.com/documentation/WidgetKit/Animating-data-updates-in-widgets-and-live-activities
+* snapple code: https://developer.apple.com/documentation/widgetkit/emoji_rangers_supporting_live_activities_interactivity_and_animations
+  - it's kind of huge
 
 ### Displaying live data with live activities
 
@@ -79,7 +82,71 @@ Adding Support
        will work Just Fine.
      - crossing fingers and activtating
    - nice touch, it has a working(?) set of widgets out of the template
-2. If have an Info(e).plist, add Supports Live Activities to it = YES
+2. add "Supports Live Activities = YES" to the plist (equivalent)
+   - _also need to have "push notification" capability added on the app target_
+     - https://developer.apple.com/forums/thread/712223
+3. add code that defines an ActivityAttributes structure to describe the
+   static and dynamic data of the live activity
+   - https://developer.apple.com/documentation/activitykit/activityAttributes
+   - presumably this is part of the widget target source.
+   - _make this in something shared between the app and the wedgie_
+4. Use the ActivityAttributes defined to create the ActivityConfiguration
+   - https://developer.apple.com/documentation/WidgetKit/ActivityConfiguration
+5. add code to configure/start/update/end your live activies
+   - draw the rest of the fucking owl
+   - not even links or a howdy-do.
+6. Make your live activity interactive with button or toggle
+   - https://developer.apple.com/documentation/WidgetKit/Adding-interactivity-to-widgets-and-Live-Activities
+7. Add animutations to bring attention to content updates
+   - https://developer.apple.com/documentation/WidgetKit/Animating-data-updates-in-widgets-and-live-activities
+
+### Configure / Start / Update / End live activities
+
+- an app can start several live activities, and a device can run LAs from
+  several apps.
+  - exact number depends on Factors
+  - so handle errors gracefully when starting/updating/ending themx
+
+* Starting
+  - make sure it's available
+    - use `areActivitiesEnabled`, which is part of ActivityAuthoriationInfo
+  - make an activity content
+    - the emoji rangers has it as shared code.
+    - `#if canImport(ActivityKit)`
+  - I love how the code in the "displaying live data with live activities"
+    - like a "setup(withActivity: activity)" method and errorMessage property
+  - Activity.request - requests and starts a live activity
+    - the sample uses ".token" as the pushType parameter
+    - more info at https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
+    - ".token" to configure a live activity that updates dynamic content
+      by ActivityKit pooshes
+    - it's also the _only_ option
+  - you can only start a live activity while it's in the forgound
+    - from the background, you can update and end it, like via Background Tasks
+      - https://developer.apple.com/documentation/backgroundtasks
+  - Using said code
+    - The operation couldn’t be completed. (com.apple.ActivityKit.ActivityInput error 0.)
+    - "resolved this by ensuring the application target had the push capability added"
+
+### Activity Authorization Info
+
+* https://developer.apple.com/documentation/activitykit/activityauthorizationinfo
+* are you allowed to start Live Activities?
+  - by default, your capp can start/update/end live activity if use
+    activity kit.
+  - a user can deactivate them in Settings
+  - check with
+    - (synchronous) areActivitieEnabled
+    - (async sequence) activityEnablementUpdates
+* are you allowed to update LA with frequent ActivityKit poosh notifications?
+  - check with
+    - (synchronous) frequentPushesEnabled
+    - (async sequence) frequentPushEnblementUpdates
+  - obtw need to add NSSUpportsFrequentLiveActivitiyUpdates(YES) in plist
+  - though nowhere is "frequent" actually defined?
+  - settable as a property in settings for the app, so user can turn on/off
+    - though not seeing the "frequent push" setting on my phong
+
 
 ### HIG
 
