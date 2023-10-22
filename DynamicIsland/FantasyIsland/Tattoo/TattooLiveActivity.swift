@@ -37,6 +37,7 @@ struct TattooLiveActivity: Widget {
                 Text("L")
             } compactTrailing: {
                 Text("T \(context.state.emoji)")
+                    .contentTransition(.numericText())
             } minimal: {
                 Text(context.state.emoji)
             }
