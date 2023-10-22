@@ -8,7 +8,7 @@
 import SwiftUI
 import ActivityKit
 
-class ContentViewModel {
+class ContentViewModel: ObservableObject {
     // TODO - investigate using the async sequence to get updates.
     let activityAuthInfo = ActivityAuthorizationInfo()
     var canUseLiveActivities: Bool {
@@ -20,16 +20,25 @@ class ContentViewModel {
     
     private var errorMessage = ""
     private var timer: Timer?
+    @Published var count = 0
 
     var currentActivity: Activity<TattooAttributes>?
     
     private func setup(withActivity activity: Activity<TattooAttributes>) {
         currentActivity = activity
     }
-    private var count = 0
 
     func goLive() {
         guard canUseLiveActivities else { return }
+
+        if let currentActivity {
+            Task {
+                await currentActivity.end(nil, dismissalPolicy: .immediate)
+            }
+        }
+        timer?.invalidate()
+        timer = nil
+        count = 0
 
         do {
             let tattoo = TattooAttributes(name: "Splunge")
@@ -39,10 +48,10 @@ class ContentViewModel {
               content: .init(state: initialState, staleDate: nil),
               pushType: .token)
             setup(withActivity: activity)
-            timer = Timer.scheduledTimer(withTimeInterval: 5.0,
-                                         repeats: false) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0,
+                                         repeats: true) { timer in
                 print("lub dub")
-                self.update(alert: true)
+                self.update(alert: false)
                 self.count += 1
             }
         } catch {
@@ -87,14 +96,14 @@ class ContentViewModel {
 }
 
 struct ContentView: View {
-    let viewModel = ContentViewModel()
+    @StateObject var viewModel = ContentViewModel()
 
     var body: some View {
         VStack {
             Image(systemName: "airplane")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Bozz.  the plane! the plane!!").padding()
+            Text("Bozz.  the plane \(viewModel.count)! the plane!!").padding()
 
             Button("Roark") {
                 print("huh")
