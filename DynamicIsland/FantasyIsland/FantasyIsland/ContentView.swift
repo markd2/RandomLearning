@@ -19,10 +19,14 @@ class ContentViewModel {
     }
     
     private var errorMessage = ""
+    private var timer: Timer?
+
+    var currentActivity: Activity<TattooAttributes>?
     
-    private func setup(withActivity: Activity<TattooAttributes>) {
-        print("no idea wtf goes here")
+    private func setup(withActivity activity: Activity<TattooAttributes>) {
+        currentActivity = activity
     }
+    private var count = 0
 
     func goLive() {
         guard canUseLiveActivities else { return }
@@ -35,10 +39,48 @@ class ContentViewModel {
               content: .init(state: initialState, staleDate: nil),
               pushType: .token)
             setup(withActivity: activity)
+            timer = Timer.scheduledTimer(withTimeInterval: 5.0,
+                                         repeats: false) { timer in
+                print("lub dub")
+                self.update(alert: true)
+                self.count += 1
+            }
         } catch {
             errorMessage = "can't start \(error)"
             print(errorMessage)
             print(error.localizedDescription)
+        }
+    }
+
+    func update(alert: Bool) {
+        guard let activity = currentActivity else {
+            return
+        }
+        Task {
+            print("updating")
+            var alertConfig: AlertConfiguration? = nil
+            let contentState: TattooAttributes.ContentState
+            if alert {
+                alertConfig = AlertConfiguration(
+                    title: "Splunge \(count)",
+                    body: "Greeble",
+                    sound: .default
+                )
+               contentState = TattooAttributes.ContentState(
+                    emoji: "!\(count)¡")
+             } else {
+                contentState = TattooAttributes.ContentState(
+                    emoji: "\(count)")
+            }
+
+            await activity.update(
+                ActivityContent<TattooAttributes.ContentState>(
+                    state: contentState,
+                    staleDate: Date.now + 15,
+                    relevanceScore: alert ? 100 : 50
+                ),
+                alertConfiguration: alertConfig
+            )
         }
     }
 
@@ -55,6 +97,7 @@ struct ContentView: View {
             Text("Bozz.  the plane! the plane!!").padding()
 
             Button("Roark") {
+                print("huh")
                 viewModel.goLive()
             }.padding()
 
