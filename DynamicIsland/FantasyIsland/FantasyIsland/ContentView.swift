@@ -8,7 +8,7 @@
 import SwiftUI
 import ActivityKit
 
-struct ContentViewModel {
+class ContentViewModel {
     // TODO - investigate using the async sequence to get updates.
     let activityAuthInfo = ActivityAuthorizationInfo()
     var canUseLiveActivities: Bool {
@@ -17,10 +17,37 @@ struct ContentViewModel {
     var canPushFrequently: Bool {
         activityAuthInfo.frequentPushesEnabled
     }
+    
+    private var errorMessage = ""
+    
+    private func setup(withActivity: Activity<TattooAttributes>) {
+        print("no idea wtf goes here")
+    }
+
+    func goLive() {
+        guard canUseLiveActivities else { return }
+
+        do {
+            let tattoo = TattooAttributes(name: "Splunge")
+            let initialState = TattooAttributes.ContentState(emoji: "Greeble")
+            let activity = try Activity.request(
+              attributes: tattoo,
+              content: .init(state: initialState, staleDate: nil),
+              pushType: .token)
+            setup(withActivity: activity)
+        } catch {
+            errorMessage = "can't start \(error)"
+            print(errorMessage)
+            print(error.localizedDescription)
+
+        }
+    }
+
 }
 
 struct ContentView: View {
     let viewModel = ContentViewModel()
+
     var body: some View {
         VStack {
             Image(systemName: "airplane")
@@ -29,7 +56,7 @@ struct ContentView: View {
             Text("Bozz.  the plane! the plane!!").padding()
 
             Button("Roark") {
-                print("Snorgle")
+                viewModel.goLive()
             }.padding()
 
             Text(viewModel.canUseLiveActivities ? "Can use live activities" : "No live activities for you")

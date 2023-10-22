@@ -18,6 +18,8 @@
 		7DA3C2962AE57FAD0049721A /* Tattoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA3C2952AE57FAD0049721A /* Tattoo.swift */; };
 		7DA3C2982AE57FAE0049721A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DA3C2972AE57FAE0049721A /* Assets.xcassets */; };
 		7DA3C29C2AE57FAE0049721A /* TattooExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7DA3C28A2AE57FAD0049721A /* TattooExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7DA3C2A62AE595510049721A /* SharedJazz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA3C2A52AE595510049721A /* SharedJazz.swift */; };
+		7DA3C2A72AE595510049721A /* SharedJazz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA3C2A52AE595510049721A /* SharedJazz.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		7DA3C2952AE57FAD0049721A /* Tattoo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tattoo.swift; sourceTree = "<group>"; };
 		7DA3C2972AE57FAE0049721A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DA3C2992AE57FAE0049721A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DA3C2A52AE595510049721A /* SharedJazz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedJazz.swift; path = FantasyIsland/SharedJazz.swift; sourceTree = "<group>"; };
+		7DA3C2A82AE5A0D80049721A /* FantasyIsland.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FantasyIsland.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 		7DA3C26C2AE578460049721A = {
 			isa = PBXGroup;
 			children = (
+				7DA3C2A12AE595150049721A /* Shared */,
 				7DA3C2772AE578460049721A /* FantasyIsland */,
 				7DA3C2902AE57FAD0049721A /* Tattoo */,
 				7DA3C28B2AE57FAD0049721A /* Frameworks */,
@@ -102,6 +107,7 @@
 		7DA3C2772AE578460049721A /* FantasyIsland */ = {
 			isa = PBXGroup;
 			children = (
+				7DA3C2A82AE5A0D80049721A /* FantasyIsland.entitlements */,
 				7DA3C2782AE578460049721A /* FantasyIslandApp.swift */,
 				7DA3C27A2AE578460049721A /* ContentView.swift */,
 				7DA3C27C2AE578470049721A /* Assets.xcassets */,
@@ -137,6 +143,14 @@
 				7DA3C2992AE57FAE0049721A /* Info.plist */,
 			);
 			path = Tattoo;
+			sourceTree = "<group>";
+		};
+		7DA3C2A12AE595150049721A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7DA3C2A52AE595510049721A /* SharedJazz.swift */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +256,7 @@
 			files = (
 				7DA3C27B2AE578460049721A /* ContentView.swift in Sources */,
 				7DA3C2792AE578460049721A /* FantasyIslandApp.swift in Sources */,
+				7DA3C2A62AE595510049721A /* SharedJazz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DA3C2922AE57FAD0049721A /* TattooBundle.swift in Sources */,
+				7DA3C2A72AE595510049721A /* SharedJazz.swift in Sources */,
 				7DA3C2962AE57FAD0049721A /* Tattoo.swift in Sources */,
 				7DA3C2942AE57FAD0049721A /* TattooLiveActivity.swift in Sources */,
 			);
@@ -391,6 +407,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FantasyIsland/FantasyIsland.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FantasyIsland/Preview Content\"";
@@ -423,6 +440,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FantasyIsland/FantasyIsland.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FantasyIsland/Preview Content\"";
