@@ -39,7 +39,6 @@ class ContentViewModel {
             errorMessage = "can't start \(error)"
             print(errorMessage)
             print(error.localizedDescription)
-
         }
     }
 
