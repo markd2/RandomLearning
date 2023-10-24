@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="CF1C6C2E-5C86-478B-B637-36A49F0A55A5">
+            <Text>It's invasive
+Some safety annotations cannot be made unless you can edit the headers
+This is more for "I have a big C++ codebase (e.g. foundationDb, Logic, etc), and I'm wanting to write new stuff for it in Swift"
+
+</Text>
+        </Document>
+        <Document ID="6799E79E-392E-4772-A91B-8D5CF9D6E757">
+            <Title>Limitations</Title>
+            <Text>Calling virtual member functions
+	'blah()' is unavailable: virtual functions are not yet available in Swift
+
+C++ classes with a deleted copy constructor
+	- except those explicitly mapped to Swift reference types
+	- https://www.swift.org/documentation/cxx-interop#mapping-c-types-to-swift-reference-types
+
+std::unique_ptr / std::function / std::variant
+
+C++ class and structure templates are not directly available
+	- there needs to be a specialization
+	- can use a type alias in a C++ header
+	- https://www.swift.org/documentation/cxx-interop#using-class-templates
+
+Don't throw C++ exceptions across the language boundary
+	- ABEND if it reaches swift-land
+	- Swift does have try/catch, but they're not actually exceptions
+
+
+
+</Text>
+        </Document>
+        <Document ID="7477F752-B80D-478B-A7FC-B3FBF12B6CAE">
+            <Title>Where can C++ come from?</Title>
+            <Text>From the application itself
+From a Library
+From a Framework
+From a clang module
+From a SPM package
+NOT a C++20 module
+</Text>
+        </Document>
+        <Document ID="888BA4C7-78CD-452F-9F8F-9DFD133218D0">
+            <Title>C++ Interoperability</Title>
+            <Text>Wherever I say "C++ class", you can also do "C++ struct".  Structs and classes are identical</Text>
+        </Document>
+        <Document ID="EE8747D6-A856-4D47-956A-DF440EEF0D22">
+            <Title>Swift types</Title>
+            <Text>value types
+
+reference types
+	- no GC
+	- retain / release
+</Text>
+        </Document>
+        <Document ID="782B84BA-C3BD-402E-8928-3A6DF94822C0">
+            <Title>Zillow peculirarities</Title>
+            <Text>Testbed app experiment results
+
+C++ in other apps
+</Text>
+        </Document>
+        <Document ID="5619BB08-0833-4817-8AA7-B1C90FFB24E2">
+            <Title>Cool Optimizations</Title>
+            <Text>C++ functions inlined into Swift
+LLVM IR  (diagram with C++ -&gt; clang -&gt; IR -&gt; program  and Swift -&gt; swiftc -&gt; SIL -&gt; IR -&gt; program, and LLVM optimizer can work across languages)
+
+</Text>
+        </Document>
+        <Document ID="2ABE254A-5986-40E0-9A38-E137CEDAC1C5">
+            <Title>Stuff we get</Title>
+            <Text>- import most collections - stdlib and elsewhere
+- function templates and class template specialiation
+- smart pointers std::shared_ptr
+</Text>
+        </Document>
+        <Document ID="CAF14E72-A317-45A1-BE59-F87C15A36844">
+            <Title>Why Swift?</Title>
+            <Text>New / follow-on langauge
+More ergonomic, modern syntax.  fewer ::s
+designed for safety - memory from day 1, concurrency from recently
+smaller surface area, fewer interested parties so can innovate more/faster
+Pretty decent performance in release builds. (debug builds are pretty slow in comparison)
+</Text>
+        </Document>
+        <Document ID="C3DCA333-ECDB-4703-BA99-57B8DA65B614">
+            <Title>Performance</Title>
+            <Text>Swift can make a deep copy of a collection in a for-in loop
+	- can use forEach to avoid</Text>
+        </Document>
+        <Document ID="773E611F-DC0E-4365-8684-1D5658B28680">
+            <Title>Templates</Title>
+            <Text>An instantiate specialization is mapped to a distinct swift type
+
+uninstantiated templates are not available
+	- Un-specialized class templates are not currently supported. Please use a specialization of this type.
+
+so not a pure "hey just use this stuff" for things that require specialization
+	- though I guess you can do that specialization locally
+	- so might not be *that* bad of a limitation
+
+
+raw:
+Templates
+  - an instantiated specialization is mapped to a distinct swift type
+    - uninsantiated templates are not availabile
+    - _Un-specialized class templates are not currently supported. Please use a\
+ specialization of this type.__
+  - `using CharCharFraction = Fraction&lt;char, char&gt;;`
+  - so looks like it's not a pure "hey just use this stuff', for things
+    that require specialization, they need to be done on the C++ side
+    of the fence.
+</Text>
+        </Document>
+        <Document ID="A71DCE3B-E06F-4F2D-9BA0-B1BBF4EC36D4">
+            <Title>Collections</Title>
+            <Text>In Swift-land, iterator interface is verboten.
+protocols like CxxRandomAccessCollection / CxxConvertibleToCollection /CxxDictionary
+can explicitly convert a container to an array (from anything iterable) or a dictionary (for anything mappable)
+
+
+
+raw notes:
+
+ - Recommend approach
+    - use for-in syntax (for RandomAccessCollection)
+    - use collection APIs (map/filer) (for same)
+    - use the subscript operator to access a specific elelemnt (for same)
+    - convert other sequential containers to swift collections if you'd
+      like to traverse their elements
+    - use the subscript operator from CxxDictionary protocol when looking
+      up values in na associative container
+  - ~COMPLIANCE~ PERFORMANCE
+    - the current swift for-in makes a deep copy when traversing
+    - can avoid by using forEach by CxxConvertibleToCollection protocol
+  - Beast Practices
+    - do not use C++ iterators in swift
+    - use protocols like CxxRandomAccessCollection and CxxConvertibleToCollecti\
+on and CxxDictionary
+    - member functions in container types that return C++ iterators are marked
+      unsafe (just like member functions that return references).
+    - other top-level functiions that take or return iterators could be availab\
+le,
+      but avoid them.
+    - Borrow containers when calling Swift Functions
+      - they become value types in Swift, using the copy constructor
+      - swift's upcoming(?) Parameter Ownership Modifiers will let you avoid co\
+pes when passing immutable values to functions
+        - https://github.com/apple/swift-evolution/blob/main/proposals/0377-par\
+ameter-ownership-modifiers.md
+        - supposedly implemented in swift 5.9
+      - mutable values can be passed by inout, which avoids doing a deep copy o\
+f the C++ container
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

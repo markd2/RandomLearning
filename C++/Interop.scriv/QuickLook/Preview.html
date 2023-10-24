@@ -1,0 +1,272 @@
+<html>
+
+<head>
+<title>Writings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">C++ Interoperability</p>
+<p class="itemText">Wherever I say "C++ class", you can also do "C++ struct".<span class="Apple-converted-space">  </span>Structs and classes are identical</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Why Swift?</p>
+<p class="itemText">New / follow-on langauge</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">More ergonomic, modern syntax.<span class="Apple-converted-space">  </span>fewer ::s</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">designed for safety - memory from day 1, concurrency from recently</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">smaller surface area, fewer interested parties so can innovate more/faster</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Pretty decent performance in release builds. (debug builds are pretty slow in comparison)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Swift types</p>
+<p class="itemText">value types</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">reference types</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- no GC</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- retain / release</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Where can C++ come from?</p>
+<p class="itemText">From the application itself</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">From a Library</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">From a Framework</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">From a clang module</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">From a SPM package</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">NOT a C++20 module</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Stuff we get</p>
+<p class="itemText">- import most collections - stdlib and elsewhere</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- function templates and class template specialiation</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- smart pointers std::shared_ptr</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Performance</p>
+<p class="itemText">Swift can make a deep copy of a collection in a for-in loop</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- can use forEach to avoid</p>
+</li>
+<li>
+<p class="itemTitle">Collections</p>
+<p class="itemText">In Swift-land, iterator interface is verboten.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">protocols like CxxRandomAccessCollection / CxxConvertibleToCollection /CxxDictionary</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">can explicitly convert a container to an array (from anything iterable) or a dictionary (for anything mappable)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">raw notes:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- Recommend approach</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>- use for-in syntax (for RandomAccessCollection)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>- use collection APIs (map/filer) (for same)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>- use the subscript operator to access a specific elelemnt (for same)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>- convert other sequential containers t...</p>
+</li>
+<li>
+<p class="itemTitle">Templates</p>
+<p class="itemText">An instantiate specialization is mapped to a distinct swift type</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">uninstantiated templates are not available</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- Un-specialized class templates are not currently supported. Please use a specialization of this type.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">so not a pure "hey just use this stuff" for things that require specialization</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- though I guess you can do that specialization locally</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- so might not be *that* bad of a limitation</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">raw:</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Templates</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>- an instantiated specialization is mapped to a distinct swift type</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>- uninsantia...</p>
+</li>
+<li>
+<p class="itemTitle">Decorations</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">API NIceties</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">SWIFT_COMPUTED_PROPERTY</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_NAME</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_CONFORMS_TO</p>
+</li>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="itemTitle">Memory safety</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">SWIFT_SHARED_REFERENCE</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_UNSAFE_REFERENCE</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_IMMORTAL_REFERENCE</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_MUTATING</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_RETURNS_INDEPENDENT_VALUE</p>
+</li>
+<li>
+<p class="itemTitle">SWIFT_SELF_CONTAINED</p>
+</li>
+</ul>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="itemTitle">It's Invasive</p>
+<p class="itemText">It's invasive</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Some safety annotations cannot be made unless you can edit the headers</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This is more for "I have a big C++ codebase (e.g. foundationDb, Logic, etc), and I'm wanting to write new stuff for it in Swift"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Cool Optimizations</p>
+<p class="itemText">C++ functions inlined into Swift</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">LLVM IR<span class="Apple-converted-space">  </span>(diagram with C++ -&gt; clang -&gt; IR -&gt; program<span class="Apple-converted-space">  </span>and Swift -&gt; swiftc -&gt; SIL -&gt; IR -&gt; program, and LLVM optimizer can work across languages)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Limitations</p>
+<p class="itemText">Calling virtual member functions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>'blah()' is unavailable: virtual functions are not yet available in Swift</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">C++ classes with a deleted copy constructor</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- except those explicitly mapped to Swift reference types</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- https://www.swift.org/documentation/cxx-interop#mapping-c-types-to-swift-reference-types</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">std::unique_ptr / std::function / std::variant</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">C++ class and structure templates are not directly available</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- there needs to be a specialization</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- can use a type alias in a C++ header</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- https...</p>
+</li>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

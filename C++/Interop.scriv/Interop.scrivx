@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrivenerProject Identifier="8757208A-0713-47EB-8EE7-796E8428DC97" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="ZG13388" Author="" Modified="2023-10-24 11:50:59 -0400" ModID="2C17347F-4BD3-40C1-A718-2E95CF7BFDDE">
+    <Binder>
+        <BinderItem UUID="E51698EB-8A1B-4717-9E71-693846813EA7" Type="DraftFolder" Created="2023-10-23 19:56:46 -0400" Modified="2023-10-23 19:56:46 -0400">
+            <Title>Draft</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+            <Children>
+                <BinderItem UUID="888BA4C7-78CD-452F-9F8F-9DFD133218D0" Type="Text" Created="2023-10-23 19:56:46 -0400" Modified="2023-10-23 20:18:14 -0400">
+                    <Title>C++ Interoperability</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>92,0</TextSelection>
+                    </TextSettings>
+                    <Children>
+                        <BinderItem UUID="CAF14E72-A317-45A1-BE59-F87C15A36844" Type="Text" Created="2023-10-23 20:04:09 -0400" Modified="2023-10-23 20:06:22 -0400">
+                            <Title>Why Swift?</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>299,0</TextSelection>
+                            </TextSettings>
+                            <Children>
+                                <BinderItem UUID="EE8747D6-A856-4D47-956A-DF440EEF0D22" Type="Text" Created="2023-10-23 20:38:55 -0400" Modified="2023-10-23 20:39:25 -0400">
+                                    <Title>Swift types</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>58,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
+                        </BinderItem>
+                        <BinderItem UUID="7477F752-B80D-478B-A7FC-B3FBF12B6CAE" Type="Text" Created="2023-10-23 20:16:03 -0400" Modified="2023-10-23 20:25:30 -0400">
+                            <Title>Where can C++ come from?</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>98,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="2ABE254A-5986-40E0-9A38-E137CEDAC1C5" Type="Text" Created="2023-10-23 20:38:25 -0400" Modified="2023-10-23 20:38:49 -0400">
+                            <Title>Stuff we get</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>136,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="C3DCA333-ECDB-4703-BA99-57B8DA65B614" Type="Text" Created="2023-10-23 20:25:48 -0400" Modified="2023-10-23 20:26:12 -0400">
+                            <Title>Performance</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>87,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="A71DCE3B-E06F-4F2D-9BA0-B1BBF4EC36D4" Type="Text" Created="2023-10-23 20:26:17 -0400" Modified="2023-10-23 20:31:27 -0400">
+                            <Title>Collections</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1772,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="773E611F-DC0E-4365-8684-1D5658B28680" Type="Text" Created="2023-10-23 20:31:37 -0400" Modified="2023-10-23 20:37:50 -0400">
+                            <Title>Templates</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>859,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="53C0C287-EDAA-465F-82B4-C09C4F66D674" Type="Text" Created="2023-10-23 20:06:29 -0400" Modified="2023-10-23 20:06:32 -0400">
+                            <Title>Decorations</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>0,0</TextSelection>
+                            </TextSettings>
+                            <Children>
+                                <BinderItem UUID="846E0749-76C5-413F-81AA-8EC50ECF287A" Type="Text" Created="2023-10-23 20:10:58 -0400" Modified="2023-10-23 20:11:01 -0400">
+                                    <Title>API NIceties</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>0,0</TextSelection>
+                                    </TextSettings>
+                                    <Children>
+                                        <BinderItem UUID="A7813AF5-2C0F-40E5-9941-F727E1556687" Type="Text" Created="2023-10-23 20:08:13 -0400" Modified="2023-10-23 20:08:25 -0400">
+                                            <Title>SWIFT_COMPUTED_PROPERTY</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="42482A65-71FF-4293-997A-6ABE89F682F9" Type="Text" Created="2023-10-23 20:08:29 -0400" Modified="2023-10-23 20:08:59 -0400">
+                                            <Title>SWIFT_NAME</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="15C59629-285C-47E9-9E5E-8A2507B7F8EF" Type="Text" Created="2023-10-23 20:08:30 -0400" Modified="2023-10-23 20:09:04 -0400">
+                                            <Title>SWIFT_CONFORMS_TO</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                    </Children>
+                                </BinderItem>
+                                <BinderItem UUID="939A7134-6189-4494-B0F0-141760C1FC6E" Type="Text" Created="2023-10-23 20:10:19 -0400" Modified="2023-10-23 20:10:23 -0400">
+                                    <Title>Memory safety</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>0,0</TextSelection>
+                                    </TextSettings>
+                                    <Children>
+                                        <BinderItem UUID="9B9D4CBF-2387-49E1-88E6-83CA54BE7ED6" Type="Text" Created="2023-10-23 20:08:25 -0400" Modified="2023-10-23 20:08:39 -0400">
+                                            <Title>SWIFT_SHARED_REFERENCE</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="305C75BA-3CD3-4055-8F48-0EBB83E1EC45" Type="Text" Created="2023-10-23 20:08:27 -0400" Modified="2023-10-23 20:08:44 -0400">
+                                            <Title>SWIFT_UNSAFE_REFERENCE</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="2F9B060B-CF79-41EE-90B5-D0FEF12E5AB6" Type="Text" Created="2023-10-23 20:09:25 -0400" Modified="2023-10-23 20:09:35 -0400">
+                                            <Title>SWIFT_IMMORTAL_REFERENCE</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="C41F97A9-191F-4938-B198-5A5319D20804" Type="Text" Created="2023-10-23 20:08:30 -0400" Modified="2023-10-23 20:09:25 -0400">
+                                            <Title>SWIFT_MUTATING</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="02241D74-DB68-4583-A46A-FD7FF5A4EB52" Type="Text" Created="2023-10-23 20:08:28 -0400" Modified="2023-10-23 20:08:52 -0400">
+                                            <Title>SWIFT_RETURNS_INDEPENDENT_VALUE</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                        <BinderItem UUID="B5FD9CF0-E4CF-4C32-8C0E-65EE519A9046" Type="Text" Created="2023-10-23 20:08:28 -0400" Modified="2023-10-23 20:08:55 -0400">
+                                            <Title>SWIFT_SELF_CONTAINED</Title>
+                                            <MetaData>
+                                                <IncludeInCompile>Yes</IncludeInCompile>
+                                            </MetaData>
+                                            <TextSettings>
+                                                <TextSelection>0,0</TextSelection>
+                                            </TextSettings>
+                                        </BinderItem>
+                                    </Children>
+                                </BinderItem>
+                            </Children>
+                        </BinderItem>
+                        <BinderItem UUID="CF1C6C2E-5C86-478B-B637-36A49F0A55A5" Type="Text" Created="2023-10-23 20:01:34 -0400" Modified="2023-10-23 20:25:12 -0400">
+                            <Title>It's Invasive</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>215,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="5619BB08-0833-4817-8AA7-B1C90FFB24E2" Type="Text" Created="2023-10-23 19:58:24 -0400" Modified="2023-10-23 20:00:21 -0400">
+                            <Title>Cool Optimizations</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>179,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="6799E79E-392E-4772-A91B-8D5CF9D6E757" Type="Text" Created="2023-10-23 20:16:33 -0400" Modified="2023-10-23 20:25:00 -0400">
+                            <Title>Limitations</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>724,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                    </Children>
+                </BinderItem>
+            </Children>
+        </BinderItem>
+        <BinderItem UUID="29626BAE-4E18-46AD-A818-30A4ED72E747" Type="ResearchFolder" Created="2023-10-23 19:56:46 -0400" Modified="2023-10-23 19:56:46 -0400">
+            <Title>Research</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+        </BinderItem>
+        <BinderItem UUID="20849671-50DF-4464-89FE-330985AE966F" Type="TrashFolder" Created="2023-10-23 19:56:46 -0400" Modified="2023-10-23 19:56:46 -0400">
+            <Title>Trash</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+            <Children>
+                <BinderItem UUID="55BE4ACD-623E-4D7A-915B-BBF8B8E90F2F" Type="Text" Created="2023-10-23 20:02:33 -0400" Modified="2023-10-23 20:02:33 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="18A4A744-6FC6-4185-80AA-0770484E4678" Type="Text" Created="2023-10-23 20:03:01 -0400" Modified="2023-10-23 20:03:01 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="C773090A-18DD-4B47-8D0C-659357168C74" Type="Text" Created="2023-10-23 20:03:03 -0400" Modified="2023-10-23 20:03:03 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="A62DE642-A68F-4943-9B87-AFD40D909B20" Type="Text" Created="2023-10-23 20:38:58 -0400" Modified="2023-10-23 20:38:58 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="FAACA971-2A30-4ED2-A7C1-AC09A5A50C31" Type="Text" Created="2023-10-23 20:39:01 -0400" Modified="2023-10-23 20:39:01 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="E0732E70-A717-413A-B125-C55609EE9D33" Type="Text" Created="2023-10-23 20:40:10 -0400" Modified="2023-10-23 20:40:10 -0400">
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem UUID="782B84BA-C3BD-402E-8928-3A6DF94822C0" Type="Text" Created="2023-10-23 20:01:13 -0400" Modified="2023-10-23 20:01:33 -0400">
+                    <Title>Zillow peculirarities</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>50,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+            </Children>
+        </BinderItem>
+    </Binder>
+    <Collections>
+        <Collection Type="Binder" ID="DFB9DAF9-93CC-4D47-8208-D1E5604D2562" Color="1.0 1.0 1.0">
+            <Title>Binder</Title>
+        </Collection>
+        <Collection Type="RecentSearch" ID="134D6595-F208-4E20-86CA-B3D008B382E5" Color="0.922173 0.818612 0.999627">
+            <Title>Search Results</Title>
+        </Collection>
+    </Collections>
+    <SectionTypes>
+        <TypeDefinitions>
+            <Type ID="791A8EE6-5E57-4527-B676-78FD10E87DBD">Heading</Type>
+            <Type ID="2C4D00CD-2AC5-42CD-A8F9-5CF73FC67B4E">Sub-Heading</Type>
+            <Type ID="615666FA-4B73-4F38-BD2C-CC4E8E431A6A">Section</Type>
+        </TypeDefinitions>
+        <LevelTypes>
+            <Folders>
+                <Type>791A8EE6-5E57-4527-B676-78FD10E87DBD</Type>
+            </Folders>
+            <Containers>
+                <Type>615666FA-4B73-4F38-BD2C-CC4E8E431A6A</Type>
+            </Containers>
+            <Files>
+                <Type>615666FA-4B73-4F38-BD2C-CC4E8E431A6A</Type>
+            </Files>
+        </LevelTypes>
+    </SectionTypes>
+    <LabelSettings>
+        <Title>Label</Title>
+        <DefaultLabelID>-1</DefaultLabelID>
+        <Labels>
+            <Label ID="-1">No Label</Label>
+            <Label ID="0" Color="0.993495 0.701227 0.732594">Red</Label>
+            <Label ID="1" Color="0.995418 0.790968 0.65239">Orange</Label>
+            <Label ID="2" Color="0.99772 0.892753 0.652574">Yellow</Label>
+            <Label ID="3" Color="0.715848 0.948734 0.697698">Green</Label>
+            <Label ID="4" Color="0.702312 0.888297 0.97426">Blue</Label>
+            <Label ID="5" Color="0.957564 0.766768 0.999625">Purple</Label>
+        </Labels>
+    </LabelSettings>
+    <StatusSettings>
+        <Title>Status</Title>
+        <DefaultStatusID>-1</DefaultStatusID>
+        <StatusItems>
+            <Status ID="-1">No Status</Status>
+            <Status ID="0">To Do</Status>
+            <Status ID="1">In Progress</Status>
+            <Status ID="2">First Draft</Status>
+            <Status ID="3">Revised Draft</Status>
+            <Status ID="4">Final Draft</Status>
+            <Status ID="5">Done</Status>
+        </StatusItems>
+    </StatusSettings>
+    <ProjectTargets Notify="No">
+        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-10-23 19:56:46 -0400" IgnoreDeadline="Yes">0</DraftTarget>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2023-10-25 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2023-10-24 11:50:54 -0400"/>
+    </ProjectTargets>
+    <RecentWritingHistory Date="2023-10-24 00:00:00 -0400">
+        <DraftWordCount>0</DraftWordCount>
+        <DraftCharCount>0</DraftCharCount>
+        <OtherWordCount>0</OtherWordCount>
+        <OtherCharCount>0</OtherCharCount>
+    </RecentWritingHistory>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+</ScrivenerProject>
