@@ -511,7 +511,27 @@ Containers
       maeks it possible to convert to a swift collection type (like Array
       or Set)
       - assuming that if there's a way to sequentially access the goodies,
-        then there 
+        then they can be hoovered up by Array and friends
+  - Associative Container C++ types
+    - like std::map, efficient access to elements using a lookup key
+    - the `find` member function id unsafe in Swift
+    - instead of find, Swift automatically conforms associated containers
+      from C++ stdlib into the CxxDictionary protocol
+      - lets you use the subscript operator
+      - can be used like a dictionary
+    - associative containers can be convert to swift sequential
+      collections (e.g. Array) when need to traverse through their elements
+      - but... keys? values?
+    - Swift does not conform custom associative C++ containers to CxxDictionary
+      automagically.  A Swift extension can be used to add the CONFORMance
+      retroactively
+  - using SSTL types in swwift
+    - import the C++ std lib by importing the CxxStdlib module
+    - std:: namespace becaomes a std enumerator
+    - types and functions in std become nested types and static functions
+      - https://www.swift.org/documentation/cxx-interop/status/#c-standard-library-support
+  
+
 
   - Recommend approach
     - use for-in syntax (for RandomAccessCollection)
@@ -626,6 +646,7 @@ Apple sample code
       - trying to pull the multi-langauge framework into the pure-C++
         library was giving objc(++) compiler problems. Which I'd like to
         paste here, but xcode decided to stop hanging on to build logs (!)
+
   - SWIFT_COMPUTED_PROPERTY, even for just getters
     - annotating a setting automatically makes a getter, so no write-only
       properties.
@@ -674,4 +695,9 @@ Apple sample code
   - SWIFT_MUTATING
     - specifies that a specific _constant_ C++ member function should be
       imported as a mutating Swift method.
+  - SWIFT_IMMORTAL_REFERENCE - things allocated and leaked without tracking their uses.
+    - also arena-allocated, thign is aren't individually managed
+    - imported as unmanaged classes
+      - for an arena-allocated dealie, it's unsafe, but unavoidable
+
 
