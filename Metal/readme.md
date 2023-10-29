@@ -170,6 +170,8 @@ like hello world, but draws a triangle. (nice!)
 
 This chapter builds the app without a template. 
 
+Ooh nice, metal is working in the simulators now
+
 * metal uses a normalized coordinate system
   - two units by two units by one
   - the phone screen is one unit by one unit size
