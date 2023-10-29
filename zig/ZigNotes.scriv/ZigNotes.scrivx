@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< Updated upstream
 <ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.1-15588" Device="Ultrabook" Author="" Modified="2023-08-26 15:24:12 -0700" ModID="AB2F2CCD-2522-4AB8-9854-37B8590321A0">
+=======
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.1-15588" Device="SqueakyToy" Author="" Modified="2023-10-20 10:58:40 -0400" ModID="CFE8E269-542F-42FB-87C8-4822D69A7E87">
+>>>>>>> Stashed changes
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
             <Title>Draft</Title>
@@ -220,11 +224,19 @@
         </StatusItems>
     </StatusSettings>
     <ProjectTargets Notify="No">
+<<<<<<< Updated upstream
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 17:40:58 -0700" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2023-08-27 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
         <PreviousSession Words="0" Characters="0" Date="2023-08-26 15:24:09 -0700"/>
     </ProjectTargets>
     <RecentWritingHistory Date="2023-08-26 00:00:00 -0700">
+=======
+        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2023-10-21 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2023-10-20 10:58:37 -0400"/>
+    </ProjectTargets>
+    <RecentWritingHistory Date="2023-10-20 00:00:00 -0400">
+>>>>>>> Stashed changes
         <DraftWordCount>0</DraftWordCount>
         <DraftCharCount>0</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
