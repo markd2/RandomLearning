@@ -303,3 +303,100 @@ fragment half4 basic_fragment() {
     return half(1.0);
 }
 ```
+
+* MetalKit
+  - new framework (as of iOS 9) to reduce effort
+  - texture loading
+  - model handling
+  - view management
+  - The metal layer, CADisplay link stuff is taken care of 
+    MTKView / MTKViewDelegate
+    - MTKView has three modes to draw to the screen
+    - internal timer - similar to HowdyTriangule
+    - notifications, where view redraws only when it is told
+    - a draw() method
+      - also exists on MTKViewDelegate
+
+### Essential Mathemagics
+
+* Graphics programming boils down to figuring out how to express
+  how an object appears and moves around in space
+  - but need a coordnate system:
+    - a point of origin
+    - a consistent unit of measurement
+    - a convention to oreint the positive and negative directions
+  - cartesian coordinates
+    - 3D cartesian coordinate system with a z-axis perpindicular to the x/y
+      axes.
+    - right-handed positive axis of rotation moves counterclockwise
+    - left-handed positive axis of rotation moves clockwise
+  - for metal, negative z is coming out of the screen towards the user
+  - Metal has 2 coordinate spaces
+    - applies to 3D world space
+      - x and y axes run from -1 to 1, z from 0 to 1
+    - applies to 2D rasterized projection space
+      - same as used by CoreGraphics (opposite from OpenGL)
+      - origin upper-left
+* Points, Vectors, and Vector operations
+  - point is a coordiante in space (x,y,z)
+  - vectors are magnitude and direction, describing movement from one point
+    to another
+  - `float4` vector type
+    - the fourth float is 1 for points and 0 for vector
+  - points can be subtracted to create vectors (the 1 going to 0)
+  - points cannot be added together (because then the 1 goes to 2)
+  - dot product
+    - a dot b = ax*bx + ay*by = |a||b|cos(theta)
+    - gives us the cosine of an angle between two vectors
+      - unit vectors (length of 1)
+    - gives a way of measuring the impact one vector has on another
+      - like MarioKart, speed boost affects more the faster you go
+      - direction too.  if you're going lateral, the boost only works forward
+    - used in graphics (among other things) to determine how light interacts
+      with an object
+      - find the cosine of the angle created by the surface normal and the
+        direction the ray of light is coming from
+  - cross product
+    - related to dot product
+    - the dot doesn't care about x vs y vs z. the cross product does
+    - it's used to find the axis of rotation between two vectors
+  - normalization and unit vectors
+    - a lot of graphics-related math is easier to do when dealing with
+      percentages
+    - (reducing to a vector of length 1)
+    - useful for determining direction
+    - normalize with pythagorean theorem
+    - normalization doesn't change the shape or angle of the vector, just
+      scaling it up or down
+  - orthogonality
+    - 90 degrees / right angles
+  - to get the normalized coordinates, divide each component by
+    the length (of the hypotenuse)
+  - sine/cosine/tangent
+    - triangle ABC, points run counter clockwise, right angle by B.
+    - sin c = opposite / hypotenuse = AB/AC
+    - cos c = adjacent / hypotenuse = BC/AC
+    - tan c = opposite / adjacent = AB/BC
+    - cot c = adjacent / opposite = BC/AB
+    - sec c = hypotenuse / adjacent = AC/BC
+    - csc c = hypotenuse / opposite = AC/AB
+```
+ C
+a|\
+d| \ hypotenuse
+j|  \
+a|   \
+c|    \
+e|     \
+n|      \
+t|_      \
+ |_|______\
+ B         A
+   opposite
+```
+  - (going to skim - since this stuff was covered in the game physics book)
+  - matrices are set up with null/zero values in places where the coordinate
+    is not impacted by changes happening in other coordinate spaces
+  - projection matrix determines camera space
+  - world space is every object in the screen
+  - camera space determines which objects are within the field of view
