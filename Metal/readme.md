@@ -189,3 +189,117 @@ Ooh nice, metal is working in the simulators now
 * command buffer needs to encode render commands in order to know what
   work to send to the GPU
 
+TL;DR - minimum using just metal (no scaffolding, no metal views)
+
+```
+// in view controller
+    var metalLayer: CAMetalLayer!
+
+    var device: MTLDevice!
+    var vertexBuffer: MTLBuffer!
+
+    var pipelineState: MTLRenderPipelineState!
+    var commandQueue: MTLCommandQueue!
+
+// the shape to draw
+    let vertexData: [Float] = [
+       0.0,  0.5, 0.0,
+      -0.5, -0.5, 0.0,
+       0.5, -0.5, 0.0
+    ]
+
+// trigger the renderer
+    var timer: CADisplayLink!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        device = MTLCreateSystemDefaultDevice()
+
+        metalLayer = CAMetalLayer()
+        metalLayer.device = device
+        metalLayer.pixelFormat = .bgra8Unorm  // NORM!
+        metalLayer.framebufferOnly = true
+        metalLayer.frame = view.layer.frame
+        view.layer.addSublayer(metalLayer)
+
+        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+        vertexBuffer = device.makeBuffer(bytes: vertexData,
+                                         length: dataSize,
+                                         options: [])
+
+        // get the shaders and add to the default liberry
+        let defaultLibrary = device.makeDefaultLibrary()!
+        let vertexProgram = defaultLibrary.makeFunction(name: "basic_vertex")
+        let fragmentProgram = defaultLibrary.makeFunction(name: "basic_fragment")
+
+        // now add to the render pipeline
+        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
+        pipelineStateDescriptor.vertexFunction = vertexProgram
+        pipelineStateDescriptor.fragmentFunction = fragmentProgram
+        pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        
+        do {
+            try pipelineState = device.makeRenderPipelineState(
+              descriptor: pipelineStateDescriptor)
+        } catch {
+            print("failed to create pipeline state \(error)")
+        }
+
+        // command queues expensive to create - make one and re-use.
+        // command buffers are cheap
+        commandQueue = device.makeCommandQueue()
+
+        timer = CADisplayLink(target: self, 
+                              selector: #selector(ViewController.gameloop))
+        timer.add(to: RunLoop.main, forMode: .default)
+    }
+
+    func render() {
+        let renderPassDescriptor = MTLRenderPassDescriptor()
+        guard let drawable = metalLayer.nextDrawable() else { return }
+
+        renderPassDescriptor.colorAttachments[0].texture = drawable.texture
+        renderPassDescriptor.colorAttachments[0].loadAction = .clear
+        renderPassDescriptor.colorAttachments[0].clearColor =
+          MTLClearColor(red: 221.0 / 255.0, green: 160.0 / 255.0,
+                        blue: 221.0 / 255.0, alpha: 1.0)
+
+        let commandBuffer = commandQueue.makeCommandBuffer()!
+        
+        let renderEncoder = (commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor))!
+        renderEncoder.setRenderPipelineState(pipelineState)
+        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        renderEncoder.drawPrimitives(type: .triangle,
+                                     vertexStart: 0, vertexCount: 3)
+        renderEncoder.endEncoding()
+
+        commandBuffer.present(drawable)
+        commandBuffer.commit()
+    }
+
+    @objc func gameloop() {
+        autoreleasepool {
+            self.render()
+        }
+    }
+
+// shader implementation
+
+#include <metal_stdlib>
+using namespace metal;
+
+// [[ buffer(0) ]] says to pull data from the first vertex buffer 
+//    sent to the shader
+// the second argument is the index of the vertex within the vertex array
+vertex float4 basic_vertex(
+    const device packed_float3 *vertex_array [[ buffer(0) ]],
+    unsigned int vid [[ vertex_id ]]) {
+    
+    return float4(vertex_array[vid], 1.0);
+}
+
+fragment half4 basic_fragment() {
+    return half(1.0);
+}
+```
