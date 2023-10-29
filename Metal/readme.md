@@ -170,3 +170,20 @@ like hello world, but draws a triangle. (nice!)
 
 This chapter builds the app without a template. 
 
+* metal uses a normalized coordinate system
+  - two units by two units by one
+  - the phone screen is one unit by one unit size
+  - so upper left of the screen is 1,1,1, and lower right is -1, -1, 0
+    - center is 0, 0, 0.5
+  - used no matter the aspect ratio of the screen
+    - rectangular on phong, square for wartch
+  - https://developer.apple.com/documentation/metal/resource_fundamentals/setting_resource_storage_modes
+* Three types of `MTLFunction`
+  - vertex
+  - fragment
+  - kernel
+  - collected into `MTLLibary` objects
+    - can be compiled from strings at runtime, or buildtime
+* command buffer needs to encode render commands in order to know what
+  work to send to the GPU
+
