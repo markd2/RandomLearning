@@ -3,10 +3,10 @@
 * on iPhongs 14 pro, an all 15s.
 * ActivityKit handles the display
   - https://developer.apple.com/documentation/activitykit
-* Displaying live data using live activities Lively
+* Displaying live data using live activities Lively (x)
   - https://developer.apple.com/documentation/activitykit/displaying-live-data-with-live-activities
 * https://developer.apple.com/documentation/widgetkit/dynamicisland
-  - dynamic island wedgie
+  - dynamic island wedgie swiftui view
 * HIG (x)
   - https://developer.apple.com/design/human-interface-guidelines/live-activities
 * WWDC
@@ -15,6 +15,8 @@
 * Updating live activities with ActivityKit push notification
 s
   - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
+* Accessibility - https://developer.apple.com/documentation/activitykit/adding-accessible-descriptions-to-widgets-and-live-activities
+* Live Activitys with push notifications - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
 * ObToot: https://www.answertopia.com/swiftui/a-swiftui-live-activity-tutorial/
 * Adding interactivity - https://developer.apple.com/documentation/WidgetKit/Adding-interactivity-to-widgets-and-Live-Activities
 * animating - https://developer.apple.com/documentation/WidgetKit/Animating-data-updates-in-widgets-and-live-activities
@@ -146,6 +148,24 @@ Adding Support
     there's multiple in-flight. (otherwise sorted by date, so what was
     presented first).  Also controls the order on the lock screen.
   - can do an update via APN
+  - Animating
+    - when definiting the UI, the system ignores any animationm modifiers
+      - e.g. withAnimation(_:_:) / animation(_:value:)
+    - The system performs some animation when the dynamic content
+      of the live activity changes
+    - text views animated content changes with blurred content transitions
+    - if you add or remove views, they fade in and out
+    - use these to configure the built-in transitions
+      - opacity
+      - move(edge:)
+      - slide
+      - push(from:)
+      - and combinations
+      - requests animations for "timer text" with numericText(countsDown:)
+        - https://developer.apple.com/documentation/SwiftUI/ContentTransition/numericText(countsDown:)
+        - as simple as
+          `Text("T \(context.state.emoji)").contentTransition(.numericText())`
+
 
 * Ending
   - can do via APN
