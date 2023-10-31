@@ -356,7 +356,9 @@ let package = Package(
             name: "libraryUsesCxx", 
             swiftSettings: [.interoperabilityMode(.Cxx)])
     ]
-)```
+)
+```
+
     - Swift imports C++ headers using *Clang* modules
       - https://clang.llvm.org/docs/Modules.html (this is a novel)
       - https://www.swift.org/documentation/cxx-interop/#importing-c-into-swift
@@ -638,6 +640,7 @@ Apple sample code
   - IntrusiveRefCounted (love the name)
     - there's a "forestRetain" and "forestRelease" - how does it know
       to use those?
+      - comes from the SWIFT_SHARED_REFERENCE macro
   - Exposing a specialization of a vector
     - `using VectorOfTrees = std::vector<Tree>;`
     - kind of got beaten using a vector of swift types
