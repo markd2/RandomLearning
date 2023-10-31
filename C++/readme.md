@@ -359,45 +359,42 @@ let package = Package(
 )
 ```
 
-    - Swift imports C++ headers using *Clang* modules
-      - https://clang.llvm.org/docs/Modules.html (this is a novel)
-      - https://www.swift.org/documentation/cxx-interop/#importing-c-into-swift
-      - "provide a more robust and efficient semantic model of C++ headers
-         compared to the preprocessor-based model of direclty including
-         the contents of header files using #include"
-      - legit C++ modules (C++20) cannot be imported
-      - for swift to import a clang module, needs to find a `module.modulemap`
-        - describles how a pile of C++ headers maps to a clang module
-        - SPM automatically generates when it finds an umbrella header
-        - xcrud automatically generates for a framework target
-        - otherwise, make it manually
-        - list all the header files from a c++ target to be visible in swift
-        - also `export *` - ensures that the types from clang modules imported
-          into the module are made visible to swift as well
-        - place the module map as a peer of the re45tdsxe (Bob says) headers
-          in the include directory
-      - with a module map, swift can import it when interop is enabled
-      - build system needs to -I the blah/include directory
-      - https://clang.llvm.org/docs/Modules.html#module-map-language
-        - "not guaranteed to be stable between major revisions of clang"
-        - can break things into smaller modules - like put errno.h into
-          its own module.
-        - (didn't even skim)
-    - Swift enumeration used internally by the compiler to represent C++ enums
-    - Swift structure used internally to represent classes
-    - Swift uses C++ types and calls C++ functions directly, wihtout any
-      indirection or thunking.
+  - Swift imports C++ headers using *Clang* modules
+    - https://clang.llvm.org/docs/Modules.html (this is a novel)
+    - https://www.swift.org/documentation/cxx-interop/#importing-c-into-swift
+    - "provide a more robust and efficient semantic model of C++ headers
+       compared to the preprocessor-based model of direclty including
+       the contents of header files using #include"
+    - legit C++ modules (C++20) cannot be imported
+    - for swift to import a clang module, needs to find a `module.modulemap`
+      - describles how a pile of C++ headers maps to a clang module
+      - SPM automatically generates when it finds an umbrella header
+      - xcrud automatically generates for a framework target
+      - otherwise, make it manually
+      - list all the header files from a c++ target to be visible in swift
+      - also `export *` - ensures that the types from clang modules imported
+        into the module are made visible to swift as well
+      - place the module map as a peer of the re45tdsxe (Bob says) headers
+        in the include directory
+    - with a module map, swift can import it when interop is enabled
+    - build system needs to -I the blah/include directory
+    - https://clang.llvm.org/docs/Modules.html#module-map-language
+      - "not guaranteed to be stable between major revisions of clang"
+      - can break things into smaller modules - like put errno.h into
+        its own module.
+      - (didn't even skim)
+  - Swift enumeration used internally by the compiler to represent C++ enums
+  - Swift structure used internally to represent classes
+  - Swift uses C++ types and calls C++ functions directly, without any
+    indirection or thunking.
 
 Exposing Swift APIs to C++
-
-
-
 
 Working with imported C++ APIs
 
 - C++ types and functions are presented as if they were swift types 
   and functions
-  - looks like no names unless use SWIFT_NAME
+  - looks like no pretty name unless use SWIFT_NAME
   - structs/classes (which are actually nearly the same in C++)
     come in as struct types by default and are value types
     - always copied
