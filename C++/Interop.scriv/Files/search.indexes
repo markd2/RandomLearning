@@ -30,6 +30,10 @@ Don't throw C++ exceptions across the language boundary
 
 </Text>
         </Document>
+        <Document ID="1A75DCE0-F10A-4123-9596-3CA75121E6C7">
+            <Title>Wrap-up</Title>
+            <Text>##</Text>
+        </Document>
         <Document ID="7477F752-B80D-478B-A7FC-B3FBF12B6CAE">
             <Title>Where can C++ come from?</Title>
             <Text>From the application itself
@@ -39,10 +43,6 @@ From a clang module
 From a SPM package
 NOT a C++20 module
 </Text>
-        </Document>
-        <Document ID="1A75DCE0-F10A-4123-9596-3CA75121E6C7">
-            <Title>Wrap-up</Title>
-            <Text>##</Text>
         </Document>
         <Document ID="888BA4C7-78CD-452F-9F8F-9DFD133218D0">
             <Title>C++ Interoperability</Title>
