@@ -183,7 +183,7 @@ complex code bases.
   - namesapces
   - enums
   - code completion
-  - std::sset
+  - std::set
   - function templates
   - class templates specialization
   - jump to definition
@@ -658,7 +658,7 @@ Apple sample code
         library was giving objc(++) compiler problems. Which I'd like to
         paste here, but xcode decided to stop hanging on to build logs (!)
 
-  - SWIFT_COMPUTED_PROPERTY, even for just getters
+x  - SWIFT_COMPUTED_PROPERTY, even for just getters
     - annotating a setting automatically makes a getter, so no write-only
       properties.
   - SWIFT_SHARED_REFERENCE
@@ -672,29 +672,29 @@ Apple sample code
       - take one arg, return void, arg is pointer to the type (not a base type)
     - imported as a reference type
     - no example shared_ptr in the apple samples.
-  - SWIFT_UNSAFE_REFERENCE - like immportal, but it communicates different
+x  - SWIFT_UNSAFE_REFERENCE - like immportal, but it communicates different
     semantics - this type is intended to be used unsafely rather than
     living for the duration of the proogram
     - the programmer must validate that any reference to such an object
       is valid themselves.
     - the macro is _identical_ to immportal
-  - SWIFT_RETURNS_INDEPENDENT_VALUE - added to C++ member functions to let
+x  - SWIFT_RETURNS_INDEPENDENT_VALUE - added to C++ member functions to let
     Swift know that it doesn't return a dependent reference or a dependent
     view
     - basically you're not returning an interior reference value.
     - like a "const char *getName() const" - if it's returning a static
       string, then it should be marked as returning an independent value.
       But if you extract a char* from a std::string, then don't use this.
-  - SWIFT_SELF_CONTAINED - it's not a view type.  All member functions
+x  - SWIFT_SELF_CONTAINED - it's not a view type.  All member functions
     that return the self contained type are assumed to be safe in Swift
     - a.k.a. owns and controls the lifetime of all of the objects it references
     - allows swift to import methods that return a class or struct type that's
       annotated thusly
-  - SWIFT_NAME - providing a different name for C++ types and functions
+x  - SWIFT_NAME - providing a different name for C++ types and functions
     in swift
     - e.g. `class Error {...} SWIFT_NAME("CxxLibraryError");`
     - and `void sendCopy(const std::string &) SWIFT_NAME(send(_:));`
-  - SWIFT_CONFORMS_TO (swift.org only talks about template specialization,
+x  - SWIFT_CONFORMS_TO (swift.org only talks about template specialization,
     but the header seems to imply that non-template works as well)
     - conform all specializations of a class template to
       a swift protocol automatically.
@@ -703,10 +703,10 @@ Apple sample code
       a class template in Swift by using a protocol extension
     - also lets you use any specialization in constrainted generic code witout
       explicit conformances
-  - SWIFT_MUTATING
+x  - SWIFT_MUTATING
     - specifies that a specific _constant_ C++ member function should be
       imported as a mutating Swift method.
-  - SWIFT_IMMORTAL_REFERENCE - things allocated and leaked without tracking their uses.
+x  - SWIFT_IMMORTAL_REFERENCE - things allocated and leaked without tracking their uses.
     - also arena-allocated, thign is aren't individually managed
     - imported as unmanaged classes
       - for an arena-allocated dealie, it's unsafe, but unavoidable
