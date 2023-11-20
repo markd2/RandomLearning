@@ -28,8 +28,6 @@ Don't throw C++ exceptions across the language boundary
 	- ABEND if it reaches swift-land
 	- Swift does have try/catch, but they're not actually exceptions
 
-
-
 </Text>
         </Document>
         <Document ID="7477F752-B80D-478B-A7FC-B3FBF12B6CAE">
@@ -42,9 +40,17 @@ From a SPM package
 NOT a C++20 module
 </Text>
         </Document>
+        <Document ID="1A75DCE0-F10A-4123-9596-3CA75121E6C7">
+            <Title>Wrap-up</Title>
+            <Text>##</Text>
+        </Document>
         <Document ID="888BA4C7-78CD-452F-9F8F-9DFD133218D0">
             <Title>C++ Interoperability</Title>
-            <Text>Wherever I say "C++ class", you can also do "C++ struct".  Structs and classes are identical</Text>
+            <Text>Wherever I say "C++ class", you can also do "C++ struct".  Structs and classes are identical
+
+This is half strategy and why things are happening, and half actual useful information
+
+</Text>
         </Document>
         <Document ID="EE8747D6-A856-4D47-956A-DF440EEF0D22">
             <Title>Swift types</Title>
@@ -74,7 +80,7 @@ LLVM IR  (diagram with C++ -&gt; clang -&gt; IR -&gt; program  and Swift -&gt; s
             <Text>- import most collections - stdlib and elsewhere
 - function templates and class template specialiation
 - smart pointers std::shared_ptr
-</Text>
+##</Text>
         </Document>
         <Document ID="CAF14E72-A317-45A1-BE59-F87C15A36844">
             <Title>Why Swift?</Title>
@@ -113,6 +119,25 @@ Templates
     that require specialization, they need to be done on the C++ side
     of the fence.
 </Text>
+        </Document>
+        <Document ID="969B58F9-7FC1-4A67-B3E8-08829A209058">
+            <Title>Successor Language</Title>
+            <Text>Appears to be apple's overall strategy of positioning Swift as "successor languages" for the established oldy-moldy
+
+c.f.  https://www.youtube.com/watch?v=lgivCGdmFrw
+
+And do to it by interop, a.k.a. "embrace and extend" from the old microsoft playbook, except without (most?) the evil intent.
+
+maybe talk about objc interop, and what it does and not (and why)
+
+The stuff we have is fundamentally old.  like 70s-80s old.  We've learned :alot: since then. 
+
+But huge problems from the early design decisions.
+
+Could do a replacement langauge, but getting adoption?  Like seeing how much Rust is being used for real stuff. Or Zig.  Some, mainly new greenfield stuff.  vast majority of stuff is being made in unsafe langauges (at this level.  Not considering the stuff addressed by scripting langauges and javascript)  systems programming, and software that needs performance that can only really be accomplished if you have some kind of control over the instructions and _memory layout_
+
+#
+#</Text>
         </Document>
         <Document ID="A71DCE3B-E06F-4F2D-9BA0-B1BBF4EC36D4">
             <Title>Collections</Title>
@@ -153,7 +178,8 @@ ameter-ownership-modifiers.md
         - supposedly implemented in swift 5.9
       - mutable values can be passed by inout, which avoids doing a deep copy o\
 f the C++ container
-</Text>
+
+#</Text>
         </Document>
     </Documents>
 </SearchIndexes>

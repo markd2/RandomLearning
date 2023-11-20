@@ -102,6 +102,17 @@ enum class Outcome {
 
 # Swift/C++ Interop
 
+## other links
+
+(courtesy of Kenson Johnson)
+* Introducing a Memory-Safe Successor Language in Large C++ Code Bases - John McCall - CppNow 2023 - https://www.youtube.com/watch?v=lgivCGdmFrw
+* Swift as C++ Successor in FoundationDB -  Konrad Malawski (Strange Loop 2023)- https://youtu.be/ZQc9-seU-5k?si=AjvUa95BojFo59Oh
+
+## memory-safe successor
+
+"pretty usable state"
+
+
 ## WWDC Session
 
 * Mix C++ and Swift (WWDC 2023) - https://developer.apple.com/videos/play/wwdc2023/10172/
