@@ -11,3 +11,8 @@ Suggestions from Kenson:
 And from others
 
 * https://course.fast.ai/
+
+I managed to snag the book (book? what's that?) - O'Reilly _Hands-on
+machine learning with scikit-Learn, Keras, and TensorFlow_
+
+
