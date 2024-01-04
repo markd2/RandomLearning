@@ -15,4 +15,6 @@ And from others
 I managed to snag the book (book? what's that?) - O'Reilly _Hands-on
 machine learning with scikit-Learn, Keras, and TensorFlow_
 
+Make a test set and then never look at it - to prevent data-snooping bias
+
 
