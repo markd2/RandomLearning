@@ -347,3 +347,261 @@ top.
   - Support dork mode and always on.
     - https://developer.apple.com/design/human-interface-guidelines/always-on
 
+### WWDC Session
+
+https://developer.apple.com/videos/play/wwdc2023/10184
+
+Live Activity overtview - immersive glanceable way to keep status of task.
+Discrete start and end, and can give update from background app updates or
+remotely from poosh notifications
+
+UA and MLB example
+
+@1:07 - even more immersive on latest phones, with dynamic islant,
+displays on activity on system when app si on backgdround.  When one
+is active, rendered in its "compact" presentation.
+
+Displays up to two live activities. One appaers attached to the 
+TRUE DEPTH camera, and the other in a detacthed.  Both use their
+"minimal" presentation
+
+Any time, can live-press on the live activity to display its expanded
+presentation, even more glanceable information.  Expanded, views can
+deep link to different areas in app, providing a rich user experience.
+
+Some newer experiecnes in 17.  IN addition to the lock screen and
+dynamic island.  LA appear in stand-by .  And iPad also supports
+Live activities.
+
+Interactive Live Activities
+
+- leverage widget enhnacements with widgetkit and wiftui
+- add buttons or toggles to enahnce the user experience
+- learn more to "BRING WIDGETS TO LIFE - wwdc 2023"
+
+Overview
+
+- rely on ActivityKit framework
+   - app can request, update, and manage lifecycle
+- layed out with SUI and widget kit
+  - familiar to widgt home thing
+- can be requested while in the foreground.
+- only request due to discrete user action, following a user action,
+  or beginning a task
+ 
+User-moderated, similar to notification. Someone can dismiss or
+turn them off all together.
+
+API requires you to support all presentations
+  - from lock screen to all 3 Dyamic island presentation
+  - in standby, system scales lockscreen to the full screen
+
+App can update remotely via poosh notification with Live Activity
+push type.
+
+c.f. UPDATE LIVE ACTIVITIES WITH PUSH NOTIFICATIONS wwdc
+
+Lifecycle
+
+example - choose to hear from the emoji ranger app, and go on an 
+adventure. Hero will face challenges and fight with bosses.
+
+The LA displays displays info about hero adventure - name and stats,
+avatar, health, and description of what they experience
+
+Four main steps
+
+1. Request an activity
+2. once started, update with latest content
+3. observe activity state, like it being ended
+4. end when completed
+
+Request an activity
+
+make sure your app is in the foreground, and configure your app so
+you have an initial content and necessary request data.
+
+Before I can request a LA from emoji rangers, need to define a set
+of static and dynamic data for the activity
+
+```
+import ActivityKit
+
+struct AdventureAttributes: ActivityAttributes {
+    let hero: EmojiRanger // static
+
+    struct ContentState: Codable & Hashable { // dynamic
+        let currentHealthLevel: Double
+        let eventDescription: Double
+    }      
+}
+```
+
+as my property changes, my LA UI will get updated.
+
+Now that the dynamic and static data is ready, set up request.
+
+```
+let adventure = AdventureAttributes(hero: hero)
+
+let initialState = AdventureAttributes.ContentState(
+     currentHealthLevel: hero.healthLevel,
+     eventDescription: "HUZZAH"
+)
+
+let content = ActivityContent(
+    state: initialState, staleDate: nil,
+    relevanceScore: 0.0
+)
+
+let activity = try Activity.request(
+    attributes: adventure,
+    content: content,
+    pushType: nil
+)
+```
+
+* staleDate: when data is considered out of date
+* relevanceScore: order in which each live activity appears when
+  severeal adventure activities are started.  If started another one,
+  specify a different score.
+* pushType - indicates if the live activity receives updates to its
+  content via activity kit push notifications.  nil is receiving
+  updates locally.
+
+The live activity setting for the app needs to be enabled.
+
+Update
+
+Now how to update the adventure.  The dynamic attributes tell me how
+I can update the activity
+
+```
+let heroName = activity.attributes.hero.name
+
+// change health level and describe event
+nlet contentState = AdventureAttributes.ContentState(
+    currentHealthLevel: hero.healthLevel,
+    eventDescription: "\(heroName) has taken a critical hit")
+
+// since the hero is in bad state, send an alert.
+// will display an alert on phone/pad/watch
+// title and body only used on watch.
+var alertConfig = AlertConfiguration(
+    title: "\(heroname) has taken a critical hit",
+    body: "open the app and use a potion to heal \(heroName)"),
+    sound: .default)
+
+activity.update(
+    ActivityContent<AdventureAttributes.ContentState>(
+        state: contentState,
+        staleDate: nil),
+        alertConfiguration: alertConfig
+    )
+)
+```
+
+Activity state changes can happen at any time. There are 4 possible stats
+* started
+* finished
+* dismissed
+* stale
+
+observe via
+
+```
+func observeActivity(activity: Activity<AdventureAttributes>) {
+    Task {
+        for await activityState in activity.activityStateUpdates {
+            if activityState == .dismissed {
+                self.cleanUpDismissedActivity()
+            }
+        }
+    }
+}
+```
+
+when activity gets dismissed, make sure not keeping track of adventure
+data, and update the UI in the app that I don't show an ongoing activity.
+
+Can also check the state via activity state API to retreive it synchronously
+
+```
+let activityState = activity.activityState
+if activityState == .dismissed {
+    self.cleanUpDismissedActivity()
+}
+```
+
+Ending
+
+Create a final content.
+
+```
+let hero = activity.attributes.hero
+let finalContent = AdventureAttributes.ContentState(
+    currentHealthLevel: hero.healthLevel,
+    eventDescription: "Adventure over!"
+)
+
+let dismissalPolicy: ActivityUIDismissalPolicy = .default
+
+activity.end(
+    ActivityContent(state: finalContent, staleDate: nil),
+    dismissalPolicy; dismissalPolicy
+)
+```
+
+policy ensures the information appears on the lockscreen for some
+time after it ends, so someone can glance at the lock screen to
+see how the adventure wrapped up.
+
+@10:50 - UI
+
+The widget extension has two widgets already.  Need to add the
+live activity configuration to the bundle.
+
+```
+struct AdventureActivityConfiguration: Widget {
+    var body: some WidgetConfiguration {
+        ...
+    }
+}
+```
+
+needs to return a widget configuration in its body.
+
+```
+struct AdventureActivityConfiguration: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: AdventureAttributes.self) { context in
+            ...
+        } dynamicIsland: { context in
+            ...
+        }
+    }
+}
+```
+
+the ActivityConfiguration describes the live activity.  Each closure
+gets an activity view context, that has the static and dynamic
+attributes, and activity ID
+
+This is created based on the attribtue type passed in. Must match the
+attribute the activity is requested with.
+
+
+```
+struct AdventureActivityConfiguration: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: AdventureAttributes.self) { context in
+            ...
+        } dynamicIsland: { context in
+            ...
+        }
+    }
+}
+```
+
+Stopped at 11:52
+
