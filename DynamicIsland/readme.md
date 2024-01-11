@@ -527,7 +527,7 @@ I can update the activity
 let heroName = activity.attributes.hero.name
 
 // change health level and describe event
-nlet contentState = AdventureAttributes.ContentState(
+let contentState = AdventureAttributes.ContentState(
     currentHealthLevel: hero.healthLevel,
     eventDescription: "\(heroName) has taken a critical hit")
 

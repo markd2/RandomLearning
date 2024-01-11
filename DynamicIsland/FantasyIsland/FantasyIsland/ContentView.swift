@@ -33,7 +33,12 @@ class ContentViewModel: ObservableObject {
         Task {
             guard let currentActivity  else { return }
             
-            await currentActivity.end(nil, dismissalPolicy: .immediate)
+            let finalContent = TattooAttributes.ContentState(counter: "666")
+
+            await currentActivity.end(
+                ActivityContent(state: finalContent,
+                    staleDate: nil),
+                dismissalPolicy: .default)
             timer?.invalidate()
             timer = nil
             count = 0
@@ -45,15 +50,23 @@ class ContentViewModel: ObservableObject {
         guard canUseLiveActivities else { return }
 
         stopIt()
-
+        
         do {
             let tattoo = TattooAttributes(name: "Splunge")
-            let initialState = TattooAttributes.ContentState(counter: "Greeble")
+            let initialState = TattooAttributes.ContentState(counter: "0")
+            
+            let content = ActivityContent(
+                state: initialState,
+                staleDate: nil,
+                relevanceScore: 0.0)
+            
             let activity = try Activity.request(
-              attributes: tattoo,
-              content: .init(state: initialState, staleDate: nil),
-              pushType: .token)
+                attributes: tattoo,
+                content: content,
+                pushType: nil)
+            
             setup(withActivity: activity)
+            
             timer = Timer.scheduledTimer(withTimeInterval: 1.0,
                                          repeats: true) { timer in
                 print("lub dub")
@@ -61,12 +74,12 @@ class ContentViewModel: ObservableObject {
                 self.count += 1
             }
 
-            Task {
-                for await state in activity.activityStateUpdates {
-                    self.splunge = "\(state)"
-                }
-                print("bye bye")
-            }
+Task {
+    for await state in activity.activityStateUpdates {
+        self.splunge = "\(state)"
+    }
+    print("bye bye")
+}
         } catch {
             errorMessage = "can't start \(error)"
             print(errorMessage)
@@ -99,9 +112,9 @@ class ContentViewModel: ObservableObject {
                 ActivityContent<TattooAttributes.ContentState>(
                     state: contentState,
                     staleDate: Date.now + 15,
-                    relevanceScore: alert ? 100 : 50
+                    relevanceScore: 0
                 ),
-                alertConfiguration: alertConfig
+                alertConfiguration: nil
             )
         }
     }

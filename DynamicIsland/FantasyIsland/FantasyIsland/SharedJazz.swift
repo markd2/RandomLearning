@@ -5,13 +5,14 @@ import WidgetKit
 import ActivityKit
 
 struct TattooAttributes: ActivityAttributes {
+
+    // Static state
+    var name: String
+    
+    // Dynamic state
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here
         var counter: String
     }
-
-    // Fixed non-changing properties about your activity go here
-    var name: String
 }
 
 #endif
