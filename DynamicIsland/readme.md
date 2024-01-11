@@ -11,12 +11,12 @@
   - https://developer.apple.com/design/human-interface-guidelines/live-activities
 * WWDC
   - https://developer.apple.com/videos/play/wwdc2023/10184 - Meet Activity kit
-  - https://developer.apple.com/videos/play/wwdc2023/10194 - design dynamic liev activities
+  - https://developer.apple.com/videos/play/wwdc2023/10194 - design dynamic live activities
 * Updating live activities with ActivityKit push notification
 s
   - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
 * Accessibility - https://developer.apple.com/documentation/activitykit/adding-accessible-descriptions-to-widgets-and-live-activities
-* Live Activitys with push notifications - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
+* Live Activities with push notifications - https://developer.apple.com/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications
 * ObToot: https://www.answertopia.com/swiftui/a-swiftui-live-activity-tutorial/
 * Adding interactivity - https://developer.apple.com/documentation/WidgetKit/Adding-interactivity-to-widgets-and-Live-Activities
 * animating - https://developer.apple.com/documentation/WidgetKit/Animating-data-updates-in-widgets-and-live-activities
@@ -347,7 +347,54 @@ top.
   - Support dork mode and always on.
     - https://developer.apple.com/design/human-interface-guidelines/always-on
 
-### WWDC Session
+## O'Reilly course
+`
+https://learning.oreilly.com/videos/mastering-widgetkit-in/9781801815819/9781801815819-video1_1/
+
+Skipping ahead to Dynmaic island.
+
+Activities to keep track of tasks and activities. Persistent location to
+show informatioin that updates frequently.  e.g. pizza delivery app, the
+latest step until it arrives. Or ride share shows status of a ride.
+
+Can show on the lock screen.  And on some devices, LiveActivity can be shown
+(on other devices, have a banner, showing a snapshot while viewing home screen),
+but only interrupts if the app decides person should be interrupted.
+
+Expand the pizza delivery widget into dynamic island.
+
+Some basics. When displaying live activities in DI, show in one of 3
+ways:
+  - compact presentation, has a leading and trailing side
+    - if only one live activity that is current
+    - seperate views that surround the camera dealie
+    - tapping opens app
+  - minimal
+    - circular minimal (detached)
+      - showing two activities.
+    - or attached leading side.
+    - the OS picks one to be attached and detached.
+    - two apps running same time and reporting activity
+    - say pizza delivery, but you are driving.  Or your navigation app
+      is running, and its LiveAcitivty is on the detached, and the 
+      songs in on the minimal attached.
+  - expanded
+    - the full view
+    - touch and hold in a compact or minimal, the system shows the
+      content in an expanded presentation.
+
+Tapping on either of them will open the appropriate app.
+
+Have to support all three types.  Have seen where passed empty views
+or icons, but we've provided all styles.
+
+In addition to lock screen, DI supports live activities, that are
+powered by Wedgie Kit.
+
+(omitted the rest - not a fan of videos)
+
+
+## WWDC Session
 
 https://developer.apple.com/videos/play/wwdc2023/10184
 
