@@ -14,7 +14,7 @@ struct TattooLiveActivity: Widget {
         ActivityConfiguration(for: TattooAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello \(context.state.emoji)")
+                Text("Hello \(context.state.counter)")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
@@ -30,16 +30,16 @@ struct TattooLiveActivity: Widget {
                     Text("Trailing")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
+                    Text("Bottom \(context.state.counter)")
                     // more content
                 }
             } compactLeading: {
                 Text("L")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text("T \(context.state.counter)")
                     .contentTransition(.numericText())
             } minimal: {
-                Text(context.state.emoji)
+                Text(context.state.counter)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -54,18 +54,18 @@ extension TattooAttributes {
 }
 
 extension TattooAttributes.ContentState {
-    fileprivate static var smiley: TattooAttributes.ContentState {
-        TattooAttributes.ContentState(emoji: "😀")
+    fileprivate static var zeroCount: TattooAttributes.ContentState {
+        TattooAttributes.ContentState(counter: "0")
      }
      
-     fileprivate static var starEyes: TattooAttributes.ContentState {
-         TattooAttributes.ContentState(emoji: "🤩")
+     fileprivate static var oneCount: TattooAttributes.ContentState {
+         TattooAttributes.ContentState(counter: "1")
      }
 }
 
 #Preview("Notification", as: .content, using: TattooAttributes.preview) {
    TattooLiveActivity()
 } contentStates: {
-    TattooAttributes.ContentState.smiley
-    TattooAttributes.ContentState.starEyes
+    TattooAttributes.ContentState.zeroCount
+    TattooAttributes.ContentState.oneCount
 }

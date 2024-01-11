@@ -11,7 +11,7 @@ import ActivityKit
 class ContentViewModel: ObservableObject {
     // TODO - investigate using the async sequence to get updates.
     let activityAuthInfo = ActivityAuthorizationInfo()
-    var canUseLiveActivities: Bool {
+    @MainActor var canUseLiveActivities: Bool {
         activityAuthInfo.areActivitiesEnabled
     }
     var canPushFrequently: Bool {
@@ -41,14 +41,14 @@ class ContentViewModel: ObservableObject {
         }
     }
 
-    func goLive() {
+    @MainActor func goLive() {
         guard canUseLiveActivities else { return }
 
         stopIt()
 
         do {
             let tattoo = TattooAttributes(name: "Splunge")
-            let initialState = TattooAttributes.ContentState(emoji: "Greeble")
+            let initialState = TattooAttributes.ContentState(counter: "Greeble")
             let activity = try Activity.request(
               attributes: tattoo,
               content: .init(state: initialState, staleDate: nil),
@@ -89,10 +89,10 @@ class ContentViewModel: ObservableObject {
                     sound: .default
                 )
                contentState = TattooAttributes.ContentState(
-                    emoji: "!\(count)¡")
+                    counter: "!\(count)¡")
              } else {
                 contentState = TattooAttributes.ContentState(
-                    emoji: "\(count)")
+                    counter: "\(count)")
             }
 
             await activity.update(
