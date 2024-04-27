@@ -1,6 +1,8 @@
 
 #pragma once
 
+#import <swift/bridging>
+
 class HappyFunCplusplus {
 public:
     HappyFunCplusplus(bool printInvocation);

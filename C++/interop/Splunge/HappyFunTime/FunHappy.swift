@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 public struct FunHappy {
     private let printInvocation: Bool
     

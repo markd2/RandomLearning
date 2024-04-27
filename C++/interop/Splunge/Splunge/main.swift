@@ -38,3 +38,5 @@ let oop = getMagicNumber()
 print(oop)
 
 let greeble2 = CharCharFraction(2, 10);
+
+gronk()

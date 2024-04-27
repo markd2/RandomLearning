@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0F55072B0BD591007B2D09 /* Spork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D0F55052B0BD591007B2D09 /* Spork.cpp */; };
+		7D0F55092B0BD69C007B2D09 /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0F55082B0BD69C007B2D09 /* Temp.swift */; };
 		7D9368B22AD9B34C00A6B972 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9368B12AD9B34C00A6B972 /* main.swift */; };
 		7DD664812AE043A80089A7CE /* CTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DD6647F2AE043A80089A7CE /* CTest.cpp */; };
 		7DD664822AE043A80089A7CE /* CTest.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7DD664802AE043A80089A7CE /* CTest.hpp */; };
@@ -76,6 +78,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D0F55042B0BD590007B2D09 /* Splunge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Splunge-Bridging-Header.h"; sourceTree = "<group>"; };
+		7D0F55052B0BD591007B2D09 /* Spork.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Spork.cpp; sourceTree = "<group>"; };
+		7D0F55062B0BD591007B2D09 /* Spork.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Spork.hpp; sourceTree = "<group>"; };
+		7D0F55082B0BD69C007B2D09 /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		7D9368AE2AD9B34C00A6B972 /* Splunge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Splunge; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D9368B12AD9B34C00A6B972 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7DD6647A2AE043110089A7CE /* libCxxTest.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCxxTest.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +163,10 @@
 			isa = PBXGroup;
 			children = (
 				7D9368B12AD9B34C00A6B972 /* main.swift */,
+				7D0F55052B0BD591007B2D09 /* Spork.cpp */,
+				7D0F55062B0BD591007B2D09 /* Spork.hpp */,
+				7D0F55042B0BD590007B2D09 /* Splunge-Bridging-Header.h */,
+				7D0F55082B0BD69C007B2D09 /* Temp.swift */,
 			);
 			path = Splunge;
 			sourceTree = "<group>";
@@ -326,6 +336,7 @@
 				TargetAttributes = {
 					7D9368AD2AD9B34C00A6B972 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 					7DD664792AE043110089A7CE = {
 						CreatedOnToolsVersion = 15.0;
@@ -376,6 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D9368B22AD9B34C00A6B972 /* main.swift in Sources */,
+				7D0F55072B0BD591007B2D09 /* Spork.cpp in Sources */,
+				7D0F55092B0BD69C007B2D09 /* Temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,10 +564,13 @@
 		7D9368B62AD9B34C00A6B972 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2HBB3G8HCG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Splunge/Splunge-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -562,10 +578,12 @@
 		7D9368B72AD9B34C00A6B972 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2HBB3G8HCG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Splunge/Splunge-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
