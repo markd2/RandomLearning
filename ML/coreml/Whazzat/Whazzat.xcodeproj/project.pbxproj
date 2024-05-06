@@ -11,6 +11,7 @@
 		7D325FDC2BE913B6002F2BE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D325FDB2BE913B6002F2BE6 /* ContentView.swift */; };
 		7D325FDE2BE913B8002F2BE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D325FDD2BE913B8002F2BE6 /* Assets.xcassets */; };
 		7D325FE12BE913B8002F2BE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D325FE02BE913B8002F2BE6 /* Preview Assets.xcassets */; };
+		7D325FE82BE91407002F2BE6 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7D325FE72BE91407002F2BE6 /* Inceptionv3.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		7D325FDB2BE913B6002F2BE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D325FDD2BE913B8002F2BE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D325FE02BE913B8002F2BE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7D325FE72BE91407002F2BE6 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		7D325FD82BE913B6002F2BE6 /* Whazzat */ = {
 			isa = PBXGroup;
 			children = (
+				7D325FE72BE91407002F2BE6 /* Inceptionv3.mlmodel */,
 				7D325FD92BE913B6002F2BE6 /* WhazzatApp.swift */,
 				7D325FDB2BE913B6002F2BE6 /* ContentView.swift */,
 				7D325FDD2BE913B8002F2BE6 /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D325FDC2BE913B6002F2BE6 /* ContentView.swift in Sources */,
+				7D325FE82BE91407002F2BE6 /* Inceptionv3.mlmodel in Sources */,
 				7D325FDA2BE913B6002F2BE6 /* WhazzatApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
