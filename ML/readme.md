@@ -90,8 +90,10 @@ Classes
       can query it for input feature values via `featureValue(for:)`
     - pass your app's MLFeatureProvider to your MLModel via
       `prediction(from:)` or `prediction(from:options:)`
-    - use the MLFeaturePRovider returned from a prediction(from:) to get the
+    - use the MLFeatureProvider returned from a prediction(from:) to get the
       output feature values for the prediction
+      - coreML defines this, so really only need to define one
+  - MLDictionaryFeatureProvider
 
 ```
 public protocol MLFeatureProvider {
@@ -148,3 +150,22 @@ public protocol MLFeatureProvider {
   - access the feature's Type via `type`
   - and then a bunch of `isUndefined`, `doubleValue`, `stringValue`, etc
   - can compare with `isEqual(to:)`
+
+* MLMultiArray
+  - multi-dimensional array
+  - all elements are one of the same type
+     - int32
+     - float16
+     - float32
+     - float64
+  - shape is an integer array that has an element for each dimension
+    in the multiarray
+  - to inspect the shape and constraints of an input or output feature
+    - access the modelDescription
+    - find the multiarray input or output feature
+    - access the fetaure descriptions multiArrayConstraint
+    - inspect the constraint's shape and shapeConstraint
+
+
+
+* MLBatchProvider
