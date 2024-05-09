@@ -29,9 +29,12 @@ https://developer.apple.com/documentation/coreml
 * use CoreML API and user data to make predictions
 * can also train/fine-tune models on a device
 * used CPU, GPU and Neural Engine(tm)
+
 * run strictly on-dvice, avoid network, keep data private, app responsive
+
 * APIs like Vision, Natural Language, Speech, and sound analysis are based
   on CoreML
+
 * built on top of Accelerate, BNNS (acelerate framework collection for
   constructing neural networks for training and inference), and Metal
   Performance Shaders
@@ -123,7 +126,7 @@ public protocol MLFeatureProvider {
   - one of teh types MLFeatureType defines
   - usually access feature values indirectly using methods in the generated wrapper 
     class
-  - if access an MLModel directly, must c reate and consume MLFeatureProvider 
+  - if access an MLModel directly, must create and consume MLFeatureProvider 
     instances
   - for each prediction, CoreML accepts a feature provider for its inputs,
     and generates a seaprate feature provider for its outputs
