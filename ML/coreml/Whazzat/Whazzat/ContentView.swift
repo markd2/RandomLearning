@@ -18,8 +18,7 @@ class Helperer {
     }
     
     func checkBöb() -> String {
-//        let böburl = Bundle.main.url(forResource: "bob-with-lego-car", withExtension: "jpg")!
-        let böburl = Bundle.main.url(forResource: "sleesstak", withExtension: "jpg")!
+        let böburl = Bundle.main.url(forResource: "bob-with-lego-car", withExtension: "jpg")!
         let input = try! Inceptionv3Input(imageAt: böburl)
         let prediction = try! iv3.prediction(input: input)
         return prediction.classLabel
@@ -85,8 +84,11 @@ struct ContentView: View {
             Button("Splunge with Help") {
                 print(Helperer().checkBöb())
             }
-             Button("Splunge without Help") {
+            Button("Splunge without Help") {
                 print(Helperer().checkBob("sleesstak"))
+            }
+            Button("Gimme Pizza") {
+                print(Helperer().checkBob("pizza"))
             }
        }
         .padding()
