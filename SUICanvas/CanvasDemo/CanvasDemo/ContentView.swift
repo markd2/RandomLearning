@@ -12,10 +12,19 @@ struct ClippingView: View {
     var body: some View {
         // clip to top left quadrant
         Canvas { context, size in
+            var maskedContext = context
             let halfSize = size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
-            context.clip(to: Path(CGRect(origin: .zero, size: halfSize)))
-            context.fill(Path(ellipseIn: CGRect(origin: .zero, size: size)),
-                         with: .color(.purple))
+            maskedContext.clip(to: Path(CGRect(origin: .zero, size: halfSize)))
+            maskedContext.fill(Path(ellipseIn: CGRect(origin: .zero, size: size)),
+                               with: .color(.purple))
+
+            let origin = CGPoint(x: size.width / 4, y: size.height / 4)
+            context.fill(Path(CGRect(origin: origin, size: halfSize)),
+                         with: .color(.yellow))
+
+            let quarterSize = size.applying(CGAffineTransform(scaleX: 0.33, y: 0.33))
+            maskedContext.fill(Path(ellipseIn: CGRect(origin: .zero, size: quarterSize)),
+                               with: .color(.orange))
         }
         .border(Color.black)
         .background(.white)
