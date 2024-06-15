@@ -1,7 +1,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    var body: some View {
+        ScatterView()
+    }
+}
 
+struct ScatterView: View {
+    let rects = [
+        CGRect(x: 100, y: 100, width: 30, height: 30),
+        CGRect(x: 50, y: 120, width: 30, height: 30),
+        CGRect(x: 200, y: 300, width: 30, height: 30),
+        CGRect(x: 95, y: 78, width: 30, height: 30),
+        CGRect(x: 10, y: 20, width: 45, height: 45),
+    ]
+    var body: some View {
+        VStack {
+            Text("Bork")
+            ScatterPlotView(rects: rects, mark: Image(systemName: "tortoise"))
+        }
+    }
+}
+
+struct EllipseContentView: View {
     var body: some View {
         VStack {
             Canvas { context, size in
@@ -14,6 +35,30 @@ struct ContentView: View {
             .background(.white)
         }
         .padding()
+    }
+}
+
+// Uses "symbols" - UI views for doing rendering.  No interactivity or accessibility
+struct ScatterPlotView<Mark: View>: View {
+    let rects: [CGRect]
+    let mark: Mark // bork bork bork
+
+    enum SymbolID: Int {
+        case mark
+    }
+
+    var body: some View {
+        Canvas { context, size in
+            if let mark = context.resolveSymbol(id: SymbolID.mark) {
+                for rect in rects {
+                    context.draw(mark, in: rect)
+                }
+            }
+        } symbols: {
+            mark.tag(SymbolID.mark)
+        } 
+          .border(Color.black)
+          .background(.white)
     }
 }
 
