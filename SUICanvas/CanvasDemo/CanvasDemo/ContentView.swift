@@ -2,7 +2,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ScatterView()
+        VStack {
+            ClippingView()
+        }.padding()
+    }
+}
+
+struct ClippingView: View {
+    var body: some View {
+        // clip to top left quadrant
+        Canvas { context, size in
+            let halfSize = size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
+            context.clip(to: Path(CGRect(origin: .zero, size: halfSize)))
+            context.fill(Path(ellipseIn: CGRect(origin: .zero, size: size)),
+                         with: .color(.purple))
+        }
+        .border(Color.black)
+        .background(.white)
     }
 }
 
