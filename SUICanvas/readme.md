@@ -277,3 +277,22 @@ fireworks burst
 
 available on all platforms.
 
+----------
+
+# Notes building sample
+
+declared as
+
+```
+@MainActor
+@preconcurrency
+struct Canvas<Symbols> where Symbols : View
+```
+
+huh. wonder what that Symbols thing is.
+
+for "immediate mode drawing", to draw rich and dynamic 2D graphincs inside a SUI view.
+
+Making a canvas, give a closure (not a function builder) that takes a
+GraphicsContext and and also a CGSize. (and so you start out at 5 levels of indention)
+

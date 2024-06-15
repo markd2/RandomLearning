@@ -1,19 +1,17 @@
-//
-//  ContentView.swift
-//  CanvasDemo
-//
-//  Created by Mark Dalrymple on 6/15/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Canvas { context, size in
+                context.stroke(
+                  Path(ellipseIn: CGRect(origin: .zero, size: size)),
+                  with: .color(.purple),
+                  lineWidth: 4)
+            }
+            .border(Color.black)
+            .background(.white)
         }
         .padding()
     }
