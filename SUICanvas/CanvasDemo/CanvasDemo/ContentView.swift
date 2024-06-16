@@ -3,15 +3,44 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            ClippingView()
+            Infinitie()
         }.padding()
     }
 }
+
+// --------------------------------------------------=
+
+
+// Respect
+struct Infinitie: View {
+    @State private var trimEnd: CGFloat = 0.0
+    
+    var body: some View {
+        Path { path in
+            path.addLines([
+                .init(x: 2, y: 1),
+                .init(x: 1, y: 0),
+                .init(x: 0, y: 1),
+                .init(x: 1, y: 2),
+                .init(x: 3, y: 0),
+                .init(x: 4, y: 1),
+                .init(x: 3, y: 2),
+                .init(x: 2, y: 1)
+            ])
+        }
+        .trim(from: 0.15, to: 0.80)
+        .scale(50, anchor: .topLeading)
+        .stroke(Color.black, lineWidth: 3)
+    }
+}
+
+// --------------------------------------------------=
 
 struct ClippingView: View {
     var body: some View {
         // clip to top left quadrant
         Canvas { context, size in
+            print(context.environment.description)
             var maskedContext = context
             let halfSize = size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
             maskedContext.clip(to: Path(CGRect(origin: .zero, size: halfSize)))
