@@ -7,11 +7,13 @@
 
 \f0\fs36 \cf0 ## Benchmarking\
 \
-I'm using some really cheesy benchmarking. It's totally non-scientific.\
+I was going to do some really cheesy benchmarking but ran out of time.\
 \
-But first, make sure 
+But folks might not realize the disparity between Swift's performance in debug and release mode.\
+\
+Make sure 
 \f1\b you're optimizing
-\f0\b0 .  Unoptimized Swift is a porker.\
+\f0\b0  if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.\
 \
 for example\
 \
@@ -42,18 +44,23 @@ print("blah: \\(x[0])")
 \
 \
 
-\f2\fs32 \cf2 \CocoaLigature0 % time ./tg\
-blah: 14\
-26.189u 0.018s 0:
-\f3\b 26.50
-\f2\b0  98.8%    0+0k 0+0io 13pf+0w\
-\
-% time ./to\
+\f2\fs32 \cf2 \CocoaLigature0 % time ./to\
 blah: 14\
 0.252u 0.002s 0:
 \f3\b 00.25
 \f2\b0  100.0%    0+0k 0+0io 4pf+0w
 \f0\fs36 \cf0 \CocoaLigature1 \
 \
-So like two orders of magnitude faster. It's only 100,000,000 bits of work.\
+while tg is running, explain the output of time\
+\
+
+\f2\fs32 \cf2 \CocoaLigature0 % time ./tg\
+blah: 14\
+26.189u 0.018s 0:
+\f3\b 26.50
+\f2\b0  98.8%    0+0k 0+0io 13pf+0w\
+\
+
+\f0\fs36 \cf0 \CocoaLigature1 \
+So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.\
 }

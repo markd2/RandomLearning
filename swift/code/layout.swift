@@ -1,19 +1,19 @@
 // swiftc -O layout.swift -o layout
 
 struct Thing1 {
-    let aBool: Bool = false
-    let anInt: Int = 0
-    let anotherBool: Bool = false
-    let short: Int16 = 0 
-    let anotherInt: Int = 0
+    let aBool: Bool
+    let anInt: Int
+    let anotherBool: Bool
+    let aShort: Int16
+    let anotherInt: Int
 }
 
 struct Thing2 {
     let anInt: Int = 0
     let anotherInt: Int = 0
+    let aShort: Int16 = 0
     let aBool: Bool = false
     let anotherBool: Bool = false
-    let short: Int16 = 0
 }
 
 print("Thing 1")
@@ -24,7 +24,7 @@ print("Thing 1")
   print("  aBool offset: \(MemoryLayout<Thing1>.offset(of: \.aBool)!)")
   print("  anInt offset: \(MemoryLayout<Thing1>.offset(of: \.anInt)!)")
   print("  anotherBool offset: \(MemoryLayout<Thing1>.offset(of: \.anotherBool)!)")
-  print("  short offset: \(MemoryLayout<Thing1>.offset(of: \.short)!)")
+  print("  aShort offset: \(MemoryLayout<Thing1>.offset(of: \.aShort)!)")
   print("  anotherInt offset: \(MemoryLayout<Thing1>.offset(of: \.anotherInt)!)")
 
 print("------------------------------")
@@ -36,10 +36,12 @@ print("Thing 2")
   print("")
   print("  anInt offset: \(MemoryLayout<Thing2>.offset(of: \.anInt)!)")
   print("  anotherInt offset: \(MemoryLayout<Thing2>.offset(of: \.anotherInt)!)")
+  print("  aShort offset: \(MemoryLayout<Thing2>.offset(of: \.aShort)!)")
   print("  aBool offset: \(MemoryLayout<Thing2>.offset(of: \.aBool)!)")
   print("  anotherBool offset: \(MemoryLayout<Thing2>.offset(of: \.anotherBool)!)")
-  print("  short offset: \(MemoryLayout<Thing2>.offset(of: \.short)!)")
 
+
+#if false
 
 protocol Snorgle {
     var anInt: Int { get }
@@ -47,7 +49,7 @@ protocol Snorgle {
     var aBool: Bool { get }
     var anotherInt: Int { get }
     var anotherBool: Bool { get }
-    var short: Int16 { get }
+    var aShort: Int16 { get }
 
     func x()
     func y()
@@ -82,3 +84,5 @@ print("  stride: \(MemoryLayout<Snorgle>.stride)")
 print("  alignment: \(MemoryLayout<Snorgle>.alignment)")
 print("  anInt offset: \(MemoryLayout<Snorgle>.offset(of: \.anInt) ?? -1)")
 print("  aBool offset: \(MemoryLayout<Snorgle>.offset(of: \.anInt) ?? -1)")
+
+#endif

@@ -56,30 +56,15 @@ The alignment of 8 implies that there's a data type that requires 8-byte alignme
 
 </Text>
         </Document>
-        <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
-            <Title>More than a copy</Title>
-            <Text>## More than a copy
-
-So, class instances need to be retained when used, and released when done with.  If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out. 
-
-if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.
-
-When the reference count hits zero, the memory is freed.  Notice memory is freed, so that implies that the object has been allocated.  You can think of objects living in the heap.  Structures can live anywhere their inline representation can live.  So a structure can be passed on the C stack without involving expensive dynamic memory.
-
-So, what if a struct contains references to objects? Those need to be retained and released
-
-(struct-class.swift)
-
-
-</Text>
-        </Document>
         <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
             <Title>Benchmarking</Title>
             <Text>## Benchmarking
 
-I'm using some really cheesy benchmarking. It's totally non-scientific.
+I was going to do some really cheesy benchmarking but ran out of time.
 
-But first, make sure you're optimizing.  Unoptimized Swift is a porker.
+But folks might not realize the disparity between Swift's performance in debug and release mode.
+
+Make sure you're optimizing if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.
 
 for example
 
@@ -99,15 +84,35 @@ print("blah: \(x[0])")
 % swiftc -O test-opt.swift -o to
 
 
-% time ./tg
-blah: 14
-26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
-
 % time ./to
 blah: 14
 0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
 
-So like two orders of magnitude faster. It's only 100,000,000 bits of work.
+while tg is running, explain the output of time
+
+% time ./tg
+blah: 14
+26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
+
+
+So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
+</Text>
+        </Document>
+        <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
+            <Title>More than a copy</Title>
+            <Text>## More than a copy
+
+So, class instances need to be retained when used, and released when done with.  If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out. 
+
+if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.
+
+When the reference count hits zero, the memory is freed.  Notice memory is freed, so that implies that the object has been allocated.  You can think of objects living in the heap.  Structures can live anywhere their inline representation can live.  So a structure can be passed on the C stack without involving expensive dynamic memory.
+
+So, what if a struct contains references to objects? Those need to be retained and released
+
+(struct-class.swift)
+
+
 </Text>
         </Document>
         <Document ID="FB15E44A-6E03-4785-BC39-87C5FE716CF7">

@@ -86,7 +86,7 @@
 	</dict>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {409, 627}}</string>
+		<string>{{0, 0}, {409, 802}}</string>
 	</array>
 	<key>inspectorWidth</key>
 	<real>245</real>
@@ -103,7 +103,7 @@
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>562 287 1035 840 0 0 2048 1127 </string>
+	<string>937 287 1035 840 0 0 2048 1127 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>

@@ -104,9 +104,11 @@
 <p class="topLevelItemTitle">Benchmarking</p>
 <p class="itemText">## Benchmarking</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">I'm using some really cheesy benchmarking. It's totally non-scientific.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I was going to do some really cheesy benchmarking but ran out of time.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">But first, make sure you're optimizing.<span class="Apple-converted-space">  </span>Unoptimized Swift is a porker.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">But folks might not realize the disparity between Swift's performance in debug and release mode.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Make sure you're optimizing if you're doing any kind of real comparisons.<span class="Apple-converted-space">  </span>Unoptimized Swift is a porker.</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">for example</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
@@ -122,18 +124,12 @@
 <p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1">print("blah: \(x[0])")</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">% swiftc<span class="Apple-converted-space">    </span>test-opt.swift -o tg</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1">% swiftc -O test-opt.swift -o to</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">% time ./tg</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1">blah: 14</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1">26.189u 0.018s 0:26.50 98.8%<span class="Apple-converted-space">    </span>0+0k 0+0io 13pf+0w</span></p></p>
-<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">% tim...</p>
+<p class="itemText"><p class="p1"><span class="s1">% swiftc<span class="Apple-converted-space">    </span>tes...</p>
 </li>
+<hr class="afterText"/>
+<ul>
 <li>
-<p class="topLevelItemTitle">csh time builtin output format</p>
+<p class="itemTitle">csh time builtin output format</p>
 <p class="itemText">%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">%U</span></p></p>
@@ -162,6 +158,9 @@
 <p class="itemText"><p class="p1"><span class="s1">%F</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1">The number of major page faults (pa...</p>
 </li>
+</ul>
+<hr class="afterText"/>
+
 <li>
 <p class="topLevelItemTitle">Arrays (part 1)</p>
 <p class="itemText">## Arrays</span></p></p>
