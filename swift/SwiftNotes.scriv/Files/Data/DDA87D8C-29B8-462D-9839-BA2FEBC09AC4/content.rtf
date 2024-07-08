@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 ## Benchmarking\
+\
+I'm using some really cheesy benchmarking. It's totally non-scientific.\
+\
+But first, make sure 
+\f1\b you're optimizing
+\f0\b0 .  Unoptimized Swift is a porker.\
+\
+for example\
+\
+test-opt.swift\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li1440\pardirnatural\partightenfactor0
+
+\f2\fs32 \cf2 \CocoaLigature0 let n = 10000\
+var x = [Int](repeating: 1, count: n)\
+\
+for i in 0 ..< n \{\
+    for j in 0 ..< n \{\
+        x[i] ^= x[j] << (i+j) % 16\
+    \}\
+\}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+print("blah: \\(x[0])")
+\f0\fs36 \cf0 \CocoaLigature1 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs32 \cf2 \CocoaLigature0 % swiftc    test-opt.swift -o tg
+\f0\fs36 \cf0 \CocoaLigature1 \
+
+\f2\fs32 \cf2 \CocoaLigature0 % swiftc -O test-opt.swift -o to
+\f0\fs36 \cf0 \CocoaLigature1 \
+\
+\
+
+\f2\fs32 \cf2 \CocoaLigature0 % time ./tg\
+blah: 14\
+26.189u 0.018s 0:
+\f3\b 26.50
+\f2\b0  98.8%    0+0k 0+0io 13pf+0w\
+\
+% time ./to\
+blah: 14\
+0.252u 0.002s 0:
+\f3\b 00.25
+\f2\b0  100.0%    0+0k 0+0io 4pf+0w
+\f0\fs36 \cf0 \CocoaLigature1 \
+\
+So like two orders of magnitude faster. It's only 100,000,000 bits of work.\
+}

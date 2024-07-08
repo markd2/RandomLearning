@@ -1,4 +1,337 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
-    <Documents/>
+    <Documents>
+        <Document ID="EAAE4896-FE10-41C8-B75B-D849D5D4837F">
+            <Title>Protocols</Title>
+            <Text>## Protocols
+
+One of swift's defining features is its ability to add layers of abstraction and polymorphism via protocols.  A protocol describes some subset of functionality (say "codable" or "human biometric provider") 
+
+So revisit layout.swift
+
+protocol Snorgle {
+    var anInt: Int { get }
+/*
+    var aBool: Bool { get }
+    var anotherInt: Int { get }
+    var anotherBool: Bool { get }
+    var short: Int16 { get }
+
+    func x()
+    func y()
+    func z()
+    func q()
+*/
+}
+
+extension Thing1: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+
+extension Thing2: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+and run, and get
+
+Snorgle
+  size: 40
+  stride: 40
+  alignment: 8
+  anInt offset: -1
+  aBool offset: -1
+
+if you throw more things in to it, the thing doesn't get any bigger.
+
+The alignment of 8 implies that there's a data type that requires 8-byte alignment, so probably pointers involved.  size of 40 would mean five pointers.
+
+"Any problem can be solved with an additional layer of indirection"
+
+
+
+</Text>
+        </Document>
+        <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
+            <Title>More than a copy</Title>
+            <Text>## More than a copy
+
+So, class instances need to be retained when used, and released when done with.  If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out. 
+
+if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.
+
+When the reference count hits zero, the memory is freed.  Notice memory is freed, so that implies that the object has been allocated.  You can think of objects living in the heap.  Structures can live anywhere their inline representation can live.  So a structure can be passed on the C stack without involving expensive dynamic memory.
+
+So, what if a struct contains references to objects? Those need to be retained and released
+
+(struct-class.swift)
+
+
+</Text>
+        </Document>
+        <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
+            <Title>Benchmarking</Title>
+            <Text>## Benchmarking
+
+I'm using some really cheesy benchmarking. It's totally non-scientific.
+
+But first, make sure you're optimizing.  Unoptimized Swift is a porker.
+
+for example
+
+test-opt.swift
+
+let n = 10000
+var x = [Int](repeating: 1, count: n)
+
+for i in 0 ..&lt; n {
+    for j in 0 ..&lt; n {
+        x[i] ^= x[j] &lt;&lt; (i+j) % 16
+    }
+}
+print("blah: \(x[0])")
+
+% swiftc    test-opt.swift -o tg
+% swiftc -O test-opt.swift -o to
+
+
+% time ./tg
+blah: 14
+26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
+
+% time ./to
+blah: 14
+0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
+
+So like two orders of magnitude faster. It's only 100,000,000 bits of work.
+</Text>
+        </Document>
+        <Document ID="FB15E44A-6E03-4785-BC39-87C5FE716CF7">
+            <Title>Structure Layout</Title>
+            <Text># Structure Layout
+
+C has pretty straightforward rules on how structures are represented in memory.  Structs defined from C will have the same size, layout, and alignment.
+
+
+Does Swift do the same thing?  Pretty much
+
+how to tell the size 
+
+(layout.swift)
+
+MemoryLayout 
+
+MemoryLayout&lt;Thing1&gt;.size
+MemoryLayout&lt;Thing1&gt;.stride
+MemoryLayout&lt;Thing1&gt;.alignment
+
+MemoryLayout&lt;Thing1&gt;.offset(of: \.aBool)
+
+
+(diagram thing1 and thing2)
+
+struct Thing1 {
+    let aBool: Bool
+    let anInt: Int
+    let anotherBool: Bool
+    let short: Int16
+    let anotherInt: Int
+}
+
+struct Thing2 {
+    let anInt: Int = 0
+    let anotherInt: Int = 0
+    let aBool: Bool = false
+    let anotherBool: Bool = false
+    let short: Int16 = 0
+}
+
+(bop out and run layout.swift)
+
+Thing 1
+  size: 32
+  stride: 32
+  alignment: 8
+
+  aBool offset: 0
+  anInt offset: 8
+  anotherBool offset: 16
+  short offset: 18
+  anotherInt offset: 24
+------------------------------
+Thing 2
+  size: 20
+  stride: 24
+  alignment: 8
+
+  anInt offset: 0
+  anotherInt offset: 8
+  aBool offset: 16
+  anotherBool offset: 17
+  short offset: 18
+
+
+just for funsies, change thing 2 into a class
+
+
+Thing 2
+  size: 8
+  stride: 8
+  alignment: 8
+
+Trace/BPT trap
+
+huh.  Where'd all the numbers go?
+
+</Text>
+        </Document>
+        <Document ID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE">
+            <Title>Arrays (part 2)</Title>
+            <Text>## Arrays part 2.  Moo
+
+So, if you remember arrays part 1, you know that array storage is a linear chunk of stuff with the array contents laid end to end (using the _stride_ of the struct). This brings up a couple of interesting questions.
+
+axiom #1: Arrays are value types . Structs are passed by copy. Copying a million element array, is kind of expensive. 
+
+So arrays are implemented as a struct (yay value type), which wraps an object (yay reference type).  
+
+The array points to its backing store.  If you pass the array around, small structs get peeled off, but all referencing the same dingus
+
+(illustration)
+
+if someone modifies the array, it'll make a copy(*) first, and then modify that. "Copy on Write". So the expensive operation is paid by the one who is doing the copying.
+
+
+</Text>
+        </Document>
+        <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
+            <Title>csh time builtin output format</Title>
+            <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
+
+%U
+The time the process spent in user mode in cpu seconds.
+
+%S
+The time the process spent in kernel mode in cpu seconds.
+
+%E
+The elapsed (wall clock) time in seconds.
+
+%P
+The CPU percentage computed as (%U + %S) / %E.
+
+
+%X
+The average amount in (shared) text space used in Kbytes.
+%D
+The average amount in (unshared) data/stack space used in Kbytes.
+
+%I
+The number of input operations.
+%O
+The number of output operations.
+
+%F
+The number of major page faults (page needed to be brought from disk).
+%W
+Number of times the process was swapped.
+
+</Text>
+        </Document>
+        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
+            <Title>Swift Under the Hood</Title>
+            <Text># Swift under the hood
+
+Things like in-memory representation, existential containers, witness tables, etc.
+
+Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.
+
+"you should have an intuition for what performance different language features give you"
+
+I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
+</Text>
+        </Document>
+        <Document ID="F40AE388-1C45-493D-AF10-31C1A82B1D5A">
+            <Text>## Arrays
+
+In many performance-oriented languages, arrays have a particular implemention that makes them very fast for what they do.
+
+- large contiguous chunk of memory
+- uniform size of entities
+
+This allows easy "pointer plus scaled offset" for indexing.  If you know your array items are 30 bytes long, you can figure out the address in memory for the N'th item by doing baseAddress + N * 30.  makes random access really fast
+
+And because arrays are in a contiguous chunka bytes, iterative scanning through them (for i in 0 .. size; do stuff with array[i]) take advantage of the processor's prefetching behavior.
+
+SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went into vapor-lock.  Greebles can be enums, or structs, or classes.  all different sizes. HOW CAN THAT WORK?!??!
+
+
+
+</Text>
+        </Document>
+        <Document ID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4">
+            <Title>Existential Containers</Title>
+            <Text>## Existential Containers
+
+one pointer for the witness table
+three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)
+and not sure what the other word is for
+
+</Text>
+        </Document>
+        <Document ID="3235AABD-C6FC-41FE-BF87-81C6694566F1">
+            <Title>Inline representation</Title>
+            <Text>## Inline Representation
+
+the inline representation is how a particular swift Thing is, well, represented in memory.  
+
+Specifically, when doing things like storing it in variables, passing it around from function to function, or putting things into collections.
+
+As we saw, the inline representation of a structure is the goodies in the structure.  I don't think it's officially documented (outside of random forum postings by Swift Core Team Members), but structs are generally laid out in memory like described.
+
+when structs are passed around, I like to use the "peel off a copy metaphor". I have this structure. I'm going to pass it to this function or I'm going to assign it to this variable.  I'm going to peel off a copy and give you that copy.  This copy I'm peeling off is the inline representation. I'll take the inline representation of my structure, duplicate it, and pass that inline representation to the function, or where the variable's storage is.  
+
+This is how the Value Semantics work. Because you have your own peeled-off copy, you can do whatever you want with it and my pristine original is unaffacted
+
+
+Classes though, are reference types.  When passing a reference type around, all you have to do is say "uh, hey, you can find this thing over there", giving it the address in memory where that object lives.  a.k.a. a pointer to the chunk of memory that has the object's properties.
+
+This means the inline representation for class instances is going to be the size of a pointer, which is going to be 8 bytes (iOS, Mac, etc), or 4 bytes (on Playdate and other embedded systems)
+</Text>
+        </Document>
+        <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
+            <Title>Compiler Knows Things</Title>
+            <Text>## Compiler knows things
+
+If the compiler has no other recourse, it'll use existential containers:
+
+func blah2(snorgles: [any Snorgle]) {
+    print("  size: \(MemoryLayout&lt;any Snorgle&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")
+}
+blah2(snorgles: [thing1, thing2])
+
+which prints out the existential container size. But notice we can pass any kind of snorgle in there.
+
+Because generics are known at compile time:
+
+func blahArray&lt;T: Snorgle&gt;(snorgles: [T]) {
+    print("  size: \(MemoryLayout&lt;T&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;T&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;T&gt;.alignment)")
+}
+
+can call with a uniform type
+blahArray(snorgles: [thing1])
+blahArray(snorgles: [thing2])
+
+and the actual sizes are known (so no dispatching through an existential container)
+</Text>
+        </Document>
+    </Documents>
 </SearchIndexes>

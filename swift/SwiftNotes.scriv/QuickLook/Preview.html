@@ -88,7 +88,205 @@
 
 <ul>
 <li>
-<p class="topLevelItemTitle">Untitled Document</p>
+<p class="topLevelItemTitle">Swift Under the Hood</p>
+<p class="itemText"># Swift under the hood</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Things like in-memory representation, existential containers, witness tables, etc.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">"you should have an intuition for what performance different language features give you"</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Benchmarking</p>
+<p class="itemText">## Benchmarking</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">I'm using some really cheesy benchmarking. It's totally non-scientific.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">But first, make sure you're optimizing.<span class="Apple-converted-space">  </span>Unoptimized Swift is a porker.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">for example</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">test-opt.swift</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">let n = 10000</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">var x = [Int](repeating: 1, count: n)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">for i in 0 ..&lt; n {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>for j in 0 ..&lt; n {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>x[i] ^= x[j] &lt;&lt; (i+j) % 16</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">print("blah: \(x[0])")</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">% swiftc<span class="Apple-converted-space">    </span>test-opt.swift -o tg</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">% swiftc -O test-opt.swift -o to</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">% time ./tg</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">blah: 14</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">26.189u 0.018s 0:26.50 98.8%<span class="Apple-converted-space">    </span>0+0k 0+0io 13pf+0w</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">% tim...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">csh time builtin output format</p>
+<p class="itemText">%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%U</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The time the process spent in user mode in cpu seconds.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%S</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The time the process spent in kernel mode in cpu seconds.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%E</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The elapsed (wall clock) time in seconds.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%P</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The CPU percentage computed as (%U + %S) / %E.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%X</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The average amount in (shared) text space used in Kbytes.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%D</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The average amount in (unshared) data/stack space used in Kbytes.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%I</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The number of input operations.</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%O</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The number of output operations.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">%F</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The number of major page faults (pa...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Arrays (part 1)</p>
+<p class="itemText">## Arrays</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In many performance-oriented languages, arrays have a particular implemention that makes them very fast for what they do.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- large contiguous chunk of memory</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- uniform size of entities</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">This allows easy "pointer plus scaled offset" for indexing.<span class="Apple-converted-space">  </span>If you know your array items are 30 bytes long, you can figure out the address in memory for the N'th item by doing baseAddress + N * 30.<span class="Apple-converted-space">  </span>makes random access really fast</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">And because arrays are in a contiguous chunka bytes, iterative scannin...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Structure Layout</p>
+<p class="itemText"># Structure Layout</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">C has pretty straightforward rules on how structures are represented in memory.<span class="Apple-converted-space">  </span>Structs defined from C will have the same size, layout, and alignment.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Does Swift do the same thing?<span class="Apple-converted-space">  </span>Pretty much</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">how to tell the size<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(layout.swift)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">MemoryLayout<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">MemoryLayout&lt;Thing1&gt;.size</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">MemoryLayout&lt;Thing1&gt;.stride</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">MemoryLayout&lt;Thing1&gt;.alignment</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">MemoryLayout&lt;Thing1&gt;.offset(of: \.aBool)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(diagram thing1 and thing2)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">struct Thing1 {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let aBool: Bool</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let anInt: Int</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let another...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Inline representation</p>
+<p class="itemText">## Inline Representation</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">the inline representation is how a particular swift Thing is, well, represented in memory. <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Specifically, when doing things like storing it in variables, passing it around from function to function, or putting things into collections.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">As we saw, the inline representation of a structure is the goodies in the structure.<span class="Apple-converted-space">  </span>I don't think it's officially documented (outside of random forum postings by Swift Core Team Members), but structs are generally laid out in memory l...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">More than a copy</p>
+<p class="itemText">## More than a copy</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">So, class instances need to be retained when used, and released when done with.<span class="Apple-converted-space">  </span>If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">When the reference count hits zero, the memory is freed.<span class="Apple-converted-space">  </span>Notice memory is freed, so that implies tha...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Arrays (part 2)</p>
+<p class="itemText">## Arrays part 2.<span class="Apple-converted-space">  </span>Moo</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">So, if you remember arrays part 1, you know that array storage is a linear chunk of stuff with the array contents laid end to end (using the _stride_ of the struct). This brings up a couple of interesting questions.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">axiom #1: Arrays are value types . Structs are passed by copy. Copying a million element array, is kind of expensive.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">So arrays are implemented as a struct (yay value type), which wraps an object (yay reference type). <span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The array points to its backing stor...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Protocols</p>
+<p class="itemText">## Protocols</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One of swift's defining features is its ability to add layers of abstraction and polymorphism via protocols.<span class="Apple-converted-space">  </span>A protocol describes some subset of functionality (say "codable" or "human biometric provider")<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">So revisit layout.swift</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">protocol Snorgle {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var anInt: Int { get }</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">/*</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var aBool: Bool { get }</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var anotherInt: Int { get }</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var anotherBool: Bool { get }</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var short: Int16 { get }</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>func x()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>func y()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>func z()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>func q()</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">*/</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">extension Thing1: Snor...</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Existential Containers</p>
+<p class="itemText">## Existential Containers</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">one pointer for the witness table</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">and not sure what the other word is for</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="topLevelItemTitle">Compiler Knows Things</p>
+<p class="itemText">## Compiler knows things</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">If the compiler has no other recourse, it'll use existential containers:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">func blah2(snorgles: [any Snorgle]) {</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>print("<span class="Apple-converted-space">  </span>size: \(MemoryLayout&lt;any Snorgle&gt;.size)")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>print("<span class="Apple-converted-space">  </span>stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>print("<span class="Apple-converted-space">  </span>alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">blah2(snorgles: [thing1, thing2])</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">which prints out the existential container size. But notice we can pass any kind of snorgle in there.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Because generics are known at compile time:...</p>
 </li>
 </ul>
 

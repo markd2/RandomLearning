@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 ## Inline Representation\
+\
+the inline representation is how a particular swift Thing is, well, represented in memory.  \
+\
+Specifically, when doing things like storing it in variables, passing it around from function to function, or putting things into collections.\
+\
+As we saw, the inline representation of a structure is the goodies in the structure.  I don't think it's officially documented (outside of random forum postings by Swift Core Team Members), but structs are generally laid out in memory like described.\
+\
+when structs are passed around, I like to use the "peel off a copy metaphor". I have this structure. I'm going to pass it to this function or I'm going to assign it to this variable.  I'm going to peel off a copy and give you that copy.  This copy I'm peeling off is the inline representation. I'll take the inline representation of my structure, duplicate it, and pass that inline representation to the function, or where the variable's storage is.  \
+\
+This is how the Value Semantics work. Because you have your own peeled-off copy, you can do whatever you want with it and my pristine original is unaffacted\
+\
+\
+Classes though, are reference types.  When passing a reference type around, all you have to do is say "uh, hey, you can find this thing over there", giving it the address in memory where that object lives.  a.k.a. a pointer to the chunk of memory that has the object's properties.\
+\
+This means the inline representation for class instances is going to be the size of a pointer, which is going to be 8 bytes (iOS, Mac, etc), or 4 bytes (on Playdate and other embedded systems)\
+}

@@ -1,11 +1,11 @@
 // swiftc -O layout.swift -o layout
 
 struct Thing1 {
-    let aBool: Bool
-    let anInt: Int
-    let anotherBool: Bool
-    let short: Int16
-    let anotherInt: Int
+    let aBool: Bool = false
+    let anInt: Int = 0
+    let anotherBool: Bool = false
+    let short: Int16 = 0 
+    let anotherInt: Int = 0
 }
 
 struct Thing2 {
@@ -39,3 +39,46 @@ print("Thing 2")
   print("  aBool offset: \(MemoryLayout<Thing2>.offset(of: \.aBool)!)")
   print("  anotherBool offset: \(MemoryLayout<Thing2>.offset(of: \.anotherBool)!)")
   print("  short offset: \(MemoryLayout<Thing2>.offset(of: \.short)!)")
+
+
+protocol Snorgle {
+    var anInt: Int { get }
+/*
+    var aBool: Bool { get }
+    var anotherInt: Int { get }
+    var anotherBool: Bool { get }
+    var short: Int16 { get }
+
+    func x()
+    func y()
+    func z()
+    func q()
+*/
+}
+
+extension Thing1: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+
+extension Thing2: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+
+let thing1 = Thing1()
+let thing2 = Thing2()
+
+let snorgle1 = thing1
+
+print("------------------------------")
+print("Snorgle")
+print("  size: \(MemoryLayout<Snorgle>.size)")
+print("  stride: \(MemoryLayout<Snorgle>.stride)")
+print("  alignment: \(MemoryLayout<Snorgle>.alignment)")
+print("  anInt offset: \(MemoryLayout<Snorgle>.offset(of: \.anInt) ?? -1)")
+print("  aBool offset: \(MemoryLayout<Snorgle>.offset(of: \.anInt) ?? -1)")
