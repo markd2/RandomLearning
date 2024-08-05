@@ -49,44 +49,56 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.0526953125e+2
-  - 2.9013671875e+2
+  - 2.0581640625e+2
+  - 4.51084872159091e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 5
       length: 3
+    - location: 35
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 5
   text: async
   formattingOptions: []
   position:
-  - 8.49375e+1
-  - 3.755234375e+2
+  - 1.36507102272727e+2
+  - 5.29561079545454e+2
   width: 7e+1
   connections:
     indexes:
     - location: 4
+      length: 1
+    - location: 17
+      length: 1
+    - location: 29
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 6
   text: await
   formattingOptions: []
   position:
-  - 2.28199573863636e+2
-  - 3.76514914772727e+2
+  - 4.25536221590909e+2
+  - 5.25737215909091e+2
   width: 7e+1
   connections:
     indexes:
     - location: 4
+      length: 1
+    - location: 18
+      length: 1
+    - location: 29
+      length: 2
+    - location: 32
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 7
   text: Task
   formattingOptions: []
   position:
-  - 1.29847301136364e+2
-  - 4.28794744318182e+2
+  - 9.35901988636364e+1
+  - 4.37594460227273e+2
   width: 7e+1
   connections:
     indexes:
@@ -101,24 +113,28 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.15473721590909e+3
-  - 3.97961647727273e+1
+  - 8.04683948863636e+2
+  - 5.03892045454546e+1
   width: 1.6e+2
   connections:
     indexes:
     - location: 9
+      length: 1
+    - location: 19
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 9
   text: Checked Continuations
   formattingOptions: []
   position:
-  - 1.12030539772727e+3
-  - 1.00783380681818e+2
+  - 9.00529119318181e+2
+  - 9.11846590909092e+1
   width: 1.6e+2
   connections:
     indexes:
     - location: 8
+      length: 1
+    - location: 21
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 10
@@ -129,20 +145,22 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.08601207386364e+3
-  - 1.95662642045455e+2
+  - 7.898046875e+2
+  - 3.47136363636364e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 11
       length: 2
+    - location: 23
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 11
   text: AsyncSequence
   formattingOptions: []
   position:
-  - 1.00270241477273e+3
-  - 2.70598721590909e+2
+  - 7.06495028409091e+2
+  - 4.22072443181818e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -153,8 +171,8 @@
   text: AsyncStream
   formattingOptions: []
   position:
-  - 1.04014204545455e+3
-  - 3.34643465909091e+2
+  - 7.43934659090909e+2
+  - 4.861171875e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -162,44 +180,50 @@
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 13
-  text: Start tasks and synchronize later one
+  text: 'Structured Concurrency: Start tasks and synchronize later one'
   fillColorRGB:
     red: 1e+0
     green: 9.0283e-1
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.32329545454545e+3
-  - 1.62349431818182e+2
+  - 1.08639204545455e+3
+  - 1.77750710227273e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 14
       length: 2
-  _effectiveHeight: 2.8e+1
+    - location: 24
+      length: 1
+  _effectiveHeight: 4.2e+1
 - ID: 14
   text: async let
   formattingOptions: []
   position:
-  - 1.33370028409091e+3
-  - 2.12722301136364e+2
+  - 1.21112215909091e+3
+  - 2.95556107954546e+2
   width: 9e+1
   connections:
     indexes:
     - location: 13
+      length: 1
+    - location: 25
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 15
   text: TaskGroups
   formattingOptions: []
   position:
-  - 1.38446022727273e+3
-  - 1.34863633636364e+2
+  - 1.12396661931818e+3
+  - 1.16404826818182e+2
   width: 9e+1
   connections:
     indexes:
     - location: 13
       length: 1
+    - location: 26
+      length: 2
   _effectiveHeight: 1.4e+1
 - ID: 16
   text: Actors
@@ -209,9 +233,309 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.22744318181818e+3
-  - 2.90300426136369e+2
+  - 1.14220525568182e+3
+  - 4.66376420454551e+2
   width: 1.6e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 28
+      length: 1
   _effectiveHeight: 1.4e+1
+- ID: 17
+  text: Indicates a method can suspend, so the app isn't blocked by long-running work
+  formattingOptions: []
+  position:
+  - 4.29509943181814e+1
+  - 5.94515625000004e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 5
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 18
+  text: point to a possible suspension point
+  formattingOptions: []
+  position:
+  - 3.221875e+2
+  - 4.06202414772731e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+    - location: 31
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 19
+  text: Continuations
+  formattingOptions: []
+  position:
+  - 6.83870738636363e+2
+  - 8.74524147727261e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+    - location: 20
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 20
+  text: Wrap delegate and callback closures
+  formattingOptions: []
+  position:
+  - 6.82723721590909e+2
+  - 1.42122159090908e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 21
+  text: a promise that async methods use to return a value in the future
+  formattingOptions: []
+  position:
+  - 8.91274857954545e+2
+  - 1.39377130681817e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 9
+      length: 1
+    - location: 22
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 22
+  text: enforce returning exactly once
+  formattingOptions: []
+  position:
+  - 8.52180397727272e+2
+  - 2.27960227272726e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 23
+  text: getting a sequence of esponses as they become available
+  formattingOptions: []
+  position:
+  - 8.86548295454545e+2
+  - 4.14323863636362e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 24
+  text: take the results of more than one asynchronous task and combine them
+  formattingOptions: []
+  position:
+  - 1.03237215909091e+3
+  - 2.71529119318179e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 25
+  text: '"we use async let for structured concurrency"'
+  formattingOptions: []
+  position:
+  - 1.11699573863636e+3
+  - 3.62324573863634e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 26
+  text: for when we don't know how many child tasks we're going to want to spawn
+  formattingOptions: []
+  position:
+  - 1.08755681818182e+3
+  - 3.25305397727267e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 15
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 27
+  text: can cancel a parent task and the child tasks get cancelled as well
+  formattingOptions: []
+  position:
+  - 1.24578835227273e+3
+  - 8.91498579545448e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 15
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 28
+  text: Protect shared mutable state from being accessed from multiple threads
+  formattingOptions: []
+  position:
+  - 1.17743607954546e+3
+  - 5.09238636363634e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 29
+  text: built around tasks and functions that can suspend and resume
+  formattingOptions: []
+  position:
+  - 2.31818181818183e+2
+  - 5.19686079545452e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 5
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 30
+  text: required when calling an async method
+  formattingOptions: []
+  position:
+  - 3.07634943181819e+2
+  - 6.01053267045452e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 31
+  text: think about what else can happen while this is suspended
+  formattingOptions: []
+  position:
+  - 4.80198863636365e+2
+  - 4.01316051136361e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 32
+  text: can only be used in an async context
+  formattingOptions: []
+  position:
+  - 5.15465198863638e+2
+  - 5.28975852272725e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+    - location: 33
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 33
+  text: in an async method
+  formattingOptions: []
+  position:
+  - 4.68377130681819e+2
+  - 5.82100852272725e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 34
+  text: or in a closure passed to a Task
+  formattingOptions: []
+  position:
+  - 5.24421164772728e+2
+  - 6.16635653409089e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 35
+  text: parallels between throws/try/do catch  and async/await/Task
+  formattingOptions: []
+  position:
+  - 2.07325994318183e+2
+  - 2.31340909090907e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+    - location: 36
+      length: 4
+  _effectiveHeight: 4.2e+1
+- ID: 36
+  text: we have to try even if a throwing method doesn't actually throw
+  formattingOptions: []
+  position:
+  - 1.14897017045456e+2
+  - 1.62839488636362e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 37
+  text: '*can* throw - so the method could result in an error, or result in something
+    being returned'
+  formattingOptions: []
+  position:
+  - 2.78082386363637e+2
+  - 1.37715198863634e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 38
+  text: do catch wraps error throwing code up in a box that hides the error from an
+    error-free world
+  formattingOptions: []
+  position:
+  - 4.45983664772728e+2
+  - 1.67054687499998e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 39
+  text: 'Summary:
+
+    - mark methods that can throw with throws
+
+    - if call one, must use try to signal we know we''re calling something that can
+    throw
+
+    - if we call with try, either handle or mark with throws
+
+    - we handle a call to a method that throws by enclosing try in a do block and
+    handling error in a catch'
+  formattingOptions: []
+  position:
+  - 3.86100852272728e+2
+  - 2.62558948863635e+2
+  width: 2.8e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 1.26e+2
