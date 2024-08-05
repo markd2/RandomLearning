@@ -1,0 +1,217 @@
+- ID: 1
+  text: ASYNC CAFE
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 10
+  position:
+  - 1.1346875e+2
+  - 7.53828125e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 2
+  text: Dan Steinberg
+  formattingOptions: []
+  position:
+  - 3.6290625e+2
+  - 7.75390625e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 3
+  text: https://editorscut.gumroad.com/l/async
+  formattingOptions: []
+  position:
+  - 1.2384375e+2
+  - 3.065625e+1
+  width: 2.2e+2
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 4
+  text: Basic elements
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 2.0526953125e+2
+  - 2.9013671875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 5
+      length: 3
+  _effectiveHeight: 1.4e+1
+- ID: 5
+  text: async
+  formattingOptions: []
+  position:
+  - 8.49375e+1
+  - 3.755234375e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 6
+  text: await
+  formattingOptions: []
+  position:
+  - 2.28199573863636e+2
+  - 3.76514914772727e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 7
+  text: Task
+  formattingOptions: []
+  position:
+  - 1.29847301136364e+2
+  - 4.28794744318182e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 8
+  text: Mechanisms
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.15473721590909e+3
+  - 3.97961647727273e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 9
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 9
+  text: Checked Continuations
+  formattingOptions: []
+  position:
+  - 1.12030539772727e+3
+  - 1.00783380681818e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 10
+  text: More than one result over time
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.08601207386364e+3
+  - 1.95662642045455e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 11
+  text: AsyncSequence
+  formattingOptions: []
+  position:
+  - 1.00270241477273e+3
+  - 2.70598721590909e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 12
+  text: AsyncStream
+  formattingOptions: []
+  position:
+  - 1.04014204545455e+3
+  - 3.34643465909091e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 13
+  text: Start tasks and synchronize later one
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.32329545454545e+3
+  - 1.62349431818182e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 14
+  text: async let
+  formattingOptions: []
+  position:
+  - 1.33370028409091e+3
+  - 2.12722301136364e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 15
+  text: TaskGroups
+  formattingOptions: []
+  position:
+  - 1.38446022727273e+3
+  - 1.34863633636364e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 16
+  text: Actors
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.22744318181818e+3
+  - 2.90300426136369e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
