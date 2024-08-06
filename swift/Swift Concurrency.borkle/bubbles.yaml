@@ -9,8 +9,8 @@
     rangeStart: 0
     rangeLength: 10
   position:
-  - 1.1346875e+2
-  - 7.53828125e+1
+  - 3.32026988636364e+2
+  - 8.51377840909091e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -21,8 +21,8 @@
   text: Dan Steinberg
   formattingOptions: []
   position:
-  - 3.12341619318182e+2
-  - 5.97940340909091e+1
+  - 5.30899857954546e+2
+  - 6.95490056818182e+1
   width: 9e+1
   connections:
     indexes:
@@ -35,8 +35,8 @@
   text: https://editorscut.gumroad.com/l/async
   formattingOptions: []
   position:
-  - 6.96427556818182e+1
-  - 2.09758522727273e+1
+  - 2.88200994318182e+2
+  - 3.07308238636363e+1
   width: 2.2e+2
   connections:
     indexes:
@@ -51,8 +51,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.0581640625e+2
-  - 4.51084872159091e+2
+  - 4.24875355113636e+2
+  - 4.60818536931818e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -65,8 +65,8 @@
   text: async
   formattingOptions: []
   position:
-  - 2.84823863636364e+2
-  - 6.91269176136364e+2
+  - 5.038828125e+2
+  - 7.01002840909091e+2
   width: 7e+1
   connections:
     indexes:
@@ -85,8 +85,8 @@
   text: await
   formattingOptions: []
   position:
-  - 4.25536221590909e+2
-  - 5.25737215909091e+2
+  - 6.44595170454545e+2
+  - 5.35470880681818e+2
   width: 7e+1
   connections:
     indexes:
@@ -105,8 +105,8 @@
   text: Task
   formattingOptions: []
   position:
-  - 6.40269886363636e+1
-  - 3.58574573863636e+2
+  - 2.830859375e+2
+  - 3.68308238636364e+2
   width: 7e+1
   connections:
     indexes:
@@ -114,6 +114,8 @@
       length: 1
     - location: 43
       length: 3
+    - location: 55
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 8
   text: Mechanisms
@@ -123,8 +125,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 8.69836647727272e+2
-  - 5.03892045454546e+1
+  - 1.0966015625e+3
+  - 6.7182528409091e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -137,8 +139,8 @@
   text: Checked Continuations
   formattingOptions: []
   position:
-  - 9.65681818181817e+2
-  - 9.11846590909092e+1
+  - 1.19244673295454e+3
+  - 1.07977982954546e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -155,8 +157,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 8.24311079545454e+2
-  - 2.99327414772727e+2
+  - 1.05107599431818e+3
+  - 3.16120738636364e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -169,8 +171,8 @@
   text: AsyncSequence
   formattingOptions: []
   position:
-  - 7.41001420454545e+2
-  - 3.74263494318182e+2
+  - 9.67766335227273e+2
+  - 3.91056818181818e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -181,8 +183,8 @@
   text: AsyncStream
   formattingOptions: []
   position:
-  - 7.78441051136364e+2
-  - 4.38308238636364e+2
+  - 1.00520596590909e+3
+  - 4.551015625e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -197,8 +199,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.15154474431818e+3
-  - 1.77750710227273e+2
+  - 1.37830965909091e+3
+  - 1.94544034090909e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -211,8 +213,8 @@
   text: async let
   formattingOptions: []
   position:
-  - 1.27627485795455e+3
-  - 2.95556107954546e+2
+  - 1.50303977272727e+3
+  - 3.12349431818182e+2
   width: 9e+1
   connections:
     indexes:
@@ -225,8 +227,8 @@
   text: TaskGroups
   formattingOptions: []
   position:
-  - 1.18911931818182e+3
-  - 1.16404826818182e+2
+  - 1.41588423295455e+3
+  - 1.33198150681818e+2
   width: 9e+1
   connections:
     indexes:
@@ -243,8 +245,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 9.39936079545455e+2
-  - 6.54547585227278e+2
+  - 1.16670099431818e+3
+  - 6.71340909090914e+2
   width: 6e+1
   connections:
     indexes:
@@ -260,8 +262,8 @@
     can do the work and come back later.
   formattingOptions: []
   position:
-  - 2.41281960227272e+2
-  - 5.18453835227277e+2
+  - 4.60340909090909e+2
+  - 5.28187500000004e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -272,8 +274,8 @@
   text: point to a possible suspension point
   formattingOptions: []
   position:
-  - 3.221875e+2
-  - 4.06202414772731e+2
+  - 5.41246448863636e+2
+  - 4.15936079545459e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -286,8 +288,8 @@
   text: Continuations
   formattingOptions: []
   position:
-  - 7.490234375e+2
-  - 8.74524147727261e+1
+  - 9.75788352272727e+2
+  - 1.04245738636362e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -300,8 +302,8 @@
   text: Wrap delegate and callback closures
   formattingOptions: []
   position:
-  - 7.47876420454545e+2
-  - 1.42122159090908e+2
+  - 9.74641335227272e+2
+  - 1.58915482954544e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -312,8 +314,8 @@
   text: a promise that async methods use to return a value in the future
   formattingOptions: []
   position:
-  - 9.56427556818181e+2
-  - 1.39377130681817e+2
+  - 1.18319247159091e+3
+  - 1.56170454545453e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -326,8 +328,8 @@
   text: enforce returning exactly once
   formattingOptions: []
   position:
-  - 9.17333096590908e+2
-  - 2.27960227272726e+2
+  - 1.14409801136364e+3
+  - 2.44753551136362e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -338,8 +340,8 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 9.21054687499999e+2
-  - 3.66514914772726e+2
+  - 1.14781960227273e+3
+  - 3.83308238636362e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -350,8 +352,8 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 1.09752485795455e+3
-  - 2.71529119318179e+2
+  - 1.32428977272727e+3
+  - 2.88322443181816e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -362,8 +364,8 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 1.1821484375e+3
-  - 3.62324573863634e+2
+  - 1.40891335227273e+3
+  - 3.7911789772727e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -374,8 +376,8 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 1.15270951704546e+3
-  - 3.25305397727267e+1
+  - 1.37947443181818e+3
+  - 4.9323863636363e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -386,8 +388,8 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 1.31094105113636e+3
-  - 8.91498579545448e+1
+  - 1.53770596590909e+3
+  - 1.05943181818181e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -398,8 +400,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 9.75166903409092e+2
-  - 6.97409801136361e+2
+  - 1.20193181818182e+3
+  - 7.14203124999998e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -410,8 +412,8 @@
   text: built around tasks and functions that can suspend and resume
   formattingOptions: []
   position:
-  - 3.47468039772728e+2
-  - 6.25314630681816e+2
+  - 5.66526988636365e+2
+  - 6.35048295454543e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -423,8 +425,8 @@
     result in execution being suspended
   formattingOptions: []
   position:
-  - 5.26324573863638e+2
-  - 6.73972301136361e+2
+  - 7.45383522727274e+2
+  - 6.83705965909089e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -435,8 +437,8 @@
   text: think about what else can happen while this is suspended
   formattingOptions: []
   position:
-  - 4.80198863636365e+2
-  - 4.01316051136361e+2
+  - 6.99257812500001e+2
+  - 4.11049715909089e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -447,8 +449,8 @@
   text: can only be used in an async context
   formattingOptions: []
   position:
-  - 5.15465198863638e+2
-  - 5.28975852272725e+2
+  - 7.34524147727274e+2
+  - 5.38709517045452e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -461,8 +463,8 @@
   text: in an async method
   formattingOptions: []
   position:
-  - 4.68377130681819e+2
-  - 5.82100852272725e+2
+  - 6.87436079545456e+2
+  - 5.91834517045452e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -473,8 +475,8 @@
   text: or in a closure passed to a Task
   formattingOptions: []
   position:
-  - 5.24421164772728e+2
-  - 6.16635653409089e+2
+  - 7.43480113636365e+2
+  - 6.26369318181816e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -485,8 +487,8 @@
   text: parallels between throws/try/do catch  and async/await/Task
   formattingOptions: []
   position:
-  - 2.07325994318183e+2
-  - 2.31340909090907e+2
+  - 4.26384943181819e+2
+  - 2.41074573863634e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -499,8 +501,8 @@
   text: we have to try even if a throwing method doesn't actually throw
   formattingOptions: []
   position:
-  - 8.2482244318183e+1
-  - 1.5492755681818e+2
+  - 3.01541193181819e+2
+  - 1.64661221590907e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -512,8 +514,8 @@
     being returned'
   formattingOptions: []
   position:
-  - 2.66487926136365e+2
-  - 1.44046874999998e+2
+  - 4.85546875000001e+2
+  - 1.53780539772725e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -525,8 +527,8 @@
     error-free world
   formattingOptions: []
   position:
-  - 4.45983664772728e+2
-  - 1.67054687499998e+2
+  - 6.65042613636365e+2
+  - 1.77122159090907e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -547,8 +549,8 @@
     handling error in a catch'
   formattingOptions: []
   position:
-  - 3.86100852272728e+2
-  - 2.62558948863635e+2
+  - 6.05159801136365e+2
+  - 2.72292613636362e+2
   width: 2.8e+2
   connections:
     indexes:
@@ -559,8 +561,8 @@
   text: parallel to throws
   formattingOptions: []
   position:
-  - 1.67855113636364e+2
-  - 6.11980113636364e+2
+  - 3.869140625e+2
+  - 6.21713778409091e+2
   width: 1e+2
   connections:
     indexes:
@@ -571,8 +573,8 @@
   text: our "beware, this could take a while" sign
   formattingOptions: []
   position:
-  - 2.40774147727273e+2
-  - 7.43436079545458e+2
+  - 4.59833096590909e+2
+  - 7.53169744318186e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -583,8 +585,8 @@
   text: parallel to try
   formattingOptions: []
   position:
-  - 4.75845170454545e+2
-  - 4.79533380681822e+2
+  - 6.94904119318182e+2
+  - 4.89267045454549e+2
   width: 8e+1
   connections:
     indexes:
@@ -595,8 +597,8 @@
   text: analogous to wrapping a try in a do block
   formattingOptions: []
   position:
-  - 1.87393465909091e+1
-  - 2.75861505681822e+2
+  - 2.37798295454545e+2
+  - 2.85595170454549e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -607,8 +609,8 @@
   text: inherits the actor context
   formattingOptions: []
   position:
-  - 2.32421875e+1
-  - 4.12914062500004e+2
+  - 2.42301136363636e+2
+  - 4.22647727272731e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -619,8 +621,8 @@
   text: operation closure implicitly captures self
   formattingOptions: []
   position:
-  - 1.76640622272727e+2
-  - 3.57033380681822e+2
+  - 3.95699571136364e+2
+  - 3.66767045454549e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -633,8 +635,8 @@
   text: can specify a [weak self] for a detatched task
   formattingOptions: []
   position:
-  - 1.48117897727273e+2
-  - 3.09927556818186e+2
+  - 3.67176846590909e+2
+  - 3.19661221590913e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -645,8 +647,8 @@
   text: pollutes the calling chain until hitting a Task (marking methods red)
   formattingOptions: []
   position:
-  - 1.08224431818182e+2
-  - 6.8419957386364e+2
+  - 3.27283380681818e+2
+  - 6.93933238636368e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -657,8 +659,8 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 9.04790482954546e+2
-  - 6.09313210227282e+2
+  - 1.13155539772727e+3
+  - 6.26106534090919e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -669,8 +671,8 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 8.71058238636364e+2
-  - 7.00701704545464e+2
+  - 1.09782315340909e+3
+  - 7.174950284091e+2
   width: 9e+1
   connections:
     indexes:
@@ -683,8 +685,8 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 8.42837357954546e+2
-  - 7.50573863636373e+2
+  - 1.06960227272727e+3
+  - 7.67367187500009e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -695,8 +697,8 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 1.07299360795455e+3
-  - 6.57264204545464e+2
+  - 1.29975852272727e+3
+  - 6.740575284091e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -711,8 +713,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 4.62571022727273e+2
-  - 2.81697443181923e+1
+  - 6.81629971590909e+2
+  - 3.79034090909196e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -724,8 +726,8 @@
     to a swiftui button?
   formattingOptions: []
   position:
-  - 5.5e+2
-  - 6.43558238636469e+1
+  - 7.68558238636364e+2
+  - 7.4110795454556e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -736,11 +738,49 @@
   text: rules the universe
   formattingOptions: []
   position:
-  - 3.32666903409091e+2
-  - 9.87556818181923e+1
+  - 5.51225142045454e+2
+  - 1.08510653409101e+2
   width: 1.1e+2
   connections:
     indexes:
     - location: 2
       length: 1
   _effectiveHeight: 1.4e+1
+- ID: 55
+  text: Task is broken into subunits - PartialAsyncTasks at each suspension point
+    and at the completion of the task
+  formattingOptions: []
+  position:
+  - 7.47265625e+1
+  - 3.23780539772739e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 7
+      length: 1
+    - location: 56
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 56
+  text: can thik of a new one of these each time see an await
+  formattingOptions: []
+  position:
+  - 4.15980113636363e+1
+  - 2.53297585227283e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 55
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 57
+  text: if we're inside an async methods, somewhere up the calltree we're being run
+    in a Task
+  formattingOptions: []
+  position:
+  - 8.02201704545454e+1
+  - 4.41067471590919e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 5.6e+1
