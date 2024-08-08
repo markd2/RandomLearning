@@ -60,13 +60,17 @@
       length: 3
     - location: 35
       length: 1
+    - location: 63
+      length: 1
+    - location: 67
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 5
   text: async
   formattingOptions: []
   position:
-  - 5.038828125e+2
-  - 7.01002840909091e+2
+  - 5.36105823863636e+2
+  - 7.02000710227272e+2
   width: 7e+1
   connections:
     indexes:
@@ -79,6 +83,8 @@
     - location: 40
       length: 2
     - location: 47
+      length: 1
+    - location: 60
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 6
@@ -419,14 +425,16 @@
     indexes:
     - location: 5
       length: 2
+    - location: 58
+      length: 1
   _effectiveHeight: 4.2e+1
 - ID: 30
   text: required when calling an async method. indicates that we know that this can
     result in execution being suspended
   formattingOptions: []
   position:
-  - 7.45383522727274e+2
-  - 6.83705965909089e+2
+  - 7.97666903409092e+2
+  - 6.8051349431818e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -549,8 +557,8 @@
     handling error in a catch'
   formattingOptions: []
   position:
-  - 6.05159801136365e+2
-  - 2.72292613636362e+2
+  - 6.17073863636365e+2
+  - 2.49977272727271e+2
   width: 2.8e+2
   connections:
     indexes:
@@ -561,8 +569,8 @@
   text: parallel to throws
   formattingOptions: []
   position:
-  - 3.869140625e+2
-  - 6.21713778409091e+2
+  - 4.10696022727273e+2
+  - 6.46994318181818e+2
   width: 1e+2
   connections:
     indexes:
@@ -573,8 +581,8 @@
   text: our "beware, this could take a while" sign
   formattingOptions: []
   position:
-  - 4.59833096590909e+2
-  - 7.53169744318186e+2
+  - 5.27787642045454e+2
+  - 8.09146306818186e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -644,12 +652,12 @@
       length: 1
   _effectiveHeight: 2.8e+1
 - ID: 47
-  text: pollutes the calling chain until hitting a Task (marking methods red)
+  text: pollutes the calling chain until hitting a Task (marking methods blue)
   formattingOptions: []
   position:
-  - 3.27283380681818e+2
-  - 6.93933238636368e+2
-  width: 1.6e+2
+  - 3.54463778409091e+2
+  - 7.00172585227277e+2
+  width: 1.4e+2
   connections:
     indexes:
     - location: 5
@@ -784,3 +792,226 @@
   connections:
     indexes: []
   _effectiveHeight: 5.6e+1
+- ID: 58
+  text: if both exist, async comes first in the signature. "this is an async function
+    that happens to throw"
+  formattingOptions: []
+  position:
+  - 6.22769886363636e+2
+  - 7.10414062500003e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+    - location: 59
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 59
+  text: 'At the call site, it''s reversed, try await blah(), '
+  formattingOptions: []
+  position:
+  - 7.28061079545454e+2
+  - 8.06028409090905e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 58
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 60
+  text: 'and computed propertes:
+
+    the async has to be put on the _get_ block directly, not on the top-level. e.g.
+
+
+    var blah: String { get async { ... } }'
+  formattingOptions: []
+  position:
+  - 3.61164772727273e+2
+  - 7.76688920454533e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 5
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 61
+  text: Stylishness
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 8.07599431818182e+1
+  - 8.43877840908905e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 62
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 62
+  text: 'Put the await (as well as the try) as close as possible to the thing that
+    needs it.  e.g.
+
+    blah = oop + (await ack)'
+  formattingOptions: []
+  position:
+  - 6.02095170454545e+1
+  - 1.51401278409072e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 63
+  text: Testing (XCTest)
+  formattingOptions: []
+  position:
+  - 2.75745738636364e+2
+  - 4.82285511363618e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+    - location: 64
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 64
+  text: tests can marked async, so they'll automatically be run in a Task context.
+  formattingOptions: []
+  position:
+  - 2.18618607954545e+2
+  - 5.19313210227254e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 63
+      length: 1
+    - location: 65
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 65
+  text: 'lets us get rid of :alot: of the expectation / fulfil expectation / wait
+    boilerplate.'
+  formattingOptions: []
+  position:
+  - 3.48792613636363e+1
+  - 5.28649147727254e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 64
+      length: 1
+    - location: 66
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 66
+  text: though we lose setting a timeout on something that might take forever
+  formattingOptions: []
+  position:
+  - 1.0234375e+1
+  - 6.06575284090891e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 67
+  text: Let's be careful out there
+  formattingOptions: []
+  position:
+  - 2.39208096590909e+2
+  - 6.07434659090894e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+    - location: 68
+      length: 1
+    - location: 71
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 68
+  text: in seemingly simple and "easy to read and understand" code, there's still
+    a lot going on in a few lines
+  formattingOptions: []
+  position:
+  - 5.64133522727272e+1
+  - 6.68400568181809e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 67
+      length: 1
+    - location: 69
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 69
+  text: odd things can happen on opposite sides of a suspension point
+  formattingOptions: []
+  position:
+  - 6.95703125e+1
+  - 7.59366477272718e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 68
+      length: 1
+    - location: 70
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 70
+  text: need to be careful that we know what to pack away to use later
+  formattingOptions: []
+  position:
+  - 3.63955965909091e+1
+  - 8.23908380681808e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 69
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 71
+  text: When using tasks, we might get an unexpected order of returns
+  formattingOptions: []
+  position:
+  - 2.365625e+2
+  - 6.91422585227263e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 67
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 72
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.88022017045455e+2
+  - 9.17640624999982e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 73
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.82713068181818e+2
+  - 1.22727840909089e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 72
+      length: 1
+  _effectiveHeight: 1.4e+1
