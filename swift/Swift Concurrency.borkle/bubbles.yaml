@@ -131,8 +131,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.0966015625e+3
-  - 6.7182528409091e+1
+  - 1.19594815340909e+3
+  - 1.66159801136364e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -140,19 +140,25 @@
       length: 1
     - location: 19
       length: 1
+    - location: 74
+      length: 1
+    - location: 78
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 9
   text: Checked Continuations
   formattingOptions: []
   position:
-  - 1.19244673295454e+3
-  - 1.07977982954546e+2
+  - 1.37866832386364e+3
+  - 2.42477272727273e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 8
       length: 1
     - location: 21
+      length: 1
+    - location: 79
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 10
@@ -163,8 +169,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.05107599431818e+3
-  - 3.16120738636364e+2
+  - 1.85720880681818e+3
+  - 2.52402698863636e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -177,8 +183,8 @@
   text: AsyncSequence
   formattingOptions: []
   position:
-  - 9.67766335227273e+2
-  - 3.91056818181818e+2
+  - 1.77389914772727e+3
+  - 3.27448863636364e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -189,8 +195,8 @@
   text: AsyncStream
   formattingOptions: []
   position:
-  - 1.00520596590909e+3
-  - 4.551015625e+2
+  - 1.81133877840909e+3
+  - 3.91493607954546e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -205,8 +211,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.37830965909091e+3
-  - 1.94544034090909e+2
+  - 2.18444247159091e+3
+  - 1.30825994318182e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -219,8 +225,8 @@
   text: async let
   formattingOptions: []
   position:
-  - 1.50303977272727e+3
-  - 3.12349431818182e+2
+  - 2.30917258522728e+3
+  - 2.48631392045455e+2
   width: 9e+1
   connections:
     indexes:
@@ -233,8 +239,8 @@
   text: TaskGroups
   formattingOptions: []
   position:
-  - 1.41588423295455e+3
-  - 1.33198150681818e+2
+  - 2.22258877840909e+3
+  - 6.81484347727275e+1
   width: 9e+1
   connections:
     indexes:
@@ -251,8 +257,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.16670099431818e+3
-  - 6.71340909090914e+2
+  - 1.97283380681818e+3
+  - 6.0773295454546e+2
   width: 6e+1
   connections:
     indexes:
@@ -294,22 +300,24 @@
   text: Continuations
   formattingOptions: []
   position:
-  - 9.75788352272727e+2
-  - 1.04245738636362e+2
-  width: 1.6e+2
+  - 1.00670099431818e+3
+  - 2.23347301136362e+2
+  width: 9e+1
   connections:
     indexes:
     - location: 8
       length: 1
     - location: 20
       length: 1
+    - location: 75
+      length: 3
   _effectiveHeight: 1.4e+1
 - ID: 20
   text: Wrap delegate and callback closures
   formattingOptions: []
   position:
-  - 9.74641335227272e+2
-  - 1.58915482954544e+2
+  - 9.83902698863636e+2
+  - 1.30694602272726e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -320,8 +328,8 @@
   text: a promise that async methods use to return a value in the future
   formattingOptions: []
   position:
-  - 1.18319247159091e+3
-  - 1.56170454545453e+2
+  - 1.39388139204545e+3
+  - 1.54274147727272e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -334,8 +342,8 @@
   text: enforce returning exactly once
   formattingOptions: []
   position:
-  - 1.14409801136364e+3
-  - 2.44753551136362e+2
+  - 1.39510298295454e+3
+  - 6.94303977272716e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -346,8 +354,8 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 1.14781960227273e+3
-  - 3.83308238636362e+2
+  - 1.95395241477273e+3
+  - 3.19700284090908e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -358,8 +366,8 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 1.32428977272727e+3
-  - 2.88322443181816e+2
+  - 2.13042258522728e+3
+  - 2.24604403409088e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -370,8 +378,8 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 1.40891335227273e+3
-  - 3.7911789772727e+2
+  - 2.21504616477273e+3
+  - 3.15399857954543e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -382,8 +390,8 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 1.37947443181818e+3
-  - 4.9323863636363e+1
+  - 2.18560724431818e+3
+  - -1.43941761363643e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -394,8 +402,8 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 1.53770596590909e+3
-  - 1.05943181818181e+2
+  - 2.34383877840909e+3
+  - 4.22251420454539e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -406,8 +414,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 1.20193181818182e+3
-  - 7.14203124999998e+2
+  - 2.00806463068182e+3
+  - 6.50595170454543e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -667,8 +675,8 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 1.13155539772727e+3
-  - 6.26106534090919e+2
+  - 1.93768821022727e+3
+  - 5.62498579545464e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -679,8 +687,8 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 1.09782315340909e+3
-  - 7.174950284091e+2
+  - 1.90395596590909e+3
+  - 6.53887073863646e+2
   width: 9e+1
   connections:
     indexes:
@@ -693,8 +701,8 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 1.06960227272727e+3
-  - 7.67367187500009e+2
+  - 1.87573508522727e+3
+  - 7.03759232954555e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -705,8 +713,8 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 1.29975852272727e+3
-  - 6.740575284091e+2
+  - 2.10589133522727e+3
+  - 6.10449573863646e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -995,7 +1003,7 @@
   text: ''
   formattingOptions: []
   position:
-  - 9.88022017045455e+2
+  - 9.90603693181818e+2
   - 9.17640624999982e+2
   width: 1.6e+2
   connections:
@@ -1007,11 +1015,89 @@
   text: ''
   formattingOptions: []
   position:
-  - 9.82713068181818e+2
+  - 9.85294744318182e+2
   - 1.22727840909089e+3
   width: 1.6e+2
   connections:
     indexes:
     - location: 72
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 74
+  text: 'reminder that
+
+    - any mehod labeled async can be suspended
+
+    - anytime you see await, you know that''s a possible suspension point'
+  formattingOptions: []
+  position:
+  - 1.15188210227273e+3
+  - 3.17918997727275e+1
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 75
+  text: the part after the work that's being awaited
+  formattingOptions: []
+  position:
+  - 9.65834517045454e+2
+  - 2.65406956590909e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 76
+  text: when we return from the method that we're awaiting, the next steps are the
+    continuation
+  formattingOptions: []
+  position:
+  - 9.90458096590909e+2
+  - 3.31889204545455e+2
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 77
+  text: can think of it as a proxy object that will be filled in later with the right
+    value
+  formattingOptions: []
+  position:
+  - 1.14613991477273e+3
+  - 2.22716619318181e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 78
+  text: Checked Throwing Continuations
+  formattingOptions: []
+  position:
+  - 1.38087002840909e+3
+  - 3.33934659090908e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 79
+  text: generic with <T, Never>
+  formattingOptions: []
+  position:
+  - 1.46540838068182e+3
+  - 2.82485795454544e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 9
       length: 1
   _effectiveHeight: 1.4e+1
