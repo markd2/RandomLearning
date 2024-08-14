@@ -67,10 +67,14 @@
   _effectiveHeight: 1.4e+1
 - ID: 5
   text: async
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 5.36105823863636e+2
-  - 7.02000710227272e+2
+  - 5.36212357954545e+2
+  - 7.01365056818182e+2
   width: 7e+1
   connections:
     indexes:
@@ -89,10 +93,14 @@
   _effectiveHeight: 1.4e+1
 - ID: 6
   text: await
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 6.44595170454545e+2
-  - 5.35470880681818e+2
+  - 6.44453125e+2
+  - 5.31063920454545e+2
   width: 7e+1
   connections:
     indexes:
@@ -109,10 +117,14 @@
   _effectiveHeight: 1.4e+1
 - ID: 7
   text: Task
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.830859375e+2
-  - 3.68308238636364e+2
+  - 2.83192471590909e+2
+  - 3.67672585227273e+2
   width: 7e+1
   connections:
     indexes:
@@ -131,8 +143,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.19594815340909e+3
-  - 1.66159801136364e+2
+  - 1.25864346590909e+3
+  - 1.81756392045455e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -144,13 +156,21 @@
       length: 1
     - location: 78
       length: 1
+    - location: 83
+      length: 1
+    - location: 92
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 9
   text: Checked Continuations
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.37866832386364e+3
-  - 2.42477272727273e+2
+  - 1.44199928977273e+3
+  - 2.57750710227273e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -169,7 +189,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.85720880681818e+3
+  - 1.96038352272727e+3
   - 2.52402698863636e+2
   width: 1.6e+2
   connections:
@@ -183,7 +203,7 @@
   text: AsyncSequence
   formattingOptions: []
   position:
-  - 1.77389914772727e+3
+  - 1.87707386363636e+3
   - 3.27448863636364e+2
   width: 1.2e+2
   connections:
@@ -195,7 +215,7 @@
   text: AsyncStream
   formattingOptions: []
   position:
-  - 1.81133877840909e+3
+  - 1.91451349431818e+3
   - 3.91493607954546e+2
   width: 1.2e+2
   connections:
@@ -211,7 +231,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.18444247159091e+3
+  - 2.2876171875e+3
   - 1.30825994318182e+2
   width: 1.6e+2
   connections:
@@ -225,7 +245,7 @@
   text: async let
   formattingOptions: []
   position:
-  - 2.30917258522728e+3
+  - 2.41234730113636e+3
   - 2.48631392045455e+2
   width: 9e+1
   connections:
@@ -239,7 +259,7 @@
   text: TaskGroups
   formattingOptions: []
   position:
-  - 2.22258877840909e+3
+  - 2.32576349431818e+3
   - 6.81484347727275e+1
   width: 9e+1
   connections:
@@ -257,7 +277,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.97283380681818e+3
+  - 2.07600852272727e+3
   - 6.0773295454546e+2
   width: 6e+1
   connections:
@@ -267,6 +287,8 @@
     - location: 48
       length: 2
     - location: 51
+      length: 1
+    - location: 91
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 17
@@ -298,10 +320,14 @@
   _effectiveHeight: 2.8e+1
 - ID: 19
   text: Continuations
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.00670099431818e+3
-  - 2.23347301136362e+2
+  - 1.15740411931818e+3
+  - 1.98702414772726e+2
   width: 9e+1
   connections:
     indexes:
@@ -311,13 +337,15 @@
       length: 1
     - location: 75
       length: 3
+    - location: 80
+      length: 3
   _effectiveHeight: 1.4e+1
 - ID: 20
   text: Wrap delegate and callback closures
   formattingOptions: []
   position:
-  - 9.83902698863636e+2
-  - 1.30694602272726e+2
+  - 1.04575284090909e+3
+  - 1.28879971590908e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -328,8 +356,8 @@
   text: a promise that async methods use to return a value in the future
   formattingOptions: []
   position:
-  - 1.39388139204545e+3
-  - 1.54274147727272e+2
+  - 1.45657670454545e+3
+  - 1.69870738636362e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -342,8 +370,8 @@
   text: enforce returning exactly once
   formattingOptions: []
   position:
-  - 1.39510298295454e+3
-  - 6.94303977272716e+1
+  - 1.45779829545454e+3
+  - 8.50269886363625e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -354,7 +382,7 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 1.95395241477273e+3
+  - 2.05712713068182e+3
   - 3.19700284090908e+2
   width: 1.6e+2
   connections:
@@ -366,7 +394,7 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 2.13042258522728e+3
+  - 2.23359730113636e+3
   - 2.24604403409088e+2
   width: 1.6e+2
   connections:
@@ -378,7 +406,7 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 2.21504616477273e+3
+  - 2.31822088068182e+3
   - 3.15399857954543e+2
   width: 1.6e+2
   connections:
@@ -390,8 +418,8 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 2.18560724431818e+3
-  - -1.43941761363643e+1
+  - 2.28167613636364e+3
+  - 1.01654829545448e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -402,7 +430,7 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 2.34383877840909e+3
+  - 2.44701349431818e+3
   - 4.22251420454539e+1
   width: 1.6e+2
   connections:
@@ -414,7 +442,7 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 2.00806463068182e+3
+  - 2.11123934659091e+3
   - 6.50595170454543e+2
   width: 1.6e+2
   connections:
@@ -501,10 +529,14 @@
   _effectiveHeight: 2.8e+1
 - ID: 35
   text: parallels between throws/try/do catch  and async/await/Task
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 4.26384943181819e+2
-  - 2.41074573863634e+2
+  - 4.24907670454546e+2
+  - 2.43499999999998e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -613,8 +645,8 @@
   text: analogous to wrapping a try in a do block
   formattingOptions: []
   position:
-  - 2.37798295454545e+2
-  - 2.85595170454549e+2
+  - 2.39992897727273e+2
+  - 2.78688210227277e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -675,7 +707,7 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 1.93768821022727e+3
+  - 2.04086292613636e+3
   - 5.62498579545464e+2
   width: 1.9e+2
   connections:
@@ -687,7 +719,7 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 1.90395596590909e+3
+  - 2.00713068181818e+3
   - 6.53887073863646e+2
   width: 9e+1
   connections:
@@ -701,7 +733,7 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 1.87573508522727e+3
+  - 1.97890980113636e+3
   - 7.03759232954555e+2
   width: 1.6e+2
   connections:
@@ -713,7 +745,7 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 2.10589133522727e+3
+  - 2.20906605113636e+3
   - 6.10449573863646e+2
   width: 1.6e+2
   connections:
@@ -778,11 +810,11 @@
       length: 1
   _effectiveHeight: 5.6e+1
 - ID: 56
-  text: can thik of a new one of these each time see an await
+  text: can think of a new one of these each time see an await
   formattingOptions: []
   position:
   - 4.15980113636363e+1
-  - 2.53297585227283e+2
+  - 2.52977982954556e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -877,10 +909,14 @@
   _effectiveHeight: 5.6e+1
 - ID: 63
   text: Testing (XCTest)
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.75745738636364e+2
-  - 4.82285511363618e+2
+  - 2.75852272727273e+2
+  - 4.81649857954527e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -932,10 +968,14 @@
   _effectiveHeight: 4.2e+1
 - ID: 67
   text: Let's be careful out there
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.39208096590909e+2
-  - 6.07434659090894e+2
+  - 2.39314630681818e+2
+  - 6.06799005681804e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1031,8 +1071,8 @@
     - anytime you see await, you know that''s a possible suspension point'
   formattingOptions: []
   position:
-  - 1.15188210227273e+3
-  - 3.17918997727275e+1
+  - 1.21457741477273e+3
+  - 4.73884906818184e+1
   width: 1.9e+2
   connections:
     indexes:
@@ -1043,8 +1083,8 @@
   text: the part after the work that's being awaited
   formattingOptions: []
   position:
-  - 9.65834517045454e+2
-  - 2.65406956590909e+2
+  - 1.020703125e+3
+  - 2.89991473636364e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1056,8 +1096,8 @@
     continuation
   formattingOptions: []
   position:
-  - 9.90458096590909e+2
-  - 3.31889204545455e+2
+  - 1.05315340909091e+3
+  - 3.47485795454546e+2
   width: 1.8e+2
   connections:
     indexes:
@@ -1069,8 +1109,8 @@
     value
   formattingOptions: []
   position:
-  - 1.14613991477273e+3
-  - 2.22716619318181e+2
+  - 1.20883522727273e+3
+  - 2.38313210227272e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -1079,25 +1119,260 @@
   _effectiveHeight: 4.2e+1
 - ID: 78
   text: Checked Throwing Continuations
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.38087002840909e+3
-  - 3.33934659090908e+2
+  - 1.18528764204545e+3
+  - 4.87464488636363e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 8
       length: 1
+    - location: 88
+      length: 3
   _effectiveHeight: 2.8e+1
 - ID: 79
   text: generic with <T, Never>
   formattingOptions: []
   position:
-  - 1.46540838068182e+3
-  - 2.82485795454544e+2
+  - 1.52810369318182e+3
+  - 2.98082386363635e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 9
       length: 1
   _effectiveHeight: 1.4e+1
+- ID: 80
+  text: MUST return exactly once
+  formattingOptions: []
+  position:
+  - 1.19305752840909e+3
+  - 3.12526985e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 81
+  text: it hangs on to the calling function name so it can log it when errors happen
+  formattingOptions: []
+  position:
+  - 9.82911931818182e+2
+  - 1.73714488636363e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 82
+  text: no problem returning Void or tuples
+  formattingOptions: []
+  position:
+  - 9.62411221590909e+2
+  - 2.33571019090906e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 83
+  text: Unsafe Continuations
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.50461292613636e+3
+  - 3.41026278409089e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+    - location: 84
+      length: 2
+    - location: 87
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 84
+  text: Doesn't log if there's a continuation problem
+  formattingOptions: []
+  position:
+  - 1.56290482954545e+3
+  - 3.94952411136364e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 85
+  text: Can get some unspeciied performance increase
+  formattingOptions: []
+  position:
+  - 1.43928267045455e+3
+  - 4.95113636363637e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+    - location: 86
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 86
+  text: but yeah, you shouldn't use this
+  formattingOptions: []
+  position:
+  - 1.52605823863636e+3
+  - 5.56036931818182e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 85
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 87
+  text: Dies at the top of the app if there's a double-resume
+  formattingOptions: []
+  position:
+  - 1.52473011363636e+3
+  - 4.4209872159091e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 88
+  text: Adding a non-Never type to a continuation property makes it throwing
+  formattingOptions: []
+  position:
+  - 1.06524857954545e+3
+  - 4.20401278409092e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 89
+  text: use withCheckedThrowingContinuation
+  formattingOptions: []
+  position:
+  - 9.84946732954536e+2
+  - 5.43604403409095e+2
+  width: 2e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 90
+  text: resume(with:) takes a Result type (so we can avoid calling resume(throwing:)
+    in a different code branch
+  formattingOptions: []
+  position:
+  - 1.22859019886364e+3
+  - 5.61832386363646e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 91
+  text: 'await MainActor.run { ... }
+
+    for running stuff on main thread'
+  formattingOptions: []
+  position:
+  - 1.83060724431817e+3
+  - 5.91188206590909e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 92
+  text: Migrating from closures
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.34475852272726e+3
+  - 6.49620028409091e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+    - location: 93
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 93
+  text: 'Strategy 1: modify the closure-based version to call the async version'
+  formattingOptions: []
+  position:
+  - 1.23705610795453e+3
+  - 6.94850852272728e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 92
+      length: 1
+    - location: 95
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 94
+  text: 'Strategy 2:'
+  formattingOptions: []
+  position:
+  - 1.42814985795453e+3
+  - 6.92507102272728e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 92
+      length: 1
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 95
+  text: "signatures of old closure-based and new async-based\n    func selectRandomNumber(with
+    completion: \n             @escaping (Int, Bool) -> Void) {\n    \n    func randomNumber()
+    async (Int, Bool) {\n"
+  formattingOptions: []
+  position:
+  - 1.03300071022726e+3
+  - 7.64154829545476e+2
+  width: 3e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 96
+  text: wrap the closure based version in an async version
+  formattingOptions: []
+  position:
+  - 1.44438565340907e+3
+  - 7.25841619318198e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 94
+      length: 1
+  _effectiveHeight: 2.8e+1
