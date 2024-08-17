@@ -191,8 +191,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.96038352272727e+3
-  - 2.52402698863636e+2
+  - 1.97687781359265e+3
+  - 2.50734429632867e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -200,30 +200,54 @@
       length: 2
     - location: 23
       length: 1
+    - location: 100
+      length: 1
+    - location: 102
+      length: 1
+    - location: 106
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 11
   text: AsyncSequence
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.87707386363636e+3
-  - 3.27448863636364e+2
+  - 1.84870637565559e+3
+  - 2.34293214597903e+2
   width: 1.2e+2
   connections:
     indexes:
     - location: 10
       length: 1
+    - location: 12
+      length: 1
+    - location: 99
+      length: 1
+    - location: 113
+      length: 2
   _effectiveHeight: 1.4e+1
 - ID: 12
-  text: AsyncStream
+  text: AsyncStream<T>
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.91451349431818e+3
-  - 3.91493607954546e+2
+  - 1.9511520159528e+3
+  - 4.543866368007e+2
   width: 1.2e+2
   connections:
     indexes:
     - location: 10
+      length: 2
+    - location: 98
       length: 1
+    - location: 108
+      length: 4
   _effectiveHeight: 1.4e+1
 - ID: 13
   text: 'Structured Concurrency: Start tasks and synchronize later one'
@@ -233,7 +257,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.2876171875e+3
+  - 3.19728515625e+3
   - 1.30825994318182e+2
   width: 1.6e+2
   connections:
@@ -247,7 +271,7 @@
   text: async let
   formattingOptions: []
   position:
-  - 2.41234730113636e+3
+  - 3.32201526988636e+3
   - 2.48631392045455e+2
   width: 9e+1
   connections:
@@ -261,7 +285,7 @@
   text: TaskGroups
   formattingOptions: []
   position:
-  - 2.32576349431818e+3
+  - 3.23543146306818e+3
   - 6.81484347727275e+1
   width: 9e+1
   connections:
@@ -279,7 +303,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.07600852272727e+3
+  - 2.98567649147727e+3
   - 6.0773295454546e+2
   width: 6e+1
   connections:
@@ -384,8 +408,8 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 2.05712713068182e+3
-  - 3.19700284090908e+2
+  - 1.94068872923951e+3
+  - 1.51824082167831e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -396,7 +420,7 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 2.23359730113636e+3
+  - 3.14326526988636e+3
   - 2.24604403409088e+2
   width: 1.6e+2
   connections:
@@ -408,7 +432,7 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 2.31822088068182e+3
+  - 3.22788884943182e+3
   - 3.15399857954543e+2
   width: 1.6e+2
   connections:
@@ -420,7 +444,7 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 2.28167613636364e+3
+  - 3.19134410511364e+3
   - 1.01654829545448e+1
   width: 1.6e+2
   connections:
@@ -432,7 +456,7 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 2.44701349431818e+3
+  - 3.35668146306818e+3
   - 4.22251420454539e+1
   width: 1.6e+2
   connections:
@@ -444,7 +468,7 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 2.11123934659091e+3
+  - 3.02090731534091e+3
   - 6.50595170454543e+2
   width: 1.6e+2
   connections:
@@ -709,7 +733,7 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 2.04086292613636e+3
+  - 2.95053089488636e+3
   - 5.62498579545464e+2
   width: 1.9e+2
   connections:
@@ -721,7 +745,7 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 2.00713068181818e+3
+  - 2.91679865056818e+3
   - 6.53887073863646e+2
   width: 9e+1
   connections:
@@ -735,7 +759,7 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 1.97890980113636e+3
+  - 2.88857776988636e+3
   - 7.03759232954555e+2
   width: 1.6e+2
   connections:
@@ -747,7 +771,7 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 2.20906605113636e+3
+  - 3.11873401988636e+3
   - 6.10449573863646e+2
   width: 1.6e+2
   connections:
@@ -1298,7 +1322,7 @@
     for running stuff on main thread'
   formattingOptions: []
   position:
-  - 1.83060724431817e+3
+  - 2.74027521306817e+3
   - 5.91188206590909e+2
   width: 1.6e+2
   connections:
@@ -1390,3 +1414,240 @@
     - location: 8
       length: 1
   _effectiveHeight: 4.2e+1
+- ID: 98
+  text: 'Concrete implementation of
+
+    AsyncSequence'
+  formattingOptions: []
+  position:
+  - 1.78239182692309e+3
+  - 4.11670072115391e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 99
+  text: can transform with filter and map
+  formattingOptions: []
+  position:
+  - 1.73334735576924e+3
+  - 1.85864783653852e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 100
+  text: AsyncAlgorithms
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.12712740384616e+3
+  - 1.28232572115391e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 101
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 101
+  text: non-standard-library package of additional goodies
+  formattingOptions: []
+  position:
+  - 2.13968149038462e+3
+  - 6.35811298076987e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 100
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 102
+  text: (NS)Notifications as one of the driving examples
+  formattingOptions: []
+  position:
+  - 2.16972055288464e+3
+  - 1.84064903846187e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 103
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 103
+  text: strategy for communicating asynchronously
+  formattingOptions: []
+  position:
+  - 2.35917067307694e+3
+  - 1.74470552884649e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 102
+      length: 1
+    - location: 104
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 104
+  text: unlike delegate, neither party knows aboot the other
+  formattingOptions: []
+  position:
+  - 2.39197115384617e+3
+  - 2.27171875000034e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 103
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 105
+  text: '"hey, something happened, maybe here''s an informational payload'
+  formattingOptions: []
+  position:
+  - 2.3637590144231e+3
+  - 9.12103365384974e+1
+  width: 1.5e+2
+  connections:
+    indexes:
+    - location: 103
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 106
+  text: because it can be zero, one, or many, it requires a different approach than
+    seen in prior chapters
+  formattingOptions: []
+  position:
+  - 2.16454326923079e+3
+  - 2.48764423076959e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 107
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 107
+  text: e.g. CheckedContinuation requires being resumed once and only once
+  formattingOptions: []
+  position:
+  - 2.35455829326925e+3
+  - 2.81216346153882e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 106
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 108
+  text: requires a type of what it's async streaming
+  formattingOptions: []
+  position:
+  - 1.7659044471154e+3
+  - 4.64128004807728e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 109
+  text: '"Picture it as a stream that gently flows by on a beautiful sunny day. Every
+    once in a while an Int floats by on an innertube'
+  formattingOptions: []
+  position:
+  - 1.90334435096155e+3
+  - 5.42607572115421e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 110
+  text: to make a stored property, specify the type of elements, and a continuation(closure)
+  formattingOptions: []
+  position:
+  - 2.05411057692309e+3
+  - 5.02379206730805e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+    - location: 112
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 111
+  text: AsyncStream.Continuation - designed to return zero, one, or more values
+  formattingOptions: []
+  position:
+  - 2.10554086538463e+3
+  - 4.38259615384652e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 112
+  text: continuation.yield(value) is what kicks off the innertube
+  formattingOptions: []
+  position:
+  - 2.09374098557694e+3
+  - 5.75909855769267e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 110
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 113
+  text: A Sequence that can deliver values over time
+  formattingOptions: []
+  position:
+  - 1.76682992788463e+3
+  - 1.22868990384652e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 114
+  text: for await blah in someSequence
+  formattingOptions: []
+  position:
+  - 1.73556790865386e+3
+  - 2.71688100961575e+2
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+    - location: 115
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 115
+  text: a great use is need to listen to changes to a subscription or something else
+    that we need to kep alive the whole time the app is running
+  formattingOptions: []
+  position:
+  - 1.73627403846155e+3
+  - 3.10281850961575e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 114
+      length: 1
+  _effectiveHeight: 7e+1
