@@ -2100,6 +2100,8 @@
     indexes:
     - location: 10
       length: 1
+    - location: 146
+      length: 2
   _effectiveHeight: 2.8e+1
 - ID: 146
   text: transforms (e.g. map, filter) on Sequences preserve the fundamental sequence
@@ -2110,5 +2112,47 @@
   - 8.62274038461615e+2
   width: 1.8e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 145
+      length: 1
   _effectiveHeight: 8.4e+1
+- ID: 147
+  text: there are methods like (compact)map, filter, etc on AsyncSequences
+  formattingOptions:
+  - options: 1
+    rangeStart: 6
+    rangeLength: 3
+  position:
+  - 1.93442692683317e+3
+  - 9.70091045673164e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 145
+      length: 1
+    - location: 148
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 148
+  text: but behave more like the Combine(RIP) counterparts by mutating in stages,
+    creating a cascadingly complex set of nested types
+  formattingOptions: []
+  position:
+  - 1.75080186110301e+3
+  - 9.83397742638308e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 147
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 149
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.03197183462314e+3
+  - 1.06932204965453e+3
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
