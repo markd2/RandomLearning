@@ -1085,8 +1085,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 9.90603693181818e+2
-  - 9.17640624999982e+2
+  - 1.05104258290538e+3
+  - 1.65985772705076e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1097,8 +1097,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 9.85294744318182e+2
-  - 1.22727840909089e+3
+  - 1.04573363404174e+3
+  - 1.96949551114167e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2145,14 +2145,185 @@
     indexes:
     - location: 147
       length: 1
+    - location: 150
+      length: 1
   _effectiveHeight: 7e+1
 - ID: 149
   text: ''
   formattingOptions: []
   position:
-  - 2.03197183462314e+3
-  - 1.06932204965453e+3
+  - 2.29946582500775e+3
+  - 1.05212253042376e+3
   width: 1.6e+2
   connections:
     indexes: []
   _effectiveHeight: 1.4e+1
+- ID: 150
+  text: Speaking of Combine...
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 1.92112079326947e+3
+  - 1.07198557692316e+3
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 148
+      length: 1
+    - location: 151
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 151
+  text: 'With @Published var count = 0
+
+
+    (e.g.) $count is a publisher.  Every time count changes, $count (the publisher
+    associated with count) will publish its value if anyone is listening.  Also, first-time-callers
+    get the existing value'
+  formattingOptions: []
+  position:
+  - 1.74146033653871e+3
+  - 1.12640264423086e+3
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 150
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 152
+  text: 'convert a combine publisher to an async sequence using .values
+
+    e.g.
+
+    IntPublisher.share.$count.values'
+  formattingOptions: []
+  position:
+  - 1.99763178898763e+3
+  - 1.14152739070022e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 150
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 153
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.12754178560722e+3
+  - 1.05667171536974e+3
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 154
+  text: Making a custom async sequence
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.78727196326658e+3
+  - 1.37526508976883e+3
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 155
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 155
+  text: kinda gnarly
+  formattingOptions: []
+  position:
+  - 1.780094393217e+3
+  - 1.34180636831451e+3
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 154
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 156
+  text: adopt AsyncSequence protocol
+  formattingOptions: []
+  position:
+  - 1.77462644136904e+3
+  - 1.43330417104889e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 154
+      length: 1
+    - location: 157
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 157
+  text: typealias Element = Blah
+  formattingOptions: []
+  position:
+  - 1.71718637319747e+3
+  - 1.49555636831451e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 156
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 158
+  text: func makeAsyncIterator() -> TheIteratorType
+  formattingOptions: []
+  position:
+  - 1.89049307016261e+3
+  - 1.49488657789985e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 156
+      length: 1
+    - location: 159
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 159
+  text: AsyncSequence doesn't type erase the return type (so it exposes all sorts
+    of implementation details.  yay).  That's what we need to return
+  formattingOptions: []
+  position:
+  - 1.74389831543004e+3
+  - 1.54748925781271e+3
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 158
+      length: 1
+    - location: 161
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 160
+  text: make a typealias of the oogly type and use that as TheIteratorType
+  formattingOptions: []
+  position:
+  - 1.96396991436336e+3
+  - 1.55315533916788e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 158
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 161
+  text: Can figure out the type by assigning to a temp, then querying in the editor
+    for the type. Copy and paste that. And hope you never have to edit the pipeline
+  formattingOptions: []
+  position:
+  - 1.75350027231108e+3
+  - 1.63590107609696e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 159
+      length: 1
+  _effectiveHeight: 8.4e+1
