@@ -51,7 +51,7 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 4.24875355113636e+2
+  - 4.33075475305944e+2
   - 4.60818536931818e+2
   width: 1.6e+2
   connections:
@@ -134,6 +134,8 @@
       length: 3
     - location: 55
       length: 1
+    - location: 125
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 8
   text: Mechanisms
@@ -191,8 +193,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.97687781359265e+3
-  - 2.50734429632867e+2
+  - 1.97484656359266e+3
+  - 3.92071569055944e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -206,6 +208,10 @@
       length: 1
     - location: 106
       length: 1
+    - location: 120
+      length: 2
+    - location: 145
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 11
   text: AsyncSequence
@@ -215,8 +221,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.84870637565559e+3
-  - 2.34293214597903e+2
+  - 1.8539377458479e+3
+  - 3.20639368444056e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -228,6 +234,8 @@
       length: 1
     - location: 113
       length: 2
+    - location: 119
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 12
   text: AsyncStream<T>
@@ -237,8 +245,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.9511520159528e+3
-  - 4.543866368007e+2
+  - 1.9563833861451e+3
+  - 5.40732790646854e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -315,6 +323,12 @@
     - location: 51
       length: 1
     - location: 91
+      length: 1
+    - location: 126
+      length: 1
+    - location: 128
+      length: 1
+    - location: 136
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 17
@@ -408,8 +422,8 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 1.94068872923951e+3
-  - 1.51824082167831e+2
+  - 1.94592009943182e+3
+  - 2.38170236013985e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -468,8 +482,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 3.02090731534091e+3
-  - 6.50595170454543e+2
+  - 3.04613568072552e+3
+  - 7.42425098339158e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -561,8 +575,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 4.24907670454546e+2
-  - 2.43499999999998e+2
+  - 4.28895050262238e+2
+  - 2.43310697115383e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -671,14 +685,14 @@
   text: analogous to wrapping a try in a do block
   formattingOptions: []
   position:
-  - 2.39992897727273e+2
-  - 2.78688210227277e+2
-  width: 1.6e+2
+  - 2.40807200611888e+2
+  - 2.95893739073431e+2
+  width: 1.2e+2
   connections:
     indexes:
     - location: 7
       length: 1
-  _effectiveHeight: 2.8e+1
+  _effectiveHeight: 4.2e+1
 - ID: 44
   text: inherits the actor context
   formattingOptions: []
@@ -709,9 +723,9 @@
   text: can specify a [weak self] for a detatched task
   formattingOptions: []
   position:
-  - 3.67176846590909e+2
-  - 3.19661221590913e+2
-  width: 1.6e+2
+  - 3.72537423513986e+2
+  - 3.13122760052451e+2
+  width: 1.4e+2
   connections:
     indexes:
     - location: 45
@@ -733,8 +747,8 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 2.95053089488636e+3
-  - 5.62498579545464e+2
+  - 2.94494195257867e+3
+  - 5.41987762237772e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -753,6 +767,8 @@
     - location: 16
       length: 1
     - location: 50
+      length: 1
+    - location: 127
       length: 1
   _effectiveHeight: 2.8e+1
 - ID: 50
@@ -1420,8 +1436,8 @@
     AsyncSequence'
   formattingOptions: []
   position:
-  - 1.78239182692309e+3
-  - 4.11670072115391e+2
+  - 1.78762319711539e+3
+  - 4.98016225961545e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1432,8 +1448,8 @@
   text: can transform with filter and map
   formattingOptions: []
   position:
-  - 1.73334735576924e+3
-  - 1.85864783653852e+2
+  - 1.73857872596155e+3
+  - 2.72210937500006e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -1448,8 +1464,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.12712740384616e+3
-  - 1.28232572115391e+2
+  - 2.13235877403847e+3
+  - 2.14578725961545e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1462,8 +1478,8 @@
   text: non-standard-library package of additional goodies
   formattingOptions: []
   position:
-  - 2.13968149038462e+3
-  - 6.35811298076987e+1
+  - 2.14491286057693e+3
+  - 1.49927283653853e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1474,8 +1490,8 @@
   text: (NS)Notifications as one of the driving examples
   formattingOptions: []
   position:
-  - 2.16972055288464e+3
-  - 1.84064903846187e+2
+  - 2.17495192307694e+3
+  - 2.70411057692341e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1483,13 +1499,15 @@
       length: 1
     - location: 103
       length: 1
+    - location: 116
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 103
   text: strategy for communicating asynchronously
   formattingOptions: []
   position:
-  - 2.35917067307694e+3
-  - 1.74470552884649e+2
+  - 2.36440204326925e+3
+  - 2.60816706730803e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1502,8 +1520,8 @@
   text: unlike delegate, neither party knows aboot the other
   formattingOptions: []
   position:
-  - 2.39197115384617e+3
-  - 2.27171875000034e+2
+  - 2.39720252403848e+3
+  - 3.13518028846187e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1514,8 +1532,8 @@
   text: '"hey, something happened, maybe here''s an informational payload'
   formattingOptions: []
   position:
-  - 2.3637590144231e+3
-  - 9.12103365384974e+1
+  - 2.43765324519233e+3
+  - 1.99176081730805e+2
   width: 1.5e+2
   connections:
     indexes:
@@ -1527,8 +1545,8 @@
     seen in prior chapters
   formattingOptions: []
   position:
-  - 2.16454326923079e+3
-  - 2.48764423076959e+2
+  - 2.17565504807694e+3
+  - 3.47865985576959e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1541,8 +1559,8 @@
   text: e.g. CheckedContinuation requires being resumed once and only once
   formattingOptions: []
   position:
-  - 2.35455829326925e+3
-  - 2.81216346153882e+2
+  - 2.35997896634618e+3
+  - 3.82637620192344e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1553,8 +1571,8 @@
   text: requires a type of what it's async streaming
   formattingOptions: []
   position:
-  - 1.7659044471154e+3
-  - 4.64128004807728e+2
+  - 1.77113581730771e+3
+  - 5.50474158653882e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1566,8 +1584,8 @@
     once in a while an Int floats by on an innertube'
   formattingOptions: []
   position:
-  - 1.90334435096155e+3
-  - 5.42607572115421e+2
+  - 1.77379807692309e+3
+  - 6.18566105769267e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1578,8 +1596,8 @@
   text: to make a stored property, specify the type of elements, and a continuation(closure)
   formattingOptions: []
   position:
-  - 2.05411057692309e+3
-  - 5.02379206730805e+2
+  - 1.93857572115386e+3
+  - 5.97234975961575e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1592,8 +1610,8 @@
   text: AsyncStream.Continuation - designed to return zero, one, or more values
   formattingOptions: []
   position:
-  - 2.10554086538463e+3
-  - 4.38259615384652e+2
+  - 1.94177584134617e+3
+  - 6.75732572115421e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1604,8 +1622,8 @@
   text: continuation.yield(value) is what kicks off the innertube
   formattingOptions: []
   position:
-  - 2.09374098557694e+3
-  - 5.75909855769267e+2
+  - 1.76754206730771e+3
+  - 7.20456129807728e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1616,8 +1634,8 @@
   text: A Sequence that can deliver values over time
   formattingOptions: []
   position:
-  - 1.76682992788463e+3
-  - 1.22868990384652e+2
+  - 1.72636117788463e+3
+  - 2.2179927884619e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1628,8 +1646,8 @@
   text: for await blah in someSequence
   formattingOptions: []
   position:
-  - 1.73556790865386e+3
-  - 2.71688100961575e+2
+  - 1.74079927884617e+3
+  - 3.58034254807728e+2
   width: 1.8e+2
   connections:
     indexes:
@@ -1643,11 +1661,454 @@
     that we need to kep alive the whole time the app is running
   formattingOptions: []
   position:
-  - 1.73627403846155e+3
-  - 3.10281850961575e+2
+  - 1.74150540865386e+3
+  - 3.96628004807728e+2
   width: 1.7e+2
   connections:
     indexes:
     - location: 114
       length: 1
   _effectiveHeight: 7e+1
+- ID: 116
+  text: notifications(), can think of as an AsyncSequence<Notification>
+  formattingOptions: []
+  position:
+  - 2.34342548076925e+3
+  - 1.57048677884652e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 102
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 117
+  text: Non-sendable type 'Notification?' returned by implicitly asynchronous call
+    to nonisolated function cannot cross actor boundary %-)
+  formattingOptions: []
+  position:
+  - 2.31993389423078e+3
+  - 5.35924879807727e+2
+  width: 2e+2
+  connections:
+    indexes:
+    - location: 121
+      length: 1
+    - location: 124
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 118
+  text: "for in loop is equivalent to this\n\nlet ints = [0, 1, 2, 3, 4]\nvar iterator
+    = ints.makeIterator()\nwhile let int = iterator.next() {\n    print(int)\n}"
+  formattingOptions: []
+  position:
+  - 1.98476562500002e+3
+  - 1.54471153846504e+1
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 119
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 119
+  text: 'Much like Sequence:
+
+    * specify Element type
+
+    * has an AsyncIterator that defines async next() returning Element?'
+  formattingOptions: []
+  position:
+  - 1.81729867788463e+3
+  - 1.41808293269266e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+    - location: 118
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 120
+  text: Sendable
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.25217247596155e+3
+  - 7.80149639423111e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 131
+      length: 2
+    - location: 141
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 121
+  text: Main Actor
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.1258263221154e+3
+  - 4.43358774038498e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 117
+      length: 1
+    - location: 122
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 122
+  text: 'Can think of the main actor as the Cafe area where customers sit.
+
+    Staff behave differently in front of customers than when are behind closed doors'
+  formattingOptions: []
+  position:
+  - 2.22063401442309e+3
+  - 4.49918269230805e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 121
+      length: 1
+    - location: 123
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 123
+  text: staff moves constantly between the two worlds
+  formattingOptions: []
+  position:
+  - 2.44356370192309e+3
+  - 4.57856971153882e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 122
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 124
+  text: was caused by the loop being in a @MainActor, which is different from where
+    the notificaitons originated from
+  formattingOptions: []
+  position:
+  - 2.45107872596155e+3
+  - 6.14909254807725e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 117
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 125
+  text: 'can do Task { @MainActor in
+
+    to shunt to main actor'
+  formattingOptions: []
+  position:
+  - 2.20288461538454e+2
+  - 2.42246995192341e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 7
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 126
+  text: '"the job of an actor is to resstrict access to shared mutable state"'
+  formattingOptions: []
+  position:
+  - 3.12089543269223e+3
+  - 6.78710336538495e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 127
+  text: await MainActor.run { }
+  formattingOptions: []
+  position:
+  - 2.72230168269225e+3
+  - 6.6295612980773e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 49
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 128
+  text: isolation
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.79225360576919e+3
+  - 5.14740985576961e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 129
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 129
+  text: something isolated must run on the actor that it is connected to
+  formattingOptions: []
+  position:
+  - 2.67531249999996e+3
+  - 4.42613581730807e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 130
+  text: something non-isolated can run on or off the actor, but doesn't have acess
+    to the isolated parts of the actor without taking extra steps
+  formattingOptions: []
+  position:
+  - 2.87118389423073e+3
+  - 4.30161658653884e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 131
+  text: think in terms of let/var
+  formattingOptions: []
+  position:
+  - 2.15570913461542e+3
+  - 7.30302884615422e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 120
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 132
+  text: A type is Sendable if it is safe for us to send a copy to a different concurrency
+    world
+  formattingOptions: []
+  position:
+  - 2.23283954326927e+3
+  - 6.29302283653883e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 120
+      length: 1
+    - location: 133
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 133
+  text: Notification isn't sendable b/c it's a reference type
+  formattingOptions: []
+  position:
+  - 2.3298978365385e+3
+  - 7.08055288461575e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 132
+      length: 1
+    - location: 134
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 134
+  text: and the info dictionary can have ANYTHING in it
+  formattingOptions: []
+  position:
+  - 2.4703455528847e+3
+  - 7.08884615384663e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 133
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 135
+  text: Actors help out with the reference type problem
+  formattingOptions: []
+  position:
+  - 2.32637620192317e+3
+  - 7.73974759615436e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 133
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 136
+  text: Actors are Sendable
+  formattingOptions: []
+  position:
+  - 3.06240084134614e+3
+  - 5.69984375000052e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 137
+  text: 'a class can be sendable if it consists of immutable data.
+
+    Though tricky if it has properties that are reference types'
+  formattingOptions: []
+  position:
+  - 2.32735576923089e+3
+  - 9.40900841346201e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 138
+      length: 1
+    - location: 141
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 138
+  text: immutable data all the way down
+  formattingOptions: []
+  position:
+  - 2.39575420673089e+3
+  - 8.42823918269278e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 137
+      length: 1
+    - location: 139
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 139
+  text: guess that implies the turtles are immutable
+  formattingOptions: []
+  position:
+  - 2.47482572115397e+3
+  - 8.89461538461585e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 138
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 140
+  text: a class can also be sedable if access to its internal state is synchronized
+    (queues/locks/etc)
+  formattingOptions: []
+  position:
+  - 2.19307091346166e+3
+  - 8.68923677884662e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 141
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 141
+  text: classes
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.32101562500012e+3
+  - 8.30726562500047e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 120
+      length: 1
+    - location: 137
+      length: 1
+    - location: 140
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 142
+  text: structs
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.14717548076935e+3
+  - 8.10534254807739e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 120
+      length: 1
+    - location: 143
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 143
+  text: structs must only have Sendable members and associated values
+  formattingOptions: []
+  position:
+  - 1.94905649038479e+3
+  - 7.95747596153916e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 142
+      length: 1
+    - location: 144
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 144
+  text: containing value types helps satisfy this
+  formattingOptions: []
+  position:
+  - 1.79201322115402e+3
+  - 7.9225000000007e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 143
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 145
+  text: transforming AsyncSequences
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.98319411057711e+3
+  - 9.03827524038537e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 146
+  text: transforms (e.g. map, filter) on Sequences preserve the fundamental sequence
+    type. Starts as an Array<SomeType> ends as an Array<PossiblyAnotherType>
+  formattingOptions: []
+  position:
+  - 1.7404387019233e+3
+  - 8.62274038461615e+2
+  width: 1.8e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 8.4e+1
