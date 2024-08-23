@@ -2215,14 +2215,24 @@
       length: 1
   _effectiveHeight: 8.4e+1
 - ID: 153
-  text: ''
+  text: Async Algorithms
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.12754178560722e+3
-  - 1.05667171536974e+3
-  width: 1.6e+2
+  - 2.20596125676107e+3
+  - 1.59675284517745e+3
+  width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 172
+      length: 4
+    - location: 177
+      length: 1
+    - location: 179
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 154
   text: Making a custom async sequence
@@ -2232,8 +2242,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.78727196326658e+3
-  - 1.37526508976883e+3
+  - 1.7729660738435e+3
+  - 1.30508780611498e+3
   width: 1.2e+2
   connections:
     indexes:
@@ -2244,8 +2254,8 @@
   text: kinda gnarly
   formattingOptions: []
   position:
-  - 1.780094393217e+3
-  - 1.34180636831451e+3
+  - 1.76597179706316e+3
+  - 1.27162908466067e+3
   width: 8e+1
   connections:
     indexes:
@@ -2256,8 +2266,8 @@
   text: adopt AsyncSequence protocol
   formattingOptions: []
   position:
-  - 1.77462644136904e+3
-  - 1.43330417104889e+3
+  - 1.7605038452152e+3
+  - 1.36312688739504e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2270,8 +2280,8 @@
   text: typealias Element = Blah
   formattingOptions: []
   position:
-  - 1.71718637319747e+3
-  - 1.49555636831451e+3
+  - 1.70306377704362e+3
+  - 1.42537908466067e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2282,8 +2292,8 @@
   text: func makeAsyncIterator() -> TheIteratorType
   formattingOptions: []
   position:
-  - 1.89049307016261e+3
-  - 1.49488657789985e+3
+  - 1.87637047400877e+3
+  - 1.424709294246e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2297,8 +2307,8 @@
     of implementation details.  yay).  That's what we need to return
   formattingOptions: []
   position:
-  - 1.74389831543004e+3
-  - 1.54748925781271e+3
+  - 1.7297757192762e+3
+  - 1.47731197415887e+3
   width: 1.8e+2
   connections:
     indexes:
@@ -2311,8 +2321,8 @@
   text: make a typealias of the oogly type and use that as TheIteratorType
   formattingOptions: []
   position:
-  - 1.96396991436336e+3
-  - 1.55315533916788e+3
+  - 1.95875056340182e+3
+  - 1.3521306997448e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2324,8 +2334,8 @@
     for the type. Copy and paste that. And hope you never have to edit the pipeline
   formattingOptions: []
   position:
-  - 1.75350027231108e+3
-  - 1.63590107609696e+3
+  - 1.73937767615723e+3
+  - 1.56572379244312e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2396,8 +2406,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 2.03980769230818e+3
-  - 1.40157692307715e+3
+  - 2.41232572115433e+3
+  - 1.60854206730792e+3
   width: 1.6e+2
   connections:
     indexes: []
@@ -2463,3 +2473,127 @@
     - location: 13
       length: 1
   _effectiveHeight: 2.8e+1
+- ID: 172
+  text: Standard Library has some of the usual toys (dropFirst, map, filter, etc),
+    but not things like debounce/throttle which can be really useful for time-oriented
+    streams
+  formattingOptions: []
+  position:
+  - 2.00009615384678e+3
+  - 1.53575661057722e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 173
+  text: 'AsyncAlgorithms has things like
+
+    time: debounce, throttle
+
+    combining: zip, merge, cobineLatest
+
+    utilties: compacted, removeDuplicates, interspersed'
+  formattingOptions: []
+  position:
+  - 2.18088641826985e+3
+  - 1.49912800480799e+3
+  width: 2.9e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 174
+  text: AsyncTimerSequence - fires after a specified duration
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 18
+  position:
+  - 1.98289362980836e+3
+  - 1.64574459134646e+3
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 175
+  text: merge - two sequences with the same type, combined into a single sequence
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 5
+  position:
+  - 2.06396935096221e+3
+  - 1.69626742788493e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+    - location: 176
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 176
+  text: result of merge is AsyncMerge2Sequence (two streams) or AsyncMerg3Sequence
+    (three streams)
+  formattingOptions: []
+  position:
+  - 2.00989182692374e+3
+  - 1.76727403846185e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 175
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 177
+  text: 'Throttle: adjust the rate elements are being emitted by a sequence'
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 10
+  position:
+  - 2.21793569711605e+3
+  - 1.77273377403877e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+    - location: 178
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 178
+  text: '"hey, I need two seconds to recover from the previous stream value" - extra
+    ones generated in the mean time are dropped on the floor, only keeping the last
+    one'
+  formattingOptions: []
+  position:
+  - 2.18193209134682e+3
+  - 1.86341887019262e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 177
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 179
+  text: zip - pairs up elements in two sequences.  one sequence may have to wait on
+    the other to emit its value
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 3
+  position:
+  - 2.26560396634682e+3
+  - 1.65544411057724e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 5.6e+1
