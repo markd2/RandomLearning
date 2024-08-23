@@ -274,6 +274,8 @@
       length: 2
     - location: 24
       length: 1
+    - location: 171
+      length: 1
   _effectiveHeight: 4.2e+1
 - ID: 14
   text: async let
@@ -2149,15 +2151,18 @@
       length: 1
   _effectiveHeight: 7e+1
 - ID: 149
-  text: ''
+  text: Taking our own values and putting them into an AsyncStream, consumable in
+    a for await in loop
   formattingOptions: []
   position:
-  - 2.29946582500775e+3
-  - 1.05212253042376e+3
+  - 2.42399106539237e+3
+  - 1.05059608811607e+3
   width: 1.6e+2
   connections:
-    indexes: []
-  _effectiveHeight: 1.4e+1
+    indexes:
+    - location: 162
+      length: 1
+  _effectiveHeight: 5.6e+1
 - ID: 150
   text: Speaking of Combine...
   fillColorRGB:
@@ -2201,8 +2206,8 @@
     IntPublisher.share.$count.values'
   formattingOptions: []
   position:
-  - 1.99763178898763e+3
-  - 1.14152739070022e+3
+  - 1.95551039475686e+3
+  - 1.17378400127714e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2327,3 +2332,134 @@
     - location: 159
       length: 1
   _effectiveHeight: 8.4e+1
+- ID: 162
+  text: Async (Throwing) Stream Continuations
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.43344050480808e+3
+  - 1.19897475961555e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 149
+      length: 1
+    - location: 163
+      length: 3
+    - location: 170
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 163
+  text: there's an .inTermination closure can set to know when the stream ends
+  formattingOptions: []
+  position:
+  - 2.23188100961587e+3
+  - 1.08560336538484e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 162
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 164
+  text: "private var continuation: AsyncStream<Entry>.Continuation?\n\nlazy private(set)
+    var entries =\nAsyncStream(Entry.self) { continuation in\n    self.continuation
+    = continuation\n}\n\n// publish with\ncontinuation?.yield(Entry(number: count))\n"
+  formattingOptions: []
+  position:
+  - 2.16259014423125e+3
+  - 1.15349699519253e+3
+  width: 2.3e+2
+  connections:
+    indexes:
+    - location: 162
+      length: 1
+  _effectiveHeight: 1.54e+2
+- ID: 165
+  text: Can be terminated from the consuming end or the producing end
+  formattingOptions: []
+  position:
+  - 2.44452824519279e+3
+  - 1.24219891826946e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 162
+      length: 1
+    - location: 167
+      length: 3
+  _effectiveHeight: 4.2e+1
+- ID: 166
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.03980769230818e+3
+  - 1.40157692307715e+3
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 167
+  text: know via .onTermination on the continuation
+  formattingOptions: []
+  position:
+  - 2.47271334134664e+3
+  - 1.31145973557716e+3
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 165
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 168
+  text: breaking out of the for async in loop does not trigger
+  formattingOptions: []
+  position:
+  - 2.42553185096202e+3
+  - 1.36857211538485e+3
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 165
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 169
+  text: explicitly doing finish() on the continuation does
+  formattingOptions: []
+  position:
+  - 2.47111177884664e+3
+  - 1.44243629807716e+3
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 165
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 170
+  text: callig finish() on the continuation causes the iterator next() value to retur
+    nil, and so break out of the for async in loop
+  formattingOptions: []
+  position:
+  - 2.23444711538514e+3
+  - 1.34600600961568e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 162
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 171
+  text: 'Unstructured Concurrency: spinning up a bunch of tasks'
+  formattingOptions: []
+  position:
+  - 3.01771334134658e+3
+  - 1.0511658653874e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 2.8e+1
