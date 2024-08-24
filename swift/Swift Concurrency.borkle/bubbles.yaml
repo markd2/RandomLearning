@@ -145,8 +145,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.25864346590909e+3
-  - 1.81756392045455e+2
+  - 3.63535292832156e+2
+  - 1.12254365166085e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -173,8 +173,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.44199928977273e+3
-  - 2.57750710227273e+2
+  - 5.46891116695796e+2
+  - 1.19853796984267e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -193,8 +193,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 1.97484656359266e+3
-  - 3.92071569055944e+2
+  - 1.22225040974649e+3
+  - 3.93297530594404e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -221,8 +221,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.8539377458479e+3
-  - 3.20639368444056e+2
+  - 1.10134159200173e+3
+  - 3.21865329982517e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -245,8 +245,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.9563833861451e+3
-  - 5.40732790646854e+2
+  - 1.20378723229894e+3
+  - 5.41958752185314e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -265,8 +265,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 3.19728515625e+3
-  - 1.30825994318182e+2
+  - 2.18262770432704e+3
+  - 1.45868061625873e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -281,8 +281,8 @@
   text: async let
   formattingOptions: []
   position:
-  - 3.32201526988636e+3
-  - 2.48631392045455e+2
+  - 2.30640829873263e+3
+  - 2.63673459353146e+2
   width: 9e+1
   connections:
     indexes:
@@ -295,8 +295,8 @@
   text: TaskGroups
   formattingOptions: []
   position:
-  - 3.23543146306818e+3
-  - 6.81484347727275e+1
+  - 2.21982449191445e+3
+  - 8.31905020804181e+1
   width: 9e+1
   connections:
     indexes:
@@ -313,8 +313,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.98567649147727e+3
-  - 6.0773295454546e+2
+  - 3.04006952032342e+3
+  - 1.84650021853156e+2
   width: 6e+1
   connections:
     indexes:
@@ -368,8 +368,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.15740411931818e+3
-  - 1.98702414772726e+2
+  - 2.62295946241246e+2
+  - 1.13948967438812e+3
   width: 9e+1
   connections:
     indexes:
@@ -386,8 +386,8 @@
   text: Wrap delegate and callback closures
   formattingOptions: []
   position:
-  - 1.04575284090909e+3
-  - 1.28879971590908e+2
+  - 1.50644667832156e+2
+  - 1.06966723120631e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -398,8 +398,8 @@
   text: a promise that async methods use to return a value in the future
   formattingOptions: []
   position:
-  - 1.45657670454545e+3
-  - 1.69870738636362e+2
+  - 5.61468531468516e+2
+  - 1.11065799825176e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -412,8 +412,8 @@
   text: enforce returning exactly once
   formattingOptions: []
   position:
-  - 1.45779829545454e+3
-  - 8.50269886363625e+1
+  - 5.62690122377606e+2
+  - 1.02581424825176e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -424,8 +424,8 @@
   text: getting a sequence of esponses as they become available
   formattingOptions: []
   position:
-  - 1.94592009943182e+3
-  - 2.38170236013985e+2
+  - 1.19332394558565e+3
+  - 2.39396197552445e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -436,8 +436,8 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 3.14326526988636e+3
-  - 2.24604403409088e+2
+  - 2.12765829873263e+3
+  - 2.39646470716779e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -448,8 +448,8 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 3.22788884943182e+3
-  - 3.15399857954543e+2
+  - 2.21228187827809e+3
+  - 3.30441925262234e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -460,8 +460,8 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 3.19134410511364e+3
-  - 1.01654829545448e+1
+  - 2.17573713395991e+3
+  - 2.52075502622354e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -472,8 +472,8 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 3.35668146306818e+3
-  - 4.22251420454539e+1
+  - 2.34107449191445e+3
+  - 5.72672093531444e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -484,8 +484,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 3.04613568072552e+3
-  - 7.42425098339158e+2
+  - 3.10052870957168e+3
+  - 3.19342165646854e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -749,8 +749,8 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 2.94494195257867e+3
-  - 5.41987762237772e+2
+  - 2.99933498142482e+3
+  - 1.18904829545468e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -761,8 +761,8 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 2.91679865056818e+3
-  - 6.53887073863646e+2
+  - 2.97119167941433e+3
+  - 2.30804141171342e+2
   width: 9e+1
   connections:
     indexes:
@@ -777,8 +777,8 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 2.88857776988636e+3
-  - 7.03759232954555e+2
+  - 2.94297079873251e+3
+  - 2.80676300262251e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -789,8 +789,8 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 3.11873401988636e+3
-  - 6.10449573863646e+2
+  - 3.17312704873251e+3
+  - 1.87366641171342e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1087,8 +1087,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 1.05104258290538e+3
-  - 1.65985772705076e+3
+  - 1.03183284732845e+3
+  - 1.74700015493538e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1115,8 +1115,8 @@
     - anytime you see await, you know that''s a possible suspension point'
   formattingOptions: []
   position:
-  - 1.21457741477273e+3
-  - 4.73884906818184e+1
+  - 3.19469241695796e+2
+  - 9.88175750297217e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1127,8 +1127,8 @@
   text: the part after the work that's being awaited
   formattingOptions: []
   position:
-  - 1.020703125e+3
-  - 2.89991473636364e+2
+  - 1.25594951923066e+2
+  - 1.23077873325176e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1140,8 +1140,8 @@
     continuation
   formattingOptions: []
   position:
-  - 1.05315340909091e+3
-  - 3.47485795454546e+2
+  - 1.58045236013976e+2
+  - 1.28827305506994e+3
   width: 1.8e+2
   connections:
     indexes:
@@ -1153,8 +1153,8 @@
     value
   formattingOptions: []
   position:
-  - 1.20883522727273e+3
-  - 2.38313210227272e+2
+  - 3.13727054195796e+2
+  - 1.17890515734267e+3
   width: 1.4e+2
   connections:
     indexes:
@@ -1169,8 +1169,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.18528764204545e+3
-  - 4.87464488636363e+2
+  - 2.90179468968516e+2
+  - 1.42825174825176e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1183,8 +1183,8 @@
   text: generic with <T, Never>
   formattingOptions: []
   position:
-  - 1.52810369318182e+3
-  - 2.98082386363635e+2
+  - 6.32995520104886e+2
+  - 1.23886964597903e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1195,8 +1195,8 @@
   text: MUST return exactly once
   formattingOptions: []
   position:
-  - 1.19305752840909e+3
-  - 3.12526985e+2
+  - 2.97949355332156e+2
+  - 1.2533142446154e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1207,8 +1207,8 @@
   text: it hangs on to the calling function name so it can log it when errors happen
   formattingOptions: []
   position:
-  - 9.82911931818182e+2
-  - 1.73714488636363e+2
+  - 8.7803758741248e+1
+  - 1.11450174825176e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1219,8 +1219,8 @@
   text: no problem returning Void or tuples
   formattingOptions: []
   position:
-  - 9.62411221590909e+2
-  - 2.33571019090906e+2
+  - 6.7303048513975e+1
+  - 1.1743582787063e+3
   width: 1.2e+2
   connections:
     indexes:
@@ -1235,8 +1235,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.50461292613636e+3
-  - 3.41026278409089e+2
+  - 6.09504753059426e+2
+  - 1.28181353802449e+3
   width: 1.3e+2
   connections:
     indexes:
@@ -1251,8 +1251,8 @@
   text: Doesn't log if there's a continuation problem
   formattingOptions: []
   position:
-  - 1.56290482954545e+3
-  - 3.94952411136364e+2
+  - 6.67796656468516e+2
+  - 1.33573967075176e+3
   width: 1.3e+2
   connections:
     indexes:
@@ -1263,8 +1263,8 @@
   text: Can get some unspeciied performance increase
   formattingOptions: []
   position:
-  - 1.43928267045455e+3
-  - 4.95113636363637e+2
+  - 5.44174497377616e+2
+  - 1.43590089597904e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1277,8 +1277,8 @@
   text: but yeah, you shouldn't use this
   formattingOptions: []
   position:
-  - 1.52605823863636e+3
-  - 5.56036931818182e+2
+  - 6.30950065559426e+2
+  - 1.49682419143358e+3
   width: 1.1e+2
   connections:
     indexes:
@@ -1289,8 +1289,8 @@
   text: Dies at the top of the app if there's a double-resume
   formattingOptions: []
   position:
-  - 1.52473011363636e+3
-  - 4.4209872159091e+2
+  - 6.29621940559426e+2
+  - 1.38288598120631e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1301,8 +1301,8 @@
   text: Adding a non-Never type to a continuation property makes it throwing
   formattingOptions: []
   position:
-  - 1.06524857954545e+3
-  - 4.20401278409092e+2
+  - 1.70140406468516e+2
+  - 1.36118853802449e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1313,8 +1313,8 @@
   text: use withCheckedThrowingContinuation
   formattingOptions: []
   position:
-  - 9.84946732954536e+2
-  - 5.43604403409095e+2
+  - 8.98385598776019e+1
+  - 1.48439166302449e+3
   width: 2e+2
   connections:
     indexes:
@@ -1326,8 +1326,8 @@
     in a different code branch
   formattingOptions: []
   position:
-  - 1.22859019886364e+3
-  - 5.61832386363646e+2
+  - 3.33482025786706e+2
+  - 1.50261964597904e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1340,8 +1340,8 @@
     for running stuff on main thread'
   formattingOptions: []
   position:
-  - 2.74027521306817e+3
-  - 5.91188206590909e+2
+  - 2.79466824191432e+3
+  - 1.68105273898605e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1356,8 +1356,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.34475852272726e+3
-  - 6.49620028409091e+2
+  - 4.49650349650326e+2
+  - 1.59040728802449e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1370,8 +1370,8 @@
   text: 'Strategy 1: modify the closure-based version to call the async version'
   formattingOptions: []
   position:
-  - 1.23705610795453e+3
-  - 6.94850852272728e+2
+  - 3.41947934877596e+2
+  - 1.63563811188813e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1384,8 +1384,8 @@
   text: 'Strategy 2:'
   formattingOptions: []
   position:
-  - 1.42814985795453e+3
-  - 6.92507102272728e+2
+  - 5.33041684877596e+2
+  - 1.63329436188813e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1400,8 +1400,8 @@
     async (Int, Bool) {\n"
   formattingOptions: []
   position:
-  - 1.03300071022726e+3
-  - 7.64154829545476e+2
+  - 1.37892537150326e+2
+  - 1.70494208916087e+3
   width: 3e+2
   connections:
     indexes:
@@ -1412,8 +1412,8 @@
   text: wrap the closure based version in an async version
   formattingOptions: []
   position:
-  - 1.44438565340907e+3
-  - 7.25841619318198e+2
+  - 5.49277480332136e+2
+  - 1.6666288789336e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1424,8 +1424,8 @@
   text: xcode has some refactorings
   formattingOptions: []
   position:
-  - 1.40126953125e+3
-  - 3.2036328125e+2
+  - 5.06161358173066e+2
+  - 1.2611505408654e+3
   width: 7e+1
   connections:
     indexes:
@@ -1438,8 +1438,8 @@
     AsyncSequence'
   formattingOptions: []
   position:
-  - 1.78762319711539e+3
-  - 4.98016225961545e+2
+  - 1.03502704326923e+3
+  - 4.99242187500005e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1450,8 +1450,8 @@
   text: can transform with filter and map
   formattingOptions: []
   position:
-  - 1.73857872596155e+3
-  - 2.72210937500006e+2
+  - 9.8598257211538e+2
+  - 2.73436899038467e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -1466,8 +1466,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.13235877403847e+3
-  - 2.14578725961545e+2
+  - 1.3797626201923e+3
+  - 2.15804687500005e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1480,8 +1480,8 @@
   text: non-standard-library package of additional goodies
   formattingOptions: []
   position:
-  - 2.14491286057693e+3
-  - 1.49927283653853e+2
+  - 1.39231670673077e+3
+  - 1.51153245192313e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1492,8 +1492,8 @@
   text: (NS)Notifications as one of the driving examples
   formattingOptions: []
   position:
-  - 2.17495192307694e+3
-  - 2.70411057692341e+2
+  - 1.42235576923078e+3
+  - 2.71637019230802e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1508,8 +1508,8 @@
   text: strategy for communicating asynchronously
   formattingOptions: []
   position:
-  - 2.36440204326925e+3
-  - 2.60816706730803e+2
+  - 1.61234975961539e+3
+  - 2.62042668269263e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1522,8 +1522,8 @@
   text: unlike delegate, neither party knows aboot the other
   formattingOptions: []
   position:
-  - 2.39720252403848e+3
-  - 3.13518028846187e+2
+  - 1.64515024038462e+3
+  - 3.14743990384648e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1534,8 +1534,8 @@
   text: '"hey, something happened, maybe here''s an informational payload'
   formattingOptions: []
   position:
-  - 2.43765324519233e+3
-  - 1.99176081730805e+2
+  - 1.68560096153847e+3
+  - 2.00402043269266e+2
   width: 1.5e+2
   connections:
     indexes:
@@ -1547,8 +1547,8 @@
     seen in prior chapters
   formattingOptions: []
   position:
-  - 2.17565504807694e+3
-  - 3.47865985576959e+2
+  - 1.42305889423078e+3
+  - 3.49091947115419e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1561,8 +1561,8 @@
   text: e.g. CheckedContinuation requires being resumed once and only once
   formattingOptions: []
   position:
-  - 2.35997896634618e+3
-  - 3.82637620192344e+2
+  - 1.60792668269232e+3
+  - 3.83863581730804e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1573,8 +1573,8 @@
   text: requires a type of what it's async streaming
   formattingOptions: []
   position:
-  - 1.77113581730771e+3
-  - 5.50474158653882e+2
+  - 1.01853966346154e+3
+  - 5.51700120192343e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1586,8 +1586,8 @@
     once in a while an Int floats by on an innertube'
   formattingOptions: []
   position:
-  - 1.77379807692309e+3
-  - 6.18566105769267e+2
+  - 1.02120192307693e+3
+  - 6.19792067307727e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1598,8 +1598,8 @@
   text: to make a stored property, specify the type of elements, and a continuation(closure)
   formattingOptions: []
   position:
-  - 1.93857572115386e+3
-  - 5.97234975961575e+2
+  - 1.1859795673077e+3
+  - 5.98460937500035e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1612,8 +1612,8 @@
   text: AsyncStream.Continuation - designed to return zero, one, or more values
   formattingOptions: []
   position:
-  - 1.94177584134617e+3
-  - 6.75732572115421e+2
+  - 1.1891796875e+3
+  - 6.76958533653881e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1624,8 +1624,8 @@
   text: continuation.yield(value) is what kicks off the innertube
   formattingOptions: []
   position:
-  - 1.76754206730771e+3
-  - 7.20456129807728e+2
+  - 1.01494591346154e+3
+  - 7.21682091346189e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1636,8 +1636,8 @@
   text: A Sequence that can deliver values over time
   formattingOptions: []
   position:
-  - 1.72636117788463e+3
-  - 2.2179927884619e+2
+  - 9.73765024038465e+2
+  - 2.2302524038465e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1648,8 +1648,8 @@
   text: for await blah in someSequence
   formattingOptions: []
   position:
-  - 1.74079927884617e+3
-  - 3.58034254807728e+2
+  - 9.88203125000003e+2
+  - 3.59260216346189e+2
   width: 1.8e+2
   connections:
     indexes:
@@ -1663,8 +1663,8 @@
     that we need to kep alive the whole time the app is running
   formattingOptions: []
   position:
-  - 1.74150540865386e+3
-  - 3.96628004807728e+2
+  - 9.88909254807695e+2
+  - 3.97853966346189e+2
   width: 1.7e+2
   connections:
     indexes:
@@ -1675,8 +1675,8 @@
   text: notifications(), can think of as an AsyncSequence<Notification>
   formattingOptions: []
   position:
-  - 2.34342548076925e+3
-  - 1.57048677884652e+2
+  - 1.59137319711539e+3
+  - 1.58274639423112e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1688,8 +1688,8 @@
     to nonisolated function cannot cross actor boundary %-)
   formattingOptions: []
   position:
-  - 2.31993389423078e+3
-  - 5.35924879807727e+2
+  - 1.56788161057692e+3
+  - 5.37150841346188e+2
   width: 2e+2
   connections:
     indexes:
@@ -1703,8 +1703,8 @@
     = ints.makeIterator()\nwhile let int = iterator.next() {\n    print(int)\n}"
   formattingOptions: []
   position:
-  - 1.98476562500002e+3
-  - 1.54471153846504e+1
+  - 1.23216947115385e+3
+  - 1.62584134615724e+1
   width: 1.9e+2
   connections:
     indexes:
@@ -1719,8 +1719,8 @@
     * has an AsyncIterator that defines async next() returning Element?'
   formattingOptions: []
   position:
-  - 1.81729867788463e+3
-  - 1.41808293269266e+2
+  - 1.06470252403846e+3
+  - 1.43034254807727e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1737,8 +1737,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.25217247596155e+3
-  - 7.80149639423111e+2
+  - 1.49957632211538e+3
+  - 7.81375600961571e+2
   width: 6e+1
   connections:
     indexes:
@@ -1757,8 +1757,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.1258263221154e+3
-  - 4.43358774038498e+2
+  - 1.37323016826923e+3
+  - 4.44584735576958e+2
   width: 7e+1
   connections:
     indexes:
@@ -1775,8 +1775,8 @@
     Staff behave differently in front of customers than when are behind closed doors'
   formattingOptions: []
   position:
-  - 2.22063401442309e+3
-  - 4.49918269230805e+2
+  - 1.46803786057693e+3
+  - 4.51144230769266e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -1789,8 +1789,8 @@
   text: staff moves constantly between the two worlds
   formattingOptions: []
   position:
-  - 2.44356370192309e+3
-  - 4.57856971153882e+2
+  - 1.69151141826923e+3
+  - 4.59082932692342e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1802,8 +1802,8 @@
     the notificaitons originated from
   formattingOptions: []
   position:
-  - 2.45107872596155e+3
-  - 6.14909254807725e+2
+  - 1.69902644230769e+3
+  - 6.16135216346185e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1828,8 +1828,8 @@
   text: '"the job of an actor is to resstrict access to shared mutable state"'
   formattingOptions: []
   position:
-  - 3.12089543269223e+3
-  - 6.78710336538495e+2
+  - 3.17528846153839e+3
+  - 2.55627403846191e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1840,8 +1840,8 @@
   text: await MainActor.run { }
   formattingOptions: []
   position:
-  - 2.72230168269225e+3
-  - 6.6295612980773e+2
+  - 2.7766947115384e+3
+  - 2.39873197115426e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1856,8 +1856,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.79225360576919e+3
-  - 5.14740985576961e+2
+  - 2.84664663461534e+3
+  - 9.16580528846569e+1
   width: 6e+1
   connections:
     indexes:
@@ -1870,8 +1870,8 @@
   text: something isolated must run on the actor that it is connected to
   formattingOptions: []
   position:
-  - 2.67531249999996e+3
-  - 4.42613581730807e+2
+  - 2.72970552884611e+3
+  - 1.95306490385029e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -1883,8 +1883,8 @@
     to the isolated parts of the actor without taking extra steps
   formattingOptions: []
   position:
-  - 2.87118389423073e+3
-  - 4.30161658653884e+2
+  - 2.92557692307688e+3
+  - 7.07872596157995e+0
   width: 1.6e+2
   connections:
     indexes:
@@ -1895,8 +1895,8 @@
   text: think in terms of let/var
   formattingOptions: []
   position:
-  - 2.15570913461542e+3
-  - 7.30302884615422e+2
+  - 1.40311298076926e+3
+  - 7.31528846153882e+2
   width: 8e+1
   connections:
     indexes:
@@ -1908,8 +1908,8 @@
     world
   formattingOptions: []
   position:
-  - 2.23283954326927e+3
-  - 6.29302283653883e+2
+  - 1.4802433894231e+3
+  - 6.30528245192343e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1922,8 +1922,8 @@
   text: Notification isn't sendable b/c it's a reference type
   formattingOptions: []
   position:
-  - 2.3298978365385e+3
-  - 7.08055288461575e+2
+  - 1.57730168269233e+3
+  - 7.09281250000036e+2
   width: 1e+2
   connections:
     indexes:
@@ -1936,8 +1936,8 @@
   text: and the info dictionary can have ANYTHING in it
   formattingOptions: []
   position:
-  - 2.4703455528847e+3
-  - 7.08884615384663e+2
+  - 1.71829326923084e+3
+  - 7.10110576923124e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -1948,8 +1948,8 @@
   text: Actors help out with the reference type problem
   formattingOptions: []
   position:
-  - 2.32637620192317e+3
-  - 7.73974759615436e+2
+  - 1.57432391826931e+3
+  - 7.75200721153896e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -1960,8 +1960,8 @@
   text: Actors are Sendable
   formattingOptions: []
   position:
-  - 3.06240084134614e+3
-  - 5.69984375000052e+2
+  - 3.11679387019229e+3
+  - 1.46901442307747e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -1974,8 +1974,8 @@
     Though tricky if it has properties that are reference types'
   formattingOptions: []
   position:
-  - 2.32735576923089e+3
-  - 9.40900841346201e+2
+  - 1.57530348557703e+3
+  - 9.42126802884661e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1988,8 +1988,8 @@
   text: immutable data all the way down
   formattingOptions: []
   position:
-  - 2.39575420673089e+3
-  - 8.42823918269278e+2
+  - 1.64370192307703e+3
+  - 8.44049879807738e+2
   width: 1e+2
   connections:
     indexes:
@@ -2002,8 +2002,8 @@
   text: guess that implies the turtles are immutable
   formattingOptions: []
   position:
-  - 2.47482572115397e+3
-  - 8.89461538461585e+2
+  - 1.72277343750011e+3
+  - 8.90687500000046e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -2015,8 +2015,8 @@
     (queues/locks/etc)
   formattingOptions: []
   position:
-  - 2.19307091346166e+3
-  - 8.68923677884662e+2
+  - 1.44047475961549e+3
+  - 8.70149639423123e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2031,8 +2031,8 @@
     blue: 1e+0
   formattingOptions: []
   position:
-  - 2.32101562500012e+3
-  - 8.30726562500047e+2
+  - 1.56841947115395e+3
+  - 8.31952524038507e+2
   width: 5e+1
   connections:
     indexes:
@@ -2051,8 +2051,8 @@
     blue: 1e+0
   formattingOptions: []
   position:
-  - 2.14717548076935e+3
-  - 8.10534254807739e+2
+  - 1.39457932692318e+3
+  - 8.117602163462e+2
   width: 5e+1
   connections:
     indexes:
@@ -2065,8 +2065,8 @@
   text: structs must only have Sendable members and associated values
   formattingOptions: []
   position:
-  - 1.94905649038479e+3
-  - 7.95747596153916e+2
+  - 1.19646033653862e+3
+  - 7.96973557692376e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2079,8 +2079,8 @@
   text: containing value types helps satisfy this
   formattingOptions: []
   position:
-  - 1.79201322115402e+3
-  - 7.9225000000007e+2
+  - 1.03941706730785e+3
+  - 7.9347596153853e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -2095,8 +2095,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.98319411057711e+3
-  - 9.03827524038537e+2
+  - 1.23059795673095e+3
+  - 9.05053485576997e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2110,8 +2110,8 @@
     type. Starts as an Array<SomeType> ends as an Array<PossiblyAnotherType>
   formattingOptions: []
   position:
-  - 1.7404387019233e+3
-  - 8.62274038461615e+2
+  - 9.87842548077128e+2
+  - 8.63500000000076e+2
   width: 1.8e+2
   connections:
     indexes:
@@ -2125,8 +2125,8 @@
     rangeStart: 6
     rangeLength: 3
   position:
-  - 1.93442692683317e+3
-  - 9.70091045673164e+2
+  - 1.18183077298701e+3
+  - 9.71317007211625e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2140,8 +2140,8 @@
     creating a cascadingly complex set of nested types
   formattingOptions: []
   position:
-  - 1.75080186110301e+3
-  - 9.83397742638308e+2
+  - 9.98205707256838e+2
+  - 9.84623704176769e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2155,8 +2155,8 @@
     a for await in loop
   formattingOptions: []
   position:
-  - 2.42399106539237e+3
-  - 1.05059608811607e+3
+  - 1.67193878173851e+3
+  - 1.05182204965453e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2171,8 +2171,8 @@
     blue: 1e+0
   formattingOptions: []
   position:
-  - 1.92112079326947e+3
-  - 1.07198557692316e+3
+  - 1.1685246394233e+3
+  - 1.07321153846162e+3
   width: 7e+1
   connections:
     indexes:
@@ -2180,6 +2180,8 @@
       length: 1
     - location: 151
       length: 2
+    - location: 166
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 151
   text: 'With @Published var count = 0
@@ -2190,8 +2192,8 @@
     get the existing value'
   formattingOptions: []
   position:
-  - 1.74146033653871e+3
-  - 1.12640264423086e+3
+  - 9.88864182692542e+2
+  - 1.12762860576932e+3
   width: 1.9e+2
   connections:
     indexes:
@@ -2206,8 +2208,8 @@
     IntPublisher.share.$count.values'
   formattingOptions: []
   position:
-  - 1.95551039475686e+3
-  - 1.17378400127714e+3
+  - 1.2029142409107e+3
+  - 1.1750099628156e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2222,8 +2224,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.20596125676107e+3
-  - 1.59675284517745e+3
+  - 1.45336510291491e+3
+  - 1.59778950383129e+3
   width: 1.1e+2
   connections:
     indexes:
@@ -2232,7 +2234,7 @@
     - location: 177
       length: 1
     - location: 179
-      length: 1
+      length: 3
   _effectiveHeight: 1.4e+1
 - ID: 154
   text: Making a custom async sequence
@@ -2242,8 +2244,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.7729660738435e+3
-  - 1.30508780611498e+3
+  - 1.02036991999734e+3
+  - 1.30612446476883e+3
   width: 1.2e+2
   connections:
     indexes:
@@ -2254,8 +2256,8 @@
   text: kinda gnarly
   formattingOptions: []
   position:
-  - 1.76597179706316e+3
-  - 1.27162908466067e+3
+  - 1.01337564321699e+3
+  - 1.27266574331451e+3
   width: 8e+1
   connections:
     indexes:
@@ -2266,8 +2268,8 @@
   text: adopt AsyncSequence protocol
   formattingOptions: []
   position:
-  - 1.7605038452152e+3
-  - 1.36312688739504e+3
+  - 1.00790769136903e+3
+  - 1.36416354604889e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2280,8 +2282,8 @@
   text: typealias Element = Blah
   formattingOptions: []
   position:
-  - 1.70306377704362e+3
-  - 1.42537908466067e+3
+  - 9.50467623197457e+2
+  - 1.42641574331451e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2292,8 +2294,8 @@
   text: func makeAsyncIterator() -> TheIteratorType
   formattingOptions: []
   position:
-  - 1.87637047400877e+3
-  - 1.424709294246e+3
+  - 1.1237743201626e+3
+  - 1.42574595289985e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2307,8 +2309,8 @@
     of implementation details.  yay).  That's what we need to return
   formattingOptions: []
   position:
-  - 1.7297757192762e+3
-  - 1.47731197415887e+3
+  - 9.7717956543003e+2
+  - 1.47834863281271e+3
   width: 1.8e+2
   connections:
     indexes:
@@ -2321,8 +2323,8 @@
   text: make a typealias of the oogly type and use that as TheIteratorType
   formattingOptions: []
   position:
-  - 1.95875056340182e+3
-  - 1.3521306997448e+3
+  - 1.20615440955566e+3
+  - 1.35335666128326e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2334,8 +2336,8 @@
     for the type. Copy and paste that. And hope you never have to edit the pipeline
   formattingOptions: []
   position:
-  - 1.73937767615723e+3
-  - 1.56572379244312e+3
+  - 9.86781522311067e+2
+  - 1.56676045109696e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2350,8 +2352,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.43344050480808e+3
-  - 1.19897475961555e+3
+  - 1.68138822115423e+3
+  - 1.20020072115401e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2366,8 +2368,8 @@
   text: there's an .inTermination closure can set to know when the stream ends
   formattingOptions: []
   position:
-  - 2.23188100961587e+3
-  - 1.08560336538484e+3
+  - 1.4792848557697e+3
+  - 1.0868293269233e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2380,8 +2382,8 @@
     = continuation\n}\n\n// publish with\ncontinuation?.yield(Entry(number: count))\n"
   formattingOptions: []
   position:
-  - 2.16259014423125e+3
-  - 1.15349699519253e+3
+  - 1.40999399038509e+3
+  - 1.15472295673099e+3
   width: 2.3e+2
   connections:
     indexes:
@@ -2392,8 +2394,8 @@
   text: Can be terminated from the consuming end or the producing end
   formattingOptions: []
   position:
-  - 2.44452824519279e+3
-  - 1.24219891826946e+3
+  - 1.69247596153893e+3
+  - 1.24342487980792e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2403,21 +2405,24 @@
       length: 3
   _effectiveHeight: 4.2e+1
 - ID: 166
-  text: ''
+  text: Unlike Comebine, can't really have the same AsyncSequence appearing in two
+    for await in loops
   formattingOptions: []
   position:
-  - 2.41232572115433e+3
-  - 1.60854206730792e+3
+  - 1.26522836538509e+3
+  - 1.04385156250022e+3
   width: 1.6e+2
   connections:
-    indexes: []
-  _effectiveHeight: 1.4e+1
+    indexes:
+    - location: 150
+      length: 1
+  _effectiveHeight: 5.6e+1
 - ID: 167
   text: know via .onTermination on the continuation
   formattingOptions: []
   position:
-  - 2.47271334134664e+3
-  - 1.31145973557716e+3
+  - 1.72066105769278e+3
+  - 1.31268569711562e+3
   width: 1.4e+2
   connections:
     indexes:
@@ -2428,8 +2433,8 @@
   text: breaking out of the for async in loop does not trigger
   formattingOptions: []
   position:
-  - 2.42553185096202e+3
-  - 1.36857211538485e+3
+  - 1.67347956730817e+3
+  - 1.36979807692331e+3
   width: 1.3e+2
   connections:
     indexes:
@@ -2440,8 +2445,8 @@
   text: explicitly doing finish() on the continuation does
   formattingOptions: []
   position:
-  - 2.47111177884664e+3
-  - 1.44243629807716e+3
+  - 1.71905949519279e+3
+  - 1.44366225961562e+3
   width: 1.4e+2
   connections:
     indexes:
@@ -2453,8 +2458,8 @@
     nil, and so break out of the for async in loop
   formattingOptions: []
   position:
-  - 2.23444711538514e+3
-  - 1.34600600961568e+3
+  - 1.48185096153898e+3
+  - 1.34723197115414e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2465,8 +2470,8 @@
   text: 'Unstructured Concurrency: spinning up a bunch of tasks'
   formattingOptions: []
   position:
-  - 3.01771334134658e+3
-  - 1.0511658653874e+2
+  - 2.00210637019285e+3
+  - 1.2015865384643e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2479,8 +2484,8 @@
     streams
   formattingOptions: []
   position:
-  - 2.00009615384678e+3
-  - 1.53575661057722e+3
+  - 1.24750000000061e+3
+  - 1.53679326923107e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2497,8 +2502,8 @@
     utilties: compacted, removeDuplicates, interspersed'
   formattingOptions: []
   position:
-  - 2.18088641826985e+3
-  - 1.49912800480799e+3
+  - 1.36323617788523e+3
+  - 1.46147776442338e+3
   width: 2.9e+2
   connections:
     indexes:
@@ -2512,8 +2517,8 @@
     rangeStart: 0
     rangeLength: 18
   position:
-  - 1.98289362980836e+3
-  - 1.64574459134646e+3
+  - 1.23029747596219e+3
+  - 1.64678125000031e+3
   width: 1.8e+2
   connections:
     indexes:
@@ -2527,8 +2532,8 @@
     rangeStart: 0
     rangeLength: 5
   position:
-  - 2.06396935096221e+3
-  - 1.69626742788493e+3
+  - 1.31137319711604e+3
+  - 1.69730408653877e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2542,8 +2547,8 @@
     (three streams)
   formattingOptions: []
   position:
-  - 2.00989182692374e+3
-  - 1.76727403846185e+3
+  - 1.25729567307758e+3
+  - 1.76831069711569e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2557,8 +2562,8 @@
     rangeStart: 0
     rangeLength: 10
   position:
-  - 2.21793569711605e+3
-  - 1.77273377403877e+3
+  - 1.46533954326989e+3
+  - 1.77377043269262e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2573,8 +2578,8 @@
     one'
   formattingOptions: []
   position:
-  - 2.18193209134682e+3
-  - 1.86341887019262e+3
+  - 1.42933593750066e+3
+  - 1.86445552884646e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2589,11 +2594,38 @@
     rangeStart: 0
     rangeLength: 3
   position:
-  - 2.26560396634682e+3
-  - 1.65544411057724e+3
+  - 1.54478365384681e+3
+  - 1.67444651442339e+3
   width: 1.6e+2
   connections:
     indexes:
     - location: 153
       length: 1
   _effectiveHeight: 5.6e+1
+- ID: 180
+  text: combineLatest - whenever one of the streams has a new value, emit both values
+  formattingOptions:
+  - options: 1
+    rangeStart: 0
+    rangeLength: 13
+  position:
+  - 1.58363281250072e+3
+  - 1.53965084134651e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 181
+  text: sensitive to the current Swift toolchain
+  formattingOptions: []
+  position:
+  - 1.58915564903918e+3
+  - 1.6122319711542e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 2.8e+1
