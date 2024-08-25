@@ -306,6 +306,8 @@
       length: 1
     - location: 203
       length: 1
+    - location: 211
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 16
   text: Actors
@@ -462,8 +464,8 @@
   text: for when we don't know how many child tasks we're going to want to spawn
   formattingOptions: []
   position:
-  - 1.89654242242144e+3
-  - 3.95553103146851e+2
+  - 2.08926778299837e+3
+  - 5.51436516608389e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -474,8 +476,8 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 1.89882389095291e+3
-  - 4.56359757430068e+2
+  - 2.0380065832606e+3
+  - 6.26179468968529e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2655,8 +2657,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.09229266827015e+3
-  - 3.96612980769589e+2
+  - 2.2250450721163e+3
+  - 6.33073317308051e+2
   width: 8e+1
   connections:
     indexes:
@@ -2671,8 +2673,8 @@
   text: work with many asychronous calls and handle each as it is completed
   formattingOptions: []
   position:
-  - 1.96193209134708e+3
-  - 3.06507812500366e+2
+  - 2.26673978365477e+3
+  - 5.34197115384982e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -2739,8 +2741,8 @@
   text: says to create a new Task that is a child of our current Task
   formattingOptions: []
   position:
-  - 2.35836838942397e+3
-  - 2.13563100961893e+2
+  - 2.34189603365474e+3
+  - 2.1200961538497e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -2750,14 +2752,16 @@
       length: 1
     - location: 193
       length: 1
+    - location: 210
+      length: 1
   _effectiveHeight: 4.2e+1
 - ID: 190
   text: Tasks are generic over value and error.  So the type of the generated task
     matches the assignment
   formattingOptions: []
   position:
-  - 2.45612379807781e+3
-  - 3.02352163461893e+2
+  - 2.43737379807781e+3
+  - 2.84545673077278e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2825,8 +2829,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.22678185096244e+3
-  - 4.34218149038855e+2
+  - 2.12111778846244e+3
+  - 2.81718149038855e+2
   width: 8e+1
   connections:
     indexes:
@@ -2853,8 +2857,8 @@
   text: does not kill a task
   formattingOptions: []
   position:
-  - 2.13827824519321e+3
-  - 4.71781250000393e+2
+  - 2.02538161057783e+3
+  - 3.75278846154239e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -2867,8 +2871,8 @@
   text: the task needs to check if it's been cancelled, then dealloc and unwind stuff
   formattingOptions: []
   position:
-  - 2.09941706730859e+3
-  - 5.05095552885009e+2
+  - 1.92098858173167e+3
+  - 4.17168870192701e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2883,8 +2887,8 @@
   text: general cancellation is hard, mmmmkay?
   formattingOptions: []
   position:
-  - 2.04094951923168e+3
-  - 5.67652644231163e+2
+  - 2.10540865384706e+3
+  - 4.11102163461933e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -2895,8 +2899,8 @@
   text: cancelling a parent implicitly cancels the children as well
   formattingOptions: []
   position:
-  - 2.30850360577014e+3
-  - 4.76513822115779e+2
+  - 1.93305588942398e+3
+  - 3.16468750000394e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2907,8 +2911,8 @@
   text: Task.sleep returns immediately when cancelled
   formattingOptions: []
   position:
-  - 2.21624399038552e+3
-  - 5.73448918269625e+2
+  - 2.11548076923168e+3
+  - 4.70182692308086e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2919,8 +2923,8 @@
   text: Check with Task.isCancelled
   formattingOptions: []
   position:
-  - 1.90841346153937e+3
-  - 5.28875600961934e+2
+  - 1.91954927884706e+3
+  - 4.93917668269627e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2932,8 +2936,8 @@
     the variable
   formattingOptions: []
   position:
-  - 2.57375300480858e+3
-  - 2.32454326923472e+2
+  - 2.61103966346243e+3
+  - 2.22592548077319e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3027,3 +3031,27 @@
     - location: 208
       length: 1
   _effectiveHeight: 1.4e+1
+- ID: 210
+  text: just plain Task inside a task does not create child tasks
+  formattingOptions: []
+  position:
+  - 2.47645132211628e+3
+  - 2.22799879808094e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 189
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 211
+  text: great for small number of tasks, known order of use
+  formattingOptions: []
+  position:
+  - 2.61791165865472e+3
+  - 2.94254206731171e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 2.8e+1
