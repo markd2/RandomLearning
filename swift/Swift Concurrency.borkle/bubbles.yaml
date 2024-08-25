@@ -265,8 +265,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 2.18262770432704e+3
-  - 1.45868061625873e+2
+  - 2.11144981971165e+3
+  - 1.48473229895103e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -278,6 +278,10 @@
       length: 1
     - location: 182
       length: 2
+    - location: 195
+      length: 1
+    - location: 204
+      length: 1
   _effectiveHeight: 4.2e+1
 - ID: 14
   text: async let
@@ -299,6 +303,8 @@
     - location: 186
       length: 1
     - location: 189
+      length: 1
+    - location: 203
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 16
@@ -432,8 +438,8 @@
   text: take the results of more than one asynchronous task and combine them
   formattingOptions: []
   position:
-  - 1.96832536604032e+3
-  - 1.57519066870625e+2
+  - 1.92914868334801e+3
+  - 8.51903409090862e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -444,8 +450,8 @@
   text: '"we use async let for structured concurrency"'
   formattingOptions: []
   position:
-  - 2.23095976289347e+3
-  - 2.30336756993003e+2
+  - 2.2270805561627e+3
+  - 2.07875819493003e+2
   width: 1e+2
   connections:
     indexes:
@@ -468,8 +474,8 @@
   text: can cancel a parent task and the child tasks get cancelled as well
   formattingOptions: []
   position:
-  - 1.94268206402983e+3
-  - 4.72922257430068e+2
+  - 1.89882389095291e+3
+  - 4.56359757430068e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2468,8 +2474,8 @@
   text: 'Unstructured Concurrency: spinning up a bunch of tasks'
   formattingOptions: []
   position:
-  - 2.00411057692362e+3
-  - 6.1736177884892e+1
+  - 2.05726862980823e+3
+  - 4.22950721156613e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -2631,8 +2637,8 @@
   text: Wanting to have more control over Tasks and may want to coordinate them
   formattingOptions: []
   position:
-  - 2.02006610577013e+3
-  - 2.34689903846511e+2
+  - 1.91096454327013e+3
+  - 1.44049879808049e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2678,8 +2684,8 @@
     a point where we need that async work
   formattingOptions: []
   position:
-  - 2.18984375000092e+3
-  - 3.56228365384982e+2
+  - 1.95038762019323e+3
+  - 2.04635817308059e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2705,8 +2711,8 @@
   text: anything using plainNumber must be prepared to wait (with explicit await instructions)
   formattingOptions: []
   position:
-  - 2.53481069711628e+3
-  - 1.58319711538828e+2
+  - 2.57641526442398e+3
+  - 3.1952524038828e+1
   width: 1.7e+2
   connections:
     indexes:
@@ -2721,8 +2727,8 @@
   text: every use.
   formattingOptions: []
   position:
-  - 2.58726862980858e+3
-  - 1.21781250000355e+2
+  - 2.59181189903935e+3
+  - 9.86832932695856e+1
   width: 7e+1
   connections:
     indexes:
@@ -2733,7 +2739,7 @@
   text: says to create a new Task that is a child of our current Task
   formattingOptions: []
   position:
-  - 2.37672475961627e+3
+  - 2.35836838942397e+3
   - 2.13563100961893e+2
   width: 1.2e+2
   connections:
@@ -2750,8 +2756,8 @@
     matches the assignment
   formattingOptions: []
   position:
-  - 2.48625000000089e+3
-  - 3.22033653846509e+2
+  - 2.45612379807781e+3
+  - 3.02352163461893e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -2763,8 +2769,8 @@
     \n    await Comparison(plainNumber, filledNumber)"
   formattingOptions: []
   position:
-  - 2.51824218750089e+3
-  - 2.18379807692662e+2
+  - 2.51883713942397e+3
+  - 1.36964543269586e+2
   width: 3e+2
   connections:
     indexes:
@@ -2789,8 +2795,8 @@
   text: the child task inherits the priority and context of its parent
   formattingOptions: []
   position:
-  - 2.33821213942396e+3
-  - 2.85510216346524e+2
+  - 2.29567608173166e+3
+  - 2.73746394231139e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -2811,3 +2817,213 @@
     - location: 193
       length: 1
   _effectiveHeight: 4.2e+1
+- ID: 195
+  text: Cancellation
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.22678185096244e+3
+  - 4.34218149038855e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+    - location: 196
+      length: 2
+    - location: 200
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 196
+  text: cancel a Task<T,Error> with cancel()
+  formattingOptions: []
+  position:
+  - 2.19213341346244e+3
+  - 3.51366586538855e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 195
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 197
+  text: does not kill a task
+  formattingOptions: []
+  position:
+  - 2.13827824519321e+3
+  - 4.71781250000393e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 195
+      length: 1
+    - location: 198
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 198
+  text: the task needs to check if it's been cancelled, then dealloc and unwind stuff
+  formattingOptions: []
+  position:
+  - 2.09941706730859e+3
+  - 5.05095552885009e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 197
+      length: 1
+    - location: 199
+      length: 1
+    - location: 201
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 199
+  text: general cancellation is hard, mmmmkay?
+  formattingOptions: []
+  position:
+  - 2.04094951923168e+3
+  - 5.67652644231163e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 198
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 200
+  text: cancelling a parent implicitly cancels the children as well
+  formattingOptions: []
+  position:
+  - 2.30850360577014e+3
+  - 4.76513822115779e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 195
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 201
+  text: Task.sleep returns immediately when cancelled
+  formattingOptions: []
+  position:
+  - 2.21624399038552e+3
+  - 5.73448918269625e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 198
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 202
+  text: Check with Task.isCancelled
+  formattingOptions: []
+  position:
+  - 1.90841346153937e+3
+  - 5.28875600961934e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 198
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 203
+  text: with throwing, the try is not put on the async let, instead on the use of
+    the variable
+  formattingOptions: []
+  position:
+  - 2.57375300480858e+3
+  - 2.32454326923472e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 204
+  text: Tasks can return values
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.56032451923168e+3
+  - 5.18460937500404e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+    - location: 205
+      length: 1
+    - location: 208
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 205
+  text: 'Task specifies return and error types:
+
+    Task<Success, Failure>'
+  formattingOptions: []
+  position:
+  - 2.45143028846244e+3
+  - 5.99527644231175e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 204
+      length: 1
+    - location: 206
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 206
+  text: looks familiar - Result or Publisher type
+  formattingOptions: []
+  position:
+  - 2.63490384615474e+3
+  - 5.69554687500406e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 205
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 207
+  text: Success CONFORMS to Sendable, Failure to Error
+  formattingOptions: []
+  position:
+  - 2.38955528846244e+3
+  - 5.2987319711579e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 205
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 208
+  text: "func taskExample() async {\n    let task = Task {\n        return 5\n    }\n
+    \   print(await task.value)\n}"
+  formattingOptions: []
+  position:
+  - 2.60096895658143e+3
+  - 4.02082974947822e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 204
+      length: 1
+    - location: 209
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 209
+  text: Task<Int, Never>
+  formattingOptions: []
+  position:
+  - 2.65114586463431e+3
+  - 3.52936598558098e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 208
+      length: 1
+  _effectiveHeight: 1.4e+1
