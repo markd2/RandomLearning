@@ -317,15 +317,15 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 3.15037601070804e+3
-  - 1.82853146853156e+2
+  - 3.20783394340035e+3
+  - 2.37393411276233e+2
   width: 6e+1
   connections:
     indexes:
     - location: 28
       length: 1
     - location: 48
-      length: 2
+      length: 1
     - location: 51
       length: 1
     - location: 91
@@ -335,6 +335,16 @@
     - location: 128
       length: 1
     - location: 136
+      length: 1
+    - location: 216
+      length: 2
+    - location: 219
+      length: 1
+    - location: 221
+      length: 2
+    - location: 225
+      length: 1
+    - location: 228
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 17
@@ -488,8 +498,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 3.21083519995629e+3
-  - 3.17545290646854e+2
+  - 3.22180274803322e+3
+  - 3.8285178103147e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -753,8 +763,8 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 3.10964147180944e+3
-  - 1.17107954545468e+2
+  - 3.16709940450174e+3
+  - 1.71648218968545e+2
   width: 1.9e+2
   connections:
     indexes:
@@ -765,24 +775,24 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 3.08149816979895e+3
-  - 2.29007266171342e+2
+  - 3.05320790537587e+3
+  - 3.34866641171342e+2
   width: 9e+1
   connections:
     indexes:
-    - location: 16
-      length: 1
     - location: 50
       length: 1
     - location: 127
       length: 1
+    - location: 222
+      length: 2
   _effectiveHeight: 2.8e+1
 - ID: 50
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 3.05327728911713e+3
-  - 2.78879425262251e+2
+  - 2.85194916411713e+3
+  - 3.31373415646866e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -793,8 +803,8 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 3.28343353911713e+3
-  - 1.85569766171342e+2
+  - 3.34089147180944e+3
+  - 2.40110030594419e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1346,8 +1356,8 @@
     for running stuff on main thread'
   formattingOptions: []
   position:
-  - 2.90497473229894e+3
-  - 1.66308398898605e+2
+  - 2.96243266499125e+3
+  - 2.20848663321682e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1834,8 +1844,8 @@
   text: '"the job of an actor is to resstrict access to shared mutable state"'
   formattingOptions: []
   position:
-  - 3.285594951923e+3
-  - 2.53830528846191e+2
+  - 3.41478064903839e+3
+  - 2.83755408653883e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1846,8 +1856,8 @@
   text: await MainActor.run { }
   formattingOptions: []
   position:
-  - 2.88700120192302e+3
-  - 2.38076322115426e+2
+  - 2.90544170673071e+3
+  - 2.91558894230811e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1862,8 +1872,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.95695312499996e+3
-  - 8.98611778846569e+1
+  - 3.04108473557688e+3
+  - 1.61748197115426e+2
   width: 6e+1
   connections:
     indexes:
@@ -1876,8 +1886,8 @@
   text: something isolated must run on the actor that it is connected to
   formattingOptions: []
   position:
-  - 2.84001201923073e+3
-  - 1.77337740385029e+1
+  - 2.91583533653842e+3
+  - 3.48491586538875e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -1889,8 +1899,8 @@
     to the isolated parts of the actor without taking extra steps
   formattingOptions: []
   position:
-  - 3.0358834134615e+3
-  - 5.28185096157995e+0
+  - 3.09334134615381e+3
+  - 5.98221153846569e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -1966,8 +1976,8 @@
   text: Actors are Sendable
   formattingOptions: []
   position:
-  - 3.22710036057691e+3
-  - 1.45104567307747e+2
+  - 3.28455829326922e+3
+  - 1.99644831730824e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3109,5 +3119,215 @@
   connections:
     indexes:
     - location: 183
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 216
+  text: '"A Swift Actor is a reference type that is designed to manage shared mutable
+    state by allowing access to the properties and methods that are isolated to the
+    ctor to only one Task at a time"'
+  formattingOptions: []
+  position:
+  - 3.33605168269318e+3
+  - 5.67572115387342e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 217
+  text: helps prevent race conditions
+  formattingOptions: []
+  position:
+  - 3.43231670673163e+3
+  - 1.94560697115669e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 218
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 218
+  text: but don't hold on to an actor for too long, or you'll cause a bottleneck
+  formattingOptions: []
+  position:
+  - 3.54875901442394e+3
+  - 2.27742788461815e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 217
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 219
+  text: 'actors cut across our code in a different dimension than class.  '
+  formattingOptions: []
+  position:
+  - 3.20147536057779e+3
+  - 4.75828725961815e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 220
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 220
+  text: having a non-isolated method access isolated properties, need to await them
+    because they might not be immediately available
+  formattingOptions: []
+  position:
+  - 3.38759014423163e+3
+  - 5.00329927884893e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 219
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 221
+  text: TaskLocal properties
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.11283653846238e+3
+  - 5.4895673076951e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 222
+  text: '@MainActor'
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.14878305288546e+3
+  - 2.7528485576951e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 49
+      length: 1
+    - location: 224
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 223
+  text: MainActoring the class is automatically inhertied by extensions
+  formattingOptions: []
+  position:
+  - 2.863064903847e+3
+  - 3.96246394231042e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 49
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 224
+  text: 'nonisolated allows a method to be called off of the main actor
+
+    nonisolated private func ...'
+  formattingOptions: []
+  position:
+  - 3.01425781250085e+3
+  - 3.98394831731041e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 222
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 225
+  text: Imagine actors as islands
+  formattingOptions: []
+  position:
+  - 3.28881310096238e+3
+  - 3.10978966346426e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 226
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 226
+  text: default is property and method access are isolated to that island
+  formattingOptions: []
+  position:
+  - 3.42598257211623e+3
+  - 3.4353605769258e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 225
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 227
+  text: nonisolated means it can be performed off-island w/o having any access to
+    the isolated members of the island
+  formattingOptions: []
+  position:
+  - 3.40210937500085e+3
+  - 4.0418810096181e+2
+  width: 1.5e+2
+  connections:
+    indexes:
+    - location: 225
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 228
+  text: detatched Tasks
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.91868689903932e+3
+  - 5.05140625000272e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 229
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 229
+  text: does not capture self
+  formattingOptions: []
+  position:
+  - 2.84554086538547e+3
+  - 5.39215144231041e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 228
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 230
+  text: does not inherit the context of the containing method
+  formattingOptions: []
+  position:
+  - 2.89910757211624e+3
+  - 5.76709134615656e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 228
       length: 1
   _effectiveHeight: 2.8e+1
