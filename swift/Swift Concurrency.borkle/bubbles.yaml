@@ -2668,6 +2668,10 @@
       length: 2
     - location: 184
       length: 1
+    - location: 212
+      length: 1
+    - location: 215
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 184
   text: work with many asychronous calls and handle each as it is completed
@@ -3053,5 +3057,57 @@
   connections:
     indexes:
     - location: 14
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 212
+  text: make withTaskGroup() or withThrowingTaskGroup()
+  formattingOptions: []
+  position:
+  - 2.10181490384706e+3
+  - 6.92962139423465e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 183
+      length: 1
+    - location: 213
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 213
+  text: give it a closure to provide the tasks involved
+  formattingOptions: []
+  position:
+  - 1.92880408653936e+3
+  - 6.94341346154234e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 212
+      length: 1
+    - location: 214
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 214
+  text: then do group.addTask { ... }
+  formattingOptions: []
+  position:
+  - 1.93174879807783e+3
+  - 7.61745192308081e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 213
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 215
+  text: They are also AsyncSequences
+  formattingOptions: []
+  position:
+  - 2.3230679086548e+3
+  - 6.55912860577291e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 183
       length: 1
   _effectiveHeight: 2.8e+1
