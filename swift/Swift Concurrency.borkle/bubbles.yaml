@@ -783,8 +783,8 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 3.1803498324592e+3
-  - 5.57773542213009e+2
+  - 3.15467274912587e+3
+  - 5.37402448463009e+2
   width: 9e+1
   connections:
     indexes:
@@ -3235,13 +3235,15 @@
       length: 1
     - location: 49
       length: 1
+    - location: 260
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 223
   text: MainActoring the class is automatically inhertied by extensions
   formattingOptions: []
   position:
-  - 2.95600761218033e+3
-  - 6.14325821314375e+2
+  - 2.84527844551367e+3
+  - 5.46386368189375e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -3254,8 +3256,8 @@
     nonisolated private func ...'
   formattingOptions: []
   position:
-  - 2.88078125000085e+3
-  - 6.80709284856041e+2
+  - 2.85552408854252e+3
+  - 8.33557592147708e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3608,8 +3610,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.17898763020835e+3
-  - 6.53343749999982e+2
+  - 3.04605794270835e+3
+  - 8.45482421874982e+2
   width: 7e+1
   connections:
     indexes:
@@ -3625,8 +3627,8 @@
     that don''t require attention" (looking at the time) - nonisolated'
   formattingOptions: []
   position:
-  - 3.07257812500002e+3
-  - 7.15619140624982e+2
+  - 2.88458333333335e+3
+  - 9.79824869791649e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3638,8 +3640,8 @@
     for nonisolated
   formattingOptions: []
   position:
-  - 2.88428710937502e+3
-  - 7.59893229166647e+2
+  - 2.85291015625002e+3
+  - 9.01022786458314e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3651,8 +3653,8 @@
     it at the same time
   formattingOptions: []
   position:
-  - 2.89170247395834e+3
-  - 8.47321614583318e+2
+  - 3.05240885416667e+3
+  - 8.87266276041651e+2
   width: 1.7e+2
   connections:
     indexes:
@@ -3664,8 +3666,8 @@
     to accomplish a single objective
   formattingOptions: []
   position:
-  - 2.90935872395834e+3
-  - 9.26432942708318e+2
+  - 3.155869140625e+3
+  - 9.70469401041651e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3678,8 +3680,8 @@
   text: first rule is to see if you can avoid doing so
   formattingOptions: []
   position:
-  - 3.09094075520834e+3
-  - 9.18207031249985e+2
+  - 3.337451171875e+3
+  - 9.62243489583318e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -3693,8 +3695,8 @@
     resource
   formattingOptions: []
   position:
-  - 2.84211263020834e+3
-  - 1.03575911458338e+3
+  - 3.088623046875e+3
+  - 1.07979557291671e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -3705,8 +3707,8 @@
   text: try not to get clever and stack multipe actors together in one call
   formattingOptions: []
   position:
-  - 3.02186197916667e+3
-  - 1.03475651041671e+3
+  - 3.26837239583334e+3
+  - 1.07879296875004e+3
   width: 1.4e+2
   connections:
     indexes:
@@ -3717,8 +3719,8 @@
   text: 'second is to minimizse the issue '
   formattingOptions: []
   position:
-  - 3.15324544270834e+3
-  - 9.7419335937504e+2
+  - 3.399755859375e+3
+  - 1.01822981770837e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -3731,11 +3733,51 @@
   text: third is to capture the value from one actor and then pass it to the other
   formattingOptions: []
   position:
-  - 3.222763671875e+3
-  - 1.05242578125004e+3
+  - 3.46927408854167e+3
+  - 1.09646223958337e+3
   width: 1.6e+2
   connections:
     indexes:
     - location: 258
       length: 1
   _effectiveHeight: 4.2e+1
+- ID: 260
+  text: there's only one of them, and it is somehow global
+  formattingOptions: []
+  position:
+  - 3.14828450520834e+3
+  - 5.80462890625055e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 222
+      length: 1
+    - location: 261
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 261
+  text: Make global actors by decorating with @globalActor
+  formattingOptions: []
+  position:
+  - 2.97018554687498e+3
+  - 6.28867838541726e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 260
+      length: 1
+    - location: 262
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 262
+  text: Also gives you an e.g. @ProgressMonitor decoration for running on that actor
+  formattingOptions: []
+  position:
+  - 2.87917968749998e+3
+  - 6.90843750000059e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 261
+      length: 1
+  _effectiveHeight: 5.6e+1
