@@ -317,8 +317,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 3.35594917777535e+3
-  - 4.76175963359566e+2
+  - 3.35707222465035e+3
+  - 4.60404478984566e+2
   width: 6e+1
   connections:
     indexes:
@@ -347,6 +347,8 @@
     - location: 228
       length: 1
     - location: 245
+      length: 1
+    - location: 250
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 17
@@ -781,8 +783,8 @@
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 3.20132313975087e+3
-  - 5.72669375546342e+2
+  - 3.1803498324592e+3
+  - 5.57773542213009e+2
   width: 9e+1
   connections:
     indexes:
@@ -797,9 +799,9 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 3.00006439849213e+3
-  - 5.69176150021866e+2
-  width: 1.6e+2
+  - 3.00646088286713e+3
+  - 5.61529665646866e+2
+  width: 1.3e+2
   connections:
     indexes:
     - location: 49
@@ -1862,9 +1864,9 @@
   text: await MainActor.run { }
   formattingOptions: []
   position:
-  - 3.05355694110571e+3
-  - 5.29361628605811e+2
-  width: 1.6e+2
+  - 3.00913636818904e+3
+  - 5.36112930689144e+2
+  width: 1.3e+2
   connections:
     indexes:
     - location: 49
@@ -1889,6 +1891,8 @@
       length: 2
     - location: 242
       length: 2
+    - location: 246
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 129
   text: something isolated must run on the actor that it is connected to
@@ -3197,21 +3201,23 @@
       length: 1
   _effectiveHeight: 8.4e+1
 - ID: 221
-  text: TaskLocal properties
+  text: Communicating Between Tasks
   fillColorRGB:
     red: 8.96043e-1
     green: 9.97437e-1
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.26095177283738e+3
-  - 7.8675946514451e+2
+  - 3.15810672075405e+3
+  - 8.1598798076951e+2
   width: 1.2e+2
   connections:
     indexes:
     - location: 16
       length: 1
-  _effectiveHeight: 1.4e+1
+    - location: 253
+      length: 3
+  _effectiveHeight: 2.8e+1
 - ID: 222
   text: '@MainActor'
   fillColorRGB:
@@ -3220,8 +3226,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.29689828726046e+3
-  - 5.1308759014451e+2
+  - 3.26088591746879e+3
+  - 4.9970868389451e+2
   width: 8e+1
   connections:
     indexes:
@@ -3229,15 +3235,13 @@
       length: 1
     - location: 49
       length: 1
-    - location: 224
-      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 223
   text: MainActoring the class is automatically inhertied by extensions
   formattingOptions: []
   position:
-  - 3.011180138222e+3
-  - 6.34049128606042e+2
+  - 2.95600761218033e+3
+  - 6.14325821314375e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -3250,12 +3254,12 @@
     nonisolated private func ...'
   formattingOptions: []
   position:
-  - 3.16237304687585e+3
-  - 6.36197566106041e+2
+  - 2.88078125000085e+3
+  - 6.80709284856041e+2
   width: 1.6e+2
   connections:
     indexes:
-    - location: 222
+    - location: 250
       length: 1
   _effectiveHeight: 5.6e+1
 - ID: 225
@@ -3305,8 +3309,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.06680213341432e+3
-  - 7.42943359375272e+2
+  - 3.27276893028932e+3
+  - 7.82692708333605e+2
   width: 1e+2
   connections:
     indexes:
@@ -3319,8 +3323,8 @@
   text: does not capture self
   formattingOptions: []
   position:
-  - 2.99365609976047e+3
-  - 7.77017878606041e+2
+  - 3.3857882612188e+3
+  - 7.86943008814374e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3331,8 +3335,8 @@
   text: does not inherit the context of the containing method
   formattingOptions: []
   position:
-  - 3.04722280649124e+3
-  - 8.14511868990656e+2
+  - 3.30036082732457e+3
+  - 8.37981921073989e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3377,8 +3381,8 @@
   text: embodying
   formattingOptions: []
   position:
-  - 3.19837565104167e+3
-  - 2.4698307291667e+2
+  - 3.21546549479167e+3
+  - 2.4466861979167e+2
   width: 7e+1
   connections:
     indexes:
@@ -3393,8 +3397,8 @@
     (getting things done)'
   formattingOptions: []
   position:
-  - 3.06694986979167e+3
-  - 2.01377604166674e+2
+  - 3.0966796875e+3
+  - 1.92259765625007e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3407,8 +3411,8 @@
     (to remember things)'
   formattingOptions: []
   position:
-  - 3.1435546875e+3
-  - 1.49603515625007e+2
+  - 3.15234700520833e+3
+  - 1.43809244791674e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3419,8 +3423,8 @@
   text: communication
   formattingOptions: []
   position:
-  - 3.22971028645833e+3
-  - 1.98805989583341e+2
+  - 3.242216796875e+3
+  - 1.97090494791674e+2
   width: 1e+2
   connections:
     indexes:
@@ -3509,8 +3513,8 @@
     tasks must wait until the current task has finished
   formattingOptions: []
   position:
-  - 2.87298502604167e+3
-  - 4.41957031250017e+2
+  - 2.84798828125e+3
+  - 4.3269270833335e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3539,5 +3543,144 @@
   connections:
     indexes:
     - location: 16
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 246
+  text: 'an await in an isolated method can cause current task to suspend, then someone
+    else come through the isolated method. '
+  formattingOptions: []
+  position:
+  - 2.85960286458336e+3
+  - 1.91533854166663e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+    - location: 247
+      length: 2
+  _effectiveHeight: 7e+1
+- ID: 247
+  text: you're giving up control of the actor, and letting others contend for the
+    resource
+  formattingOptions: []
+  position:
+  - 2.85531575520835e+3
+  - 1.0625716145832e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 246
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 248
+  text: so be careful; to make sure that we only use await inside an actor when we
+    need to, and to preserve state on either side
+  formattingOptions: []
+  position:
+  - 3.02701171875002e+3
+  - 6.96979166666531e+1
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 246
+      length: 1
+    - location: 249
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 249
+  text: re-entrancy issues.  Actors aren't a panacea for all things concurrency
+  formattingOptions: []
+  position:
+  - 3.17132161458335e+3
+  - 7.15729166666514e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 248
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 250
+  text: nonisolated
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.17898763020835e+3
+  - 6.53343749999982e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 224
+      length: 1
+    - location: 251
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 251
+  text: '"things that require your attention" (making coffee) - isolated vs "things
+    that don''t require attention" (looking at the time) - nonisolated'
+  formattingOptions: []
+  position:
+  - 3.07257812500002e+3
+  - 7.15619140624982e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 250
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 252
+  text: a method that doesn't access an isolated property or methodi s agood candidate
+    for nonisolated
+  formattingOptions: []
+  position:
+  - 2.88428710937502e+3
+  - 7.59893229166647e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 250
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 253
+  text: Each actor is a potential bottleneck preventing multiple Tasks from accessing
+    it at the same time
+  formattingOptions: []
+  position:
+  - 2.89170247395834e+3
+  - 8.47321614583318e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 221
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 254
+  text: comms between tasks involves asking for exclusive access to multiple resources
+    to accomplish a single objective
+  formattingOptions: []
+  position:
+  - 2.90935872395834e+3
+  - 9.26432942708318e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 221
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 255
+  text: first rule is to see if you can avoid doing so
+  formattingOptions: []
+  position:
+  - 3.12797526041667e+3
+  - 9.00176432291652e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 221
       length: 1
   _effectiveHeight: 2.8e+1
