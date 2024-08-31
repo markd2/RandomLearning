@@ -3671,16 +3671,71 @@
     indexes:
     - location: 221
       length: 1
+    - location: 256
+      length: 2
   _effectiveHeight: 7e+1
 - ID: 255
   text: first rule is to see if you can avoid doing so
   formattingOptions: []
   position:
-  - 3.12797526041667e+3
-  - 9.00176432291652e+2
+  - 3.09094075520834e+3
+  - 9.18207031249985e+2
   width: 1.3e+2
   connections:
     indexes:
     - location: 221
       length: 1
+    - location: 258
+      length: 1
   _effectiveHeight: 2.8e+1
+- ID: 256
+  text: get a value from one resource, stash it into a local, then use it with another
+    resource
+  formattingOptions: []
+  position:
+  - 2.84211263020834e+3
+  - 1.03575911458338e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 254
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 257
+  text: try not to get clever and stack multipe actors together in one call
+  formattingOptions: []
+  position:
+  - 3.02186197916667e+3
+  - 1.03475651041671e+3
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 254
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 258
+  text: 'second is to minimizse the issue '
+  formattingOptions: []
+  position:
+  - 3.15324544270834e+3
+  - 9.7419335937504e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 255
+      length: 1
+    - location: 259
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 259
+  text: third is to capture the value from one actor and then pass it to the other
+  formattingOptions: []
+  position:
+  - 3.222763671875e+3
+  - 1.05242578125004e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 258
+      length: 1
+  _effectiveHeight: 4.2e+1
