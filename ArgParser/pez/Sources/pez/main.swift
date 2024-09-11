@@ -1,25 +1,68 @@
 import Foundation
 import ArgumentParser
 
-private let version = "0.1.0"
-
-// Sigh.  #ilyswift
-@available(macOS 10.15, *)
+enum MarkDisms: String {
+    case forgotProjector
+    case leftPhoneInCar
+    case ilyxc
+}
 
 @main
 struct Pez: AsyncParsableCommand {
     static var configuration = CommandConfiguration(
       commandName: "pez",
+      abstract: "It Smells Like Pez. Don't let what's his butt forget the projector",
+      subcommands: [DownloadPezCommand.self])
+
+    @Option(parsing: .next,
+            help: "Fnord greeble ekky hoover ni bork",
+            transform: MarkDisms.init)
+    var bork: MarkDisms? = .ilyxc
+
+    @Option(help: "More types!")
+    var scale: Double = 1.0
+
+    @OptionGroup var globalOptions: GlobalOptions
+
+    mutating func run() async throws {
+        print("\n\n")
+        print("base command - \(100 * scale)")
+
+        if let bork {
+            print("\(bork)")
+        }
+        if globalOptions.verbose {
+            print("  all your base are belong to pez")
+        }
+    }
+}
+
+struct GlobalOptions: ParsableArguments {
+    @Flag(help: "Be chatty")
+    var verbose = false
+
+    @Option(help: "splunge")
+    var splunge = ""
+}
+
+
+struct DownloadPezCommand: AsyncParsableCommand {
+    static var configuration = CommandConfiguration(
+      commandName: "download-pez",
       abstract: "It Smells Like Pez. Don't let what's his butt forget the projector")
 
     @Argument(help: "This is a required argument")
     var required: String
 
-    @Flag(help: "Reverse the ouptut")
+    @Flag(name: .shortAndLong,
+          help: "Reverse the ouptut")
     var reverse: Bool = false
 
-    @Option(help: "Truncate the output to _ characters")
+    @Option(name: [.customShort("x"), .customLong("enshorten")],
+            help: "Truncate the output to _ characters")
     var truncation: Int?
+
+    @OptionGroup var gloptions: GlobalOptions
 
     mutating func run() async throws {
         print("\n\n")
@@ -44,10 +87,9 @@ struct Pez: AsyncParsableCommand {
         }
 
         print(string)
-    }
-
-    mutating func run() throws {
-        print("yay2 pez: \(required)")
+        
+        if gloptions.verbose {
+            print("  all your pez are belong to base")
+        }
     }
 }
-
