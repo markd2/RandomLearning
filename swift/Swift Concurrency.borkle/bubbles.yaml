@@ -317,8 +317,8 @@
     blue: 9.76506e-1
   formattingOptions: []
   position:
-  - 3.20783394340035e+3
-  - 2.37393411276233e+2
+  - 3.35653511527535e+3
+  - 4.72679869609566e+2
   width: 6e+1
   connections:
     indexes:
@@ -345,6 +345,12 @@
     - location: 225
       length: 1
     - location: 228
+      length: 1
+    - location: 245
+      length: 1
+    - location: 250
+      length: 1
+    - location: 263
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 17
@@ -498,8 +504,8 @@
   text: Protect shared mutable state from being accessed from multiple threads
   formattingOptions: []
   position:
-  - 3.22180274803322e+3
-  - 3.8285178103147e+2
+  - 3.69750912824155e+3
+  - 3.7185568728147e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -763,20 +769,24 @@
   text: reference semantics, like classes
   formattingOptions: []
   position:
-  - 3.16709940450174e+3
-  - 1.71648218968545e+2
+  - 3.29640604512674e+3
+  - 4.04958765843545e+2
   width: 1.9e+2
   connections:
     indexes:
     - location: 16
+      length: 1
+    - location: 231
+      length: 1
+    - location: 244
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 49
   text: All UI done on MainActor
   formattingOptions: []
   position:
-  - 3.05320790537587e+3
-  - 3.34866641171342e+2
+  - 3.15467274912587e+3
+  - 5.37402448463009e+2
   width: 9e+1
   connections:
     indexes:
@@ -791,9 +801,9 @@
   text: '"using the main actor to manage access to the main thread"'
   formattingOptions: []
   position:
-  - 2.85194916411713e+3
-  - 3.31373415646866e+2
-  width: 1.6e+2
+  - 3.00646088286713e+3
+  - 5.61529665646866e+2
+  width: 1.3e+2
   connections:
     indexes:
     - location: 49
@@ -803,8 +813,8 @@
   text: Mark ObservableObjets with @MainActor
   formattingOptions: []
   position:
-  - 3.34089147180944e+3
-  - 2.40110030594419e+2
+  - 3.48900670618444e+3
+  - 4.77912764969419e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1356,14 +1366,14 @@
     for running stuff on main thread'
   formattingOptions: []
   position:
-  - 2.96243266499125e+3
-  - 2.20848663321682e+2
-  width: 1.6e+2
+  - 3.06154399311625e+3
+  - 4.86454132071682e+2
+  width: 1.8e+2
   connections:
     indexes:
     - location: 16
       length: 1
-  _effectiveHeight: 4.2e+1
+  _effectiveHeight: 2.8e+1
 - ID: 92
   text: Migrating from closures
   fillColorRGB:
@@ -1844,8 +1854,8 @@
   text: '"the job of an actor is to resstrict access to shared mutable state"'
   formattingOptions: []
   position:
-  - 3.41478064903839e+3
-  - 2.83755408653883e+2
+  - 3.56289588341339e+3
+  - 5.21558143028883e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1856,9 +1866,9 @@
   text: await MainActor.run { }
   formattingOptions: []
   position:
-  - 2.90544170673071e+3
-  - 2.91558894230811e+2
-  width: 1.6e+2
+  - 3.00913636818904e+3
+  - 5.36112930689144e+2
+  width: 1.3e+2
   connections:
     indexes:
     - location: 49
@@ -1872,8 +1882,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.04108473557688e+3
-  - 1.61748197115426e+2
+  - 3.05162510016021e+3
+  - 3.85286608573759e+2
   width: 6e+1
   connections:
     indexes:
@@ -1881,13 +1891,17 @@
       length: 1
     - location: 129
       length: 2
+    - location: 242
+      length: 2
+    - location: 246
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 129
   text: something isolated must run on the actor that it is connected to
   formattingOptions: []
   position:
-  - 2.91583533653842e+3
-  - 3.48491586538875e+1
+  - 2.86746294070509e+3
+  - 2.89526893028887e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1899,8 +1913,8 @@
     to the isolated parts of the actor without taking extra steps
   formattingOptions: []
   position:
-  - 3.09334134615381e+3
-  - 5.98221153846569e+1
+  - 3.05834134615381e+3
+  - 2.80251802884657e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1976,8 +1990,8 @@
   text: Actors are Sendable
   formattingOptions: []
   position:
-  - 3.28455829326922e+3
-  - 1.99644831730824e+2
+  - 3.43267352764422e+3
+  - 4.37447566105824e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3127,8 +3141,8 @@
     ctor to only one Task at a time"'
   formattingOptions: []
   position:
-  - 3.33605168269318e+3
-  - 5.67572115387342e+1
+  - 3.48416691706818e+3
+  - 2.94559945913734e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3139,8 +3153,8 @@
   text: helps prevent race conditions
   formattingOptions: []
   position:
-  - 3.43231670673163e+3
-  - 1.94560697115669e+2
+  - 3.58043194110663e+3
+  - 4.32363431490669e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -3153,9 +3167,9 @@
   text: but don't hold on to an actor for too long, or you'll cause a bottleneck
   formattingOptions: []
   position:
-  - 3.54875901442394e+3
-  - 2.27742788461815e+2
-  width: 1.6e+2
+  - 3.71121018629894e+3
+  - 4.60350210336815e+2
+  width: 1.4e+2
   connections:
     indexes:
     - location: 217
@@ -3165,8 +3179,8 @@
   text: 'actors cut across our code in a different dimension than class.  '
   formattingOptions: []
   position:
-  - 3.20147536057779e+3
-  - 4.75828725961815e+2
+  - 3.40852288661946e+3
+  - 6.31828074920148e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3180,8 +3194,8 @@
     because they might not be immediately available
   formattingOptions: []
   position:
-  - 3.38759014423163e+3
-  - 5.00329927884893e+2
+  - 3.5928310296483e+3
+  - 7.29919771634893e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -3189,21 +3203,23 @@
       length: 1
   _effectiveHeight: 8.4e+1
 - ID: 221
-  text: TaskLocal properties
+  text: Communicating Between Tasks
   fillColorRGB:
     red: 8.96043e-1
     green: 9.97437e-1
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.11283653846238e+3
-  - 5.4895673076951e+2
-  width: 1.2e+2
+  - 3.27573041867071e+3
+  - 7.57553735977843e+2
+  width: 9e+1
   connections:
     indexes:
     - location: 16
       length: 1
-  _effectiveHeight: 1.4e+1
+    - location: 253
+      length: 3
+  _effectiveHeight: 2.8e+1
 - ID: 222
   text: '@MainActor'
   fillColorRGB:
@@ -3212,8 +3228,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 3.14878305288546e+3
-  - 2.7528485576951e+2
+  - 3.26088591746879e+3
+  - 4.9970868389451e+2
   width: 8e+1
   connections:
     indexes:
@@ -3221,15 +3237,15 @@
       length: 1
     - location: 49
       length: 1
-    - location: 224
+    - location: 260
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 223
   text: MainActoring the class is automatically inhertied by extensions
   formattingOptions: []
   position:
-  - 2.863064903847e+3
-  - 3.96246394231042e+2
+  - 2.84527844551367e+3
+  - 5.46386368189375e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -3242,20 +3258,20 @@
     nonisolated private func ...'
   formattingOptions: []
   position:
-  - 3.01425781250085e+3
-  - 3.98394831731041e+2
+  - 2.99286458333418e+3
+  - 6.79582982772708e+2
   width: 1.6e+2
   connections:
     indexes:
-    - location: 222
+    - location: 250
       length: 1
   _effectiveHeight: 5.6e+1
 - ID: 225
   text: Imagine actors as islands
   formattingOptions: []
   position:
-  - 3.28881310096238e+3
-  - 3.10978966346426e+2
+  - 3.43692833533738e+3
+  - 5.48781700721426e+2
   width: 9e+1
   connections:
     indexes:
@@ -3268,8 +3284,8 @@
   text: default is property and method access are isolated to that island
   formattingOptions: []
   position:
-  - 3.42598257211623e+3
-  - 3.4353605769258e+2
+  - 3.57409780649123e+3
+  - 5.8133879206758e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -3281,8 +3297,8 @@
     the isolated members of the island
   formattingOptions: []
   position:
-  - 3.40210937500085e+3
-  - 4.0418810096181e+2
+  - 3.60018880208418e+3
+  - 6.42407502003477e+2
   width: 1.5e+2
   connections:
     indexes:
@@ -3297,8 +3313,8 @@
     blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 2.91868689903932e+3
-  - 5.05140625000272e+2
+  - 3.35790890424765e+3
+  - 6.91755208333605e+2
   width: 1e+2
   connections:
     indexes:
@@ -3311,8 +3327,8 @@
   text: does not capture self
   formattingOptions: []
   position:
-  - 2.84554086538547e+3
-  - 5.39215144231041e+2
+  - 3.45266977163547e+3
+  - 7.27981420272708e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -3323,11 +3339,652 @@
   text: does not inherit the context of the containing method
   formattingOptions: []
   position:
-  - 2.89910757211624e+3
-  - 5.76709134615656e+2
+  - 3.38191030649124e+3
+  - 7.57649889823989e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 228
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 231
+  text: actor model invented by Carl Hewitt
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.34147135416667e+3
+  - 3.38832027916667e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 48
+      length: 1
+    - location: 232
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 232
+  text: actor is the fundamental unit of computation
+  formattingOptions: []
+  position:
+  - 3.241484375e+3
+  - 2.8456119791667e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 231
+      length: 1
+    - location: 233
+      length: 1
+    - location: 237
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 233
+  text: embodying
+  formattingOptions: []
+  position:
+  - 3.21546549479167e+3
+  - 2.4466861979167e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 232
+      length: 1
+    - location: 234
+      length: 3
+  _effectiveHeight: 1.4e+1
+- ID: 234
+  text: 'Processing
+
+    (getting things done)'
+  formattingOptions: []
+  position:
+  - 3.0966796875e+3
+  - 1.92259765625007e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 233
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 235
+  text: 'Storage
+
+    (to remember things)'
+  formattingOptions: []
+  position:
+  - 3.15234700520833e+3
+  - 1.43809244791674e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 233
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 236
+  text: communication
+  formattingOptions: []
+  position:
+  - 3.242216796875e+3
+  - 1.97090494791674e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 233
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 237
+  text: mailbox metaphor - they must have addresses so that an actor can send a message
+    to another actor.  All work is done through these messages
+  formattingOptions: []
+  position:
+  - 3.34784505208333e+3
+  - 1.76289713541674e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 232
+      length: 1
+    - location: 238
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 238
+  text: can do one or more of three things
+  formattingOptions: []
+  position:
+  - 3.54794921875e+3
+  - 2.06201822916674e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 237
+      length: 1
+    - location: 239
+      length: 3
+  _effectiveHeight: 2.8e+1
+- ID: 239
+  text: can create one or more actors
+  formattingOptions: []
+  position:
+  - 3.68895833333333e+3
+  - 2.58789713541674e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 238
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 240
+  text: can send a message to one or more actors it has addresses for
+  formattingOptions: []
+  position:
+  - 3.66615234375e+3
+  - 3.10427083333341e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 238
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 241
+  text: can designate what it's going to do with the next message it receives
+  formattingOptions: []
+  position:
+  - 3.59989908854167e+3
+  - 1.35414062500007e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 238
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 242
+  text: by default properties and methods of an actor are isolated
+  formattingOptions: []
+  position:
+  - 2.84628255208333e+3
+  - 3.67035156250006e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 243
+  text: If a task is accessing or mutating a property or calling a method, all other
+    tasks must wait until the current task has finished
+  formattingOptions: []
+  position:
+  - 2.84798828125e+3
+  - 4.3269270833335e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 244
+  text: no inheritance
+  formattingOptions: []
+  position:
+  - 3.22889322916667e+3
+  - 3.6830794270835e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 48
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 245
+  text: intended to be shared resources
+  formattingOptions: []
+  position:
+  - 3.10573567708333e+3
+  - 4.42640625000017e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 246
+  text: 'an await in an isolated method can cause current task to suspend, then someone
+    else come through the isolated method. '
+  formattingOptions: []
+  position:
+  - 2.85960286458336e+3
+  - 1.91533854166663e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 128
+      length: 1
+    - location: 247
+      length: 2
+  _effectiveHeight: 7e+1
+- ID: 247
+  text: you're giving up control of the actor, and letting others contend for the
+    resource
+  formattingOptions: []
+  position:
+  - 2.85531575520835e+3
+  - 1.0625716145832e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 246
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 248
+  text: so be careful; to make sure that we only use await inside an actor when we
+    need to, and to preserve state on either side
+  formattingOptions: []
+  position:
+  - 3.02701171875002e+3
+  - 6.96979166666531e+1
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 246
+      length: 1
+    - location: 249
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 249
+  text: re-entrancy issues.  Actors aren't a panacea for all things concurrency
+  formattingOptions: []
+  position:
+  - 3.17132161458335e+3
+  - 7.15729166666514e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 248
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 250
+  text: nonisolated
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.19762044270835e+3
+  - 6.64815104166649e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 224
+      length: 1
+    - location: 251
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 251
+  text: '"things that require your attention" (making coffee) - isolated vs "things
+    that don''t require attention" (looking at the time) - nonisolated'
+  formattingOptions: []
+  position:
+  - 2.88223958333335e+3
+  - 8.10179687499982e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 250
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 252
+  text: a method that doesn't access an isolated property or methodi s agood candidate
+    for nonisolated
+  formattingOptions: []
+  position:
+  - 2.94523111979169e+3
+  - 7.34424479166648e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 250
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 253
+  text: Each actor is a potential bottleneck preventing multiple Tasks from accessing
+    it at the same time
+  formattingOptions: []
+  position:
+  - 3.27709309895833e+3
+  - 8.31387369791651e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 221
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 254
+  text: comms between tasks involves asking for exclusive access to multiple resources
+    to accomplish a single objective
+  formattingOptions: []
+  position:
+  - 3.38055338541667e+3
+  - 9.14590494791651e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 221
+      length: 1
+    - location: 256
+      length: 2
+  _effectiveHeight: 7e+1
+- ID: 255
+  text: first rule is to see if you can avoid doing so
+  formattingOptions: []
+  position:
+  - 3.46624348958334e+3
+  - 8.37302083333318e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 221
+      length: 1
+    - location: 258
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 256
+  text: get a value from one resource, stash it into a local, then use it with another
+    resource
+  formattingOptions: []
+  position:
+  - 3.45913411458334e+3
+  - 1.01607486979171e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 254
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 257
+  text: try not to get clever and stack multipe actors together in one call
+  formattingOptions: []
+  position:
+  - 3.55692057291667e+3
+  - 9.54831380208375e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 254
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 258
+  text: 'second is to minimizse the issue '
+  formattingOptions: []
+  position:
+  - 3.57274739583333e+3
+  - 9.04079427083373e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 255
+      length: 1
+    - location: 259
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 259
+  text: third is to capture the value from one actor and then pass it to the other
+  formattingOptions: []
+  position:
+  - 3.64383138020833e+3
+  - 8.3557031250004e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 258
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 260
+  text: there's only one of them, and it is somehow global
+  formattingOptions: []
+  position:
+  - 3.14828450520834e+3
+  - 5.80462890625055e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 222
+      length: 1
+    - location: 261
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 261
+  text: Make global actors by decorating with @globalActor
+  formattingOptions: []
+  position:
+  - 2.99029947916665e+3
+  - 6.34125000000059e+2
+  width: 1.7e+2
+  connections:
+    indexes:
+    - location: 260
+      length: 1
+    - location: 262
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 262
+  text: Also gives you an e.g. @ProgressMonitor decoration for running on that actor
+  formattingOptions: []
+  position:
+  - 2.84130208333332e+3
+  - 6.59391927083392e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 261
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 263
+  text: TaskLocal Values
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 3.12507161458333e+3
+  - 7.71032552083295e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 264
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 264
+  text: Can set values for certain tasks and they'll be available in child Tasks as
+    well.
+  formattingOptions: []
+  position:
+  - 3.06663736979167e+3
+  - 8.44753255208295e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 263
+      length: 1
+    - location: 265
+      length: 1
+    - location: 267
+      length: 1
+    - location: 269
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 265
+  text: its a static var with a default value
+  formattingOptions: []
+  position:
+  - 2.87742838541667e+3
+  - 9.06553385416628e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 264
+      length: 1
+    - location: 266
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 266
+  text: if access outside of a context which it has been set, will get that default
+    value
+  formattingOptions: []
+  position:
+  - 2.8695703125e+3
+  - 9.82432291666628e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 265
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 267
+  text: "inside of a task, set its value with e.g.\ntry await Tracker.$searchTerm.withValue(rawText)
+    {\n    // closure in which searchTerm will have that value\n}"
+  formattingOptions: []
+  position:
+  - 3.05933268229167e+3
+  - 9.23490234374964e+2
+  width: 2.9e+2
+  connections:
+    indexes:
+    - location: 264
+      length: 1
+    - location: 268
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 268
+  text: $searchTerm is a TaskLocal<String>
+  formattingOptions: []
+  position:
+  - 3.16460611979167e+3
+  - 9.9621158854163e+2
+  width: 2e+2
+  connections:
+    indexes:
+    - location: 267
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 269
+  text: get with simple Tracker.searchTerm
+  formattingOptions: []
+  position:
+  - 3.01175130208333e+3
+  - 1.0215989583333e+3
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 264
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 270
+  text: Distributed Actors
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 3.228642578125e+3
+  - 1.10400781249995e+3
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 271
+      length: 1
+    - location: 275
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 271
+  text: 'reminder of the fallacies of distributed computing (Peter Deutsch)
+
+    * Network is reliable
+
+    * Latency is zero
+
+    * Bandwidth is infinite
+
+    * Network is secure
+
+    * Toplogy doesn''t change
+
+    * There is a single administrator
+
+    * Transport cost is free
+
+    * The network is homogenous'
+  formattingOptions: []
+  position:
+  - 3.0944140625e+3
+  - 1.14173893229162e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 270
+      length: 1
+    - location: 272
+      length: 2
+  _effectiveHeight: 1.82e+2
+- ID: 272
+  text: a remote call can fail
+  formattingOptions: []
+  position:
+  - 2.96291341145833e+3
+  - 1.19329166666662e+3
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 271
+      length: 1
+    - location: 274
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 273
+  text: a remote call can take a while
+  formattingOptions: []
+  position:
+  - 2.95053385416667e+3
+  - 1.25242578124995e+3
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 271
+      length: 1
+    - location: 274
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 274
+  text: Hence haver to try await all of them
+  formattingOptions: []
+  position:
+  - 2.84022135416667e+3
+  - 1.21383854166662e+3
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 272
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 275
+  text: '* distributed keyword
+
+    * import Distributed module'
+  formattingOptions: []
+  position:
+  - 3.29316731770833e+3
+  - 1.16407617187495e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 270
       length: 1
   _effectiveHeight: 2.8e+1
