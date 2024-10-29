@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="SqueakyToy" Author="" Modified="2024-07-08 09:28:41 -0400" ModID="C8B0AD29-1614-40C4-B2B0-5BD70A0489D2">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="SqueakyToy" Author="" Modified="2024-10-29 17:12:09 -0400" ModID="81727CC2-1843-4872-A18F-B6E13CD78A0B">
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
@@ -15,98 +15,129 @@
                     <TextSettings>
                         <TextSelection>323,0</TextSelection>
                     </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4" Type="Text" Created="2024-07-07 18:00:42 -0400" Modified="2024-07-08 09:28:41 -0400">
-                    <Title>Benchmarking</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>949,0</TextSelection>
-                    </TextSettings>
                     <Children>
-                        <BinderItem UUID="C1DD02B5-E104-40F2-B910-750B9D444DB6" Type="Text" Created="2024-07-07 18:15:46 -0400" Modified="2024-07-07 18:17:27 -0400">
-                            <Title>csh time builtin output format</Title>
+                        <BinderItem UUID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4" Type="Text" Created="2024-07-07 18:00:42 -0400" Modified="2024-07-08 09:28:41 -0400">
+                            <Title>Benchmarking</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>581,0</TextSelection>
+                                <TextSelection>949,0</TextSelection>
+                            </TextSettings>
+                            <Children>
+                                <BinderItem UUID="C1DD02B5-E104-40F2-B910-750B9D444DB6" Type="Text" Created="2024-07-07 18:15:46 -0400" Modified="2024-07-07 18:17:27 -0400">
+                                    <Title>csh time builtin output format</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>581,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
+                        </BinderItem>
+                        <BinderItem UUID="F40AE388-1C45-493D-AF10-31C1A82B1D5A" Type="Text" Created="2024-07-07 17:32:45 -0400" Modified="2024-07-07 20:50:57 -0400">
+                            <Title>Arrays (part 1)</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>808,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="FB15E44A-6E03-4785-BC39-87C5FE716CF7" Type="Text" Created="2024-07-07 19:19:13 -0400" Modified="2024-07-07 19:38:54 -0400">
+                            <Title>Structure Layout</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1228,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="3235AABD-C6FC-41FE-BF87-81C6694566F1" Type="Text" Created="2024-07-07 17:48:26 -0400" Modified="2024-07-07 20:50:30 -0400">
+                            <Title>Inline representation</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1603,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="BA1108B6-D88C-4C58-9629-189F748F2CFE" Type="Text" Created="2024-07-07 18:43:10 -0400" Modified="2024-07-07 22:15:02 -0400">
+                            <Title>More than a copy</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>853,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE" Type="Text" Created="2024-07-07 22:15:05 -0400" Modified="2024-07-07 22:40:50 -0400">
+                            <Title>Arrays (part 2)</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>788,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="EAAE4896-FE10-41C8-B75B-D849D5D4837F" Type="Text" Created="2024-07-07 22:41:01 -0400" Modified="2024-07-07 22:58:42 -0400">
+                            <Title>Protocols</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1064,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4" Type="Text" Created="2024-07-07 22:58:45 -0400" Modified="2024-07-07 22:59:22 -0400">
+                            <Title>Existential Containers</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>194,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D" Type="Text" Created="2024-07-07 23:14:13 -0400" Modified="2024-07-07 23:17:45 -0400">
+                            <Title>Compiler Knows Things</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>872,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem UUID="F40AE388-1C45-493D-AF10-31C1A82B1D5A" Type="Text" Created="2024-07-07 17:32:45 -0400" Modified="2024-07-07 20:50:57 -0400">
-                    <Title>Arrays (part 1)</Title>
+                <BinderItem UUID="C50A3C19-EF63-4307-A97F-85C2EFBBC7AB" Type="Text" Created="2024-10-29 16:57:05 -0400" Modified="2024-10-29 16:57:09 -0400">
+                    <Title>Swift Testing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>808,0</TextSelection>
+                        <TextSelection>0,0</TextSelection>
                     </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="FB15E44A-6E03-4785-BC39-87C5FE716CF7" Type="Text" Created="2024-07-07 19:19:13 -0400" Modified="2024-07-07 19:38:54 -0400">
-                    <Title>Structure Layout</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>1228,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="3235AABD-C6FC-41FE-BF87-81C6694566F1" Type="Text" Created="2024-07-07 17:48:26 -0400" Modified="2024-07-07 20:50:30 -0400">
-                    <Title>Inline representation</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>1603,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="BA1108B6-D88C-4C58-9629-189F748F2CFE" Type="Text" Created="2024-07-07 18:43:10 -0400" Modified="2024-07-07 22:15:02 -0400">
-                    <Title>More than a copy</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>853,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE" Type="Text" Created="2024-07-07 22:15:05 -0400" Modified="2024-07-07 22:40:50 -0400">
-                    <Title>Arrays (part 2)</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>788,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="EAAE4896-FE10-41C8-B75B-D849D5D4837F" Type="Text" Created="2024-07-07 22:41:01 -0400" Modified="2024-07-07 22:58:42 -0400">
-                    <Title>Protocols</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>1064,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4" Type="Text" Created="2024-07-07 22:58:45 -0400" Modified="2024-07-07 22:59:22 -0400">
-                    <Title>Existential Containers</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>194,0</TextSelection>
-                    </TextSettings>
-                </BinderItem>
-                <BinderItem UUID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D" Type="Text" Created="2024-07-07 23:14:13 -0400" Modified="2024-07-07 23:17:45 -0400">
-                    <Title>Compiler Knows Things</Title>
-                    <MetaData>
-                        <IncludeInCompile>Yes</IncludeInCompile>
-                    </MetaData>
-                    <TextSettings>
-                        <TextSelection>872,0</TextSelection>
-                    </TextSettings>
+                    <Children>
+                        <BinderItem UUID="4D3CF17A-C9DB-4703-864D-115FCC3E8777" Type="Text" Created="2024-10-29 16:57:12 -0400" Modified="2024-10-29 17:11:57 -0400">
+                            <Title>Bucket of Notes</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1628,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem UUID="9244C190-7AFE-4065-A947-59F2898F796E" Type="Text" Created="2024-10-29 17:05:11 -0400" Modified="2024-10-29 17:12:09 -0400">
+                            <Title>Syntax bits</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>45,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                    </Children>
                 </BinderItem>
             </Children>
         </BinderItem>
@@ -177,12 +208,12 @@
     </StatusSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-07-09 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="56" Characters="307" Date="2024-07-08 09:23:36 -0400"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-10-30 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="209" Characters="1698" Date="2024-10-29 16:56:40 -0400"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2024-07-08 00:00:00 -0400">
-        <DraftWordCount>56</DraftWordCount>
-        <DraftCharCount>307</DraftCharCount>
+    <RecentWritingHistory Date="2024-10-29 00:00:00 -0400">
+        <DraftWordCount>209</DraftWordCount>
+        <DraftCharCount>1698</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>

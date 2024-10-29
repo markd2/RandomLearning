@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
+        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
+            <Title>Swift Under the Hood</Title>
+            <Text># Swift under the hood
+
+Things like in-memory representation, existential containers, witness tables, etc.
+
+Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.
+
+"you should have an intuition for what performance different language features give you"
+
+I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
+</Text>
+        </Document>
+        <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
+            <Title>csh time builtin output format</Title>
+            <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
+
+%U
+The time the process spent in user mode in cpu seconds.
+
+%S
+The time the process spent in kernel mode in cpu seconds.
+
+%E
+The elapsed (wall clock) time in seconds.
+
+%P
+The CPU percentage computed as (%U + %S) / %E.
+
+
+%X
+The average amount in (shared) text space used in Kbytes.
+%D
+The average amount in (unshared) data/stack space used in Kbytes.
+
+%I
+The number of input operations.
+%O
+The number of output operations.
+
+%F
+The number of major page faults (page needed to be brought from disk).
+%W
+Number of times the process was swapped.
+
+</Text>
+        </Document>
+        <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
+            <Title>Benchmarking</Title>
+            <Text>## Benchmarking
+
+I was going to do some really cheesy benchmarking but ran out of time.
+
+But folks might not realize the disparity between Swift's performance in debug and release mode.
+
+Make sure you're optimizing if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.
+
+for example
+
+test-opt.swift
+
+let n = 10000
+var x = [Int](repeating: 1, count: n)
+
+for i in 0 ..&lt; n {
+    for j in 0 ..&lt; n {
+        x[i] ^= x[j] &lt;&lt; (i+j) % 16
+    }
+}
+print("blah: \(x[0])")
+
+% swiftc    test-opt.swift -o tg
+% swiftc -O test-opt.swift -o to
+
+
+% time ./to
+blah: 14
+0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
+
+while tg is running, explain the output of time
+
+% time ./tg
+blah: 14
+26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
+
+
+So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
+</Text>
+        </Document>
         <Document ID="EAAE4896-FE10-41C8-B75B-D849D5D4837F">
             <Title>Protocols</Title>
             <Text>## Protocols
@@ -56,48 +145,6 @@ The alignment of 8 implies that there's a data type that requires 8-byte alignme
 
 </Text>
         </Document>
-        <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
-            <Title>Benchmarking</Title>
-            <Text>## Benchmarking
-
-I was going to do some really cheesy benchmarking but ran out of time.
-
-But folks might not realize the disparity between Swift's performance in debug and release mode.
-
-Make sure you're optimizing if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.
-
-for example
-
-test-opt.swift
-
-let n = 10000
-var x = [Int](repeating: 1, count: n)
-
-for i in 0 ..&lt; n {
-    for j in 0 ..&lt; n {
-        x[i] ^= x[j] &lt;&lt; (i+j) % 16
-    }
-}
-print("blah: \(x[0])")
-
-% swiftc    test-opt.swift -o tg
-% swiftc -O test-opt.swift -o to
-
-
-% time ./to
-blah: 14
-0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
-
-while tg is running, explain the output of time
-
-% time ./tg
-blah: 14
-26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
-
-
-So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
-</Text>
-        </Document>
         <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
             <Title>More than a copy</Title>
             <Text>## More than a copy
@@ -114,6 +161,119 @@ So, what if a struct contains references to objects? Those need to be retained a
 
 
 </Text>
+        </Document>
+        <Document ID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4">
+            <Title>Existential Containers</Title>
+            <Text>## Existential Containers
+
+one pointer for the witness table
+three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)
+and not sure what the other word is for
+
+</Text>
+        </Document>
+        <Document ID="4D3CF17A-C9DB-4703-864D-115FCC3E8777">
+            <Title>Bucket of Notes</Title>
+            <Text>Swift Testing
+
+New and improved testing frameworkke
+
+                                                                                                    
+
+https://developer.apple.com/xcode/swift-testing/
+
+Clear Expressive API
+
+* declare complex behaviors with a small amount of code
+* #expect uses Swift expressions and operators
+	- captures evaluated values so can quickly understand what went wrong
+* Parameterized tests run the same test over a sequence of values
+* integrate seamlessly with Swift Concurrency and run in parallel by default
+
+@Test("Continents mentioned in videos", arguments: [
+    "A Beach",
+    "By the Lake",
+    "Camping in the Woods"
+])
+func mentionedContinents(videoName: String) async throws {
+    let videoLibrary = try await VideoLibrary()
+    let video = try #require(await videoLibrary.video(named: videoName))
+    #expect(video.mentionedContinents.count &lt;= 3)
+}
+
+Custom test behaviors
+
+Can customize behavior of test/suites using traits.
+Can describe the runtime conditions for a test
+	- which device a test should ruin on
+	- limt test to a certain OS system versions
+	- help in CI by specifying execution time limits
+
+@Test(.enabled(if: AppFeatures.isCommentingEnabled))
+func videoCommenting() async throws {
+    let video = try #require(await videoLibrary.video(named: "A Beach"))
+    #expect(video.comments.contains("So picturesque!"))
+}
+
+Easy and Flexible Organization
+
+Provides many ways to keep your tests organized.
+	- structure related tests using a hierarchy of groups and subgroups
+	- apply tags to flexibly manage, edit, and run tests with common characteristics across your test suite
+
+</Text>
+        </Document>
+        <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
+            <Title>Compiler Knows Things</Title>
+            <Text>## Compiler knows things
+
+If the compiler has no other recourse, it'll use existential containers:
+
+func blah2(snorgles: [any Snorgle]) {
+    print("  size: \(MemoryLayout&lt;any Snorgle&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")
+}
+blah2(snorgles: [thing1, thing2])
+
+which prints out the existential container size. But notice we can pass any kind of snorgle in there.
+
+Because generics are known at compile time:
+
+func blahArray&lt;T: Snorgle&gt;(snorgles: [T]) {
+    print("  size: \(MemoryLayout&lt;T&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;T&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;T&gt;.alignment)")
+}
+
+can call with a uniform type
+blahArray(snorgles: [thing1])
+blahArray(snorgles: [thing2])
+
+and the actual sizes are known (so no dispatching through an existential container)
+</Text>
+        </Document>
+        <Document ID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE">
+            <Title>Arrays (part 2)</Title>
+            <Text>## Arrays part 2.  Moo
+
+So, if you remember arrays part 1, you know that array storage is a linear chunk of stuff with the array contents laid end to end (using the _stride_ of the struct). This brings up a couple of interesting questions.
+
+axiom #1: Arrays are value types . Structs are passed by copy. Copying a million element array, is kind of expensive. 
+
+So arrays are implemented as a struct (yay value type), which wraps an object (yay reference type).  
+
+The array points to its backing store.  If you pass the array around, small structs get peeled off, but all referencing the same dingus
+
+(illustration)
+
+if someone modifies the array, it'll make a copy(*) first, and then modify that. "Copy on Write". So the expensive operation is paid by the one who is doing the copying.
+
+
+</Text>
+        </Document>
+        <Document ID="C50A3C19-EF63-4307-A97F-85C2EFBBC7AB">
+            <Title>Syntax bits</Title>
         </Document>
         <Document ID="FB15E44A-6E03-4785-BC39-87C5FE716CF7">
             <Title>Structure Layout</Title>
@@ -194,72 +354,6 @@ huh.  Where'd all the numbers go?
 
 </Text>
         </Document>
-        <Document ID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE">
-            <Title>Arrays (part 2)</Title>
-            <Text>## Arrays part 2.  Moo
-
-So, if you remember arrays part 1, you know that array storage is a linear chunk of stuff with the array contents laid end to end (using the _stride_ of the struct). This brings up a couple of interesting questions.
-
-axiom #1: Arrays are value types . Structs are passed by copy. Copying a million element array, is kind of expensive. 
-
-So arrays are implemented as a struct (yay value type), which wraps an object (yay reference type).  
-
-The array points to its backing store.  If you pass the array around, small structs get peeled off, but all referencing the same dingus
-
-(illustration)
-
-if someone modifies the array, it'll make a copy(*) first, and then modify that. "Copy on Write". So the expensive operation is paid by the one who is doing the copying.
-
-
-</Text>
-        </Document>
-        <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
-            <Title>csh time builtin output format</Title>
-            <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
-
-%U
-The time the process spent in user mode in cpu seconds.
-
-%S
-The time the process spent in kernel mode in cpu seconds.
-
-%E
-The elapsed (wall clock) time in seconds.
-
-%P
-The CPU percentage computed as (%U + %S) / %E.
-
-
-%X
-The average amount in (shared) text space used in Kbytes.
-%D
-The average amount in (unshared) data/stack space used in Kbytes.
-
-%I
-The number of input operations.
-%O
-The number of output operations.
-
-%F
-The number of major page faults (page needed to be brought from disk).
-%W
-Number of times the process was swapped.
-
-</Text>
-        </Document>
-        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
-            <Title>Swift Under the Hood</Title>
-            <Text># Swift under the hood
-
-Things like in-memory representation, existential containers, witness tables, etc.
-
-Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.
-
-"you should have an intuition for what performance different language features give you"
-
-I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
-</Text>
-        </Document>
         <Document ID="F40AE388-1C45-493D-AF10-31C1A82B1D5A">
             <Text>## Arrays
 
@@ -278,14 +372,18 @@ SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went 
 
 </Text>
         </Document>
-        <Document ID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4">
-            <Title>Existential Containers</Title>
-            <Text>## Existential Containers
+        <Document ID="9244C190-7AFE-4065-A947-59F2898F796E">
+            <Title>Syntax bits</Title>
+            <Text>@Test
+#require
+#expect
 
-one pointer for the witness table
-three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)
-and not sure what the other word is for
+tests vs suites
 
+tags
+
+traits
+.enabled(if:)
 </Text>
         </Document>
         <Document ID="3235AABD-C6FC-41FE-BF87-81C6694566F1">
@@ -306,36 +404,6 @@ This is how the Value Semantics work. Because you have your own peeled-off copy,
 Classes though, are reference types.  When passing a reference type around, all you have to do is say "uh, hey, you can find this thing over there", giving it the address in memory where that object lives.  a.k.a. a pointer to the chunk of memory that has the object's properties.
 
 This means the inline representation for class instances is going to be the size of a pointer, which is going to be 8 bytes (iOS, Mac, etc), or 4 bytes (on Playdate and other embedded systems)
-</Text>
-        </Document>
-        <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
-            <Title>Compiler Knows Things</Title>
-            <Text>## Compiler knows things
-
-If the compiler has no other recourse, it'll use existential containers:
-
-func blah2(snorgles: [any Snorgle]) {
-    print("  size: \(MemoryLayout&lt;any Snorgle&gt;.size)")
-    print("  stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")
-    print("  alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")
-}
-blah2(snorgles: [thing1, thing2])
-
-which prints out the existential container size. But notice we can pass any kind of snorgle in there.
-
-Because generics are known at compile time:
-
-func blahArray&lt;T: Snorgle&gt;(snorgles: [T]) {
-    print("  size: \(MemoryLayout&lt;T&gt;.size)")
-    print("  stride: \(MemoryLayout&lt;T&gt;.stride)")
-    print("  alignment: \(MemoryLayout&lt;T&gt;.alignment)")
-}
-
-can call with a uniform type
-blahArray(snorgles: [thing1])
-blahArray(snorgles: [thing2])
-
-and the actual sizes are known (so no dispatching through an existential container)
 </Text>
         </Document>
     </Documents>

@@ -100,8 +100,10 @@
 <p class="itemText"><p class="p1"><span class="s1">I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
+<hr class="afterText"/>
+<ul>
 <li>
-<p class="topLevelItemTitle">Benchmarking</p>
+<p class="itemTitle">Benchmarking</p>
 <p class="itemText">## Benchmarking</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">I was going to do some really cheesy benchmarking but ran out of time.</span></p></p>
@@ -162,7 +164,7 @@
 <hr class="afterText"/>
 
 <li>
-<p class="topLevelItemTitle">Arrays (part 1)</p>
+<p class="itemTitle">Arrays (part 1)</p>
 <p class="itemText">## Arrays</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">In many performance-oriented languages, arrays have a particular implemention that makes them very fast for what they do.</span></p></p>
@@ -175,7 +177,7 @@
 <p class="itemText"><p class="p1"><span class="s1">And because arrays are in a contiguous chunka bytes, iterative scannin...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">Structure Layout</p>
+<p class="itemTitle">Structure Layout</p>
 <p class="itemText"># Structure Layout</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">C has pretty straightforward rules on how structures are represented in memory.<span class="Apple-converted-space">  </span>Structs defined from C will have the same size, layout, and alignment.</span></p></p>
@@ -204,7 +206,7 @@
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>let another...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">Inline representation</p>
+<p class="itemTitle">Inline representation</p>
 <p class="itemText">## Inline Representation</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">the inline representation is how a particular swift Thing is, well, represented in memory. <span class="Apple-converted-space"> </span></span></p></p>
@@ -214,7 +216,7 @@
 <p class="itemText"><p class="p1"><span class="s1">As we saw, the inline representation of a structure is the goodies in the structure.<span class="Apple-converted-space">  </span>I don't think it's officially documented (outside of random forum postings by Swift Core Team Members), but structs are generally laid out in memory l...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">More than a copy</p>
+<p class="itemTitle">More than a copy</p>
 <p class="itemText">## More than a copy</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">So, class instances need to be retained when used, and released when done with.<span class="Apple-converted-space">  </span>If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out.<span class="Apple-converted-space"> </span></span></p></p>
@@ -224,7 +226,7 @@
 <p class="itemText"><p class="p1"><span class="s1">When the reference count hits zero, the memory is freed.<span class="Apple-converted-space">  </span>Notice memory is freed, so that implies tha...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">Arrays (part 2)</p>
+<p class="itemTitle">Arrays (part 2)</p>
 <p class="itemText">## Arrays part 2.<span class="Apple-converted-space">  </span>Moo</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">So, if you remember arrays part 1, you know that array storage is a linear chunk of stuff with the array contents laid end to end (using the _stride_ of the struct). This brings up a couple of interesting questions.</span></p></p>
@@ -236,7 +238,7 @@
 <p class="itemText"><p class="p1"><span class="s1">The array points to its backing stor...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">Protocols</p>
+<p class="itemTitle">Protocols</p>
 <p class="itemText">## Protocols</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">One of swift's defining features is its ability to add layers of abstraction and polymorphism via protocols.<span class="Apple-converted-space">  </span>A protocol describes some subset of functionality (say "codable" or "human biometric provider")<span class="Apple-converted-space"> </span></span></p></p>
@@ -261,7 +263,7 @@
 <p class="itemText"><p class="p1"><span class="s1">extension Thing1: Snor...</p>
 </li>
 <li>
-<p class="topLevelItemTitle">Existential Containers</p>
+<p class="itemTitle">Existential Containers</p>
 <p class="itemText">## Existential Containers</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">one pointer for the witness table</span></p></p>
@@ -271,7 +273,7 @@
 <p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
 <li>
-<p class="topLevelItemTitle">Compiler Knows Things</p>
+<p class="itemTitle">Compiler Knows Things</p>
 <p class="itemText">## Compiler knows things</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">If the compiler has no other recourse, it'll use existential containers:</span></p></p>
@@ -287,6 +289,47 @@
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1">Because generics are known at compile time:...</p>
 </li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Swift Testing</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">Bucket of Notes</p>
+<p class="itemText">Swift Testing</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">New and improved testing frameworkke</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">                                                                                                    </span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">https://developer.apple.com/xcode/swift-testing/</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Clear Expressive API</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* declare complex behaviors with a small amount of code</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* #expect uses Swift expressions and operators</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- captures evaluated values so can quickly understand what went wrong</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* Parameterized tests run the same test over a sequence of values</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* integrate seamlessly with Swift...</p>
+</li>
+<li>
+<p class="itemTitle">Syntax bits</p>
+<p class="itemText">@Test</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#require</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#expect</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">tests vs suites</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">tags</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">traits</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">.enabled(if:)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+</ul>
 </ul>
 
 </td>
