@@ -1,8 +1,11 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2761
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Bold;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\froman\fcharset0 Palatino-BoldItalic;\f4\fswiss\fcharset0 Helvetica;\f5\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
 }
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
+{\colortbl;\red255\green255\blue255;\red22\green22\blue24;\red255\green255\blue255;\red109\green109\blue109;
+}
+{\*\expandedcolortbl;;\cssrgb\c11373\c11373\c12157;\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c50196\c50196;
+}
 \pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
 \f0\b\fs36 \cf0 Swift Testing
@@ -66,5 +69,816 @@ func videoCommenting() async throws \{\
 Provides many ways to keep your tests organized.\
 	- structure related tests using a hierarchy of groups and subgroups\
 	- apply tags to flexibly manage, edit, and run tests with common characteristics across your test suite\
+	- also give tests a descriptive name\
 \
+
+\f2 @Test("Check video metadata",\
+      .tags(.metadata))\
+func videoMetadata() \{\
+    let video = Video(fileName: "By the Lake.mov")\
+    let expectedMetadata = Metadata(duration: .seconds(90))\
+    #expect(video.metadata == expectedMetadata)\
+\}
+\f1 \
+\
+
+\f0\b Tooling\
+
+\f1\b0 \
+work with tests and suites inside of xcrud\
+inline presentations of tst results\
+re-run specific arguments for parameterized tests for debugging\
+\
+run from the command line using SPM (yay!)\
+\
+
+\f0\b Open Source / Cross Platform\
+
+\f1\b0 \
+works on all major platforms.\
+Tests can behave more consistently when moving between platforms.\
+open source\
+\
+
+\f0\b works with XCTest
+\f1\b0 \
+\
+can run side-by-side with newer SwiftTesting\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\qc\partightenfactor0
+\cf0 \ul \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\ulnone \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
+https://developer.apple.com/documentation/testing/\
+\
+
+\f0\b intro blurb\
+
+\f1\b0 Develop tests with more confidence and less code\
+integrates seamlessly with SPM testing workflow\
+customizable metadata\
+scalable test execution\
+\
+- define test functions almost anywhere with a single attribute\
+- group related tests into hierarchies using Swift's type system\
+- integrate seamlessly with Swift Concurrency\
+- Parameterize test functions\
+- enable tests dynamically depending on runtime conditions\
+	- hopefully there's a phase of moon attribute\
+- paralleize tests in-process\
+- categorize tests using tags\
+- associate bugs directly with the tests that verify their fixes or repro their problems\
+	- 
+\f3\i\b interesting
+\f1\i0\b0 \
+\
+
+\f0\b Defining Test Functions
+\f1\b0 \
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/definingtests"}}{\fldrslt https://developer.apple.com/documentation/testing/definingtests}}\
+\
+"definite a test function to validate that code is working correctly:\
+\
+Article assumes the package or project has already been configured with a test target (c.f. {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/Xcode/test-coverage"}}{\fldrslt https://developer.apple.com/documentation/Xcode/test-coverage}})\
+\
+
+\f2 import Testing\
+
+\f1 \
+Note:\
+	- Only import the testing liberry into a test target\
+	- importing into an application, libary, or binary target isn't supported / recommended\
+	- test functions aren't stripped from binaries when building for release, so all sorts of stuff could be visible\
+\
+
+\f0\b Declaring a test function
+\f1\b0 \
+\
+
+\f2 @Test func foodTruckExists() \{\
+    // test logic goes here\
+\}\
+
+\f1 \
+can be at file-scope or inside a type\
+\
+A type containing test functions is automatically a test suite.  c.f. {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/organizingtests"}}{\fldrslt https://developer.apple.com/documentation/testing/organizingtests}}\
+\
+The above function doesn't do much.  Add 
+\f0\b expectations
+\f1\b0  to the test function. c.f. Edmund Welles {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectations"}}{\fldrslt https://developer.apple.com/documentation/testing/expectations}}\
+\
+Can customize the test name's (so when it's surfaced in an IDE or command line" - can add a string literal to the @Test attribute\
+\
+
+\f2 @Test("Food truck exists") func foodTruckExists() \{ ... \}\
+
+\f1 \
+To further customize appearance and behavior of a test function, use traits like 
+\f2 tags(_:)
+\f1 \
+\
+
+\f0\b concurrent or throwing tests
+\f1\b0 \
+\
+can decorate the test with async / throws / @MainActor\
+\
+
+\f0\b limiting availability\
+\
+
+\f1\b0 For running on newer versions of OS or language, use @available.  e.g.\
+
+\f2 	@available(swift, introduced: 8.0, message: "Requires Swift 8.0 features to run")\
+
+\f1 \
+and can also use @available for things like an OS gate (@available(macOS 11.0, *))\
+\
+There's also migrating a test from XCTest, via {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/migratingfromxctest"}}{\fldrslt https://developer.apple.com/documentation/testing/migratingfromxctest}}\
+\
+
+\f0\b Test Suite Types
+\f1\b0 \
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/organizingtests"}}{\fldrslt https://developer.apple.com/documentation/testing/organizingtests}}\
+\
+When working with a large chunk of functions, helpful to organize them into test suites.\
+\
+Two ways\
+- placing it into a Swift type\
+- placing it in a swift type and annotating that type with the @Suite attributt\
+\
+@Suite isn't required to recognize a type contains test functions.  Does allow customization of the test's appearance in tooling.  Traits like tags/disabled are inherited by the test in the suite\
+\
+Can have nested test suites\
+\
+tests within a suite run in parallel. c.f. {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/parallelization"}}{\fldrslt https://developer.apple.com/documentation/testing/parallelization}}\
+\
+customizing name\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf0 @Suite("Food truck tests") struct FoodTruckTests \{\
+  @Test func foodTruckExists() \{ ... \}\
+\}\
+
+\f1 \
+
+\f0\b test functions in a test suite type
+\f1\b0 \
+\
+instance method test functions, the library calls that by initialziing an instance of the type, then calling the test function\
+\
+So these two are equivalent\
+\
+
+\f2 @Suite struct FoodTruckTests \{\
+  @Test func foodTruckExists() \{ ... \}\
+\}\
+\
+@Suite struct FoodTruckTests \{\
+  func foodTruckExists() \{ ... \}\
+\
+\
+  @Test static func staticFoodTruckExists() \{\
+    let instance = FoodTruckTests()\
+    instance.foodTruckExists()\
+  \}\
+\}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+
+\f0\b limitations / constraints on suite types\
+
+\f1\b0 \
+an initializer may be required\
+	- may be implicit or explicit\
+	- sync or async\
+	- throwing or non-thorwing\
+	- private/fileprivate / internal / package / public\
+\
+Test suite types must always be available - not annotated with @available\
+\
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/parallelization"}}{\fldrslt https://developer.apple.com/documentation/testing/parallelization}}\
+Running tests serially or in parallel\
+\
+testing library uses task groups, and tests all run in the same process.\
+\
+number of tests that run concurrently s controlled by the runtime\
+\
+parallelization can be disabled on a per-function or a per-suite basis using serialized\
+\
+
+\f2 @Test(.serialized, arguments: Food.allCases) func prepare(food: Food) \{\
+  // This function will be invoked serially, once per food, because it has the\
+  // .serialized trait.\
+\}\
+\
+\
+@Suite(.serialized) struct FoodTruckTests \{\
+  @Test(arguments: Condiment.allCases) func refill(condiment: Condiment) \{\
+    // This function will be invoked serially, once per condiment, because the\
+    // containing suite has the .serialized trait.\
+  \}\
+\
+\
+  @Test func startEngine() async throws \{\
+    // This function will not run while refill(condiment:) is running. One test\
+    // must end before the other will start.\
+  \}\
+\}
+\f1 \
+\
+when added to a parameterized test function, serialized causes that test to run its cases serially instead of paralle.\
+\
+When applied to a non-param test function, has no effect\
+\
+When applied to a test suite, causes it to run the contained test functions and sub-suites serially\
+\
+Recursively applied through embedded suites\
+\
+doesn't affect execution of a test relative to its peers or unrelated tests.\
+\
+has no effect if parallelization is globally disabled (e.g. --no-parallel to swift test)\
+\
+
+\f0\b Migrating from XCTest
+\f1\b0 \
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/migratingfromxctest"}}{\fldrslt https://developer.apple.com/documentation/testing/migratingfromxctest}}\
+\
+Can coexist in the same file\
+\
+XCTest groups related sets of test methods in test calsses inheriting from XCTestCase.\
+Can be free or global, or static or class members of a type.\
+\
+To convert XCTestCase to a suite, remove the XCTestCase CONFORMance.\
+\
+Swift structure or actor be used to better enforce concurrency saftey\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  ...\
+\}\
+\
+// After\
+struct FoodTruckTests \{\
+  ...\
+\}
+\f1 \
+\
+XCtest - setup and tear down.  Use init instead.  and deinit for teardown (but need a class for that)\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  var batteryLevel: NSNumber!\
+  override func setUp() async throws \{\
+    batteryLevel = 100\
+  \}\
+  ...\
+\}\
+\
+// After\
+struct FoodTruckTests \{\
+  var batteryLevel: NSNumber\
+  init() async throws \{\
+    batteryLevel = 100\
+  \}\
+  ...\
+\}
+\f1 \
+\
+XCTest is func testBlah() , while "the testing library" is @Test func blahblah(), so not name-driven any more.\
+\
+XCTest runs sync test methods on the main actor by default.  The Testing Library\'99 runs them on an arbitrary task.  Decorate with @MainActor if you need those semantics,\
+\
+or run the thread-sensitive code inside a call to MainActor.run(resultType:body:)\
+\
+instead of XCTAssertWhatever, use the #expect and #require macros.  They're\
+like XCTAssert except require throws an error if the condition isn't met\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testEngineWorks() throws \{\
+    let engine = FoodTruck.shared.engine\
+    XCTAssertNotNil(engine.parts.first)\
+    XCTAssertGreaterThan(engine.batteryLevel, 0)\
+    try engine.start()\
+    XCTAssertTrue(engine.isRunning)\
+  \}\
+  ....\
+\}\
+\
+// After\
+struct FoodTruckTests \{\
+  @Test func engineWorks() throws \{\
+    let engine = FoodTruck.shared.engine\
+    try #require(engine.parts.first != nil)\
+    #expect(engine.batteryLevel > 0)\
+    try engine.start()\
+    #expect(engine.isRunning)\
+  \}\
+  ...\
+\}\
+
+\f1 \
+XCTUnwrap to test if an optional is nil and throw if it does.\
+For The Testing Libary, use require with optional expressions to unwrap them\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testEngineWorks() throws \{\
+    let engine = FoodTruck.shared.engine\
+    let part = try XCTUnwrap(engine.parts.first)\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+struct FoodTruckTests \{\
+  @Test func engineWorks() throws \{\
+    let engine = FoodTruck.shared.engine\
+    let part = try #require(engine.parts.first)\
+    ...\
+  \}\
+  ...\
+\}\
+
+\f1 \
+XCTFail to fail immediately and uncondionally - useful when syntax prevents the use of XCTAssert\
+\
+To do this, use record.\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testEngineWorks() \{\
+    let engine = FoodTruck.shared.engine\
+    guard case .electric = engine else \{\
+      XCTFail("Engine is not electric")\
+      return\
+    \}\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+struct FoodTruckTests \{\
+  @Test func engineWorks() \{\
+    let engine = FoodTruck.shared.engine\
+    guard case .electric = engine else \{\
+      Issue.record("Engine is not electric")\
+      return\
+    \}\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+And comparison table\
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\parhyphenfactor20\partightenfactor0
+
+\f2\fs34 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 XCTest
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\parhyphenfactor20\partightenfactor0
+
+\f2 \cf2 Swift Testing
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssert(x)
+\f4 ,\'a0
+\f5 XCTAssertTrue(x)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertFalse(x)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(!x)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertNil(x)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x == nil)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertNotNil(x)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x != nil)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertEqual(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x == y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertNotEqual(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x != y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertIdentical(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x === y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertNotIdentical(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x !== y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertGreaterThan(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x > y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertGreaterThanOrEqual(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x >= y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertLessThanOrEqual(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x <= y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertLessThan(x, y)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(x < y)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertThrowsError(try f())
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(throws: (any Error).self) \{ try f() \}
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertThrowsError(try f()) \{ error in \'85 \}
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect \{ try f() \} throws: \{ error in return \'85 \}
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTAssertNoThrow(try f())
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 #expect(throws: Never.self) \{ try f() \}
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 try XCTUnwrap(x)
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 try #require(x)
+\f4 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 XCTFail("\'85")
+\f4 \cell 
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+
+\f5 \cf2 Issue.record("\'85")
+\f4 \cell \lastrow\row
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1\fs36 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+XCTestCas has continueAfterFailure, set to false to cause the test to stop runing after a failure occurs. (by throwing an objc exception) which tears through a swift stack frame causing damage (especialky an async function)\
+\
+use require to throw a swift error that throws on failure. other tests will continue to run\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testTruck() async \{\
+    continueAfterFailure = false\
+    XCTAssertTrue(FoodTruck.shared.isLicensed)\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+struct FoodTruckTests \{\
+  @Test func truck() throws \{\
+    try #require(FoodTruck.shared.isLicensed)\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+Validate async behaviors\
+\
+XCTEstExpectation / fulfilling expectaion, wait for it to be fulfilled\
+\
+Prefer to use Swift concurrency  to validate async conditions.\
+\
+if necessary to determine the result of an async swift function, can be awaited\
+with await. With a completion handler, can use a swift continuation to convert the call into an async-compatible one.\
+\
+Some that can't be converted to use Swift concurrency, there's _confirmations_,\
+created andu sed in teh scope of the function ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/confirmation"}}{\fldrslt https://developer.apple.com/documentation/testing/confirmation}})\
+\
+Confirmations don't block or suspend the caller while waiting for a condition to be fulfilled.  The requirement is expected to be _confirmed_ (equivalent of fulfilling an expectation) before conformation returns\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testTruckEvents() async \{\
+    let soldFood = expectation(description: "\'85")\
+    FoodTruck.shared.eventHandler = \{ event in\
+      if case .soldFood = event \{\
+        soldFood.fulfill()\
+      \}\
+    \}\
+    await Customer().buy(.soup)\
+    await fulfillment(of: [soldFood])\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+struct FoodTruckTests \{\
+  @Test func truckEvents() async \{\
+    await confirmation("\'85") \{ soldFood in\
+      FoodTruck.shared.eventHandler = \{ event in\
+        if case .soldFood = event \{\
+          soldFood()\
+        \}\
+      \}\
+      await Customer().buy(.soup)\
+    \}\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+XCTSkip error type can be thrown to bypass the remaineder of a test function.  Also XCTSkipIf and XCTSkipUnless\
+\
+Can use ConditionTrait trait type\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testArepasAreTasty() throws \{\
+    try XCTSkipIf(CashRegister.isEmpty)\
+    try XCTSkipUnless(FoodTruck.sells(.arepas))\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+@Suite(.disabled(if: CashRegister.isEmpty))\
+struct FoodTruckTests \{\
+  @Test(.enabled(if: FoodTruck.sells(.arepas)))\
+  func arepasAreTasty() \{\
+    ...\
+  \}\
+  ...\
+\}\
+
+\f1 \
+Annotating known issues\
+\
+say a test has something that prevents it from passing.  With XCT, can do XCTExpectFailure\
+\
+The Testingt Library has equivalents: withKnownIssue(_:isIntermittent:[isolation]:sourceLocation:)\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testGrillWorks() async \{\
+    XCTExpectFailure("Grill is out of fuel") \{\
+      try FoodTruck.shared.grill.start()\
+    \}\
+    ...\
+  \}\
+  ...\
+\}\
+// After\
+struct FoodTruckTests \{\
+  @Test func grillWorks() async \{\
+    withKnownIssue("Grill is out of fuel") \{\
+      try FoodTruck.shared.grill.start()\
+    \}\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+XCTExpectFailure doesn't have a direct equivalent.  To mark a test as having a known issue, wrap its boyd with withKnownIssue\
+\
+XCTExpectFialure can be marked non0strict.  with testing lib, specify that the known issue is intermittent instead\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testGrillWorks() async \{\
+    XCTExpectFailure(\
+      "Grill may need fuel",\
+      options: .nonStrict()\
+    ) \{\
+      try FoodTruck.shared.grill.start()\
+    \}\
+    ...\
+  \}\
+  ...\
+\}\
+\
+// After\
+struct FoodTruckTests \{\
+  @Test func grillWorks() async \{\
+    withKnownIssue(\
+      "Grill may need fuel", \
+      isIntermittent: true\
+    ) \{\
+      try FoodTruck.shared.grill.start()\
+    \}\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+Also withKnownIssues that take additional arguments with behavior\
+* {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:sourcelocation:_:)"}}{\fldrslt https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:sourcelocation:_:)}}\
+* {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:isolation:sourcelocation:_:)"}}{\fldrslt https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:isolation:sourcelocation:_:)}}\
+* {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:sourcelocation:_:when:matching:)"}}{\fldrslt https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:sourcelocation:_:when:matching:)}}\
+* {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:isolation:sourcelocation:_:when:matching:)"}}{\fldrslt https://developer.apple.com/documentation/testing/withknownissue(_:isintermittent:isolation:sourcelocation:_:when:matching:)}}\
+\
+
+\f2 // Before\
+class FoodTruckTests: XCTestCase \{\
+  func testGrillWorks() async \{\
+    let options = XCTExpectedFailure.Options()\
+    options.isEnabled = FoodTruck.shared.hasGrill\
+    options.issueMatcher = \{ issue in\
+      issue.type == thrownError\
+    \}\
+    XCTExpectFailure(\
+      "Grill is out of fuel",\
+      options: options\
+    ) \{\
+      try FoodTruck.shared.grill.start()\
+    \}\
+    ...\
+  \}\
+  ...\
+\}\
+\
+// After\
+struct FoodTruckTests \{\
+  @Test func grillWorks() async \{\
+    withKnownIssue("Grill is out of fuel") \{\
+      try FoodTruck.shared.grill.start()\
+    \} when: \{\
+      FoodTruck.shared.hasGrill\
+    \} matching: \{ issue in\
+      issue.error != nil \
+    \}\
+    ...\
+  \}\
+  ...\
+\}
+\f1 \
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/known-issues"}}{\fldrslt https://developer.apple.com/documentation/testing/known-issues}}\
+\
+Highlight known issues when running tests.\
+\
+use withKnownIssue() (and variants) to mark issues as known.  Informs the testing library at runtime not to mark the tests as failing when issues occur\
+\
+Describe failure or warning via an Issue\
+\
+\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectations"}}{\fldrslt https://developer.apple.com/documentation/testing/expectations}}\
+\
+check for expected values, outcomes, and async events in tests\
 }
