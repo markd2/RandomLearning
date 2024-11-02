@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2761
+{\rtf1\ansi\ansicpg1252\cocoartf2818
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Roman;\f1\froman\fcharset0 Palatino-Italic;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\froman\fcharset0 Palatino-Bold;}
 {\colortbl;\red255\green255\blue255;}
@@ -13,13 +13,18 @@
 @Suite\
 	- declares a test suite\
 Issues - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/issue/record(_:sourcelocation:)"}}{\fldrslt https://developer.apple.com/documentation/testing/issue/record(_:sourcelocation:)}}\
+Confirmation - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/confirmation"}}{\fldrslt https://developer.apple.com/documentation/testing/confirmation}}\
 	- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/issue"}}{\fldrslt https://developer.apple.com/documentation/testing/issue}}\
+Expectation - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectation"}}{\fldrslt https://developer.apple.com/documentation/testing/expectation}} \
+	- also FailedError for failed expectations\
+	- type describing an expectation that has been evaluated\
+CustomTestArgumentEncodable - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/customtestargumentencodable"}}{\fldrslt https://developer.apple.com/documentation/testing/customtestargumentencodable}}\
 \
 expectations\
 	- #expect - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expect(_:_:sourcelocation:)"}}{\fldrslt https://developer.apple.com/documentation/testing/expect(_:_:sourcelocation:)}}\
 	- #require - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/require(_:_:sourcelocation:)"}}{\fldrslt https://developer.apple.com/documentation/testing/require(_:_:sourcelocation:)}}\
-	- when to use which?  Looking at the migration guide, it seems kind of arbitrary which one is used\
 \
+	- \strike \strikec0 when to use which?  Looking at the migration guide, it seems kind of arbitrary which one is used.\strike0\striked0   Expect keeps running, require stops\
 tests vs suites\
 	- test suite is a type that contains test functions\
 \
@@ -32,7 +37,10 @@ traits ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/
 	- serialized ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/trait/serialized"}}{\fldrslt https://developer.apple.com/documentation/testing/trait/serialized}})\
 	- condition ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/conditiontrait"}}{\fldrslt https://developer.apple.com/documentation/testing/conditiontrait}})\
 		- enabled / disabled\
-\
+\pard\pardeftab720\partightenfactor0
+\cf0   - Trait, TestTrait, and SuiteTrait protocols\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 \
 Confirmations - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/confirmation"}}{\fldrslt https://developer.apple.com/documentation/testing/confirmation}}\
 	-  
 \f2 await confirmation("\'85") \{ blah in
@@ -45,7 +53,28 @@ withKnownIssue - {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/docum
 \f3\b traits
 \f0\b0 \
 .enabled(if:)\
+	- Bug\
+	- Comment\
+	- ConditionTrait\
+	- ParallelizationTrait\
+	- Tag\
+	- List\
+	- TimeLimitTrait\
 \
 swift test\
 	- --no-parallel\
+\
+\
+Random interesting exampules\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 let customer = try #require(Customer(id: 123))
+\f0 \
+\
+
+\f2   #expect(throws: Never.self) \{ // if it throws, record an error, but don't kill the test\
+    try order.add(topping: .caper, toPizzasIn: 0..<1)\
+  \}\
+\
 }

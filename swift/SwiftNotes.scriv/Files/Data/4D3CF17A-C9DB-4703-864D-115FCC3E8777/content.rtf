@@ -1,11 +1,9 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2761
+{\rtf1\ansi\ansicpg1252\cocoartf2818
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Bold;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\froman\fcharset0 Palatino-BoldItalic;\f4\fswiss\fcharset0 Helvetica;\f5\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
-}
-{\colortbl;\red255\green255\blue255;\red22\green22\blue24;\red255\green255\blue255;\red109\green109\blue109;
-}
-{\*\expandedcolortbl;;\cssrgb\c11373\c11373\c12157;\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c50196\c50196;
-}
+\f6\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;\red22\green22\blue24;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c11373\c11373\c12157;\cssrgb\c100000\c100000\c100000;}
 \pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
 \f0\b\fs36 \cf0 Swift Testing
@@ -136,14 +134,16 @@ scalable test execution\
 \f0\b Defining Test Functions
 \f1\b0 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/definingtests"}}{\fldrslt https://developer.apple.com/documentation/testing/definingtests}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/definingtests"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/definingtests}}\
 \
 "definite a test function to validate that code is working correctly:\
 \
 Article assumes the package or project has already been configured with a test target (c.f. {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/Xcode/test-coverage"}}{\fldrslt https://developer.apple.com/documentation/Xcode/test-coverage}})\
 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 import Testing\
+\f2 \cf0 import Testing\
 
 \f1 \
 Note:\
@@ -202,7 +202,8 @@ There's also migrating a test from XCTest, via {\field{\*\fldinst{HYPERLINK "htt
 \f0\b Test Suite Types
 \f1\b0 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/organizingtests"}}{\fldrslt https://developer.apple.com/documentation/testing/organizingtests}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/organizingtests"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/organizingtests}}\
 \
 When working with a large chunk of functions, helpful to organize them into test suites.\
 \
@@ -263,7 +264,8 @@ an initializer may be required\
 Test suite types must always be available - not annotated with @available\
 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/parallelization"}}{\fldrslt https://developer.apple.com/documentation/testing/parallelization}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/parallelization"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/parallelization}}\
 Running tests serially or in parallel\
 \
 testing library uses task groups, and tests all run in the same process.\
@@ -272,8 +274,9 @@ number of tests that run concurrently s controlled by the runtime\
 \
 parallelization can be disabled on a per-function or a per-suite basis using serialized\
 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 @Test(.serialized, arguments: Food.allCases) func prepare(food: Food) \{\
+\f2 \cf0 @Test(.serialized, arguments: Food.allCases) func prepare(food: Food) \{\
   // This function will be invoked serially, once per food, because it has the\
   // .serialized trait.\
 \}\
@@ -309,7 +312,8 @@ has no effect if parallelization is globally disabled (e.g. --no-parallel to swi
 \f0\b Migrating from XCTest
 \f1\b0 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/migratingfromxctest"}}{\fldrslt https://developer.apple.com/documentation/testing/migratingfromxctest}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/migratingfromxctest"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/migratingfromxctest}}\
 \
 Can coexist in the same file\
 \
@@ -320,8 +324,9 @@ To convert XCTestCase to a suite, remove the XCTestCase CONFORMance.\
 \
 Swift structure or actor be used to better enforce concurrency saftey\
 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 // Before\
+\f2 \cf0 // Before\
 class FoodTruckTests: XCTestCase \{\
   ...\
 \}\
@@ -450,12 +455,12 @@ And comparison table\
 \itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
 \clvertalc \clshdrawnil \clwWidth6996\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx4320
 \clvertalc \clshdrawnil \clwWidth7799\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt141 \clpadl141 \clpadb141 \clpadr141 \gaph\cellx8640
-\pard\intbl\itap1\pardeftab720\parhyphenfactor20\partightenfactor0
+\pard\intbl\itap1\pardeftab720\partightenfactor0
 
 \f2\fs34 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 XCTest
+XCTest
 \f4 \cell 
-\pard\intbl\itap1\pardeftab720\parhyphenfactor20\partightenfactor0
+\pard\intbl\itap1\pardeftab720\partightenfactor0
 
 \f2 \cf2 Swift Testing
 \f4 \cell \row
@@ -667,7 +672,7 @@ And comparison table\
 \f4 \cell \lastrow\row
 \pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1\fs36 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f1\fs36 \cf0 \kerning1\expnd0\expndtw0 \
 XCTestCas has continueAfterFailure, set to false to cause the test to stop runing after a failure occurs. (by throwing an objc exception) which tears through a swift stack frame causing damage (especialky an async function)\
 \
 use require to throw a swift error that throws on failure. other tests will continue to run\
@@ -869,7 +874,8 @@ struct FoodTruckTests \{\
 \}
 \f1 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/known-issues"}}{\fldrslt https://developer.apple.com/documentation/testing/known-issues}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/known-issues"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/known-issues}}\
 \
 Highlight known issues when running tests.\
 \
@@ -878,7 +884,337 @@ use withKnownIssue() (and variants) to mark issues as known.  Informs the testin
 Describe failure or warning via an Issue\
 \
 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectations"}}{\fldrslt https://developer.apple.com/documentation/testing/expectations}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf0 (Grate) Expectataions and Confirmations, also by Edmund Welles\
+
+\f1\b0 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectations"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/expectations}}\
 \
 check for expected values, outcomes, and async events in tests\
+\
+Use expect(_:_:_:_:_:_:_:_:sourceLocation:) and require(_:_:sourceLocaton) macros (wheee) to validate expected outcomes.\
+\
+To validate an error is (not) thrown, it provides overloads of the macros.\
+\
+C.f. TESTING FOR ERRORS  {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code"}}{\fldrslt https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code}}\
+\
+Use a Confirmation ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/confirmation"}}{\fldrslt https://developer.apple.com/documentation/testing/confirmation}}) to confthe occurence of an async event.  \
+C.f. Testing AsyncCode ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/testing-asynchronous-code"}}{\fldrslt https://developer.apple.com/documentation/testing/testing-asynchronous-code}})\
+\
+Validating code's result - use expect.\
+\
+The macro captures the expression passed in, and provides detailed info when the code doesn't statisfy the expecation\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test func calculatingOrderTotal() \{\
+  let calculator = OrderCalculator()\
+  #expect(calculator.total(of: [3, 3]) == 7)\
+  // Prints "Expectation failed: (calculator.total(of: [3, 3]) \uc0\u8594  6) == 7"\
+\}\
+
+\f1 Tests keep running after the expect fails.\
+\
+To stop the test, use require\
+\
+
+\f2 @Test func returningCustomerRemembersUsualOrder() throws \{\
+  let customer = try #require(Customer(id: 123))\
+  // The test runner doesn't reach this line if the customer is nil.\
+  #expect(customer.usualOrder.countOfItems == 2)\
+\}\
+
+\f1 \
+require throws an instance of ExpectationFailedError when it fails\
+\
+lots o' flavors.\
+EXPERIMENT TO DO:\
+	- try to do each of the expects and requires on {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/expectations"}}{\fldrslt https://developer.apple.com/documentation/testing/expectations}}\
+	- same with {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code"}}{\fldrslt https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code}}\
+\
+\
+Testing for errors \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code}}\
+\
+ensure your code handles errors in the way you expect.\
+\
+Write test that valid the conditions in which the code throws errors and conditions in which it returns without throwing an error.\
+\
+use overloads of expect/require to check for errors\
+\
+Validate your code throws an expected erorr\
+\
+Make a test function that throws and try the code under test. If the code throws an error, then your test fails.\
+\
+To check that the code under test throws a specific error, or continue a longer test function after it throws, pass the error as the first argument of expect(throws:...) and pass a closure that calls the code under test\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test func cannotAddToppingToPizzaBeforeStartOfList() \{\
+  var order = PizzaToppings(bases: [.calzone, .deepCrust])\
+  #expect(throws: PizzaToppings.Error.outOfRange) \{\
+    try order.add(topping: .mozarella, toPizzasIn: -1..<0)\
+  \}\
+\}
+\f1 \
+\
+If the closure completes without throwing an error,  it records an issue\
+Other overloads of expect let you test the code throws an error of a given type, or matches an arbitrary Boolean test.\
+\
+Similar overloads of require stop running the test.\
+\
+Validate it doesn't throw an error\
+\
+a test function that throws an error means that it fails , usually sufficient for testing that code doesn't throw.\
+\
+if need to record a thrown error as an issue without stopping the test, compare the error to Never\
+\
+
+\f2 @Test func canAddToppingToPizzaInPositionZero() throws \{\
+  var order = PizzaToppings(bases: [.thinCrust, .thinCrust])\
+  #expect(throws: Never.self) \{\
+    try order.add(topping: .caper, toPizzasIn: 0..<1)\
+  \}\
+  let toppings = try order.toppings(forPizzaAt: 0)\
+  #expect(toppings == [.caper])\
+\}
+\f1 \
+\
+
+\f0\b Testing Async Code\
+
+\f1\b0 \
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/testing-asynchronous-code"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/testing-asynchronous-code}}\
+\
+Validate your code causes expected events to happen\
+\
+The Testing Library integrates with Swift Concurrency.  So can test async code using standard swift features.   Mark test as async, then in the body await any async interactions\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf0 @Test func priceLookupYieldsExpectedValue() async \{\
+  let mozarellaPrice = await unitPrice(for: .mozarella)\
+  #expect(mozarellaPrice == 3)\
+\}
+\f1 \
+\
+In more complex situations can use Confirmation ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/confirmationhttps://developer.apple.com/documentation/testing/confirmation"}}{\fldrslt https://developer.apple.com/documentation/testing/confirmationhttps://developer.apple.com/documentation/testing/confirmation}})  to discover whether an expected event happens\
+\
+Call confirmation(_:expectedCount:isolation:sourceLocation:_:) to create a Confirmation to for the expected event.  In the trailing closure parameter, call the code under test.\
+The Test Library passes a Confirmation as the parameter to the closure.  Call as afunction in the event handler for the code under test when the event testing for occurs.\
+\
+
+\f2 @Test("OrderCalculator successfully calculates subtotal for no pizzas")\
+func subtotalForNoPizzas() async \{\
+  let calculator = OrderCalculator()\
+  await confirmation() \{ confirmation in\
+    calculator.successHandler = \{ _ in confirmation() \}\
+    _ = await calculator.subtotal(for: PizzaToppings(bases: []))\
+  \}\
+\}
+\f1 \
+\
+(note not #confirmation - the mix of #blah and non-# blah is kind of confusing)\
+\
+Set the expectedCount parameter to the number of times you expect the confirmation to be called.  Test passes if the number of occurences during the tst matches the expected count, before falling off the bottom of the crosure.\
+\
+Confirming an event does _not_ happen - create a confirmation with an expected count of zero\
+\
+
+\f2 @Test func orderCalculatorEncountersNoErrors() async \{\
+  let calculator = OrderCalculator()\
+  await confirmation(expectedCount: 0) \{ confirmation in\
+    calculator.errorHandler = \{ _ in confirmation() \}\
+    calculator.subtotal(for: PizzaToppings(bases: []))\
+  \}\
+\}
+\f1 \
+\
+\
+
+\f0\b Parameterized Tests
+\f1\b0 \
+\
+Some tests need to be run over many different inputs. - might need to validate all cases in an enum.  TTL lets us specify one or more collections to iterate over during testing, with the elements being forward to a test function.\
+\
+An invocation of the test function with a particular set of argument values is a _test case_\
+\
+A group of test functions is a _basket case_\
+\
+By default they run in parallel with each other. Saw earlier how to run them serially\
+\
+over an array of values \
+\
+
+\f2 enum Food \{\
+  case burger, iceCream, burrito, noodleBowl, kebab\
+\}\
+\
+@Test("All foods available", arguments: [Food.burger, .iceCream, .burrito, .noodleBowl, .kebab])\
+func foodAvailable(_ food: Food) async throws \{\
+  let foodTruck = FoodTruck(selling: food)\
+  #expect(await foodTruck.cook(food))\
+\}\
+
+\f1 \
+when passing a collection to @Test, the library passes each element of the collection, one at a time,. to the test function a its first (and only) argument.  If it fails for one or more inputs, the diagnostics clearly indicate which inputs to examine\
+\
+over the cases of an iteration - pass the EnumType.allCases (and of course need CaseIterable)\
+\
+GOing over a range of integers, can pass it a closed range.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf0 @Test("Can make large orders", arguments: 1 ... 100)
+\f1 \
+\
+heh.  "Note, very large ranges like 0 ..< .max may take an excessive amount of time to test or may never complete"  - "please don't spray windex into eyes"\
+\
+More than one collection (cartesian product). so say 5 fuds, this will be run FIVE HUNDRED times. \
+\
+
+\f2 @Test("Can make large orders", arguments: Food.allCases, 1 ... 100)\
+func makeLargeOrder(of food: Food, count: Int) async throws \{\
+  let foodTruck = FoodTruck(selling: food)\
+  #expect(await foodTruck.cook(food, quantity: count))\
+\}\
+
+\f1 \
+To avoid the combinatorial asplosion, use zip\
+\
+
+\f2 @Test("Can make large orders", arguments: zip(Food.allCases, 1 ... 100))\
+
+\f1 \
+The zip sequence will be "destructured" into two arguments automagically. so like (.burger, 1), (.miceCream, 2), etc\
+\
+Running selected test cases. - allows you to run specific test cases it contains - like if there's :alot: of cases, but only some are failing.\
+\
+It must be deterministically match the test case's arguments.  When someone attepmts to run selectected test cases (how?) of a parameterized test function, TTL evaluates each argument of the test's cases for conformance to one of several known protocols.  if all arguments CONFORM, the test can be run selectively.\
+ 	- CustomTestArgumentEncodable ({\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/customtestargumentencodable"}}{\fldrslt https://developer.apple.com/documentation/testing/customtestargumentencodable}}) - for types that don't conform to Encodable or Decodable\
+	- Raw Representable where RawValue conforms to Encodable\
+	- Encodable\
+	- Identifiable where ID conforms to Encodable\
+(sounds like the selective test running depends on the parameter being Encodable.\
+\
+\
+
+\f0\b Traits
+\f1\b0 \
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/traits"}}{\fldrslt https://developer.apple.com/documentation/testing/traits}} \
+Add traits to tests to annotate them or customize their behavior\
+\
+Pass built-in traits to test functions or suite types to comment, categorize, and modify runtime behaviors.  (so kind of the SwiftUI approach of "hey here's a bunch of different stuff stuff that all hangs off the same basic model)\
+\
+Can use the Trait, TestTrait, and SuiteTrait protocols to create own types that customize the behavior of test functions\
+\
+topics:\
+	- enabling and disabling tests\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/enablinganddisabling"}}{\fldrslt https://developer.apple.com/documentation/testing/enablinganddisabling}}\
+	- limiting running time\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/limitingexecutiontime"}}{\fldrslt https://developer.apple.com/documentation/testing/limitingexecutiontime}}\
+	- adding tags to tests\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/addingtags"}}{\fldrslt https://developer.apple.com/documentation/testing/addingtags}}\
+	- adding comments\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/addingcomments"}}{\fldrslt https://developer.apple.com/documentation/testing/addingcomments}}\
+	- associating bugs with tests\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/associatingbugs"}}{\fldrslt https://developer.apple.com/documentation/testing/associatingbugs}}\
+	- interpetting bug identifiers\
+		- {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/bugidentifiers"}}{\fldrslt https://developer.apple.com/documentation/testing/bugidentifiers}}\
+\
+And more types:\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+\cf0 	- Bug\
+	- Comment\
+	- ConditionTrait\
+	- ParallelizationTrait\
+	- Tag\
+	- List\
+	- TimeLimitTrait\
+\
+(the rabbit hole just keeps going deeper and deeper)\
+\
+\
+Enalbing and disabling tests\
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/enablinganddisabling"}}{\fldrslt https://developer.apple.com/documentation/testing/enablinganddisabling}}\
+\
+sometimes a test is only applicable in specific circumstances - might want it to run on devices with particular hardware, or locale-dependent operations.  Can add traits to the tests that cause runners to automatically skip them if conditions are not met.\
+\
+Note: Condition may be evaluated multiple times during testing. 
+\f6\i (not sure why they decided to call that out)
+\f1\i0 \
+\
+To disable unconditionally, use disabled function\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test("Food truck sells burritos", .disabled())\
+func sellsBurritos() async throws \{ ... \}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+test will now always be skipped.\
+\
+Can also give an optional comment.\
+\
+enable or disable test conditionally - .enabled(if:)\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test("Ice cream is cold", .enabled(if: Season.current == .summer))\
+func isCold() async throws \{ ... \}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+can have multiple conditions (so the @Test is very variadic). They all have to pass (or be no-ops)  Otherwise the runner notes the first condition to fail as the reason the test is skipped.\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test(\
+  "Ice cream is cold",\
+  .enabled(if: Season.current == .summer),\
+  .disabled("We ran out of sprinkles")\
+)\
+func isCold() async throws \{ ... \}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+If it's due to a bug, can use the bug trait\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 @Test(\
+  "Ice cream is cold",\
+  .enabled(if: Season.current == .summer),\
+  .disabled("We ran out of sprinkles"),\
+  .bug(id: "12345")\
+)\
+func isCold() async throws \{ ... \}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
+Can call functions in the test conditions to factor out complex logic\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f2 \cf0 func allIngredientsAvailable(for food: Food) -> Bool \{ ... \}\
+\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f1 \cf0 @Test(
+\f2 \
+  "Can make sundaes",\
+  .enabled(if: Season.current == .summer),\
+  .enabled(if: allIngredientsAvailable(for: .sundae))\
+)\
+func makeSundae() async throws \{ ... \}\
+
+\f1 \
+Limiting Runtime\
+\pard\pardeftab720\partightenfactor0
+\cf0  {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/limitingexecutiontime"}}{\fldrslt https://developer.apple.com/documentation/testing/limitingexecutiontime}}\
+\
 }

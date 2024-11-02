@@ -90,6 +90,9 @@ blah: 14
 So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
 </Text>
         </Document>
+        <Document ID="0C1844CA-6BF0-4F68-89F8-992892F47349">
+            <Title>Quick Reference</Title>
+        </Document>
         <Document ID="EAAE4896-FE10-41C8-B75B-D849D5D4837F">
             <Title>Protocols</Title>
             <Text>## Protocols
@@ -175,6 +178,48 @@ and not sure what the other word is for
         <Document ID="C341F091-E04B-4D12-B18F-6685DA0A50E7">
             <Title>xcrud 15 vs 16</Title>
             <Text>IIRC built into xc16. for 15, you need some hoops
+
+</Text>
+        </Document>
+        <Document ID="3E912E40-69F9-4FEA-9F22-42C186FD7171">
+            <Title>Quick Reference</Title>
+            <Text>Always skip tests
+@Test("Food truck sells burritos", .disabled("optional comment"))
+func sellsBurritos() async throws { ... }
+
+Require non-nil result
+let customer = try #require(Customer(id: 123))
+
+Don't kill the test if something throws
+#expect(throws: Never.self) { // if it throws, record an error, but don't kill the test
+  try order.add(topping: .caper, toPizzasIn: 0..&lt;1)
+}
+
+Conditionally enable a test
+@Test("Ice cream is cold", .enabled(if: Season.current == .summer))
+func isCold() async throws { ... }
+
+Chaining multiple conditions
+@Test(
+  "Ice cream is cold",
+  .enabled(if: Season.current == .summer),
+  .disabled("We ran out of sprinkles")
+)
+func isCold() async throws { ... }
+
+Adding a bug ID
+@Test(
+  "Ice cream is cold",
+  .bug(id: "12345")
+)
+func isCold() async throws { ... }
+
+
+
+
+sdjfnsdjf
+
+
 
 </Text>
         </Document>
@@ -778,9 +823,275 @@ use withKnownIssue() (and variants) to mark issues as known.  Informs the testin
 Describe failure or warning via an Issue
 
 
+(Grate) Expectataions and Confirmations, also by Edmund Welles
+
 https://developer.apple.com/documentation/testing/expectations
 
 check for expected values, outcomes, and async events in tests
+
+Use expect(_:_:_:_:_:_:_:_:sourceLocation:) and require(_:_:sourceLocaton) macros (wheee) to validate expected outcomes.
+
+To validate an error is (not) thrown, it provides overloads of the macros.
+
+C.f. TESTING FOR ERRORS  https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code
+
+Use a Confirmation (https://developer.apple.com/documentation/testing/confirmation) to confthe occurence of an async event.  
+C.f. Testing AsyncCode (https://developer.apple.com/documentation/testing/testing-asynchronous-code)
+
+Validating code's result - use expect.
+
+The macro captures the expression passed in, and provides detailed info when the code doesn't statisfy the expecation
+
+@Test func calculatingOrderTotal() {
+  let calculator = OrderCalculator()
+  #expect(calculator.total(of: [3, 3]) == 7)
+  // Prints "Expectation failed: (calculator.total(of: [3, 3]) → 6) == 7"
+}
+Tests keep running after the expect fails.
+
+To stop the test, use require
+
+@Test func returningCustomerRemembersUsualOrder() throws {
+  let customer = try #require(Customer(id: 123))
+  // The test runner doesn't reach this line if the customer is nil.
+  #expect(customer.usualOrder.countOfItems == 2)
+}
+
+require throws an instance of ExpectationFailedError when it fails
+
+lots o' flavors.
+EXPERIMENT TO DO:
+	- try to do each of the expects and requires on https://developer.apple.com/documentation/testing/expectations
+	- same with https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code
+
+
+Testing for errors 
+https://developer.apple.com/documentation/testing/testing-for-errors-in-swift-code
+
+ensure your code handles errors in the way you expect.
+
+Write test that valid the conditions in which the code throws errors and conditions in which it returns without throwing an error.
+
+use overloads of expect/require to check for errors
+
+Validate your code throws an expected erorr
+
+Make a test function that throws and try the code under test. If the code throws an error, then your test fails.
+
+To check that the code under test throws a specific error, or continue a longer test function after it throws, pass the error as the first argument of expect(throws:...) and pass a closure that calls the code under test
+
+@Test func cannotAddToppingToPizzaBeforeStartOfList() {
+  var order = PizzaToppings(bases: [.calzone, .deepCrust])
+  #expect(throws: PizzaToppings.Error.outOfRange) {
+    try order.add(topping: .mozarella, toPizzasIn: -1..&lt;0)
+  }
+}
+
+If the closure completes without throwing an error,  it records an issue
+Other overloads of expect let you test the code throws an error of a given type, or matches an arbitrary Boolean test.
+
+Similar overloads of require stop running the test.
+
+Validate it doesn't throw an error
+
+a test function that throws an error means that it fails , usually sufficient for testing that code doesn't throw.
+
+if need to record a thrown error as an issue without stopping the test, compare the error to Never
+
+@Test func canAddToppingToPizzaInPositionZero() throws {
+  var order = PizzaToppings(bases: [.thinCrust, .thinCrust])
+  #expect(throws: Never.self) {
+    try order.add(topping: .caper, toPizzasIn: 0..&lt;1)
+  }
+  let toppings = try order.toppings(forPizzaAt: 0)
+  #expect(toppings == [.caper])
+}
+
+Testing Async Code
+
+https://developer.apple.com/documentation/testing/testing-asynchronous-code
+
+Validate your code causes expected events to happen
+
+The Testing Library integrates with Swift Concurrency.  So can test async code using standard swift features.   Mark test as async, then in the body await any async interactions
+
+@Test func priceLookupYieldsExpectedValue() async {
+  let mozarellaPrice = await unitPrice(for: .mozarella)
+  #expect(mozarellaPrice == 3)
+}
+
+In more complex situations can use Confirmation (https://developer.apple.com/documentation/testing/confirmationhttps://developer.apple.com/documentation/testing/confirmation)  to discover whether an expected event happens
+
+Call confirmation(_:expectedCount:isolation:sourceLocation:_:) to create a Confirmation to for the expected event.  In the trailing closure parameter, call the code under test.
+The Test Library passes a Confirmation as the parameter to the closure.  Call as afunction in the event handler for the code under test when the event testing for occurs.
+
+@Test("OrderCalculator successfully calculates subtotal for no pizzas")
+func subtotalForNoPizzas() async {
+  let calculator = OrderCalculator()
+  await confirmation() { confirmation in
+    calculator.successHandler = { _ in confirmation() }
+    _ = await calculator.subtotal(for: PizzaToppings(bases: []))
+  }
+}
+
+(note not #confirmation - the mix of #blah and non-# blah is kind of confusing)
+
+Set the expectedCount parameter to the number of times you expect the confirmation to be called.  Test passes if the number of occurences during the tst matches the expected count, before falling off the bottom of the crosure.
+
+Confirming an event does _not_ happen - create a confirmation with an expected count of zero
+
+@Test func orderCalculatorEncountersNoErrors() async {
+  let calculator = OrderCalculator()
+  await confirmation(expectedCount: 0) { confirmation in
+    calculator.errorHandler = { _ in confirmation() }
+    calculator.subtotal(for: PizzaToppings(bases: []))
+  }
+}
+
+
+Parameterized Tests
+
+Some tests need to be run over many different inputs. - might need to validate all cases in an enum.  TTL lets us specify one or more collections to iterate over during testing, with the elements being forward to a test function.
+
+An invocation of the test function with a particular set of argument values is a _test case_
+
+A group of test functions is a _basket case_
+
+By default they run in parallel with each other. Saw earlier how to run them serially
+
+over an array of values 
+
+enum Food {
+  case burger, iceCream, burrito, noodleBowl, kebab
+}
+
+@Test("All foods available", arguments: [Food.burger, .iceCream, .burrito, .noodleBowl, .kebab])
+func foodAvailable(_ food: Food) async throws {
+  let foodTruck = FoodTruck(selling: food)
+  #expect(await foodTruck.cook(food))
+}
+
+when passing a collection to @Test, the library passes each element of the collection, one at a time,. to the test function a its first (and only) argument.  If it fails for one or more inputs, the diagnostics clearly indicate which inputs to examine
+
+over the cases of an iteration - pass the EnumType.allCases (and of course need CaseIterable)
+
+GOing over a range of integers, can pass it a closed range.
+
+@Test("Can make large orders", arguments: 1 ... 100)
+
+heh.  "Note, very large ranges like 0 ..&lt; .max may take an excessive amount of time to test or may never complete"  - "please don't spray windex into eyes"
+
+More than one collection (cartesian product). so say 5 fuds, this will be run FIVE HUNDRED times. 
+
+@Test("Can make large orders", arguments: Food.allCases, 1 ... 100)
+func makeLargeOrder(of food: Food, count: Int) async throws {
+  let foodTruck = FoodTruck(selling: food)
+  #expect(await foodTruck.cook(food, quantity: count))
+}
+
+To avoid the combinatorial asplosion, use zip
+
+@Test("Can make large orders", arguments: zip(Food.allCases, 1 ... 100))
+
+The zip sequence will be "destructured" into two arguments automagically. so like (.burger, 1), (.miceCream, 2), etc
+
+Running selected test cases. - allows you to run specific test cases it contains - like if there's :alot: of cases, but only some are failing.
+
+It must be deterministically match the test case's arguments.  When someone attepmts to run selectected test cases (how?) of a parameterized test function, TTL evaluates each argument of the test's cases for conformance to one of several known protocols.  if all arguments CONFORM, the test can be run selectively.
+ 	- CustomTestArgumentEncodable (https://developer.apple.com/documentation/testing/customtestargumentencodable) - for types that don't conform to Encodable or Decodable
+	- Raw Representable where RawValue conforms to Encodable
+	- Encodable
+	- Identifiable where ID conforms to Encodable
+(sounds like the selective test running depends on the parameter being Encodable.
+
+
+Traits
+https://developer.apple.com/documentation/testing/traits 
+Add traits to tests to annotate them or customize their behavior
+
+Pass built-in traits to test functions or suite types to comment, categorize, and modify runtime behaviors.  (so kind of the SwiftUI approach of "hey here's a bunch of different stuff stuff that all hangs off the same basic model)
+
+Can use the Trait, TestTrait, and SuiteTrait protocols to create own types that customize the behavior of test functions
+
+topics:
+	- enabling and disabling tests
+		- https://developer.apple.com/documentation/testing/enablinganddisabling
+	- limiting running time
+		- https://developer.apple.com/documentation/testing/limitingexecutiontime
+	- adding tags to tests
+		- https://developer.apple.com/documentation/testing/addingtags
+	- adding comments
+		- https://developer.apple.com/documentation/testing/addingcomments
+	- associating bugs with tests
+		- https://developer.apple.com/documentation/testing/associatingbugs
+	- interpetting bug identifiers
+		- https://developer.apple.com/documentation/testing/bugidentifiers
+
+And more types:
+	- Bug
+	- Comment
+	- ConditionTrait
+	- ParallelizationTrait
+	- Tag
+	- List
+	- TimeLimitTrait
+
+(the rabbit hole just keeps going deeper and deeper)
+
+
+Enalbing and disabling tests
+https://developer.apple.com/documentation/testing/enablinganddisabling
+
+sometimes a test is only applicable in specific circumstances - might want it to run on devices with particular hardware, or locale-dependent operations.  Can add traits to the tests that cause runners to automatically skip them if conditions are not met.
+
+Note: Condition may be evaluated multiple times during testing. (not sure why they decided to call that out)
+
+To disable unconditionally, use disabled function
+
+@Test("Food truck sells burritos", .disabled())
+func sellsBurritos() async throws { ... }
+
+test will now always be skipped.
+
+Can also give an optional comment.
+
+enable or disable test conditionally - .enabled(if:)
+
+@Test("Ice cream is cold", .enabled(if: Season.current == .summer))
+func isCold() async throws { ... }
+
+can have multiple conditions (so the @Test is very variadic). They all have to pass (or be no-ops)  Otherwise the runner notes the first condition to fail as the reason the test is skipped.
+
+@Test(
+  "Ice cream is cold",
+  .enabled(if: Season.current == .summer),
+  .disabled("We ran out of sprinkles")
+)
+func isCold() async throws { ... }
+
+If it's due to a bug, can use the bug trait
+@Test(
+  "Ice cream is cold",
+  .enabled(if: Season.current == .summer),
+  .disabled("We ran out of sprinkles"),
+  .bug(id: "12345")
+)
+func isCold() async throws { ... }
+
+Can call functions in the test conditions to factor out complex logic
+
+func allIngredientsAvailable(for food: Food) -&gt; Bool { ... }
+
+@Test(
+  "Can make sundaes",
+  .enabled(if: Season.current == .summer),
+  .enabled(if: allIngredientsAvailable(for: .sundae))
+)
+func makeSundae() async throws { ... }
+
+Limiting Runtime
+ https://developer.apple.com/documentation/testing/limitingexecutiontime
+
 </Text>
         </Document>
         <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
@@ -942,13 +1253,18 @@ SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went 
 @Suite
 	- declares a test suite
 Issues - https://developer.apple.com/documentation/testing/issue/record(_:sourcelocation:)
+Confirmation - https://developer.apple.com/documentation/testing/confirmation
 	- https://developer.apple.com/documentation/testing/issue
+Expectation - https://developer.apple.com/documentation/testing/expectation 
+	- also FailedError for failed expectations
+	- type describing an expectation that has been evaluated
+CustomTestArgumentEncodable - https://developer.apple.com/documentation/testing/customtestargumentencodable
 
 expectations
 	- #expect - https://developer.apple.com/documentation/testing/expect(_:_:sourcelocation:)
 	- #require - https://developer.apple.com/documentation/testing/require(_:_:sourcelocation:)
-	- when to use which?  Looking at the migration guide, it seems kind of arbitrary which one is used
 
+	- when to use which?  Looking at the migration guide, it seems kind of arbitrary which one is used.  Expect keeps running, require stops
 tests vs suites
 	- test suite is a type that contains test functions
 
@@ -959,6 +1275,7 @@ traits (https://developer.apple.com/documentation/testing/traits)
 	- serialized (https://developer.apple.com/documentation/testing/trait/serialized)
 	- condition (https://developer.apple.com/documentation/testing/conditiontrait)
 		- enabled / disabled
+  - Trait, TestTrait, and SuiteTrait protocols
 
 Confirmations - https://developer.apple.com/documentation/testing/confirmation
 	-  await confirmation("…") { blah in
@@ -968,9 +1285,26 @@ withKnownIssue - https://developer.apple.com/documentation/testing/withknownissu
 
 traits
 .enabled(if:)
+	- Bug
+	- Comment
+	- ConditionTrait
+	- ParallelizationTrait
+	- Tag
+	- List
+	- TimeLimitTrait
 
 swift test
 	- --no-parallel
+
+
+Random interesting exampules
+
+let customer = try #require(Customer(id: 123))
+
+  #expect(throws: Never.self) { // if it throws, record an error, but don't kill the test
+    try order.add(topping: .caper, toPizzasIn: 0..&lt;1)
+  }
+
 </Text>
         </Document>
         <Document ID="3235AABD-C6FC-41FE-BF87-81C6694566F1">

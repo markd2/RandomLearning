@@ -6,19 +6,28 @@
 	<real>1</real>
 	<key>binderSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {265, 812}}</string>
-		<string>{{266, 0}, {769, 812}}</string>
+		<string>{{0, 0}, {345, 802}}</string>
 	</array>
 	<key>binderWidth</key>
 	<real>265</real>
 	<key>bookmarksSelectionInfo</key>
 	<dict>
+		<key>0C1844CA-6BF0-4F68-89F8-992892F47349</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
 		<key>3235AABD-C6FC-41FE-BF87-81C6694566F1</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>3E912E40-69F9-4FEA-9F22-42C186FD7171</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -43,6 +52,11 @@
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
+		<key>B97CBD3F-54DD-4BCB-B38E-672786A066F1</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>BA1108B6-D88C-4C58-9629-189F748F2CFE</key>
 		<dict>
 			<key>Row</key>
@@ -63,12 +77,22 @@
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
+		<key>D626954E-87CF-4F2D-B2EC-80A9A63D1915</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>DA035F06-5C9F-47BF-8F93-ADECA9BF579D</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
 		<key>DDA87D8C-29B8-462D-9839-BA2FEBC09AC4</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>E79F5BE6-495C-4761-A280-340851E7110C</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -108,7 +132,7 @@
 	</dict>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {409, 802}}</string>
+		<string>{{0, 0}, {345, 802}}</string>
 	</array>
 	<key>inspectorWidth</key>
 	<real>245</real>
@@ -118,14 +142,14 @@
 		<real>1</real>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 15264}, {754, 726}}</string>
+	<string>{{0, 23103.5}, {774, 726}}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>textScaleFactor</key>
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>1013 64 1035 840 0 0 2048 1127 </string>
+	<string>921 125 789 840 0 0 1728 1079 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>

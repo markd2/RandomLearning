@@ -325,11 +325,28 @@
 <p class="itemText"><p class="p1"><span class="s1">@Suite</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- declares a test suite</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1">Issues - https://developer.apple.com/documentation/testing/issue/record(_:sourcelocation:)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Confirmation - https://developer.apple.com/documentation/testing/confirmation</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- https://developer.apple.com/documentation/testing/issue</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Expectation - https://developer.apple.com/documentation/testing/expectation<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- also FailedError for fa...</p>
+</li>
+<li>
+<p class="itemTitle">Quick Reference</p>
+<p class="itemText">Always skip tests</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">@Test("Food truck sells burritos", .disabled("optional comment"))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">func sellsBurritos() async throws { ... }</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
-<p class="itemText"><p class="p1"><span class="s1">expectations</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- #expect - https://developer.apple.com/documentation/testing/expect(_:_:sourcelocation:)</span></p></p>
-<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>- #require - https://developer.apple.com/documentation/testing/require(_:_:...</p>
+<p class="itemText"><p class="p1"><span class="s1">Require non-nil result</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">let customer = try #require(Customer(id: 123))</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Don't kill the test if something throws</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">#expect(throws: Never.self) { // if it throws, record an error, but don't kill the test</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>try order.add(topping: .caper, toPizzasIn: 0..&lt;1)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Conditionally enable a test</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">@Test("Ice cream is cold", .enabled(if: Season.current == .summer))</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">func isCold() async thr...</p>
 </li>
 <li>
 <p class="itemTitle">xcrud 15 vs 16</p>
