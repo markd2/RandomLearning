@@ -175,25 +175,22 @@ and not sure what the other word is for
 
 </Text>
         </Document>
-        <Document ID="C341F091-E04B-4D12-B18F-6685DA0A50E7">
-            <Title>xcrud 15 vs 16</Title>
-            <Text>IIRC built into xc16. for 15, you need some hoops
-
-</Text>
-        </Document>
         <Document ID="3E912E40-69F9-4FEA-9F22-42C186FD7171">
             <Title>Quick Reference</Title>
             <Text>Always skip tests
 @Test("Food truck sells burritos", .disabled("optional comment"))
 func sellsBurritos() async throws { ... }
 
-Require non-nil result
+Require non-nil result / unwrap for rest of test
 let customer = try #require(Customer(id: 123))
 
 Don't kill the test if something throws
 #expect(throws: Never.self) { // if it throws, record an error, but don't kill the test
   try order.add(topping: .caper, toPizzasIn: 0..&lt;1)
 }
+
+Expecting a particular error
+#expect(throws: (any Error).self) { try ... } // or an error type
 
 Conditionally enable a test
 @Test("Ice cream is cold", .enabled(if: Season.current == .summer))
@@ -214,12 +211,35 @@ Adding a bug ID
 )
 func isCold() async throws { ... }
 
+Limit test running
+@Test(.timeLimit(.minutes(60))
+
+Attach a bug id (can also include a url)
+@Test(
+  "Food truck has napkins",
+  .bug(id: "12345 or numeric value", "optional description")
+)
+func hasNapkins() async {
+
+Making a custom description for test output
+struct SoftServe: CustomTestStringConvertible {
+	var testDescription: String {
+		"\(flavor) in a \(container)"
+	}
+}
+
 
 
 
 sdjfnsdjf
 
 
+
+</Text>
+        </Document>
+        <Document ID="C341F091-E04B-4D12-B18F-6685DA0A50E7">
+            <Title>xcrud 15 vs 16</Title>
+            <Text>IIRC built into xc16. for 15, you need some hoops
 
 </Text>
         </Document>
@@ -973,13 +993,15 @@ func foodAvailable(_ food: Food) async throws {
 
 when passing a collection to @Test, the library passes each element of the collection, one at a time,. to the test function a its first (and only) argument.  If it fails for one or more inputs, the diagnostics clearly indicate which inputs to examine
 
-over the cases of an iteration - pass the EnumType.allCases (and of course need CaseIterable)
+over the cases of an enumeration - pass the EnumType.allCases (and of course need CaseIterable)
 
-GOing over a range of integers, can pass it a closed range.
+Going over a range of integers, can pass it a closed range.
 
 @Test("Can make large orders", arguments: 1 ... 100)
 
 heh.  "Note, very large ranges like 0 ..&lt; .max may take an excessive amount of time to test or may never complete"  - "please don't spray windex into eyes"
+
+Any collection that's Sendable - Array / Set / OptionSet / Dictionary / Range
 
 More than one collection (cartesian product). so say 5 fuds, this will be run FIVE HUNDRED times. 
 
@@ -990,6 +1012,8 @@ func makeLargeOrder(of food: Food, count: Int) async throws {
 }
 
 To avoid the combinatorial asplosion, use zip
+
+oh, and a maximum of two collections when not using zip
 
 @Test("Can make large orders", arguments: zip(Food.allCases, 1 ... 100))
 
@@ -1091,6 +1115,238 @@ func makeSundae() async throws { ... }
 
 Limiting Runtime
  https://developer.apple.com/documentation/testing/limitingexecutiontime
+
+use timeLimit trait.  Multiple limits use the shortest one. defaults to one minute (and is configurable)
+
+@Test(.timeLimit(.minutes(60))
+func serve100CustomersInOneHour() async {
+  for _ in 0 ..&lt; 100 {
+    let customer = await Customer.next()
+    await customer.order()
+    ...
+  }
+}
+(a 60 minute test? wtf...)
+
+if the time limit runs out, the task that's running is cancelled, and test fails with a timeLimitExceeded issue
+
+Can apply to test suites - recursively applied to all test functions and child test suites (sounds like then the time isn't for the entire suite, just bubbled down to the test functions.
+
+Time limits on parameterized tests are applied to each invocation seperately. That way if one blorfs, then it won't incorrectly mark others as being blorfed
+
+Adding tags to tests
+
+use tags to provide semantic information for organization, filtering, and customizing appearances. 
+
+a complex package may contain hundreds or thousands of tets and suites. Some may share a common facet, like being critical or flaky.  can use tags to add to the group and categorize tests.
+
+Tags != test suites - suites impose structure on test functions on a source leve.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets (how is that expressed?)
+
+To add a tag, use the tags trait. - takes a sequence of tags as its argument, and those are applied to the test at runtime.
+
+if any tags are applied to a test suite, then all tests inherit those tags.
+
+TTL doesn't assign any semantic meaning to any tags, nor does it affect how the testing library runs tests.
+
+Tags are instances of Tag and expressed as named constants.  Use the Tag macro:
+
+extension Tag {
+  @Tag static var legallyRequired: Self
+}
+
+
+@Test("Vendor's license is valid", .tags(.legallyRequired))
+func licenseValid() { ... }
+
+If two tags with the same name are declared in differnt files/modules/othercontext, TTL treats them as equivalent
+
+If it's important to disambiguate, use reverse-DNS naming
+
+extension Tag {
+  enum com_example_foodtruck {}
+}
+
+extension Tag.com_example_foodtruck {
+  @Tag static var extraSpecial: Tag
+}
+
+@Test(
+  "Extra Special Sauce recipe is secret",
+  .tags(.com_example_foodtruck.extraSpecial)
+)
+func secretSauce() { ... }
+
+Tags must always be declared as a member of Tag in an extension (or in a nested type)
+
+(and how are those tags used?)
+
+Adding comments to tests
+https://developer.apple.com/documentation/testing/addingcomments
+
+- provide context or background info about code's urpose
+- explain how complex code implemented [sic]
+- includes details which may be helpful when diagnosing issues
+
+Comments can be added to test declrations and TTL will automatically capture and show them when issues are recorded
+
+// Assumes the standard lunch menu includes a taco
+@Test func lunchMenu() {
+  let foodTruck = FoodTruck(
+    menu: .lunch,
+    ingredients: [.tortillas, .cheese]
+  )
+  #expect(foodTruck.menu.contains { $0 is Taco })
+}
+
+Comments on tests are most useful when they
+- add information not obvious from reading the code
+- provide useful information about the operation or motivation of the test
+
+if test is related to a bug or issue, consider using the Bug trait instead.
+
+Associating bugs with tests
+https://developer.apple.com/documentation/testing/associatingbugs
+
+"bugs" can be referred to as "Issues" IRL,there is an Issue type in TTL, so the link refers to them all as Bugs
+
+Three forms
+	 - url representing the bug
+	- unique identifier (string) (with or without url)
+	- unique identifier (numeric) (with or without url)
+
+@Test("Food truck engine works", .bug("https://www.example.com/issues/12345"))
+func engineWorks() async {
+  var foodTruck = FoodTruck()
+  await foodTruck.engine.start()
+  #expect(foodTruck.engine.isRunning)
+}
+
+Can also add a title.
+
+@Test(
+  "Food truck has napkins",
+  .bug(id: "12345", "Forgot to buy more napkins")
+)
+func hasNapkins() async {
+  ...
+}
+
+Interpreting bug identifiers
+https://developer.apple.com/documentation/testing/bugidentifiers
+
+how TTL interprets bug identifiers
+
+Two ways to identify a bug:
+	- url linking to more info
+	- unique ID (string/id)
+	- or both
+
+It will infer bug tracking systems (github issues, webkit bugzilla, apple Feedbackdar black hole)
+
+                                                                                                    
+Now for the wwdc vids.
+
+10195-Go further with Swift Testing
+
+Not transcribing, just interesting notes
+
+challenges
+	- redability - easy to ead and understand
+	- coverage
+	- organizing
+	- hidden dependencies make them fragile
+
+Expressive cod
+	- expectations - expect macro is more sophisticated
+		- expectThrows - catch and examine error.  rather than writing the do / catch / etc
+		- #expect(throws: (any Error).self) { try ... }
+can also do more sophisticated via #expect throws macro
+
+@Test func brewTea() {
+	let teaLaves = ...
+	#expect {
+		try teaLeaves.brew(forMinutes: 3)
+	} throws: { error in
+		guard let error = error as? BewingError,
+			case let .needsMoreTime(optimalBewTime) = error else {
+			return false
+		}
+		return optionalBewTime == 4
+	}
+}
+
+Don't disable tests, but use withKnownIssue - it'll continue complaining, but won't show up as failing. Then when it works, withKnownIssue will then fail so you know to remove it
+
+Test descriptions (vs production code)
+
+CONFORM to CustomTestStringConvertable, and provide a var testDescription: String {}
+
+struct SoftServe: CustomTestStringConvertible {
+	var testDescription: String {
+		"\(flavor) in a \(container)"
+	}
+}
+
+parameterized tests
+	- since run in parallel, will run faster than a for loop
+	test cases displayed in test navigator and test report
+
+organizing tests
+	- suites
+	- document with names
+	- suites can contain other suites
+	- can add subsuites and show organizing the tests themselves
+	- tags.  (like caffeniated vs chocolate foods, beacuse some can be both)
+		- not a replacement for suites
+		- suites impose structure at the source level
+		- tags associate tests from different files/suites/targets that share something
+		need @Tag before the static var caffeinented: Self (without assignemnt)
+	- test navigator lets group by tags
+	- filter matches function and tag names, tag filters
+	- organize by tags with search field dingus
+test plan editor can be driven by tag
+	- list of test plans in the test navigator (~17:00)
+		- can include and exclude tags. tags excluded are crossed out.
+		- multiple tags is AND / OR
+	- tags for anayzing results
+		- pie chart.  lots of failures
+		- tags appear in the outline.
+		- there's a tags filter
+		- insights screen - shows patterns in test failures
+			- double click on the row
+ignoring xcode cloud
+
+parallel testing enabled by default.  Even across parallel devices
+order is randomized  - surface hidden dependencies between tests
+
+.serialized can be added to indicate will run serially. lose the advantages, so should fix it.
+also to a parameteried function
+
+waiting on async conditions
+	- await works the same way
+	- @24:48 - don't understand. Objc with a completion handler
+		- "swift provides an async overload that does that automatically"
+
+original: "runs after the test function returns" (the eat(cookies...) part)
+@Test func bakeCookies () async throws {
+	let cookies = await Cookie.bake(count: 10)
+	eat (cookies, with: .milk) { result, error in
+		#expect(result != nil)
+	}
+}
+
+"automatic":
+
+@Test func bakeCookies() async throws {
+	let cookies = await Cookie.bake(count: 10)
+	try await eat(cookies, with: .milk)
+}
+
+can do withChecked[Throwing]Continuation
+
+event handlers that might call more than once.  Counting manually has data race issues
+use confirmation
+
 
 </Text>
         </Document>
@@ -1253,6 +1509,20 @@ SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went 
 @Suite
 	- declares a test suite
 Issues - https://developer.apple.com/documentation/testing/issue/record(_:sourcelocation:)
+	-  type describing a failure or warning which occurred during a test
+	- comments
+	- error
+	- kind (Issue.kind)
+		- apiMisued (due to misuse of the testing liberry)
+		- confiremationMiscounted(actual, expected)
+		- errorCaught(error)
+		- expectationFailed(Expectation)
+		- knownIssueNotRecorded - known issue was expected but not recorded
+		- system - the underlying system had a problem, not the test
+		- timeLimitExceeded(seconds/attoseconds
+		- unconditional (like record)
+	- sourceLocation
+	- record(...)
 Confirmation - https://developer.apple.com/documentation/testing/confirmation
 	- https://developer.apple.com/documentation/testing/issue
 Expectation - https://developer.apple.com/documentation/testing/expectation 

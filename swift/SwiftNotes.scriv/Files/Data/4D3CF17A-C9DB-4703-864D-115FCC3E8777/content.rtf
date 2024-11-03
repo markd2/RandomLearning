@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2818
+{\rtf1\ansi\ansicpg1252\cocoartf2761
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Bold;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\froman\fcharset0 Palatino-BoldItalic;\f4\fswiss\fcharset0 Helvetica;\f5\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
 \f6\froman\fcharset0 Palatino-Italic;}
@@ -1063,16 +1063,17 @@ func foodAvailable(_ food: Food) async throws \{\
 \f1 \
 when passing a collection to @Test, the library passes each element of the collection, one at a time,. to the test function a its first (and only) argument.  If it fails for one or more inputs, the diagnostics clearly indicate which inputs to examine\
 \
-over the cases of an iteration - pass the EnumType.allCases (and of course need CaseIterable)\
+over the cases of an enumeration - pass the EnumType.allCases (and of course need CaseIterable)\
 \
-GOing over a range of integers, can pass it a closed range.\
+Going over a range of integers, can pass it a closed range.\
 \
-\pard\pardeftab720\partightenfactor0
 
-\f2 \cf0 @Test("Can make large orders", arguments: 1 ... 100)
+\f2 @Test("Can make large orders", arguments: 1 ... 100)
 \f1 \
 \
 heh.  "Note, very large ranges like 0 ..< .max may take an excessive amount of time to test or may never complete"  - "please don't spray windex into eyes"\
+\
+Any collection that's Sendable - Array / Set / OptionSet / Dictionary / Range\
 \
 More than one collection (cartesian product). so say 5 fuds, this will be run FIVE HUNDRED times. \
 \
@@ -1085,6 +1086,8 @@ func makeLargeOrder(of food: Food, count: Int) async throws \{\
 
 \f1 \
 To avoid the combinatorial asplosion, use zip\
+\
+oh, and a maximum of two collections when not using zip\
 \
 
 \f2 @Test("Can make large orders", arguments: zip(Food.allCases, 1 ... 100))\
@@ -1105,7 +1108,8 @@ It must be deterministically match the test case's arguments.  When someone atte
 
 \f0\b Traits
 \f1\b0 \
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/traits"}}{\fldrslt https://developer.apple.com/documentation/testing/traits}} \
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/traits"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/traits}} \
 Add traits to tests to annotate them or customize their behavior\
 \
 Pass built-in traits to test functions or suite types to comment, categorize, and modify runtime behaviors.  (so kind of the SwiftUI approach of "hey here's a bunch of different stuff stuff that all hangs off the same basic model)\
@@ -1140,7 +1144,8 @@ And more types:\
 \
 \
 Enalbing and disabling tests\
-{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/enablinganddisabling"}}{\fldrslt https://developer.apple.com/documentation/testing/enablinganddisabling}}\
+\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/enablinganddisabling"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/enablinganddisabling}}\
 \
 sometimes a test is only applicable in specific circumstances - might want it to run on devices with particular hardware, or locale-dependent operations.  Can add traits to the tests that cause runners to automatically skip them if conditions are not met.\
 \
@@ -1154,57 +1159,48 @@ To disable unconditionally, use disabled function\
 
 \f2 \cf0 @Test("Food truck sells burritos", .disabled())\
 func sellsBurritos() async throws \{ ... \}\
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1 \cf0 \
+\f1 \
 test will now always be skipped.\
 \
 Can also give an optional comment.\
 \
 enable or disable test conditionally - .enabled(if:)\
 \
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 \cf0 @Test("Ice cream is cold", .enabled(if: Season.current == .summer))\
+\f2 @Test("Ice cream is cold", .enabled(if: Season.current == .summer))\
 func isCold() async throws \{ ... \}\
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1 \cf0 \
+\f1 \
 can have multiple conditions (so the @Test is very variadic). They all have to pass (or be no-ops)  Otherwise the runner notes the first condition to fail as the reason the test is skipped.\
 \
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 \cf0 @Test(\
+\f2 @Test(\
   "Ice cream is cold",\
   .enabled(if: Season.current == .summer),\
   .disabled("We ran out of sprinkles")\
 )\
 func isCold() async throws \{ ... \}\
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1 \cf0 \
+\f1 \
 If it's due to a bug, can use the bug trait\
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 \cf0 @Test(\
+\f2 @Test(\
   "Ice cream is cold",\
   .enabled(if: Season.current == .summer),\
   .disabled("We ran out of sprinkles"),\
   .bug(id: "12345")\
 )\
 func isCold() async throws \{ ... \}\
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1 \cf0 \
+\f1 \
 Can call functions in the test conditions to factor out complex logic\
 \
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f2 \cf0 func allIngredientsAvailable(for food: Food) -> Bool \{ ... \}\
+\f2 func allIngredientsAvailable(for food: Food) -> Bool \{ ... \}\
 \
-\pard\tx0\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
-\f1 \cf0 @Test(
+\f1 @Test(
 \f2 \
   "Can make sundaes",\
   .enabled(if: Season.current == .summer),\
@@ -1213,8 +1209,288 @@ Can call functions in the test conditions to factor out complex logic\
 func makeSundae() async throws \{ ... \}\
 
 \f1 \
-Limiting Runtime\
+
+\f0\b Limiting Runtime
+\f1\b0 \
 \pard\pardeftab720\partightenfactor0
 \cf0  {\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/limitingexecutiontime"}}{\fldrslt https://developer.apple.com/documentation/testing/limitingexecutiontime}}\
+\
+use timeLimit trait.  Multiple limits use the shortest one. defaults to one minute (and is configurable)\
+\
+
+\f2 @Test(.timeLimit(.minutes(60))\
+func serve100CustomersInOneHour() async \{\
+  for _ in 0 ..< 100 \{\
+    let customer = await Customer.next()\
+    await customer.order()\
+    ...\
+  \}\
+\}
+\f1 \
+(a 60 minute test? wtf...)\
+\
+if the time limit runs out, the task that's running is cancelled, and test fails with a timeLimitExceeded issue\
+\
+Can apply to test suites - recursively applied to all test functions and child test suites (sounds like then the time isn't for the entire suite, just bubbled down to the test functions.\
+\
+Time limits on parameterized tests are applied to each invocation seperately. That way if one blorfs, then it won't incorrectly mark others as being blorfed\
+\
+
+\f0\b Adding tags to tests\
+\
+
+\f1\b0 use tags to provide semantic information for organization, filtering, and customizing appearances. \
+\
+a complex package may contain hundreds or thousands of tets and suites. Some may share a common facet, like being 
+\f0\b critical
+\f1\b0  or 
+\f0\b flaky
+\f1\b0 .  can use tags to add to the group and categorize tests.\
+\
+Tags != test suites - suites impose structure on test functions on a source leve.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets 
+\f6\i (how is that expressed?)\
+
+\f1\i0 \
+To add a tag, use the tags trait. - takes a sequence of tags as its argument, and those are applied to the test at runtime.\
+\
+if any tags are applied to a test suite, then all tests inherit those tags.\
+\
+TTL doesn't assign any semantic meaning to any tags, nor does it affect how the testing library runs tests.\
+\
+Tags are instances of Tag and expressed as named constants.  Use the Tag macro:\
+\
+
+\f2 extension Tag \{\
+  @Tag static var legallyRequired: Self\
+\}\
+\
+\
+@Test("Vendor's license is valid", .tags(.legallyRequired))\
+func licenseValid() \{ ... \}
+\f1 \
+\
+If two tags with the same name are declared in differnt files/modules/othercontext, TTL treats them as equivalent\
+\
+If it's important to disambiguate, use reverse-DNS naming\
+\
+
+\f2 extension Tag \{\
+  enum com_example_foodtruck \{\}\
+\}\
+\
+extension Tag.com_example_foodtruck \{\
+  @Tag static var extraSpecial: Tag\
+\}\
+\
+@Test(\
+  "Extra Special Sauce recipe is secret",\
+  .tags(.com_example_foodtruck.extraSpecial)\
+)\
+func secretSauce() \{ ... \}\
+
+\f1 \
+Tags must always be declared as a member of Tag in an extension (or in a nested type)\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f6\i \cf0 (and how are those tags used?)\
+\pard\pardeftab720\partightenfactor0
+
+\f1\i0 \cf0 \
+
+\f0\b Adding comments to tests
+\f1\b0 \
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/addingcomments"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/addingcomments}}\
+\
+- provide context or background info about code's urpose\
+- explain how complex code implemented [sic]\
+- includes details which may be helpful when diagnosing issues\
+\
+Comments can be added to test declrations and TTL will automatically capture and show them when issues are recorded\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf0 // Assumes the standard lunch menu includes a taco\
+@Test func lunchMenu() \{\
+  let foodTruck = FoodTruck(\
+    menu: .lunch,\
+    ingredients: [.tortillas, .cheese]\
+  )\
+  #expect(foodTruck.menu.contains \{ $0 is Taco \})\
+\}
+\f1 \
+\
+Comments on tests are most useful when they\
+- add information not obvious from reading the code\
+- provide useful information about the operation or motivation of the test\
+\
+if test is related to a bug or issue, consider using the Bug trait instead.\
+\
+
+\f0\b Associating bugs with tests\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/associatingbugs"}}{\fldrslt 
+\f1\b0 \cf0 https://developer.apple.com/documentation/testing/associatingbugs}}
+\f1\b0 \
+\
+"bugs" can be referred to as "Issues" IRL,there is an Issue type in TTL, so the link refers to them all as Bugs\
+\
+Three forms\
+	 - url representing the bug\
+	- unique identifier (string) (with or without url)\
+	- unique identifier (numeric) (with or without url)\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf0 @Test("Food truck engine works", .bug("https://www.example.com/issues/12345"))\
+func engineWorks() async \{\
+  var foodTruck = FoodTruck()\
+  await foodTruck.engine.start()\
+  #expect(foodTruck.engine.isRunning)\
+\}
+\f1 \
+\
+Can also add a title.\
+\
+
+\f2 @Test(\
+  "Food truck has napkins",\
+  .bug(id: "12345", "Forgot to buy more napkins")\
+)\
+func hasNapkins() async \{\
+  ...\
+\}
+\f1 \
+\
+
+\f0\b Interpreting bug identifiers
+\f1\b0 \
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://developer.apple.com/documentation/testing/bugidentifiers"}}{\fldrslt \cf0 https://developer.apple.com/documentation/testing/bugidentifiers}}\
+\
+how TTL interprets bug identifiers\
+\
+Two ways to identify a bug:\
+	- url linking to more info\
+	- unique ID (string/id)\
+	- or both\
+\
+It will infer bug tracking systems (github issues, webkit bugzilla, apple Feedbackdar black hole)\
+\
+\pard\pardeftab720\qc\partightenfactor0
+\cf0 \ul \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\ulnone \
+\pard\pardeftab720\partightenfactor0
+\cf0 Now for the wwdc vids.\
+\
+10195-Go further with Swift Testing\
+\
+Not transcribing, just interesting notes\
+\
+challenges\
+	- redability - easy to ead and understand\
+	- coverage\
+	- organizing\
+	- hidden dependencies make them fragile\
+\
+Expressive cod\
+	- expectations - expect macro is more sophisticated\
+		- expectThrows - catch and examine error.  rather than writing the do / catch / etc\
+		- #expect(throws: (any Error).self) \{ try ... \}\
+can also do more sophisticated via #expect throws macro\
+\
+
+\f2 @Test func brewTea() \{\
+	let teaLaves = ...\
+	#expect \{\
+		try teaLeaves.brew(forMinutes: 3)\
+	\} throws: \{ error in\
+		guard let error = error as? BewingError,\
+			case let .needsMoreTime(optimalBewTime) = error else \{\
+			return false\
+		\}\
+		return optionalBewTime == 4\
+	\}\
+\}
+\f1 \
+\
+Don't disable tests, but use withKnownIssue - it'll continue complaining, but won't show up as failing. Then when it works, withKnownIssue will then fail so you know to remove it\
+\
+Test descriptions (vs production code)\
+\
+CONFORM to CustomTestStringConvertable, and provide a var testDescription: String \{\}\
+\
+
+\f2 struct SoftServe: CustomTestStringConvertible \{\
+	var testDescription: String \{\
+		"\\(flavor) in a \\(container)"\
+	\}\
+\}\
+
+\f1 \
+parameterized tests\
+	- since run in parallel, will run faster than a for loop\
+	test cases displayed in test navigator and test report\
+\
+organizing tests\
+	- suites\
+	- document with names\
+	- suites can contain other suites\
+	- can add subsuites and show organizing the tests themselves\
+	- tags.  (like caffeniated vs chocolate foods, beacuse some can be both)\
+		- not a replacement for suites\
+		- suites impose structure at the source level\
+		- tags associate tests from different files/suites/targets that share something\
+		need @Tag before the static var caffeinented: Self (without assignemnt)\
+	- test navigator lets group by tags\
+	- filter matches function and tag names, tag filters\
+	- organize by tags with search field dingus\
+test plan editor can be driven by tag\
+	- list of test plans in the test navigator (~17:00)\
+		- can include and exclude tags. tags excluded are crossed out.\
+		- multiple tags is AND / OR\
+	- tags for anayzing results\
+		- pie chart.  lots of failures\
+		- tags appear in the outline.\
+		- there's a tags filter\
+		- insights screen - shows patterns in test failures\
+			- double click on the row\
+ignoring xcode cloud\
+\
+parallel testing enabled by default.  Even across parallel devices\
+order is randomized  - surface hidden dependencies between tests\
+\
+.serialized can be added to indicate will run serially. lose the advantages, so should fix it.\
+also to a parameteried function\
+\
+waiting on async conditions\
+	- await works the same way\
+	- @24:48 - don't understand. Objc with a completion handler\
+		- "swift provides an async overload that does that automatically"\
+\
+original: "runs after the test function returns" (the eat(cookies...) part)\
+
+\f2 @Test func bakeCookies () async throws \{\
+	let cookies = await Cookie.bake(count: 10)\
+	eat (cookies, with: .milk) \{ result, error in\
+		#expect(result != nil)\
+	\}\
+\}\
+
+\f1 \
+"automatic":\
+\
+
+\f2 @Test func bakeCookies() async throws \{\
+	let cookies = await Cookie.bake(count: 10)\
+	try await eat(cookies, with: .milk)\
+\}\
+
+\f1 \
+can do withChecked[Throwing]Continuation\
+\
+event handlers that might call more than once.  Counting manually has data race issues\
+use confirmation\
+\
 \
 }

@@ -132,7 +132,7 @@
 	</dict>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {345, 802}}</string>
+		<string>{{0, 0}, {409, 802}}</string>
 	</array>
 	<key>inspectorWidth</key>
 	<real>245</real>
@@ -142,14 +142,14 @@
 		<real>1</real>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 23103.5}, {774, 726}}</string>
+	<string>{{0, 28774}, {800, 726}}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>textScaleFactor</key>
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>921 125 789 840 0 0 1728 1079 </string>
+	<string>1220 157 815 840 0 0 2048 1127 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>
