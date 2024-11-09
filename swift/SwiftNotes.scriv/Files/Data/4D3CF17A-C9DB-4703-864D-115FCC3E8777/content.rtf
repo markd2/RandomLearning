@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2761
+{\rtf1\ansi\ansicpg1252\cocoartf2818
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Bold;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\froman\fcharset0 Palatino-BoldItalic;\f4\fswiss\fcharset0 Helvetica;\f5\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
 \f6\froman\fcharset0 Palatino-Italic;}
@@ -1247,7 +1247,7 @@ a complex package may contain hundreds or thousands of tets and suites. Some may
 \f0\b flaky
 \f1\b0 .  can use tags to add to the group and categorize tests.\
 \
-Tags != test suites - suites impose structure on test functions on a source leve.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets 
+Tags != test suites - suites impose structure on test functions on a source level.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets 
 \f6\i (how is that expressed?)\
 
 \f1\i0 \
@@ -1493,4 +1493,8 @@ event handlers that might call more than once.  Counting manually has data race 
 use confirmation\
 \
 \
-}
+Want to compare floating point numbers?  We used to have XCTAssertEqual(_:_:accuracy:)\
+{\field{\*\fldinst{HYPERLINK "https://github.com/swiftlang/swift-testing/issues/165"}}{\fldrslt https://github.com/swiftlang/swift-testing/issues/165}}\
+Suggestion is to pull in swift-numerics, and use isApproximatelyEqual\
+\
+Got spurious coverage?  See if the driver app is opening a document that happens to exercise things (had a document with some formatting, and wondering why my bold formatting stuff was getting covered)  Since you don't see it opening}

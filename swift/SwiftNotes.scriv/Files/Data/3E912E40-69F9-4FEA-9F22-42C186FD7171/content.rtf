@@ -1,6 +1,6 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2761
+{\rtf1\ansi\ansicpg1252\cocoartf2818
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Palatino-Bold;\f1\froman\fcharset0 Palatino-Roman;\f2\fnil\fcharset0 Menlo-Regular;
-}
+\f3\froman\fcharset0 Palatino-Italic;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
@@ -17,6 +17,9 @@ func sellsBurritos() async throws \{ ... \}\
 \f1\b0 \
 
 \f2 let customer = try #require(Customer(id: 123))\
+
+\f1 If you forget the try, you'll get an error that has no error marker in the editor #ilyxc
+\f2 \
 
 \f1 \
 
@@ -91,7 +94,31 @@ func hasNapkins() async \{\
 \pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\sl264\slmult1\pardirnatural\partightenfactor0
 
 \f1 \cf0 \
-\
+
+\f0\b Iterative tests\
+
+\f2\b0 @Test(arguments: 0 ..< 10)\
+func createBubbleChoosesID(count: Int) \{\
+
+\f1 \
+
+\f0\b Are we running in tests?
+\f1\b0  
+\f3\i (not 100% sure this is the best way. Only tested on Mac so far)
+\f1\i0 \
+
+\f2 let inTests = ProcessInfo().environment["XCTestBundlePath"] != nil\
+if !inTests \{        \
+
+\f1 \
+
+\f0\b Serializing tests
+\f1\b0  
+\f3\i (handy during debugging argument tests)
+\f1\i0 \
+
+\f2 @Test(.serialized) func blah() \{
+\f1 \
 \
 \
 sdjfnsdjf\

@@ -183,6 +183,7 @@ func sellsBurritos() async throws { ... }
 
 Require non-nil result / unwrap for rest of test
 let customer = try #require(Customer(id: 123))
+If you forget the try, you'll get an error that has no error marker in the editor #ilyxc
 
 Don't kill the test if something throws
 #expect(throws: Never.self) { // if it throws, record an error, but don't kill the test
@@ -228,7 +229,16 @@ struct SoftServe: CustomTestStringConvertible {
 	}
 }
 
+Iterative tests
+@Test(arguments: 0 ..&lt; 10)
+func createBubbleChoosesID(count: Int) {
 
+Are we running in tests? (not 100% sure this is the best way. Only tested on Mac so far)
+let inTests = ProcessInfo().environment["XCTestBundlePath"] != nil
+if !inTests {        
+
+Serializing tests (handy during debugging argument tests)
+@Test(.serialized) func blah() {
 
 
 sdjfnsdjf
@@ -1140,7 +1150,7 @@ use tags to provide semantic information for organization, filtering, and custom
 
 a complex package may contain hundreds or thousands of tets and suites. Some may share a common facet, like being critical or flaky.  can use tags to add to the group and categorize tests.
 
-Tags != test suites - suites impose structure on test functions on a source leve.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets (how is that expressed?)
+Tags != test suites - suites impose structure on test functions on a source level.  Tags provide semantic information for a test that can be shared with any number of other tests across test suites, source files, or even test targets (how is that expressed?)
 
 To add a tag, use the tags trait. - takes a sequence of tags as its argument, and those are applied to the test at runtime.
 
@@ -1348,7 +1358,11 @@ event handlers that might call more than once.  Counting manually has data race 
 use confirmation
 
 
-</Text>
+Want to compare floating point numbers?  We used to have XCTAssertEqual(_:_:accuracy:)
+https://github.com/swiftlang/swift-testing/issues/165
+Suggestion is to pull in swift-numerics, and use isApproximatelyEqual
+
+Got spurious coverage?  See if the driver app is opening a document that happens to exercise things (had a document with some formatting, and wondering why my bold formatting stuff was getting covered)  Since you don't see it opening</Text>
         </Document>
         <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
             <Title>Compiler Knows Things</Title>
