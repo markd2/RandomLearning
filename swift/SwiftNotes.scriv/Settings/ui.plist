@@ -43,12 +43,27 @@
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
+		<key>82E1A36D-C3DC-41F5-947A-2D01C586EB0C</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>8C8AEF0F-4C2D-4C7A-A1F7-F710BE2ADCCD</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>9244C190-7AFE-4065-A947-59F2898F796E</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
 		<key>AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>B636E5B3-4F03-44DC-A443-1B6A838BFD95</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -133,7 +148,7 @@
 	</dict>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {345, 802}}</string>
+		<string>{{0, 0}, {497, 802}}</string>
 	</array>
 	<key>inspectorWidth</key>
 	<real>245</real>
@@ -143,14 +158,14 @@
 		<real>1</real>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 1269}, {800, 726}}</string>
+	<string>{{0, 0}, {800, 726}}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>textScaleFactor</key>
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>277 73 1081 840 0 0 1728 1079 </string>
+	<string>1239 253 1081 840 0 0 2560 1415 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>

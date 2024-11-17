@@ -14,6 +14,17 @@ Big caveat - don't use this information to make decisions, unless you know you s
 I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
 </Text>
         </Document>
+        <Document ID="B636E5B3-4F03-44DC-A443-1B6A838BFD95">
+            <Title>Async Sequence</Title>
+            <Text>Async Sequence
+
+goal:
+- how to use async sequences
+- how to make my own async sequence from a task thingie
+
+
+</Text>
+        </Document>
         <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
             <Title>csh time builtin output format</Title>
             <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
@@ -251,6 +262,7 @@ sdjfnsdjf
             <Title>xcrud 15 vs 16</Title>
             <Text>IIRC built into xc16. for 15, you need some hoops
 
+hello
 </Text>
         </Document>
         <Document ID="4D3CF17A-C9DB-4703-864D-115FCC3E8777">
@@ -1510,6 +1522,11 @@ And because arrays are in a contiguous chunka bytes, iterative scanning through 
 SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went into vapor-lock.  Greebles can be enums, or structs, or classes.  all different sizes. HOW CAN THAT WORK?!??!
 
 
+
+</Text>
+        </Document>
+        <Document ID="82E1A36D-C3DC-41F5-947A-2D01C586EB0C">
+            <Text>Async Sequences
 
 </Text>
         </Document>
