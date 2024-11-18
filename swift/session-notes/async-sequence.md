@@ -14,7 +14,7 @@ WWDC 2021: https://developer.apple.com/videos/play/wwdc2021/10058/
 
 ```
 @main
-struct QuakesTool ‹
+struct QuakesTool {
     static func main() async throws {
         let endpointURL = URL(string:
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")!
