@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="squeaky2" Author="" Modified="2024-11-17 16:35:54 -0500" ModID="4A79D8D8-C52B-4AAB-B1B5-6273B5F885E1">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="ultrabook" Author="" Modified="2024-11-24 21:57:04 -0500" ModID="A2E67B53-2A06-49B4-AFEA-D60CCAC8A624">
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
@@ -286,14 +286,14 @@
     </StatusSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-11-18 00:00:00 -0500" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="22" Characters="132" Date="2024-11-17 16:33:49 -0500"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-11-25 00:00:00 -0500" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2024-11-24 21:57:03 -0500"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2024-11-17 00:00:00 -0500">
-        <DraftWordCount>22</DraftWordCount>
-        <DraftCharCount>132</DraftCharCount>
+    <RecentWritingHistory Date="2024-11-24 00:00:00 -0500">
+        <DraftWordCount>0</DraftWordCount>
+        <DraftCharCount>0</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
-    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+    <PrintSettings PaperSize="611.999993,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>
