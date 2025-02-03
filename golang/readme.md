@@ -208,4 +208,121 @@ case int:
   - signature `func (class *Class) Blah(args) (n int, err error)`
 
 * Named result parameters
+  - return/result parameters can be given names and used as regular vriables.
+    When named, they are initialized to zero types, and when returning their
+    current values are used (so like Pascal function return)
+  - `func nextInt(b []byte, pos int) (value, nextPos int) { ... return }`
+    - simplifies the return statement too
+
+* Defer
+  - schedules a function call to be run immediately before the function returns
+    - guessing it doesn't allow a code block
+    - guessing it's not scoped
+  - canonical exampls are unloxing a mutex or closing a file
+  - evaluated when the defer executes, not when the call executes
+    - so safe from variables changing values
+  - run in LIFO order
+  - includes a cool "entering/running/exiting" utility
+  - the function-based rather than blocked based is "more interesting and powerful"
+
+### Data
+
+* two allocation primitives: new and make
+  - new
+    - built-in function that allocates memory, does not initialize it (just zeroes)
+    - new(T) allocates zeroed storage of size(T) and returns its address as
+      value of type *T (pointer to T)
+    - helpful when designging to have a zeroed type be useful without 
+      further ado.
+      - like bytes.Buffer is an empty buffer ready to use, or sync.Muxtex
+        is born unlocked
+    - zero-value-is-useful is handy for composition (say a buffer and mutex
+      together)
+  - make(T, args) - creates slices, maps, and channels only
+    - returns initialized (not zeroed) values of type T (not *T)
+    - these three types represent data structures that must be initialized
+      prior to use.
+      - e.g. a slice is a three-item descriptor containg a poitner to
+        the data (inside of an array), length, and capacity.
+        - until we got those, the slice is nil
+    - make sets up the innards for use.
+      - `make([]int, 10, 100)` allocates an array of 100 ints and makes
+        a slice structure with length 10 and a capacity of 100 pointing to
+        the first 10 elements of the array
+        - obtw, when making a slice, the capactiy can be omitted
+      - in contrast, `new([]int)` returns a pointer to a newly allocated
+        zeroed slice structure - a pointer to a nil slice value
+
+```
+var p *[]int = new([]int)  // allocates slice structure, *p == nil. "rarely useful"
+var v  []int = make([]int, 100) // slice v now refers to a new array of 100 ints
+
+// unnecessarily complex:
+var p *[]int = new([]int)
+*p = make([]int, 100, 100)
+
+// idiomatic
+v := make([]int, 100)
+```
+
+
+* initializing constructor, e.g.
+
+```
+func NewFile(fd int, name string) *File {
+    if fd < 0 { return nil }
+    f := new(File) // zero'd
+    f.fd = f
+    f.name = name
+    f.dirinfo = nil
+    f.nepipe = 0
+    return f
+}
+```
+
+* Can simplify it with a composite literal - an expression that creates
+  a new instance each time it is evaludated
+  - it's perfectly OK to return the address of a local variable
+  - taking the address of a composite literal allocates a fresh instance
+    each time it is evaluated, so in the example can do `return &File{fd: fd, name: name}`
+  - a composite ltieral contains no fields at all, creating a zero value for the type
+   - `new(File)` and `&File{}` are equivalent
+  - can also be created for arrays, slices, maps with the field labels being
+    indices or map keys as appropriate
+    - I didn't understand the example
+
+```
+func NewFile(fd int, name string) *File {
+    if fd < 0 { return nil }
+    f := File{f, name, nil, 0}
+    return &f
+}
+```
+
+* Arrays
+  - useful when planning the detailed layout of memory and sometimes can
+    help avoid allocation
+  - primarily a building block for slices
+  - differences than C
+    - arrays are values - assignment copies all the elements
+      - deeply?
+    - if you pass an array to a function, it will receive a copy, not a pointer
+    - the size is part of its type.  `[10]int` and `[20]int` are distinct
+  - the value property can be useful but expensive. For C-like
+    behavior and performance, do something like this. But, really, just
+    use slices
+
+```
+func Sum(a *[3]float64) (sum float64) {  // named return, starts at zero
+    for _, v := range *a {
+        sum += v
+    }
+    return  // returns the current value of sum
+}
+
+array := [...]float64{7.0, 8.5, 9.1}
+x := Sum(&array) // note explicit address-of
+```
+
+* Slices
   - stopped here
