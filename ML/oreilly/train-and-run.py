@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sklearn.linear_model
+import sklearn.neighbors
 
 def prepare_country_stats(oecd_bli, gdp_per_capita):
     oecd_bli = oecd_bli[oecd_bli["INEQUALITY"]=="TOT"]
@@ -36,6 +37,9 @@ plt.show()
 
 # Select a linear model
 model = sklearn.linear_model.LinearRegression()
+
+# Select a k-nearest won't you be my Neighbors
+# model = sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
 
 # Train it
 model.fit(X, y)
