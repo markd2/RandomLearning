@@ -1,191 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
-        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
-            <Title>Swift Under the Hood</Title>
-            <Text># Swift under the hood
-
-Things like in-memory representation, existential containers, witness tables, etc.
-
-Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.
-
-"you should have an intuition for what performance different language features give you"
-
-I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
-</Text>
-        </Document>
-        <Document ID="B636E5B3-4F03-44DC-A443-1B6A838BFD95">
-            <Title>Async Sequence</Title>
-            <Text>Async Sequence
-
-goal:
-- how to use async sequences
-- how to make my own async sequence from a task thingie
-
-
-</Text>
-        </Document>
-        <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
-            <Title>csh time builtin output format</Title>
-            <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
-
-%U
-The time the process spent in user mode in cpu seconds.
-
-%S
-The time the process spent in kernel mode in cpu seconds.
-
-%E
-The elapsed (wall clock) time in seconds.
-
-%P
-The CPU percentage computed as (%U + %S) / %E.
-
-
-%X
-The average amount in (shared) text space used in Kbytes.
-%D
-The average amount in (unshared) data/stack space used in Kbytes.
-
-%I
-The number of input operations.
-%O
-The number of output operations.
-
-%F
-The number of major page faults (page needed to be brought from disk).
-%W
-Number of times the process was swapped.
-
-</Text>
-        </Document>
-        <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
-            <Title>Benchmarking</Title>
-            <Text>## Benchmarking
-
-I was going to do some really cheesy benchmarking but ran out of time.
-
-But folks might not realize the disparity between Swift's performance in debug and release mode.
-
-Make sure you're optimizing if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.
-
-for example
-
-test-opt.swift
-
-let n = 10000
-var x = [Int](repeating: 1, count: n)
-
-for i in 0 ..&lt; n {
-    for j in 0 ..&lt; n {
-        x[i] ^= x[j] &lt;&lt; (i+j) % 16
-    }
-}
-print("blah: \(x[0])")
-
-% swiftc    test-opt.swift -o tg
-% swiftc -O test-opt.swift -o to
-
-
-% time ./to
-blah: 14
-0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
-
-while tg is running, explain the output of time
-
-% time ./tg
-blah: 14
-26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
-
-
-So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
-</Text>
-        </Document>
-        <Document ID="0C1844CA-6BF0-4F68-89F8-992892F47349">
-            <Title>Quick Reference</Title>
-        </Document>
-        <Document ID="EAAE4896-FE10-41C8-B75B-D849D5D4837F">
-            <Title>Protocols</Title>
-            <Text>## Protocols
-
-One of swift's defining features is its ability to add layers of abstraction and polymorphism via protocols.  A protocol describes some subset of functionality (say "codable" or "human biometric provider") 
-
-So revisit layout.swift
-
-protocol Snorgle {
-    var anInt: Int { get }
-/*
-    var aBool: Bool { get }
-    var anotherInt: Int { get }
-    var anotherBool: Bool { get }
-    var short: Int16 { get }
-
-    func x()
-    func y()
-    func z()
-    func q()
-*/
-}
-
-extension Thing1: Snorgle {
-    func x() {}
-    func y() {}
-    func z() {}
-    func q() {}
-}
-
-extension Thing2: Snorgle {
-    func x() {}
-    func y() {}
-    func z() {}
-    func q() {}
-}
-and run, and get
-
-Snorgle
-  size: 40
-  stride: 40
-  alignment: 8
-  anInt offset: -1
-  aBool offset: -1
-
-if you throw more things in to it, the thing doesn't get any bigger.
-
-The alignment of 8 implies that there's a data type that requires 8-byte alignment, so probably pointers involved.  size of 40 would mean five pointers.
-
-"Any problem can be solved with an additional layer of indirection"
-
-
-
-</Text>
-        </Document>
-        <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
-            <Title>More than a copy</Title>
-            <Text>## More than a copy
-
-So, class instances need to be retained when used, and released when done with.  If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out. 
-
-if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.
-
-When the reference count hits zero, the memory is freed.  Notice memory is freed, so that implies that the object has been allocated.  You can think of objects living in the heap.  Structures can live anywhere their inline representation can live.  So a structure can be passed on the C stack without involving expensive dynamic memory.
-
-So, what if a struct contains references to objects? Those need to be retained and released
-
-(struct-class.swift)
-
-
-</Text>
-        </Document>
-        <Document ID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4">
-            <Title>Existential Containers</Title>
-            <Text>## Existential Containers
-
-one pointer for the witness table
-three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)
-and not sure what the other word is for
-
-</Text>
-        </Document>
         <Document ID="3E912E40-69F9-4FEA-9F22-42C186FD7171">
             <Title>Quick Reference</Title>
             <Text>Always skip tests
@@ -256,13 +71,6 @@ sdjfnsdjf
 
 
 
-</Text>
-        </Document>
-        <Document ID="C341F091-E04B-4D12-B18F-6685DA0A50E7">
-            <Title>xcrud 15 vs 16</Title>
-            <Text>IIRC built into xc16. for 15, you need some hoops
-
-hello
 </Text>
         </Document>
         <Document ID="4D3CF17A-C9DB-4703-864D-115FCC3E8777">
@@ -1376,36 +1184,6 @@ Suggestion is to pull in swift-numerics, and use isApproximatelyEqual
 
 Got spurious coverage?  See if the driver app is opening a document that happens to exercise things (had a document with some formatting, and wondering why my bold formatting stuff was getting covered)  Since you don't see it opening</Text>
         </Document>
-        <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
-            <Title>Compiler Knows Things</Title>
-            <Text>## Compiler knows things
-
-If the compiler has no other recourse, it'll use existential containers:
-
-func blah2(snorgles: [any Snorgle]) {
-    print("  size: \(MemoryLayout&lt;any Snorgle&gt;.size)")
-    print("  stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")
-    print("  alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")
-}
-blah2(snorgles: [thing1, thing2])
-
-which prints out the existential container size. But notice we can pass any kind of snorgle in there.
-
-Because generics are known at compile time:
-
-func blahArray&lt;T: Snorgle&gt;(snorgles: [T]) {
-    print("  size: \(MemoryLayout&lt;T&gt;.size)")
-    print("  stride: \(MemoryLayout&lt;T&gt;.stride)")
-    print("  alignment: \(MemoryLayout&lt;T&gt;.alignment)")
-}
-
-can call with a uniform type
-blahArray(snorgles: [thing1])
-blahArray(snorgles: [thing2])
-
-and the actual sizes are known (so no dispatching through an existential container)
-</Text>
-        </Document>
         <Document ID="1CDFACFC-26E5-4D80-9AD2-24B85C7FAFAE">
             <Title>Arrays (part 2)</Title>
             <Text>## Arrays part 2.  Moo
@@ -1424,9 +1202,6 @@ if someone modifies the array, it'll make a copy(*) first, and then modify that.
 
 
 </Text>
-        </Document>
-        <Document ID="C50A3C19-EF63-4307-A97F-85C2EFBBC7AB">
-            <Title>Syntax bits</Title>
         </Document>
         <Document ID="FB15E44A-6E03-4785-BC39-87C5FE716CF7">
             <Title>Structure Layout</Title>
@@ -1507,27 +1282,11 @@ huh.  Where'd all the numbers go?
 
 </Text>
         </Document>
-        <Document ID="F40AE388-1C45-493D-AF10-31C1A82B1D5A">
-            <Text>## Arrays
+        <Document ID="C341F091-E04B-4D12-B18F-6685DA0A50E7">
+            <Title>xcrud 15 vs 16</Title>
+            <Text>IIRC built into xc16. for 15, you need some hoops
 
-In many performance-oriented languages, arrays have a particular implemention that makes them very fast for what they do.
-
-- large contiguous chunk of memory
-- uniform size of entities
-
-This allows easy "pointer plus scaled offset" for indexing.  If you know your array items are 30 bytes long, you can figure out the address in memory for the N'th item by doing baseAddress + N * 30.  makes random access really fast
-
-And because arrays are in a contiguous chunka bytes, iterative scanning through them (for i in 0 .. size; do stuff with array[i]) take advantage of the processor's prefetching behavior.
-
-SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went into vapor-lock.  Greebles can be enums, or structs, or classes.  all different sizes. HOW CAN THAT WORK?!??!
-
-
-
-</Text>
-        </Document>
-        <Document ID="82E1A36D-C3DC-41F5-947A-2D01C586EB0C">
-            <Text>Async Sequences
-
+hello
 </Text>
         </Document>
         <Document ID="9244C190-7AFE-4065-A947-59F2898F796E">
@@ -1608,6 +1367,149 @@ let customer = try #require(Customer(id: 123))
 
 </Text>
         </Document>
+        <Document ID="82E1A36D-C3DC-41F5-947A-2D01C586EB0C">
+            <Text>Async Sequences
+
+</Text>
+        </Document>
+        <Document ID="8ECFF5E5-03A9-47B3-A8DC-551A72B42470">
+            <Title>Gino Murfday</Title>
+            <Text>Hi, I'm MarkD, and I met Gino back when Global Ride was in its prime, in the the 2009 / 2010 timeframe.  To be honest, time is fungible.  Global Ride was a cool fitness studio, making DVDs, doing yoga and Spinning (oops, Indoor Cycling. Spinning is a registered trademark of Mad Dogg Athletics, Inc, and may not be used by anybody under any circumstances), Pilates, Smoothies, and more.
+
+A cool fitness studio that run "science" experiments on people.  He convinced us to strap on technology for use in these experiments. To breathe into weird devices. We did it, and we did it voluntarily!
+
+When you first meet Gino, it's easy to be fooled by the friendly, genuine exterior.  It's obvious that guy is smart, knows a lot about a lot of stuff, and is able to stay on task while leaving more tasks in his wake.  Gino has an intelligence. Almost an inhuman intelligence.  I know he thinks on a plane different, sometimes incomprehensible, than most of us mere humans.
+
+For instance.  Who here remembers One Watt Per Pound?.  In the process of verifying "maintaining one watt per pound of bodyweight on a Kesier M3 Spin (er) Indoor Bike can deflect Arkanoid reflector beams",  Gino ran a climbing workshop for folks of... about my caliber conditioning.  He had us ride up and down a steep road called EDGECLIFF.  Not exactly a comforting name for us mere humans.  Kind of along the lines of "Fellow humans, would you join us for a calm weekend at Castle Murderdeath?"
+
+When I .. mentally travel back to that time, Gino did some amazing, really ahead of the time-curve kind of stuff.  
+  - Prior to the Cycling Fusion Training Center, we had the Spreadsheet from Hell that would calculate our Winter Training load points. I have no idea how that thing worked. It was like some kind of alien technology.  Spreadsheets can do THIS?
+  - The cleared music service, for being able to re-use music in published Indoor Spinning Classes.  Peloton ended up leveraging such a service to the level of success it has now.
+  - Streaming Winter Training over the internet - at the time, there really wasn't Twitch, or YouTube streaming, or any of that stuff.  Streaming technology caught up with him about a decade later.  Peloton and Apple Fitness Plus now kind of own that territory.
+  - Live immersive video! We even dabbled with first person 3D graphics.  Zwift!
+  - Video clips that can be assembled by users and used for public performance.  Yes, Gino came up with TikTok, just ... too early
+
+Come to think of it, it's pretty amazing that Gino's so consistently been ahead of the curve.  Almost as if he has some inside knowledge about what's going to happen.
+
+There's really only one explanation.
+
+(j'accuse)  Gino is a Time Lord.  Just... not a very good one.
+
+Thank you
+
+ 	
+
+4:00 til 10:00
+The German Club
+857 Phineas St. Pittsburgh 15212
+
+30 mil, 30min
+leave at 3? 3:15?
+
+Down 28, Exit 1B (E Ohio St)
+R on Madison
+R on Phineas</Text>
+        </Document>
+        <Document ID="C50A3C19-EF63-4307-A97F-85C2EFBBC7AB">
+            <Title>Syntax bits</Title>
+        </Document>
+        <Document ID="AE8BCB40-8CD3-44E9-A029-EFDBFB897DD4">
+            <Title>Existential Containers</Title>
+            <Text>## Existential Containers
+
+one pointer for the witness table
+three word-size for inline-storage, otherwise flow out to dynamic memory (based on scoping)
+and not sure what the other word is for
+
+</Text>
+        </Document>
+        <Document ID="C1DD02B5-E104-40F2-B910-750B9D444DB6">
+            <Title>csh time builtin output format</Title>
+            <Text>%Uu %Ss %E %P %X+%Dk %I+%Oio %Fpf+%Ww
+
+%U
+The time the process spent in user mode in cpu seconds.
+
+%S
+The time the process spent in kernel mode in cpu seconds.
+
+%E
+The elapsed (wall clock) time in seconds.
+
+%P
+The CPU percentage computed as (%U + %S) / %E.
+
+
+%X
+The average amount in (shared) text space used in Kbytes.
+%D
+The average amount in (unshared) data/stack space used in Kbytes.
+
+%I
+The number of input operations.
+%O
+The number of output operations.
+
+%F
+The number of major page faults (page needed to be brought from disk).
+%W
+Number of times the process was swapped.
+
+</Text>
+        </Document>
+        <Document ID="B636E5B3-4F03-44DC-A443-1B6A838BFD95">
+            <Title>Async Sequence</Title>
+            <Text>Async Sequence
+
+goal:
+- how to use async sequences
+- how to make my own async sequence from a task thingie
+
+
+</Text>
+        </Document>
+        <Document ID="DDA87D8C-29B8-462D-9839-BA2FEBC09AC4">
+            <Title>Benchmarking</Title>
+            <Text>## Benchmarking
+
+I was going to do some really cheesy benchmarking but ran out of time.
+
+But folks might not realize the disparity between Swift's performance in debug and release mode.
+
+Make sure you're optimizing if you're doing any kind of real comparisons.  Unoptimized Swift is a porker.
+
+for example
+
+test-opt.swift
+
+let n = 10000
+var x = [Int](repeating: 1, count: n)
+
+for i in 0 ..&lt; n {
+    for j in 0 ..&lt; n {
+        x[i] ^= x[j] &lt;&lt; (i+j) % 16
+    }
+}
+print("blah: \(x[0])")
+
+% swiftc    test-opt.swift -o tg
+% swiftc -O test-opt.swift -o to
+
+
+% time ./to
+blah: 14
+0.252u 0.002s 0:00.25 100.0%    0+0k 0+0io 4pf+0w
+
+while tg is running, explain the output of time
+
+% time ./tg
+blah: 14
+26.189u 0.018s 0:26.50 98.8%    0+0k 0+0io 13pf+0w
+
+
+So like two orders of magnitude faster - 26 seconds for "only" 100,000,000 bits of work is not fast.  Sometimes this is really noticeable with the swift algorithms, like doing a permutation over a set.
+</Text>
+        </Document>
         <Document ID="3235AABD-C6FC-41FE-BF87-81C6694566F1">
             <Title>Inline representation</Title>
             <Text>## Inline Representation
@@ -1627,6 +1529,142 @@ Classes though, are reference types.  When passing a reference type around, all 
 
 This means the inline representation for class instances is going to be the size of a pointer, which is going to be 8 bytes (iOS, Mac, etc), or 4 bytes (on Playdate and other embedded systems)
 </Text>
+        </Document>
+        <Document ID="BA1108B6-D88C-4C58-9629-189F748F2CFE">
+            <Title>More than a copy</Title>
+            <Text>## More than a copy
+
+So, class instances need to be retained when used, and released when done with.  If I pass an object to a function, it gets retained on the way in (reference count incremented), and released (reference count decremented) on the way out. 
+
+if I assign an object to a local property, it gets retained when assigned, and then if a new value is assigned, the original is released.
+
+When the reference count hits zero, the memory is freed.  Notice memory is freed, so that implies that the object has been allocated.  You can think of objects living in the heap.  Structures can live anywhere their inline representation can live.  So a structure can be passed on the C stack without involving expensive dynamic memory.
+
+So, what if a struct contains references to objects? Those need to be retained and released
+
+(struct-class.swift)
+
+
+</Text>
+        </Document>
+        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
+            <Title>Swift Under the Hood</Title>
+            <Text># Swift under the hood
+
+Things like in-memory representation, existential containers, witness tables, etc.
+
+Big caveat - don't use this information to make decisions, unless you know you should use this information to make decisions.
+
+"you should have an intuition for what performance different language features give you"
+
+I know for me, I get all sorts of "oh, so that's how $SOMETHING works" hits of dopamine with these things (as we'll see with arrays)
+</Text>
+        </Document>
+        <Document ID="DA035F06-5C9F-47BF-8F93-ADECA9BF579D">
+            <Title>Compiler Knows Things</Title>
+            <Text>## Compiler knows things
+
+If the compiler has no other recourse, it'll use existential containers:
+
+func blah2(snorgles: [any Snorgle]) {
+    print("  size: \(MemoryLayout&lt;any Snorgle&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;any Snorgle&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;any Snorgle&gt;.alignment)")
+}
+blah2(snorgles: [thing1, thing2])
+
+which prints out the existential container size. But notice we can pass any kind of snorgle in there.
+
+Because generics are known at compile time:
+
+func blahArray&lt;T: Snorgle&gt;(snorgles: [T]) {
+    print("  size: \(MemoryLayout&lt;T&gt;.size)")
+    print("  stride: \(MemoryLayout&lt;T&gt;.stride)")
+    print("  alignment: \(MemoryLayout&lt;T&gt;.alignment)")
+}
+
+can call with a uniform type
+blahArray(snorgles: [thing1])
+blahArray(snorgles: [thing2])
+
+and the actual sizes are known (so no dispatching through an existential container)
+</Text>
+        </Document>
+        <Document ID="F40AE388-1C45-493D-AF10-31C1A82B1D5A">
+            <Text>## Arrays
+
+In many performance-oriented languages, arrays have a particular implemention that makes them very fast for what they do.
+
+- large contiguous chunk of memory
+- uniform size of entities
+
+This allows easy "pointer plus scaled offset" for indexing.  If you know your array items are 30 bytes long, you can figure out the address in memory for the N'th item by doing baseAddress + N * 30.  makes random access really fast
+
+And because arrays are in a contiguous chunka bytes, iterative scanning through them (for i in 0 .. size; do stuff with array[i]) take advantage of the processor's prefetching behavior.
+
+SO, knowing that, things like   func blah(array: [any Greeble]) - my brain went into vapor-lock.  Greebles can be enums, or structs, or classes.  all different sizes. HOW CAN THAT WORK?!??!
+
+
+
+</Text>
+        </Document>
+        <Document ID="EAAE4896-FE10-41C8-B75B-D849D5D4837F">
+            <Title>Protocols</Title>
+            <Text>## Protocols
+
+One of swift's defining features is its ability to add layers of abstraction and polymorphism via protocols.  A protocol describes some subset of functionality (say "codable" or "human biometric provider") 
+
+So revisit layout.swift
+
+protocol Snorgle {
+    var anInt: Int { get }
+/*
+    var aBool: Bool { get }
+    var anotherInt: Int { get }
+    var anotherBool: Bool { get }
+    var short: Int16 { get }
+
+    func x()
+    func y()
+    func z()
+    func q()
+*/
+}
+
+extension Thing1: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+
+extension Thing2: Snorgle {
+    func x() {}
+    func y() {}
+    func z() {}
+    func q() {}
+}
+and run, and get
+
+Snorgle
+  size: 40
+  stride: 40
+  alignment: 8
+  anInt offset: -1
+  aBool offset: -1
+
+if you throw more things in to it, the thing doesn't get any bigger.
+
+The alignment of 8 implies that there's a data type that requires 8-byte alignment, so probably pointers involved.  size of 40 would mean five pointers.
+
+"Any problem can be solved with an additional layer of indirection"
+
+
+
+</Text>
+        </Document>
+        <Document ID="0C1844CA-6BF0-4F68-89F8-992892F47349">
+            <Title>Quick Reference</Title>
         </Document>
     </Documents>
 </SearchIndexes>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="ultrabook" Author="" Modified="2024-11-24 21:57:04 -0500" ModID="A2E67B53-2A06-49B4-AFEA-D60CCAC8A624">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.3.6-16305" Device="squeakytoy2" Author="" Modified="2025-05-03 10:40:43 -0400" ModID="760A6428-5554-4690-BD18-D1488E39423E">
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
@@ -166,6 +166,15 @@
                         <TextSelection>108,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
+                <BinderItem UUID="8ECFF5E5-03A9-47B3-A8DC-551A72B42470" Type="Text" Created="2025-05-03 09:08:40 -0400" Modified="2025-05-03 10:40:43 -0400">
+                    <Title>Gino Murfday</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>1795,1</TextSelection>
+                    </TextSettings>
+                </BinderItem>
             </Children>
         </BinderItem>
         <BinderItem UUID="94D5FC1E-44EA-4DFB-A8B8-029A495C48DB" Type="ResearchFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
@@ -286,12 +295,12 @@
     </StatusSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-11-25 00:00:00 -0500" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="0" Characters="0" Date="2024-11-24 21:57:03 -0500"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2025-05-04 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="505" Characters="2917" Date="2025-05-03 09:08:21 -0400"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2024-11-24 00:00:00 -0500">
-        <DraftWordCount>0</DraftWordCount>
-        <DraftCharCount>0</DraftCharCount>
+    <RecentWritingHistory Date="2025-05-03 00:00:00 -0400">
+        <DraftWordCount>505</DraftWordCount>
+        <DraftCharCount>2917</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
