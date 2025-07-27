@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.4-16639" Device="squeakytoy2" Author="" Modified="2025-07-26 20:46:02 -0400" ModID="80A90BB2-0796-4C10-8C62-C143A465093C">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.4-16639" Device="squeakytoy2" Author="" Modified="2025-07-26 20:47:21 -0400" ModID="CA271111-883E-4492-9D09-A88E36D48847">
     <Binder>
         <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
@@ -64,6 +64,15 @@
                             </Children>
                         </BinderItem>
                     </Children>
+                </BinderItem>
+                <BinderItem UUID="E2ED45D4-067C-451C-AFFC-B651A44D397B" Type="Text" Created="2025-07-26 20:47:14 -0400" Modified="2025-07-26 20:47:19 -0400">
+                    <Title>Model 100</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
                 </BinderItem>
             </Children>
         </BinderItem>
@@ -135,7 +144,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2025-07-27 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="0" Characters="0" Date="2025-07-26 20:43:42 -0400"/>
+        <PreviousSession Words="0" Characters="0" Date="2025-07-26 20:47:11 -0400"/>
     </ProjectTargets>
     <RecentWritingHistory Date="2025-07-26 00:00:00 -0400">
         <DraftWordCount>0</DraftWordCount>

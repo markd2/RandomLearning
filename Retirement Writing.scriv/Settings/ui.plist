@@ -36,6 +36,11 @@
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
+		<key>E2ED45D4-067C-451C-AFFC-B651A44D397B</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>FA23F07E-F8E3-433F-A965-2B7854A16AE2</key>
 		<dict>
 			<key>Row</key>
@@ -79,7 +84,7 @@
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>494 27 1246 665 0 0 2048 1127 </string>
+	<string>494 33 1246 665 0 0 2048 1127 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>
