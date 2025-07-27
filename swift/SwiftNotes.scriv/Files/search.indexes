@@ -1367,11 +1367,6 @@ let customer = try #require(Customer(id: 123))
 
 </Text>
         </Document>
-        <Document ID="82E1A36D-C3DC-41F5-947A-2D01C586EB0C">
-            <Text>Async Sequences
-
-</Text>
-        </Document>
         <Document ID="8ECFF5E5-03A9-47B3-A8DC-551A72B42470">
             <Title>Gino Murfday</Title>
             <Text>Hi, I'm MarkD, and I met Gino back when Global Ride was in its prime, in the the 2009 / 2010 timeframe.  To be honest, time is fungible.  Global Ride was a cool fitness studio, making DVDs, doing yoga and Spinning (oops, Indoor Cycling. Spinning is a registered trademark of Mad Dogg Athletics, Inc, and may not be used by anybody under any circumstances), Pilates, Smoothies, and more.
@@ -1409,6 +1404,11 @@ leave at 3? 3:15?
 Down 28, Exit 1B (E Ohio St)
 R on Madison
 R on Phineas</Text>
+        </Document>
+        <Document ID="82E1A36D-C3DC-41F5-947A-2D01C586EB0C">
+            <Text>Async Sequences
+
+</Text>
         </Document>
         <Document ID="C50A3C19-EF63-4307-A97F-85C2EFBBC7AB">
             <Title>Syntax bits</Title>
