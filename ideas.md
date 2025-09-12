@@ -34,6 +34,7 @@ Specific software I want to build.
 * Galactica handheld game
 * Correspondence tracker
 * Infocom mapper helper
+* Gameboy Emulator
 
 
 ### BASIC peculiar
