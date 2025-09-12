@@ -33,6 +33,7 @@ Specific software I want to build.
 * 6502 Tearing assisting app (Enhancing your Apple 2 1st and second 2d, Don Lancaster)
 * Galactica handheld game
 * Correspondence tracker
+* Infocom mapper helper
 
 
 ### BASIC peculiar
