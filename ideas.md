@@ -35,6 +35,13 @@ Specific software I want to build.
 * Correspondence tracker
 * Infocom mapper helper
 * Gameboy Emulator
+* DrawSteel support
+* Some kind of ICS helper
+* Borkbot for twitch
+* Story tracker (have I bored this person with this story before?)
+* Recipe accumulator
+* Photography diary
+* area restaurant traxor (Lemme go and visit everybody and give my reviews. Maybe trace out an area on a map with a finger for "show me all the foodage in this region)
 
 
 ### BASIC peculiar
@@ -43,6 +50,7 @@ Specific software I want to build.
 * string animations in BASIC
 * Tetris 
 * Obligatory MadLibs
+* Apple ][ Powerpoint 
 
 
 
@@ -74,3 +82,4 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * [Computer, Enahnce!](https://www.computerenhance.com) - Casey Muratori's performance deep-dive
 * swift compuer and runtime for concurrency
 * Game AI / Genetic algorithms
+* Track down a dot matrix printer for the retro machines
