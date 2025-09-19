@@ -42,6 +42,12 @@ Specific software I want to build.
 * Recipe accumulator
 * Photography diary
 * area restaurant traxor (Lemme go and visit everybody and give my reviews. Maybe trace out an area on a map with a finger for "show me all the foodage in this region)
+* create crostic from photo
+* Swift Composable Architecture (TCA) visualizer (what are the reducers doing, etc)
+* TIME BOXXY
+* pipedream-style puzzle
+* heart rate sequeince overlaid with exercise, choose where workout has ended to
+  see your actual post-workout recovery rate, no matter where that happened.
 
 
 ### BASIC peculiar
@@ -51,6 +57,7 @@ Specific software I want to build.
 * Tetris 
 * Obligatory MadLibs
 * Apple ][ Powerpoint 
+* Crossword puzzle
 
 
 
@@ -83,3 +90,4 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * swift compuer and runtime for concurrency
 * Game AI / Genetic algorithms
 * Track down a dot matrix printer for the retro machines
+* Volunteer at large-scale museum
