@@ -48,6 +48,12 @@ Specific software I want to build.
 * pipedream-style puzzle
 * heart rate sequeince overlaid with exercise, choose where workout has ended to
   see your actual post-workout recovery rate, no matter where that happened.
+* pipedream style puzzle
+* MUST SAVE ROOMBA
+* Unified ideas capturer
+* High Friction recipe keeper (might do a whole line of High Friction software)
+  - everything is too damn easy.  If you can scan, love with a tap, or ingest
+    homoginized slop, then you might be hoarder.
 
 
 ### BASIC peculiar
@@ -91,3 +97,13 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * Game AI / Genetic algorithms
 * Track down a dot matrix printer for the retro machines
 * Volunteer at large-scale museum
+* Casy M's Big Oops / ECS
+* Hand assembly
+* write an assembler
+* embedded forth
+* forth on playdate
+
+
+## Music ideas
+
+* Grob of our Fathers
