@@ -1,0 +1,1114 @@
+- ID: 1
+  text: Greeble
+  formattingOptions: []
+  position:
+  - 0e+0
+  - 0e+0
+  width: 0e+0
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 3
+  text: Why did I wake up?
+  formattingOptions: []
+  position:
+  - 1.599375e+2
+  - 1.913125e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 28
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 4
+  text: Apps with tags
+  formattingOptions: []
+  position:
+  - 4.7875e+1
+  - 2.980859375e+2
+  width: 9e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 5
+  text: Spreadsheet
+  formattingOptions: []
+  position:
+  - 1.765078125e+2
+  - 2.9059765625e+2
+  width: 9e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 6
+  text: Playdate
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 6.83296875e+2
+  - 3.248671875e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 7
+      length: 4
+  _effectiveHeight: 1.4e+1
+- ID: 7
+  text: Lua Game
+  formattingOptions: []
+  position:
+  - 6.5653515625e+2
+  - 3.6177734375e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 8
+  text: C / Game
+  formattingOptions: []
+  position:
+  - 7.3591015625e+2
+  - 2.867734375e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 9
+  text: Swift embedded game
+  formattingOptions: []
+  position:
+  - 7.6749609375e+2
+  - 3.560625e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 10
+  text: Forth Game
+  formattingOptions: []
+  position:
+  - 6.5167578125e+2
+  - 2.6501953125e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 11
+  text: Borkle 2
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.8833984375e+2
+  - 5.36546875e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 12
+      length: 2
+    - location: 22
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 12
+  text: Infocom mapper
+  formattingOptions: []
+  position:
+  - 3.2974609375e+2
+  - 5.05296875e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 13
+  text: General Zettelkasten
+  formattingOptions: []
+  position:
+  - 2.9530859375e+2
+  - 5.74546875e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 14
+  text: Ridebuddy 2
+  formattingOptions: []
+  position:
+  - 3.32046875e+2
+  - 4.2845703125e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 15
+  text: Foster threshold test
+  formattingOptions: []
+  position:
+  - 3.2846875e+2
+  - 3.430625e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 16
+  text: Health / Fitness
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 3.2933984375e+2
+  - 3.7972265625e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 14
+      length: 2
+    - location: 17
+      length: 1
+    - location: 47
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 17
+  text: BP visualzier
+  formattingOptions: []
+  position:
+  - 2.3209375e+2
+  - 3.9603125e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 18
+  text: Kitchen inventory
+  formattingOptions: []
+  position:
+  - 5.639453125e+2
+  - 5.000078125e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 19
+  text: Retro Benchmarker
+  formattingOptions: []
+  position:
+  - 1.0623828125e+2
+  - 7.6200390625e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 20
+  text: Mille Borks
+  formattingOptions: []
+  position:
+  - 6.0673828125e+2
+  - 6.6965625e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 21
+  text: Cookage
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 5.826015625e+2
+  - 5.37875e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+    - location: 38
+      length: 1
+    - location: 50
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 22
+  text: Apple 2 reference manual
+  formattingOptions: []
+  position:
+  - 1.5246875e+2
+  - 4.980234375e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 23
+  text: Grafdemo for Swiftui
+  formattingOptions: []
+  position:
+  - 3.1690625e+2
+  - 2.8378515625e+2
+  width: 1.2e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 24
+  text: Laurel's metronome from hell
+  formattingOptions: []
+  position:
+  - 3.8601953125e+2
+  - 1.9896484375e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 4.2e+1
+- ID: 25
+  text: Borkstitch
+  formattingOptions: []
+  position:
+  - 5.185234375e+2
+  - 1.3821484375e+2
+  width: 7e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 26
+  text: quick lock-screen expense entry
+  formattingOptions: []
+  position:
+  - 4.1188671875e+2
+  - 1.0478125e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 2.8e+1
+- ID: 27
+  text: Better top / activity monitor CPU monitor
+  formattingOptions: []
+  position:
+  - 1.49e+2
+  - 9.354296875e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 28
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 28
+  text: Mac System stuff
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.1349609375e+2
+  - 1.417890625e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 3
+      length: 1
+    - location: 27
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 29
+  text: Retro
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.7140234375e+2
+  - 7.68328125e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 19
+      length: 1
+    - location: 30
+      length: 1
+    - location: 33
+      length: 1
+    - location: 52
+      length: 1
+    - location: 93
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 30
+  text: 6502 Tearing assistant
+  formattingOptions: []
+  position:
+  - 1.9478515625e+2
+  - 7.3259375e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 31
+  text: Galactica hand-held game
+  formattingOptions: []
+  position:
+  - 6.5065625e+2
+  - 5.987265625e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 32
+  text: correspndence tracker
+  formattingOptions: []
+  position:
+  - 6.8229296875e+2
+  - 8.245546875e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 33
+  text: Gameboy emulator
+  formattingOptions: []
+  position:
+  - 3.381484375e+2
+  - 7.7273828125e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 34
+  text: Draw Steel support
+  formattingOptions: []
+  position:
+  - 4.2165625e+2
+  - 5.509765625e+1
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 35
+  text: Some kind of ICS helper
+  formattingOptions: []
+  position:
+  - 5.6624609375e+2
+  - 1.0192578125e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 36
+  text: Borkbot for twitch
+  formattingOptions: []
+  position:
+  - 6.41375e+2
+  - 1.418515625e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 37
+  text: Story tracker
+  formattingOptions: []
+  position:
+  - 6.343125e+2
+  - 7.7972265625e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 38
+  text: Recipe accumulator
+  formattingOptions: []
+  position:
+  - 6.778515625e+2
+  - 5.325078125e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 39
+  text: Photography diary
+  formattingOptions: []
+  position:
+  - 7.0653515625e+2
+  - 8.8172265625e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 40
+  text: Games
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 7.284375e+2
+  - 6.5701953125e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 20
+      length: 1
+    - location: 31
+      length: 1
+    - location: 46
+      length: 1
+    - location: 48
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 41
+  text: meta-trackers
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 7.681953125e+2
+  - 7.6674609375e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+    - location: 37
+      length: 1
+    - location: 39
+      length: 1
+    - location: 42
+      length: 1
+    - location: 45
+      length: 1
+    - location: 49
+      length: 1
+    - location: 51
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 42
+  text: area restaurant checklist
+  formattingOptions: []
+  position:
+  - 6.0176953125e+2
+  - 7.2103515625e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 43
+  text: create crostic from photo
+  formattingOptions: []
+  position:
+  - 6.3058984375e+2
+  - 4.02890625e+1
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 44
+  text: TCA Visualizer
+  formattingOptions: []
+  position:
+  - 2.0833203125e+2
+  - 2.44609375e+2
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 45
+  text: TIME BOXXY
+  formattingOptions: []
+  position:
+  - 8.242109375e+2
+  - 8.16609375e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 46
+  text: pipedream-style puzzler
+  formattingOptions: []
+  position:
+  - 7.854921875e+2
+  - 6.1062890625e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 47
+  text: heart rate sequence w/exercise etc
+  formattingOptions: []
+  position:
+  - 4.140546875e+2
+  - 3.7710546875e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 48
+  text: MUST SAVE ROOMBA
+  formattingOptions: []
+  position:
+  - 8.1865625e+2
+  - 6.7397265625e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 49
+  text: unified ideas capturer
+  formattingOptions: []
+  position:
+  - 8.04640625e+2
+  - 8.51578125e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 50
+  text: high-friction recipe keeper
+  formattingOptions: []
+  position:
+  - 4.82078125e+2
+  - 5.2950390625e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 51
+  text: unified ideas capturer
+  formattingOptions: []
+  position:
+  - 7.8604296875e+2
+  - 7.2414453125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 52
+  text: BASIC
+  formattingOptions: []
+  position:
+  - 2.5749609375e+2
+  - 8.105234375e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+    - location: 53
+      length: 6
+  _effectiveHeight: 1.4e+1
+- ID: 53
+  text: cryptogrammer
+  formattingOptions: []
+  position:
+  - 1.1355859375e+2
+  - 8.3842578125e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 54
+  text: string animations
+  formattingOptions: []
+  position:
+  - 2.4555078125e+2
+  - 8.4129296875e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 55
+  text: (ascii) tetris
+  formattingOptions: []
+  position:
+  - 1.3020703125e+2
+  - 8.7503125e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 56
+  text: ObMadLibs
+  formattingOptions: []
+  position:
+  - 2.631953125e+2
+  - 8.9528125e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 57
+  text: Apple ][ powerpoint
+  formattingOptions: []
+  position:
+  - 3.7998828125e+2
+  - 8.533515625e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 58
+  text: Crossword puzzle
+  formattingOptions: []
+  position:
+  - 3.8530859375e+2
+  - 8.150078125e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 59
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.01033203125e+3
+  - 9.170703125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 60
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 60
+  text: ''
+  formattingOptions: []
+  position:
+  - 1.79680078125e+3
+  - 6.8763671875e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 59
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 61
+  text: Crafting Interpreters
+  formattingOptions: []
+  position:
+  - 1.02562890625e+3
+  - 3.88671875e+1
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 62
+  text: BorkOS
+  formattingOptions: []
+  position:
+  - 1.02766015625e+3
+  - 1.0140234375e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 63
+  text: elisp
+  formattingOptions: []
+  position:
+  - 1.01736328125e+3
+  - 1.8140234375e+2
+  width: 4e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 64
+  text: vscode grokking
+  formattingOptions: []
+  position:
+  - 1.14769140625e+3
+  - 1.3817578125e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 65
+  text: Retro programming book
+  formattingOptions: []
+  position:
+  - 1.06707421875e+3
+  - 2.469765625e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 66
+  text: Forth
+  formattingOptions: []
+  position:
+  - 1.13214453125e+3
+  - 2.9912890625e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 67
+  text: SwiftUI
+  formattingOptions: []
+  position:
+  - 1.27477734375e+3
+  - 2.032421875e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 68
+  text: Lua (for playdate)
+  formattingOptions: []
+  position:
+  - 1.06038671875e+3
+  - 4.2680078125e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 69
+  text: golang / modern-ish web
+  formattingOptions: []
+  position:
+  - 1.12540234375e+3
+  - 3.671484375e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 70
+  text: BeOS
+  formattingOptions: []
+  position:
+  - 1.1924296875e+3
+  - 8.334765625e+1
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 71
+  text: lisp
+  formattingOptions: []
+  position:
+  - 1.008328125e+3
+  - 2.1243359375e+2
+  width: 4e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 72
+  text: Ghidra / LW's wrapper
+  formattingOptions: []
+  position:
+  - 1.31022265625e+3
+  - 3.098125e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 73
+  text: VAX/VMS
+  formattingOptions: []
+  position:
+  - 1.3186875e+3
+  - 3.709765625e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 74
+  text: emacs deep dive
+  formattingOptions: []
+  position:
+  - 1.3278125e+3
+  - 4.838828125e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 75
+  text: git arcana
+  formattingOptions: []
+  position:
+  - 1.2930625e+3
+  - 4.3583203125e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 76
+  text: jijutsu
+  formattingOptions: []
+  position:
+  - 1.09258203125e+3
+  - 5.0438671875e+2
+  width: 6e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 77
+  text: drawing (physical)
+  formattingOptions: []
+  position:
+  - 1.26597265625e+3
+  - 5.6038671875e+2
+  width: 1.2e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 78
+  text: FORTRAN
+  formattingOptions: []
+  position:
+  - 1.03461328125e+3
+  - 5.703515625e+2
+  width: 8e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 79
+  text: data-oriented design
+  formattingOptions: []
+  position:
+  - 1.14865625e+3
+  - 6.05375e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 80
+  text: play timezone game
+  formattingOptions: []
+  position:
+  - 1.3246171875e+3
+  - 1.3120703125e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 81
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 81
+  text: stream?
+  formattingOptions: []
+  position:
+  - 1.39688671875e+3
+  - 9.9546875e+1
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 80
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 82
+  text: use infocom mapper!
+  formattingOptions: []
+  position:
+  - 1.38596484375e+3
+  - 1.6413671875e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 80
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 83
+  text: Modern C++
+  formattingOptions: []
+  position:
+  - 1.01198828125e+3
+  - 4.6582421875e+2
+  width: 8e+1
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 84
+  text: Computer Enhance!
+  formattingOptions: []
+  position:
+  - 1.2951875e+3
+  - 5.2387109375e+2
+  width: 1.2e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 85
+  text: Swift concurrency guts deep-dive
+  formattingOptions: []
+  position:
+  - 9.7769140625e+2
+  - 6.725546875e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 2.8e+1
+- ID: 86
+  text: Game AI
+  formattingOptions: []
+  position:
+  - 1.2041640625e+3
+  - 7.0152734375e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 87
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 87
+  text: Genetic Algorihms
+  formattingOptions: []
+  position:
+  - 1.16905078125e+3
+  - 7.4462109375e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 86
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 88
+  text: Game Math
+  formattingOptions: []
+  position:
+  - 1.33971484375e+3
+  - 6.71234375e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 89
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 89
+  text: Trig
+  formattingOptions: []
+  position:
+  - 1.31616015625e+3
+  - 6.2273046875e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 88
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 90
+  text: Linear Algernon
+  formattingOptions: []
+  position:
+  - 1.38960546875e+3
+  - 7.057265625e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 88
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 91
+  text: track down dot-matrix printer
+  formattingOptions: []
+  position:
+  - 9.88375e+2
+  - 8.1487109375e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 92
+  text: Volunteer at large-scale museum
+  formattingOptions: []
+  position:
+  - 1.21782421875e+3
+  - 8.0630859375e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 2.8e+1
+- ID: 93
+  text: 6502 emulator
+  formattingOptions: []
+  position:
+  - 3.4465625e+2
+  - 7.2513671875e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 29
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 94
+  text: embedded forth
+  formattingOptions: []
+  position:
+  - 1.28581640625e+3
+  - 2.45859375e+2
+  width: 1.1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1

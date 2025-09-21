@@ -48,12 +48,12 @@ Specific software I want to build.
 * pipedream-style puzzle
 * heart rate sequeince overlaid with exercise, choose where workout has ended to
   see your actual post-workout recovery rate, no matter where that happened.
-* pipedream style puzzle
 * MUST SAVE ROOMBA
 * Unified ideas capturer
 * High Friction recipe keeper (might do a whole line of High Friction software)
   - everything is too damn easy.  If you can scan, love with a tap, or ingest
     homoginized slop, then you might be hoarder.
+* Polish and ship Ephemeral TODO
 
 
 ### BASIC peculiar
