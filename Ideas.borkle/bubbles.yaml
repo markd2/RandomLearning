@@ -734,8 +734,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 1.01033203125e+3
-  - 9.170703125e+2
+  - 1.54646875e+3
+  - 8.270625e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -758,18 +758,20 @@
   text: Crafting Interpreters
   formattingOptions: []
   position:
-  - 1.02562890625e+3
-  - 3.88671875e+1
-  width: 1.6e+2
+  - 1.0715859375e+3
+  - 3.5112890625e+2
+  width: 1.2e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 62
   text: BorkOS
   formattingOptions: []
   position:
-  - 1.02766015625e+3
-  - 1.0140234375e+2
+  - 1.00438671875e+3
+  - 5.0207421875e+2
   width: 6e+1
   connections:
     indexes: []
@@ -778,68 +780,82 @@
   text: elisp
   formattingOptions: []
   position:
-  - 1.01736328125e+3
-  - 1.8140234375e+2
+  - 1.4633125e+3
+  - 3.916484375e+2
   width: 4e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 74
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 64
   text: vscode grokking
   formattingOptions: []
   position:
-  - 1.14769140625e+3
-  - 1.3817578125e+2
+  - 1.1929921875e+3
+  - 2.915390625e+2
   width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 65
   text: Retro programming book
   formattingOptions: []
   position:
-  - 1.06707421875e+3
-  - 2.469765625e+2
+  - 1.0195546875e+3
+  - 8.6384765625e+2
   width: 1.6e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 66
   text: Forth
   formattingOptions: []
   position:
-  - 1.13214453125e+3
-  - 2.9912890625e+2
+  - 1.2594296875e+3
+  - 7.0994921875e+2
   width: 6e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 94
+      length: 1
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 67
-  text: SwiftUI
+  text: SwiftUI deep-dive
   formattingOptions: []
   position:
-  - 1.27477734375e+3
-  - 2.032421875e+2
+  - 1.04706640625e+3
+  - 2.9830078125e+2
   width: 6e+1
   connections:
-    indexes: []
-  _effectiveHeight: 1.4e+1
+    indexes:
+    - location: 97
+      length: 1
+  _effectiveHeight: 2.8e+1
 - ID: 68
   text: Lua (for playdate)
   formattingOptions: []
   position:
-  - 1.06038671875e+3
-  - 4.2680078125e+2
+  - 1.29656640625e+3
+  - 9.959765625e+1
   width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 95
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 69
   text: golang / modern-ish web
   formattingOptions: []
   position:
-  - 1.12540234375e+3
-  - 3.671484375e+2
+  - 1.07780859375e+3
+  - 5.6673046875e+2
   width: 1.6e+2
   connections:
     indexes: []
@@ -848,21 +864,25 @@
   text: BeOS
   formattingOptions: []
   position:
-  - 1.1924296875e+3
-  - 8.334765625e+1
+  - 1.17628515625e+3
+  - 7.029921875e+2
   width: 6e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 71
   text: lisp
   formattingOptions: []
   position:
-  - 1.008328125e+3
-  - 2.1243359375e+2
+  - 1.15223046875e+3
+  - 4.059296875e+2
   width: 4e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 72
   text: Ghidra / LW's wrapper
@@ -872,47 +892,59 @@
   - 3.098125e+2
   width: 1.6e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 73
   text: VAX/VMS
   formattingOptions: []
   position:
-  - 1.3186875e+3
-  - 3.709765625e+2
+  - 1.29064453125e+3
+  - 7.7017578125e+2
   width: 6e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 74
   text: emacs deep dive
   formattingOptions: []
   position:
-  - 1.3278125e+3
-  - 4.838828125e+2
+  - 1.3212109375e+3
+  - 3.9713671875e+2
   width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 63
+      length: 1
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 75
   text: git arcana
   formattingOptions: []
   position:
-  - 1.2930625e+3
-  - 4.3583203125e+2
+  - 1.3293359375e+3
+  - 3.56234375e+2
   width: 6e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 76
   text: jijutsu
   formattingOptions: []
   position:
-  - 1.09258203125e+3
-  - 5.0438671875e+2
+  - 1.1787890625e+3
+  - 4.569921875e+2
   width: 6e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 77
   text: drawing (physical)
@@ -928,40 +960,46 @@
   text: FORTRAN
   formattingOptions: []
   position:
-  - 1.03461328125e+3
-  - 5.703515625e+2
+  - 1.08100390625e+3
+  - 7.477109375e+2
   width: 8e+1
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 79
   text: data-oriented design
   formattingOptions: []
   position:
-  - 1.14865625e+3
-  - 6.05375e+2
-  width: 1.6e+2
+  - 1.246328125e+3
+  - 4.884609375e+2
+  width: 1.2e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 80
   text: play timezone game
   formattingOptions: []
   position:
-  - 1.3246171875e+3
-  - 1.3120703125e+2
+  - 1.2142109375e+3
+  - 8.64390625e+2
   width: 1.3e+2
   connections:
     indexes:
     - location: 81
       length: 2
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 81
   text: stream?
   formattingOptions: []
   position:
-  - 1.39688671875e+3
-  - 9.9546875e+1
+  - 1.21196484375e+3
+  - 9.2996484375e+2
   width: 6e+1
   connections:
     indexes:
@@ -972,8 +1010,8 @@
   text: use infocom mapper!
   formattingOptions: []
   position:
-  - 1.38596484375e+3
-  - 1.6413671875e+2
+  - 1.2764765625e+3
+  - 9.006796875e+2
   width: 1.3e+2
   connections:
     indexes:
@@ -994,40 +1032,46 @@
   text: Computer Enhance!
   formattingOptions: []
   position:
-  - 1.2951875e+3
-  - 5.2387109375e+2
+  - 1.329734375e+3
+  - 4.4167578125e+2
   width: 1.2e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 85
   text: Swift concurrency guts deep-dive
   formattingOptions: []
   position:
-  - 9.7769140625e+2
-  - 6.725546875e+2
-  width: 1.6e+2
+  - 1.04194140625e+3
+  - 2.4509765625e+2
+  width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 97
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 86
   text: Game AI
   formattingOptions: []
   position:
-  - 1.2041640625e+3
-  - 7.0152734375e+2
+  - 1.40712890625e+3
+  - 1.788046875e+2
   width: 6e+1
   connections:
     indexes:
     - location: 87
+      length: 1
+    - location: 95
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 87
   text: Genetic Algorihms
   formattingOptions: []
   position:
-  - 1.16905078125e+3
-  - 7.4462109375e+2
+  - 1.372015625e+3
+  - 2.218984375e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -1038,20 +1082,22 @@
   text: Game Math
   formattingOptions: []
   position:
-  - 1.33971484375e+3
-  - 6.71234375e+2
+  - 1.2400234375e+3
+  - 2.0740234375e+2
   width: 6e+1
   connections:
     indexes:
     - location: 89
       length: 2
+    - location: 95
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 89
   text: Trig
   formattingOptions: []
   position:
-  - 1.31616015625e+3
-  - 6.2273046875e+2
+  - 1.2205078125e+3
+  - 1.614453125e+2
   width: 6e+1
   connections:
     indexes:
@@ -1062,8 +1108,8 @@
   text: Linear Algernon
   formattingOptions: []
   position:
-  - 1.38960546875e+3
-  - 7.057265625e+2
+  - 1.31228125e+3
+  - 2.5314453125e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -1074,21 +1120,25 @@
   text: track down dot-matrix printer
   formattingOptions: []
   position:
-  - 9.88375e+2
-  - 8.1487109375e+2
+  - 1.01383984375e+3
+  - 8.0425390625e+2
   width: 1.6e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 92
   text: Volunteer at large-scale museum
   formattingOptions: []
   position:
-  - 1.21782421875e+3
-  - 8.0630859375e+2
+  - 1.37061328125e+3
+  - 8.1088671875e+2
   width: 1.6e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 96
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 93
   text: 6502 emulator
@@ -1106,9 +1156,85 @@
   text: embedded forth
   formattingOptions: []
   position:
-  - 1.28581640625e+3
-  - 2.45859375e+2
+  - 1.346828125e+3
+  - 7.3389453125e+2
   width: 1.1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 66
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 95
+  text: Games
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.30380859375e+3
+  - 1.5612109375e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 68
+      length: 1
+    - location: 86
+      length: 1
+    - location: 88
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 96
+  text: Retro
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.21256640625e+3
+  - 7.655703125e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 65
+      length: 2
+    - location: 70
+      length: 1
+    - location: 73
+      length: 1
+    - location: 78
+      length: 1
+    - location: 80
+      length: 1
+    - location: 91
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 97
+  text: Nerdity
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.22350390625e+3
+  - 3.8271484375e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+    - location: 64
+      length: 1
+    - location: 67
+      length: 1
+    - location: 71
+      length: 2
+    - location: 74
+      length: 3
+    - location: 79
+      length: 1
+    - location: 84
+      length: 2
   _effectiveHeight: 1.4e+1
