@@ -108,6 +108,10 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * write an assembler
 * embedded forth
 * forth on playdate
+* Ruvinskiy-style data acquisition flows
+* intent-driven development
+* swift reflection / metadata / support structures
+
 
 ## One-month Creative Ideas
 
@@ -120,8 +124,10 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * saxafrog
 * time for "boredom"
 * meditation
+* musicprod
 
 
 ## Music ideas
 
 * Grob of our Fathers
+* (uplifting) Tichelli shenandoah bopstep
