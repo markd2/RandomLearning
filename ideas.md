@@ -17,6 +17,7 @@ Specific software I want to build.
 * Playdate C / Swift-embedded game
 * Overhaul [Borkle2](https://github.com/markd2/Borkle2) so it's more than just a
   mind-mapper, but more zettlekasten
+  - build in borkle, deploy to other places (apple2 reference, SUI reference, etc)
 * RideBuddy 2
 * Foster Threshold test
 * BP Visualizer (like that pre-32pocalypse one I really liked)
@@ -54,6 +55,11 @@ Specific software I want to build.
   - everything is too damn easy.  If you can scan, love with a tap, or ingest
     homoginized slop, then you might be hoarder.
 * Polish and ship Ephemeral TODO
+* Borkaruga
+* workout and weight tracker, watch input
+* zk-based snippet keeper (sui tyles, animation resources, etc)
+* phone typing tutor for old folks / Type Attack
+
 
 
 ### BASIC peculiar
@@ -102,6 +108,18 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * write an assembler
 * embedded forth
 * forth on playdate
+
+## One-month Creative Ideas
+
+* drawing
+* (hand) writing
+* (tech) writing
+* camera
+* math probleems
+* reverse engineering
+* saxafrog
+* time for "boredom"
+* meditation
 
 
 ## Music ideas
