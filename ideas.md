@@ -59,6 +59,7 @@ Specific software I want to build.
 * workout and weight tracker, watch input
 * zk-based snippet keeper (sui tyles, animation resources, etc)
 * phone typing tutor for old folks / Type Attack
+* Multi-process multipong
 
 
 
@@ -111,6 +112,13 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * Ruvinskiy-style data acquisition flows
 * intent-driven development
 * swift reflection / metadata / support structures
+* SIMD
+* Parallel Algorithms
+* State Machiens
+* Swift Task
+* Fat Struct / flags tag
+* App version checker / sunsetter
+* QR Code Maker / Reader
 
 
 ## One-month Creative Ideas
@@ -131,3 +139,4 @@ Nerd things I want to dig in to because they look fun and/or interesting
 
 * Grob of our Fathers
 * (uplifting) Tichelli shenandoah bopstep
+* Close Encounters
