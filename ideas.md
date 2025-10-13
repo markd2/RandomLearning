@@ -60,6 +60,7 @@ Specific software I want to build.
 * zk-based snippet keeper (sui tyles, animation resources, etc)
 * phone typing tutor for old folks / Type Attack
 * Multi-process multipong
+* Ishido / solver
 
 
 
@@ -119,6 +120,10 @@ Nerd things I want to dig in to because they look fun and/or interesting
 * Fat Struct / flags tag
 * App version checker / sunsetter
 * QR Code Maker / Reader
+* Mac console
+* awk
+* simula
+* object pascal
 
 
 ## One-month Creative Ideas

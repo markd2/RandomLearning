@@ -508,7 +508,7 @@
     - location: 101
       length: 1
     - location: 131
-      length: 1
+      length: 2
   _effectiveHeight: 1.4e+1
 - ID: 41
   text: meta-trackers
@@ -960,8 +960,8 @@
   text: FORTRAN
   formattingOptions: []
   position:
-  - 1.08100390625e+3
-  - 7.477109375e+2
+  - 1.08524609375e+3
+  - 7.6412890625e+2
   width: 8e+1
   connections:
     indexes:
@@ -1211,6 +1211,8 @@
       length: 1
     - location: 91
       length: 2
+    - location: 134
+      length: 3
   _effectiveHeight: 1.4e+1
 - ID: 97
   text: Nerdity
@@ -1258,8 +1260,8 @@
   text: Borkaruga
   formattingOptions: []
   position:
-  - 7.2789453125e+2
-  - 7.1858203125e+2
+  - 7.190390625e+2
+  - 7.0271875e+2
   width: 7e+1
   connections:
     indexes:
@@ -1686,5 +1688,63 @@
   connections:
     indexes:
     - location: 40
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 132
+  text: Ishido / solver
+  formattingOptions: []
+  position:
+  - 7.8824609375e+2
+  - 7.390078125e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 133
+  text: Mac Console deep-dive
+  formattingOptions: []
+  position:
+  - 1.3809453125e+3
+  - 2.5867578125e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 134
+  text: awk
+  formattingOptions: []
+  position:
+  - 1.27959765625e+3
+  - 8.2034375e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 135
+  text: simula
+  formattingOptions: []
+  position:
+  - 1.19940234375e+3
+  - 8.190078125e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 136
+  text: object pascal
+  formattingOptions: []
+  position:
+  - 1.085921875e+3
+  - 7.15078125e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 96
       length: 1
   _effectiveHeight: 1.4e+1
