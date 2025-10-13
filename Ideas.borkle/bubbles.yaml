@@ -210,8 +210,8 @@
   text: Kitchen inventory
   formattingOptions: []
   position:
-  - 5.639453125e+2
-  - 5.000078125e+2
+  - 5.988203125e+2
+  - 4.75453125e+2
   width: 1.1e+2
   connections:
     indexes:
@@ -250,8 +250,8 @@
     blue: 1e+0
   formattingOptions: []
   position:
-  - 5.826015625e+2
-  - 5.37875e+2
+  - 5.9616796875e+2
+  - 5.2654296875e+2
   width: 7e+1
   connections:
     indexes:
@@ -260,6 +260,8 @@
     - location: 38
       length: 1
     - location: 50
+      length: 1
+    - location: 137
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 22
@@ -462,8 +464,8 @@
   text: Recipe accumulator
   formattingOptions: []
   position:
-  - 6.778515625e+2
-  - 5.325078125e+2
+  - 6.77328125e+2
+  - 5.0449609375e+2
   width: 1.2e+2
   connections:
     indexes:
@@ -634,8 +636,8 @@
   text: high-friction recipe keeper
   formattingOptions: []
   position:
-  - 4.82078125e+2
-  - 5.2950390625e+2
+  - 4.9153515625e+2
+  - 4.9200390625e+2
   width: 8e+1
   connections:
     indexes:
@@ -1748,3 +1750,15 @@
     - location: 96
       length: 1
   _effectiveHeight: 1.4e+1
+- ID: 137
+  text: Cooking logistics timer
+  formattingOptions: []
+  position:
+  - 5.4420703125e+2
+  - 5.590703125e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 2.8e+1

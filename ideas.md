@@ -61,6 +61,9 @@ Specific software I want to build.
 * phone typing tutor for old folks / Type Attack
 * Multi-process multipong
 * Ishido / solver
+* cooking timer with "along the way" alarms / haptics. "start 30 min before end
+  at 5 min, do this, at 7 min do that, at 12 min, check this".  Watch stuff would
+  be useful.  Also can work backwards, essentially finding the long pole
 
 
 
