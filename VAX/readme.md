@@ -6,8 +6,8 @@ with VAX assembly langauge, and maybe something like FORTRAN.
 
 ## Assembly
 
-There's stuff in the (assembly)[assembly] subdirectory here.
+There's stuff in the [assembly](assembly) subdirectory here.
 
 ## VMS
 
-There's stuff in the (VMS Notes)[vms-notes.md] about non-code VMS stuff.
+There's stuff in the [VMS Notes](vms-notes.md) about non-code VMS stuff.
