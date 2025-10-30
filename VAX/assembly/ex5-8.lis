@@ -1,0 +1,100 @@
+.MAIN.                                                                   29-OCT-2025 15:07:10  VAX MACRO V5.4-3            Page   1
+                                                                         29-OCT-2025 14:51:39  [MARKD.ASSEMBLY]EX5-8.MAR;2       (1)
+
+                                     0000     1 ; example 5.8: complete program using DUMPLONG for output
+                                     0000     2 ;  computes 6 * (ALPHA) + (BETA) and stores into RESULT
+                           0000000A  0000     3 LF = 10
+                                     0000     4 
+20 6E 6F 69 74 61 74 75 70 6D 6F 43  0000     5 TITLE: .ASCIZ	/Computation of 6*ALPHA + BETA/<LF>
+2B 20 41 48 50 4C 41 2A 36 20 66 6F  000C       
+               00 0A 41 54 45 42 20  0018       
+                           00000003  001F     6 ALPHA: .LONG	3	
+                           000001C2  0023     7 BETA:  .LONG	450
+                           0000002B  0027     8 RESULT:	.BLKL	1
+                                     002B     9 
+                                     002B    10 ; register usage : r5 scratch
+                                     002B    11 
+                                     002B    12 	BEGIN	EXAMPLE
+                                     007B    13 	PRINTCHRS TITLE
+                                     008B    14 	DUMPLONG  ALPHA,BETA	; SHOW DATA
+             55   FF4B CF   06   C5  00CF    15 	MULL3	#6,ALPHA,R5	; 6*ALPHA
+        FF4A CF   FF49 CF   55   C1  00D5    16 	ADDL3	R5,BETA,RESULT	; 6*ALPHA + BETA => RESULT
+                                     00DD    17 	DUMPLONG RESULT
+                                     0106    18 	EXIT
+                                     0136    19 	.END	EXAMPLE
+.MAIN.                                                                   29-OCT-2025 15:07:10  VAX MACRO V5.4-3            Page   2
+Symbol table                                                             29-OCT-2025 14:51:39  [MARKD.ASSEMBLY]EX5-8.MAR;2       (1)
+
+$$.TMP1        = 00000001               
+$$.TMP2        = 000000EF               
+ALPHA            0000001F R     01      
+BETA             00000023 R     01      
+CVTPRT           ********   X   01      
+DISKFAB          ********   X   01      
+DISKRAB          ********   X   01      
+ENDDUMP          ********   X   01      
+EXAMPLE          0000002B RG    01      
+INFAB            ********   X   01      
+INRAB            ********   X   01      
+LF             = 0000000A               
+OUTFAB           ********   X   01      
+OUTRAB           ********   X   01      
+PTCHRS           ********   X   01      
+RESULT           00000027 R     01      
+STARTDUMP        ********   X   01      
+SYS$CLOSE        ********  GX   01      
+SYS$CONNECT      ********  GX   01      
+SYS$CREATE       ********  GX   01      
+SYS$EXIT         ********  GX   01      
+SYS$OPEN         ********  GX   01      
+TITLE            00000000 R     01      
+
+                                                +----------------+
+                                                ! Psect synopsis !
+                                                +----------------+
+
+PSECT name                      Allocation          PSECT No.  Attributes     
+----------                      ----------          ---------  ----------     
+.  ABS  .                       00000000  (    0.)  00 (  0.)  NOPIC   USR   CON   ABS   LCL NOSHR NOEXE NORD  NOWRT NOVEC BYTE  
+. BLANK .                       00000136  (  310.)  01 (  1.)  NOPIC   USR   CON   REL   LCL NOSHR   EXE   RD    WRT NOVEC BYTE  
+
+                                             +------------------------+
+                                             ! Performance indicators !
+                                             +------------------------+
+
+Phase                    Page faults    CPU Time       Elapsed Time   
+-----                    -----------    --------       ------------   
+Initialization                   36     00:00:00.01    00:00:00.01
+Command processing              939     00:00:00.08    00:00:00.17
+Pass 1                          337     00:00:00.08    00:00:00.21
+Symbol table sort                 0     00:00:00.00    00:00:00.00
+Pass 2                           42     00:00:00.03    00:00:00.10
+Symbol table output               4     00:00:00.00    00:00:00.00
+Psect synopsis output             5     00:00:00.00    00:00:00.00
+Cross-reference output            0     00:00:00.00    00:00:00.00
+Assembler run totals           1385     00:00:00.20    00:00:00.49
+
+The working set limit was 962 pages.
+5767 bytes (12 pages) of virtual memory were used to buffer the intermediate code.
+There were 10 pages of symbol table space allocated to hold 23 non-local and 0 local symbols.
+19 source lines were read in Pass 1, producing 15 object records in Pass 2.
+11 pages of virtual memory were used to define 10 macros.
+.MAIN.                                                                   29-OCT-2025 15:07:10  VAX MACRO V5.4-3            Page   3
+VAX-11 Macro Run Statistics                                              29-OCT-2025 14:51:39  [MARKD.ASSEMBLY]EX5-8.MAR;2       (1)
+
+
+                                            +--------------------------+
+                                            ! Macro library statistics !
+                                            +--------------------------+
+
+Macro library name                           Macros defined      
+------------------                           --------------      
+DISK$USER:[MARKD.ASSEMBLY]IOMAC.MLB;2                   4        
+SYS$COMMON:[SYSLIB]STARLET.MLB;2                        6        
+TOTALS (all libraries)                                 10        
+
+97 GETS were required to define 10 macros.
+
+There were no errors, warnings or information messages.
+
+MACRO/LIST EX5-8.MAR+IOMAC/LIB

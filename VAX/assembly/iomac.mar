@@ -1,0 +1,50 @@
+.MACRO	BEGIN	NAME
+	.ENTRY	NAME,^M<IV>  ; define entry point. set integer overflow trap
+	$OPEN	FAB=INFAB	; oen erminal input file
+	$CONNECT RAB=INRAB
+	$CREATE FAB=OUTFAB	; create terminal output file
+	$CONNECT RAB=OUTRAB
+	$OPEN 	FAB=DISKFAB	; open disk input fil
+	$CONNECT RAB=DISKRAB
+.ENDM	BEGIN
+
+.MACRO	READLINE WHERETO
+	PUSHAB	WHERETO		; stack user buffer address
+	CALLS	#1,RDLINE
+.ENDM	READLINE
+
+.MACRO	READRCRD WHERETO,?LBL
+	PUSHAB	WHERETO
+	CALLS	#1,RDRCRD	; Returns length in R0
+	BNEQ	LBL		; got a record
+	BRW	EOF		; end of file
+LBL:	.ENDM	READRCRD
+
+.MACRO	PRINTCHRS STRING,LENGTH=#85
+	CVTWL	LENGTH,-(SP)	; stack string length
+	PUSHAB	STRING		; stack string address
+	CALLS	#2,PTCHRS
+.ENDM	PRINTCHRS
+
+.MACRO	DUMPLONG ARG1,ARG2,ARG3,ARG4,ARG5,ARG6,-
+	ARG7,ARG8,ARG9,ARG10,ARG11,ARG12
+	CALLS	#0, STARTDUMP	; print header
+.IRP	ARG,<ARG1,ARG2,ARG3,ARG4,ARG5,ARG6,-
+	ARG7,ARG8,ARG9,ARG10,ARG11,ARG12>
+.IF	NOT_BLANK ARG
+	MOVQ	#^A/%EXTRACT(0,8,ARG)/,-(SP)	; stack name
+	PUSHL	SP	; stack address of nam
+	PUSHL	ARG	; stack longword to dump
+	CALLS	#2,CVTPRT ;
+	ADDL2	#8,SP	; pop name
+.ENDC
+.ENDR
+	CALLS #0,ENDDUMP	; print trailer
+.ENDM	DUMPLONG
+
+.MACRO	EXIT
+	$CLOSE FAB=INFAB
+	$CLOSE FAB=OUTFAB
+	$CLOSE FAB=DISKFAB
+	$EXIT_S 	; system exit macro
+.ENDM	EXIT

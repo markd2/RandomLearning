@@ -1,0 +1,19 @@
+; example 5.8: complete program using DUMPLONG for output
+;  computes 6 * (ALPHA) + (BETA) and stores into RESULT
+LF = 10
+
+TITLE: .ASCIZ	/Computation of 6*ALPHA + BETA/<LF>
+ALPHA: .LONG	3	
+BETA:  .LONG	450
+RESULT:	.BLKL	1
+
+; register usage : r5 scratch
+
+	BEGIN	EXAMPLE
+	PRINTCHRS TITLE
+	DUMPLONG  ALPHA,BETA	; SHOW DATA
+	MULL3	#6,ALPHA,R5	; 6*ALPHA
+	ADDL3	R5,BETA,RESULT	; 6*ALPHA + BETA => RESULT
+	DUMPLONG RESULT
+	EXIT
+	.END	EXAMPLE

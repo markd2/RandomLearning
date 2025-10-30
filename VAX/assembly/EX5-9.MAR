@@ -1,0 +1,33 @@
+; Example 5.9- formatting characters for output
+; read a telephone directory from DATA.DAT, and print
+; to the terminal
+
+; data formats
+; each record in the file contains a 20-character name
+; (which may be padded by blanks) followed by an 8-character
+; telephong number.  the entries will be printed with 10 blanks
+; separating the name and phone number
+
+; CONSTANTS
+TAB = 9
+LF = 10
+BLANK = ^A/ /
+NAME_SIZE = 20
+
+; Storage reservation and initialization
+HDG: 		.ASCIZ	<TAB>/TELEOPHONE DIRECTORY/<LF><LF>
+LINEIN:		.BLKB	NAME_SIZE+8	; input buffer
+NAME:		.BLKB	NAME_SIZE
+		.BYTE	BLANK[10]	; BLANKS
+PHONE:		.BLKB	8
+
+	BEGIN PRINT_PHONES
+	PRINTCHRS HDG	; print heading
+READ:	READRCRD  LINEIN	; rad entry from file
+	MOVC3	#NAME_SIZE,LINEIN,NAME	; copy name
+	MOVC3	#8,LINEIN+NAME_SIZE,PHONE 	; copy phone number
+	PRINTCHRS NAME,#NAME_SIZE+18  ; PRINT ENTRY
+	BRB	READ
+EOF:	EXIT
+	.END PRINT_PHONES
+

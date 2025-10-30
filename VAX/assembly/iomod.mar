@@ -1,0 +1,118 @@
+	.PSECT	IO_DATA,LONG,WRT,NOEXE
+LF = 10
+CR = 13
+BLANK = ^A/ /
+
+INFAB::	$FAB	FNM=<SYS$INPUT>	; terminal input
+OUTFAB:: $FAB	FNM=<SYS$OUTPUT>,MRS=85 ; terminal output
+DISKFAB:: $FAB	FNM=<DATA.DAT>  ; for DATA.DAT disk file
+INRAB::	$RAB	FAB=INFAB,USZ=80,-
+		ROP=PMT,PBF=PROMPT,PSZ=5
+OUTRAB:: $RAB	FAB=OUTFAB
+DISKRAB:: $RAB	FAB=DISKFAB,USZ=80
+PROMPT::  .ASCII <LF><CR>/?? /
+
+
+	.PSECT	IO_PROCS,NOWRT
+
+; procedure RDLINE (WHERETO)
+;
+; This procedure gets and inpt line from the terminal.
+; It used th eRAB labeled INRAB which casues a prompt to be
+; displayed at the terminal. The ninput record is stored
+; in memory at WHERETOP, RDLINE's argument. RDLINE returns
+; the length of the record in R0
+	.ENTRY RDLINE,0
+	MOVL	4(AP),INRAB+RAB$L_UBF	; fill UBF field in RAB
+	$GET	RAB=INRAB		; get record or 8-track
+	CVTWL	INRAB+RAB$W_RSZ,R0	; record size to R0
+	RET
+
+; procedure RDRCRD (WHERETO)
+;
+; Reads the next recored from the DATA.DAT file.
+; If thre was a record, it is stored in WHERETO and its
+; length is ut in R0. if thre were no more recods, the Z bit
+; in the stacked PSW is set to indicate end-of-file
+; RDRCRD uses the RAB labeled DISKRAB
+	.ENTRY RDRCRD,0
+	MOVL	4(AP),DISKRAB+RAB$L_UBF
+	$GET	RAB=DISKRAB	; GET RECORD
+	CMPL	DISKRAB+RAB$L_STS,#RMS$_EOF ; CHECK STS FIELD FOR EOF
+	BEQL	EOF
+	CVTWL	DISKRAB+RAB$W_RSZ,R0	; record size in R0
+	RET
+EOF:	BISB2	#^X04,4(FP)	; set the EOF flag
+	RET
+
+
+; procedure PTCHRS (STRING, MAX_LEN)
+;
+; displays a character string at the terminal.
+; it sends a carraige return and line feed before the string
+;
+; input arguments:
+;	STRING:	  the string to be displayed
+;	MAX_LEN:	THE MAX STRING LENGTH (PASSED BY IMMDITE VALUE)
+;
+; at most MAX_LEN characters will be displayed. but a byte 0's
+; is interpretet as a string terminator.
+CR_LF:	.BYTE	13,10	; CRLF, like it says on the tin
+
+	.ENTRY	PTCHRS,0
+	MOVAW	CR_LF,OUTRAB+RAB$L_RBF	; set RBF and RSZ fields
+	MOVW	#2,OUTRAB+RAB$W_RSZ	;    for CRLF
+	$PUT	RAB=OUTRAB		; output CRLF
+
+	MOVL	4(AP),OUTRAB+RAB$L_RBF	; put string addr in RBF field
+	LOCC	#0,8(AP),@4(AP)		; find 00 byte
+	SUBL2	4(AP),R1		; length of string
+	MOVW	R1,OUTRAB+RAB$W_RSZ	; put length into RSZ field
+	$PUT	RAB=OUTRAB		; output string
+	RET
+
+; procedure DUMP_MSGS
+;
+; prints header and trailer lines for DUMPLONG ouput
+HDR:	.ASCIZ /** DUMPLONG OUTPUT **/
+STARS:	.ASCIZ /**  END  DUMPLONG  **/
+	.ENTRY STARTDUMP,0
+	PRINTCHRS HDR
+	RET
+	.ENTRY ENDDUMP,0
+	PRINTCHRS STARS
+	RET
+
+; procedure CVTPRT (LONG, NAME)
+;
+;
+; converts a longword to a hex character string
+; and prints it along with its name. the argument list
+; contains the longword, passed by immediate value, and
+; the addess of a character string (of length at most 8)
+; that is the name of the longword
+; This uses OTS$CVT_L_TZ, from the VAX run-time libary to do the conversion
+	.PSECT IO_DATA
+LONG:	.BLKL 1
+DUMP:	.BLKB 18	; for dumplong's output
+
+	.PSECT IO_PROCS
+DESC:	.LONG	^X010E0008	; the library procedure requies
+	.ADDRESS DUMP+10	;   a string descriptor
+ARGS:	.LONG	3		; arglist for library call
+	.ADDRESS LONG,DESC
+	.LONG	8
+
+	.ENTRY CVTPRT,^M<R2,R3,R4,R5>
+	MOVC5	#0,0,#BLANK,#10,DUMP	; blank out the DUMP buffer
+	LOCC	#0,#8,@8(AP)		; find end of name string
+	SUBL3	R0,#8,R2		; lenght of name string
+	MOVC3	R2,@8(AP),DUMP		; move name to DUMP buffer
+	MOVL	4(AP),LONG		; address of longword to arglist
+	CALLG	ARGS,G^OTS$CVT_L_TZ	; library conversion routine
+	PRINTCHRS DUMP,#18		; output
+	RET
+
+	.END
+
+	
