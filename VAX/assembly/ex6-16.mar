@@ -1,0 +1,17 @@
+BLANK = ^A/ /
+LINE:	.BYTE	BLANK[80]
+NAME:	.ASCII	/Greeble Bork/
+; NAME_LEN:	.WORD	12
+NAME_LEN = 12
+
+	BEGIN CENTRE
+	MOVL	#NAME_LEN, R6	; set up initial conditions for the exercise
+
+	DIVL3	#2, R6, R0  ; halve the name length. Preserve R6, it's not ours
+	SUBL3	R0, #40, R1  ; offset from middle of the line
+	movaw	LINE, R2  ; get address of LINE into a register
+	ADDL2	R2, R1  ; point into LINE
+	MOVC3	#NAME_LEN, NAME, (R1)  ; copy into interior of LINE
+	PRINTCHRS LINE, #80
+	EXIT
+	.END CENTRE
