@@ -1,0 +1,21 @@
+; replace array of words with their partial sums
+
+DATA:	.WORD	1,2,3,4,5,6
+N = 6
+
+	BEGIN 	PARTSUM
+	MOVAW	DATA, R0	; R0 scanning through array
+	MOVW	#N, R1		; loop index
+	
+LOOP:	ADDW2	(R0)+, (R0)
+	SOBGTR	R1, LOOP
+
+; now crudely dump stuff
+	movl	#N, R6
+	movaW	DATA, R7
+dump:	cvtWL	(R7)+, R8
+	dumplong R8
+	sobgtr	R6, dump
+
+	EXIT
+	.END PARTSUM
