@@ -9,8 +9,7 @@ NAME_LEN = 12
 
 	DIVL3	#2, R6, R0  ; halve the name length. Preserve R6, it's not ours
 	SUBL3	R0, #40, R1  ; offset from middle of the line
-	movaw	LINE, R2  ; get address of LINE into a register
-	ADDL2	R2, R1  ; point into LINE
+	MOVAL	LINE(R1), R1  ; point into line by R1 bytes
 	MOVC3	#NAME_LEN, NAME, (R1)  ; copy into interior of LINE
 	PRINTCHRS LINE, #80
 	EXIT
