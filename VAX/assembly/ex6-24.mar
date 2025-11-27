@@ -1,0 +1,26 @@
+COUNTERS:	.LONG	0,1,2,3,400,5,6,7,800,9,10,11,1200,13,14
+NUM = 14
+
+; register usage:
+;   RO - number of items to process, also decrement loop counter for SOBGTR
+;   R1 - scaled index to subtract one from inside the loop
+
+	BEGIN	FOURDEC
+	DIVL3	#4, #NUM, R0	; how many we'll process
+	moval	counters, r4
+
+LOOP:	MULL3	R0, #4, R1	; scale index
+;	SUBL2	#1, COUNTERS(R1)  ; i am totally misunderstanding this sytax
+	addl2	#16, r4
+	subl2	#1, (r4) 
+	SOBGTR	R0, LOOP
+	
+	movl	#num, R2
+	movl	#0, R3
+	moval	counters, R4
+LOOP2:	dumplong (R4)+
+	sobgtr r2, loop2
+
+	EXIT
+	.END FOURDEC
+
