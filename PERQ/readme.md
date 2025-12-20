@@ -6,6 +6,11 @@ Get from https://github.com/skeezicsb/PERQemu/releases
 
 Lots o docs at http://www.bitsavers.org/pdf/perq/
 
+* https://www.youtube.com/watch?v=kxYpfsJtEtc - SIGGRAPH PERQ demo
+* https://www.youtube.com/watch?v=Fap-mXY80ls - Intran demo
+* https://www.chilton-computing.org.uk/acd/sus/perq_history/overview.htm - PERQ history
+* https://www.youtube.com/watch?v=iB9y7j4EYs4 - demo of PERQemu
+* https://graydon2.dreamwidth.org/313862.html - more history
 
 
 # Running macstyles:
@@ -27,6 +32,8 @@ go
 
 * `dir`
 * `dir >*.run` - see all the available things to run
+* `bye` - logout
+* `> settings assign rs232 device A RSX:`
 
 
 # Programming
@@ -500,10 +507,89 @@ can get help with `/HELP`
 
 `edit file-name.pas`
 
+The docs/tutorial is poorly organized.
+
+
+### Selection
+
+left button (button 1) to select character. click again to select word. click again to select line.
+
+middle button (button 2) to select words.  click again to select line.
+
+right button (button 3) to extend the current selection without changing the other extreme of the selection.
+
+For four button puck,
+* white - character
+* yellow - word
+* green - extend
+* blue - line
+
+If you don't want to click, can use `e` to extend the selection, kind of like how modern textfields behave.  Uses the selection type last used (?)
+
+`*` selects the entire file
+
+
+### Keys
+
+text modification commands are terminated with the "accept" (INS) key 
+or "reject" (DEL).
+
+when inserting, can delete with
+* backspace the most recently typed character
+* control-backspace the most recently typed word
+* control-OOPS most recenlty typed line, up to and including the CR.
+
+To quote keys (like ^V in emacs), do a control-"
+
+At command level:
+* INS - repeats the last command (for a subset of commands) - A, I, R, S and those that move selection
+* typing a 1-4 digit number enters a repeat count
+* `>` - change to forward-direction (small sigil on left-side of top line)
+* `<` - change to backward-direction -  these affect Find, Replace, Word, Line, and goto character
+
+
+### Scrolling / Navigating
+
+left-side of the text area.  when mousing over it, cursor turns into a down arrow (when near the vertical line) or an up arrow (further away).
+
+* click next to a line while having the up arrow, puts that line at the top.
+* clicking with down arrow will scroll to earlier in the document, proportional
+  to how far you're down the screen
+* middle button scrolls down
+* right button scrolls up
+* `T` puts the selection at the top of the window (unless it's offscreen, then it's put at the bottom, or maybe the middle)
+* `B` puts the selection at the bottom of the window (same)
+
+The top margin line is the "thumb bar" - the cursor turns into a circle when hovered over.  it's like a thumb trough, but 90-degrees out of phase with the document. "rapidly move around your file. But it's not very precise.  ASCII-art styles:
+
+* `<` - end of file (actually, a black triangle, not a less-than sign)
+* `S` - start of selection. Can click on this to scroll to the selection
+* `(` and `)` - showing range of displayed text
+* `N` - position of the Noted (?) display
+* `O` - position of the display at the last thumbing. _(I have no idea what this means)_
+* `X` - somewhat baffling line "similar control can be achieved with the X command", which puts an X into the thumb bar, and needing to INS/DEL to get out of.
+
+### Finding
+
+`F` Finds a character string.  
+
+Do `F`, then type your string, then accept (INS) or reject (DEL).  The matching string will be highlighted.
+
+ `F ACCEPT` will use the prior search string (displayed in the top status-y area).
+
+Matching is emacs-style: lowercase matches everything, uppercase only matches uppercase.  Long finds can be interrupted with ^C
+
+direction is honored, if you want to search backwards, change the direction with `<` and then do your `F`ind.
+
+
+
+
+### Misc
+
 only the left-shift works.  So doing ":" with right shift gives you ";".
 
 `I` to go into Insert mode (at where the insertion point is). Can't
 edit outside of the insertion area.
 
-INS key to accept text.  DEL key to discard.
+INS key to accept text.  DEL key to discard. (kind of)
 
