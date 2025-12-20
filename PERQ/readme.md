@@ -528,6 +528,23 @@ If you don't want to click, can use `e` to extend the selection, kind of like ho
 
 `*` selects the entire file
 
+Character selection has some shortcut keys
+
+* ` ` (space) - move the character selection after the current selection
+* `backspace` / `^H` - move to before the current selection
+* `TAB` - move forward 5 characters
+* `^TAB` - move backward 5 characters
+* `^backspace` - move backward by word
+* `RETURN` / `^U` - move to beginning of next line
+* `^RETURN` / `^OOPS` - go backwards beginning of prior line. Both returns skip empty lines.
+
+More stuffs:
+
+* `G` - Go to a character.  Searches "the current screen". Obeys the direction.  INS will repeat it
+* `W` - select next/prev word
+* `^W` - select first character of next/prev word. obeys repeat count
+* `L` - select line.  If line selected, selects next line. obeys direction / repeat count
+* `M` - "more", preserves existing selection when doing the above goodies.
 
 ### Keys
 
@@ -569,6 +586,10 @@ The top margin line is the "thumb bar" - the cursor turns into a circle when hov
 * `O` - position of the display at the last thumbing. _(I have no idea what this means)_
 * `X` - somewhat baffling line "similar control can be achieved with the X command", which puts an X into the thumb bar, and needing to INS/DEL to get out of.
 
+!!! There's stuf on page 10 I just don't understand.
+
+
+
 ### Finding
 
 `F` Finds a character string.  
@@ -582,14 +603,66 @@ Matching is emacs-style: lowercase matches everything, uppercase only matches up
 direction is honored, if you want to search backwards, change the direction with `<` and then do your `F`ind.
 
 
+### Text Modification
+
+Commands:
+
+* Insert
+* Append
+* Substitute
+* Replace
+* Delete
+
+Insert and Append operate before and after the current selection.  THe others
+work on the current selection.
+
+Except for delete command, the function can be re-executed by doing INS, say for inserting the same text in a number of places.
+
+If you press INS after a delete command, the deleted text is reinserted. (you can delete, and re-insert in multiple places).  Handy for quick copy/paste.
+
+At the top of the screen are some indicators
+
+```
+I{}
+D{}
+F{}
+R{}
+S{}
+```
+
+they have the contents (or an elided form) of the last (accepted) things inserted, deleted, finded, replaced, and substituted.  If you do the op, and then press INS, it'll use that content
+
+For replacement:
+
+* `R`
+* type search term. will appear in the `F{}` dingus
+* type `INS`
+* type replacement term. For empty replacement (delete), type a character and backspace.  Will appear in the `R{}` dingus.
+* type `INS`
+* see a `C1` count up as it replaces stuff.
+* ^C to interrupt.
+
+a repeat count will limit the number of changes. not repeat count means all the things.
+
+`V` - verify mode, is like emacs query replace.  Pressing `V` puts a V in the top line.  Do your find and replace as normal. For each one, will stop - INS to replace and move on, space to skip and move on, DEL to stop the whole process.  Many things clear the V flag automatically.
+
+Substitute - the docs say it's easy to confuse this with Replace.  It replaces the selceted text with new text, like doing a `D`elete followed by an `I`nsert.  The currently selected text is still in the buffer while you're putting in the new text, so it can be confusing for folks used to modern textfields.  There's no real way to undo a substitute.
 
 
 ### Misc
 
 only the left-shift works.  So doing ":" with right shift gives you ";".
 
-`I` to go into Insert mode (at where the insertion point is). Can't
-edit outside of the insertion area.
+There is a log kept of actions performed in the session, stored in `>Editor.Transcript`
 
-INS key to accept text.  DEL key to discard. (kind of)
+Can replay stuff with `Editor/Replay`
+
+* space - stop replaying after next character or puck press
+* CR - stop replaying after a CR in I command or after next command if not in I command
+* LF - stop replaying after next command
+* INS - begin replaying and stop when one of the above keys is types
+* DEL - exit replya mode.
+
+It'll replay against the prior-save file (SPLUNGE.XYZ$)
+
 
