@@ -11,7 +11,7 @@ Lots o docs at http://www.bitsavers.org/pdf/perq/
 * https://www.chilton-computing.org.uk/acd/sus/perq_history/overview.htm - PERQ history
 * https://www.youtube.com/watch?v=iB9y7j4EYs4 - demo of PERQemu
 * https://graydon2.dreamwidth.org/313862.html - more history
-
+* lots o stuff - https://blisscast.wordpress.com/2024/08/20/three-rivers-perq-gui-wonderland-4/#foot2a
 
 # Running macstyles:
 
@@ -500,6 +500,93 @@ can get help with `/HELP`
 * Many functions for integers (like LAND) are not implemented for longs.
 * RECAST does not work with two-word sclars (LONG) and arrays
 
+
+## Graphics API n'at
+
+```
+Procedure Line(Style: LineStyle; X1, Y1, X2, Y2: integer; Origin: RasterPtr);
+{-----------------------------------------------------------------------------
+ Abstract: Draws a line.
+ Parameters: Style - function for the line;
+             X1, X2, Y1, Y2 - end points of line.
+             Origin - pointer to the memory to draw lines in.
+                      Use SScreenP for Origin to draw lines on the screen.
+(using TLATE0, QLINE)
+```
+
+```
+Procedure SVarLine(Style: LineStyle; X1, Y1, X2, Y2, Width: integer;
+                   Origin: RasterPtr);
+{-----------------------------------------------------------------------------
+ Abstract: Draws a line.  Same as Line except it takes the buffer width as
+           a parameter.  This is only useful when drawing lines in off-screen
+           buffers.
+ Parameters: Style - function for the line;
+             X1, X2, Y1, Y2 - end points of line.
+             Width - the word width of the "origin" buffer.
+             Origin - pointer to the memory to draw lines in.
+                      Use SScreenP for Origin to draw lines on the screen.
+```
+
+```
+Procedure SLine(Style: LineStyle; X1, Y1, X2, Y2: integer; Origin: RasterPtr);
+{-----------------------------------------------------------------------------
+ Abstract: Draws an line relative and clipped to the current window;
+ Parameters: Style is function for the line; X1, X2, Y1, Y2 are end points of
+             line relative to current window (i.e. 0,0 is upper left corner of
+             home char).  Origin is pointer for Screen;
+ SideEffects: Draws a line on the screen
+-----------------------------------------------------------------------------}
+```
+
+```
+Procedure SRasterOp(Funct, Width, Height, DestX, DestY, DestWidth: Integer;
+                    DestP: RasterPtr; SourceX, SourceY, SourceWidth: Integer;
+                    SourceP: RasterPtr);
+{-----------------------------------------------------------------------------
+ Abstract: Does a RasterOp relative and clipped to the current window;
+ Parameters: Same as for RasterOp; does relative to current window for dest if
+             destP = SScreenP and for source if sourceP = SScreenP
+ SideEffects: Does a rasterOp on the screen
+-----------------------------------------------------------------------------}
+```
+
+```
+  Const RRpl    = 0;       { Raster Op function codes }
+        RNot    = 1;
+        RAnd    = 2;
+        RAndNot = 3;
+        ROr     = 4;
+        ROrNot  = 5;
+        RXor    = 6;
+        RXNor   = 7;
+        
+  Type RasterPtr = ^RasterArray; {a pointer that can be used as RasterOp 
+                                    or Line source and destination }
+       RasterArray = Array[0..0] of integer;
+```
+
+```
+  CursorPattern = array[0..63,0..3] of integer;
+  CurPatPtr = ^CursorPattern;
+
+Procedure IOLoadCursor(Pat: CurPatPtr; pX, pY: integer); 
+                                           { load user cursor pattern }         
+```
+
+
+```
+Function IOCPresent( Unit: UnitRng ): boolean;
+
+{----------------------------------------------------------------------------
+{
+{  Abstract:
+{
+{       Returns true if the Unit is a character device and has a character
+{       available for reading.  Otherwise it returns false.  It does not
+{       read the character.
+(iounit.pas)
+```
 
  
 
