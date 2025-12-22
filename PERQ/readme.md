@@ -12,6 +12,8 @@ Lots o docs at http://www.bitsavers.org/pdf/perq/
 * https://www.youtube.com/watch?v=iB9y7j4EYs4 - demo of PERQemu
 * https://graydon2.dreamwidth.org/313862.html - more history
 * lots o stuff - https://blisscast.wordpress.com/2024/08/20/three-rivers-perq-gui-wonderland-4/#foot2a
+* FAQ - https://archive.decromancer.ca/vonhagen.org/perq-gen-faq.html
+* newsgroup - alt.sys.perq
 
 # Running macstyles:
 
