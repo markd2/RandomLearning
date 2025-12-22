@@ -515,6 +515,7 @@ Procedure Line(Style: LineStyle; X1, Y1, X2, Y2: integer; Origin: RasterPtr);
              Origin - pointer to the memory to draw lines in.
                       Use SScreenP for Origin to draw lines on the screen.
 (using TLATE0, QLINE)
+        LineStyle = (DrawLine,EraseLine,XorLine);
 ```
 
 ```
