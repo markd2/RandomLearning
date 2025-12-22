@@ -33,6 +33,9 @@ go
 * `dir`
 * `dir >*.run` - see all the available things to run
 * `bye` - logout
+* `configure memory 2048`
+* `configure show`
+* `configure enable rs232`
 * `> settings assign rs232 device A RSX:`
 
 
