@@ -1,1 +1,2573 @@
-{$RANGE-}PROGRAM CHESS ( OUTPUT );{{     CHESS         Version 1.0{{{{     SIEMENS AG, ZTI SOF 2,   1982{{     Charly Drechsler       Tel. (089) 636-2203{}imports memory from memory;imports screen from screen;imports virtual from virtual;imports controlstore from controlstore;imports Stream from Stream;imports ChessBoard FROM ChessBoard;imports PERQ_String FROM PERQ_String; CONST     AK   = 0;         ZK   = 16;     AKM2 = AK - 2;    ZKP1 = ZK + 1;     AL   = 0;         ZL   = 119;     AS   =  0;        ZS   = 63;     AT   = - 1;       ZT   = 63;     AV   = - 32767;   ZV   = + 32767;     AW   =   1;       ZW   = 1000;      PVALUE = 100;     RVALUE = 500;     NVALUE = 325;     BVALUE = 350;     QVALUE = 900;    TYPE     Piece     = (MT, LP, LN, LB, LR, LQ, LK, DP, DN, DB, DR, DQ, DK);     Color     = (LITE, DARK, NONE);     Direction = (B1, B2, B3, B4, S1, S2, S3, S4,                  N1, N2, N3, N4, N5, N6, N7, N8);     TH        = (H1, H2, H3, H4, H6, H7, H8, H9, H10, H11);     TQ        = (LiteShort, LiteLong, DarkShort, DarkLong);     TR        = (R1, R2, R3, R4, R5, R6, R7, R8);     TF        = (F1, F2, F3, F4, F5, F6, F7, F8);      TK        = AKM2 .. ZKP1;     Square    = AS .. ZS;     TW        = AW .. ZW;      FILES     = SET OF TF;     CASTLES   = SET OF TQ;     RANKS     = SET OF TR;     BitBoard  = SET OF Square;     RA        = STRING[10];     GameStatus = (PLAYING, WINN, LOST, DRAWN);     byte      = 0 .. 255;          MoveEntry = PACKED RECORD                    RMFR: Square;                    RMTO: Square;                    RMMP: Piece;                    RMCP: Piece;                    VALU: INTEGER;                    RMCA: BOOLEAN;                    RMAC: BOOLEAN;                    RMCH: BOOLEAN;                    RMMT: BOOLEAN;                    RMIL: BOOLEAN;                    RMSU: BOOLEAN;                    CASE RMPR : BOOLEAN OF                       FALSE: (CASE RMOO: BOOLEAN OF                                  FALSE: (RMEP: BOOLEAN);                                  TRUE : (RMQS: BOOLEAN;                                          RKFR: Square;                                          RKTO: Square));                       TRUE : (  )                 END;  VAR     FNDEVL     : INTEGER;     FNKTRP     : INTEGER;     FNCTRP     : INTEGER;      FBDEVL     : INTEGER;     FBMOBL     : INTEGER;      FRKTRP     : INTEGER;     FRMOBL     : INTEGER;     FRK7TH     : INTEGER;     FRDUBL     : INTEGER;     FROPEN     : INTEGER;      FQMOBL     : INTEGER;     FQKTRP     : INTEGER;      FKCTRP     : INTEGER;     FKCORN     : INTEGER;     FKSECU     : INTEGER;     FKPSHD     : INTEGER;                   FPFLNX     : INTEGER;     FPCONN     : INTEGER;     FPBLOK     : INTEGER;     FPDUBL     : INTEGER;     FPNISO     : INTEGER;     FPNPAS     : INTEGER;     FPPDEF     : INTEGER;     FPPATK     : INTEGER;     FPPBLK     : INTEGER;      MAXPS      : INTEGER;     STATEVAL   : INTEGER;     RESULT     : GameStatus;     ply        : TK;     DEPTH      : TK;      PLAYER     : Color;     OPPONENT   : Color;     Empty      : BitBoard;     NODES      : INTEGER;     BOARD      : RECORD                     RBTM: Color;                     RBTS: INTEGER;                     RBSQ: CASTLES;                     CASE X: INTEGER OF                        0: (RBIS : ARRAY [Square] OF Piece);                        1: (RBIRF: ARRAY [TR, TF] OF Piece)                  END;      JNTW       : TW;     FMTEGE     : INTEGER;     FMAXMT     : INTEGER;     FTIMEL     : INTEGER;     FNODEL     : INTEGER;     FTRADE     : INTEGER;     FTRDSL     : INTEGER;     FTRPOK     : INTEGER;     FTRPWN     : INTEGER;     WINDOW     : INTEGER;     LSTMV      : MoveEntry;      OTHER      : ARRAY[Color] OF Color;     XTMQ       : ARRAY[Color] OF TQ;     XTMV       : ARRAY[Color] OF INTEGER;      XSPB       : ARRAY[Piece] OF BOOLEAN;     XFPE       : ARRAY[Piece] OF Direction;     XLPE       : ARRAY[Piece] OF Direction;     XTPC       : ARRAY[Piece] OF CHAR;     XTPM       : ARRAY[Piece] OF Color;     XTPV       : ARRAY[Piece] OF INTEGER;      XTSF       : ARRAY[Square] OF TF;     XTSR       : ARRAY[Square] OF TR;     XTSL       : ARRAY[Square] OF INTEGER;     CDIS       : ARRAY[Square] OF INTEGER;     ADVL       : ARRAY[Square] OF INTEGER;     ADVD       : ARRAY[Square] OF INTEGER;     base       : ARRAY[TK] OF RECORD                    mblte : INTEGER;                    mbtot : INTEGER;                    mbval : INTEGER;                    cstat : BitBoard;                    ksqr  : ARRAY[Color] OF Square;                    mbpwn : ARRAY[Color] OF INTEGER;                    alatk : ARRAY[Color] OF BitBoard;                    tmloc : ARRAY[Color] OF BitBoard;                    nbord : ARRAY[Square] OF Piece;                    atkfr : ARRAY[Square] OF BitBoard;                    atkto : ARRAY[Square] OF BitBoard;                    tploc : ARRAY[Piece] OF BitBoard;                  END;                          data       : ARRAY[TK] OF                     RECORD                        genfr : BitBoard;                        gento : BitBoard;                        genpn : BitBoard                      END;                          XNSS       : ARRAY[Square] OF BitBoard;     XRSS       : ARRAY[Square] OF BitBoard;     XTED       : ARRAY[Direction] OF INTEGER;     EDGE       : ARRAY[DIRECTION] OF BitBoard;     XTLS       : ARRAY[0 .. 119] OF INTEGER;      LINDX      : ARRAY[TK] OF TW;     INDEX      : ARRAY[TK] OF TW;     MVSEL      : ARRAY[TK] OF INTEGER;     BSTVL      : ARRAY[TK] OF INTEGER;     SRCHM      : ARRAY[TK] OF TH;     CMAG       : ARRAY[TK] OF BOOLEAN;     ENPAS      : ARRAY[TK] OF AT .. ZT;          KILLR      : ARRAY[TK] OF MoveEntry;      XRFS       : ARRAY [TF] OF BitBoard;     ADRS       : ARRAY [TF] OF BitBoard;      XRRS       : ARRAY [TR] OF BitBoard;     FWRS       : ARRAY [TR] OF BitBoard;     BWRS       : ARRAY [TR] OF BitBoard;      XRQM       : ARRAY [TQ] OF MoveEntry;     XSQS       : ARRAY [TQ] OF BitBoard;     XTQS       : ARRAY [TQ] OF Square;      MOVES      : ARRAY [TW] OF MoveEntry;     XLLD       : ARRAY [-119 .. 119] OF INTEGER;     BORDR      : BitBoard;     CORNR      : BitBoard;     NULMV      : MoveEntry;          NrOfBits   : ARRAY[byte] OF INTEGER;     FirstBit   : ARRAY[byte] OF INTEGER;procedure csdx;{ CSDX.PAS{ Brian Rosen{ Copyright 1981, 1982{ Three Rivers Computer Corp.{ Pittsburgh, Pa.{ Change Log{   ver 1.1  WCH  2 jan 82     modified to work with the production {                              version of interface{   CSDX works with the CSDX.MICRO program to perform a screen dump to the {   LBP-10 printer. The micro code does a four bit expansion of each {   screen pixel and transmits a video stream to the printer. The microcode{   also handles the DMA channel setup and buffer building. }{   Adapted for chess by Manfred Sommer on 16 Aug 82  @ SIEMENS }type BuffPtr = ^Integer;var Buffseg: SegmentNumber;    Buffer: BuffPtr;    i,j,k: integer;    microcode: microfile;    Handler ResetError(FileName: PathName);begin  exit(csdx);end;    begin    reset(microcode,':part2>utils>csdx.bin');    LoadControlStore(microcode);    CreateSegment(Buffseg,12,1,12);    IncIOCount(Buffseg);    Buffer := MakePtr(Buffseg,0,BuffPtr);    LoadAdr(SScreenP);    InLineByte(239 {LDDW});    LoadAdr(Buffer);    InLineByte(239 {LDDW});    LoadExpr(Lor(Shift(#7000,8),Shift(#7000,-8)));    InLineByte(240 {STLATE});    InLineByte(#102 {4,2});    InLineByte(#277 {JCS});    StorExpr(i);    if i = 0 then writeln('  not ready!!!!');    if i = 1 then writeln('  bad buffer!!!!');    DecIOCount(Buffseg);end { csdx };FUNCTION XUpper(A: CHAR): CHAR;  BEGIN    IF A IN ['a' .. 'z']       THEN XUpper := CHR(ORD(A) - ORD('a') + ORD('A'))       ELSE XUpper := A; END (* XUpper *);  FUNCTION Str ( x: INTEGER ): String;  VAR        s: String;      pot: INTEGER; BEGIN    IF x = 0 THEN       Str := '0'    ELSE BEGIN       IF x < 0 THEN BEGIN          s := '-';          x := - x;          END       ELSE          s := '';       pot := 10000;       WHILE pot > x DO          pot := pot DIV 10;       REPEAT          AppendChar(s, Chr(x DIV pot + Ord('0')));          x   := x MOD pot;          pot := pot DIV 10;       UNTIL pot = 0;       Str := s;       END; END { Str }; (*--------------------------------------------------------------------*)   FUNCTION NXTTS ( VAR A: BitBoard; VAR B: Square ): BOOLEAN; VAR            s: SQUARE;        Trick: PACKED RECORD                  CASE INTEGER OF                     1: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );                     2: ( w4, w3, w2, w1: Integer);                     3: ( R: BitBoard )               END; BEGIN    WITH Trick DO BEGIN       R  := A;       IF w1 <> 0 THEN BEGIN          IF p1 <> 0             THEN s := FirstBit[p1]             ELSE s := FirstBit[p2] + 8          END       ELSE IF w2 <> 0 THEN BEGIN          IF p3 <> 0             THEN s := FirstBit[p3] + 16             ELSE s := FirstBit[p4] + 24          END       ELSE IF w3 <> 0 THEN BEGIN          IF p5 <> 0             THEN s := FirstBit[p5] + 32             ELSE s := FirstBit[p6] + 40          END       ELSE IF w4 <> 0 THEN BEGIN          IF p7 <> 0             THEN s := FirstBit[p7] + 48             ELSE s := FirstBit[p8] + 56          END       ELSE BEGIN          NXTTS := FALSE;          EXIT(NXTTS);          END;       END;     NXTTS := TRUE;     B     := s;     A     := A - XRSS[s];   END { NXTTS };              PROCEDURE SFTRS ( VAR A: BitBoard; B: BitBoard; C: Direction );               VAR            i: INTEGER;        Trick: PACKED RECORD                  CASE Boolean OF                     FALSE: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );                     TRUE : ( R: BitBoard )               END;          BEGIN    Trick.R := B - EDGE[C];    WITH Trick DO    CASE C OF       S1: BEGIN              p1 := shift(p1, -1);   p2 := shift(p2, -1);              p3 := shift(p3, -1);   p4 := shift(p4, -1);              p5 := shift(p5, -1);   p6 := shift(p6, -1);              p7 := shift(p7, -1);   p8 := shift(p8, -1);           END;       S2: BEGIN               p8 := p7;              p7 := p6;              p6 := p5;              p5 := p4;              p4 := p3;              p3 := p2;              p2 := p1;              p1 := 0;           END;       S3: BEGIN              p1 := shift(p1, 1);    p2 := shift(p2, 1);              p3 := shift(p3, 1);    p4 := shift(p4, 1);              p5 := shift(p5, 1);    p6 := shift(p6, 1);              p7 := shift(p7, 1);    p8 := shift(p8, 1);           END;              S4: BEGIN              p1 := p2;              p2 := p3;              p3 := p4;              p4 := p5;              p5 := p6;              p6 := p7;              p7 := p8;              p8 := 0;           END;       B1: BEGIN              p8 := shift(p7, -1);   p7 := shift(p6, -1);              p6 := shift(p5, -1);   p5 := shift(p4, -1);              p4 := shift(p3, -1);   p3 := shift(p2, -1);              p2 := shift(p1, -1);   p1 := 0;           END;       B2: BEGIN              p8 := shift(p7, 1);    p7 := shift(p6, 1);              p6 := shift(p5, 1);    p5 := shift(p4, 1);              p4 := shift(p3, 1);    p3 := shift(p2, 1);              p2 := shift(p1, 1);    p1 := 0;           END;       B3: BEGIN              p1 := shift(p2, 1);    p2 := shift(p3, 1);              p3 := shift(p4, 1);    p4 := shift(p5, 1);              p5 := shift(p6, 1);    p6 := shift(p7, 1);              p7 := shift(p8, 1);    p8 := 0;           END;       B4: BEGIN              p1 := shift(p2, -1);   p2 := shift(p3, -1);              p3 := shift(p4, -1);   p4 := shift(p5, -1);              p5 := shift(p6, -1);   p6 := shift(p7, -1);              p7 := shift(p8, -1);   p8 := 0;           END     END;        A := Trick.R; END { SFTRS };FUNCTION CNTRS ( A: BitBoard ): Square;  VAR        Trick: PACKED RECORD                  CASE Boolean OF                     FALSE: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );                     TRUE : ( R: BitBoard )               END;      BEGIN    Trick.R := A;    WITH Trick DO       CNTRS := NrOfBits[P1] + NrOfBits[P2] + NrOfBits[P3]              + NrOfBits[P4] + NrOfBits[P5] + NrOfBits[P6]              + NrOfBits[P7] + NrOfBits[P8]; END { CNTRS };          PROCEDURE ERROR ( A: INTEGER );  BEGIN END (* ERROR *);  PROCEDURE REPORT;  BEGIN    csdx; END (* REPORT *); FUNCTION NULMVB ( VAR MOVE: MoveEntry ): BOOLEAN;  BEGIN    WITH MOVE DO       NULMVB := RMAC AND RMPR AND (NOT RMCA); END (* NULMVB *);  FUNCTION SUMDIS ( A, B: Square ): INTEGER;  BEGIN    SUMDIS := ABS(ORD(XTSR[A]) - ORD(XTSR[B])) +              ABS(ORD(XTSF[A]) - ORD(XTSF[B])); END (* SUMDIS *);  FUNCTION MINDIS ( A, B: Square ): INTEGER;  VAR         IRTI: INTEGER;         IFTI: INTEGER;  BEGIN    IRTI := ABS(ORD(XTSR[A]) - ORD(XTSR[B]));    IFTI := ABS(ORD(XTSF[A]) - ORD(XTSF[B]));    IF IRTI < IFTI       THEN MINDIS := IRTI       ELSE MINDIS := IFTI; END (* MINDIS *); PROCEDURE SETMOV(VAR A: RA; VAR B: MoveEntry);  BEGIN    A := '          ';    WITH B DO BEGIN       IF RMOO THEN          IF RMQS             THEN A := '0-0-0    '             ELSE A := '0-0      '       ELSE BEGIN          A[1] := XUpper(XTPC[RMMP]);          A[2] := CHR(ORD(XTSF[RMFR]) + ORD('a'));          A[3] := CHR(ORD(XTSR[RMFR]) + ORD('1'));          IF RMCA THEN BEGIN             A[4] := '*';             A[5] := XUpper(XTPC[RMCP]);             END          ELSE BEGIN             A[4] := '-';             A[5] := ' ';             END;          A[6] := CHR(ORD(XTSF[RMTO]) + ORD('a'));          A[7] := CHR(ORD(XTSR[RMTO]) + ORD('1'));          IF RMPR THEN             A[8] := XTPC[LQ];          END;       IF RMCH THEN          A[9] := '+';       END; END (* SETMOV *);        PROCEDURE DISPLAY (VAR Move: MoveEntry);  VAR      INRA: RA;       BEGIN    SETMOV(INRA, Move);    WITH Move DO BEGIN       RecordAndMoveFigure(RMFR, RMTO, INRA);       IF RMPR THEN BEGIN          if ((RMMP = LP) OR (RMMP = LK) OR (RMMP = LN) OR              (RMMP = LB) OR (RMMP = LR) OR (RMMP = LQ)) THEN                  DrawFigure ('d', RMTO)          else DrawFigure ('D', RMTO);          END       ELSE          IF RMOO THEN             MoveFigure(RKFR, RKTO)          ELSE             IF RMEP THEN BEGIN          if ((RMMP = LP) OR (RMMP = LK) OR (RMMP = LN) OR              (RMMP = LB) OR (RMMP = LR) OR (RMMP = LQ)) THEN                DrawFigure ('0', RMTO-8)          else DrawFigure ('0', RMTO+8);                END       END;    ChangePlayer; END { DISPLAY };    PROCEDURE INICON;  VAR                INTD: INTEGER;                INTE: Direction;                INTF: TF;                INTI: INTEGER;                INTK: TK;                INTL: INTEGER;                INTQ: TQ;                INTR: TR;                INTS: Square;                INTT: INTEGER;                INRS: BitBoard;                IMRS: BitBoard;                IMTT: INTEGER;                IMTR: TR;                IMTF: TF;              FPADCR: ARRAY [TF] OF INTEGER;     PROCEDURE INITABS;  VAR     i: Integer;       BEGIN     Empty       := [ ];     NrOfBits[0] := 0;     FirstBit[0] := 0;     FOR i := 1 TO 255 DO        IF Odd(i) THEN BEGIN           NrOfBits[i] := NrOfBits[i DIV 2] + 1;           FirstBit[i] := 0;           END        ELSE BEGIN           NrOfBits[i] := NrOfBits[i DIV 2];           FirstBit[i] := FirstBit[i DIV 2] + 1;           END;  END { INITTABS };   PROCEDURE INIXTP ( P: Piece; B: CHAR; C: Color; E: BOOLEAN; F,G: Direction;                    H: INTEGER);    BEGIN     XTPC[P] := B;     XTPM[P] := C;     XSPB[P] := E;     XFPE[P] := F;     XLPE[P] := G;     XTPV[P] := H;  END (* INIXTP *);   BEGIN (* INICON *)    INITABS;        INIXTP(LP, 'B', LITE, FALSE, B1, B2,   PVALUE );    INIXTP(LR, 'T', LITE, TRUE , S1, S4,   RVALUE );    INIXTP(LN, 'S', LITE, FALSE, N1, N8,   NVALUE );    INIXTP(LB, 'L', LITE, TRUE , B1, B4,   BVALUE );    INIXTP(LQ, 'D', LITE, TRUE , B1, S4,   QVALUE );    INIXTP(LK, 'K', LITE, FALSE, B1, S4,         0);    INIXTP(DP, 'b', DARK, FALSE, B3, B4, - PVALUE );    INIXTP(DR, 't', DARK, TRUE , S1, S4, - RVALUE );    INIXTP(DN, 's', DARK, FALSE, N1, N8, - NVALUE );    INIXTP(DB, 'l', DARK, TRUE , B1, B4, - BVALUE );    INIXTP(DQ, 'd', DARK, TRUE , B1, S4, - QVALUE );    INIXTP(DK, 'k', DARK, FALSE, B1, S4,         0);    INIXTP(MT, ' ', NONE, FALSE, B2, B1,         0);     OTHER[LITE] := DARK;  OTHER[DARK] := LITE;    XTMV [LITE] := 1;     XTMV [DARK] := - 1;    XTMQ [LITE] := LiteShort;    XTMQ [DARK] := DarkShort;     FPADCR[F1] :=   0;    FPADCR[F2] :=   0;    FPADCR[F3] :=  39;    FPADCR[F4] :=  54;    FPADCR[F5] :=  70;    FPADCR[F6] :=  23;    FPADCR[F7] :=   0;    FPADCR[F8] :=   0;     XRRS[R1] := [  0,  1,  2,  3,  4,  5,  6,  7 ];    XRRS[R2] := [  8,  9, 10, 11, 12, 13, 14, 15 ];    XRRS[R3] := [ 16, 17, 18, 19, 20, 21, 22, 23 ];    XRRS[R4] := [ 24, 25, 26, 27, 28, 29, 30, 31 ];    XRRS[R5] := [ 32, 33, 34, 35, 36, 37, 38, 39 ];    XRRS[R6] := [ 40, 41, 42, 43, 44, 45, 46, 47 ];    XRRS[R7] := [ 48, 49, 50, 51, 52, 53, 54, 55 ];    XRRS[R8] := [ 56, 57, 58, 59, 60, 61, 62, 63 ];     XRFS[F1] := [  0,  8, 16, 24, 32, 40, 48, 56 ];    XRFS[F2] := [  1,  9, 17, 25, 33, 41, 49, 57 ];    XRFS[F3] := [  2, 10, 18, 26, 34, 42, 50, 58 ];    XRFS[F4] := [  3, 11, 19, 27, 35, 43, 51, 59 ];    XRFS[F5] := [  4, 12, 20, 28, 36, 44, 52, 60 ];    XRFS[F6] := [  5, 13, 21, 29, 37, 45, 53, 61 ];    XRFS[F7] := [  6, 14, 22, 30, 38, 46, 54, 62 ];    XRFS[F8] := [  7, 15, 23, 31, 39, 47, 55, 63 ];     INRS := Empty;    FOR INTR := R8 DOWNTO R1 DO BEGIN       FWRS[INTR] := INRS;       INRS       := INRS + XRRS[INTR];       END;     INRS := Empty;    FOR INTR := R1 TO R8 DO BEGIN       BWRS[INTR] := INRS;       INRS       := INRS + XRRS[INTR];       END;     ADRS[F1] :=            XRFS[F2];    ADRS[F2] := XRFS[F1] + XRFS[F3];    ADRS[F3] := XRFS[F2] + XRFS[F4];    ADRS[F4] := XRFS[F3] + XRFS[F5];    ADRS[F5] := XRFS[F4] + XRFS[F6];    ADRS[F6] := XRFS[F5] + XRFS[F7];    ADRS[F7] := XRFS[F6] + XRFS[F8];    ADRS[F8] := XRFS[F7];     BORDR := XRRS[R3] + XRRS[R6] + XRFS[F3] + XRFS[F6];    CORNR := (XRRS[R1] + XRRS[R2] + XRRS[R7] + XRRS[R8])           * (XRFS[F1] + XRFS[F2] + XRFS[F7] + XRFS[F8]);     FOR INTL := AL TO ZL DO       XTLS[INTL] := - 1;     INTL := 21;    FOR INTR := R1 TO R8 DO BEGIN       FOR INTF := F1 TO F8 DO BEGIN          INTS       := ORD(INTR) * 8 + ORD(INTF);          XTLS[INTL] := INTS;          XTSL[INTS] := INTL;          XTSR[INTS] := INTR;          XTSF[INTS] := INTF;          CDIS[INTS] := ABS(2 * ORD(INTR) - 7) + ABS(2 * ORD(INTF) - 7);          ADVL[INTS] := (ORD(INTR) - ORD(R2)) * FPADCR[INTF];          ADVD[INTS] := (ORD(R7) - ORD(INTR)) * FPADCR[INTF];          XRSS[INTS] := [INTS];          XNSS[INTS] := [AS .. ZS] - XRSS[INTS];          INTL       := INTL + 1;          END;       INTL := INTL + 2;       END;     XTED[S1] := - 1;    XTED[N1] :=  19;    XTED[S2] :=  10;    XTED[N2] :=  21;    XTED[S3] :=   1;    XTED[N3] :=  12;    XTED[S4] := -10;    XTED[N4] := - 8;    XTED[B1] :=   9;    XTED[N5] := -19;    XTED[B2] :=  11;    XTED[N6] := -21;    XTED[B3] := - 9;    XTED[N7] := -12;    XTED[B4] := -11;    XTED[N8] :=   8;    EDGE[S1] :=  XRFS[F1];    EDGE[S2] :=  XRRS[R8];    EDGE[S3] :=  XRFS[F8];    EDGE[S4] :=  XRRS[R1];    EDGE[B1] :=  EDGE[S1] + EDGE[S2];    EDGE[B2] :=  EDGE[S2] + EDGE[S3];    EDGE[B3] :=  EDGE[S3] + EDGE[S4];    EDGE[B4] :=  EDGE[S4] + EDGE[S1];         FOR INTE := B1 TO S4 DO BEGIN       INTD := XTED[INTE];       FOR INTI := 1 TO 7 DO          XLLD[INTI * INTD] := INTD;;       END;     XSQS [LiteShort] := [04, 07];    XSQS [LiteLong ] := [00, 04];    XSQS [DarkShort] := [60, 63];    XSQS [DarkLong ] := [56, 60];     XTQS [LiteShort] :=  7;    XTQS [LiteLong ] :=  0;    XTQS [DarkShort] := 63;    XTQS [DarkLong ] := 56;     FOR INTQ := LiteShort TO DarkLong DO       WITH XRQM[INTQ] DO BEGIN          RMCP := MT;          RMCA := FALSE;          RMAC := TRUE;          RMCH := FALSE;          RMMT := FALSE;          RMIL := FALSE;          RMSU := FALSE;          RMPR := FALSE;          RMOO := TRUE;          VALU := 0;          END;     WITH XRQM[LiteShort] DO BEGIN       RMMP := LK;       RMQS := FALSE;       RMFR :=  4;       RMTO :=  6;       RKFR :=  7;       RKTO :=  5;       END;    WITH XRQM[LiteLong] DO BEGIN       RMMP := LK;       RMQS := TRUE;       RMFR :=  4;       RMTO :=  2;       RKFR :=  0;       RKTO :=  3;       END;    WITH XRQM[DarkShort] DO BEGIN       RMMP := DK;       RMQS := FALSE;       RMFR := 60;       RMTO := 62;       RKFR := 63;       RKTO := 61;       END;    WITH XRQM[DarkLong] DO BEGIN       RMMP := DK;       RMQS := TRUE;       RMFR := 60;       RMTO := 58;       RKFR := 56;       RKTO := 59;       END;     WITH NULMV DO BEGIN       RMFR := AS;       RMTO := AS;       RMMP := MT;       RMCP := MT;       RMCA := FALSE;       RMAC := TRUE;       RMCH := FALSE;       RMMT := FALSE;       RMIL := FALSE;       RMSU := FALSE;       RMPR := TRUE;       END;     FMAXMT := 512;    FMTEGE := 250;    FTIMEL := 2500;    FNODEL := 100;    WINDOW := 75;     FNDEVL :=  94;    FNKTRP :=  12;    FNCTRP :=  16;         FBDEVL := 110;    FBMOBL :=  24;         FRKTRP :=  16;    FRMOBL :=  16;    FRK7TH := 220;    FRDUBL :=  80;    FROPEN :=  80;         FQMOBL :=   8;    FQKTRP :=   8;     FKCTRP :=  23;    FKCORN :=  31;    FKSECU :=   2;    FKPSHD :=   2;         FPFLNX :=   5;    FPCONN :=   2;    FPBLOK :=   7;    FPDUBL :=  80;    FPNISO := 200;    FPNPAS :=  23;    FPPDEF :=   3;    FPPATK :=   4;    FPPBLK :=   7;     RESULT := PLAYING;     FOR INTK := AK TO ZK DO       CMAG[INTK] := FALSE;  END (* INICON *);   PROCEDURE INITAL;  VAR                INTF: TF;                INTR: TR;     BEGIN    WITH BOARD DO BEGIN       RBTM := LITE;       RBTS := - 1;       RBSQ := [LiteShort .. DarkLong];       FOR INTF := F1 TO F8 DO BEGIN          RBIRF[R2, INTF] := LP;          FOR INTR := R3 TO R6 DO             RBIRF[INTR, INTF] := MT;          RBIRF[R7, INTF] := DP;          END;       RBIRF[R1, F1] := LR;       RBIRF[R1, F2] := LN;       RBIRF[R1, F3] := LB;       RBIRF[R1, F4] := LQ;       RBIRF[R1, F5] := LK;       RBIRF[R1, F6] := LB;       RBIRF[R1, F7] := LN;       RBIRF[R1, F8] := LR;       RBIRF[R8, F1] := DR;       RBIRF[R8, F2] := DN;       RBIRF[R8, F3] := DB;       RBIRF[R8, F4] := DQ;       RBIRF[R8, F5] := DK;       RBIRF[R8, F6] := DB;       RBIRF[R8, F7] := DN;       RBIRF[R8, F8] := DR;       LSTMV         := NULMV;       END;    DEPTH := AK; END (* INITAL *);  PROCEDURE MBEVAL;  VAR               PA: INTEGER;                W: INTEGER;                V: INTEGER;     BEGIN    WITH base[ply] DO    IF mblte = 0 THEN       mbval := 0    ELSE BEGIN       IF mblte > 0          THEN PA := mbpwn[LITE]          ELSE PA := mbpwn[DARK];       V := ABS(mblte) * PA * (8000 - mbtot);       W := 6400 * (PA + 1);       IF ABS(mblte) < 2400          THEN V := V DIV W + ABS(mblte)          ELSE V := V DIV W + 2400;       IF V > 3100 THEN          V := 3100;        IF mblte < 0            THEN mbval := - V           ELSE mbval :=   V;       END; END (* MBEVAL *);  PROCEDURE MBCAPT ( A: Piece );  BEGIN    WITH base[ply] DO BEGIN       mbtot := mbtot - ABS(XTPV[A]);       mblte := mblte - XTPV[A];       IF A = LP THEN          mbpwn[LITE] := mbpwn[LITE] - 1       ELSE IF A = DP THEN          mbpwn[DARK] := mbpwn[DARK] - 1;       END;    MBEVAL; END (* MBCAPT *);  PROCEDURE MBTPAC ( A: Piece );  BEGIN    WITH base[ply] DO BEGIN       mbtot := mbtot + ABS(XTPV[A]);       mblte := mblte + XTPV[A];       IF A = LP THEN          mbpwn[LITE] := mbpwn[LITE] + 1       ELSE IF A = DP THEN          mbpwn[DARK] := mbpwn[DARK] + 1;       END; END (* MBTPAC *);  PROCEDURE MBPROM ( A: Color );  BEGIN    WITH base[ply] DO BEGIN       mbtot := mbtot + ABS(QVALUE - PVALUE);       IF A = LITE THEN BEGIN          mblte       := mblte + (QVALUE - PVALUE);          mbpwn[LITE] := mbpwn[LITE] - 1;          END       ELSE BEGIN          mblte       := mblte - (QVALUE - PVALUE);          mbpwn[DARK] := mbpwn[DARK] - 1;          END;       END;    MBEVAL; END (* MBPROM *);   PROCEDURE ADDATK ( A: Square );  LABEL    1;     VAR                INTE: Direction;                INTD: INTEGER;                INTM: Color;                INTP: Piece;                INTS: Square;     BEGIN    WITH base[ply] DO BEGIN    INTP := nbord[A];    INTM := XTPM[INTP];    CASE INTP OF       LP:          BEGIN             INTS := XTLS[XTSL[A] + XTED[B1]];             IF INTS >= AS THEN BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                alatk[LITE] := alatk[LITE] + XRSS[INTS];                atkto[INTS] := atkto[INTS] + XRSS[A];                END;             INTS := XTLS[XTSL[A] + XTED[B2]];             IF INTS >= AS THEN BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                alatk[LITE] := alatk[LITE] + XRSS[INTS];                atkto[INTS] := atkto[INTS] + XRSS[A];                END;          END;       DP:          BEGIN             INTS := XTLS[XTSL[A] + XTED[B3]];             IF INTS >= AS THEN BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                atkto[INTS] := atkto[INTS]    + XRSS[A];                alatk[DARK] := alatk[DARK] + XRSS[INTS];                END;             INTS := XTLS[XTSL[A] + XTED[B4]];             IF INTS >= AS THEN BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                atkto[INTS] := atkto[INTS] + XRSS[A];                alatk[DARK] := alatk[DARK] + XRSS[INTS];                END;          END;       LK, LN, DK, DN:          FOR INTE := XFPE[INTP] TO XLPE[INTP] DO BEGIN             INTS := XTLS[XTSL[A] + XTED[INTE]];             IF INTS >= AS THEN BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                atkto[INTS] := atkto[INTS] + XRSS[A];                alatk[INTM] := alatk[INTM] + XRSS[INTS];                END;             END;       LR, LB, LQ, DR, DB, DQ:          FOR INTE := XFPE[INTP] TO XLPE[INTP] DO BEGIN             INTD := XTED[INTE];             INTS := XTLS[XTSL[A] + INTD];             WHILE INTS >= AS DO BEGIN                atkfr[A]    := atkfr[A]    + XRSS[INTS];                atkto[INTS] := atkto[INTS] + XRSS[A];                alatk[INTM] := alatk[INTM] + XRSS[INTS];                IF nbord[INTS] <> MT THEN                   GOTO 1;                INTS := XTLS[XTSL[INTS] + INTD];                END;          1: END;       END;    END; END (* ADDATK *);  PROCEDURE ADDLOC ( A: Square; B: Piece );  BEGIN    WITH base[ply] DO BEGIN       tploc[MT]      := tploc[MT]      * XNSS[A];       tploc[B]       := tploc[B]       + XRSS[A];       tmloc[XTPM[B]] := tmloc[XTPM[B]] + XRSS[A];       nbord[A]       := B;       IF B = LK THEN          ksqr[LITE] := A       ELSE IF B = DK THEN          ksqr[DARK] := A;       END; END (* ADDLOC *);  PROCEDURE CUTATK ( A: Square );  VAR                INTS: Square;                INTT: INTEGER;                INRS: BitBoard;                INTE: Direction;                INTD: INTEGER;                INTM: Color;                INTB: BOOLEAN;     BEGIN    WITH base[ply] DO BEGIN    INRS := atkto[A];    WHILE NXTTS(INRS, INTS) DO       IF XSPB[nbord[INTS]] THEN BEGIN          INTD := XLLD[XTSL[A] - XTSL[INTS]];          INTM := XTPM[nbord[INTS]];          INTT := XTLS[XTSL[A] + INTD];          WHILE INTT >= AS DO BEGIN             atkfr[INTS] := atkfr[INTS] * XNSS[INTT];             atkto[INTT] := atkto[INTT] * XNSS[INTS];             IF atkto[INTT] * tmloc[INTM] = Empty THEN                alatk[INTM] := alatk[INTM] * XNSS[INTT];             IF nbord[INTT] = MT                THEN INTT := XTLS[XTSL[INTT] + INTD]                ELSE INTT := AT;             END;          END;       END; END (* CUTATK *);  PROCEDURE DELATK ( A: Square );  VAR                INRS: BitBoard;                INTS: Square;                INTM: Color;     BEGIN    WITH base[ply] DO BEGIN    INRS     := atkfr[A];    atkfr[A] := Empty;    INTM     := XTPM[nbord[A]];    WHILE NXTTS(INRS, INTS) DO BEGIN       atkto[INTS] := atkto[INTS] * XNSS[A];       IF atkto[INTS] * tmloc[INTM] = Empty THEN          alatk[INTM] := alatk[INTM] * XNSS[INTS];       END;    tploc[nbord[A]] := tploc[nbord[A]] * XNSS[A];    tmloc[INTM]     := tmloc[INTM]     * XNSS[A];    tploc[MT]       := tploc[MT]       + XRSS[A];    nbord[A]        := MT;    END; END (* DELATK *);  PROCEDURE PRPATK ( A: Square );  VAR                INRS: BitBoard;                INTS: Square;                INTD: INTEGER;                INTM: Color;                INTT: INTEGER;     BEGIN    WITH base[ply] DO BEGIN    INRS := atkto[A];    WHILE NXTTS(INRS, INTS) DO       IF XSPB[nbord[INTS]] THEN BEGIN          INTD := XLLD[XTSL[A] - XTSL[INTS]];          INTM := XTPM[nbord[INTS]];          INTT := XTLS[XTSL[A] + INTD];          WHILE INTT >= AS DO BEGIN             atkfr[INTS] := atkfr[INTS] + XRSS[INTT];             atkto[INTT] := atkto[INTT] + XRSS[INTS];             alatk[INTM] := alatk[INTM] + XRSS[INTT];             IF nbord[INTT] = MT                THEN INTT := XTLS[XTSL[INTT] + INTD]                ELSE INTT := AT;             END;          END;       END; END (* PRPATK *);  PROCEDURE LOSEIT ( VAR MOVE: MoveEntry );  BEGIN    WITH MOVE, base[ply] DO BEGIN       MBCAPT(nbord[RMTO]);       DELATK(RMTO);       ADDLOC(RMTO, nbord[RMFR]);       DELATK(RMFR);       PRPATK(RMFR);       ADDATK(RMTO);       END; END (* LOSEIT *);  PROCEDURE MOVEIT ( VAR MOVE: MoveEntry );  BEGIN    WITH MOVE, base[ply] DO BEGIN       ADDLOC(RMTO, nbord[RMFR]);       CUTATK(RMTO);       DELATK(RMFR);       PRPATK(RMFR);       ADDATK(RMTO);       END; END (* MOVEIT *);  PROCEDURE PROACA ( A: Square );  VAR                INTS: Square;                INRS: BitBoard;                IMRS: BitBoard;     BEGIN    WITH base[ply] DO BEGIN       cstat := cstat * XNSS[A];       INTS  := ORD(XTSR[A]) * 8 + ORD(F5);       INRS  := cstat * XRRS[XTSR[A]];       IF INRS * XRSS[INTS] = Empty THEN          cstat := cstat - XRRS[XTSR[A]];       IF INRS * (XRFS[F1] + XRFS[F8]) = Empty THEN          cstat := cstat - XRRS[XTSR[A]];    END; END (* PROACA *);  PROCEDURE PROACS ( VAR MOVE: MoveEntry );  BEGIN    WITH MOVE, base[ply] DO BEGIN       IF cstat * XRSS[RMFR] <> Empty THEN          PROACA(RMFR);       IF cstat * XRSS[RMTO] <> Empty THEN          PROACA(RMTO);       END; END (* PROACS *);  PROCEDURE PROMOT ( VAR MOVE: MoveEntry );  BEGIN    MBPROM(PLAYER);    WITH MOVE, base[ply] DO       IF PLAYER = LITE THEN BEGIN          tploc[LP]   := tploc[LP] * XNSS[RMFR];          nbord[RMFR] := LQ          END       ELSE BEGIN          tploc[DP]   := tploc[DP] * XNSS[RMFR];          nbord[RMFR] := DQ;          END; END (* PROMOT *);  PROCEDURE CREATE;  VAR                INRS: BitBoard;                INTK: TK;                INTQ: TQ;                INTS: Square;     BEGIN    JNTW := AW + 1;    ply  := AK;    WITH BOARD, base[ply] DO BEGIN       PLAYER   := RBTM;       OPPONENT := OTHER[PLAYER];       NODES    := 0;       LINDX[ply] := JNTW;       FOR INTS := AS TO ZS DO BEGIN          atkfr[INTS] := Empty;          atkto[INTS] := Empty;          nbord[INTS] := MT;          END;       tploc[MT] := Empty;       tploc[LP] := Empty;       tploc[LR] := Empty;       tploc[LN] := Empty;       tploc[LB] := Empty;       tploc[LQ] := Empty;       tploc[LK] := Empty;       tploc[DP] := Empty;       tploc[DR] := Empty;       tploc[DN] := Empty;       tploc[DB] := Empty;       tploc[DQ] := Empty;       tploc[DK] := Empty;        tmloc[LITE] := Empty;  alatk[LITE] := Empty;       tmloc[DARK] := Empty;  alatk[DARK] := Empty;        mbtot := 0;       mblte := 0;       mbpwn[LITE] := 0;       mbpwn[DARK] := 0;       FOR INTS := AS TO ZS DO          IF RBIS[INTS] <> MT THEN BEGIN             ADDLOC(INTS, RBIS[INTS]);             MBTPAC(RBIS[INTS]);             END          ELSE             tploc[MT] := tploc[MT] + XRSS[INTS];       MBEVAL;       INRS := tmloc[LITE] + tmloc[DARK];       WHILE NXTTS(INRS, INTS) DO          ADDATK(INTS);       cstat := Empty;       FOR INTQ := LiteShort TO DarkLong DO          IF INTQ IN RBSQ THEN             cstat := cstat + XSQS[INTQ];       ENPAS[ply] := RBTS;       WITH data[ply] DO       IF PLAYER = LITE THEN BEGIN          genpn := tploc[LP];          gento := [AS .. ZS] - tmloc[LITE] - tploc[DK];          genfr := tmloc[LITE] - tploc[LP];          END       ELSE BEGIN          genpn := tploc[DP];          gento := [AS .. ZS] - tmloc[DARK] - tploc[LK];          genfr := tmloc[DARK] - tploc[DP];          END;       END; END (* CREATE *);  PROCEDURE DNDATE;  BEGIN    JNTW      := LINDX[ply];    CMAG[ply] := FALSE;    ply       := ply - 1;    PLAYER    := OPPONENT;    OPPONENT  := OTHER[PLAYER]; END (* DNDATE *);  PROCEDURE UPDATE ( VAR MOVE: MoveEntry );  VAR                INRS: BitBoard;                IMRS: BitBoard;                INTS: Square;                INTF: TF;                INTR: TR;     BEGIN    ply := ply + 1;    base[ply] := base[ply - 1];    WITH MOVE, base[ply] DO BEGIN       ENPAS[ply] := AT;       LINDX[ply] := JNTW;       CASE ORD(RMCA) * 4 + ORD(RMAC) * 2 + ORD(RMPR) OF          0: IF RMEP THEN BEGIN                SFTRS(INRS, XRSS[RMTO], S1);                SFTRS(IMRS, XRSS[RMTO], S3);                INRS := INRS + IMRS;                IF PLAYER = DARK                   THEN INRS := INRS * tploc[LP]                   ELSE INRS := INRS * tploc[DP];                IF INRS <> Empty THEN                   ENPAS[ply] := (RMTO + RMFR) DIV 2;                MOVEIT(MOVE);                END             ELSE                MOVEIT(MOVE);          1: BEGIN                PROMOT(MOVE);                MOVEIT(MOVE);             END;          2: BEGIN                IF RMOO THEN BEGIN                   INTR       := XTSR[RMFR];                   cstat := cstat - XRRS[INTR];                   ADDLOC(RKTO, nbord[RKFR]);                   ADDATK(RKTO);                   DELATK(RKFR);                   MOVEIT(MOVE);                   END                ELSE BEGIN                   PROACS(MOVE);                   MOVEIT(MOVE);                   END;                END;          3:;          4: IF RMEP THEN BEGIN                INTS := ORD(XTSR[RMFR]) * 8 + ORD(XTSF[RMTO]);                MBCAPT(nbord[INTS]);                DELATK(INTS);                PRPATK(INTS);                MOVEIT(MOVE);                END             ELSE                LOSEIT(MOVE);          5: BEGIN                PROMOT(MOVE);                LOSEIT(MOVE);             END;          6: BEGIN                PROACS(MOVE);                LOSEIT(MOVE);             END;          7: BEGIN                PROMOT(MOVE);                PROACS(MOVE);                LOSEIT(MOVE);             END;          END;       PLAYER   := OPPONENT;       OPPONENT := OTHER[PLAYER];       WITH data[ply] DO       IF PLAYER = LITE THEN BEGIN          genpn := tploc[LP];          gento := [AS .. ZS]  - tmloc[LITE] - tploc[DK];          genfr := tmloc[LITE] - genpn;          RMCH  := tploc[LK] * alatk[DARK] <> Empty;          RMIL  := tploc[DK] * alatk[LITE] <> Empty;          END       ELSE BEGIN          genpn := tploc[DP];          gento := [AS .. ZS]  - tmloc[DARK] - tploc[LK];          genfr := tmloc[DARK] - genpn;          RMCH  := tploc[DK] * alatk[LITE] <> Empty;          RMIL  := tploc[LK] * alatk[DARK] <> Empty;          END;       IF NOT RMIL THEN          MVSEL[ply-1] := MVSEL[ply-1] + 1;       SRCHM[ply] := H1;       NODES     := NODES + 1;       END; END (* UPDATE *);  PROCEDURE GENONE ( A, B: Square );  BEGIN    WITH MOVES[JNTW], base[ply] DO BEGIN       RMFR := A;       RMTO := B;       RMMP := nbord[A];       RMCP := nbord[B];       RMCA := (nbord[B] <> MT);       RMAC := (XRSS[A] + XRSS[B]) * cstat <> Empty;       RMCH := FALSE;       RMMT := FALSE;       RMIL := FALSE;       RMSU := FALSE;       RMPR := FALSE;       RMOO := FALSE;       RMEP := FALSE;       VALU := 0;       END;    JNTW := JNTW + 1; END (* GENONE *);  PROCEDURE GENPWN ( A, B: BitBoard; C: INTEGER);  VAR                INRS,                IMRS: BitBoard;                INTS: Square;     BEGIN    WITH base[ply] DO    IF PLAYER = LITE THEN BEGIN       SFTRS(INRS, A, S2);       INRS := tploc[MT] * INRS;       IMRS := INRS;       INRS := B * INRS;       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS - 8, INTS);          IF INTS >= 56 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       INRS := IMRS * XRRS[R3];       SFTRS(INRS, INRS, S2);       INRS := INRS * B * tploc[MT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS - 16, INTS);          MOVES[JNTW-1].RMEP := TRUE;          END;       SFTRS(INRS, A, B1);       IMRS := INRS * B;       INRS := IMRS * tmloc[OPPONENT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS - 7, INTS);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := FALSE;             END;          IF INTS >= 56 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       IF C >= AS THEN BEGIN        INRS := IMRS * XRSS[C];        if NXTTS (INRS, INTS) THEN BEGIN        (*          GENONE(C, C + 7);*)          GENONE (C-7, C);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := TRUE;             RMCP := DP;             END;          END;       END;       SFTRS(INRS, A, B2);       IMRS := INRS * B;       INRS := IMRS * tmloc[OPPONENT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS - 9, INTS);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := FALSE;             END;          IF INTS >= 56 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       IF C >= AS THEN BEGIN        INRS := IMRS * XRSS[C];        if NXTTS (INRS, INTS) THEN BEGIN        (*          GENONE(C, C + 9);*)         GENONE (C-9, C);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := TRUE;             RMCP := DP;             END;          END;       END;     END    ELSE BEGIN       SFTRS(INRS, A, S4);       INRS := tploc[MT] * INRS;       IMRS := INRS;       INRS := B * INRS;       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS + 8, INTS);          IF INTS <= 7 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       INRS := IMRS * XRRS[R6];       SFTRS(INRS, INRS, S4);       INRS := INRS * B * tploc[MT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS + 16, INTS);          MOVES[JNTW-1].RMEP := TRUE;          END;       SFTRS(INRS, A, B3);       IMRS := INRS * B;       INRS := IMRS * tmloc[OPPONENT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS + 7, INTS);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := FALSE;             END;          IF INTS <= 7 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       IF C >= AS THEN BEGIN        INRS := IMRS * XRSS[C];        if NXTTS (INRS, INTS) THEN BEGIN        (*          GENONE(C, C - 7);*)        GENONE (C+7, C);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := TRUE;             RMCP := LP;             END;          END;       END;       SFTRS(INRS, A, B4);       IMRS := INRS * B;       INRS := IMRS * tmloc[OPPONENT];       WHILE NXTTS(INRS, INTS) DO BEGIN          GENONE(INTS + 9, INTS);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := FALSE;             END;          IF INTS <= 7 THEN             MOVES[JNTW-1].RMPR := TRUE;          END;       IF C >= AS THEN BEGIN        INRS := IMRS * XRSS[C];        if NXTTS (INRS, INTS) THEN BEGIN        (*          GENONE(C, C - 9);*)        GENONE (C+9, C);          WITH MOVES[JNTW-1] DO BEGIN             RMCA := TRUE;             RMEP := TRUE;             RMCP := LP;             END;          END;       END;     END; END (* GENPWN *);  PROCEDURE GENFSL ( A: BitBoard );  VAR                INRS: BitBoard;                IMRS: BitBoard;                IPRS: BitBoard;                INTS: Square;                IMTS: Square;     BEGIN    WITH base[ply], data[ply] DO BEGIN       INRS  := A * genfr;       IPRS  := A * genpn;       genfr := genfr - A;       genpn := genpn - A;       WHILE NXTTS(INRS, INTS) DO BEGIN          IMRS := atkfr[INTS] * gento;          WHILE NXTTS(IMRS, IMTS) DO             GENONE(INTS, IMTS);          END;       GENPWN(IPRS, gento, ENPAS[ply]);       END; END (* GENFSL *);  PROCEDURE GENTSL ( A: BitBoard );  VAR                INRS: BitBoard;                IMRS: BitBoard;                IPRS: BitBoard;                INTS: Square;                IMTS: Square;     BEGIN    WITH base[ply], data[ply] DO BEGIN       INRS  := A * gento;       IPRS  := INRS;       gento := gento - A;       WHILE NXTTS(INRS, INTS) DO BEGIN          IMRS := atkto[INTS] * genfr;          WHILE NXTTS(IMRS, IMTS) DO             GENONE(IMTS, INTS);          END;       GENPWN(genpn, IPRS, ENPAS[ply]);       END; END (* GENTSL *);  PROCEDURE GENCAS;  BEGIN    WITH base[ply] DO    IF PLAYER = LITE THEN BEGIN       IF 7 IN cstat THEN          IF [5 .. 6] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN             IF [4 .. 6] * alatk[OPPONENT] = Empty THEN BEGIN                MOVES[JNTW] := XRQM[LiteShort];                JNTW        := JNTW + 1;                END;       IF 0 IN cstat THEN          IF [1 .. 3] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN             IF [2 .. 4] * alatk[OPPONENT] = Empty THEN BEGIN                MOVES[JNTW] := XRQM[LiteLong];                JNTW        := JNTW + 1;                END;       END    ELSE BEGIN       IF 63 IN cstat THEN          IF [61 .. 62] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN             IF [60 .. 62] * alatk[OPPONENT] = Empty THEN BEGIN                MOVES[JNTW] := XRQM[DarkShort];                JNTW        := JNTW + 1;                END;       IF 56 IN cstat THEN          IF [57 .. 59] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN             IF [58 .. 60] * alatk[OPPONENT] = Empty THEN BEGIN                MOVES[JNTW] := XRQM[DarkLong];                JNTW        := JNTW + 1;                END;       END;    CMAG[ply] := TRUE; END (* GENCAS *);  PROCEDURE GENALL;  BEGIN    WITH base[ply] DO       GENFSL(tmloc[LITE] + tmloc[DARK]);    GENCAS; END (* GENALL *);  PROCEDURE LSTMOV;  VAR             INTW: TW;     BEGIN    CREATE;    GENALL;    FOR INTW := AW + 1 TO JNTW - 1 DO BEGIN       UPDATE(MOVES[INTW]);       DNDATE;       END; END (* LSTMOV *);  PROCEDURE THEMOV ( VAR MOVE: MoveEntry );  VAR                INTB: BOOLEAN;                INTK: TK;                INRS: BitBoard;                INTQ: TQ;                INTS: Square;     BEGIN    LSTMV := MOVE;    ply   := AK;    NODES := NODES - 1;    UPDATE(MOVE);    WITH BOARD, base[ply] DO BEGIN       RBTM := PLAYER;       RBTS := ENPAS[ply];       FOR INTQ := LiteShort TO DarkLong DO          IF XTQS[INTQ] IN cstat             THEN RBSQ := RBSQ + [INTQ]             ELSE RBSQ := RBSQ - [INTQ];       FOR INTS := AS TO ZS DO          RBIS[INTS] := nbord[INTS]       END; END (* THEMOV *);  PROCEDURE EVALU8 ( VAR MOVE: MoveEntry );  VAR                VALU: INTEGER;                INTS: Square;                INRS: BitBoard;   PROCEDURE EVKING;   VAR                 INTV: INTEGER;                 INTI: INTEGER;                 IMTI: INTEGER;                 IMTV: INTEGER;                 IMRS: BitBoard;                 INRS: BitBoard;   BEGIN     INTV := 0;     WITH base[ply] DO BEGIN     INTI := CNTRS(tmloc[DARK] - tploc[DP]);     IF tploc[DQ] = Empty THEN        INTI := INTI - 2;     IF INTI > 0 THEN BEGIN        IMTV := FKPSHD * CNTRS(atkfr[ksqr[LITE]] * tploc[LP])              - FKSECU * CNTRS(atkfr[ksqr[LITE]] * alatk[DARK]);        IF XRSS[ksqr[LITE]] * CORNR = Empty THEN           IMTV := IMTV - FKCORN;        INTV := INTV + INTI * IMTV;        END;     IF mbtot - mblte <= 2*(RVALUE + BVALUE + NVALUE + 3*PVALUE) THEN        INTV := INTV - FKCTRP * CDIS[ksqr[LITE]];     INTI := CNTRS(tmloc[LITE] - tploc[LP]);     IF tploc[LQ] = Empty THEN        INTI := INTI - 2;     IF INTI > 0 THEN BEGIN        IMTV := FKPSHD * CNTRS(atkfr[ksqr[DARK]] * tploc[DP])              - FKSECU * CNTRS(atkfr[ksqr[DARK]] * alatk[LITE]);        IF XRSS[ksqr[DARK]] * CORNR = Empty THEN           IMTV := IMTV - FKCORN;        INTV := INTV - INTI * IMTV;        END;     IF mbtot + mblte <= 2*(RVALUE + BVALUE + NVALUE + 3*PVALUE) THEN        INTV := INTV + FKCTRP * CDIS[ksqr[DARK]];     END;     VALU := VALU + INTV;   END (* EVKING *);   PROCEDURE EVNITE;   VAR                 INTV: INTEGER;                 CTRP: INTEGER;                 KTRP: INTEGER;                 INTS: Square;                 INRS: BitBoard;   BEGIN     INTV := 0;     CTRP := 0;     KTRP := 0;     WITH base[ply] DO BEGIN        INRS := tploc[LN];        WHILE NXTTS(INRS, INTS) DO BEGIN           CTRP := CTRP + 6 - CDIS[INTS];           KTRP := KTRP + 5 - SUMDIS(INTS, ksqr[DARK]);           IF INTS <= 7 THEN              INTV := INTV - FNDEVL;           END;         INRS := tploc[DN];        WHILE NXTTS(INRS, INTS) DO BEGIN           CTRP := CTRP - 6 + CDIS[INTS];           KTRP := KTRP - 5 + SUMDIS(INTS, ksqr[LITE]);           IF INTS >= 56 THEN              INTV := INTV + FNDEVL;           END;        END;     INTV := INTV + CTRP * FNCTRP + KTRP * FNKTRP;     VALU := VALU + INTV;  END (* EVNITE *);   PROCEDURE EVBISH;   VAR                 INTV: INTEGER;                 MOBL: INTEGER;                 INTS: Square;                 INRS: BitBoard;   BEGIN     INTV := 0;     MOBL := 0;     WITH base[ply] DO BEGIN        INRS := tploc[LB];        WHILE NXTTS(INRS, INTS) DO BEGIN           MOBL := MOBL + CNTRS(atkfr[INTS] - tploc[LP]) - 7;           IF INTS <= 7 THEN              INTV := INTV - FBDEVL;           END;         INRS := tploc[DB];        WHILE NXTTS(INRS, INTS) DO BEGIN           MOBL := MOBL - CNTRS(atkfr[INTS] - tploc[DP]) + 7;           IF INTS >= 56 THEN              INTV := INTV + FBDEVL;           END;        END;     INTV := INTV + MOBL * FBMOBL;     VALU := VALU + INTV;  END (* EVBISH *);   PROCEDURE EVQUEN;   VAR                 INTV: INTEGER;                MOBL: INTEGER;                KTRP: INTEGER;                 INTS: Square;                 INRS: BitBoard;   BEGIN     MOBL := 0;     KTRP := 0;     INTV := 0;     WITH base[ply] DO BEGIN        INRS := tploc[LQ];        WHILE NXTTS(INRS, INTS) DO BEGIN           MOBL := MOBL + CNTRS(atkfr[INTS] - alatk[DARK]);           KTRP := KTRP - MINDIS(INTS, ksqr[DARK]);           END;         INRS := tploc[DQ];        WHILE NXTTS(INRS, INTS) DO BEGIN           MOBL := MOBL - CNTRS(atkfr[INTS] - alatk[LITE]);           KTRP := KTRP + MINDIS(INTS, ksqr[LITE]);           END;        END;     INTV := INTV + MOBL * FQMOBL + KTRP * FQKTRP;     VALU := VALU + INTV;  END (* EVQUEN *);   PROCEDURE EVPAWN;   VAR                 INTV: INTEGER;                 INRS: BitBoard;                 IMRS: BitBoard;                 IPRS: BitBoard;                 INTI: INTEGER;                 INSF: FILES;                 INTF: TF;                 IMTS: Square;                 INTS: Square;   BEGIN     INTV := 0;     WITH base[ply] DO BEGIN     SFTRS(INRS, tploc[LP], S1);     SFTRS(IMRS, tploc[DP], S1);     INTV := INTV + FPFLNX * (  CNTRS(INRS * tploc[LP])                              - CNTRS(IMRS * tploc[DP]));      SFTRS(INRS, tploc[LP], B1);     SFTRS(IMRS, tploc[DP], B1);     INTV := INTV + FPCONN * (  CNTRS(INRS * tploc[LP])                              - CNTRS(IMRS * tploc[DP]));       SFTRS(INRS, tploc[LP], B2);     SFTRS(IMRS, tploc[DP], B2);     INTV := INTV + FPCONN * (  CNTRS(INRS * tploc[LP])                              - CNTRS(IMRS * tploc[DP]));       SFTRS(INRS, tploc[LP], S2);     SFTRS(IMRS, tploc[DP], S4);     INTV := INTV + FPBLOK * (  CNTRS(IMRS - tploc[MT])                              - CNTRS(INRS - tploc[MT]));      INSF := [ ];     IMRS := Empty;     IPRS := Empty;     INRS := tploc[LP];     WHILE NXTTS(INRS, INTS) DO BEGIN        INTF := XTSF[INTS];        INTV := INTV + ADVL[INTS];        IMRS := IMRS + ADRS[INTF];        IPRS := IPRS + (ADRS[INTF] + XRFS[INTF]) * FWRS[XTSR[INTS]];        IF INTF IN INSF           THEN INTV := INTV - FPDUBL           ELSE INSF := INSF + [INTF];        END;     INTV := INTV - CNTRS(tploc[LP] - IMRS) * FPNISO;      INRS := tploc[DP] - IPRS;     WHILE NXTTS(INRS, INTS) DO BEGIN        INTI := FPNPAS;        IMTS := INTS - 8;        IF XRSS[IMTS] * tmloc[LITE] <> Empty THEN           INTI := INTI - FPPBLK;        IF XRSS[IMTS] * alatk[LITE] <> Empty THEN           INTI := INTI - FPPATK;        IF XRSS[IMTS] * alatk[DARK] <> Empty THEN           INTI := INTI + FPPDEF;        INTV := INTV - INTI * SQR(8 - ORD(XTSR[INTS]));        END;      INSF := [ ];     IMRS := Empty;     IPRS := Empty;     INRS := tploc[DP];     WHILE NXTTS(INRS, INTS) DO BEGIN        INTF := XTSF[INTS];        INTV := INTV - ADVD[INTS];        IMRS := IMRS + ADRS[INTF];        IPRS := IPRS + (ADRS[INTF] + XRFS[INTF]) * BWRS[XTSR[INTS]];        IF INTF IN INSF           THEN INTV := INTV + FPDUBL           ELSE INSF := INSF + [INTF];        END;     INTV := INTV + CNTRS(tploc[DP] - IMRS) * FPNISO;      INRS := tploc[LP] - IPRS;     WHILE NXTTS(INRS, INTS) DO BEGIN        INTI := FPNPAS;        IMTS := INTS + 8;        IF XRSS[IMTS] * tmloc[DARK] <> Empty THEN           INTI := INTI - FPPBLK;        IF XRSS[IMTS] * alatk[DARK] <> Empty THEN           INTI := INTI - FPPATK;        IF XRSS[IMTS] * alatk[LITE] <> Empty THEN           INTI := INTI + FPPDEF;        INTV := INTV + INTI * SQR(1 + ORD(XTSR[INTS]));        END;     END;     VALU := VALU + INTV;  END (* EVPAWN *);   PROCEDURE EVROOK;   VAR                 INTV: INTEGER;                 MOBL: INTEGER;                 KTRP: INTEGER;                 INTS: Square;                 INRS: BitBoard;   BEGIN     INTV := 0;     MOBL := 0;     KTRP := 0;     WITH base[ply] DO BEGIN     INRS := tploc[LR];     WHILE NXTTS(INRS, INTS) DO BEGIN        KTRP := KTRP - MINDIS(INTS, ksqr[DARK]);        MOBL := MOBL + CNTRS(atkfr[INTS]);        IF atkfr[INTS] * tploc[LR] <> Empty THEN           INTV := INTV + FRDUBL;        IF XRFS[XTSF[INTS]] * (tploc[LP] + tploc[DP]) = Empty THEN           INTV := INTV + FROPEN;        IF XTSR[INTS] = R7 THEN           INTV := INTV + FRK7TH;        END;     INRS := tploc[DR];     WHILE NXTTS(INRS, INTS) DO BEGIN        KTRP := KTRP + MINDIS(INTS, ksqr[LITE]);        MOBL := MOBL - CNTRS(atkfr[INTS]);        IF atkfr[INTS] * tploc[DR] <> Empty THEN           INTV := INTV - FRDUBL;        IF XRFS[XTSF[INTS]] * (tploc[LP] + tploc[DP]) = Empty THEN           INTV := INTV - FROPEN;        IF XTSR[INTS] = R2 THEN           INTV := INTV - FRK7TH;        END;     END;     INTV := INTV + MOBL * FRMOBL + KTRP * FRKTRP;     VALU := VALU + INTV;  END (* EVROOK *);   BEGIN (* EVALU8 *)    WITH base[ply] DO BEGIN    VALU := XTMV[PLAYER] * mbval;    IF (VALU + MAXPS >   BSTVL[ply-2]) AND       (VALU - MAXPS < - BSTVL[ply-1]) THEN BEGIN       VALU := 0;       EVPAWN;       EVBISH;       EVNITE;       EVROOK;       EVQUEN;       EVKING;       VALU := VALU DIV 10;       IF ABS(VALU) > MAXPS THEN          MAXPS := ABS(VALU);       IF PLAYER = LITE          THEN VALU :=   VALU + mbval          ELSE VALU := - VALU - mbval;       END;    END;    MOVE.VALU := VALU; END (* EVALU8 *);  PROCEDURE SEARCH;  LABEL    16;     VAR      INTK: TK;      INTW: TW;      DONE: BOOLEAN;   FUNCTION MINMAX: BOOLEAN;    VAR       INRM: MoveEntry;       INTW: TW;       BEGIN     MINMAX := FALSE;     IF - BSTVL[ply+1] > BSTVL[ply] THEN BEGIN        BSTVL[ply] := - BSTVL[ply+1];        INRM := MOVES[INDEX[ply+1]];        IF ply = AK THEN BEGIN           FOR INTW := INDEX[ply+1] - 1 DOWNTO AW + 1 DO              MOVES[INTW+1] := MOVES[INTW];           MOVES[AW+1] := INRM;           END        ELSE IF NOT INRM.RMCA THEN           KILLR[ply] := INRM;        MINMAX := BSTVL[ply+1] <= BSTVL[ply-1];        END;  END (* MINMAX *);   FUNCTION SELECT: BOOLEAN;    LABEL     21, 22, 23;       VAR                 INTB: BOOLEAN;                 INTK: TK;                 INTW: TW;                 IMTW: TW;                 INTV: INTEGER;                   HV: INTEGER;                 ILRS,                 IMRS,                 INRS: BitBoard;              DUMMYTB: BOOLEAN;                 KPTS: Square;                 CPTS: Square;                 INTD: INTEGER;                 INTH: TH;           BEGIN      INTB := FALSE;     WITH base[ply] DO 21: CASE SRCHM[ply] OF        H1:           BEGIN              MVSEL[ply] := 0;              IF XRSS[ksqr[PLAYER]] * alatk[OPPONENT] <> Empty THEN                 IF ply < ZK THEN BEGIN                    INDEX[ply+1] := LINDX[ply] - 1;                    SRCHM[ply]    := H11;                    GOTO 21;                    END;              IF ply > DEPTH THEN BEGIN                 SRCHM[ply] := H2;                 EVALU8(MOVES[INDEX[ply]]);                 INDEX[ply+1] := AW;                 BSTVL[ply+1] := - MOVES[INDEX[ply]].VALU;                 IF ply = ZK THEN                     GOTO 23                 ELSE IF - BSTVL[ply+1] > BSTVL[ply] THEN BEGIN                    BSTVL[ply] := - BSTVL[ply+1];                    IF BSTVL[ply+1] <= BSTVL[ply-1] THEN                       GOTO 23                    END                 END              ELSE                 SRCHM[ply] := H4;              IF ENPAS[ply] >= AS                 THEN GENTSL(XRSS[ENPAS[ply]] + tmloc[OPPONENT])                 ELSE GENTSL(tmloc[OPPONENT]);              INDEX[ply+1] := LINDX[ply] - 1;              GOTO 21;              END;        H2:           BEGIN              INTV := AV;              INTW := AW;              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN                 WITH MOVES[IMTW] DO                    IF NOT RMSU THEN BEGIN                       IF XRSS[RMTO] * alatk[OPPONENT] <> Empty                           THEN HV := ABS(XTPV[RMCP]) - ABS(XTPV[RMMP])                          ELSE HV := ABS(XTPV[RMCP]);                       IF HV > INTV THEN BEGIN                          INTV := HV;                          INTW := IMTW;                          END;                       END;                 END;              IF INTW <> AW THEN                 IF XTMV[PLAYER] * mbval + MAXPS                    + ABS(XTPV[MOVES[INTW].RMCP]) > BSTVL[ply] THEN                      GOTO 22;              IF PLAYER = LITE                 THEN GENFSL(tploc[LP] * XRRS[R7])                 ELSE GENFSL(tploc[DP] * XRRS[R2]);              INDEX[ply+1] := LINDX[ply] - 1;              SRCHM[ply]   := H3;              GOTO 21;              END;        H3:           BEGIN              INTV := AV;              INTW := AW;              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN                 WITH MOVES[IMTW] DO                    IF NOT RMSU THEN                       IF RMPR THEN BEGIN                          HV := QVALUE;                          IF HV > INTV THEN BEGIN                             INTV := HV;                             INTW := IMTW;                             END;                          END;                 END;              IF INTW <> AW THEN                 GOTO 22              ELSE                 GOTO 23;              END;        H4:           BEGIN              INTV := AV;              INTW := AW;              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN                 WITH MOVES[IMTW] DO                    IF (NOT RMSU) AND RMCA THEN BEGIN                       IF XRSS[RMTO] * alatk[OPPONENT] <> Empty                          THEN HV := ABS(XTPV[RMCP]) - ABS(XTPV[RMMP])                          ELSE HV := ABS(XTPV[RMCP]);                       IF HV > INTV THEN BEGIN                          INTV := HV;                          INTW := IMTW;                          END;                       END;                 END;              IF INTW <> AW THEN                 IF INTV >= 0 THEN                    GOTO 22;              IF NOT NULMVB(KILLR[ply]) THEN BEGIN                 IMTW := JNTW;                 IF KILLR[ply].RMOO                    THEN GENCAS                    ELSE GENFSL(XRSS[KILLR[ply].RMFR]);                 SRCHM[ply] := H6;                 INTW := IMTW;                 WHILE INTW < JNTW DO BEGIN                    IF KILLR[ply].RMTO = MOVES[INTW].RMTO THEN                        GOTO 22;                    INTW := INTW + 1;                    END;                 END;              INDEX[ply+1] := LINDX[ply] - 1;              SRCHM[ply]   := H6;              GOTO 21;              END;        H6:           BEGIN              IF NOT CMAG[ply] THEN                 GENCAS;              INDEX[ply+1] := LINDX[ply] - 1;              SRCHM[ply]   := H7;              GOTO 21;           END;        H7:           BEGIN              INTW := INDEX[ply+1] + 1;              WHILE INTW < JNTW DO BEGIN                 IF NOT MOVES[INTW].RMSU THEN                    GOTO 22;                 INTW := INTW + 1;                 END;              INDEX[ply+1] := LINDX[ply] - 1;              SRCHM[ply]   := H8;              GOTO 21;           END;        H8:           BEGIN              INRS := tmloc[PLAYER] * alatk[OPPONENT];              ILRS := INRS - alatk[PLAYER];              GENFSL(ILRS);              GENFSL(INRS);              GENALL;              SRCHM[ply]   := H9;              INDEX[ply+1] := LINDX[ply] - 1;              GOTO 21;           END;        H9:           BEGIN              INTW := INDEX[ply+1] + 1;              WHILE INTW < JNTW DO BEGIN                 WITH MOVES[INTW] DO                    IF NOT RMSU THEN                       IF XRSS[RMTO] * alatk[OPPONENT] = Empty THEN                          GOTO 22;                 INTW := INTW + 1;                 END;              SRCHM[ply]   := H10;              INDEX[ply+1] := LINDX[ply] - 1;              GOTO 21;           END;        H10:           BEGIN              INTW := INDEX[ply+1] + 1;              WHILE INTW < JNTW DO BEGIN                 IF NOT MOVES[INTW].RMSU THEN                    GOTO 22;                 INTW := INTW + 1;                 END;              IF MVSEL[ply] = 0 THEN                 WITH MOVES[INDEX[ply]] DO BEGIN                    RMMT := TRUE;                    IF RMCH                       THEN VALU := 64 * ply - ZV                       ELSE VALU := 0;                    END;              GOTO 23;           END;        H11:           BEGIN              KPTS := ksqr[PLAYER];              IMRS := atkto[KPTS] * tmloc[OPPONENT];              IF CNTRS(IMRS) <= 1 THEN BEGIN                 IF ENPAS[Ply] >= AS                    THEN GENTSL(IMRS + XRSS[ENPAS[ply]])                    ELSE GENTSL(IMRS);                 INRS := IMRS;                 DUMMYTB := NXTTS(INRS, CPTS);                 IF NOT (nbord[CPTS] IN [LP, LN, DP, DN]) THEN BEGIN                    INRS := Empty;                    INTD := XLLD[XTSL[CPTS] - XTSL[KPTS]];                    KPTS := XTLS[XTSL[KPTS] + INTD];                    WHILE KPTS <> CPTS DO BEGIN                       INRS := INRS + XRSS[KPTS];                       KPTS := XTLS[XTSL[KPTS] + INTD];                       END;                    GENTSL(INRS);                    END;                 END;              GENFSL(XRSS[ksqr[PLAYER]]);              INDEX[ply+1] := LINDX[ply] - 1;              SRCHM[ply]   := H10;              GOTO 21;           END;        END; 22: INDEX[ply+1] := INTW;     MOVES[INTW].RMSU := TRUE;     UPDATE(MOVES[INTW]);     IF NOT MOVES[INTW].RMIL THEN BEGIN        INTB := TRUE;        END     ELSE BEGIN        DNDATE;        GOTO 21;        END; 23: SELECT := INTB;     UpdateClock;  END (* SELECT *);   PROCEDURE PRELIM;    VAR       INTK: TK;       INTW: TW;     PROCEDURE SORTIT;      VAR               INTB: BOOLEAN;               INTW: TW;               IMTW: TW;               INRM: MoveEntry;         BEGIN      INTW := AW + 2;      WHILE INTW <> JNTW DO BEGIN         IMTW := INTW - 1;         INRM := MOVES[INTW];         INTB := TRUE;         WHILE (IMTW <> AW) AND INTB DO            IF INRM.VALU < MOVES[IMTW].VALU THEN BEGIN               MOVES[IMTW + 1] := MOVES[IMTW];               IMTW            := IMTW - 1;               END            ELSE               INTB := FALSE;         MOVES[IMTW + 1] := INRM;         INTW            := INTW + 1;         END;   END (* SORTIT *);    BEGIN (* PRELIM *)     MAXPS       := 0;     BSTVL[AK-2] := - ZV;     BSTVL[AK-1] := - ZV;     BSTVL[AK  ] := - ZV;     INDEX[AK  ] := AW;     MVSEL[AK  ] := 0;     MOVES[AW  ] := LSTMV;     EVALU8(MOVES[AW]);     STATEVAL := + MOVES[AW].VALU;     GENALL;     FOR INTW := AW + 1 TO JNTW - 1 DO BEGIN        UPDATE(MOVES[INTW]);        IF MOVES[INTW].RMIL THEN           MOVES[INTW].VALU := ZV        ELSE           EVALU8(MOVES[INTW]);        DNDATE;        END;     BSTVL[AK-2] :=   STATEVAL - WINDOW;     BSTVL[AK-1] := - STATEVAL - WINDOW;     SORTIT;     FOR INTK := AK TO ZK DO        KILLR[INTK] := NULMV;     IF MVSEL[AK] <= 1 THEN BEGIN        IF NOT MOVES[AW+1].RMIL THEN           BSTVL[AK] := MOVES[AW+1].VALU;        GOTO 16;        END;     INDEX[AK+1] := LINDX[AK] - 1;     SRCHM[AK]   := H10;  END (* PRELIM *);   PROCEDURE CleanUp;   VAR        INTW: TW;   BEGIN     JNTW       := LINDX[AK+1];     MVSEL[ply] := 0;     FOR INTW := AW + 1 TO JNTW - 1 DO        MOVES[INTW].RMSU := FALSE;     INDEX[AK+1] := LINDX[AK] - 1;     SRCHM[ply]  := H10;  END (* CleanUp *);   BEGIN (* SEARCH *)    PRELIM;    DEPTH := AK + 1;    DONE  := FALSE;    REPEAT       REPEAT          BSTVL[ply] := BSTVL[ply-2];       UNTIL NOT SELECT;       BSTVL[ply] := MOVES[INDEX[ply]].VALU;       WHILE ply > AK DO BEGIN          DNDATE;          IF NOT MINMAX THEN             IF SELECT THEN BEGIN                REPEAT                   BSTVL[ply] := BSTVL[ply-2]                UNTIL NOT SELECT;                BSTVL[ply] := MOVES[INDEX[ply]].VALU;                END;          END;       IF (BSTVL[AK] <=   BSTVL[AK-2]) OR          (BSTVL[AK] >= - BSTVL[AK-1]) THEN BEGIN          IF MVSEL[AK] = 0 THEN             GOTO 16;          BSTVL[AK-1] := - ZV;          BSTVL[AK-2] := - ZV;          CleanUp;          END       ELSE BEGIN          BSTVL[AK-2] :=   BSTVL[AK] - WINDOW;          BSTVL[AK-1] := - BSTVL[AK] - WINDOW;          CleanUp;          DEPTH := DEPTH + 1;          DONE  := NODES > FNODEL;          END;    UNTIL DONE;16: END (* SEARCH *);   PROCEDURE FINDMOVE ( SOURCE, TARGET: SQUARE; VAR MOVE: MoveEntry );   LABEL     1;   VAR       INTW: TW;   BEGIN     LSTMOV;     FOR INTW := AW + 1 TO JNTW - 1 DO        WITH MOVES[INTW] DO           IF NOT RMIL THEN              IF RMFR = SOURCE THEN                 IF RMTO = TARGET THEN BEGIN                    MOVE := MOVES[INTW];                    GOTO 1;                    END;     MOVE.RMIL := TRUE;  1:  END (* FINDMOVE *);  PROCEDURE MYMOVE;  VAR      MOVE: MoveEntry;      INRS: BitBoard;     BEGIN    CREATE;    SEARCH;    MOVE := MOVES[AW+1];    WITH base[ply] DO       IF MOVE.RMIL THEN BEGIN          IF PLAYER = LITE             THEN INRS := tploc[LK] * alatk[DARK]             ELSE INRS := tploc[DK] * alatk[LITE];          IF INRS <> Empty             THEN RESULT := LOST             ELSE RESULT := DRAWN;          END       ELSE BEGIN          THEMOV(MOVE);          DISPLAY(MOVE);          IF MOVE.RMMT THEN             RESULT := WINN          END; END (* MYMOVE *);   PROCEDURE YRMOVE;  VAR      INTB  : BOOLEAN;      MOVE  : MoveEntry;      SOURCE: INTEGER;      TARGET: INTEGER;      ANSWER: CHAR;      NUMBER: INTEGER;   PROCEDURE Dialog;    VAR       Message: String;         BEGIN     CASE ANSWER OF        's': BEGIN             WriteInfo('Please enter strength of opponent (1..4) ');             READLN(NUMBER);             CASE NUMBER OF                1: FNODEL := 100;                2: FNODEL := 500;                3: FNODEL := 2000;                4: FNODEL := 5000;                END;             END;        'p': csdx;        'w': BEGIN             WriteInfo('Please enter value for window ');             READLN(WINDOW);             END;        'W': BEGIN             WriteInfo(Concat('Current window = ', Str(Window)));             END;        OTHERWISE:      END;  END {Dialog};     BEGIN    INTB := FALSE;    WHILE NOT INTB DO BEGIN       REPEAT          REQUEST(SOURCE, TARGET, ANSWER);          IF ANSWER = CHR(#177) (* DEL *) THEN             EXIT(CHESS);          IF ANSWER = CHR(#15)  (* CR  *) THEN             EXIT(YRMOVE);          Dialog;       UNTIL ANSWER = ' ';       ClearInfo;       FINDMOVE(SOURCE, TARGET, MOVE);       IF MOVE.RMIL THEN          ERROR(1)       ELSE BEGIN          THEMOV(MOVE);          DISPLAY(MOVE);          INTB := TRUE;          END;       END; END (* YRMOVE *);   BEGIN (* CHESS *)   INITBOARD;   INICON;   INITAL;   STARTGAME;   CREATE;   REPEAT      YRMOVE;      MYMOVE;   UNTIL RESULT <> PLAYING;   REPORT;   ENDGAME;END (* CHESS *).
+{$RANGE-}
+PROGRAM CHESS ( OUTPUT );
+
+{
+{     CHESS         Version 1.0
+{
+{
+{
+{     SIEMENS AG, ZTI SOF 2,   1982
+{
+{     Charly Drechsler       Tel. (089) 636-2203
+{
+}
+
+imports memory from memory;
+imports screen from screen;
+imports virtual from virtual;
+imports controlstore from controlstore;
+imports Stream from Stream;
+
+
+imports ChessBoard FROM ChessBoard;
+imports PERQ_String FROM PERQ_String;
+ 
+CONST
+     AK   = 0;         ZK   = 16;
+     AKM2 = AK - 2;    ZKP1 = ZK + 1;
+     AL   = 0;         ZL   = 119;
+     AS   =  0;        ZS   = 63;
+     AT   = - 1;       ZT   = 63;
+     AV   = - 32767;   ZV   = + 32767;
+     AW   =   1;       ZW   = 1000;
+ 
+     PVALUE = 100;
+     RVALUE = 500;
+     NVALUE = 325;
+     BVALUE = 350;
+     QVALUE = 900;
+ 
+   
+TYPE
+     Piece     = (MT, LP, LN, LB, LR, LQ, LK, DP, DN, DB, DR, DQ, DK);
+     Color     = (LITE, DARK, NONE);
+     Direction = (B1, B2, B3, B4, S1, S2, S3, S4,
+                  N1, N2, N3, N4, N5, N6, N7, N8);
+     TH        = (H1, H2, H3, H4, H6, H7, H8, H9, H10, H11);
+     TQ        = (LiteShort, LiteLong, DarkShort, DarkLong);
+     TR        = (R1, R2, R3, R4, R5, R6, R7, R8);
+     TF        = (F1, F2, F3, F4, F5, F6, F7, F8);
+ 
+     TK        = AKM2 .. ZKP1;
+     Square    = AS .. ZS;
+     TW        = AW .. ZW;
+ 
+     FILES     = SET OF TF;
+     CASTLES   = SET OF TQ;
+     RANKS     = SET OF TR;
+     BitBoard  = SET OF Square;
+     RA        = STRING[10];
+     GameStatus = (PLAYING, WINN, LOST, DRAWN);
+     byte      = 0 .. 255;
+     
+     MoveEntry = PACKED RECORD
+                    RMFR: Square;
+                    RMTO: Square;
+                    RMMP: Piece;
+                    RMCP: Piece;
+                    VALU: INTEGER;
+                    RMCA: BOOLEAN;
+                    RMAC: BOOLEAN;
+                    RMCH: BOOLEAN;
+                    RMMT: BOOLEAN;
+                    RMIL: BOOLEAN;
+                    RMSU: BOOLEAN;
+                    CASE RMPR : BOOLEAN OF
+                       FALSE: (CASE RMOO: BOOLEAN OF
+                                  FALSE: (RMEP: BOOLEAN);
+                                  TRUE : (RMQS: BOOLEAN;
+                                          RKFR: Square;
+                                          RKTO: Square));
+                       TRUE : (  )
+                 END;
+ 
+ 
+VAR
+     FNDEVL     : INTEGER;
+     FNKTRP     : INTEGER;
+     FNCTRP     : INTEGER;
+ 
+     FBDEVL     : INTEGER;
+     FBMOBL     : INTEGER;
+ 
+     FRKTRP     : INTEGER;
+     FRMOBL     : INTEGER;
+     FRK7TH     : INTEGER;
+     FRDUBL     : INTEGER;
+     FROPEN     : INTEGER;
+ 
+     FQMOBL     : INTEGER;
+     FQKTRP     : INTEGER;
+ 
+     FKCTRP     : INTEGER;
+     FKCORN     : INTEGER;
+     FKSECU     : INTEGER;
+     FKPSHD     : INTEGER;
+              
+     FPFLNX     : INTEGER;
+     FPCONN     : INTEGER;
+     FPBLOK     : INTEGER;
+     FPDUBL     : INTEGER;
+     FPNISO     : INTEGER;
+     FPNPAS     : INTEGER;
+     FPPDEF     : INTEGER;
+     FPPATK     : INTEGER;
+     FPPBLK     : INTEGER;
+ 
+     MAXPS      : INTEGER;
+     STATEVAL   : INTEGER;
+     RESULT     : GameStatus;
+     ply        : TK;
+     DEPTH      : TK;
+ 
+     PLAYER     : Color;
+     OPPONENT   : Color;
+     Empty      : BitBoard;
+     NODES      : INTEGER;
+     BOARD      : RECORD
+                     RBTM: Color;
+                     RBTS: INTEGER;
+                     RBSQ: CASTLES;
+                     CASE X: INTEGER OF
+                        0: (RBIS : ARRAY [Square] OF Piece);
+                        1: (RBIRF: ARRAY [TR, TF] OF Piece)
+                  END;
+ 
+     JNTW       : TW;
+     FMTEGE     : INTEGER;
+     FMAXMT     : INTEGER;
+     FTIMEL     : INTEGER;
+     FNODEL     : INTEGER;
+     FTRADE     : INTEGER;
+     FTRDSL     : INTEGER;
+     FTRPOK     : INTEGER;
+     FTRPWN     : INTEGER;
+     WINDOW     : INTEGER;
+     LSTMV      : MoveEntry;
+ 
+     OTHER      : ARRAY[Color] OF Color;
+
+     XTMQ       : ARRAY[Color] OF TQ;
+     XTMV       : ARRAY[Color] OF INTEGER;
+ 
+     XSPB       : ARRAY[Piece] OF BOOLEAN;
+     XFPE       : ARRAY[Piece] OF Direction;
+     XLPE       : ARRAY[Piece] OF Direction;
+     XTPC       : ARRAY[Piece] OF CHAR;
+     XTPM       : ARRAY[Piece] OF Color;
+     XTPV       : ARRAY[Piece] OF INTEGER;
+ 
+     XTSF       : ARRAY[Square] OF TF;
+     XTSR       : ARRAY[Square] OF TR;
+     XTSL       : ARRAY[Square] OF INTEGER;
+     CDIS       : ARRAY[Square] OF INTEGER;
+     ADVL       : ARRAY[Square] OF INTEGER;
+     ADVD       : ARRAY[Square] OF INTEGER;
+
+     base       : ARRAY[TK] OF RECORD
+                    mblte : INTEGER;
+                    mbtot : INTEGER;
+                    mbval : INTEGER;
+                    cstat : BitBoard;
+                    ksqr  : ARRAY[Color] OF Square;
+                    mbpwn : ARRAY[Color] OF INTEGER;
+                    alatk : ARRAY[Color] OF BitBoard;
+                    tmloc : ARRAY[Color] OF BitBoard;
+                    nbord : ARRAY[Square] OF Piece;
+                    atkfr : ARRAY[Square] OF BitBoard;
+                    atkto : ARRAY[Square] OF BitBoard;
+                    tploc : ARRAY[Piece] OF BitBoard;
+                  END;
+                     
+     data       : ARRAY[TK] OF
+                     RECORD
+                        genfr : BitBoard;
+                        gento : BitBoard;
+                        genpn : BitBoard
+                      END;
+                     
+     XNSS       : ARRAY[Square] OF BitBoard;
+     XRSS       : ARRAY[Square] OF BitBoard;
+     XTED       : ARRAY[Direction] OF INTEGER;
+     EDGE       : ARRAY[DIRECTION] OF BitBoard;
+     XTLS       : ARRAY[0 .. 119] OF INTEGER;
+ 
+     LINDX      : ARRAY[TK] OF TW;
+     INDEX      : ARRAY[TK] OF TW;
+     MVSEL      : ARRAY[TK] OF INTEGER;
+     BSTVL      : ARRAY[TK] OF INTEGER;
+     SRCHM      : ARRAY[TK] OF TH;
+     CMAG       : ARRAY[TK] OF BOOLEAN;
+     ENPAS      : ARRAY[TK] OF AT .. ZT;
+     
+     KILLR      : ARRAY[TK] OF MoveEntry;
+ 
+     XRFS       : ARRAY [TF] OF BitBoard;
+     ADRS       : ARRAY [TF] OF BitBoard;
+ 
+     XRRS       : ARRAY [TR] OF BitBoard;
+     FWRS       : ARRAY [TR] OF BitBoard;
+     BWRS       : ARRAY [TR] OF BitBoard;
+ 
+     XRQM       : ARRAY [TQ] OF MoveEntry;
+     XSQS       : ARRAY [TQ] OF BitBoard;
+     XTQS       : ARRAY [TQ] OF Square;
+ 
+     MOVES      : ARRAY [TW] OF MoveEntry;
+     XLLD       : ARRAY [-119 .. 119] OF INTEGER;
+     BORDR      : BitBoard;
+     CORNR      : BitBoard;
+     NULMV      : MoveEntry;
+     
+     NrOfBits   : ARRAY[byte] OF INTEGER;
+     FirstBit   : ARRAY[byte] OF INTEGER;
+
+
+procedure csdx;
+{ CSDX.PAS
+{ Brian Rosen
+{ Copyright 1981, 1982
+{ Three Rivers Computer Corp.
+{ Pittsburgh, Pa.
+
+{ Change Log
+{   ver 1.1  WCH  2 jan 82     modified to work with the production 
+{                              version of interface
+
+{   CSDX works with the CSDX.MICRO program to perform a screen dump to the 
+{   LBP-10 printer. The micro code does a four bit expansion of each 
+{   screen pixel and transmits a video stream to the printer. The microcode
+{   also handles the DMA channel setup and buffer building. }
+
+{   Adapted for chess by Manfred Sommer on 16 Aug 82  @ SIEMENS }
+
+type BuffPtr = ^Integer;
+var Buffseg: SegmentNumber;
+    Buffer: BuffPtr;
+    i,j,k: integer;
+    microcode: microfile;
+    
+Handler ResetError(FileName: PathName);
+begin
+  exit(csdx);
+end;
+    
+begin
+    reset(microcode,':part2>utils>csdx.bin');
+    LoadControlStore(microcode);
+    CreateSegment(Buffseg,12,1,12);
+    IncIOCount(Buffseg);
+    Buffer := MakePtr(Buffseg,0,BuffPtr);
+    LoadAdr(SScreenP);
+    InLineByte(239 {LDDW});
+    LoadAdr(Buffer);
+    InLineByte(239 {LDDW});
+    LoadExpr(Lor(Shift(#7000,8),Shift(#7000,-8)));
+    InLineByte(240 {STLATE});
+    InLineByte(#102 {4,2});
+    InLineByte(#277 {JCS});
+    StorExpr(i);
+    if i = 0 then writeln('  not ready!!!!');
+    if i = 1 then writeln('  bad buffer!!!!');
+    DecIOCount(Buffseg);
+
+
+end { csdx };
+
+
+
+FUNCTION XUpper(A: CHAR): CHAR;
+ 
+ BEGIN
+    IF A IN ['a' .. 'z']
+       THEN XUpper := CHR(ORD(A) - ORD('a') + ORD('A'))
+       ELSE XUpper := A;
+ END (* XUpper *); 
+
+ 
+FUNCTION Str ( x: INTEGER ): String;
+
+ 
+ VAR
+        s: String;
+      pot: INTEGER;
+
+ BEGIN
+    IF x = 0 THEN
+       Str := '0'
+    ELSE BEGIN
+       IF x < 0 THEN BEGIN
+          s := '-';
+          x := - x;
+          END
+       ELSE
+          s := '';
+       pot := 10000;
+       WHILE pot > x DO
+          pot := pot DIV 10;
+       REPEAT
+          AppendChar(s, Chr(x DIV pot + Ord('0')));
+          x   := x MOD pot;
+          pot := pot DIV 10;
+       UNTIL pot = 0;
+       Str := s;
+       END;
+ END { Str };
+
+ 
+(*--------------------------------------------------------------------*)
+   
+FUNCTION NXTTS ( VAR A: BitBoard; VAR B: Square ): BOOLEAN;
+
+ VAR
+            s: SQUARE;
+        Trick: PACKED RECORD
+                  CASE INTEGER OF
+                     1: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );
+                     2: ( w4, w3, w2, w1: Integer);
+                     3: ( R: BitBoard )
+               END;
+
+ BEGIN
+    WITH Trick DO BEGIN
+       R  := A;
+       IF w1 <> 0 THEN BEGIN
+          IF p1 <> 0
+             THEN s := FirstBit[p1]
+             ELSE s := FirstBit[p2] + 8
+          END
+       ELSE IF w2 <> 0 THEN BEGIN
+          IF p3 <> 0
+             THEN s := FirstBit[p3] + 16
+             ELSE s := FirstBit[p4] + 24
+          END
+       ELSE IF w3 <> 0 THEN BEGIN
+          IF p5 <> 0
+             THEN s := FirstBit[p5] + 32
+             ELSE s := FirstBit[p6] + 40
+          END
+       ELSE IF w4 <> 0 THEN BEGIN
+          IF p7 <> 0
+             THEN s := FirstBit[p7] + 48
+             ELSE s := FirstBit[p8] + 56
+          END
+       ELSE BEGIN
+          NXTTS := FALSE;
+          EXIT(NXTTS);
+          END;
+       END;
+     NXTTS := TRUE;
+     B     := s;
+     A     := A - XRSS[s];
+   END { NXTTS };
+
+
+
+
+              
+PROCEDURE SFTRS ( VAR A: BitBoard; B: BitBoard; C: Direction );
+ 
+             
+ VAR
+            i: INTEGER;
+        Trick: PACKED RECORD
+                  CASE Boolean OF
+                     FALSE: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );
+                     TRUE : ( R: BitBoard )
+               END;
+         
+ BEGIN
+    Trick.R := B - EDGE[C];
+    WITH Trick DO
+    CASE C OF
+       S1: BEGIN
+              p1 := shift(p1, -1);   p2 := shift(p2, -1);
+              p3 := shift(p3, -1);   p4 := shift(p4, -1);
+              p5 := shift(p5, -1);   p6 := shift(p6, -1);
+              p7 := shift(p7, -1);   p8 := shift(p8, -1);
+           END;
+       S2: BEGIN 
+              p8 := p7;              p7 := p6;
+              p6 := p5;              p5 := p4;
+              p4 := p3;              p3 := p2;
+              p2 := p1;              p1 := 0;
+           END;
+       S3: BEGIN
+              p1 := shift(p1, 1);    p2 := shift(p2, 1);
+              p3 := shift(p3, 1);    p4 := shift(p4, 1);
+              p5 := shift(p5, 1);    p6 := shift(p6, 1);
+              p7 := shift(p7, 1);    p8 := shift(p8, 1);
+           END;       
+       S4: BEGIN
+              p1 := p2;              p2 := p3;
+              p3 := p4;              p4 := p5;
+              p5 := p6;              p6 := p7;
+              p7 := p8;              p8 := 0;
+           END;
+       B1: BEGIN
+              p8 := shift(p7, -1);   p7 := shift(p6, -1);
+              p6 := shift(p5, -1);   p5 := shift(p4, -1);
+              p4 := shift(p3, -1);   p3 := shift(p2, -1);
+              p2 := shift(p1, -1);   p1 := 0;
+           END;
+       B2: BEGIN
+              p8 := shift(p7, 1);    p7 := shift(p6, 1);
+              p6 := shift(p5, 1);    p5 := shift(p4, 1);
+              p4 := shift(p3, 1);    p3 := shift(p2, 1);
+              p2 := shift(p1, 1);    p1 := 0;
+           END;
+       B3: BEGIN
+              p1 := shift(p2, 1);    p2 := shift(p3, 1);
+              p3 := shift(p4, 1);    p4 := shift(p5, 1);
+              p5 := shift(p6, 1);    p6 := shift(p7, 1);
+              p7 := shift(p8, 1);    p8 := 0;
+           END;
+       B4: BEGIN
+              p1 := shift(p2, -1);   p2 := shift(p3, -1);
+              p3 := shift(p4, -1);   p4 := shift(p5, -1);
+              p5 := shift(p6, -1);   p6 := shift(p7, -1);
+              p7 := shift(p8, -1);   p8 := 0;
+           END
+     END;     
+   A := Trick.R;
+ END { SFTRS };
+
+
+
+
+
+
+FUNCTION CNTRS ( A: BitBoard ): Square;
+ 
+ VAR
+        Trick: PACKED RECORD
+                  CASE Boolean OF
+                     FALSE: ( p8,p7,p6,p5,p4,p3,p2,p1: Byte );
+                     TRUE : ( R: BitBoard )
+               END;
+     
+ BEGIN
+    Trick.R := A;
+    WITH Trick DO
+       CNTRS := NrOfBits[P1] + NrOfBits[P2] + NrOfBits[P3]
+              + NrOfBits[P4] + NrOfBits[P5] + NrOfBits[P6]
+              + NrOfBits[P7] + NrOfBits[P8];
+ END { CNTRS };
+
+          
+PROCEDURE ERROR ( A: INTEGER );
+ 
+ BEGIN
+ END (* ERROR *);
+ 
+ 
+PROCEDURE REPORT;
+ 
+ BEGIN
+    csdx;
+ END (* REPORT *); 
+
+
+
+FUNCTION NULMVB ( VAR MOVE: MoveEntry ): BOOLEAN;
+ 
+ BEGIN
+    WITH MOVE DO
+       NULMVB := RMAC AND RMPR AND (NOT RMCA);
+ END (* NULMVB *);
+ 
+ 
+FUNCTION SUMDIS ( A, B: Square ): INTEGER;
+ 
+ BEGIN
+    SUMDIS := ABS(ORD(XTSR[A]) - ORD(XTSR[B])) +
+              ABS(ORD(XTSF[A]) - ORD(XTSF[B]));
+ END (* SUMDIS *);
+ 
+ 
+FUNCTION MINDIS ( A, B: Square ): INTEGER;
+ 
+ VAR
+         IRTI: INTEGER;
+         IFTI: INTEGER;
+ 
+ BEGIN
+    IRTI := ABS(ORD(XTSR[A]) - ORD(XTSR[B]));
+    IFTI := ABS(ORD(XTSF[A]) - ORD(XTSF[B]));
+    IF IRTI < IFTI
+       THEN MINDIS := IRTI
+       ELSE MINDIS := IFTI;
+ END (* MINDIS *);
+
+
+
+
+ 
+PROCEDURE SETMOV(VAR A: RA; VAR B: MoveEntry);
+ 
+ BEGIN
+    A := '          ';
+    WITH B DO BEGIN
+       IF RMOO THEN
+          IF RMQS
+             THEN A := '0-0-0    '
+             ELSE A := '0-0      '
+       ELSE BEGIN
+          A[1] := XUpper(XTPC[RMMP]);
+          A[2] := CHR(ORD(XTSF[RMFR]) + ORD('a'));
+          A[3] := CHR(ORD(XTSR[RMFR]) + ORD('1'));
+          IF RMCA THEN BEGIN
+             A[4] := '*';
+             A[5] := XUpper(XTPC[RMCP]);
+             END
+          ELSE BEGIN
+             A[4] := '-';
+             A[5] := ' ';
+             END;
+          A[6] := CHR(ORD(XTSF[RMTO]) + ORD('a'));
+          A[7] := CHR(ORD(XTSR[RMTO]) + ORD('1'));
+          IF RMPR THEN
+             A[8] := XTPC[LQ];
+          END;
+       IF RMCH THEN
+          A[9] := '+';
+       END;
+ END (* SETMOV *);
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+PROCEDURE DISPLAY (VAR Move: MoveEntry);
+ 
+ VAR
+      INRA: RA;
+      
+ BEGIN
+    SETMOV(INRA, Move);
+    WITH Move DO BEGIN
+       RecordAndMoveFigure(RMFR, RMTO, INRA);
+       IF RMPR THEN BEGIN
+          if ((RMMP = LP) OR (RMMP = LK) OR (RMMP = LN) OR
+              (RMMP = LB) OR (RMMP = LR) OR (RMMP = LQ)) THEN
+                  DrawFigure ('d', RMTO)
+          else DrawFigure ('D', RMTO);
+          END
+       ELSE
+          IF RMOO THEN
+             MoveFigure(RKFR, RKTO)
+          ELSE
+             IF RMEP THEN BEGIN
+          if ((RMMP = LP) OR (RMMP = LK) OR (RMMP = LN) OR
+              (RMMP = LB) OR (RMMP = LR) OR (RMMP = LQ)) THEN
+                DrawFigure ('0', RMTO-8)
+          else DrawFigure ('0', RMTO+8);
+
+                END
+       END;
+    ChangePlayer;
+ END { DISPLAY };
+ 
+ 
+
+ 
+ 
+PROCEDURE INICON;
+ 
+ VAR
+                INTD: INTEGER;
+                INTE: Direction;
+                INTF: TF;
+                INTI: INTEGER;
+                INTK: TK;
+                INTL: INTEGER;
+                INTQ: TQ;
+                INTR: TR;
+                INTS: Square;
+                INTT: INTEGER;
+                INRS: BitBoard;
+                IMRS: BitBoard;
+                IMTT: INTEGER;
+                IMTR: TR;
+                IMTF: TF;
+              FPADCR: ARRAY [TF] OF INTEGER;
+
+    
+ PROCEDURE INITABS;
+
+  VAR
+     i: Integer;
+     
+  BEGIN
+     Empty       := [ ];
+     NrOfBits[0] := 0;
+     FirstBit[0] := 0;
+     FOR i := 1 TO 255 DO
+        IF Odd(i) THEN BEGIN
+           NrOfBits[i] := NrOfBits[i DIV 2] + 1;
+           FirstBit[i] := 0;
+           END
+        ELSE BEGIN
+           NrOfBits[i] := NrOfBits[i DIV 2];
+           FirstBit[i] := FirstBit[i DIV 2] + 1;
+           END;
+  END { INITTABS };
+  
+
+ PROCEDURE INIXTP ( P: Piece; B: CHAR; C: Color; E: BOOLEAN; F,G: Direction;
+                    H: INTEGER);
+  
+  BEGIN
+     XTPC[P] := B;
+     XTPM[P] := C;
+     XSPB[P] := E;
+     XFPE[P] := F;
+     XLPE[P] := G;
+     XTPV[P] := H;
+  END (* INIXTP *);
+ 
+ 
+ BEGIN (* INICON *)
+    INITABS;
+    
+    INIXTP(LP, 'B', LITE, FALSE, B1, B2,   PVALUE );
+    INIXTP(LR, 'T', LITE, TRUE , S1, S4,   RVALUE );
+    INIXTP(LN, 'S', LITE, FALSE, N1, N8,   NVALUE );
+    INIXTP(LB, 'L', LITE, TRUE , B1, B4,   BVALUE );
+    INIXTP(LQ, 'D', LITE, TRUE , B1, S4,   QVALUE );
+    INIXTP(LK, 'K', LITE, FALSE, B1, S4,         0);
+    INIXTP(DP, 'b', DARK, FALSE, B3, B4, - PVALUE );
+    INIXTP(DR, 't', DARK, TRUE , S1, S4, - RVALUE );
+    INIXTP(DN, 's', DARK, FALSE, N1, N8, - NVALUE );
+    INIXTP(DB, 'l', DARK, TRUE , B1, B4, - BVALUE );
+    INIXTP(DQ, 'd', DARK, TRUE , B1, S4, - QVALUE );
+    INIXTP(DK, 'k', DARK, FALSE, B1, S4,         0);
+    INIXTP(MT, ' ', NONE, FALSE, B2, B1,         0);
+ 
+    OTHER[LITE] := DARK;  OTHER[DARK] := LITE;
+    XTMV [LITE] := 1;     XTMV [DARK] := - 1;
+
+    XTMQ [LITE] := LiteShort;
+    XTMQ [DARK] := DarkShort;
+ 
+    FPADCR[F1] :=   0;
+    FPADCR[F2] :=   0;
+    FPADCR[F3] :=  39;
+    FPADCR[F4] :=  54;
+    FPADCR[F5] :=  70;
+    FPADCR[F6] :=  23;
+    FPADCR[F7] :=   0;
+    FPADCR[F8] :=   0;
+ 
+    XRRS[R1] := [  0,  1,  2,  3,  4,  5,  6,  7 ];
+    XRRS[R2] := [  8,  9, 10, 11, 12, 13, 14, 15 ];
+    XRRS[R3] := [ 16, 17, 18, 19, 20, 21, 22, 23 ];
+    XRRS[R4] := [ 24, 25, 26, 27, 28, 29, 30, 31 ];
+    XRRS[R5] := [ 32, 33, 34, 35, 36, 37, 38, 39 ];
+    XRRS[R6] := [ 40, 41, 42, 43, 44, 45, 46, 47 ];
+    XRRS[R7] := [ 48, 49, 50, 51, 52, 53, 54, 55 ];
+    XRRS[R8] := [ 56, 57, 58, 59, 60, 61, 62, 63 ];
+ 
+    XRFS[F1] := [  0,  8, 16, 24, 32, 40, 48, 56 ];
+    XRFS[F2] := [  1,  9, 17, 25, 33, 41, 49, 57 ];
+    XRFS[F3] := [  2, 10, 18, 26, 34, 42, 50, 58 ];
+    XRFS[F4] := [  3, 11, 19, 27, 35, 43, 51, 59 ];
+    XRFS[F5] := [  4, 12, 20, 28, 36, 44, 52, 60 ];
+    XRFS[F6] := [  5, 13, 21, 29, 37, 45, 53, 61 ];
+    XRFS[F7] := [  6, 14, 22, 30, 38, 46, 54, 62 ];
+    XRFS[F8] := [  7, 15, 23, 31, 39, 47, 55, 63 ];
+ 
+    INRS := Empty;
+    FOR INTR := R8 DOWNTO R1 DO BEGIN
+       FWRS[INTR] := INRS;
+       INRS       := INRS + XRRS[INTR];
+       END;
+ 
+    INRS := Empty;
+    FOR INTR := R1 TO R8 DO BEGIN
+       BWRS[INTR] := INRS;
+       INRS       := INRS + XRRS[INTR];
+       END;
+ 
+    ADRS[F1] :=            XRFS[F2];
+    ADRS[F2] := XRFS[F1] + XRFS[F3];
+    ADRS[F3] := XRFS[F2] + XRFS[F4];
+    ADRS[F4] := XRFS[F3] + XRFS[F5];
+    ADRS[F5] := XRFS[F4] + XRFS[F6];
+    ADRS[F6] := XRFS[F5] + XRFS[F7];
+    ADRS[F7] := XRFS[F6] + XRFS[F8];
+    ADRS[F8] := XRFS[F7];
+ 
+    BORDR := XRRS[R3] + XRRS[R6] + XRFS[F3] + XRFS[F6];
+    CORNR := (XRRS[R1] + XRRS[R2] + XRRS[R7] + XRRS[R8])
+           * (XRFS[F1] + XRFS[F2] + XRFS[F7] + XRFS[F8]);
+ 
+    FOR INTL := AL TO ZL DO
+       XTLS[INTL] := - 1;
+ 
+    INTL := 21;
+    FOR INTR := R1 TO R8 DO BEGIN
+       FOR INTF := F1 TO F8 DO BEGIN
+          INTS       := ORD(INTR) * 8 + ORD(INTF);
+          XTLS[INTL] := INTS;
+          XTSL[INTS] := INTL;
+          XTSR[INTS] := INTR;
+          XTSF[INTS] := INTF;
+          CDIS[INTS] := ABS(2 * ORD(INTR) - 7) + ABS(2 * ORD(INTF) - 7);
+          ADVL[INTS] := (ORD(INTR) - ORD(R2)) * FPADCR[INTF];
+          ADVD[INTS] := (ORD(R7) - ORD(INTR)) * FPADCR[INTF];
+          XRSS[INTS] := [INTS];
+          XNSS[INTS] := [AS .. ZS] - XRSS[INTS];
+          INTL       := INTL + 1;
+          END;
+       INTL := INTL + 2;
+       END;
+ 
+    XTED[S1] := - 1;    XTED[N1] :=  19;
+    XTED[S2] :=  10;    XTED[N2] :=  21;
+    XTED[S3] :=   1;    XTED[N3] :=  12;
+    XTED[S4] := -10;    XTED[N4] := - 8;
+    XTED[B1] :=   9;    XTED[N5] := -19;
+    XTED[B2] :=  11;    XTED[N6] := -21;
+    XTED[B3] := - 9;    XTED[N7] := -12;
+    XTED[B4] := -11;    XTED[N8] :=   8;
+
+    EDGE[S1] :=  XRFS[F1];
+    EDGE[S2] :=  XRRS[R8];
+    EDGE[S3] :=  XRFS[F8];
+    EDGE[S4] :=  XRRS[R1];
+    EDGE[B1] :=  EDGE[S1] + EDGE[S2];
+    EDGE[B2] :=  EDGE[S2] + EDGE[S3];
+    EDGE[B3] :=  EDGE[S3] + EDGE[S4];
+    EDGE[B4] :=  EDGE[S4] + EDGE[S1];
+    
+ 
+    FOR INTE := B1 TO S4 DO BEGIN
+       INTD := XTED[INTE];
+       FOR INTI := 1 TO 7 DO
+          XLLD[INTI * INTD] := INTD;;
+       END;
+ 
+    XSQS [LiteShort] := [04, 07];
+    XSQS [LiteLong ] := [00, 04];
+    XSQS [DarkShort] := [60, 63];
+    XSQS [DarkLong ] := [56, 60];
+ 
+    XTQS [LiteShort] :=  7;
+    XTQS [LiteLong ] :=  0;
+    XTQS [DarkShort] := 63;
+    XTQS [DarkLong ] := 56;
+ 
+    FOR INTQ := LiteShort TO DarkLong DO
+       WITH XRQM[INTQ] DO BEGIN
+          RMCP := MT;
+          RMCA := FALSE;
+          RMAC := TRUE;
+          RMCH := FALSE;
+          RMMT := FALSE;
+          RMIL := FALSE;
+          RMSU := FALSE;
+          RMPR := FALSE;
+          RMOO := TRUE;
+          VALU := 0;
+          END;
+ 
+    WITH XRQM[LiteShort] DO BEGIN
+       RMMP := LK;
+       RMQS := FALSE;
+       RMFR :=  4;
+       RMTO :=  6;
+       RKFR :=  7;
+       RKTO :=  5;
+       END;
+    WITH XRQM[LiteLong] DO BEGIN
+       RMMP := LK;
+       RMQS := TRUE;
+       RMFR :=  4;
+       RMTO :=  2;
+       RKFR :=  0;
+       RKTO :=  3;
+       END;
+    WITH XRQM[DarkShort] DO BEGIN
+       RMMP := DK;
+       RMQS := FALSE;
+       RMFR := 60;
+       RMTO := 62;
+       RKFR := 63;
+       RKTO := 61;
+       END;
+    WITH XRQM[DarkLong] DO BEGIN
+       RMMP := DK;
+       RMQS := TRUE;
+       RMFR := 60;
+       RMTO := 58;
+       RKFR := 56;
+       RKTO := 59;
+       END;
+ 
+    WITH NULMV DO BEGIN
+       RMFR := AS;
+       RMTO := AS;
+       RMMP := MT;
+       RMCP := MT;
+       RMCA := FALSE;
+       RMAC := TRUE;
+       RMCH := FALSE;
+       RMMT := FALSE;
+       RMIL := FALSE;
+       RMSU := FALSE;
+       RMPR := TRUE;
+       END;
+ 
+    FMAXMT := 512;
+    FMTEGE := 250;
+    FTIMEL := 2500;
+    FNODEL := 100;
+    WINDOW := 75;
+ 
+    FNDEVL :=  94;
+    FNKTRP :=  12;
+    FNCTRP :=  16;
+     
+    FBDEVL := 110;
+    FBMOBL :=  24;
+     
+    FRKTRP :=  16;
+    FRMOBL :=  16;
+    FRK7TH := 220;
+    FRDUBL :=  80;
+    FROPEN :=  80;
+     
+    FQMOBL :=   8;
+    FQKTRP :=   8;
+ 
+    FKCTRP :=  23;
+    FKCORN :=  31;
+    FKSECU :=   2;
+    FKPSHD :=   2;
+     
+    FPFLNX :=   5;
+    FPCONN :=   2;
+    FPBLOK :=   7;
+    FPDUBL :=  80;
+    FPNISO := 200;
+    FPNPAS :=  23;
+    FPPDEF :=   3;
+    FPPATK :=   4;
+    FPPBLK :=   7;
+ 
+    RESULT := PLAYING;
+ 
+    FOR INTK := AK TO ZK DO
+       CMAG[INTK] := FALSE;
+ 
+ END (* INICON *);
+ 
+ 
+ 
+PROCEDURE INITAL;
+ 
+ VAR
+                INTF: TF;
+                INTR: TR;
+    
+ BEGIN
+    WITH BOARD DO BEGIN
+       RBTM := LITE;
+       RBTS := - 1;
+       RBSQ := [LiteShort .. DarkLong];
+       FOR INTF := F1 TO F8 DO BEGIN
+          RBIRF[R2, INTF] := LP;
+          FOR INTR := R3 TO R6 DO
+             RBIRF[INTR, INTF] := MT;
+          RBIRF[R7, INTF] := DP;
+          END;
+       RBIRF[R1, F1] := LR;
+       RBIRF[R1, F2] := LN;
+       RBIRF[R1, F3] := LB;
+       RBIRF[R1, F4] := LQ;
+       RBIRF[R1, F5] := LK;
+       RBIRF[R1, F6] := LB;
+       RBIRF[R1, F7] := LN;
+       RBIRF[R1, F8] := LR;
+       RBIRF[R8, F1] := DR;
+       RBIRF[R8, F2] := DN;
+       RBIRF[R8, F3] := DB;
+       RBIRF[R8, F4] := DQ;
+       RBIRF[R8, F5] := DK;
+       RBIRF[R8, F6] := DB;
+       RBIRF[R8, F7] := DN;
+       RBIRF[R8, F8] := DR;
+       LSTMV         := NULMV;
+       END;
+    DEPTH := AK;
+ END (* INITAL *);
+ 
+ 
+PROCEDURE MBEVAL;
+ 
+ VAR
+               PA: INTEGER;
+                W: INTEGER;
+                V: INTEGER;
+    
+ BEGIN
+    WITH base[ply] DO
+    IF mblte = 0 THEN
+       mbval := 0
+    ELSE BEGIN
+       IF mblte > 0
+          THEN PA := mbpwn[LITE]
+          ELSE PA := mbpwn[DARK];
+       V := ABS(mblte) * PA * (8000 - mbtot);
+       W := 6400 * (PA + 1);
+       IF ABS(mblte) < 2400
+          THEN V := V DIV W + ABS(mblte)
+          ELSE V := V DIV W + 2400;
+       IF V > 3100 THEN
+          V := 3100;
+        IF mblte < 0 
+           THEN mbval := - V
+           ELSE mbval :=   V;
+       END;
+ END (* MBEVAL *);
+ 
+ 
+PROCEDURE MBCAPT ( A: Piece );
+ 
+ BEGIN
+    WITH base[ply] DO BEGIN
+       mbtot := mbtot - ABS(XTPV[A]);
+       mblte := mblte - XTPV[A];
+       IF A = LP THEN
+          mbpwn[LITE] := mbpwn[LITE] - 1
+       ELSE IF A = DP THEN
+          mbpwn[DARK] := mbpwn[DARK] - 1;
+       END;
+    MBEVAL;
+ END (* MBCAPT *);
+ 
+ 
+PROCEDURE MBTPAC ( A: Piece );
+ 
+ BEGIN
+    WITH base[ply] DO BEGIN
+       mbtot := mbtot + ABS(XTPV[A]);
+       mblte := mblte + XTPV[A];
+       IF A = LP THEN
+          mbpwn[LITE] := mbpwn[LITE] + 1
+       ELSE IF A = DP THEN
+          mbpwn[DARK] := mbpwn[DARK] + 1;
+       END;
+ END (* MBTPAC *);
+ 
+ 
+PROCEDURE MBPROM ( A: Color );
+ 
+ BEGIN
+    WITH base[ply] DO BEGIN
+       mbtot := mbtot + ABS(QVALUE - PVALUE);
+       IF A = LITE THEN BEGIN
+          mblte       := mblte + (QVALUE - PVALUE);
+          mbpwn[LITE] := mbpwn[LITE] - 1;
+          END
+       ELSE BEGIN
+          mblte       := mblte - (QVALUE - PVALUE);
+          mbpwn[DARK] := mbpwn[DARK] - 1;
+          END;
+       END;
+    MBEVAL;
+ END (* MBPROM *);
+ 
+ 
+ 
+PROCEDURE ADDATK ( A: Square );
+ 
+ LABEL
+    1;
+    
+ VAR
+                INTE: Direction;
+                INTD: INTEGER;
+                INTM: Color;
+                INTP: Piece;
+                INTS: Square;
+    
+ BEGIN
+    WITH base[ply] DO BEGIN
+    INTP := nbord[A];
+    INTM := XTPM[INTP];
+    CASE INTP OF
+       LP:
+          BEGIN
+             INTS := XTLS[XTSL[A] + XTED[B1]];
+             IF INTS >= AS THEN BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                alatk[LITE] := alatk[LITE] + XRSS[INTS];
+                atkto[INTS] := atkto[INTS] + XRSS[A];
+                END;
+             INTS := XTLS[XTSL[A] + XTED[B2]];
+             IF INTS >= AS THEN BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                alatk[LITE] := alatk[LITE] + XRSS[INTS];
+                atkto[INTS] := atkto[INTS] + XRSS[A];
+                END;
+          END;
+       DP:
+          BEGIN
+             INTS := XTLS[XTSL[A] + XTED[B3]];
+             IF INTS >= AS THEN BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                atkto[INTS] := atkto[INTS]    + XRSS[A];
+                alatk[DARK] := alatk[DARK] + XRSS[INTS];
+                END;
+             INTS := XTLS[XTSL[A] + XTED[B4]];
+             IF INTS >= AS THEN BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                atkto[INTS] := atkto[INTS] + XRSS[A];
+                alatk[DARK] := alatk[DARK] + XRSS[INTS];
+                END;
+          END;
+       LK, LN, DK, DN:
+          FOR INTE := XFPE[INTP] TO XLPE[INTP] DO BEGIN
+             INTS := XTLS[XTSL[A] + XTED[INTE]];
+             IF INTS >= AS THEN BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                atkto[INTS] := atkto[INTS] + XRSS[A];
+                alatk[INTM] := alatk[INTM] + XRSS[INTS];
+                END;
+             END;
+       LR, LB, LQ, DR, DB, DQ:
+          FOR INTE := XFPE[INTP] TO XLPE[INTP] DO BEGIN
+             INTD := XTED[INTE];
+             INTS := XTLS[XTSL[A] + INTD];
+             WHILE INTS >= AS DO BEGIN
+                atkfr[A]    := atkfr[A]    + XRSS[INTS];
+                atkto[INTS] := atkto[INTS] + XRSS[A];
+                alatk[INTM] := alatk[INTM] + XRSS[INTS];
+                IF nbord[INTS] <> MT THEN
+                   GOTO 1;
+                INTS := XTLS[XTSL[INTS] + INTD];
+                END;
+          1: END;
+       END;
+    END;
+ END (* ADDATK *);
+ 
+ 
+PROCEDURE ADDLOC ( A: Square; B: Piece );
+ 
+ BEGIN
+    WITH base[ply] DO BEGIN
+       tploc[MT]      := tploc[MT]      * XNSS[A];
+       tploc[B]       := tploc[B]       + XRSS[A];
+       tmloc[XTPM[B]] := tmloc[XTPM[B]] + XRSS[A];
+       nbord[A]       := B;
+       IF B = LK THEN
+          ksqr[LITE] := A
+       ELSE IF B = DK THEN
+          ksqr[DARK] := A;
+       END;
+ END (* ADDLOC *);
+ 
+ 
+PROCEDURE CUTATK ( A: Square );
+ 
+ VAR
+                INTS: Square;
+                INTT: INTEGER;
+                INRS: BitBoard;
+                INTE: Direction;
+                INTD: INTEGER;
+                INTM: Color;
+                INTB: BOOLEAN;
+    
+ BEGIN
+    WITH base[ply] DO BEGIN
+    INRS := atkto[A];
+    WHILE NXTTS(INRS, INTS) DO
+       IF XSPB[nbord[INTS]] THEN BEGIN
+          INTD := XLLD[XTSL[A] - XTSL[INTS]];
+          INTM := XTPM[nbord[INTS]];
+          INTT := XTLS[XTSL[A] + INTD];
+          WHILE INTT >= AS DO BEGIN
+             atkfr[INTS] := atkfr[INTS] * XNSS[INTT];
+             atkto[INTT] := atkto[INTT] * XNSS[INTS];
+             IF atkto[INTT] * tmloc[INTM] = Empty THEN
+                alatk[INTM] := alatk[INTM] * XNSS[INTT];
+             IF nbord[INTT] = MT
+                THEN INTT := XTLS[XTSL[INTT] + INTD]
+                ELSE INTT := AT;
+             END;
+          END;
+       END;
+ END (* CUTATK *);
+ 
+ 
+PROCEDURE DELATK ( A: Square );
+ 
+ VAR
+                INRS: BitBoard;
+                INTS: Square;
+                INTM: Color;
+    
+ BEGIN
+    WITH base[ply] DO BEGIN
+    INRS     := atkfr[A];
+    atkfr[A] := Empty;
+    INTM     := XTPM[nbord[A]];
+    WHILE NXTTS(INRS, INTS) DO BEGIN
+       atkto[INTS] := atkto[INTS] * XNSS[A];
+       IF atkto[INTS] * tmloc[INTM] = Empty THEN
+          alatk[INTM] := alatk[INTM] * XNSS[INTS];
+       END;
+    tploc[nbord[A]] := tploc[nbord[A]] * XNSS[A];
+    tmloc[INTM]     := tmloc[INTM]     * XNSS[A];
+    tploc[MT]       := tploc[MT]       + XRSS[A];
+    nbord[A]        := MT;
+    END;
+ END (* DELATK *);
+ 
+ 
+PROCEDURE PRPATK ( A: Square );
+ 
+ VAR
+                INRS: BitBoard;
+                INTS: Square;
+                INTD: INTEGER;
+                INTM: Color;
+                INTT: INTEGER;
+    
+ BEGIN
+    WITH base[ply] DO BEGIN
+    INRS := atkto[A];
+    WHILE NXTTS(INRS, INTS) DO
+       IF XSPB[nbord[INTS]] THEN BEGIN
+          INTD := XLLD[XTSL[A] - XTSL[INTS]];
+          INTM := XTPM[nbord[INTS]];
+          INTT := XTLS[XTSL[A] + INTD];
+          WHILE INTT >= AS DO BEGIN
+             atkfr[INTS] := atkfr[INTS] + XRSS[INTT];
+             atkto[INTT] := atkto[INTT] + XRSS[INTS];
+             alatk[INTM] := alatk[INTM] + XRSS[INTT];
+             IF nbord[INTT] = MT
+                THEN INTT := XTLS[XTSL[INTT] + INTD]
+                ELSE INTT := AT;
+             END;
+          END;
+       END;
+ END (* PRPATK *);
+ 
+ 
+PROCEDURE LOSEIT ( VAR MOVE: MoveEntry );
+ 
+ BEGIN
+    WITH MOVE, base[ply] DO BEGIN
+       MBCAPT(nbord[RMTO]);
+       DELATK(RMTO);
+       ADDLOC(RMTO, nbord[RMFR]);
+       DELATK(RMFR);
+       PRPATK(RMFR);
+       ADDATK(RMTO);
+       END;
+ END (* LOSEIT *);
+ 
+ 
+PROCEDURE MOVEIT ( VAR MOVE: MoveEntry );
+ 
+ BEGIN
+    WITH MOVE, base[ply] DO BEGIN
+       ADDLOC(RMTO, nbord[RMFR]);
+       CUTATK(RMTO);
+       DELATK(RMFR);
+       PRPATK(RMFR);
+       ADDATK(RMTO);
+       END;
+ END (* MOVEIT *);
+ 
+ 
+PROCEDURE PROACA ( A: Square );
+ 
+ VAR
+                INTS: Square;
+                INRS: BitBoard;
+                IMRS: BitBoard;
+    
+ BEGIN
+    WITH base[ply] DO BEGIN
+       cstat := cstat * XNSS[A];
+       INTS  := ORD(XTSR[A]) * 8 + ORD(F5);
+       INRS  := cstat * XRRS[XTSR[A]];
+       IF INRS * XRSS[INTS] = Empty THEN
+          cstat := cstat - XRRS[XTSR[A]];
+       IF INRS * (XRFS[F1] + XRFS[F8]) = Empty THEN
+          cstat := cstat - XRRS[XTSR[A]];
+    END;
+ END (* PROACA *);
+ 
+ 
+PROCEDURE PROACS ( VAR MOVE: MoveEntry );
+ 
+ BEGIN
+    WITH MOVE, base[ply] DO BEGIN
+       IF cstat * XRSS[RMFR] <> Empty THEN
+          PROACA(RMFR);
+       IF cstat * XRSS[RMTO] <> Empty THEN
+          PROACA(RMTO);
+       END;
+ END (* PROACS *);
+ 
+ 
+PROCEDURE PROMOT ( VAR MOVE: MoveEntry );
+ 
+ BEGIN
+    MBPROM(PLAYER);
+    WITH MOVE, base[ply] DO
+       IF PLAYER = LITE THEN BEGIN
+          tploc[LP]   := tploc[LP] * XNSS[RMFR];
+          nbord[RMFR] := LQ
+          END
+       ELSE BEGIN
+          tploc[DP]   := tploc[DP] * XNSS[RMFR];
+          nbord[RMFR] := DQ;
+          END;
+ END (* PROMOT *);
+ 
+ 
+PROCEDURE CREATE;
+ 
+ VAR
+                INRS: BitBoard;
+                INTK: TK;
+                INTQ: TQ;
+                INTS: Square;
+    
+ BEGIN
+    JNTW := AW + 1;
+    ply  := AK;
+    WITH BOARD, base[ply] DO BEGIN
+       PLAYER   := RBTM;
+       OPPONENT := OTHER[PLAYER];
+       NODES    := 0;
+       LINDX[ply] := JNTW;
+       FOR INTS := AS TO ZS DO BEGIN
+          atkfr[INTS] := Empty;
+          atkto[INTS] := Empty;
+          nbord[INTS] := MT;
+          END;
+       tploc[MT] := Empty;
+       tploc[LP] := Empty;
+       tploc[LR] := Empty;
+       tploc[LN] := Empty;
+       tploc[LB] := Empty;
+       tploc[LQ] := Empty;
+       tploc[LK] := Empty;
+       tploc[DP] := Empty;
+       tploc[DR] := Empty;
+       tploc[DN] := Empty;
+       tploc[DB] := Empty;
+       tploc[DQ] := Empty;
+       tploc[DK] := Empty;
+ 
+       tmloc[LITE] := Empty;  alatk[LITE] := Empty;
+       tmloc[DARK] := Empty;  alatk[DARK] := Empty;
+ 
+       mbtot := 0;
+       mblte := 0;
+       mbpwn[LITE] := 0;
+       mbpwn[DARK] := 0;
+       FOR INTS := AS TO ZS DO
+          IF RBIS[INTS] <> MT THEN BEGIN
+             ADDLOC(INTS, RBIS[INTS]);
+             MBTPAC(RBIS[INTS]);
+             END
+          ELSE
+             tploc[MT] := tploc[MT] + XRSS[INTS];
+       MBEVAL;
+       INRS := tmloc[LITE] + tmloc[DARK];
+       WHILE NXTTS(INRS, INTS) DO
+          ADDATK(INTS);
+       cstat := Empty;
+       FOR INTQ := LiteShort TO DarkLong DO
+          IF INTQ IN RBSQ THEN
+             cstat := cstat + XSQS[INTQ];
+       ENPAS[ply] := RBTS;
+       WITH data[ply] DO
+       IF PLAYER = LITE THEN BEGIN
+          genpn := tploc[LP];
+          gento := [AS .. ZS] - tmloc[LITE] - tploc[DK];
+          genfr := tmloc[LITE] - tploc[LP];
+          END
+       ELSE BEGIN
+          genpn := tploc[DP];
+          gento := [AS .. ZS] - tmloc[DARK] - tploc[LK];
+          genfr := tmloc[DARK] - tploc[DP];
+          END;
+       END;
+ END (* CREATE *);
+ 
+ 
+PROCEDURE DNDATE;
+ 
+ BEGIN
+    JNTW      := LINDX[ply];
+    CMAG[ply] := FALSE;
+    ply       := ply - 1;
+    PLAYER    := OPPONENT;
+    OPPONENT  := OTHER[PLAYER];
+ END (* DNDATE *);
+ 
+ 
+PROCEDURE UPDATE ( VAR MOVE: MoveEntry );
+ 
+ VAR
+                INRS: BitBoard;
+                IMRS: BitBoard;
+                INTS: Square;
+                INTF: TF;
+                INTR: TR;
+    
+ BEGIN
+    ply := ply + 1;
+    base[ply] := base[ply - 1];
+    WITH MOVE, base[ply] DO BEGIN
+       ENPAS[ply] := AT;
+       LINDX[ply] := JNTW;
+       CASE ORD(RMCA) * 4 + ORD(RMAC) * 2 + ORD(RMPR) OF
+          0: IF RMEP THEN BEGIN
+                SFTRS(INRS, XRSS[RMTO], S1);
+                SFTRS(IMRS, XRSS[RMTO], S3);
+                INRS := INRS + IMRS;
+                IF PLAYER = DARK
+                   THEN INRS := INRS * tploc[LP]
+                   ELSE INRS := INRS * tploc[DP];
+                IF INRS <> Empty THEN
+                   ENPAS[ply] := (RMTO + RMFR) DIV 2;
+                MOVEIT(MOVE);
+                END
+             ELSE
+                MOVEIT(MOVE);
+          1: BEGIN
+                PROMOT(MOVE);
+                MOVEIT(MOVE);
+             END;
+          2: BEGIN
+                IF RMOO THEN BEGIN
+                   INTR       := XTSR[RMFR];
+                   cstat := cstat - XRRS[INTR];
+                   ADDLOC(RKTO, nbord[RKFR]);
+                   ADDATK(RKTO);
+                   DELATK(RKFR);
+                   MOVEIT(MOVE);
+                   END
+                ELSE BEGIN
+                   PROACS(MOVE);
+                   MOVEIT(MOVE);
+                   END;
+                END;
+          3:;
+          4: IF RMEP THEN BEGIN
+                INTS := ORD(XTSR[RMFR]) * 8 + ORD(XTSF[RMTO]);
+                MBCAPT(nbord[INTS]);
+                DELATK(INTS);
+                PRPATK(INTS);
+                MOVEIT(MOVE);
+                END
+             ELSE
+                LOSEIT(MOVE);
+          5: BEGIN
+                PROMOT(MOVE);
+                LOSEIT(MOVE);
+             END;
+          6: BEGIN
+                PROACS(MOVE);
+                LOSEIT(MOVE);
+             END;
+          7: BEGIN
+                PROMOT(MOVE);
+                PROACS(MOVE);
+                LOSEIT(MOVE);
+             END;
+          END;
+       PLAYER   := OPPONENT;
+       OPPONENT := OTHER[PLAYER];
+       WITH data[ply] DO
+       IF PLAYER = LITE THEN BEGIN
+          genpn := tploc[LP];
+          gento := [AS .. ZS]  - tmloc[LITE] - tploc[DK];
+          genfr := tmloc[LITE] - genpn;
+          RMCH  := tploc[LK] * alatk[DARK] <> Empty;
+          RMIL  := tploc[DK] * alatk[LITE] <> Empty;
+          END
+       ELSE BEGIN
+          genpn := tploc[DP];
+          gento := [AS .. ZS]  - tmloc[DARK] - tploc[LK];
+          genfr := tmloc[DARK] - genpn;
+          RMCH  := tploc[DK] * alatk[LITE] <> Empty;
+          RMIL  := tploc[LK] * alatk[DARK] <> Empty;
+          END;
+       IF NOT RMIL THEN
+          MVSEL[ply-1] := MVSEL[ply-1] + 1;
+       SRCHM[ply] := H1;
+       NODES     := NODES + 1;
+       END;
+ END (* UPDATE *);
+ 
+ 
+PROCEDURE GENONE ( A, B: Square );
+ 
+ BEGIN
+    WITH MOVES[JNTW], base[ply] DO BEGIN
+       RMFR := A;
+       RMTO := B;
+       RMMP := nbord[A];
+       RMCP := nbord[B];
+       RMCA := (nbord[B] <> MT);
+       RMAC := (XRSS[A] + XRSS[B]) * cstat <> Empty;
+       RMCH := FALSE;
+       RMMT := FALSE;
+       RMIL := FALSE;
+       RMSU := FALSE;
+       RMPR := FALSE;
+       RMOO := FALSE;
+       RMEP := FALSE;
+       VALU := 0;
+       END;
+    JNTW := JNTW + 1;
+ END (* GENONE *);
+ 
+ 
+PROCEDURE GENPWN ( A, B: BitBoard; C: INTEGER);
+ 
+ VAR
+                INRS,
+                IMRS: BitBoard;
+                INTS: Square;
+    
+ BEGIN
+    WITH base[ply] DO
+    IF PLAYER = LITE THEN BEGIN
+       SFTRS(INRS, A, S2);
+       INRS := tploc[MT] * INRS;
+       IMRS := INRS;
+       INRS := B * INRS;
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS - 8, INTS);
+          IF INTS >= 56 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+       INRS := IMRS * XRRS[R3];
+       SFTRS(INRS, INRS, S2);
+       INRS := INRS * B * tploc[MT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS - 16, INTS);
+          MOVES[JNTW-1].RMEP := TRUE;
+          END;
+       SFTRS(INRS, A, B1);
+       IMRS := INRS * B;
+       INRS := IMRS * tmloc[OPPONENT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS - 7, INTS);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := FALSE;
+             END;
+          IF INTS >= 56 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+
+       IF C >= AS THEN BEGIN
+        INRS := IMRS * XRSS[C];
+        if NXTTS (INRS, INTS) THEN BEGIN
+        (*          GENONE(C, C + 7);*)
+          GENONE (C-7, C);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := TRUE;
+             RMCP := DP;
+             END;
+          END;
+       END;
+
+       SFTRS(INRS, A, B2);
+       IMRS := INRS * B;
+       INRS := IMRS * tmloc[OPPONENT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS - 9, INTS);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := FALSE;
+             END;
+          IF INTS >= 56 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+
+       IF C >= AS THEN BEGIN
+        INRS := IMRS * XRSS[C];
+        if NXTTS (INRS, INTS) THEN BEGIN
+        (*          GENONE(C, C + 9);*)
+         GENONE (C-9, C);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := TRUE;
+             RMCP := DP;
+             END;
+          END;
+       END;
+     END
+
+    ELSE BEGIN
+       SFTRS(INRS, A, S4);
+       INRS := tploc[MT] * INRS;
+       IMRS := INRS;
+       INRS := B * INRS;
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS + 8, INTS);
+          IF INTS <= 7 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+       INRS := IMRS * XRRS[R6];
+       SFTRS(INRS, INRS, S4);
+       INRS := INRS * B * tploc[MT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS + 16, INTS);
+          MOVES[JNTW-1].RMEP := TRUE;
+          END;
+       SFTRS(INRS, A, B3);
+       IMRS := INRS * B;
+       INRS := IMRS * tmloc[OPPONENT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS + 7, INTS);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := FALSE;
+             END;
+          IF INTS <= 7 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+
+       IF C >= AS THEN BEGIN
+        INRS := IMRS * XRSS[C];
+        if NXTTS (INRS, INTS) THEN BEGIN
+        (*          GENONE(C, C - 7);*)
+        GENONE (C+7, C);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := TRUE;
+             RMCP := LP;
+             END;
+          END;
+       END;
+
+       SFTRS(INRS, A, B4);
+       IMRS := INRS * B;
+       INRS := IMRS * tmloc[OPPONENT];
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          GENONE(INTS + 9, INTS);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := FALSE;
+             END;
+          IF INTS <= 7 THEN
+             MOVES[JNTW-1].RMPR := TRUE;
+          END;
+
+       IF C >= AS THEN BEGIN
+        INRS := IMRS * XRSS[C];
+        if NXTTS (INRS, INTS) THEN BEGIN
+        (*          GENONE(C, C - 9);*)
+        GENONE (C+9, C);
+          WITH MOVES[JNTW-1] DO BEGIN
+             RMCA := TRUE;
+             RMEP := TRUE;
+             RMCP := LP;
+             END;
+          END;
+       END;
+     END;
+
+ END (* GENPWN *);
+ 
+ 
+PROCEDURE GENFSL ( A: BitBoard );
+ 
+ VAR
+                INRS: BitBoard;
+                IMRS: BitBoard;
+                IPRS: BitBoard;
+                INTS: Square;
+                IMTS: Square;
+    
+ BEGIN
+    WITH base[ply], data[ply] DO BEGIN
+       INRS  := A * genfr;
+       IPRS  := A * genpn;
+       genfr := genfr - A;
+       genpn := genpn - A;
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          IMRS := atkfr[INTS] * gento;
+          WHILE NXTTS(IMRS, IMTS) DO
+             GENONE(INTS, IMTS);
+          END;
+       GENPWN(IPRS, gento, ENPAS[ply]);
+       END;
+ END (* GENFSL *);
+ 
+ 
+PROCEDURE GENTSL ( A: BitBoard );
+ 
+ VAR
+                INRS: BitBoard;
+                IMRS: BitBoard;
+                IPRS: BitBoard;
+                INTS: Square;
+                IMTS: Square;
+    
+ BEGIN
+    WITH base[ply], data[ply] DO BEGIN
+       INRS  := A * gento;
+       IPRS  := INRS;
+       gento := gento - A;
+       WHILE NXTTS(INRS, INTS) DO BEGIN
+          IMRS := atkto[INTS] * genfr;
+          WHILE NXTTS(IMRS, IMTS) DO
+             GENONE(IMTS, INTS);
+          END;
+       GENPWN(genpn, IPRS, ENPAS[ply]);
+       END;
+ END (* GENTSL *);
+ 
+ 
+PROCEDURE GENCAS;
+ 
+ BEGIN
+    WITH base[ply] DO
+    IF PLAYER = LITE THEN BEGIN
+       IF 7 IN cstat THEN
+          IF [5 .. 6] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN
+             IF [4 .. 6] * alatk[OPPONENT] = Empty THEN BEGIN
+                MOVES[JNTW] := XRQM[LiteShort];
+                JNTW        := JNTW + 1;
+                END;
+       IF 0 IN cstat THEN
+          IF [1 .. 3] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN
+             IF [2 .. 4] * alatk[OPPONENT] = Empty THEN BEGIN
+                MOVES[JNTW] := XRQM[LiteLong];
+                JNTW        := JNTW + 1;
+                END;
+       END
+    ELSE BEGIN
+       IF 63 IN cstat THEN
+          IF [61 .. 62] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN
+             IF [60 .. 62] * alatk[OPPONENT] = Empty THEN BEGIN
+                MOVES[JNTW] := XRQM[DarkShort];
+                JNTW        := JNTW + 1;
+                END;
+       IF 56 IN cstat THEN
+          IF [57 .. 59] * (tmloc[LITE] + tmloc[DARK]) = Empty THEN
+             IF [58 .. 60] * alatk[OPPONENT] = Empty THEN BEGIN
+                MOVES[JNTW] := XRQM[DarkLong];
+                JNTW        := JNTW + 1;
+                END;
+       END;
+    CMAG[ply] := TRUE;
+ END (* GENCAS *);
+ 
+ 
+PROCEDURE GENALL;
+ 
+ BEGIN
+    WITH base[ply] DO
+       GENFSL(tmloc[LITE] + tmloc[DARK]);
+    GENCAS;
+ END (* GENALL *);
+ 
+ 
+PROCEDURE LSTMOV;
+ 
+ VAR
+             INTW: TW;
+    
+ BEGIN
+    CREATE;
+    GENALL;
+    FOR INTW := AW + 1 TO JNTW - 1 DO BEGIN
+       UPDATE(MOVES[INTW]);
+       DNDATE;
+       END;
+ END (* LSTMOV *);
+ 
+ 
+PROCEDURE THEMOV ( VAR MOVE: MoveEntry );
+ 
+ VAR
+                INTB: BOOLEAN;
+                INTK: TK;
+                INRS: BitBoard;
+                INTQ: TQ;
+                INTS: Square;
+    
+ BEGIN
+    LSTMV := MOVE;
+    ply   := AK;
+    NODES := NODES - 1;
+    UPDATE(MOVE);
+    WITH BOARD, base[ply] DO BEGIN
+       RBTM := PLAYER;
+       RBTS := ENPAS[ply];
+       FOR INTQ := LiteShort TO DarkLong DO
+          IF XTQS[INTQ] IN cstat
+             THEN RBSQ := RBSQ + [INTQ]
+             ELSE RBSQ := RBSQ - [INTQ];
+       FOR INTS := AS TO ZS DO
+          RBIS[INTS] := nbord[INTS]
+       END;
+ END (* THEMOV *);
+ 
+ 
+PROCEDURE EVALU8 ( VAR MOVE: MoveEntry );
+ 
+ VAR
+                VALU: INTEGER;
+                INTS: Square;
+                INRS: BitBoard;
+ 
+ 
+ PROCEDURE EVKING;
+ 
+  VAR
+                 INTV: INTEGER;
+                 INTI: INTEGER;
+                 IMTI: INTEGER;
+                 IMTV: INTEGER;
+                 IMRS: BitBoard;
+                 INRS: BitBoard;
+ 
+  BEGIN
+     INTV := 0;
+     WITH base[ply] DO BEGIN
+     INTI := CNTRS(tmloc[DARK] - tploc[DP]);
+     IF tploc[DQ] = Empty THEN
+        INTI := INTI - 2;
+     IF INTI > 0 THEN BEGIN
+        IMTV := FKPSHD * CNTRS(atkfr[ksqr[LITE]] * tploc[LP])
+              - FKSECU * CNTRS(atkfr[ksqr[LITE]] * alatk[DARK]);
+        IF XRSS[ksqr[LITE]] * CORNR = Empty THEN
+           IMTV := IMTV - FKCORN;
+        INTV := INTV + INTI * IMTV;
+        END;
+     IF mbtot - mblte <= 2*(RVALUE + BVALUE + NVALUE + 3*PVALUE) THEN
+        INTV := INTV - FKCTRP * CDIS[ksqr[LITE]];
+     INTI := CNTRS(tmloc[LITE] - tploc[LP]);
+     IF tploc[LQ] = Empty THEN
+        INTI := INTI - 2;
+     IF INTI > 0 THEN BEGIN
+        IMTV := FKPSHD * CNTRS(atkfr[ksqr[DARK]] * tploc[DP])
+              - FKSECU * CNTRS(atkfr[ksqr[DARK]] * alatk[LITE]);
+        IF XRSS[ksqr[DARK]] * CORNR = Empty THEN
+           IMTV := IMTV - FKCORN;
+        INTV := INTV - INTI * IMTV;
+        END;
+     IF mbtot + mblte <= 2*(RVALUE + BVALUE + NVALUE + 3*PVALUE) THEN
+        INTV := INTV + FKCTRP * CDIS[ksqr[DARK]];
+     END;
+     VALU := VALU + INTV; 
+  END (* EVKING *);
+ 
+ 
+ PROCEDURE EVNITE;
+ 
+  VAR
+                 INTV: INTEGER;
+                 CTRP: INTEGER;
+                 KTRP: INTEGER;
+                 INTS: Square;
+                 INRS: BitBoard;
+ 
+  BEGIN
+     INTV := 0;
+     CTRP := 0;
+     KTRP := 0;
+     WITH base[ply] DO BEGIN
+        INRS := tploc[LN];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           CTRP := CTRP + 6 - CDIS[INTS];
+           KTRP := KTRP + 5 - SUMDIS(INTS, ksqr[DARK]);
+           IF INTS <= 7 THEN
+              INTV := INTV - FNDEVL;
+           END;
+ 
+        INRS := tploc[DN];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           CTRP := CTRP - 6 + CDIS[INTS];
+           KTRP := KTRP - 5 + SUMDIS(INTS, ksqr[LITE]);
+           IF INTS >= 56 THEN
+              INTV := INTV + FNDEVL;
+           END;
+        END;
+     INTV := INTV + CTRP * FNCTRP + KTRP * FNKTRP;
+     VALU := VALU + INTV;
+  END (* EVNITE *);
+ 
+ 
+ PROCEDURE EVBISH;
+ 
+  VAR
+                 INTV: INTEGER;
+                 MOBL: INTEGER;
+                 INTS: Square;
+                 INRS: BitBoard;
+ 
+  BEGIN
+     INTV := 0;
+     MOBL := 0;
+     WITH base[ply] DO BEGIN
+        INRS := tploc[LB];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           MOBL := MOBL + CNTRS(atkfr[INTS] - tploc[LP]) - 7;
+           IF INTS <= 7 THEN
+              INTV := INTV - FBDEVL;
+           END;
+ 
+        INRS := tploc[DB];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           MOBL := MOBL - CNTRS(atkfr[INTS] - tploc[DP]) + 7;
+           IF INTS >= 56 THEN
+              INTV := INTV + FBDEVL;
+           END;
+        END;
+     INTV := INTV + MOBL * FBMOBL;
+     VALU := VALU + INTV;
+  END (* EVBISH *);
+ 
+ 
+ PROCEDURE EVQUEN;
+ 
+  VAR
+                 INTV: INTEGER;
+                MOBL: INTEGER;
+                KTRP: INTEGER;
+                 INTS: Square;
+                 INRS: BitBoard;
+ 
+  BEGIN
+     MOBL := 0;
+     KTRP := 0;
+     INTV := 0;
+     WITH base[ply] DO BEGIN
+        INRS := tploc[LQ];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           MOBL := MOBL + CNTRS(atkfr[INTS] - alatk[DARK]);
+           KTRP := KTRP - MINDIS(INTS, ksqr[DARK]);
+           END;
+ 
+        INRS := tploc[DQ];
+        WHILE NXTTS(INRS, INTS) DO BEGIN
+           MOBL := MOBL - CNTRS(atkfr[INTS] - alatk[LITE]);
+           KTRP := KTRP + MINDIS(INTS, ksqr[LITE]);
+           END;
+        END;
+     INTV := INTV + MOBL * FQMOBL + KTRP * FQKTRP;
+     VALU := VALU + INTV;
+  END (* EVQUEN *);
+ 
+ 
+ PROCEDURE EVPAWN;
+ 
+  VAR
+                 INTV: INTEGER;
+                 INRS: BitBoard;
+                 IMRS: BitBoard;
+                 IPRS: BitBoard;
+                 INTI: INTEGER;
+                 INSF: FILES;
+                 INTF: TF;
+                 IMTS: Square;
+                 INTS: Square;
+ 
+  BEGIN
+     INTV := 0;
+     WITH base[ply] DO BEGIN
+     SFTRS(INRS, tploc[LP], S1);
+     SFTRS(IMRS, tploc[DP], S1);
+     INTV := INTV + FPFLNX * (  CNTRS(INRS * tploc[LP])
+                              - CNTRS(IMRS * tploc[DP]));
+ 
+     SFTRS(INRS, tploc[LP], B1);
+     SFTRS(IMRS, tploc[DP], B1);
+     INTV := INTV + FPCONN * (  CNTRS(INRS * tploc[LP])
+                              - CNTRS(IMRS * tploc[DP])); 
+ 
+     SFTRS(INRS, tploc[LP], B2);
+     SFTRS(IMRS, tploc[DP], B2);
+     INTV := INTV + FPCONN * (  CNTRS(INRS * tploc[LP])
+                              - CNTRS(IMRS * tploc[DP])); 
+ 
+     SFTRS(INRS, tploc[LP], S2);
+     SFTRS(IMRS, tploc[DP], S4);
+     INTV := INTV + FPBLOK * (  CNTRS(IMRS - tploc[MT])
+                              - CNTRS(INRS - tploc[MT]));
+ 
+     INSF := [ ];
+     IMRS := Empty;
+     IPRS := Empty;
+     INRS := tploc[LP];
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        INTF := XTSF[INTS];
+        INTV := INTV + ADVL[INTS];
+        IMRS := IMRS + ADRS[INTF];
+        IPRS := IPRS + (ADRS[INTF] + XRFS[INTF]) * FWRS[XTSR[INTS]];
+        IF INTF IN INSF
+           THEN INTV := INTV - FPDUBL
+           ELSE INSF := INSF + [INTF];
+        END;
+     INTV := INTV - CNTRS(tploc[LP] - IMRS) * FPNISO;
+ 
+     INRS := tploc[DP] - IPRS;
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        INTI := FPNPAS;
+        IMTS := INTS - 8;
+        IF XRSS[IMTS] * tmloc[LITE] <> Empty THEN
+           INTI := INTI - FPPBLK;
+        IF XRSS[IMTS] * alatk[LITE] <> Empty THEN
+           INTI := INTI - FPPATK;
+        IF XRSS[IMTS] * alatk[DARK] <> Empty THEN
+           INTI := INTI + FPPDEF;
+        INTV := INTV - INTI * SQR(8 - ORD(XTSR[INTS]));
+        END;
+ 
+     INSF := [ ];
+     IMRS := Empty;
+     IPRS := Empty;
+     INRS := tploc[DP];
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        INTF := XTSF[INTS];
+        INTV := INTV - ADVD[INTS];
+        IMRS := IMRS + ADRS[INTF];
+        IPRS := IPRS + (ADRS[INTF] + XRFS[INTF]) * BWRS[XTSR[INTS]];
+        IF INTF IN INSF
+           THEN INTV := INTV + FPDUBL
+           ELSE INSF := INSF + [INTF];
+        END;
+     INTV := INTV + CNTRS(tploc[DP] - IMRS) * FPNISO;
+ 
+     INRS := tploc[LP] - IPRS;
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        INTI := FPNPAS;
+        IMTS := INTS + 8;
+        IF XRSS[IMTS] * tmloc[DARK] <> Empty THEN
+           INTI := INTI - FPPBLK;
+        IF XRSS[IMTS] * alatk[DARK] <> Empty THEN
+           INTI := INTI - FPPATK;
+        IF XRSS[IMTS] * alatk[LITE] <> Empty THEN
+           INTI := INTI + FPPDEF;
+        INTV := INTV + INTI * SQR(1 + ORD(XTSR[INTS]));
+        END;
+     END;
+     VALU := VALU + INTV;
+  END (* EVPAWN *);
+ 
+ 
+ PROCEDURE EVROOK;
+ 
+  VAR
+                 INTV: INTEGER;
+                 MOBL: INTEGER;
+                 KTRP: INTEGER;
+                 INTS: Square;
+                 INRS: BitBoard;
+ 
+  BEGIN
+     INTV := 0;
+     MOBL := 0;
+     KTRP := 0;
+     WITH base[ply] DO BEGIN
+     INRS := tploc[LR];
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        KTRP := KTRP - MINDIS(INTS, ksqr[DARK]);
+        MOBL := MOBL + CNTRS(atkfr[INTS]);
+        IF atkfr[INTS] * tploc[LR] <> Empty THEN
+           INTV := INTV + FRDUBL;
+        IF XRFS[XTSF[INTS]] * (tploc[LP] + tploc[DP]) = Empty THEN
+           INTV := INTV + FROPEN;
+        IF XTSR[INTS] = R7 THEN
+           INTV := INTV + FRK7TH;
+        END;
+     INRS := tploc[DR];
+     WHILE NXTTS(INRS, INTS) DO BEGIN
+        KTRP := KTRP + MINDIS(INTS, ksqr[LITE]);
+        MOBL := MOBL - CNTRS(atkfr[INTS]);
+        IF atkfr[INTS] * tploc[DR] <> Empty THEN
+           INTV := INTV - FRDUBL;
+        IF XRFS[XTSF[INTS]] * (tploc[LP] + tploc[DP]) = Empty THEN
+           INTV := INTV - FROPEN;
+        IF XTSR[INTS] = R2 THEN
+           INTV := INTV - FRK7TH;
+        END;
+     END;
+     INTV := INTV + MOBL * FRMOBL + KTRP * FRKTRP;
+     VALU := VALU + INTV;
+  END (* EVROOK *);
+ 
+ 
+ BEGIN (* EVALU8 *)
+    WITH base[ply] DO BEGIN
+    VALU := XTMV[PLAYER] * mbval;
+    IF (VALU + MAXPS >   BSTVL[ply-2]) AND
+       (VALU - MAXPS < - BSTVL[ply-1]) THEN BEGIN
+       VALU := 0;
+       EVPAWN;
+       EVBISH;
+       EVNITE;
+       EVROOK;
+       EVQUEN;
+       EVKING;
+       VALU := VALU DIV 10;
+       IF ABS(VALU) > MAXPS THEN
+          MAXPS := ABS(VALU);
+       IF PLAYER = LITE
+          THEN VALU :=   VALU + mbval
+          ELSE VALU := - VALU - mbval;
+       END;
+    END;
+    MOVE.VALU := VALU;
+ END (* EVALU8 *);
+ 
+ 
+PROCEDURE SEARCH;
+ 
+ LABEL
+    16;
+    
+ VAR
+      INTK: TK;
+      INTW: TW;
+      DONE: BOOLEAN;
+ 
+ 
+ FUNCTION MINMAX: BOOLEAN;
+  
+  VAR
+       INRM: MoveEntry;
+       INTW: TW;
+     
+  BEGIN
+     MINMAX := FALSE;
+     IF - BSTVL[ply+1] > BSTVL[ply] THEN BEGIN
+        BSTVL[ply] := - BSTVL[ply+1];
+        INRM := MOVES[INDEX[ply+1]];
+        IF ply = AK THEN BEGIN
+           FOR INTW := INDEX[ply+1] - 1 DOWNTO AW + 1 DO
+              MOVES[INTW+1] := MOVES[INTW];
+           MOVES[AW+1] := INRM;
+           END
+        ELSE IF NOT INRM.RMCA THEN
+           KILLR[ply] := INRM;
+        MINMAX := BSTVL[ply+1] <= BSTVL[ply-1];
+        END;
+  END (* MINMAX *);
+ 
+ 
+ FUNCTION SELECT: BOOLEAN;
+  
+  LABEL
+     21, 22, 23;
+     
+  VAR
+                 INTB: BOOLEAN;
+                 INTK: TK;
+                 INTW: TW;
+                 IMTW: TW;
+                 INTV: INTEGER;
+                   HV: INTEGER;
+                 ILRS,
+                 IMRS,
+                 INRS: BitBoard;
+              DUMMYTB: BOOLEAN;
+                 KPTS: Square;
+                 CPTS: Square;
+                 INTD: INTEGER;
+                 INTH: TH;
+     
+  
+  
+  BEGIN 
+     INTB := FALSE;
+     WITH base[ply] DO
+ 21: CASE SRCHM[ply] OF
+        H1:
+           BEGIN
+              MVSEL[ply] := 0;
+              IF XRSS[ksqr[PLAYER]] * alatk[OPPONENT] <> Empty THEN
+                 IF ply < ZK THEN BEGIN
+                    INDEX[ply+1] := LINDX[ply] - 1;
+                    SRCHM[ply]    := H11;
+                    GOTO 21;
+                    END;
+              IF ply > DEPTH THEN BEGIN
+                 SRCHM[ply] := H2;
+                 EVALU8(MOVES[INDEX[ply]]);
+                 INDEX[ply+1] := AW;
+                 BSTVL[ply+1] := - MOVES[INDEX[ply]].VALU;
+                 IF ply = ZK THEN 
+                    GOTO 23
+                 ELSE IF - BSTVL[ply+1] > BSTVL[ply] THEN BEGIN
+                    BSTVL[ply] := - BSTVL[ply+1];
+                    IF BSTVL[ply+1] <= BSTVL[ply-1] THEN
+                       GOTO 23
+                    END
+                 END
+              ELSE
+                 SRCHM[ply] := H4;
+              IF ENPAS[ply] >= AS
+                 THEN GENTSL(XRSS[ENPAS[ply]] + tmloc[OPPONENT])
+                 ELSE GENTSL(tmloc[OPPONENT]);
+              INDEX[ply+1] := LINDX[ply] - 1;
+              GOTO 21;
+              END;
+        H2:
+           BEGIN
+              INTV := AV;
+              INTW := AW;
+              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN
+                 WITH MOVES[IMTW] DO
+                    IF NOT RMSU THEN BEGIN
+                       IF XRSS[RMTO] * alatk[OPPONENT] <> Empty 
+                          THEN HV := ABS(XTPV[RMCP]) - ABS(XTPV[RMMP])
+                          ELSE HV := ABS(XTPV[RMCP]);
+                       IF HV > INTV THEN BEGIN
+                          INTV := HV;
+                          INTW := IMTW;
+                          END;
+                       END;
+                 END;
+              IF INTW <> AW THEN
+                 IF XTMV[PLAYER] * mbval + MAXPS
+                    + ABS(XTPV[MOVES[INTW].RMCP]) > BSTVL[ply] THEN
+                      GOTO 22;
+              IF PLAYER = LITE
+                 THEN GENFSL(tploc[LP] * XRRS[R7])
+                 ELSE GENFSL(tploc[DP] * XRRS[R2]);
+              INDEX[ply+1] := LINDX[ply] - 1;
+              SRCHM[ply]   := H3;
+              GOTO 21;
+              END;
+        H3:
+           BEGIN
+              INTV := AV;
+              INTW := AW;
+              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN
+                 WITH MOVES[IMTW] DO
+                    IF NOT RMSU THEN
+                       IF RMPR THEN BEGIN
+                          HV := QVALUE;
+                          IF HV > INTV THEN BEGIN
+                             INTV := HV;
+                             INTW := IMTW;
+                             END;
+                          END;
+                 END;
+              IF INTW <> AW THEN
+                 GOTO 22
+              ELSE
+                 GOTO 23;
+              END;
+        H4:
+           BEGIN
+              INTV := AV;
+              INTW := AW;
+              FOR IMTW := LINDX[ply] TO JNTW - 1 DO BEGIN
+                 WITH MOVES[IMTW] DO
+                    IF (NOT RMSU) AND RMCA THEN BEGIN
+                       IF XRSS[RMTO] * alatk[OPPONENT] <> Empty
+                          THEN HV := ABS(XTPV[RMCP]) - ABS(XTPV[RMMP])
+                          ELSE HV := ABS(XTPV[RMCP]);
+                       IF HV > INTV THEN BEGIN
+                          INTV := HV;
+                          INTW := IMTW;
+                          END;
+                       END;
+                 END;
+              IF INTW <> AW THEN
+                 IF INTV >= 0 THEN
+                    GOTO 22;
+              IF NOT NULMVB(KILLR[ply]) THEN BEGIN
+                 IMTW := JNTW;
+                 IF KILLR[ply].RMOO
+                    THEN GENCAS
+                    ELSE GENFSL(XRSS[KILLR[ply].RMFR]);
+                 SRCHM[ply] := H6;
+                 INTW := IMTW;
+                 WHILE INTW < JNTW DO BEGIN
+                    IF KILLR[ply].RMTO = MOVES[INTW].RMTO THEN 
+                       GOTO 22;
+                    INTW := INTW + 1;
+                    END;
+                 END;
+              INDEX[ply+1] := LINDX[ply] - 1;
+              SRCHM[ply]   := H6;
+              GOTO 21;
+              END;
+        H6:
+           BEGIN
+              IF NOT CMAG[ply] THEN
+                 GENCAS;
+              INDEX[ply+1] := LINDX[ply] - 1;
+              SRCHM[ply]   := H7;
+              GOTO 21;
+           END;
+        H7:
+           BEGIN
+              INTW := INDEX[ply+1] + 1;
+              WHILE INTW < JNTW DO BEGIN
+                 IF NOT MOVES[INTW].RMSU THEN
+                    GOTO 22;
+                 INTW := INTW + 1;
+                 END;
+              INDEX[ply+1] := LINDX[ply] - 1;
+              SRCHM[ply]   := H8;
+              GOTO 21;
+           END;
+        H8:
+           BEGIN
+              INRS := tmloc[PLAYER] * alatk[OPPONENT];
+              ILRS := INRS - alatk[PLAYER];
+              GENFSL(ILRS);
+              GENFSL(INRS);
+              GENALL;
+              SRCHM[ply]   := H9;
+              INDEX[ply+1] := LINDX[ply] - 1;
+              GOTO 21;
+           END;
+        H9:
+           BEGIN
+              INTW := INDEX[ply+1] + 1;
+              WHILE INTW < JNTW DO BEGIN
+                 WITH MOVES[INTW] DO
+                    IF NOT RMSU THEN
+                       IF XRSS[RMTO] * alatk[OPPONENT] = Empty THEN
+                          GOTO 22;
+                 INTW := INTW + 1;
+                 END;
+              SRCHM[ply]   := H10;
+              INDEX[ply+1] := LINDX[ply] - 1;
+              GOTO 21;
+           END;
+        H10:
+           BEGIN
+              INTW := INDEX[ply+1] + 1;
+              WHILE INTW < JNTW DO BEGIN
+                 IF NOT MOVES[INTW].RMSU THEN
+                    GOTO 22;
+                 INTW := INTW + 1;
+                 END;
+              IF MVSEL[ply] = 0 THEN
+                 WITH MOVES[INDEX[ply]] DO BEGIN
+                    RMMT := TRUE;
+                    IF RMCH
+                       THEN VALU := 64 * ply - ZV
+                       ELSE VALU := 0;
+                    END;
+              GOTO 23;
+           END;
+        H11:
+           BEGIN
+              KPTS := ksqr[PLAYER];
+              IMRS := atkto[KPTS] * tmloc[OPPONENT];
+              IF CNTRS(IMRS) <= 1 THEN BEGIN
+                 IF ENPAS[Ply] >= AS
+                    THEN GENTSL(IMRS + XRSS[ENPAS[ply]])
+                    ELSE GENTSL(IMRS);
+                 INRS := IMRS;
+                 DUMMYTB := NXTTS(INRS, CPTS);
+                 IF NOT (nbord[CPTS] IN [LP, LN, DP, DN]) THEN BEGIN
+                    INRS := Empty;
+                    INTD := XLLD[XTSL[CPTS] - XTSL[KPTS]];
+                    KPTS := XTLS[XTSL[KPTS] + INTD];
+                    WHILE KPTS <> CPTS DO BEGIN
+                       INRS := INRS + XRSS[KPTS];
+                       KPTS := XTLS[XTSL[KPTS] + INTD];
+                       END;
+                    GENTSL(INRS);
+                    END;
+                 END;
+              GENFSL(XRSS[ksqr[PLAYER]]);
+              INDEX[ply+1] := LINDX[ply] - 1;
+              SRCHM[ply]   := H10;
+              GOTO 21;
+           END;
+        END;
+ 22: INDEX[ply+1] := INTW;
+     MOVES[INTW].RMSU := TRUE;
+     UPDATE(MOVES[INTW]);
+     IF NOT MOVES[INTW].RMIL THEN BEGIN
+        INTB := TRUE;
+        END
+     ELSE BEGIN
+        DNDATE;
+        GOTO 21;
+        END;
+ 23: SELECT := INTB;
+     UpdateClock;
+  END (* SELECT *);
+ 
+ 
+ PROCEDURE PRELIM;
+  
+  VAR
+       INTK: TK;
+       INTW: TW;
+  
+ 
+  PROCEDURE SORTIT;
+   
+   VAR
+               INTB: BOOLEAN;
+               INTW: TW;
+               IMTW: TW;
+               INRM: MoveEntry;
+      
+   BEGIN
+      INTW := AW + 2;
+      WHILE INTW <> JNTW DO BEGIN
+         IMTW := INTW - 1;
+         INRM := MOVES[INTW];
+         INTB := TRUE;
+         WHILE (IMTW <> AW) AND INTB DO
+            IF INRM.VALU < MOVES[IMTW].VALU THEN BEGIN
+               MOVES[IMTW + 1] := MOVES[IMTW];
+               IMTW            := IMTW - 1;
+               END
+            ELSE
+               INTB := FALSE;
+         MOVES[IMTW + 1] := INRM;
+         INTW            := INTW + 1;
+         END;
+   END (* SORTIT *);
+ 
+ 
+  BEGIN (* PRELIM *)
+     MAXPS       := 0;
+     BSTVL[AK-2] := - ZV;
+     BSTVL[AK-1] := - ZV;
+     BSTVL[AK  ] := - ZV;
+     INDEX[AK  ] := AW;
+     MVSEL[AK  ] := 0;
+     MOVES[AW  ] := LSTMV;
+     EVALU8(MOVES[AW]);
+     STATEVAL := + MOVES[AW].VALU;
+     GENALL;
+     FOR INTW := AW + 1 TO JNTW - 1 DO BEGIN
+        UPDATE(MOVES[INTW]);
+        IF MOVES[INTW].RMIL THEN
+           MOVES[INTW].VALU := ZV
+        ELSE
+           EVALU8(MOVES[INTW]);
+        DNDATE;
+        END;
+     BSTVL[AK-2] :=   STATEVAL - WINDOW;
+     BSTVL[AK-1] := - STATEVAL - WINDOW;
+     SORTIT;
+     FOR INTK := AK TO ZK DO
+        KILLR[INTK] := NULMV;
+     IF MVSEL[AK] <= 1 THEN BEGIN
+        IF NOT MOVES[AW+1].RMIL THEN
+           BSTVL[AK] := MOVES[AW+1].VALU;
+        GOTO 16;
+        END;
+     INDEX[AK+1] := LINDX[AK] - 1;
+     SRCHM[AK]   := H10;
+  END (* PRELIM *);
+ 
+ 
+ PROCEDURE CleanUp;
+ 
+  VAR 
+       INTW: TW;
+ 
+  BEGIN
+     JNTW       := LINDX[AK+1];
+     MVSEL[ply] := 0;
+     FOR INTW := AW + 1 TO JNTW - 1 DO
+        MOVES[INTW].RMSU := FALSE;
+     INDEX[AK+1] := LINDX[AK] - 1;
+     SRCHM[ply]  := H10;
+  END (* CleanUp *);
+ 
+ 
+ BEGIN (* SEARCH *)
+    PRELIM;
+    DEPTH := AK + 1;
+    DONE  := FALSE;
+    REPEAT
+       REPEAT
+          BSTVL[ply] := BSTVL[ply-2];
+       UNTIL NOT SELECT;
+       BSTVL[ply] := MOVES[INDEX[ply]].VALU;
+       WHILE ply > AK DO BEGIN
+          DNDATE;
+          IF NOT MINMAX THEN
+             IF SELECT THEN BEGIN
+                REPEAT
+                   BSTVL[ply] := BSTVL[ply-2]
+                UNTIL NOT SELECT;
+                BSTVL[ply] := MOVES[INDEX[ply]].VALU;
+                END;
+          END;
+       IF (BSTVL[AK] <=   BSTVL[AK-2]) OR
+          (BSTVL[AK] >= - BSTVL[AK-1]) THEN BEGIN
+          IF MVSEL[AK] = 0 THEN
+             GOTO 16;
+          BSTVL[AK-1] := - ZV;
+          BSTVL[AK-2] := - ZV;
+          CleanUp;
+          END
+       ELSE BEGIN
+          BSTVL[AK-2] :=   BSTVL[AK] - WINDOW;
+          BSTVL[AK-1] := - BSTVL[AK] - WINDOW;
+          CleanUp;
+          DEPTH := DEPTH + 1;
+          DONE  := NODES > FNODEL;
+          END;
+    UNTIL DONE;
+16:
+ END (* SEARCH *);
+ 
+ 
+ PROCEDURE FINDMOVE ( SOURCE, TARGET: SQUARE; VAR MOVE: MoveEntry );
+ 
+  LABEL
+     1;
+ 
+  VAR
+       INTW: TW;
+ 
+  BEGIN
+     LSTMOV;
+     FOR INTW := AW + 1 TO JNTW - 1 DO
+        WITH MOVES[INTW] DO
+           IF NOT RMIL THEN
+              IF RMFR = SOURCE THEN
+                 IF RMTO = TARGET THEN BEGIN
+                    MOVE := MOVES[INTW];
+                    GOTO 1;
+                    END;
+     MOVE.RMIL := TRUE;
+  1:
+  END (* FINDMOVE *);
+ 
+ 
+PROCEDURE MYMOVE;
+ 
+ VAR
+      MOVE: MoveEntry;
+      INRS: BitBoard;
+    
+ BEGIN
+    CREATE;
+    SEARCH;
+    MOVE := MOVES[AW+1];
+    WITH base[ply] DO
+       IF MOVE.RMIL THEN BEGIN
+          IF PLAYER = LITE
+             THEN INRS := tploc[LK] * alatk[DARK]
+             ELSE INRS := tploc[DK] * alatk[LITE];
+          IF INRS <> Empty
+             THEN RESULT := LOST
+             ELSE RESULT := DRAWN;
+          END
+       ELSE BEGIN
+          THEMOV(MOVE);
+          DISPLAY(MOVE);
+          IF MOVE.RMMT THEN
+             RESULT := WINN
+          END;
+ END (* MYMOVE *);
+ 
+ 
+ 
+PROCEDURE YRMOVE;
+ 
+ VAR
+      INTB  : BOOLEAN;
+      MOVE  : MoveEntry;
+      SOURCE: INTEGER;
+      TARGET: INTEGER;
+      ANSWER: CHAR;
+      NUMBER: INTEGER;
+ 
+ 
+ PROCEDURE Dialog;
+  
+  VAR
+       Message: String;
+       
+  BEGIN
+     CASE ANSWER OF
+        's': BEGIN
+             WriteInfo('Please enter strength of opponent (1..4) ');
+             READLN(NUMBER);
+             CASE NUMBER OF
+                1: FNODEL := 100;
+                2: FNODEL := 500;
+                3: FNODEL := 2000;
+                4: FNODEL := 5000;
+                END;
+             END;
+        'p': csdx;
+        'w': BEGIN
+             WriteInfo('Please enter value for window ');
+             READLN(WINDOW);
+             END;
+        'W': BEGIN
+             WriteInfo(Concat('Current window = ', Str(Window)));
+             END;
+        OTHERWISE:
+      END;
+  END {Dialog};
+  
+  
+ BEGIN
+    INTB := FALSE;
+    WHILE NOT INTB DO BEGIN
+       REPEAT
+          REQUEST(SOURCE, TARGET, ANSWER);
+          IF ANSWER = CHR(#177) (* DEL *) THEN
+             EXIT(CHESS);
+          IF ANSWER = CHR(#15)  (* CR  *) THEN
+             EXIT(YRMOVE);
+          Dialog;
+       UNTIL ANSWER = ' ';
+       ClearInfo;
+       FINDMOVE(SOURCE, TARGET, MOVE);
+       IF MOVE.RMIL THEN
+          ERROR(1)
+       ELSE BEGIN
+          THEMOV(MOVE);
+          DISPLAY(MOVE);
+          INTB := TRUE;
+          END;
+       END;
+ END (* YRMOVE *);
+ 
+ 
+ 
+BEGIN (* CHESS *)
+   INITBOARD;
+   INICON;
+   INITAL;
+   STARTGAME;
+   CREATE;
+   REPEAT
+      YRMOVE;
+      MYMOVE;
+   UNTIL RESULT <> PLAYING;
+   REPORT;
+   ENDGAME;
+END (* CHESS *).
+
+

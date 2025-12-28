@@ -1,1 +1,42 @@
-Module FontStuff;exportsImports Screen from Screen;Function LoadFont(FontName: string): FontPtr;Procedure UnLoadFont(Font: FontPtr);PrivateImports Memory from Memory;Imports FileSystem from FileSystem;Function LoadFont(* FontName: string): FontPtr*);  var FontFile: FileId;      Blks,FSeg,i: integer;beginFontFile:=FSLookup(FontName,Blks,i);if FontFile = 0 then    LoadFont:=nilelse    begin    CreateSegment(FSeg,Blks,1,Blks);    for i:=0 to Blks-1 do        FSBlkRead(FontFile,i,MakePtr(FSeg,i*256,pDirBlk));    LoadFont:=MakePtr(FSeg,0,FontPtr)    endend { LoadFont };Procedure UnLoadFont(* Font: FontPtr *);  var Trik: packed record case boolean of               true: (Seg,Ofst: integer);               false:(F: FontPtr)        end;beginwith Trik do    begin    F := Font;    DecRefCount(Seg)    endend { UnLoadFont }.
+Module FontStuff;
+
+exports
+
+Imports Screen from Screen;
+
+Function LoadFont(FontName: string): FontPtr;
+Procedure UnLoadFont(Font: FontPtr);
+
+Private
+
+Imports Memory from Memory;
+Imports FileSystem from FileSystem;
+
+Function LoadFont(* FontName: string): FontPtr*);
+  var FontFile: FileId;
+      Blks,FSeg,i: integer;
+begin
+FontFile:=FSLookup(FontName,Blks,i);
+if FontFile = 0 then
+    LoadFont:=nil
+else
+    begin
+    CreateSegment(FSeg,Blks,1,Blks);
+    for i:=0 to Blks-1 do
+        FSBlkRead(FontFile,i,MakePtr(FSeg,i*256,pDirBlk));
+    LoadFont:=MakePtr(FSeg,0,FontPtr)
+    end
+end { LoadFont };
+
+Procedure UnLoadFont(* Font: FontPtr *);
+  var Trik: packed record case boolean of
+               true: (Seg,Ofst: integer);
+               false:(F: FontPtr)
+        end;
+begin
+with Trik do
+    begin
+    F := Font;
+    DecRefCount(Seg)
+    end
+end { UnLoadFont }.

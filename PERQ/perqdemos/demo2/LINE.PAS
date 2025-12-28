@@ -1,1 +1,182 @@
-{---------------------------------------------------------------}{                                                               }{   Line - Perq line drawing doodler.                           }{          J. P. Strait     2 May 80.                           }{                                                               }{---------------------------------------------------------------}program LineU;  imports System from System; imports IOErrors from IOErrors; imports IO_Unit from IO_Unit; imports Memory from Memory; imports Raster from Raster; imports Screen from Screen;    var Seed: integer;  function Random: integer; begin { Random }  Seed := Abs(Seed);  Seed := LXor( Seed, Shift( Seed, 4) );  Seed := LXor( Seed, Shift( Seed, -11) );  Random := Seed end { Random }; const MinX = 10;      MaxX = 757;      MinY = 100;      MaxY = 1013;      var X1, Y1, X2, Y2, dX1, dY1, dX2, dY2: integer;    Style: LineStyle;    Speed, Delay, Eraser: integer;    LineCount, LineLimit: integer;    I, J: integer;    Ln: array[0..199] of record         Lx1, Ly1, Lx2, Ly2: integer         end;    LnI: integer;    Erase, Quitting: boolean;     procedure SystemTitle(n: integer); begin { SystemTitle }  Write(Chr(#014));       { FormFeed - clear the screen }  if n <> 0 then Write(' ':n);  Writeln('Perq User Interface.    Version ', MainVersion, '.', SystemVersion:1) end { SystemTitle }; procedure Clear; begin { Clear }  RasterOp(RXor, MaxX - MinX + 1, MaxY - MinY + 1,           MinX, MinY, SScreenW, SScreenP,           MinX, MinY, SScreenW, SScreenP) end { Clear };  procedure Initialize; begin { Initialize } Rewrite(Output);  Reset(Input);  Quitting := false;  Speed := 5;  Delay := 500;  Eraser := 100;  Erase := true;  for I := 0 to 199 do with Ln[I] do   begin Lx1 := 0; Ly1 := 0; Lx2 := 1; Ly2 := 1 end;  LnI := 0;  Seed := #13205;  X1 := #600;  Y1 := #400;  X2 := #600;  Y2 := #1400;  SystemTitle(1);  CreateWindow(0,0,0,768,1024,'');  Writeln;  Writeln(' "Q"       return to command level.        "C" - clear the screen.');  Writeln(' "0".."9"  unshifted: line buffer size.    "E" - toggle erase mode.');  Writeln(' "0".."9"  shifted: speed.                 " " - start/stop.');  Writeln;  Writeln(' other characters re-seed the random number generator.');  Line(DrawLine,MinX-1,MinY-1,MaxX+1,MinY-1,SScreenP);  Line(DrawLine,MaxX+1,MinY-1,MaxX+1,MaxY+1,SScreenP);  Line(DrawLine,MaxX+1,MaxY+1,MinX-1,MaxY+1,SScreenP);  Line(DrawLine,MinX-1,MaxY+1,MinX-1,MinY-1,SScreenP) end { Initialize };   procedure KeyCheck; var Status: integer;     Ch: char;     Running: boolean; begin { KeyCheck }  Running := true;  repeat Status := IOCRead(TransKey,Ch);   if Status <> IOEIOB then    if Status = IOEIOC then     begin      if Ch in ['a'..'z'] then Ch := Chr(Ord(Ch) - Ord('a') + Ord('A'));      case Ch of       'C':       begin Clear;                   Style := DrawLine                  end;       'E':       Erase := not Erase;       'Q':       begin Quitting := true;                   SystemTitle(0);                   Writeln('Type HELP if you need it.')                  end;       ' ':       Running := not Running;       '0'..'9':  Eraser := 20 * (Ord(Ch) - Ord('0')) + 1;       ')':       Speed := 0;       '!':       Speed := 1;       '@':       Speed := 2;       '#':       Speed := 3;       '$':       Speed := 4;       '%':       Speed := 5;       '^':       Speed := 6;       '&':       Speed := 7;       '*':       Speed := 8;       '(':       Speed := 9;       otherwise: begin Seed := Ord(Ch) * #400 + Ord(Ch);                   if Seed = 0 then Seed := #12345;                   LineCount := LineLimit                  end       end     end  until Running or Quitting;  Delay := 3000 div (Speed + 1) - 3000 div 10 end { KeyCheck };          begin { LineU } Initialize; repeat  KeyCheck;  dX1 := LAnd(Random,7) - 3;  dY1 := LAnd(Random,7) - 3;  dX2 := LAnd(Random,7) - 3;  dY2 := LAnd(Random,7) - 3;  LineLimit := Random;  LineLimit := LAnd(Random,#377) + #200;  Style := Recast(Shift(Random,-3) mod 3,LineStyle);  if Erase then if Style = EraseLine then Style := XorLine;  LineCount := 0;  repeat LineCount := LineCount + 1;   KeyCheck;   if not Quitting then    begin     for I := 1 to Delay do ;    X1 := X1 + dX1;    if X1 > MaxX then begin dX1 := -dX1; X1 := MaxX + MaxX - X1 end    else     if X1 < MinX then begin dX1 := -dX1; X1 := MinX + MinX - X1 end;    Y1 := Y1 + dY1;    if Y1 > MaxY then begin dY1 := -dY1; Y1 := MaxY + MaxY - Y1 end    else     if Y1 < MinY then begin dY1 := -dY1; Y1 := MinY + MinY - Y1 end;    X2 := X2 + dX2;    if X2 > MaxX then begin dX2 := -dX2; X2 := MaxX + MaxX - X2 end    else     if X2 < MinX then begin dX2 := -dX2; X2 := MinX + MinX - X2 end;    Y2 := Y2 + dY2;    if Y2 > MaxY then begin dY2 := -dY2; Y2 := MaxY + MaxY - Y2 end    else     if Y2 < MinY then begin dY2 := -dY2; Y2 := MinY + MinY - Y2 end;    if Erase then with Ln[(LnI + 200 - Eraser) mod 200] do     Line(EraseLine,Lx1,Ly1,Lx2,Ly2,SScreenP);    Line(Style,X1,Y1,X2,Y2,SScreenP);    with Ln[LnI] do     begin Lx1 := X1; Ly1 := Y1; Lx2 := X2; Ly2 := Y2 end;    LnI := (LnI + 1) mod 200   end  until (LineCount >= LineLimit) or Quitting until Quittingend { LineU }.
+{---------------------------------------------------------------}
+{                                                               }
+{   Line - Perq line drawing doodler.                           }
+{          J. P. Strait     2 May 80.                           }
+{                                                               }
+{---------------------------------------------------------------}
+
+
+program LineU;
+ 
+ imports System from System;
+ imports IOErrors from IOErrors;
+ imports IO_Unit from IO_Unit;
+ imports Memory from Memory;
+ imports Raster from Raster;
+ imports Screen from Screen;
+  
+ 
+ var Seed: integer;
+ 
+ function Random: integer;
+ begin { Random }
+  Seed := Abs(Seed);
+  Seed := LXor( Seed, Shift( Seed, 4) );
+  Seed := LXor( Seed, Shift( Seed, -11) );
+  Random := Seed
+ end { Random };
+
+
+ 
+const MinX = 10;
+      MaxX = 757;
+      MinY = 100;
+      MaxY = 1013;
+      
+var X1, Y1, X2, Y2, dX1, dY1, dX2, dY2: integer;
+    Style: LineStyle;
+    Speed, Delay, Eraser: integer;
+    LineCount, LineLimit: integer;
+    I, J: integer;
+    Ln: array[0..199] of record
+         Lx1, Ly1, Lx2, Ly2: integer
+         end;
+    LnI: integer;
+    Erase, Quitting: boolean;
+    
+
+ procedure SystemTitle(n: integer);
+ begin { SystemTitle }
+  Write(Chr(#014));       { FormFeed - clear the screen }
+  if n <> 0 then Write(' ':n);
+  Writeln('Perq User Interface.    Version ', MainVersion, '.', SystemVersion:1)
+ end { SystemTitle };
+
+
+ procedure Clear;
+ begin { Clear }
+  RasterOp(RXor, MaxX - MinX + 1, MaxY - MinY + 1,
+           MinX, MinY, SScreenW, SScreenP,
+           MinX, MinY, SScreenW, SScreenP)
+ end { Clear };
+
+ 
+ procedure Initialize;
+ begin { Initialize }
+ Rewrite(Output);
+  Reset(Input);
+  Quitting := false;
+  Speed := 5;
+  Delay := 500;
+  Eraser := 100;
+  Erase := true;
+  for I := 0 to 199 do with Ln[I] do
+   begin Lx1 := 0; Ly1 := 0; Lx2 := 1; Ly2 := 1 end;
+  LnI := 0;
+  Seed := #13205;
+  X1 := #600;
+  Y1 := #400;
+  X2 := #600;
+  Y2 := #1400;
+  SystemTitle(1);
+  CreateWindow(0,0,0,768,1024,'');
+  Writeln;
+  Writeln(' "Q"       return to command level.        "C" - clear the screen.');
+  Writeln(' "0".."9"  unshifted: line buffer size.    "E" - toggle erase mode.');
+  Writeln(' "0".."9"  shifted: speed.                 " " - start/stop.');
+  Writeln;
+  Writeln(' other characters re-seed the random number generator.');
+  Line(DrawLine,MinX-1,MinY-1,MaxX+1,MinY-1,SScreenP);
+  Line(DrawLine,MaxX+1,MinY-1,MaxX+1,MaxY+1,SScreenP);
+  Line(DrawLine,MaxX+1,MaxY+1,MinX-1,MaxY+1,SScreenP);
+  Line(DrawLine,MinX-1,MaxY+1,MinX-1,MinY-1,SScreenP)
+ end { Initialize };
+ 
+ 
+ procedure KeyCheck;
+ var Status: integer;
+     Ch: char;
+     Running: boolean;
+ begin { KeyCheck }
+  Running := true;
+  repeat Status := IOCRead(TransKey,Ch);
+   if Status <> IOEIOB then
+    if Status = IOEIOC then
+     begin
+      if Ch in ['a'..'z'] then Ch := Chr(Ord(Ch) - Ord('a') + Ord('A'));
+      case Ch of
+       'C':       begin Clear;
+                   Style := DrawLine
+                  end;
+       'E':       Erase := not Erase;
+       'Q':       begin Quitting := true;
+                   SystemTitle(0);
+                   Writeln('Type HELP if you need it.')
+                  end;
+       ' ':       Running := not Running;
+       '0'..'9':  Eraser := 20 * (Ord(Ch) - Ord('0')) + 1;
+       ')':       Speed := 0;
+       '!':       Speed := 1;
+       '@':       Speed := 2;
+       '#':       Speed := 3;
+       '$':       Speed := 4;
+       '%':       Speed := 5;
+       '^':       Speed := 6;
+       '&':       Speed := 7;
+       '*':       Speed := 8;
+       '(':       Speed := 9;
+       otherwise: begin Seed := Ord(Ch) * #400 + Ord(Ch);
+                   if Seed = 0 then Seed := #12345;
+                   LineCount := LineLimit
+                  end
+       end
+     end
+  until Running or Quitting;
+  Delay := 3000 div (Speed + 1) - 3000 div 10
+ end { KeyCheck };
+  
+    
+    
+begin { LineU }
+ Initialize;
+ repeat  KeyCheck;
+  dX1 := LAnd(Random,7) - 3;
+  dY1 := LAnd(Random,7) - 3;
+  dX2 := LAnd(Random,7) - 3;
+  dY2 := LAnd(Random,7) - 3;
+  LineLimit := Random;
+  LineLimit := LAnd(Random,#377) + #200;
+  Style := Recast(Shift(Random,-3) mod 3,LineStyle);
+  if Erase then if Style = EraseLine then Style := XorLine;
+  LineCount := 0;
+  repeat LineCount := LineCount + 1;
+   KeyCheck;
+   if not Quitting then
+    begin
+     for I := 1 to Delay do ;
+    X1 := X1 + dX1;
+    if X1 > MaxX then begin dX1 := -dX1; X1 := MaxX + MaxX - X1 end
+    else
+     if X1 < MinX then begin dX1 := -dX1; X1 := MinX + MinX - X1 end;
+    Y1 := Y1 + dY1;
+    if Y1 > MaxY then begin dY1 := -dY1; Y1 := MaxY + MaxY - Y1 end
+    else
+     if Y1 < MinY then begin dY1 := -dY1; Y1 := MinY + MinY - Y1 end;
+    X2 := X2 + dX2;
+    if X2 > MaxX then begin dX2 := -dX2; X2 := MaxX + MaxX - X2 end
+    else
+     if X2 < MinX then begin dX2 := -dX2; X2 := MinX + MinX - X2 end;
+    Y2 := Y2 + dY2;
+    if Y2 > MaxY then begin dY2 := -dY2; Y2 := MaxY + MaxY - Y2 end
+    else
+     if Y2 < MinY then begin dY2 := -dY2; Y2 := MinY + MinY - Y2 end;
+    if Erase then with Ln[(LnI + 200 - Eraser) mod 200] do
+     Line(EraseLine,Lx1,Ly1,Lx2,Ly2,SScreenP);
+    Line(Style,X1,Y1,X2,Y2,SScreenP);
+    with Ln[LnI] do
+     begin Lx1 := X1; Ly1 := Y1; Lx2 := X2; Ly2 := Y2 end;
+    LnI := (LnI + 1) mod 200
+   end
+  until (LineCount >= LineLimit) or Quitting
+ until Quitting
+end { LineU }.

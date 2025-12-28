@@ -1,1 +1,365 @@
-Program PerqPetal;Imports IOErrors from IOErrors;Imports Memory from Memory;Imports IO_Unit from IO_Unit;Imports Raster from Raster;Imports MulDiv from MulDiv;Imports Screen from Screen;Imports Sleep from Sleep;{ useful constants scaled 3 bits for sin/cos rtns }const D360 = #5500; D270 = #4160; D180 = #2640; D90 = #1320;      VecMax = 2880;       { max vectors per petal }      Scalfac = 13;        { Scale factor for vecs }      { x,y screen locations for positioning text, etc. }      TopY=180; BotY=824;    { top and bottom of petal area }      CtrX=384; CtrY=(TopY + BotY) div 2; { posn for drawing petals }      HelpX=10; HelpY=BotY+40;    { initial posn for help msg }      PetX=100; PetY=TopY-80;    { Petal and Style params }      StyX=100; StyY=TopY-100;      VecX=520; VecY=TopY-100;      ModX=520; ModY=TopY-80;    { 'Continuous' Display }      KeyInX=100; KeyInY=TopY-50;   { Type-in requests }var   X1, Y1, X2, Y2 : integer;      NuStyle, NuPetal : integer;   { Next values to be used }      Style, Petal : integer;      PetStyle : integer;    { (Petal * Style) mod D360 }      LstStyle, LstPetal : integer; { Previous values }      StyInc, Petinc : integer;    { auto-increment values }      Delay : integer;    { value for inter-petal sleep }      SinTab : array [0..90] of integer;      Vectors, VecCnt : integer;    { total vectors to draw, current vector }      Continuous : boolean;    { Display mode }      T, S : integer;    { Used by MakePetal }      i, zilch : integer;      Procedure MakeSinTab;  begin  SinTab[0] := #0;  SinTab[1] := #435;  SinTab[2] := #1073;  SinTab[3] := #1531;  SinTab[4] := #2166;  SinTab[5] := #2623;  SinTab[6] := #3260;  SinTab[7] := #3714;  SinTab[8] := #4350;  SinTab[9] := #5003;  SinTab[10] := #5435;  SinTab[11] := #6066;  SinTab[12] := #6516;  SinTab[13] := #7145;  SinTab[14] := #7573;  SinTab[15] := #10220;  SinTab[16] := #10644;  SinTab[17] := #11266;  SinTab[18] := #11706;  SinTab[19] := #12326;  SinTab[20] := #12743;  SinTab[21] := #13357;  SinTab[22] := #13771;  SinTab[23] := #14401;  SinTab[24] := #15007;  SinTab[25] := #15414;  SinTab[26] := #16016;  SinTab[27] := #16416;  SinTab[28] := #17013;  SinTab[29] := #17407;  SinTab[30] := #20000;  SinTab[31] := #20366;  SinTab[32] := #20752;  SinTab[33] := #21333;  SinTab[34] := #21711;  SinTab[35] := #22265;  SinTab[36] := #22636;  SinTab[37] := #23204;  SinTab[38] := #23546;  SinTab[39] := #24106;  SinTab[40] := #24443;  SinTab[41] := #24774;  SinTab[42] := #25323;  SinTab[43] := #25645;  SinTab[44] := #26165;  SinTab[45] := #26501;  SinTab[46] := #27011;  SinTab[47] := #27316;  SinTab[48] := #27617;  SinTab[49] := #30115;  SinTab[50] := #30406;  SinTab[51] := #30674;  SinTab[52] := #31156;  SinTab[53] := #31434;  SinTab[54] := #31706;  SinTab[55] := #32154;  SinTab[56] := #32416;  SinTab[57] := #32654;  SinTab[58] := #33106;  SinTab[59] := #33333;  SinTab[60] := #33554;  SinTab[61] := #33771;  SinTab[62] := #34202;  SinTab[63] := #34406;  SinTab[64] := #34605;  SinTab[65] := #35000;  SinTab[66] := #35167;  SinTab[67] := #35351;  SinTab[68] := #35526;  SinTab[69] := #35677;  SinTab[70] := #36043;  SinTab[71] := #36203;  SinTab[72] := #36336;  SinTab[73] := #36464;  SinTab[74] := #36605;  SinTab[75] := #36721;  SinTab[76] := #37031;  SinTab[77] := #37134;  SinTab[78] := #37231;  SinTab[79] := #37322;  SinTab[80] := #37407;  SinTab[81] := #37466;  SinTab[82] := #37540;  SinTab[83] := #37605;  SinTab[84] := #37646;  SinTab[85] := #37701;  SinTab[86] := #37730;  SinTab[87] := #37751;  SinTab[88] := #37766;  SinTab[89] := #37775;  SinTab[90] := #40000;  end {MakeSinTab};Function GetSin(val : integer) : integer;  var frac, SinDiff, SinLo : integer;      neg : boolean;  begin  neg := false;  { Normalize val to be in quadrant 1 }  {$R-}  if val >= D180 then    begin    val := val - D180;    neg := true;    end;  if val >= D90 then    val := D180 - val;  frac := Land(#7, val);  val := Shift(val, -3);  SinLo := SinTab[val];  SinDiff := SinTab[val + 1] - SinLo;  SinLo := SinLo + Shift((frac * SinDiff), -3);  if neg then    SinLo := -SinLo;  GetSin := SinLo;  {$R=}  end;  Function GetCos(val : integer) : integer;  var tmp : integer;  begin  tmp := val - D270;  if tmp < 0 then tmp := tmp + D360;  GetCos := GetSin(tmp);  end;{ Calculate the # of vectors to draw a full petal }Function Complete(Style, Petal: integer) : integer;  var Needed, CaseArg, RepNum, Factor, cntval : integer;  begin  RepNum := 1;    for CaseArg := 1 to 3 do    begin    case CaseArg of      1: begin Factor := 2; cntval := 6; end;      2: begin Factor := 3; cntval := 2; end;      3: begin Factor := 5; cntval := 1; end;      end;    while (cntval > 0) and ((Style mod Factor) = 0) do      begin      RepNum := RepNum * Factor;      cntval := cntval - 1;      Style := Style div Factor;      end;    end;  Needed := VecMax div RepNum;  if (not odd(Needed)) and odd(Petal) then      Needed := Needed div 2;  Complete := Needed;  end;   { The actual drawing goes on here, one vector at at time }Procedure MakePetal(i : integer);  var R, zilch : integer;  begin    X1 := X2;    Y1 := Y2;    T := (T + Style) mod D360;    S := (S + PetStyle) mod D360;    R := GetCos(S);    { Calculate final x,y then scale and transform }    DblMul(GetCos(T), R, zilch, X2);    X2 := (X2 div Scalfac) + CtrX;    DblMul(GetSin(T), R, zilch, Y2);    Y2 := (Y2 div Scalfac) + CtrY;    { Clip line values }    if X2 < 0 then X2 := 0 else if X2 > 767 then X2 := 767;    if Y2 < TopY then Y2 := TopY else if Y2 > BotY then Y2 := BotY;    { Draw the line (but not the first one) }    if i <> 1 then      Line(DrawLine, X1, Y1, X2, Y2, SScreenP);  end {MakePetal};{ Clear a window on the screen. Params are upper left  and lower right screen coordinates }Procedure ClrWindow(lox, hix, loy, hiy : integer);      Function ScreenClip(val, lobound, hibound : integer) : integer;beginif val < lobound then val := lobound  else if val > hibound then val := hibound;ScreenClip := val;end;  begin {ClrWindow}  lox := ScreenClip(lox, 0, 767);  hix := ScreenClip(hix, 0, 767);  loy := ScreenClip(loy, 0, 1023);  hiy := ScreenClip(hiy, 0, 1023);  RasterOp(RXor, hix - lox + 1, hiy - loy + 1,   lox, loy, SScreenW, SScreenP,   lox, loy, SScreenW, SScreenP);  end {ClrWindow};{ Update entire text display }Procedure DispInfo;  begin  ClrWindow(0, 767, 0, TopY-15);  SSetCursor(StyX, StyY); Write('Style: ', Style:3, ' (', StyInc:1, ')');  SSetCursor(PetX, PetY); Write('Petal: ', Petal:3, ' (', PetInc:1, ')');  SSetCursor(VecX, VecY); Write('Vectors: ', Vectors:3);  SSetCursor(ModX, ModY); if Continuous then Write('Continuous');  end;{ Help message }Procedure Help;  begin  SSetCursor(HelpX, HelpY);  Writeln('   Petal commands:');  Writeln(' s - set style parameter');  Writeln(' p - set petal parameter');  Writeln(' r - set style increment');  Writeln(' o - set petal increment');  Writeln(' d - set delay time (seconds)');  Writeln('   <space>start/stop continuous mode');  Writeln;  Writeln('   To set any parameter, type the command, then a number');  end;Function Getval(s : string) : integer;  var val : integer;  begin  SSetCursor(KeyInX, KeyInY);  Write('New ', s, ' Value: ');  Readln(val);  Getval := val;  end;{ Keyboard Command Interpreter - returns true if a petal is to be drawn }Function KeyCheck: boolean;  var Status: integer;      Ch : char;  begin  KeyCheck := false;  Status := IOCRead(TransKey, Ch);  if Status <> IOEIOB then    if Status = IOEIOC then      begin      if Ch in ['a'..'z'] thenCh := Chr(Ord(Ch) - Ord('a') + Ord('A'));      case Ch of'D':  Delay := GetVal('Delay');'P':  NuPetal := GetVal('Petal');'S':  NuStyle := GetVal('Style');'R':  StyInc := GetVal('Style Increment');'O':  PetInc := GetVal('Petal Increment');'Q':  begin Write(Chr(12)); Exit(PerqPetal); end;' ':  begin  Continuous := not Continuous;  if not Continuous then    begin    NuStyle := NuStyle - StyInc;    NuPetal := NuPetal - PetInc;    end;  end;end;      if Ch in ['P','S'] then KeyCheck := true;      DispInfo;      end;  end;  { Main Program begins here }begin {Petal}Rewrite(Output);Reset(Input);MakeSinTab;CreateWindow(0,0,0,768,1024,'');{ Initialize }Continuous := true;StyInc := 2; PetInc := 1;NuStyle := 722; NuPetal := 3;VecCnt := 0;Delay := 2;Write(Chr(12));       { Initial Screen Erase }Help;{ Draw horiz. lines }Line(DrawLine, 0, TopY - 10, 767, TopY - 10, SScreenP);Line(DrawLine, 0, BotY + 10, 767, BotY + 10, SScreenP);repeat  if KeyCheck then VecCnt := 0;  if (VecCnt = 0) then    begin    T := 0;    S := 0;    LstStyle := Style;    LstPetal := Petal;    Petal := NuPetal;    Style := NuStyle;    PetStyle := MulMod(Petal, Style, D360);    { keep this value for MakePetal }    Vectors := Complete(Style, Petal);    if Continuous then      begin      NuPetal := NuPetal + PetInc;      NuStyle := NuStyle + StyInc;      end;    { Don't draw unless the new one is truly different }    if (LstStyle <> Style) or (LstPetal <> Petal) then      begin      ClrWindow(0, 767, TopY, BotY);   { clear the display area of the screen }      DispInfo;    { draw the text displays }      end;    end;  if (LstStyle <> Style) or (LstPetal <> Petal) then    begin    VecCnt := VecCnt + 1;    MakePetal(VecCnt);    end;  if VecCnt > Vectors then    begin    VecCnt := 0;    Sleep(Delay);    end;  until false;end {Petal}.
+Program PerqPetal;
+
+Imports IOErrors from IOErrors;
+Imports Memory from Memory;
+Imports IO_Unit from IO_Unit;
+Imports Raster from Raster;
+Imports MulDiv from MulDiv;
+Imports Screen from Screen;
+Imports Sleep from Sleep;
+
+{ useful constants scaled 3 bits for sin/cos rtns }
+const D360 = #5500; D270 = #4160; D180 = #2640; D90 = #1320;
+      VecMax = 2880;       { max vectors per petal }
+      Scalfac = 13;        { Scale factor for vecs }
+      { x,y screen locations for positioning text, etc. }
+      TopY=180; BotY=824;    { top and bottom of petal area }
+      CtrX=384; CtrY=(TopY + BotY) div 2; { posn for drawing petals }
+      HelpX=10; HelpY=BotY+40;    { initial posn for help msg }
+      PetX=100; PetY=TopY-80;    { Petal and Style params }
+      StyX=100; StyY=TopY-100;
+      VecX=520; VecY=TopY-100;
+      ModX=520; ModY=TopY-80;    { 'Continuous' Display }
+      KeyInX=100; KeyInY=TopY-50;   { Type-in requests }
+
+var   X1, Y1, X2, Y2 : integer;
+      NuStyle, NuPetal : integer;   { Next values to be used }
+      Style, Petal : integer;
+      PetStyle : integer;    { (Petal * Style) mod D360 }
+      LstStyle, LstPetal : integer; { Previous values }
+      StyInc, Petinc : integer;    { auto-increment values }
+      Delay : integer;    { value for inter-petal sleep }
+      SinTab : array [0..90] of integer;
+      Vectors, VecCnt : integer;    { total vectors to draw, current vector }
+      Continuous : boolean;    { Display mode }
+      T, S : integer;    { Used by MakePetal }
+      i, zilch : integer;
+      
+Procedure MakeSinTab;
+  begin
+  SinTab[0] := #0;
+  SinTab[1] := #435;
+  SinTab[2] := #1073;
+  SinTab[3] := #1531;
+  SinTab[4] := #2166;
+  SinTab[5] := #2623;
+  SinTab[6] := #3260;
+  SinTab[7] := #3714;
+  SinTab[8] := #4350;
+  SinTab[9] := #5003;
+  SinTab[10] := #5435;
+  SinTab[11] := #6066;
+  SinTab[12] := #6516;
+  SinTab[13] := #7145;
+  SinTab[14] := #7573;
+  SinTab[15] := #10220;
+  SinTab[16] := #10644;
+  SinTab[17] := #11266;
+  SinTab[18] := #11706;
+  SinTab[19] := #12326;
+  SinTab[20] := #12743;
+  SinTab[21] := #13357;
+  SinTab[22] := #13771;
+  SinTab[23] := #14401;
+  SinTab[24] := #15007;
+  SinTab[25] := #15414;
+  SinTab[26] := #16016;
+  SinTab[27] := #16416;
+  SinTab[28] := #17013;
+  SinTab[29] := #17407;
+  SinTab[30] := #20000;
+  SinTab[31] := #20366;
+  SinTab[32] := #20752;
+  SinTab[33] := #21333;
+  SinTab[34] := #21711;
+  SinTab[35] := #22265;
+  SinTab[36] := #22636;
+  SinTab[37] := #23204;
+  SinTab[38] := #23546;
+  SinTab[39] := #24106;
+  SinTab[40] := #24443;
+  SinTab[41] := #24774;
+  SinTab[42] := #25323;
+  SinTab[43] := #25645;
+  SinTab[44] := #26165;
+  SinTab[45] := #26501;
+  SinTab[46] := #27011;
+  SinTab[47] := #27316;
+  SinTab[48] := #27617;
+  SinTab[49] := #30115;
+  SinTab[50] := #30406;
+  SinTab[51] := #30674;
+  SinTab[52] := #31156;
+  SinTab[53] := #31434;
+  SinTab[54] := #31706;
+  SinTab[55] := #32154;
+  SinTab[56] := #32416;
+  SinTab[57] := #32654;
+  SinTab[58] := #33106;
+  SinTab[59] := #33333;
+  SinTab[60] := #33554;
+  SinTab[61] := #33771;
+  SinTab[62] := #34202;
+  SinTab[63] := #34406;
+  SinTab[64] := #34605;
+  SinTab[65] := #35000;
+  SinTab[66] := #35167;
+  SinTab[67] := #35351;
+  SinTab[68] := #35526;
+  SinTab[69] := #35677;
+  SinTab[70] := #36043;
+  SinTab[71] := #36203;
+  SinTab[72] := #36336;
+  SinTab[73] := #36464;
+  SinTab[74] := #36605;
+  SinTab[75] := #36721;
+  SinTab[76] := #37031;
+  SinTab[77] := #37134;
+  SinTab[78] := #37231;
+  SinTab[79] := #37322;
+  SinTab[80] := #37407;
+  SinTab[81] := #37466;
+  SinTab[82] := #37540;
+  SinTab[83] := #37605;
+  SinTab[84] := #37646;
+  SinTab[85] := #37701;
+  SinTab[86] := #37730;
+  SinTab[87] := #37751;
+  SinTab[88] := #37766;
+  SinTab[89] := #37775;
+  SinTab[90] := #40000;
+  end {MakeSinTab};
+
+Function GetSin(val : integer) : integer;
+  var frac, SinDiff, SinLo : integer;
+      neg : boolean;
+  begin
+  neg := false;
+
+  { Normalize val to be in quadrant 1 }
+  {$R-}
+  if val >= D180 then
+    begin
+    val := val - D180;
+    neg := true;
+    end;
+  if val >= D90 then
+    val := D180 - val;
+  frac := Land(#7, val);
+  val := Shift(val, -3);
+  SinLo := SinTab[val];
+  SinDiff := SinTab[val + 1] - SinLo;
+  SinLo := SinLo + Shift((frac * SinDiff), -3);
+  if neg then
+    SinLo := -SinLo;
+  GetSin := SinLo;
+  {$R=}
+  end;
+  
+Function GetCos(val : integer) : integer;
+  var tmp : integer;
+  begin
+  tmp := val - D270;
+  if tmp < 0 then tmp := tmp + D360;
+  GetCos := GetSin(tmp);
+  end;
+
+{ Calculate the # of vectors to draw a full petal }
+Function Complete(Style, Petal: integer) : integer;
+  var Needed, CaseArg, RepNum, Factor, cntval : integer;
+  begin
+  RepNum := 1;
+  
+  for CaseArg := 1 to 3 do
+    begin
+    case CaseArg of
+      1: begin Factor := 2; cntval := 6; end;
+      2: begin Factor := 3; cntval := 2; end;
+      3: begin Factor := 5; cntval := 1; end;
+      end;
+    while (cntval > 0) and ((Style mod Factor) = 0) do
+      begin
+      RepNum := RepNum * Factor;
+      cntval := cntval - 1;
+      Style := Style div Factor;
+      end;
+    end;
+  Needed := VecMax div RepNum;
+  if (not odd(Needed)) and odd(Petal) then
+      Needed := Needed div 2;
+  Complete := Needed;
+  end;
+  
+
+ { The actual drawing goes on here, one vector at at time }
+Procedure MakePetal(i : integer);
+  var R, zilch : integer;
+  begin
+    X1 := X2;
+    Y1 := Y2;
+    T := (T + Style) mod D360;
+    S := (S + PetStyle) mod D360;
+    R := GetCos(S);
+
+    { Calculate final x,y then scale and transform }
+    DblMul(GetCos(T), R, zilch, X2);
+    X2 := (X2 div Scalfac) + CtrX;
+    DblMul(GetSin(T), R, zilch, Y2);
+    Y2 := (Y2 div Scalfac) + CtrY;
+
+    { Clip line values }
+    if X2 < 0 then X2 := 0 else if X2 > 767 then X2 := 767;
+    if Y2 < TopY then Y2 := TopY else if Y2 > BotY then Y2 := BotY;
+
+    { Draw the line (but not the first one) }
+    if i <> 1 then
+      Line(DrawLine, X1, Y1, X2, Y2, SScreenP);
+  end {MakePetal};
+
+{ Clear a window on the screen. Params are upper left
+  and lower right screen coordinates }
+Procedure ClrWindow(lox, hix, loy, hiy : integer);
+
+      Function ScreenClip(val, lobound, hibound : integer) : integer;
+begin
+if val < lobound then val := lobound
+  else if val > hibound then val := hibound;
+ScreenClip := val;
+end;
+
+  begin {ClrWindow}
+  lox := ScreenClip(lox, 0, 767);
+  hix := ScreenClip(hix, 0, 767);
+  loy := ScreenClip(loy, 0, 1023);
+  hiy := ScreenClip(hiy, 0, 1023);
+  RasterOp(RXor, hix - lox + 1, hiy - loy + 1,
+   lox, loy, SScreenW, SScreenP,
+   lox, loy, SScreenW, SScreenP);
+  end {ClrWindow};
+
+{ Update entire text display }
+Procedure DispInfo;
+  begin
+  ClrWindow(0, 767, 0, TopY-15);
+  SSetCursor(StyX, StyY); Write('Style: ', Style:3, ' (', StyInc:1, ')');
+  SSetCursor(PetX, PetY); Write('Petal: ', Petal:3, ' (', PetInc:1, ')');
+  SSetCursor(VecX, VecY); Write('Vectors: ', Vectors:3);
+  SSetCursor(ModX, ModY); if Continuous then Write('Continuous');
+  end;
+
+{ Help message }
+Procedure Help;
+  begin
+  SSetCursor(HelpX, HelpY);
+  Writeln('   Petal commands:');
+  Writeln(' s - set style parameter');
+  Writeln(' p - set petal parameter');
+  Writeln(' r - set style increment');
+  Writeln(' o - set petal increment');
+  Writeln(' d - set delay time (seconds)');
+  Writeln('   <space>start/stop continuous mode');
+  Writeln;
+  Writeln('   To set any parameter, type the command, then a number');
+  end;
+
+Function Getval(s : string) : integer;
+  var val : integer;
+  begin
+  SSetCursor(KeyInX, KeyInY);
+  Write('New ', s, ' Value: ');
+  Readln(val);
+  Getval := val;
+  end;
+
+{ Keyboard Command Interpreter - returns true if a petal is to be drawn }
+Function KeyCheck: boolean;
+  var Status: integer;
+      Ch : char;
+  begin
+  KeyCheck := false;
+  Status := IOCRead(TransKey, Ch);
+  if Status <> IOEIOB then
+    if Status = IOEIOC then
+      begin
+      if Ch in ['a'..'z'] then
+Ch := Chr(Ord(Ch) - Ord('a') + Ord('A'));
+      case Ch of
+'D':  Delay := GetVal('Delay');
+'P':  NuPetal := GetVal('Petal');
+'S':  NuStyle := GetVal('Style');
+'R':  StyInc := GetVal('Style Increment');
+'O':  PetInc := GetVal('Petal Increment');
+'Q':  begin Write(Chr(12)); Exit(PerqPetal); end;
+' ':  begin
+  Continuous := not Continuous;
+  if not Continuous then
+    begin
+    NuStyle := NuStyle - StyInc;
+    NuPetal := NuPetal - PetInc;
+    end;
+  end;
+end;
+      if Ch in ['P','S'] then KeyCheck := true;
+      DispInfo;
+      end;
+  end;
+  
+{ Main Program begins here }
+begin {Petal}
+Rewrite(Output);
+Reset(Input);
+MakeSinTab;
+CreateWindow(0,0,0,768,1024,'');
+
+{ Initialize }
+Continuous := true;
+StyInc := 2; PetInc := 1;
+NuStyle := 722; NuPetal := 3;
+VecCnt := 0;
+Delay := 2;
+Write(Chr(12));       { Initial Screen Erase }
+Help;
+
+{ Draw horiz. lines }
+Line(DrawLine, 0, TopY - 10, 767, TopY - 10, SScreenP);
+Line(DrawLine, 0, BotY + 10, 767, BotY + 10, SScreenP);
+
+repeat
+  if KeyCheck then VecCnt := 0;
+  if (VecCnt = 0) then
+    begin
+    T := 0;
+    S := 0;
+    LstStyle := Style;
+    LstPetal := Petal;
+    Petal := NuPetal;
+    Style := NuStyle;
+    PetStyle := MulMod(Petal, Style, D360);    { keep this value for MakePetal }
+    Vectors := Complete(Style, Petal);
+    if Continuous then
+      begin
+      NuPetal := NuPetal + PetInc;
+      NuStyle := NuStyle + StyInc;
+      end;
+    { Don't draw unless the new one is truly different }
+    if (LstStyle <> Style) or (LstPetal <> Petal) then
+      begin
+
+      ClrWindow(0, 767, TopY, BotY);   { clear the display area of the screen }
+      DispInfo;    { draw the text displays }
+      end;
+    end;
+  if (LstStyle <> Style) or (LstPetal <> Petal) then
+    begin
+    VecCnt := VecCnt + 1;
+    MakePetal(VecCnt);
+    end;
+  if VecCnt > Vectors then
+    begin
+    VecCnt := 0;
+    Sleep(Delay);
+    end;
+  until false;
+
+end {Petal}.
+

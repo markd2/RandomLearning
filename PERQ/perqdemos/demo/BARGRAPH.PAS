@@ -1,1 +1,111 @@
-program BarGraph(input, output);{Written By Brad A. Myers on : 9/9/80;Copyright (c) Three Rivers Computer Corporation, 1981}imports FastRandom from FastRandom;imports SigUtils from SigUtils;imports XScreen From XScreen;imports SaveWindow from SaveWindow;var bar, i,j, numBars, numTimes, t, x, y, dir: integer;    win: WinRange;    save: Boolean;    winX, winY, winW, winH, w: Integer;    s: String;    c: Char;        Height : Array[1..200] of integer;beginIf ArgCount <> 5 then   begin   WriteLn('** Format: BarGraph win# save numBars numTimes(K)');   exit(BarGraph);   end;NextArgStr(s); {flush "BarGraph"}NextArgInt(t); {win Number}win := t;NextArgInt(t);save := Recast(t, boolean);NextArgInt(numBars);if numBars > 200 then   begin   WriteLn('** Maximum number of bars is 200');   exit(BarGraph);   end;NextArgInt(numTimes);ChangeWindow(win);if save then SaveAndRestoreWindow(win, 'Oil Flow in Texas Pipes')else XSRedrawWindow(win, 'Oil Flow in Texas Pipes');XSGetUseWindow(win, winX, winY, winW, winH);SetUpRandom;Write(FF);Line(DrawLine, winX+20, winY+10, winX+20, winY+winH-20, SScreenP);Line(DrawLine, winX+20, winY+winH-20, winX+winW-10, winY+winH-20, SScreenP);x := winX+20-16;y := winY+winH-20+6;i := 0;repeat  SSetCursor(x,y);  Write(i:1);  i := i + 1;  Line(DrawLine, x+11, y-6, x+21, y-6, SScreenP);  y := y - 100;until y < winY+10;w := (winW-30) div ((numBars+1)*2);for i := 1 to numBars do   begin   if numBars <= 52 then       begin       SSetCursor(i*2*w+((w-9) div 2) + (20+winX), winY+winH-4);       if i <= 26 then c := chr(ord('A')+i-1)       else c := chr(ord('a')+i-27);       write(c);       end;   height[i] := RandomRange(0, 2*((winH-30) div 3));   RasterOp(RXNor,w, height[i],             i*2*w+20+winX, winY+winH-20-height[i],SScreenW,SScreenP,             i*2*w+20+winX, winY+winH-20-height[i],SScreenW,SScreenP);   end;for i := 1 to numTimes do for j := 1 to 1000 do   begin   bar := RandomRange(1, numBars);   dir := RandomRange(1, 2);      if dir = 1 then       if height[bar] > 0 then {loose some}          begin          RasterOp(RXor, w, 1,                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP,                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP);          height[bar] := height[bar] - 1;          end      else   else       if height[bar] < winH-30 then {win some}          begin          height[bar] := height[bar] + 1;          RasterOp(RXNor, w, 1,                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP,                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP);          end;   end;end.        
+program BarGraph(input, output);
+
+{Written By Brad A. Myers on : 9/9/80;
+
+Copyright (c) Three Rivers Computer Corporation, 1981
+}
+
+imports FastRandom from FastRandom;
+imports SigUtils from SigUtils;
+imports XScreen From XScreen;
+imports SaveWindow from SaveWindow;
+
+var bar, i,j, numBars, numTimes, t, x, y, dir: integer;
+    win: WinRange;
+    save: Boolean;
+    winX, winY, winW, winH, w: Integer;
+    s: String;
+    c: Char;
+    
+    Height : Array[1..200] of integer;
+
+begin
+
+If ArgCount <> 5 then
+   begin
+   WriteLn('** Format: BarGraph win# save numBars numTimes(K)');
+   exit(BarGraph);
+   end;
+
+NextArgStr(s); {flush "BarGraph"}
+NextArgInt(t); {win Number}
+win := t;
+NextArgInt(t);
+save := Recast(t, boolean);
+NextArgInt(numBars);
+if numBars > 200 then
+   begin
+   WriteLn('** Maximum number of bars is 200');
+   exit(BarGraph);
+   end;
+NextArgInt(numTimes);
+
+ChangeWindow(win);
+if save then SaveAndRestoreWindow(win, 'Oil Flow in Texas Pipes')
+else XSRedrawWindow(win, 'Oil Flow in Texas Pipes');
+
+XSGetUseWindow(win, winX, winY, winW, winH);
+
+SetUpRandom;
+
+Write(FF);
+
+Line(DrawLine, winX+20, winY+10, winX+20, winY+winH-20, SScreenP);
+Line(DrawLine, winX+20, winY+winH-20, winX+winW-10, winY+winH-20, SScreenP);
+
+x := winX+20-16;
+y := winY+winH-20+6;
+i := 0;
+
+repeat
+  SSetCursor(x,y);
+  Write(i:1);
+  i := i + 1;
+  Line(DrawLine, x+11, y-6, x+21, y-6, SScreenP);
+  y := y - 100;
+until y < winY+10;
+
+w := (winW-30) div ((numBars+1)*2);
+
+for i := 1 to numBars do
+   begin
+   if numBars <= 52 then
+       begin
+       SSetCursor(i*2*w+((w-9) div 2) + (20+winX), winY+winH-4);
+       if i <= 26 then c := chr(ord('A')+i-1)
+       else c := chr(ord('a')+i-27);
+       write(c);
+       end;
+   height[i] := RandomRange(0, 2*((winH-30) div 3));
+   RasterOp(RXNor,w, height[i],
+             i*2*w+20+winX, winY+winH-20-height[i],SScreenW,SScreenP,
+             i*2*w+20+winX, winY+winH-20-height[i],SScreenW,SScreenP);
+   end;
+
+for i := 1 to numTimes do
+ for j := 1 to 1000 do
+   begin
+   bar := RandomRange(1, numBars);
+   dir := RandomRange(1, 2);
+   
+   if dir = 1 then 
+      if height[bar] > 0 then {loose some}
+          begin
+          RasterOp(RXor, w, 1,
+                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP,
+                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP);
+          height[bar] := height[bar] - 1;
+          end
+      else
+   else 
+      if height[bar] < winH-30 then {win some}
+          begin
+          height[bar] := height[bar] + 1;
+          RasterOp(RXNor, w, 1,
+                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP,
+                  bar*2*w+20+winX, winY+winH-20-height[bar],SScreenW,SScreenP);
+          end;
+   end;
+
+end.
+        

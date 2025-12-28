@@ -1,1 +1,64 @@
-{RasterOp "eyewash".  Full speed rasterOps}{Written By Brad A. Myers on : 9/9/80;Copyright (c) Three Rivers Computer Corporation, 1980}program kinetic(input, output);imports IO_Unit from IO_Unit;imports IOErrors from IOErrors;imports Raster from Raster;imports RandomNumbers from RandomNumbers;var destWords, funct, w,h,x,y, status: integer;    destPtr: RasterPtr;    c: char;        function Randm(first, limit: integer):integer;   var r1: integer;   begin   r1 := LAnd(Random, #077777) mod limit;   randm := r1+first;   end;   procedure EraseScreen;   begin   RasterOp(6, 768, 1024,0,0, DestWords, DestPtr,0,0, DestWords, DestPtr);   end;   beginreset(input, 'console:');rewrite(output, 'console:');    DestPtr:=MakePtr(4,0,RasterPtr);DestWords := 48;InitRandom;repeat   funct := Randm(1,6);   case funct of      1 : funct := 6;  {dest <- 0}      2 : funct := 7;  {dest <- 1}      3,4,5,6 : funct := 1;  {dest <- not dest}      end;   w := Randm(1, 768);  {width of box}   h := Randm(1, 1024); {height of box}   x := Randm(0, 769-w);  {start of box, chosen so box must fit}   y := Randm(0, 1025-h);  {ditto}      RasterOp(funct, w, h, x, y, DestWords, DestPtr, x, y, DestWords, DestPtr);      status := IOCRead(TransKey, c);   UNTIL status=IOEIOC;   EraseScreen;      end.          
+{RasterOp "eyewash".  Full speed rasterOps}
+
+{Written By Brad A. Myers on : 9/9/80;
+
+Copyright (c) Three Rivers Computer Corporation, 1980
+}
+
+program kinetic(input, output);
+imports IO_Unit from IO_Unit;
+imports IOErrors from IOErrors;
+imports Raster from Raster;
+imports RandomNumbers from RandomNumbers;
+
+
+var destWords, funct, w,h,x,y, status: integer;
+    destPtr: RasterPtr;
+    c: char;
+    
+    
+
+function Randm(first, limit: integer):integer;
+   var r1: integer;
+   begin
+   r1 := LAnd(Random, #077777) mod limit;
+   randm := r1+first;
+   end;
+   
+procedure EraseScreen;
+   begin
+   RasterOp(6, 768, 1024,0,0, DestWords, DestPtr,0,0, DestWords, DestPtr);
+   end;
+   
+begin
+
+reset(input, 'console:');
+rewrite(output, 'console:');
+    
+DestPtr:=MakePtr(4,0,RasterPtr);
+DestWords := 48;
+InitRandom;
+
+repeat
+   funct := Randm(1,6);
+   case funct of
+      1 : funct := 6;  {dest <- 0}
+      2 : funct := 7;  {dest <- 1}
+      3,4,5,6 : funct := 1;  {dest <- not dest}
+      end;
+   w := Randm(1, 768);  {width of box}
+   h := Randm(1, 1024); {height of box}
+   x := Randm(0, 769-w);  {start of box, chosen so box must fit}
+   y := Randm(0, 1025-h);  {ditto}
+   
+   RasterOp(funct, w, h, x, y, DestWords, DestPtr, x, y, DestWords, DestPtr);
+   
+   status := IOCRead(TransKey, c);
+   UNTIL status=IOEIOC;
+
+
+   EraseScreen;
+   
+   end.  
+       
+ 

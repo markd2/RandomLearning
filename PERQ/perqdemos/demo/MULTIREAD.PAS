@@ -1,1 +1,163 @@
-Module MultiRead;{-----------------------------------------------------------------------------   MultiRead - Module to Multi-sector read a file into memory.   Written by Brad Myers    24 Jul 81.   Copyright (C) Three Rivers Computer Corporation, 1981. Abstract:       This Module exports a procedure to read a file very quickly into       memory.  There must be enought memory for the entire file to be       read in at once.-----------------------------------------------------------------------------}{-----------------------------------------------------------------------------  Change Log:     24-Jul-81  V1.0  Brad Myers               Created by modifying code in the Loader-----------------------------------------------------------------------------}{//////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\}Imports FileSystem from FileSystem;Procedure MultiRead(fid: FileID; addr: pDirBlk; firstBlock,numBlocks: integer);{//////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\}{$R-}   imports DiskIO from DiskIO;imports IO_Unit from IO_Unit;imports IOErrors from IOErrors;imports ReadDisk from ReadDisk;   CONST Debug = FALSE;Procedure MultiRead(fid: FileID; addr: pDirBlk; firstBlock,numBlocks: integer);{-----------------------------------------------------------------------------  Abstract: Does a multi-sector read on the file specified into the memory            pointed to by addr  NOTE: This only works for contiguous files  Parameters: fid is the fileID of the file to read from              addr is the address of the start of the memory to read the file                into              firstBlock is the logical block number of the first to read                (the first legal value is 0; -1 will not work)              numBlocks is the count of the number of blocks to transfer-----------------------------------------------------------------------------}var physBlk: FSBit32;    Status: IOStatPtr;    BlockHeader: IOHeadPtr;    BlockAddress, sid: record case Integer of                          1: (A: DiskAddr);                          2: (D: Double)                          end;    I, J: Integer;    BlockCount: Integer;    Buf: record case Integer of                 1: (P: IOBufPtr);                 2: (Offset: Integer;                     Segment: Integer);                 3: (f: pDirBlk);                 end;    hdr: ptrHeader;    begin    if firstBlock < 0 THEN Raise DiskError('Attempt to read illegal block');    NEW(0,4,Status);    NEW(0,4,BlockHeader);    sid.a := FileIdToSegId(fid);    physBlk := sid.a;    repeat      hdr := ReadHeader(physBlk);      physBlk := hdr^.nextAdr;    until hdr^.logBlock = firstBlock-1;  {hdr is for the block before physBlk}        BlockAddress.A := LogAddrToPhysAddr(physBlk);    sid.a := LogAddrToPhysAddr(sid.a);    with BlockHeader^ do              begin              SerialNum := sid.d;              NextAdr := BlockAddress.D;              PrevAdr := BlockAddress.D;              LogBlock := firstBlock;              Filler := 0              end;    Buf.f := addr;    repeat      if numBlocks < 64 then BlockCount := numBlocks      else BlockCount := 63;      I := 0;      repeat         I := I + 1;         J := 0;         repeat            J := J + 1;            UnitIO(HardDisk, Buf.P, IORead,                     Shift(BlockCount,9), BlockAddress.D, BlockHeader, Status);            if Status^.SoftStatus = IOEIOC then                begin                numBlocks := numBlocks - BlockCount;                Buf.Offset := Buf.Offset + Shift(BlockCount,8);                BlockAddress.D := BlockHeader^.NextAdr;                BlockHeader^.LogBlock := BlockHeader^.LogBlock + 1                end            else with Status^ do                  begin                  if (SoftStatus < IOEFirstError) or                       (SoftStatus > IOELastError) then                      SoftStatus := IOEUDE;                  ErrorCnt[SoftStatus] := ErrorCnt[SoftStatus] + 1                  end         until (Status^.SoftStatus = IOEIOC) or                  (J = 5) or (Status^.SoftStatus = IOEADR);         if Status^.SoftStatus <> IOEIOC then              if I < 3 then DiskReset     until (Status^.SoftStatus = IOEIOC) or (I = 3);     if Status^.SoftStatus <> IOEIOC then            raise DiskFailure('** Multi-read failure', DskRead,                       PhysAddrToLogAddr(0,BlockAddress.A), Status^.SoftStatus)  until numBlocks = 0;  Dispose(Status);  Dispose(BlockHeader);  end { MultiRead }{$ifc debug then};imports memory from memory;var fid: fileId;    i,j: integer;    ans: String[1];    fn: string;    beginWrite('Filename: ');readLn(fn);Write('Save top? ');readln(ans);if ans = 'y' then   begin  fid := FSEnter(fn);  for i := 0 to 100 do    FSBlkWrite(fid, i, MakePtr(ScreenSeg, i*256, pDirBlk));  FSClose(fid, 101, 4096);  end;fid := FSLookUp(fn, i, j);Write('Show picture starting with which block?');Readln(j);MultiRead(fid, MakePtr(ScreenSeg, 14592, pDirBlk), j, i-j);end{$endc}.
+Module MultiRead;
+{-----------------------------------------------------------------------------
+   MultiRead - Module to Multi-sector read a file into memory.
+
+   Written by Brad Myers    24 Jul 81.
+
+   Copyright (C) Three Rivers Computer Corporation, 1981.
+
+ Abstract:
+       This Module exports a procedure to read a file very quickly into
+       memory.  There must be enought memory for the entire file to be
+       read in at once.
+
+-----------------------------------------------------------------------------}
+
+
+{-----------------------------------------------------------------------------
+  Change Log:
+     24-Jul-81  V1.0  Brad Myers
+               Created by modifying code in the Loader
+-----------------------------------------------------------------------------}
+
+{//////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+Imports FileSystem from FileSystem;
+
+Procedure MultiRead(fid: FileID; addr: pDirBlk; firstBlock,numBlocks: integer);
+
+{//////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+{$R-}
+   
+imports DiskIO from DiskIO;
+imports IO_Unit from IO_Unit;
+imports IOErrors from IOErrors;
+imports ReadDisk from ReadDisk;
+   
+CONST Debug = FALSE;
+
+
+Procedure MultiRead(fid: FileID; addr: pDirBlk; firstBlock,numBlocks: integer);
+{-----------------------------------------------------------------------------
+  Abstract: Does a multi-sector read on the file specified into the memory
+            pointed to by addr
+  NOTE: This only works for contiguous files
+  Parameters: fid is the fileID of the file to read from
+              addr is the address of the start of the memory to read the file
+                into
+              firstBlock is the logical block number of the first to read
+                (the first legal value is 0; -1 will not work)
+              numBlocks is the count of the number of blocks to transfer
+-----------------------------------------------------------------------------}
+var physBlk: FSBit32;
+    Status: IOStatPtr;
+    BlockHeader: IOHeadPtr;
+    BlockAddress, sid: record case Integer of
+                          1: (A: DiskAddr);
+                          2: (D: Double)
+                          end;
+    I, J: Integer;
+    BlockCount: Integer;
+    Buf: record case Integer of
+                 1: (P: IOBufPtr);
+                 2: (Offset: Integer;
+                     Segment: Integer);
+                 3: (f: pDirBlk);
+                 end;
+    hdr: ptrHeader;
+    begin
+    if firstBlock < 0 THEN Raise DiskError('Attempt to read illegal block');
+    NEW(0,4,Status);
+    NEW(0,4,BlockHeader);
+    sid.a := FileIdToSegId(fid);
+    physBlk := sid.a;
+    repeat
+      hdr := ReadHeader(physBlk);
+      physBlk := hdr^.nextAdr;
+    until hdr^.logBlock = firstBlock-1;  {hdr is for the block before physBlk}
+    
+    BlockAddress.A := LogAddrToPhysAddr(physBlk);
+    sid.a := LogAddrToPhysAddr(sid.a);
+    with BlockHeader^ do
+              begin
+              SerialNum := sid.d;
+              NextAdr := BlockAddress.D;
+              PrevAdr := BlockAddress.D;
+              LogBlock := firstBlock;
+              Filler := 0
+              end;
+    Buf.f := addr;
+    repeat
+      if numBlocks < 64 then BlockCount := numBlocks
+      else BlockCount := 63;
+      I := 0;
+      repeat
+         I := I + 1;
+         J := 0;
+         repeat
+            J := J + 1;
+            UnitIO(HardDisk, Buf.P, IORead,
+                     Shift(BlockCount,9), BlockAddress.D, BlockHeader, Status);
+            if Status^.SoftStatus = IOEIOC then
+                begin
+                numBlocks := numBlocks - BlockCount;
+                Buf.Offset := Buf.Offset + Shift(BlockCount,8);
+                BlockAddress.D := BlockHeader^.NextAdr;
+                BlockHeader^.LogBlock := BlockHeader^.LogBlock + 1
+                end
+            else with Status^ do
+                  begin
+                  if (SoftStatus < IOEFirstError) or
+                       (SoftStatus > IOELastError) then
+                      SoftStatus := IOEUDE;
+                  ErrorCnt[SoftStatus] := ErrorCnt[SoftStatus] + 1
+                  end
+         until (Status^.SoftStatus = IOEIOC) or
+                  (J = 5) or (Status^.SoftStatus = IOEADR);
+         if Status^.SoftStatus <> IOEIOC then
+              if I < 3 then DiskReset
+     until (Status^.SoftStatus = IOEIOC) or (I = 3);
+     if Status^.SoftStatus <> IOEIOC then
+            raise DiskFailure('** Multi-read failure', DskRead,
+                       PhysAddrToLogAddr(0,BlockAddress.A), Status^.SoftStatus)
+  until numBlocks = 0;
+  Dispose(Status);
+  Dispose(BlockHeader);
+  end { MultiRead }
+
+{$ifc debug then}
+;
+
+imports memory from memory;
+
+var fid: fileId;
+    i,j: integer;
+    ans: String[1];
+    fn: string;
+    
+begin
+Write('Filename: ');
+readLn(fn);
+Write('Save top? ');
+readln(ans);
+if ans = 'y' then 
+  begin
+  fid := FSEnter(fn);
+  for i := 0 to 100 do
+    FSBlkWrite(fid, i, MakePtr(ScreenSeg, i*256, pDirBlk));
+  FSClose(fid, 101, 4096);
+  end;
+
+fid := FSLookUp(fn, i, j);
+Write('Show picture starting with which block?');
+Readln(j);
+
+MultiRead(fid, MakePtr(ScreenSeg, 14592, pDirBlk), j, i-j);
+
+end
+
+{$endc}
+
+.
+

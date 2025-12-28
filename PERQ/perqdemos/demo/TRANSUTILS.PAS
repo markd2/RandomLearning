@@ -1,1 +1,124 @@
-Module TransUtils;{-------------------------------------------------------------------- Provides some Stream-type operations for transcript reading  Written by Brad Myers  July 27, 1981  Copyright (C) 1981 - Three Rivers Computer Corporation--------------------------------------------------------------------}{-------------------------------------------------------------------- Change log:   27-Jul-81 Brad Myers V1.0 Started by modifying code in FontEd--------------------------------------------------------------------}{/////////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\}Function ReadString(var s: String; stopOnPress: boolean): boolean;FUNCTION ReadNumber(Var num: Integer; def: integer;                      stopOnPress: boolean): boolean;EXCEPTION BadNumber;{-------------------------------------------------------------------- Abstract: Raised when an illegal character is read for a number--------------------------------------------------------------------}{/////////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\}Imports Transcript from Transcript;Imports Screen from Screen;Const CtrlU = Chr(21);      BS = Chr(8);      CR = Chr(13);      var buttons: PressRec;Function ReadString(var s: String; stopOnPress: boolean): boolean;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Reads a string using the transcript package.Parameters: s is set with the string read.            stopOnPress tells whether to exit when pressReturns: true if press and stopOnPress- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  var c: Char;      press, existsChar: boolean;      i,x,y: integer;  begin {$R-}  SCurOn;  s[0] := chr(0);  repeat    press := GetCharAction(x,y,true,buttons,existsChar,c);    if existsChar then       if c = CR then WriteLn       else if c = CtrlU then begin                              for i := length(s) downto 1 do                                         SClearChar(s[i],RXor);                              s[0] := chr(0);                              end       else if c = BS then if length(s) > 0 then                               begin                               SClearChar(s[length(s)], RXor);                               s[0] := chr(length(s)-1);                               end                        else {nothing}       else if length(s) < 80 then begin                                   s[0] := chr(length(s)+1);                                   s[length(s)] := c;                                   write(c);                                   end;  until (c = CR) or (stopOnPress and press);  SCurOff;{$R=}  ReadString := stopOnPress and press;  end;FUNCTION ReadNumber(Var num: Integer; def: integer;                      stopOnPress: boolean): boolean;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Reads a number from user in octal (preceeding #) or dec.Parameters: num is set to number read.            def is the default if CR typed            stopOnPress tells whether to stop reading when pressReturns: press and stopOnPress.Errors: Raises BadNumber if invalid- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  var i : integer;      neg, start, rad: integer;      val: integer;      s: String;      press: boolean;  begin  press := ReadString(s, stopOnPress);  ReadNumber := press;  if press then num := def  else if s = '' then num := def  else begin       if s[1] = '#' then begin                          rad := 8;                          start := 2;                          end       else begin            rad := 10;            start := 1;            end;       if s[start] = '-' then begin                              neg := -1;                              start := start+1;                              end       else neg := 1;       num := 0;       for i := start to Length(s) do            begin            val := ord(s[i])-ord('0');            if (val < 0) or (val >= rad) then Raise BadNumber            else num := num*rad+val;            end;       num := num*neg;       ReadNumber := true;       end;  end. {ReadNumber}
+Module TransUtils;
+{--------------------------------------------------------------------
+ Provides some Stream-type operations for transcript reading
+ 
+ Written by Brad Myers  July 27, 1981
+ 
+ Copyright (C) 1981 - Three Rivers Computer Corporation
+--------------------------------------------------------------------}
+
+{--------------------------------------------------------------------
+ Change log:
+   27-Jul-81 Brad Myers V1.0 Started by modifying code in FontEd
+--------------------------------------------------------------------}
+
+{/////////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+Function ReadString(var s: String; stopOnPress: boolean): boolean;
+
+FUNCTION ReadNumber(Var num: Integer; def: integer;
+                      stopOnPress: boolean): boolean;
+
+EXCEPTION BadNumber;
+{--------------------------------------------------------------------
+ Abstract: Raised when an illegal character is read for a number
+--------------------------------------------------------------------}
+
+{/////////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+Imports Transcript from Transcript;
+Imports Screen from Screen;
+
+Const CtrlU = Chr(21);
+      BS = Chr(8);
+      CR = Chr(13);
+      
+
+var buttons: PressRec;
+
+Function ReadString(var s: String; stopOnPress: boolean): boolean;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Reads a string using the transcript package.
+Parameters: s is set with the string read.
+            stopOnPress tells whether to exit when press
+Returns: true if press and stopOnPress
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  var c: Char;
+      press, existsChar: boolean;
+      i,x,y: integer;
+  begin
+ {$R-}
+  SCurOn;
+  s[0] := chr(0);
+  repeat
+    press := GetCharAction(x,y,true,buttons,existsChar,c);
+    if existsChar then
+       if c = CR then WriteLn
+       else if c = CtrlU then begin
+                              for i := length(s) downto 1 do
+                                         SClearChar(s[i],RXor);
+                              s[0] := chr(0);
+                              end
+       else if c = BS then if length(s) > 0 then
+                               begin
+                               SClearChar(s[length(s)], RXor);
+                               s[0] := chr(length(s)-1);
+                               end
+                        else {nothing}
+       else if length(s) < 80 then begin
+                                   s[0] := chr(length(s)+1);
+                                   s[length(s)] := c;
+                                   write(c);
+                                   end;
+  until (c = CR) or (stopOnPress and press);
+  SCurOff;
+{$R=}
+  ReadString := stopOnPress and press;
+  end;
+
+
+FUNCTION ReadNumber(Var num: Integer; def: integer;
+                      stopOnPress: boolean): boolean;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Reads a number from user in octal (preceeding #) or dec.
+Parameters: num is set to number read.
+            def is the default if CR typed
+            stopOnPress tells whether to stop reading when press
+Returns: press and stopOnPress.
+Errors: Raises BadNumber if invalid
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  var i : integer;
+      neg, start, rad: integer;
+      val: integer;
+      s: String;
+      press: boolean;
+  begin
+  press := ReadString(s, stopOnPress);
+  ReadNumber := press;
+  if press then num := def
+  else if s = '' then num := def
+  else begin
+       if s[1] = '#' then begin
+                          rad := 8;
+                          start := 2;
+                          end
+       else begin
+            rad := 10;
+            start := 1;
+            end;
+       if s[start] = '-' then begin
+                              neg := -1;
+                              start := start+1;
+                              end
+       else neg := 1;
+       num := 0;
+       for i := start to Length(s) do
+            begin
+            val := ord(s[i])-ord('0');
+            if (val < 0) or (val >= rad) then Raise BadNumber
+            else num := num*rad+val;
+            end;
+       num := num*neg;
+       ReadNumber := true;
+       end;
+  end. {ReadNumber}

@@ -1,1 +1,236 @@
-Module Transcript;{------------------------------------------------------------------------ Transcript implements transcripted input to allow replay.  Written by Brad A. Myers  21-Jul-81  Copyright (C) 1981 - Three Rivers Computer Corporation ------------------------------------------------------------------------}{------------------------------------------------------------------------  Change Log:     24-Jul-81  V1.1  Brad Myers  Added procedure to change cursor mode    21-Jul-81  V1.0  Brad Myers  Started------------------------------------------------------------------------}{/////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\\\\}imports FileDefs from FileDefs;imports IO_Others from IO_Others;Type PressRec = PACKED RECORD                  tabSwitch, yellow, white, green, blue: boolean;                END;Function GetAction(var x,y: integer; wait: boolean;                    var buttons: PressRec): Boolean;Function GetCharAction(var x,y: integer; wait: boolean;             var buttons: PressRec;             var existsChar: boolean; var c: Char): Boolean;Procedure InitTranscript(transName: PathName; replay: Boolean);Procedure CloseTranscript;Procedure SetCursMode(mode: CursMode);Exception CharReceived(c: Char);{------------------------------------------------------------------- Abstract: This is raised if the GetAction procedure is used and a character           was received. Parameters: c is the character Resume: Allowed.  GetAction will simply execute normally as if no char          had arrived-------------------------------------------------------------------}Exception ReadPast;{------------------------------------------------------------------- Abstract: Raised when read past end of transcript.-------------------------------------------------------------------}{/////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\\\\}imports IO_Unit from IO_Unit;imports IOErrors from IOErrors;Type TransRec = PACKED RECORD                  tabSwitch, yellow, white, green, blue: boolean;                  existsChar: Boolean;                  c: Char;                  x,y: integer;                END;                                             TransFile = FILE OF TRANSREC;var curTrans: TransFile;    reading, moveCursor: Boolean;    lastTime: Double;                        Const Null = Chr(0);{$R-}Procedure SetCursMode(mode: CursMode);{------------------------------------------------------------------- Abstract: Sets the cursor mode to parameter. If setting mode to track,           however, and replaying, then sets mode to Indep and allows           the GetAction routines to change the cursor position. Parameters: mode is new mode-------------------------------------------------------------------}  begin  if reading then     if mode = IndepCursor then moveCursor := false     else if mode = TrackCursor then         begin        mode := IndepCursor;        moveCursor := true;        end;  IOCursorMode(mode);  end;Function DoAction(var x,y: integer; wait: boolean; var buttons: PressRec;            var existsChar: boolean; var c: Char; wantChar: boolean): Boolean;{------------------------------------------------------------------- Abstract: This function is used to read an action.  It reads it from the           IO_package or from the transcript depending on how the transcript           package was initialized.  If reading from a transcript, GetAction           sets the Tablet position to the value read from the transcript. Parameters: x and y are set with the tablet positions.             wait tells whether to wait for 1/60 of sec             buttons is set with the state of the press.             wantChar tells whether to look for a character or not.             existsChar is set to true if a character came in.             c is set to the character if existsChar is true else set to Null. Returns: Tabswitch. Errors: If don't want a char and reading from a transcript and have a char,         then raises CharReceived.-------------------------------------------------------------------}  var t: double;  begin   if wait then     begin     repeat      IOGetTime(t);     until (t[0] <> lastTime[0]) or (t[1] <> lastTime[1]);     lastTime := t;     end;   if reading then       begin       existsChar := curTrans^.existsChar;       c := curTrans^.c;       if (not wantChar) and existsChar then RAISE CharReceived(curTrans^.c);       x := curTrans^.x;       y := curTrans^.y;       if moveCursor then IOSetCursorPos(x,y);       buttons.tabSwitch := curTrans^.tabSwitch;       buttons.yellow := curTrans^.yellow;       buttons.white := curTrans^.white;       buttons.green := curTrans^.green;       buttons.blue := curTrans^.blue;       DoAction := buttons.Tabswitch;       Get(curTrans);       end   else begin        IOReadTablet(x,y);        curTrans^.x := x;        curTrans^.y := y;        buttons.tabSwitch := tabSwitch;        buttons.yellow := tabYellow;        buttons.white := tabWhite;        buttons.blue := tabBlue;        buttons.green := tabGreen;        curTrans^.tabSwitch := tabSwitch;        curTrans^.yellow := tabYellow;        curTrans^.white := tabWhite;        curTrans^.blue := tabBlue;        curTrans^.green := tabGreen;        DoAction := buttons.tabSwitch;        if wantChar then            if IOCRead(TransKey,c)=IOEIOC then existsChar := true            else existsChar := false        else existsChar := false;        curTrans^.existsChar := existsChar;        if existsChar then curTrans^.c := c        else curTrans^.c := Null;        Put(curTrans);        end;   end;Function GetAction(var x,y: integer; wait: boolean;                    var buttons: PressRec): Boolean;{------------------------------------------------------------------- Abstract: This function is used to read an action.  It reads it from the           IO_package or from the transcript depending on how the transcript           package was initialized.  If reading from a transcript, GetAction           sets the Tablet position to the value read from the transcript. Parameters: x and y are set with the tablet positions.             wait tells whether to wait for 1/60 sec before returning             buttons is set with the state of the press. Returns: Tabswitch Errors: Raises CharReceived if running from a transcript and a character          comes in.-------------------------------------------------------------------}  var existsChar: boolean;      c: Char;  begin  GetAction := DoAction(x,y,wait,buttons,existsChar,c,false);  end;Function GetCharAction(var x,y: integer; wait: boolean;             var buttons: PressRec;             var existsChar: boolean; var c: Char): Boolean;{------------------------------------------------------------------- Abstract: This function is used to read an action.  It reads it from the           IO_package or from the transcript depending on how the transcript           package was initialized.  If reading from a transcript, GetAction           sets the Tablet position to the value read from the transcript. Parameters: x and y are set with the tablet positions.             wait tells whether to wait for 1/60 sec before returning             buttons is set with the state of the press.             existsChar is set to true if a character came in.             c is set to the character if existsChar is true else set to Null. Returns: Tabswitch-------------------------------------------------------------------}  begin  GetCharAction := DoAction(x,y,wait,buttons,existsChar,c,true);  end;Procedure InitTranscript(transName: PathName; replay: Boolean);{------------------------------------------------------------------- Abstract: Initializes the transcript package.  If replay, then sets up           to read the transcript, otherwise, prepares to write it.  If           replay then initializes the Cursor to IndepCursor else            initializes the Cursor to TrackCursor. Parameters: TransName is the name of the file to use as the transcript.             replay tells whether to do a replay (if true) by reading the                 transcript or to write a transcript by reading the keyboard                 and pen coords.-------------------------------------------------------------------}   begin   IOGetTime(lastTime);   if replay then begin                  Reset(curTrans, transName);                  IOCursorMode(indepCursor);                  end   else begin        Rewrite(curTrans, TransName);        IOCursorMode(trackCursor);        end;   reading := replay;   moveCursor := true;   end;Procedure CloseTranscript;{------------------------------------------------------------------- Abstract: Closes the Transcript file so it can be read later.  This should           be called at the end of every session. SideEffects: If replaying then none; else if creating a transcript, then              closes the transcript file-------------------------------------------------------------------}  begin  if not reading then Close(curTrans);  end.
+Module Transcript;
+{------------------------------------------------------------------------
+ Transcript implements transcripted input to allow replay.
+ 
+ Written by Brad A. Myers  21-Jul-81
+ 
+ Copyright (C) 1981 - Three Rivers Computer Corporation
+ 
+------------------------------------------------------------------------}
+
+{------------------------------------------------------------------------
+  Change Log: 
+    24-Jul-81  V1.1  Brad Myers  Added procedure to change cursor mode
+    21-Jul-81  V1.0  Brad Myers  Started
+------------------------------------------------------------------------}
+
+{/////////////////////////} EXPORTS {\\\\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+imports FileDefs from FileDefs;
+imports IO_Others from IO_Others;
+
+Type PressRec = PACKED RECORD
+                  tabSwitch, yellow, white, green, blue: boolean;
+                END;
+
+Function GetAction(var x,y: integer; wait: boolean;
+                    var buttons: PressRec): Boolean;
+Function GetCharAction(var x,y: integer; wait: boolean;
+             var buttons: PressRec;
+             var existsChar: boolean; var c: Char): Boolean;
+
+Procedure InitTranscript(transName: PathName; replay: Boolean);
+Procedure CloseTranscript;
+Procedure SetCursMode(mode: CursMode);
+
+Exception CharReceived(c: Char);
+{-------------------------------------------------------------------
+ Abstract: This is raised if the GetAction procedure is used and a character
+           was received.
+ Parameters: c is the character
+ Resume: Allowed.  GetAction will simply execute normally as if no char
+          had arrived
+-------------------------------------------------------------------}
+
+Exception ReadPast;
+{-------------------------------------------------------------------
+ Abstract: Raised when read past end of transcript.
+-------------------------------------------------------------------}
+
+
+{/////////////////////////} PRIVATE {\\\\\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+imports IO_Unit from IO_Unit;
+imports IOErrors from IOErrors;
+
+Type TransRec = PACKED RECORD
+                  tabSwitch, yellow, white, green, blue: boolean;
+                  existsChar: Boolean;
+                  c: Char;
+                  x,y: integer;
+                END;
+                                        
+     TransFile = FILE OF TRANSREC;
+
+var curTrans: TransFile;
+    reading, moveCursor: Boolean;
+    lastTime: Double;
+                        
+Const Null = Chr(0);
+
+{$R-}
+
+Procedure SetCursMode(mode: CursMode);
+{-------------------------------------------------------------------
+ Abstract: Sets the cursor mode to parameter. If setting mode to track,
+           however, and replaying, then sets mode to Indep and allows
+           the GetAction routines to change the cursor position.
+ Parameters: mode is new mode
+-------------------------------------------------------------------}
+  begin
+  if reading then
+     if mode = IndepCursor then moveCursor := false
+     else if mode = TrackCursor then 
+        begin
+        mode := IndepCursor;
+        moveCursor := true;
+        end;
+  IOCursorMode(mode);
+  end;
+
+
+Function DoAction(var x,y: integer; wait: boolean; var buttons: PressRec;
+            var existsChar: boolean; var c: Char; wantChar: boolean): Boolean;
+{-------------------------------------------------------------------
+ Abstract: This function is used to read an action.  It reads it from the
+           IO_package or from the transcript depending on how the transcript
+           package was initialized.  If reading from a transcript, GetAction
+           sets the Tablet position to the value read from the transcript.
+ Parameters: x and y are set with the tablet positions.
+             wait tells whether to wait for 1/60 of sec
+             buttons is set with the state of the press.
+             wantChar tells whether to look for a character or not.
+             existsChar is set to true if a character came in.
+             c is set to the character if existsChar is true else set to Null.
+ Returns: Tabswitch.
+ Errors: If don't want a char and reading from a transcript and have a char,
+         then raises CharReceived.
+-------------------------------------------------------------------}
+  var t: double;
+  begin
+   if wait then
+     begin
+     repeat
+      IOGetTime(t);
+     until (t[0] <> lastTime[0]) or (t[1] <> lastTime[1]);
+     lastTime := t;
+     end;
+   if reading then
+       begin
+       existsChar := curTrans^.existsChar;
+       c := curTrans^.c;
+       if (not wantChar) and existsChar then RAISE CharReceived(curTrans^.c);
+       x := curTrans^.x;
+       y := curTrans^.y;
+       if moveCursor then IOSetCursorPos(x,y);
+       buttons.tabSwitch := curTrans^.tabSwitch;
+       buttons.yellow := curTrans^.yellow;
+       buttons.white := curTrans^.white;
+       buttons.green := curTrans^.green;
+       buttons.blue := curTrans^.blue;
+       DoAction := buttons.Tabswitch;
+       Get(curTrans);
+       end
+   else begin
+        IOReadTablet(x,y);
+        curTrans^.x := x;
+        curTrans^.y := y;
+        buttons.tabSwitch := tabSwitch;
+        buttons.yellow := tabYellow;
+        buttons.white := tabWhite;
+        buttons.blue := tabBlue;
+        buttons.green := tabGreen;
+        curTrans^.tabSwitch := tabSwitch;
+        curTrans^.yellow := tabYellow;
+        curTrans^.white := tabWhite;
+        curTrans^.blue := tabBlue;
+        curTrans^.green := tabGreen;
+        DoAction := buttons.tabSwitch;
+        if wantChar then
+            if IOCRead(TransKey,c)=IOEIOC then existsChar := true
+            else existsChar := false
+        else existsChar := false;
+        curTrans^.existsChar := existsChar;
+        if existsChar then curTrans^.c := c
+        else curTrans^.c := Null;
+        Put(curTrans);
+        end;
+   end;
+
+Function GetAction(var x,y: integer; wait: boolean;
+                    var buttons: PressRec): Boolean;
+{-------------------------------------------------------------------
+ Abstract: This function is used to read an action.  It reads it from the
+           IO_package or from the transcript depending on how the transcript
+           package was initialized.  If reading from a transcript, GetAction
+           sets the Tablet position to the value read from the transcript.
+ Parameters: x and y are set with the tablet positions.
+             wait tells whether to wait for 1/60 sec before returning
+             buttons is set with the state of the press.
+ Returns: Tabswitch
+ Errors: Raises CharReceived if running from a transcript and a character
+          comes in.
+-------------------------------------------------------------------}
+  var existsChar: boolean;
+      c: Char;
+  begin
+  GetAction := DoAction(x,y,wait,buttons,existsChar,c,false);
+  end;
+
+
+Function GetCharAction(var x,y: integer; wait: boolean;
+             var buttons: PressRec;
+             var existsChar: boolean; var c: Char): Boolean;
+{-------------------------------------------------------------------
+ Abstract: This function is used to read an action.  It reads it from the
+           IO_package or from the transcript depending on how the transcript
+           package was initialized.  If reading from a transcript, GetAction
+           sets the Tablet position to the value read from the transcript.
+ Parameters: x and y are set with the tablet positions.
+             wait tells whether to wait for 1/60 sec before returning
+             buttons is set with the state of the press.
+             existsChar is set to true if a character came in.
+             c is set to the character if existsChar is true else set to Null.
+ Returns: Tabswitch
+-------------------------------------------------------------------}
+  begin
+  GetCharAction := DoAction(x,y,wait,buttons,existsChar,c,true);
+  end;
+
+
+Procedure InitTranscript(transName: PathName; replay: Boolean);
+{-------------------------------------------------------------------
+ Abstract: Initializes the transcript package.  If replay, then sets up
+           to read the transcript, otherwise, prepares to write it.  If
+           replay then initializes the Cursor to IndepCursor else 
+           initializes the Cursor to TrackCursor.
+ Parameters: TransName is the name of the file to use as the transcript.
+             replay tells whether to do a replay (if true) by reading the
+                 transcript or to write a transcript by reading the keyboard
+                 and pen coords.
+-------------------------------------------------------------------}
+   begin
+   IOGetTime(lastTime);
+   if replay then begin
+                  Reset(curTrans, transName);
+                  IOCursorMode(indepCursor);
+                  end
+   else begin
+        Rewrite(curTrans, TransName);
+        IOCursorMode(trackCursor);
+        end;
+   reading := replay;
+   moveCursor := true;
+   end;
+
+
+Procedure CloseTranscript;
+{-------------------------------------------------------------------
+ Abstract: Closes the Transcript file so it can be read later.  This should
+           be called at the end of every session.
+ SideEffects: If replaying then none; else if creating a transcript, then
+              closes the transcript file
+-------------------------------------------------------------------}
+  begin
+  if not reading then Close(curTrans);
+  end.

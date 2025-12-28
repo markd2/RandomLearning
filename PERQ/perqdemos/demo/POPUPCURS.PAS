@@ -1,1 +1,29 @@
-MODULE PopUpCurs;{---------------------------------------------------------------------------- Abstract:  This module sets up and sets the various cursors used by PopUp. Written by Brad A. Myers Copyright (C) 1981 - Three Rivers Computer Corporation----------------------------------------------------------------------------}{----------------------------------------------------------------------------  Change log:    17-Aug-81  V2.1  Brad Myers  fixed comments and picture for Scroll Bar    22-Jul-81  V2.0  Brad Myers  fixed for POS version D    14-Nov-80  V0.1  Brad Myers  started.----------------------------------------------------------------------------}{-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-} EXPORTS {-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-}Type CursType = (Default, Select, Scroll, DoIt, Bar);     FootAr = ARRAY [0..8] of ARRAY [0..3] of Integer;     pFootAr = ^FootAr;     PROCEDURE InitCurs;PROCEDURE DestroyCurs;PROCEDURE SetCurs(t: CursType);PROCEDURE InitFooter(VAR scrollP: pFootAr;  VAR spotP: pFootAr;                         VAR footW: integer);                         {-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-} PRIVATE {-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-}
+MODULE PopUpCurs;
+{----------------------------------------------------------------------------
+ Abstract:  This module sets up and sets the various cursors used by PopUp.
+ Written by Brad A. Myers
+ Copyright (C) 1981 - Three Rivers Computer Corporation
+----------------------------------------------------------------------------}
+
+{----------------------------------------------------------------------------
+  Change log:
+    17-Aug-81  V2.1  Brad Myers  fixed comments and picture for Scroll Bar
+    22-Jul-81  V2.0  Brad Myers  fixed for POS version D
+    14-Nov-80  V0.1  Brad Myers  started.
+----------------------------------------------------------------------------}
+
+{-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-} EXPORTS {-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-}
+
+Type CursType = (Default, Select, Scroll, DoIt, Bar);
+     FootAr = ARRAY [0..8] of ARRAY [0..3] of Integer;
+     pFootAr = ^FootAr;
+     
+PROCEDURE InitCurs;
+PROCEDURE DestroyCurs;
+
+PROCEDURE SetCurs(t: CursType);
+
+PROCEDURE InitFooter(VAR scrollP: pFootAr;  VAR spotP: pFootAr;
+                         VAR footW: integer);
+                         
+{-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-} PRIVATE {-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-}

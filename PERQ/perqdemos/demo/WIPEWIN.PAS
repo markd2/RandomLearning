@@ -1,1 +1,324 @@
-Program WipeWin;Imports Memory from Memory;Imports SigUtils from SigUtils;Imports XScreen from XScreen;Imports FastRandom from FastRandom;Imports System from System;Imports CmdParse from CmdParse;Imports SaveWindow from SaveWindow;const MaskWidth=640;      MaskHeight=600;{$Include Random.Dfs}const MulCnt = 4;type  flagArray = record case boolean of                    true: (b: packed array [0..MaskHeight div MulCnt,                                0..MaskWidth div MulCnt] of boolean);                    false: (w: array [0..MaskHeight div MulCnt,                                0..MaskWidth div MulCnt div 16] of integer);                  end;var   WipeMask: RasterPtr;      FileName, Style: string;      Width, Height: integer;      PicWidth, PicHeight: integer;      X, Y: integer;      MinX, MinY, MaxX, MaxY: integer;  { window dimensions }      WinNum: integer;      win: WinRange;      Title: string;      save, ClearFlag: boolean;      MaskSLines: integer;      { Left-to-right wipe }Procedure LWipe(X, Y, W, H: integer);  var i: integer;  begin  for i := 1 to W do    begin    RasterOp(RRpl, i, H, X, Y, SScreenW, SScreenP,                         0, 0, MaskSLines, WipeMask);    end;  end;{ Top-to-bottom wipe }Procedure TWipe(X, Y, W, H: integer);  var i: integer;  begin  for i := 1 to H do    begin    RasterOp(RRpl, W, i,  X, Y, SScreenW, SScreenP,                          0, 0, MaskSLines, WipeMask);    end;  end;{ Right-to-left wipe }Procedure RWipe(X, Y, W, H: integer);  var i: integer;  begin  for i := 1 to W do    begin    RasterOp(RRpl, i, H, X + (W - i), Y, SScreenW, SScreenP,                         0 + (W - i), 0, MaskSLines, WipeMask);    end;  end;{ Bottom-to-top wipe }Procedure BWipe(X, Y, W, H: integer);  var i: integer;  begin  for i := 1 to H do    begin    RasterOp(RRpl, W, i, X, Y + (H - i), SScreenW, SScreenP,                         0, 0 + (H - i), MaskSLines, WipeMask);    end;  end;{ Horizontal Center-out wipe }Procedure HOutWipe(X, Y, W, H: integer);  var i, CtrX: integer;  begin  CtrX := X + (W div 2);  for i := 1 to (W div 2) do    begin    RasterOp(RRpl, i * 2, H,     CtrX - i, Y, 48, MakePtr(ScreenSeg, 0, RasterPtr),     (W div 2) - i, 0, MaskSLines, WipeMask);    end;  end;{ Vertical Center-out wipe }Procedure VOutWipe(X, Y, W, H: integer);  var i, CtrY: integer;  begin  CtrY := Y + (H div 2);  for i := 1 to (H div 2) do    begin    RasterOp(RRpl, W, i * 2, X, CtrY - i, SScreenW, SScreenP,                             0, (H div 2) - i, MaskSLines, WipeMask);    end;  end;{ Simultaneous vert. and horiz. Center-out wipe }Procedure HVOutWipe(X, Y, W, H: integer);  var i, CtrX, CtrY: integer;      MaxWH, width, height: integer;  begin  CtrX := X + (W div 2);  CtrY := Y + (H div 2);  if W > H then MaxWH := W else MaxWH := H;  for i := 1 to (W div 2) do    begin    width := i * 2;    height := width;    if width > W then width := W;    if height > H then height := H;    RasterOp(RRpl, width, height,     CtrX - (width div 2), CtrY - (height div 2),     SScreenW, SScreenP,     (W - width) div 2, (H - height) div 2,     MaskSLines, WipeMask);    end;  end;Type Ctrl = (Draw, DrawCmp);{ Randomly pick points and draw them }{$R-}Procedure RandomWipe(X, Y, W, H: integer; control: Ctrl);  var i: integer;      rx: integer;      ry: integer;      xMax, yMax: integer;      done: FlagArray;      funct : integer;      tab: pRanTable;        begin  tab := MakePtr(DemoInt, 0, pRanTable);  InitRandom(tab);  xMax := (w div MulCnt);  yMax := (h div MulCnt);  if (xMax >= MaskWidth div MulCnt) or (yMax >= MaskHeight div MulCnt) then      begin     WriteLn('***** Picture too big to random wipe ******');     exit(RandomWipe);     end;  if control = Draw then Funct := RRpl  else Funct := RNot;  for ry := 0 to yMax do      begin      for rx := 0 to (xMax+15) div 16 do         done.w[ry,rx] := 0;      for rx := xMax to (((xMax+15) div 16)*16)-1 do         done.b[ry,rx] := true;      end;  for i := 1 to xMax*yMax  (** - 150 **) do       begin       LoadAdr(Tab);       InLineByte(239 {LDDW});       LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));       InLineByte(228 {TLATE1});       InLineByte(191 {JCS});       StorExpr(rx);       LoadAdr(Tab);       InLineByte(239 {LDDW});       LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));       InLineByte(228 {TLATE1});       InLineByte(191 {JCS});       StorExpr(ry);       rx := LAnd(rx, #077777) mod xMax;       ry := LAnd(ry, #077777) mod yMax;       while done.w[ry,rx div 16] = -1 do          begin          rx := ((rx div 16)+1)*16;          if rx >= xMax then begin                             rx := 0;                             ry := (ry+1) mod yMax;                             end;          end;       while done.b[ry,rx] do          begin          rx := rx+1;          if rx >= xMax then begin                             rx := 0;                             ry := (ry+1) mod yMax;                             end;          end;       done.b[ry,rx] := true;       RasterOp(funct, MulCnt, MulCnt, x+rx*4, y+ry*4, SScreenW, SScreenP,                                       rx*4,   ry*4,   MaskSLines, WipeMask);       end;(**When only go to 150 from end, do this**  RasterOp(funct, w, h, x, y, SScreenW, SScreenP,  {do rest at once}                        0, 0, MaskSLines, WipeMask);(*****) end;{$R=}{ Randomly pick points and draw them }Procedure KineticWipe(X, Y, W, H: integer);  var rx, ry, i, funct: integer;      mostlyWhite: integer;      rev: boolean;        begin  InitRandom(MakePtr(DemoInt, 0, pRanTable));  mostlyWhite := 1000; {when 1 is all white}  i := 0;  repeat   i := i + 1;      rev := false;      funct := RandomRange(1,mostlyWhite);   if funct = 1 then funct := RRpl          {dest <- src}   else if funct = 2 then funct := RNot     {dest <- not scr1}   else rev := true;                        {dest <- not dest}   width  := RandomRange(1, w div 2);   height := RandomRange(1, h div 2);   rx := RandomRange(0, w-width);  {start of box, chosen so box must fit}   ry := RandomRange(0, h-height); {ditto}      if rev then RasterOp(RNot, width, height, x+rx, y+ry, SScreenW, SScreenP,                                             x+rx, y+ry, SScreenW, SScreenP)   else RasterOp(funct, width, height, x+rx, y+ry, SScreenW, SScreenP,                        rx, ry, MaskSLines, WipeMask);     if i < 970 then mostlyWhite :=mostlyWhite - 1  {mostlyWhite = 30}   else if (i < 1570) and (i mod 30 = 0) then mostlyWhite := mostlyWhite - 1  {mostlyWhite = 10}   else if (i < 2570) and (i mod 200 = 0) then mostlyWhite := mostlyWhite-1  {mostlyWhite = 5}   else if i > 3700 then mostlyWhite := 0   else if i mod 500 = 0 then mostlyWhite := mostlyWhite - 1;  {mostlyWhite = 3}  until mostlyWhite <= 0;  RasterOp(funct, w, h, x, y, SScreenW, SScreenP,                        0, 0, MaskSLines, WipeMask);  end;Procedure cmdsparse;  var Str, Broke: string;      ArgC, dum: integer;  begin  ArgC := ArgCount;  if ArgC < 6 then    begin    Writeln('** Usage: wipewin win# save file H|V|O|L|R|T|B|X|Y|K erase [title]');    Exit(WipeWin);    end;  NextArgStr(Str); {flush WipeWin}  NextArgInt(WinNum);  win := winNum;  NextArgInt(dum);  save := Recast(dum, boolean);  NextArgStr(FileName);  NextArgStr(Style);  NextArgInt(dum);  ClearFlag := Recast(dum, boolean);  { Force the first letter of Style to upper case }  if Style[1] in ['a'..'z'] then    Style[1] := Chr(Ord(Style[1]) - Ord('a') + Ord('A'));  if ArgC > 6 then    begin    RemDelimiters(UsrCmdLine, ' ', Broke);    Title := UsrCmdLine;    end  else    Title := '  ';  { Calculate the size of the window }  ChangeWindow(win);  XSGetUseWindow(win, MinX, MinY, Width, Height);  MaxX := MinX + Width - 1;  MaxY := MinY + Height - 1;  end;begincmdsparse;if GetFastPicture(FileName, PicWidth, PicHeight, MaskSlines, WipeMask) then  begin  X := MinX; Y := MinY;  if PicWidth >= Width then PicWidth := Width  else  X := MinX + ((Width - PicWidth) div 2);  if PicHeight >= Height then PicHeight := Height  else Y := MinY + ((Height - PicHeight) div 2);  if save then SaveAndRestoreWindow(win, Title)  else XSRedrawWindow(win, Title);  if ClearFlag then Write(FF);  case Style[1] of    'T':  TWipe(X, Y, PicWidth, PicHeight);    'B':  BWipe(X, Y, PicWidth, PicHeight);    'R':  RWipe(X, Y, PicWidth, PicHeight);    'L':  LWipe(X, Y, PicWidth, PicHeight);    'O':  HVOutWipe(X, Y, PicWidth, PicHeight);    'H':  HOutWipe(X, Y, PicWidth, PicHeight);    'V':  VOutWipe(X, Y, PicWidth, PicHeight);    'X':  RandomWipe(X, Y, PicWidth, PicHeight, Draw);    'Y':  RandomWipe(X, Y, PicWidth, PicHeight, DrawCmp);    'K':  KineticWipe(X, Y, PicWidth, PicHeight);    otherwise:  LWipe(X, Y, PicWidth, PicHeight);    end;  end;end.
+Program WipeWin;
+
+Imports Memory from Memory;
+Imports SigUtils from SigUtils;
+Imports XScreen from XScreen;
+Imports FastRandom from FastRandom;
+Imports System from System;
+Imports CmdParse from CmdParse;
+Imports SaveWindow from SaveWindow;
+
+const MaskWidth=640;
+      MaskHeight=600;
+
+{$Include Random.Dfs}
+
+const MulCnt = 4;
+
+type  flagArray = record case boolean of
+                    true: (b: packed array [0..MaskHeight div MulCnt,
+                                0..MaskWidth div MulCnt] of boolean);
+                    false: (w: array [0..MaskHeight div MulCnt,
+                                0..MaskWidth div MulCnt div 16] of integer);
+                  end;
+
+var   WipeMask: RasterPtr;
+      FileName, Style: string;
+      Width, Height: integer;
+      PicWidth, PicHeight: integer;
+      X, Y: integer;
+      MinX, MinY, MaxX, MaxY: integer;  { window dimensions }
+      WinNum: integer;
+      win: WinRange;
+      Title: string;
+      save, ClearFlag: boolean;
+      MaskSLines: integer;
+      
+
+{ Left-to-right wipe }
+Procedure LWipe(X, Y, W, H: integer);
+  var i: integer;
+  begin
+  for i := 1 to W do
+    begin
+    RasterOp(RRpl, i, H, X, Y, SScreenW, SScreenP,
+                         0, 0, MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Top-to-bottom wipe }
+Procedure TWipe(X, Y, W, H: integer);
+  var i: integer;
+  begin
+  for i := 1 to H do
+    begin
+    RasterOp(RRpl, W, i,  X, Y, SScreenW, SScreenP,
+                          0, 0, MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Right-to-left wipe }
+Procedure RWipe(X, Y, W, H: integer);
+  var i: integer;
+  begin
+  for i := 1 to W do
+    begin
+    RasterOp(RRpl, i, H, X + (W - i), Y, SScreenW, SScreenP,
+                         0 + (W - i), 0, MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Bottom-to-top wipe }
+Procedure BWipe(X, Y, W, H: integer);
+  var i: integer;
+  begin
+  for i := 1 to H do
+    begin
+    RasterOp(RRpl, W, i, X, Y + (H - i), SScreenW, SScreenP,
+                         0, 0 + (H - i), MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Horizontal Center-out wipe }
+Procedure HOutWipe(X, Y, W, H: integer);
+  var i, CtrX: integer;
+  begin
+  CtrX := X + (W div 2);
+  for i := 1 to (W div 2) do
+    begin
+    RasterOp(RRpl, i * 2, H,
+     CtrX - i, Y, 48, MakePtr(ScreenSeg, 0, RasterPtr),
+     (W div 2) - i, 0, MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Vertical Center-out wipe }
+Procedure VOutWipe(X, Y, W, H: integer);
+  var i, CtrY: integer;
+  begin
+  CtrY := Y + (H div 2);
+  for i := 1 to (H div 2) do
+    begin
+    RasterOp(RRpl, W, i * 2, X, CtrY - i, SScreenW, SScreenP,
+                             0, (H div 2) - i, MaskSLines, WipeMask);
+    end;
+  end;
+
+{ Simultaneous vert. and horiz. Center-out wipe }
+Procedure HVOutWipe(X, Y, W, H: integer);
+  var i, CtrX, CtrY: integer;
+      MaxWH, width, height: integer;
+  begin
+  CtrX := X + (W div 2);
+  CtrY := Y + (H div 2);
+  if W > H then MaxWH := W else MaxWH := H;
+  for i := 1 to (W div 2) do
+    begin
+    width := i * 2;
+    height := width;
+    if width > W then width := W;
+    if height > H then height := H;
+    RasterOp(RRpl, width, height,
+     CtrX - (width div 2), CtrY - (height div 2),
+     SScreenW, SScreenP,
+     (W - width) div 2, (H - height) div 2,
+     MaskSLines, WipeMask);
+    end;
+  end;
+
+Type Ctrl = (Draw, DrawCmp);
+
+{ Randomly pick points and draw them }
+{$R-}
+Procedure RandomWipe(X, Y, W, H: integer; control: Ctrl);
+  var i: integer;
+      rx: integer;
+      ry: integer;
+      xMax, yMax: integer;
+      done: FlagArray;
+      funct : integer;
+      tab: pRanTable;
+      
+  begin
+  tab := MakePtr(DemoInt, 0, pRanTable);
+  InitRandom(tab);
+  xMax := (w div MulCnt);
+  yMax := (h div MulCnt);
+  if (xMax >= MaskWidth div MulCnt) or (yMax >= MaskHeight div MulCnt) then 
+     begin
+     WriteLn('***** Picture too big to random wipe ******');
+     exit(RandomWipe);
+     end;
+  if control = Draw then Funct := RRpl
+  else Funct := RNot;
+  for ry := 0 to yMax do
+      begin
+      for rx := 0 to (xMax+15) div 16 do
+         done.w[ry,rx] := 0;
+      for rx := xMax to (((xMax+15) div 16)*16)-1 do
+         done.b[ry,rx] := true;
+      end;
+  for i := 1 to xMax*yMax  (** - 150 **) do
+       begin
+
+       LoadAdr(Tab);
+       InLineByte(239 {LDDW});
+       LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));
+       InLineByte(228 {TLATE1});
+       InLineByte(191 {JCS});
+       StorExpr(rx);
+
+       LoadAdr(Tab);
+       InLineByte(239 {LDDW});
+       LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));
+       InLineByte(228 {TLATE1});
+       InLineByte(191 {JCS});
+       StorExpr(ry);
+
+       rx := LAnd(rx, #077777) mod xMax;
+       ry := LAnd(ry, #077777) mod yMax;
+
+       while done.w[ry,rx div 16] = -1 do
+          begin
+          rx := ((rx div 16)+1)*16;
+          if rx >= xMax then begin
+                             rx := 0;
+                             ry := (ry+1) mod yMax;
+                             end;
+          end;
+       while done.b[ry,rx] do
+          begin
+          rx := rx+1;
+          if rx >= xMax then begin
+                             rx := 0;
+                             ry := (ry+1) mod yMax;
+                             end;
+          end;
+       done.b[ry,rx] := true;
+       RasterOp(funct, MulCnt, MulCnt, x+rx*4, y+ry*4, SScreenW, SScreenP,
+                                       rx*4,   ry*4,   MaskSLines, WipeMask);
+       end;
+
+(**When only go to 150 from end, do this**
+  RasterOp(funct, w, h, x, y, SScreenW, SScreenP,  {do rest at once}
+                        0, 0, MaskSLines, WipeMask);
+(*****)
+
+ end;
+{$R=}
+
+{ Randomly pick points and draw them }
+Procedure KineticWipe(X, Y, W, H: integer);
+  var rx, ry, i, funct: integer;
+      mostlyWhite: integer;
+      rev: boolean;
+      
+  begin
+  InitRandom(MakePtr(DemoInt, 0, pRanTable));
+  mostlyWhite := 1000; {when 1 is all white}
+  i := 0;
+  repeat
+
+   i := i + 1;
+   
+   rev := false;
+   
+   funct := RandomRange(1,mostlyWhite);
+   if funct = 1 then funct := RRpl          {dest <- src}
+   else if funct = 2 then funct := RNot     {dest <- not scr1}
+   else rev := true;                        {dest <- not dest}
+
+   width  := RandomRange(1, w div 2);
+   height := RandomRange(1, h div 2);
+
+   rx := RandomRange(0, w-width);  {start of box, chosen so box must fit}
+   ry := RandomRange(0, h-height); {ditto}
+   
+   if rev then RasterOp(RNot, width, height, x+rx, y+ry, SScreenW, SScreenP,
+                                             x+rx, y+ry, SScreenW, SScreenP)
+
+   else RasterOp(funct, width, height, x+rx, y+ry, SScreenW, SScreenP,
+                        rx, ry, MaskSLines, WipeMask);
+  
+   if i < 970 then mostlyWhite :=mostlyWhite - 1
+  {mostlyWhite = 30}
+   else if (i < 1570) and (i mod 30 = 0) then mostlyWhite := mostlyWhite - 1
+  {mostlyWhite = 10}
+   else if (i < 2570) and (i mod 200 = 0) then mostlyWhite := mostlyWhite-1
+  {mostlyWhite = 5}
+   else if i > 3700 then mostlyWhite := 0
+   else if i mod 500 = 0 then mostlyWhite := mostlyWhite - 1;
+  {mostlyWhite = 3}
+
+  until mostlyWhite <= 0;
+  RasterOp(funct, w, h, x, y, SScreenW, SScreenP,
+                        0, 0, MaskSLines, WipeMask);
+  end;
+
+Procedure cmdsparse;
+  var Str, Broke: string;
+      ArgC, dum: integer;
+  begin
+  ArgC := ArgCount;
+  if ArgC < 6 then
+    begin
+    Writeln('** Usage: wipewin win# save file H|V|O|L|R|T|B|X|Y|K erase [title]');
+    Exit(WipeWin);
+    end;
+  NextArgStr(Str); {flush WipeWin}
+  NextArgInt(WinNum);
+  win := winNum;
+  NextArgInt(dum);
+  save := Recast(dum, boolean);
+  NextArgStr(FileName);
+  NextArgStr(Style);
+  NextArgInt(dum);
+  ClearFlag := Recast(dum, boolean);
+  { Force the first letter of Style to upper case }
+  if Style[1] in ['a'..'z'] then
+    Style[1] := Chr(Ord(Style[1]) - Ord('a') + Ord('A'));
+
+  if ArgC > 6 then
+    begin
+    RemDelimiters(UsrCmdLine, ' ', Broke);
+    Title := UsrCmdLine;
+    end
+  else
+    Title := '  ';
+
+  { Calculate the size of the window }
+  ChangeWindow(win);
+  XSGetUseWindow(win, MinX, MinY, Width, Height);
+  MaxX := MinX + Width - 1;
+  MaxY := MinY + Height - 1;
+  end;
+
+begin
+cmdsparse;
+
+if GetFastPicture(FileName, PicWidth, PicHeight, MaskSlines, WipeMask) then
+  begin
+  X := MinX; Y := MinY;
+  if PicWidth >= Width then PicWidth := Width
+  else  X := MinX + ((Width - PicWidth) div 2);
+  if PicHeight >= Height then PicHeight := Height
+  else Y := MinY + ((Height - PicHeight) div 2);
+  if save then SaveAndRestoreWindow(win, Title)
+  else XSRedrawWindow(win, Title);
+  if ClearFlag then Write(FF);
+
+  case Style[1] of
+    'T':  TWipe(X, Y, PicWidth, PicHeight);
+    'B':  BWipe(X, Y, PicWidth, PicHeight);
+    'R':  RWipe(X, Y, PicWidth, PicHeight);
+    'L':  LWipe(X, Y, PicWidth, PicHeight);
+    'O':  HVOutWipe(X, Y, PicWidth, PicHeight);
+    'H':  HOutWipe(X, Y, PicWidth, PicHeight);
+    'V':  VOutWipe(X, Y, PicWidth, PicHeight);
+    'X':  RandomWipe(X, Y, PicWidth, PicHeight, Draw);
+    'Y':  RandomWipe(X, Y, PicWidth, PicHeight, DrawCmp);
+    'K':  KineticWipe(X, Y, PicWidth, PicHeight);
+    otherwise:  LWipe(X, Y, PicWidth, PicHeight);
+    end;
+  end;
+end.

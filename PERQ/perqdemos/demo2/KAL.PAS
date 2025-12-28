@@ -1,1 +1,208 @@
-{---------------------------------------------------------------}{                                                               }{   Kal - Perq kaleidoscope doodler.                            }{         J. P. Strait     2 May 80.                            }{                                                               }{   Adapted from a PDP-8 program in Digital Equipment           }{   Corporation's "Small Computer HandBook" pp. 6-19.           }{                                                               }{---------------------------------------------------------------}program Kal;  imports System from System; imports IOErrors from IOErrors; imports IO_Unit from IO_Unit; imports Memory from Memory; imports Raster from Raster; imports Screen from Screen;    var Seed: integer;  function Random: integer; begin { Random }  Seed := Abs(Seed);  Seed := LXor( Seed, Shift( Seed, 4) );  Seed := LXor( Seed, Shift( Seed, -11) );  Random := Seed end { Random }; const MinX = 10;      MaxX = 757;      MinY = 100;      MaxY = 1013;      LimitX = (MaxX - MinX) div 2 - 20;      LimitY = (MaxY - MinY) div 2 - 20;      CenterX = (MaxX + MinX) div 2;      CenterY = (MaxY + MinY) div 2;type ScrnArray = array[0..0] of array[0..47] of packed array[0..15] of 0..1;     ScrnPtr = ^ScrnArray;      var X, Y, T, TX, TY: integer;    Bias, Speed, Delay, Eraser: integer;    DotCount, DotLimit: integer;    I, J: integer;    Dot: array[0..199] of record         Dx, Dy: integer         end;    DotI: integer;    Running, Erase, Quitting: boolean;    Scrn: ScrnPtr;    DotChar: char;     procedure SystemTitle(n: integer); begin { SystemTitle }  Write(Chr(#014));       { FormFeed - clear the screen }  if n <> 0 then Write(' ':n);  Writeln('Perq User Interface.    Version ', MainVersion, '.', SystemVersion:1) end { SystemTitle }; procedure Clear; begin { Clear }  RasterOp(RXor, MaxX - MinX + 1, MaxY - MinY + 1,           MinX, MinY, 48, MakePtr(ScreenSeg,0,RasterPtr),           MinX, MinY, 48, MakePtr(ScreenSeg,0,RasterPtr)) end { Clear };  procedure Initialize; begin { Initialize } Rewrite(Output);  Reset(Input);  Running := true;  Quitting := false;  Speed := 9;  Delay := 0;  Eraser := 100;  Erase := true;  DotChar := '*';  for I := 0 to 199 do with Dot[I] do   begin Dx := 0; Dy := 0 end;  DotI := 0;  Seed := #13205;  Bias := 2;  X := #5161;  Y := #3645;  Scrn := MakePtr(ScreenSeg,0,ScrnPtr);  SystemTitle(1);  Writeln;  Writeln(' "Q"       return to command level.        "C" - clear the screen.');  Writeln(' "0".."9"  unshifted: dot buffer size.     "E" - toggle erase mode.');  Writeln(' "0".."9"  shifted: speed.                 " " - start/stop.');  Writeln;  Writeln(' other characters re-seed the random number generator.');  Line(DrawLine,MinX-1,MinY-1,MaxX+1,MinY-1,SScreenP);  Line(DrawLine,MaxX+1,MinY-1,MaxX+1,MaxY+1,SScreenP);  Line(DrawLine,MaxX+1,MaxY+1,MinX-1,MaxY+1,SScreenP);  Line(DrawLine,MinX-1,MaxY+1,MinX-1,MinY-1,SScreenP) end { Initialize };   procedure KeyCheck; var Status: integer;     Ch: char; begin { KeyCheck }  Status := IOCRead(TransKey,Ch);  if Status <> IOEIOB then   if Status = IOEIOC then    begin     if Ch in ['a'..'z'] then Ch := Chr(Ord(Ch) - Ord('a') + Ord('A'));     case Ch of      'C':       Clear;      'E':       Erase := not Erase;      'Q':       begin Quitting := true;                  SystemTitle(0);                  Writeln('Type HELP if you need it.')                 end;      ' ':       Running := not Running;      '0'..'9':  Eraser := 20 * (Ord(Ch) - Ord('0')) + 1;      ')':       Speed := 0;      '!':       Speed := 1;      '@':       Speed := 2;      '#':       Speed := 3;      '$':       Speed := 4;      '%':       Speed := 5;      '^':       Speed := 6;      '&':       Speed := 7;      '*':       Speed := 8;      '(':       Speed := 9;      otherwise: begin Seed := Ord(Ch) * #400 + Ord(Ch);                  if Seed = 0 then Seed := #12345;                  DotCount := DotLimit                 end      end    end;  Delay := 3000 div (Speed + 1) - 3000 div 10 end { KeyCheck };   procedure SetDot( X, Y: integer; F: integer ); begin { SetDot }  SChrFunc(F);  SSetCursor(CenterX+X,CenterY+Y); SPutChr(DotChar);  SSetCursor(CenterX+X,CenterY-Y); SPutChr(DotChar);  SSetCursor(CenterX-X,CenterY-Y); SPutChr(DotChar);  SSetCursor(CenterX-X,CenterY+Y); SPutChr(DotChar) end { SetDot };          begin { Kal } Initialize; repeat KeyCheck;  if not Erase then Clear;  if Erase then DotChar := '*' else DotChar := '.';  T := Random;  { throw one away }  repeat T := LAnd(Random,3) + 1  until T <> Bias;  Bias := T;  DotLimit := LAnd(Random,#3777) + #4000;  DotCount := 0;  repeat   if Running then DotCount := DotCount + 1;   KeyCheck;   if not Quitting then    begin     if LAnd(Y,#4000) <> 0 then Y := LOr(Y,#174000);     X := X - Shift(Y,-Bias);     if LAnd(X,#4000) <> 0 then X := LOr(X,#174000);     Y := Y + Shift(X,-Bias);     {TX := LAnd(X,#777) - #377;     TY := LAnd(Y,#777) - #377;     T := TX * TX + TY * TY;     if (Abs(TX) < Limit) and (Abs(TY) < Limit) then}     TX := LAnd(X,#777);     TY := LAnd(Y,#777);     if (TX < LimitX) and (TY < LimitY) then      begin       for I := 1 to Delay do ;       {TX := TX + CenterX;       TY := TY + CenterY;}       {$R-}       if Erase then        with Dot[(DotI + 200 - Eraser) mod 200] do         {begin SSetCursor(DX,DY); SChrFunc(RAndNot); SputChr('*') end;}         SetDot(DX,DY,RAndNot);       {SSetCursor(TX,TY); SChrFunc(ROr); SPutChr('*');}       SetDot(TX,TY,ROr);       {$R+}       with Dot[DotI] do        begin Dx := TX; Dy := TY end;       DotI := (DotI + 1) mod 200      end    end  until (DotCount >= DotLimit) or Quitting;  if not (Erase or Quitting) then   begin DotCount := 0;    repeat DotCount := DotCount + 1 until DotCount = 0   end until Quittingend { Kal }.
+{---------------------------------------------------------------}
+{                                                               }
+{   Kal - Perq kaleidoscope doodler.                            }
+{         J. P. Strait     2 May 80.                            }
+{                                                               }
+{   Adapted from a PDP-8 program in Digital Equipment           }
+{   Corporation's "Small Computer HandBook" pp. 6-19.           }
+{                                                               }
+{---------------------------------------------------------------}
+
+
+program Kal;
+ 
+ imports System from System;
+ imports IOErrors from IOErrors;
+ imports IO_Unit from IO_Unit;
+ imports Memory from Memory;
+ imports Raster from Raster;
+ imports Screen from Screen;
+  
+ 
+ var Seed: integer;
+ 
+ function Random: integer;
+ begin { Random }
+  Seed := Abs(Seed);
+  Seed := LXor( Seed, Shift( Seed, 4) );
+  Seed := LXor( Seed, Shift( Seed, -11) );
+  Random := Seed
+ end { Random };
+
+
+ 
+const MinX = 10;
+      MaxX = 757;
+      MinY = 100;
+      MaxY = 1013;
+      LimitX = (MaxX - MinX) div 2 - 20;
+      LimitY = (MaxY - MinY) div 2 - 20;
+      CenterX = (MaxX + MinX) div 2;
+      CenterY = (MaxY + MinY) div 2;
+
+
+type ScrnArray = array[0..0] of array[0..47] of packed array[0..15] of 0..1;
+     ScrnPtr = ^ScrnArray;
+      
+var X, Y, T, TX, TY: integer;
+    Bias, Speed, Delay, Eraser: integer;
+    DotCount, DotLimit: integer;
+    I, J: integer;
+    Dot: array[0..199] of record
+         Dx, Dy: integer
+         end;
+    DotI: integer;
+    Running, Erase, Quitting: boolean;
+    Scrn: ScrnPtr;
+    DotChar: char;
+    
+
+ procedure SystemTitle(n: integer);
+ begin { SystemTitle }
+  Write(Chr(#014));       { FormFeed - clear the screen }
+  if n <> 0 then Write(' ':n);
+  Writeln('Perq User Interface.    Version ', MainVersion, '.', SystemVersion:1)
+ end { SystemTitle };
+
+
+ procedure Clear;
+ begin { Clear }
+  RasterOp(RXor, MaxX - MinX + 1, MaxY - MinY + 1,
+           MinX, MinY, 48, MakePtr(ScreenSeg,0,RasterPtr),
+           MinX, MinY, 48, MakePtr(ScreenSeg,0,RasterPtr))
+ end { Clear };
+
+ 
+ procedure Initialize;
+ begin { Initialize }
+ Rewrite(Output);
+  Reset(Input);
+  Running := true;
+  Quitting := false;
+  Speed := 9;
+  Delay := 0;
+  Eraser := 100;
+  Erase := true;
+  DotChar := '*';
+  for I := 0 to 199 do with Dot[I] do
+   begin Dx := 0; Dy := 0 end;
+  DotI := 0;
+  Seed := #13205;
+  Bias := 2;
+  X := #5161;
+  Y := #3645;
+  Scrn := MakePtr(ScreenSeg,0,ScrnPtr);
+  SystemTitle(1);
+  Writeln;
+  Writeln(' "Q"       return to command level.        "C" - clear the screen.');
+  Writeln(' "0".."9"  unshifted: dot buffer size.     "E" - toggle erase mode.');
+  Writeln(' "0".."9"  shifted: speed.                 " " - start/stop.');
+  Writeln;
+  Writeln(' other characters re-seed the random number generator.');
+  Line(DrawLine,MinX-1,MinY-1,MaxX+1,MinY-1,SScreenP);
+  Line(DrawLine,MaxX+1,MinY-1,MaxX+1,MaxY+1,SScreenP);
+  Line(DrawLine,MaxX+1,MaxY+1,MinX-1,MaxY+1,SScreenP);
+  Line(DrawLine,MinX-1,MaxY+1,MinX-1,MinY-1,SScreenP)
+ end { Initialize };
+ 
+ 
+ procedure KeyCheck;
+ var Status: integer;
+     Ch: char;
+ begin { KeyCheck }
+  Status := IOCRead(TransKey,Ch);
+  if Status <> IOEIOB then
+   if Status = IOEIOC then
+    begin
+     if Ch in ['a'..'z'] then Ch := Chr(Ord(Ch) - Ord('a') + Ord('A'));
+     case Ch of
+      'C':       Clear;
+      'E':       Erase := not Erase;
+      'Q':       begin Quitting := true;
+                  SystemTitle(0);
+                  Writeln('Type HELP if you need it.')
+                 end;
+      ' ':       Running := not Running;
+      '0'..'9':  Eraser := 20 * (Ord(Ch) - Ord('0')) + 1;
+      ')':       Speed := 0;
+      '!':       Speed := 1;
+      '@':       Speed := 2;
+      '#':       Speed := 3;
+      '$':       Speed := 4;
+      '%':       Speed := 5;
+      '^':       Speed := 6;
+      '&':       Speed := 7;
+      '*':       Speed := 8;
+      '(':       Speed := 9;
+      otherwise: begin Seed := Ord(Ch) * #400 + Ord(Ch);
+                  if Seed = 0 then Seed := #12345;
+                  DotCount := DotLimit
+                 end
+      end
+    end;
+  Delay := 3000 div (Speed + 1) - 3000 div 10
+ end { KeyCheck };
+ 
+ 
+ procedure SetDot( X, Y: integer; F: integer );
+ begin { SetDot }
+  SChrFunc(F);
+  SSetCursor(CenterX+X,CenterY+Y); SPutChr(DotChar);
+  SSetCursor(CenterX+X,CenterY-Y); SPutChr(DotChar);
+  SSetCursor(CenterX-X,CenterY-Y); SPutChr(DotChar);
+  SSetCursor(CenterX-X,CenterY+Y); SPutChr(DotChar)
+ end { SetDot };
+  
+    
+    
+begin { Kal }
+ Initialize;
+ repeat KeyCheck;
+  if not Erase then Clear;
+  if Erase then DotChar := '*' else DotChar := '.';
+  T := Random;  { throw one away }
+  repeat T := LAnd(Random,3) + 1
+  until T <> Bias;
+  Bias := T;
+  DotLimit := LAnd(Random,#3777) + #4000;
+  DotCount := 0;
+  repeat
+   if Running then DotCount := DotCount + 1;
+   KeyCheck;
+   if not Quitting then
+    begin
+     if LAnd(Y,#4000) <> 0 then Y := LOr(Y,#174000);
+     X := X - Shift(Y,-Bias);
+     if LAnd(X,#4000) <> 0 then X := LOr(X,#174000);
+     Y := Y + Shift(X,-Bias);
+     {TX := LAnd(X,#777) - #377;
+     TY := LAnd(Y,#777) - #377;
+     T := TX * TX + TY * TY;
+     if (Abs(TX) < Limit) and (Abs(TY) < Limit) then}
+     TX := LAnd(X,#777);
+     TY := LAnd(Y,#777);
+     if (TX < LimitX) and (TY < LimitY) then
+      begin
+       for I := 1 to Delay do ;
+       {TX := TX + CenterX;
+       TY := TY + CenterY;}
+       {$R-}
+       if Erase then
+        with Dot[(DotI + 200 - Eraser) mod 200] do
+         {begin SSetCursor(DX,DY); SChrFunc(RAndNot); SputChr('*') end;}
+         SetDot(DX,DY,RAndNot);
+       {SSetCursor(TX,TY); SChrFunc(ROr); SPutChr('*');}
+       SetDot(TX,TY,ROr);
+       {$R+}
+       with Dot[DotI] do
+        begin Dx := TX; Dy := TY end;
+       DotI := (DotI + 1) mod 200
+      end
+    end
+  until (DotCount >= DotLimit) or Quitting;
+  if not (Erase or Quitting) then
+   begin DotCount := 0;
+    repeat DotCount := DotCount + 1 until DotCount = 0
+   end
+ until Quitting
+end { Kal }.

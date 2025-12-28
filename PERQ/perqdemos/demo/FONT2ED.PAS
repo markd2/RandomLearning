@@ -1,1 +1,1338 @@
-module Font2Ed;{------------------------------------------------------------------------------Abstract: Font2Ed provides the external interface for fonted.  Author: Brad A. MyersCopyright (C) 1981 - Brad A. Myers------------------------------------------------------------------------------}{------------------------------------------------------------------------------Versions:    20-Jul-81  V3.1    Brad A. Myers  XScreen     6-Jun-81  V2.0    Brad A. Myers  Lots of new features    22-Apr-81  V1.1    Brad A. Myers  Made to work for new system     6-Jan-81  V1.0    Brad A. Myers  Broke off from Fonted------------------------------------------------------------------------------}{\\\\\\\\\\\\\\\\\\\\\\\\\\\\} EXPORTS {//////////////////////////}Imports IO_Others from IO_Others;Procedure SetFontHeight(newht: integer);procedure SetUpCommands;Procedure EraseScreen;procedure FixScreen;Procedure GetAdr(which: Integer; var baseX, baseY: Integer);Procedure InvertSel(sel: Integer);Procedure SetCur(newOrd: Integer);procedure ReadChar;  {read curOrd}procedure WriteChar;Function FindChar(Var charOrd: integer): boolean;procedure MainLoop;Procedure SetArrows;Procedure InitSelect;Procedure SetBaseLine(newVal: integer; eraseOld: boolean);Function Confirm: boolean;Function DoFontHt(specHeight: Integer): Integer;Function DoFontWidth(specWidth: Integer): Integer;Const FF = Chr(12); Var dotCurs : CurPatPtr;{\\\\\\\\\\\\\\\\\\\\\\\\\\\\} PRIVATE {//////////////////////////}Imports IO_Unit from IO_Unit;imports ioerrors from ioerrors;imports FontEd from FontEd;imports XScreen from XScreen;imports TransUtils from TransUtils;{$R+}PROCEDURE SelXor(topX, topY, width, height, which: integer; grey: boolean);              forward;Const blinkRate = 20;      arrowC = Chr(25);      LF = Chr(10);      BS = Chr(8);      CtrlU = Chr(21);      titComment = 'COMMENT                    | CLEAR';      byeMessage = '        Writing Transcript...';      Const NumMenus = 17;      DefFH = 13;      DefFW = 9;      sep = 2;      headerSize = 19;      W1w = 13*9+11; {Command (13)}      W1h = 14*DefFH+14;     {13+1}      W2w = 6*9+11;  {Mode (6)}      W2h = 4*DefFH+14;      {3+1}      W3w = 7*9+11;  {Confirm (7)}      W3h = 3*DefFH+14;      {2+1}      W4w = 5*9+11;  {Width (5)}      W4h = 2*DefFH+14;      {1+1}      W5w = 8*9+11;  {Function (8)}      W5h = 2*DefFH+14;      {1+1}      W6w = 5*9+11;  {Ascii (5)}      W6h = 2*DefFH+14;      {1+1}      W7w = 6*9+11;  {BaseLn (6)}      W7h = 2*DefFH+14;      {1+1}      W9w = 7*9+11; {Font Ht (7)}      W9h = 2*DefFH+14;      {1+1}      W8w = winWidth;      W8h = 2*DefFH+14;      {1+1}      W10w = winWidth;      W10h = 4*NumBits+14; {Comment}      W11w = 11*9+11; {Fixed Width (11)}      W11h = 3*DefFH+14; {2+1}      W11s = 767-W11w; {flush left}      W12w = 4*9+11;  {Ord (4)}      W12h = 2*13+14;      {1+1}      W14w = 10*9+11;  {Direction (10)}      W14h = 3*13+14;      {2+1}      W15w = 6*9+11;  {Italic (6)}      W15h = 3*13+14;      {2+1}      W16w = 5*9+11;  {Bold (5)}      W16h = 3*13+14;      {2+1}      W17w = 59;      {Char}      W17h = 57+headerSize-2;         W17x = 20*16-4;      W17y = littleY-headerSize;            W9s = w11s-sep-w9w; {flush left next to w11}            ArrowStart = (w2h+w4h+w6h+sep*3+5)*48+43;            GreyWW=((w1w+63) div 64) * 4; {round up to nearest multiple of 4 words}Type GreyArea = Array[0..DefFH+2] of Array[0..GreyWW-1] of integer;Var greySpare: ARRAY [1..5] of ^GreyArea;    posAr: ARRAY[1..NumMenus] of RECORD                                  topX, topY, width, height: Integer;                                 END;Procedure InitPosAr;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Sets all values in PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   begin   posAr[1].topX := winXStart;   posAr[1].topY := 0;   posAr[1].width := w1w;   posAr[1].height := w1h;   posAr[2].topX := winXStart+W1w+sep;   posAr[2].topY := 0;   posAr[2].width := w2w;   posAr[2].height := w2h;   posAr[3].topX := winXStart+w11w+sep;   posAr[3].topY := w2h+w4h+w6h+w14h+4*sep;   posAr[3].width := w3w;   posAr[3].height := w3h;   posAr[4].topX := winXStart+w1w+sep;   posAr[4].topY := w2h+sep;   posAr[4].width := w4w;   posAr[4].height := w4h;   posAr[5].topX := winXStart+w1w+w2w+2*sep;   posAr[5].topY := w2h+sep;   posAr[5].width := w5w;   posAr[5].height := w5h;   posAr[6].topX := winXStart+w1w+sep;   posAr[6].topY := w2h+w4h+sep*2;   posAr[6].width := w6w;   posAr[6].height := w6h;   posAr[7].topX := winXStart+w1w+w2w+w12w+3*sep;   posAr[7].topY := w2h+w4h+sep*2;   posAr[7].width := w7w;   posAr[7].height := w7h;   posAr[8].topX := winXStart;   posAr[8].topY := w2h+w4h+w6h+w14h+w11h+5*sep;   posAr[8].width := w8w;   posAr[8].height := w8h;   posAr[9].topX := winXStart+w11w+w3w+2*sep;   posAr[9].topY := w2h+w4h+w6h+w14h+4*sep;   posAr[9].width := w9w;   posAr[9].height := w9h;   posAr[10].topX := winXStart;   posAr[10].topY := w2h+w4h+w6h+w14h+w11h+w8h+6*sep;   posAr[10].width := w10w;   posAr[10].height := w10h;   posAr[11].topX := winXStart;   posAr[11].topY := w2h+w4h+w6h+w14h+4*sep;   posAr[11].width := w11w;   posAr[11].height := w11h;   posAr[12].topX := winXStart+w1w+w6w+2*sep;   posAr[12].topY := w2h+w4h+sep*2;   posAr[12].width := w12w;   posAr[12].height := w12h;   posAr[13].topX := 43*16;   posAr[13].topY := w2h+w4h+w6h+sep*3+5;   posAr[13].width := 55;   posAr[13].height := 55;   posAr[14].topX := winXStart+w1w+sep;   posAr[14].topY := w2h+w4h+w6h+3*sep;   posAr[14].width := w14w;   posAr[14].height := w14h;   posAr[15].topX := winXStart+W1w+W2w+sep*2;   posAr[15].topY := 0;   posAr[15].width := w15w;   posAr[15].height := w15h;   posAr[16].topX := winXStart+W1w+W2w+w15w+sep*3;   posAr[16].topY := 0;   posAr[16].width := w16w;   posAr[16].height := w16h;   posAr[17].topX := w17x;   posAr[17].topY := w17y;   posAr[17].width := w17w;   posAr[17].height := w17h;   end; {InitPosAr}procedure SetUpCommands;   var temp: integer;   begin   SCurOff;   SetArrows;   SCurChr(chr(127));  {del}   with posAr[1] do CreateWindow(1, topX, topY, width, height, 'COMMAND');   ChangeWindow(1);   WriteLn('ALL BLACK');   WriteLn('ALL WHITE');   WriteLn('ALL INVERT');   WriteLn('BOX');   WriteLn('CHAR READ');   WriteLn('CHAR WRITE');   WriteLn('GET FONT FILE');   WriteLn('INIT');   WriteLn('JOIN');   WriteLn('LINE');   WriteLn('PUT FONT FILE');   WriteLn('REFRESH');   Write  ('QUIT');   with posAr[2] do CreateWindow(2, topX, topY, width, height, 'MODE');   ChangeWindow(2);   WriteLn('BLACK');   WriteLn('WHITE');   Write('TOGGLE');   with posAr[2] do SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9,                           defFH, 1, false);   with posAr[3] do CreateWindow(3, topX, topY, width, height, 'CONFIRM');   ChangeWindow(3);   WriteLn('YES');   Write('NO');   with posAr[4] do CreateWindow(4, topX, topY, width, height, 'WIDTH');   ChangeWindow(4);   Write(curWidth:3);   with posAr[5] do CreateWindow(5, topX, topY, width, height, 'FUNCTION');   ChangeWindow(5);   Write(curFunction:5);   with posAr[6] do CreateWindow(6, topX, topY, width, height, 'ASC');   ChangeWindow(6);   Write(Chr(curOrd));   with posAr[7] do CreateWindow(7, topX, topY, width, height, 'BASELN');   ChangeWindow(7);   Write(curBaseLine:4);   with posAr[8] do CreateWindow(8,topX,topY, width, height, 'FONT FILE NAME');   ChangeWindow(8);   Write(curFont);   with posAr[9] do CreateWindow(9, topX, topY, width, height, 'FONT HT');   ChangeWindow(9);   Write(fontHeight:4);   with posAr[10] do CreateWindow(10, topX, topY, width, height, titComment);   ChangeWindow(10);   SCurOff;   with posAr[11] do CreateWindow(11,topX, topY, width, height, 'FIXED WIDTH');   ChangeWindow(11);   WriteLn('YES');   Write  ('NO');   if fixedWidth then temp := 0 else temp := 1;   with posAr[11] do SelXor(topX+4,topY+headerSize+temp*DefFH,width-9,                           defFH, 1, false);   with posAr[12] do CreateWindow(12,topX, topY, width, height, 'ORD');   ChangeWindow(12);   Write('#',curOrd:1:8);   with posAr[14] do CreateWindow(14,topX, topY, width, height, 'DIRECTION');   ChangeWindow(14);   WriteLn('LEFT',arrowC,'RIGHT');   Write  ('RIGHT',arrowC,'LEFT');   with posAr[14] do SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,                            width-9,defFH, 14, false);   with posAr[15] do CreateWindow(15,topX, topY, width, height, 'ITALIC');   ChangeWindow(15);   WriteLn('TRUE');   Write  ('FALSE');   with posAr[15] do SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,                            width-9,defFH, 15, false);   with posAr[16] do CreateWindow(16,topX, topY, width, height, 'BOLD');   ChangeWindow(16);   WriteLn('TRUE');   Write  ('FALSE');   with posAr[16] do SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,                            width-9,defFH, 16, false);   with posAr[17] do CreateWindow(17,topX, topY, width, height, 'CHAR');   ChangeWindow(0);   end;  {SetUpCommands}Procedure InitSelect;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Sets up arrays needed for selection, grey spares, cursor and          smalldot.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}    var i,j,k,w: integer;    f: File Of CursorPattern;(*    newCurs: CurPatPtr;*)  begin    {**set new cursor and dotCurs**}    Reset(f, 'Fonted.cursor');    NEW(0, 4, dotCurs);(*    NEW(0, 4, newCurs);*)    get(f);  {past arrows}    get(f);  {past newCursor--not used}    dotCurs^ := f^;(*    IOLoadCursor(newCurs, 4, 4);    DISPOSE(newCurs);*)    Close(f);    InitPosAr;    {**Write grey into 3 grey squares**}       {GreyW is an array holding the bit width of the three grey spares,        greyWW is word width of buffers}    for k := 1 to 5 do       begin       if k < 4 then w := k       else if k = 4 then w := 14       else if k = 5 then w := 16;       NEW(0,4,greySpare[k]);       for i := 0 to defFH+2 do           for j := 0 to greyWW-1 do              if i mod 2 = 0 then greySpare[k]^[i][j] := #122222                           else greySpare[k]^[i][j] := #055555;       {now remove parts that should be white}       {right} RasterOp(RXor, (greyWW*16+4-posAr[w].width-11),                     defFH+3, posAr[w].width-11+4, 0, GreyWW, greySpare[k],                     posAr[w].width-11+4, 0, GreyWW, greySpare[k]);       {hole}  RasterOp(RXor, posAr[w].width-11, defFH-1, 2, 2, GreyWW,                     greySpare[k], 2, 2, GreyWW, greySpare[k]);       end;    end;PROCEDURE SelXor(topX, topY, width, height, which: integer; grey: boolean);    {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -     Abstract: XOrs picture of menu item sel or draws grey box around.    Parameters: first 4 are parameters of box to select.  If not grey then                uses Black xor, otherwise grey.  If grey, width and height                params are ignored and which determines where to go    Environment:  Uses greySpare.    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}       var ys, yH, yts: Integer;           greyN: integer;       begin       if which = 11 then which := 3  {use same grey as 3}       else if which=15 then which := 2       else if (which <= 0) or (which > NumMenus) then            begin            Write('IMPOSSIBLE IN SelXor: val= ',which:1);            exit(SelXor);            end;       if which = 14 then greyN := 4       else if which > 14 then greyN := 5       else greyN := which;     {first check if scrolled off screen}       if not grey then RasterOp(RNot, width, height, topX,topY, DestWords,                           DestPtr, topX, topY, DestWords, DestPtr)       else RasterOp(RXor, posAr[which].width-11+4, defFH+3, topX, topY,                       DestWords, DestPtr, 0,0, GreyWW, greySpare[greyN]);       end; {SelXor}Procedure WaitNoPress;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: waits until press off- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var x,y: integer;       press: boolean;   begin   repeat     press := GetAction(x,y,TRUE,buttons);   until not press;   end;Function GetInChar(var c: char; lookForPress: boolean): boolean;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: waits for character and returns it after writing it.Parameters: sets c to char read. if lookForPress then exits on pressReturns: returns true if press otherwise false- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var press, existsChar: boolean;       x,y: integer;   begin   repeat     press := GetCharAction(x,y,true,buttons,existsChar,c);   until existsChar or (lookForPress and press);   if existsChar then XSPutChr(chr(LOr(ord(c), #200)));   GetInChar := press and lookForPress;   end; {GetInChar}Function FindMenu(var press: boolean): integer;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Checks the current cursor position for being inside any menu.Parameters: press is set with the tabswitch valueReturns: If inside a menu, returns that menu number otherwise returns -1.Environment:  Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var tabx, taby, i: integer;   begin   press := GetAction(tabX, tabY, TRUE, buttons);   for i := 1 to NumMenus do      with posAr[i] do         if (tabX > topX) and (tabY > topY) and (tabX < topX+width) and             (tabY < topY+height) then begin                                      FindMenu := i;                                      exit(FindMenu);                                      end;   FindMenu := -1;   end; {FindMenu}FUNCTION CheckCurs(menu: integer): integer;    {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -     Abstract: Watches cursor and greys menu item over.  Uses histerisis.  Works              only for windows with multiple items in them.  Loops until press              or cursor goes outside the menu    Parameters: menu is menu are inside of.    Returns: -1 if cursor goes outside box otherwise index of command on top of             when press (0..num-1).    Environment:  Requires nothing selected on entry. Uses PosAr.    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}      CONST hist = 3;      var lastSel, curSel, x, y, lastSelBot, lastSelTop, lastSelRight,             lastSelLeft: integer;          press: boolean;      label 1,2;      begin      lastSel := -1;      curSel := -1;      with posAr[menu] do        while true do          begin          press := GetAction(x,y, TRUE, buttons);          if (curSel <> -1) and              (y < lastSelBot+hist) and (y > lastSelTop-hist) and                (x < lastSelRight+hist) and (x > lastSelLeft-hist) then goto 2;          if (y < topY) or (y> topY+height-9) or (x < topX) or (x > topX+width)                  then begin                       CheckCurs := -1;                       if curSel <> -1 then SelXor(topX+3,topY+headerSize+                                  curSel*DefFH-2,0,0,menu, true);                       exit(CheckCurs);                       end;          if y < topY+headerSize then begin  {in header}                                      curSel := -1;                                      goto 1;                                      end;         {here must be a good selection!!!}          lastSelLeft := topX;          lastSelRight := topX+width;          curSel := ((y-topY-headerSize) div defFH);          lastSelTop := topY+headerSize+curSel*defFH;          lastSelBot := lastSelTop+defFH-1;       1: if (curSel <> lastSel) then               begin               if lastSel <> -1 then                 SelXor(topX+3,topY+headerSize+lastSel*DefFH-2,0,0,menu, true);               lastSel := curSel;               end;          if curSel <> -1 then               SelXor(topX+3,topY+headerSize+curSel*DefFH-2,0,0,menu, true);       2: if press then                if curSel <> -1 then                            begin                            CheckCurs := curSel;                            SelXor(topX+3,topY+headerSize+ curSel*DefFH-2,0,0,                              menu, true);                            exit(CheckCurs);                            end                else IOBeep;  {press in header}          end {loop}  end; {CheckCurs}FUNCTION Confirm: boolean;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Waits for confimation.  Blinks confirm box until yes or no selected          or press outside the box (= no).Returns: true iff press over YES. false if press anywhere elseEnvironment:  Requires nothing selected on entry. Uses PosAr.Calls: CheckCurs, SelXor- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var oldTime, line: integer;       time: Double;       on,press: Boolean;   begin   Confirm := false;   WaitNoPress;   IOGetTime(time);   oldTime := time[0]-blinkRate-1; {make first loop do invert}   on := false;   with posAr[3] do    repeat      IOGetTime(time);      if time[0]-oldTime > blinkRate then begin                                 on := not on;                                 SelXor(topX,topY,width, height, 3, false);                                 oldTime := time[0];                                 end;      if FindMenu(press) = 3 then begin                           if on then begin                                    SelXor(topX,topY,width,height,3,false);                                    on := false;                                    end;                           line := CheckCurs(3);                           if (line = 0) and press then Confirm := true;                           end;          until press;   WaitNoPress;   if on then SelXor(posAr[3].topX, posAr[3].topY, posAr[3].width,                     posAr[3].height, 3, false);   end; {Confirm}Procedure SetFontHeight(newHt: integer);{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Sets fontHeight and fixes window.Parameters: newHt is new value.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   begin   fontHeight := newHt;   ChangeWindow(9);   Write(fontHeight:4);   end; {SetFontHeight}   FUNCTION DoFontHt(specHeight: Integer): integer;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Blinks FontHt box until press, if inside, then reads new font height          and returns it else returns specHeight.Returns: new heightParameters: specHeight is the height of the new fontSideEffects: leave FontHt window messed up.Environment:  Uses PosAr.Calls: ReadNumber- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  Handler BadNumber;    begin    WaitNoPress;    exit(DoFontHt);    end;   var oldTime, newHt,menu: integer;       time: Double;       on,press: Boolean;   begin   DoFontHt := specHeight;   WaitNoPress;   IOGetTime(time);   oldTime := time[0]-blinkRate-1;   on := false;   ChangeWindow(9);   Write(FF,'New=',specHeight:1);   with posAr[9] do    repeat      IOGetTime(time);      if time[0]-oldTime > blinkRate then begin                                 on := not on;                                 SelXor(topX, topY, width, height, 9, false);                                 oldTime := time[0];                                 end;       menu := FindMenu(press);    until press;   if on then SelXor(posAr[9].topX, posAr[9].topY, posAr[9].width,                     posAr[9].height, 9, false);   if menu = 9 then begin                    Write(FF, ':: ');                    press := ReadNumber(newHt, specHeight, false);                    DoFontHt := newHt;                     end;   WaitNoPress;   end; {DoFontHt}Function DoFontWidth(specWidth: Integer): Integer;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Blinks Width box until press, if inside, then reads new width          and returns it else returns specWidth.Returns: new widthParameters: specwidth is the width of the new fontSideEffects: leave Width window messed up.Environment:  Uses PosAr.Calls: ReadNumber- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  Handler BadNumber;    begin    WaitNoPress;    exit(DoFontWidth);    end;   var oldTime, newWidth,menu: integer;       time: Double;       on,press: Boolean;   begin   DoFontWidth := specWidth;   WaitNoPress;   IOGetTime(time);   oldTime := time[0]-blinkRate-1;   on := false;   ChangeWindow(4);   Write(FF,'Nw=',specWidth:1);   with posAr[4] do    repeat      IOGetTime(time);      if time[0]-oldTime > blinkRate then begin                                 on := not on;                                 SelXor(topX, topY, width, height, 4, false);                                 oldTime := time[0];                                 end;       menu := FindMenu(press);    until press;   if on then SelXor(posAr[4].topX, posAr[4].topY, posAr[4].width,                     posAr[4].height, 4, false);   if menu = 4 then begin                    Write(FF, ':: ');                    press :=  ReadNumber(newWidth, specWidth, false);                    DoFontWidth := newWidth;                     end;   WaitNoPress;   end; {DoFontWidth}PROCEDURE DoQuit;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Initialized cursor and screen and exits main program- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  var i: integer;      s: String;  begin  s := ByeMessage;  XSChangeWindow(10);  {Comment window uses scrFont}  XSPutChr(FF);  XSSetBold(true);  for i := 1 to 3 do XSPutChr(LF);  for i := 1 to length(s) do XSPutChr(s[i]);  CloseTranscript;  ScreenReset;  exit(FontEd);  end; {DoQuit}PROCEDURE DoWidth;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in Width box.  If press inside then          reads new value.SideEffects: may set new width value.Environment:  Uses PosAr.Calls: ReadNumber- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  Handler BadNumber;     begin     IOBeep;     SetWidth(curWidth, true);     WaitNoPress;     exit(DoWidth);     end;  var newWd: integer;       press: boolean;   begin   with posAr[4] do SelXor(topX, topY, width, height, 4, false);   while FindMenu(press) = 4 do       if press then           if fixedWidth then IOBeep           else begin                with posAr[4] do SelXor(topX, topY, width, height, 4, false);                ChangeWindow(4);                Write(FF, ':: ');                press :=  ReadNumber(newWd, curWidth, false);                SetWidth(newWd, true);                WaitNoPress;                exit(DoWidth);                end;   with posAr[4] do SelXor(topX, topY, width, height, 4, false);   end; {DoWidth}PROCEDURE DoAscii;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in Ascii box.  If press inside then          reads new value.SideEffects: may set new curOrd.Environment:  Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var c: Char;       press: boolean;   begin   with posAr[6] do SelXor(topX, topY, width, height, 6, false);   while FindMenu(press) = 6 do               if press then begin                             with posAr[6] do SelXor(topX, topY, width, height,                                                     6, false);                             ChangeWindow(6);                             Write(FF, ':: ');                             SCurOn;                             press := GetInChar(c, false);                             SCurOff;                             SetCur(ord(c));                             WaitNoPress;                             exit(DoAscii);                             end;   with posAr[6] do SelXor(topX, topY, width, height, 6, false);   end; {DoAscii}PROCEDURE DoOrd;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in Ascii box.  If press inside then          reads new value.SideEffects: may set new curOrd.Environment:  Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   Handler BadNumber;     begin     IOBeep;     SetCur(curOrd);     WaitNoPress;     exit(DoOrd);     end;   var newOrd: integer;       press: boolean;   begin   with posAr[12] do SelXor(topX, topY, width, height, 12, false);   while FindMenu(press) = 12 do           if press then               begin               with posAr[12] do SelXor(topX, topY, width, height, 12, false);               ChangeWindow(12);               Write(FF, ':');               press := ReadNumber(newOrd, curOrd, false);               SetCur(newOrd);               WaitNoPress;               exit(DoOrd);               end;   with posAr[12] do SelXor(topX, topY, width, height, 12, false);   end; {DoOrd}PROCEDURE XorArrow(which: Direction);{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Xors the arrow refered to by which if which <> noDir.SideEffects: may alter picture.Environment:  Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}  var x, y: integer;  begin  with posAr[13] do    case which of       noDir : exit(XorArrow);      up : begin           x := topX+19;           y := topY;           end;      down: begin            x := topX+19;            y := topY+38;            end;      left: begin            x := topX;            y := topY+19;            end;      right: begin             x := topX+38;             y := topY+19;             end;      end;  RasterOp(RNot, 17, 17, x, y, DestWords, DestPtr, x, y, DestWords, DestPtr);  end;  {XorArrow}    PROCEDURE DoMove;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in Move box.  If press inside then          moves picture in the direction specified by arrow over which          pressed.SideEffects: may alter picture.Environment:  Uses PosAr.Calls: MoveOne- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var x, y: integer;       dir, lastDir: Direction;       press: boolean;   begin   lastDir := noDir;   dir := noDir;   while FindMenu(press) = 13 do     with PosAr[13] do        begin        press := GetAction(x,y,TRUE, buttons);        if (x >= topX+19) and (x < topX+36) then {up or down}            if (y >= topY) and (y < topY+17) then dir := up            else if (y >= topY+38) and (y < topY+56) then dir := down                 else dir := noDir        else if (y >=topY+19) and (y < topY+36) then {left of right}                if (x >= topX) and (x < topX+17) then dir := left                else if (x >= topX+38) and (x < topX+56) then dir := right                     else dir := noDir             else dir := noDir;        if dir <> lastDir then begin                               XorArrow(lastDir);                               XorArrow(dir);                               lastDir := dir;                               end;        if press then begin                      if dir <> noDir then begin                                           XorArrow(dir);                                           MoveOne(dir);                                           WaitNoPress;                                           exit(DoMove);                                           end                      else IOBeep;                      end;        end;   XorArrow(dir);   end; {DoMove}PROCEDURE DoFunction;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in Function box.  If press inside then          reads new value.SideEffects: may set new IOCurs Function.Environment:  Uses PosAr.Calls: ReadNumber- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   Handler BadNumber;      begin      IOBeep;      Write(FF, curFunction:5);      WaitNoPress;      Exit(doFunction);      end;   var i: integer;       press: boolean;   begin   with posAr[5] do SelXor(topX, topY, width, height, 5, false);   while FindMenu(press) = 5 do               if press then begin                             with posAr[5] do SelXor(topX, topY, width, height,                                                     5, false);                             ChangeWindow(5);                             Write(FF, ':: ');                             press := ReadNumber(i,6,false);                             if (i > 7) or (i < 2) then Raise BadNumber                             else begin                                  Write(FF, i:5);                                  curFunction := i;                                  IOSetFunction(RECAST(i, CursFunction));                                  end;                             WaitNoPress;                             exit(DoFunction);                             end;   with posAr[5] do SelXor(topX, topY, width, height, 5, false);   end; {DoFunction}PROCEDURE DoBaseLine;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in BaseLine box.  If press inside then          reads new value.SideEffects: may set new baseline.Environment:  Uses PosAr.Calls: ReadNumber- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   Handler BadNumber;      begin      IOBeep;      Write(FF, curBaseLine:4);      WaitNoPress;      Exit(DoBaseLine);      end;   var i: integer;        press: boolean;   begin   with posAr[7] do SelXor(topX, topY, width, height, 7, false);   while FindMenu(press) =7 do   if press then              begin              with posAr[7] do SelXor(topX, topY, width, height, 7, false);              ChangeWindow(7);              Write(FF, ':: ');              press := ReadNumber(i,curBaseLine,false);              if (i > fontHeight) or (i < 0) then Raise BadNumber              else SetBaseLine(i, true);              WaitNoPress;              exit(DoBaseLine);              end;   with posAr[7] do SelXor(topX, topY, width, height, 7, false);   end; {DoBaseLine}PROCEDURE DoFontName;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles cursor as long as in FontName box.  If press inside then          reads new value.SideEffects: may set curFont.Environment:  Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var newName: String;       press: boolean;   begin   with posAr[8] do SelXor(topX, topY, width, height, 8, false);   while FindMenu(press) =8 do   if press then              begin              with posAr[8] do SelXor(topX, topY, width, height, 8, false);              ChangeWindow(8);              Write(FF, ':: ');              press := ReadString(newName, false);              if newName = '' then begin                                   IOBeep;                                   Write(FF, curFont);                                   end              else begin                   Write(FF, newName);                   curFont := newName;                   end;              WaitNoPress;              exit(DoFontName);              end;   with posAr[8] do SelXor(topX, topY, width, height, 7, false);   end; {DoFontName}Procedure DoComment;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the Comment window.Environment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var c: Char;       i,x,y: Integer;       leave,erase,press : boolean;   begin   with posAr[10] do SelXor(topX, topY, width, height, 10, false);   while FindMenu(press) = 10 do      if press then         begin         with posAr[10] do begin                           SelXor(topX, topY, width, height, 10, false);                           press := GetAction(x,y,TRUE, buttons);                           erase := (y < topY+headerSize) and                                    (x > topX+width-(7*13));                           end;         WaitNoPress;         XSChangeWindow(10);  {Comment window uses scrFont}         ChangeTitle('<Press to exit>');         XSSetFont(scrFont);         XSCurChr('_');         XSCurOn;         if erase then XSPutChr(FF);         XSSetItalic(not isNotItalic);         XSSetBold(not isNotBold);         XSSetDirection(curDir);         InvertSel(curOrd);  {so not black when reading}         repeat             leave := GetInChar(c, true);            if c = CR then begin                           XSPutChr(CR);                           XSPutChr(LF);                           end;         until leave;         InvertSel(curOrd);  {restore}         XSCurOff;         XSSetFont(MakePtr(FontSeg, 0, FontPtr));         ChangeTitle(titComment);         XSCurChr(chr(127)); {Del}         WaitNoPress;         exit(DoComment);         end;   with posAr[10] do SelXor(topX, topY, width, height, 10, false);   end;  {DoComment}Procedure DoMode;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the mode menu.  Changes the mode to the specified          value.  Press outside is no changeEnvironment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var line: integer;   begin   line := CheckCurs(2);   if line > 2 then line := 2;   if (line >= 0) and (line <> ord(mode)) then     with posAr[2] do      begin      SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9, defFH,              1, false);  {remove old one}      mode := RECAST(line, Funct);      SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9, defFH,              1, false);      end;      WaitNoPress;   end;  {DoMode}Procedure DoItalic;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the Italic menu.  Changes the style to the specified          value.  Press outside is no changeEnvironment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var line: integer;   begin   line := CheckCurs(15);   if line > 1 then line := 1;   if (line >= 0) and (line <> ord(isNotItalic)) then     with posAr[15] do      begin      SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,width-9, defFH,              1, false);  {remove old one}      isNotItalic := RECAST(line, BOOLEAN);      SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,width-9, defFH,              1, false);      end;      WaitNoPress;   end;  {DoItalic}Procedure DoBold;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the bold menu.  Changes the style to the specified          value.  Press outside is no changeEnvironment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var line: integer;   begin   line := CheckCurs(16);   if line > 1 then line := 1;   if (line >= 0) and (line <> ord(isNotBold)) then     with posAr[16] do      begin      SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,width-9, defFH,              1, false);  {remove old one}      isNotBold := RECAST(line, BOOLEAN);      SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,width-9, defFH,              1, false);      end;      WaitNoPress;   end;  {DoBold}Procedure DoDir;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the Dir menu.  Changes the Dir to the specified          value.  Press outside is no changeEnvironment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var line: integer;   begin   line := CheckCurs(14);   if line > 1 then line := 1;   if (line >= 0) and (line <> ord(curDir)) then     with posAr[14] do      begin      SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,width-9, defFH,              1, false);  {remove old one}      curDir := RECAST(line, XSDirection);      XSSetDirection(curDir);      SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,width-9, defFH,              1, false);      end;      WaitNoPress;   end;  {DoDir}Procedure DoFixedWidth;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the fixedWidth menu.  Changes FixedWidth to value          specified.  Press outside is no change.  If changing from not to          yes, then new fixed width is width of current char.Environment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var line, oldLine, i: integer;   begin   if fixedWidth then oldLine := 0 else oldLine := 1;   line := CheckCurs(11);   if line > 1 then line := 1;   if (line >= 0) and (line <> oldLine) then     with posAr[11] do      begin      SelXor(topX+4,topY+headerSize+oldLine*DefFH,width-9, defFH,              11, false);  {remove old one}      if line = 0 then if confirm then                          begin                          maxWidth := DoFontWidth(maxWidth);                          fixedWidth := true;                          for i := 0 to 127 do                              begin                              widths[i] := maxWidth;                              ScrFont^.index[i].Width := maxWidth;                              end;                          SetWidth(maxWidth, true);                          end                       else line := 1 {not confirm}      else fixedWidth := false;      SelXor(topX+4,topY+headerSize+line*DefFH,width-9, defFH,              11, false);      end;      WaitNoPress;   end;  {DoFixedWidth}Procedure DoCommand;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Handles press in the COMMAND menu.  Calls the appropriate procedure          to do the specified action.Environment:  Requires nothing selected on entry. Uses PosAr.- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var com, ht: integer;       erase: boolean;   begin   com := CheckCurs(1);   if com >= 0 then     with posAr[1] do      begin      SelXor(topX+4,topY+headerSize+com*DefFH,width-9, defFH, 1, false);      erase := true;      case com of          0 : begin              WaitNoPress;              All(true);              end;          1 : begin              WaitNoPress;              All(false);              end;          2 : begin              WaitNoPress;              InvertAll;              end;          3 : Box;          4 : begin              WaitNoPress;              ReadChar;              end;          5 : begin              WaitNoPress;              WriteChar;              end;          6 : if Confirm then erase := not ReadFontFile;          7 : if Confirm then begin                              Init;                              erase := false;                              end;          8 : begin              WaitNoPress;              JoinChar;              end;          9 : FLine;         10 : if Confirm then WriteFontFile;         11 : begin              WaitNoPress;              FixScreen;              end;         otherwise : if Confirm then DoQuit;         end;      if erase then SelXor(topX+4,topY+headerSize+com*DefFH,width-9, defFH,                            1, false);      end;      end;  {DoCommand}Procedure LookForMenu;{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Abstract: Checks if cursor in any window and if so calls that menu handler.Environment:  Requires nothing selected on entry. Uses PosAr.Calls: FindMenu and lots of handlers- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}   var press: boolean;   begin   case FindMenu(press) of          1 : DoCommand;          2 : DoMode;          3 : ;          4 : DoWidth;          5 : DoFunction;          6 : DoAscii;          7 : DoBaseLine;          8 : DoFontName;          9 : ;         10 : DoComment;         11 : DoFixedWidth;         12 : DoOrd;         13 : DoMove;         14 : DoDir;         15 : DoItalic;         16 : DoBold;         otherwise : ;         end;   end;  {LookForMenu}Procedure EraseScreen;   begin   curOrd := -1;   CreateWindow(0, 0, 0, 768, 1024, '');   Write('            FontEditor - ',FontVersion);   MakeScrFont;   SetUpCommands;   end; {EraseScreen}Procedure SetBaseLine(newVal: integer; eraseOld: boolean);   begin   if eraseOld then DotHLine(curBaseLine);   if newVal <= fontHeight then curBaseLine := newVal;   ScrFont^.base := curBaseLine;   DotHLine(curBaseLine);   ChangeWindow(7);   Write(FF, curBaseLine:4);   ChangeWindow(0);   end;procedure FixScreen;   var x,y: quad;       w: integer;   begin   RasterOp(RXor, winXStart-1,yBaseTop-1+NumBits*8,               0,yBaseTop-1,DestWords,DestPtr,               0,yBaseTop-1,DestWords,DestPtr);   for y := 0 to fontHeight-1 do     for x := 0 to curWidth-1 do      if GetBit(y,x) then RasterOp(RXNor,7,7,xBase+1+x*8,yBase+1+y*8,DestWords,               DestPtr, xBase+1+x*8, yBase+1+y*8,DestWords, DestPtr);   for y := 0 to MaxBit do      for w := 0 to MaxWord do          SetDestWord(y,w);   DisplayBoard;   SetWidth(curWidth, false);   SetBaseLine(curBaseLine, false);   end;  {FixScreen}   Procedure GetAdr(which: Integer; var baseX, baseY: Integer);   begin   baseX := (which mod CharsPerLine) * NumBits;   baseY := CharYStart + (which div CharsPerLine)* FontHeight;   end;  {GetAdr}Procedure InvertSel(sel: Integer);   var baseX, baseY: Integer;   begin   GetAdr(sel, baseX, baseY);   RasterOp(1, NumBits, fontHeight, baseX, baseY, DestWords, DestPtr,                                    baseX, baseY, DestWords, DestPtr);   end;  {InvertSel}Procedure SetCur(newOrd: Integer);   begin   if curOrd <> -1 then InvertSel(curOrd);   curOrd := newOrd;   InvertSel(curOrd);   ChangeWindow(6);   Write(FF, ' ');   if newOrd < ord(' ') then Write('^',chr(newOrd+ord('@')))   else write(chr(newOrd));   ChangeWindow(12);   Write(FF,'#',newOrd:1:8);   ChangeWindow(0);   end;  {SetCur}procedure ReadChar;  {read curOrd}   var baseX, baseY: integer;   begin   GetAdr(curOrd, baseX, baseY);   InvertSel(curOrd);   RasterOp(RXor, NumBits, NumBits, 0,0, 4, curChar,  {erase old picture}                                    0,0, 4, curChar);   RasterOp(RRpl, NumBits, FontHeight, 0,0, 4, curChar,                  baseX, baseY, DestWords, DestPtr);   InvertSel(curOrd);   curWidth := widths[curOrd];   if curWidth = 0 then       if fixedWidth then curWidth := maxWidth      else curWidth := NumBits;   curXMax := xBase+curWidth*8;   FixScreen;  {calls SetWidth}   end;  {ReadChar}procedure WriteChar;   var baseX, baseY: integer;   begin   GetAdr(curOrd, baseX, baseY);   widths[curOrd] := curWidth;   ScrFont^.index[curOrd].Width := curWidth;   RasterOp(RRpl, NumBits, fontHeight, baseX, baseY, DestWords, DestPtr,                  0,0, 4, curChar);   InvertSel(curOrd);   end;  {WriteChar}{Sets x,y to upper left corner of box to use (in Bits); sets charOrd to  ordinal of box}Function FindChar(Var charOrd: integer): boolean;  var x, y: integer;      press: boolean;  begin  FindChar := False;  press := GetAction(x,y,TRUE, buttons);  if not press then exit(FindChar);  if (y < charYStart) or (y >= charYStart+numLines*fontHeight) or          (x >= charsPerLine*NumBits) then FindChar := false  else begin       x := (x div NumBits);       y := ((y - charYStart) div fontHeight);       charOrd := y*charsPerLine + x;       if charOrd < 128 then FindChar := true       else FindChar := false;       end;  end;  {FindChar}procedure MainLoop;   var c: char;       fileName: STRING;       f: Text;       fid: FileId;       status, tabx, taby, count, blks, i, x,y: integer;       dir : Direction;       val, ok, press: boolean;       m : Funct;   label 1,2;   begin   while true do      begin      LookForMenu;      {check for cursor pressed over a square}      CheckBaseLineDot;      CheckWidthDot;      press := GetAction(tabx,taby,TRUE, buttons);      If press then          begin          if (tabx < xBase) or (taby < yBase) or (tabx >= curXMax) or (taby >= curYMax) then if FindChar(i) then SetCur(i)             else IOBeep          else if (not justDown) or (lastx <> (tabx-xBase) div 8) or                             (lasty <> (taby-yBase) div 8 ) then {new point}                    begin                    lasty := (taby-yBase) div 8;                    lastx := (tabx-xBase) div 8;                    justDown := true;                    if buttons.white then m := Black                    else if buttons.green then m := White                    else if buttons.blue then m := Toggle                    else m := mode;                    CursPt(lasty, lastx, m);                    end;          end {pt exists}       else justDown := false;  {no point}       end; {loop}   end;  {MainLoop}Procedure SetArrows;   var f: File Of Integer;       x, y: integer;   begin   Reset(f, 'Fonted.cursor');   for y:= 0 to 63 do      for x := 0 to 3 do        begin       {$R-}        DestPtr^[ArrowStart+y*48+x] := f^;       {$R+}        get(f);        end;   Close(f);   end.  {SetArrows}
+module Font2Ed;
+{------------------------------------------------------------------------------
+Abstract: Font2Ed provides the external interface for fonted.  
+Author: Brad A. Myers
+Copyright (C) 1981 - Brad A. Myers
+------------------------------------------------------------------------------}
+{------------------------------------------------------------------------------
+Versions:
+    20-Jul-81  V3.1    Brad A. Myers  XScreen
+     6-Jun-81  V2.0    Brad A. Myers  Lots of new features
+    22-Apr-81  V1.1    Brad A. Myers  Made to work for new system
+     6-Jan-81  V1.0    Brad A. Myers  Broke off from Fonted
+------------------------------------------------------------------------------}
+
+{\\\\\\\\\\\\\\\\\\\\\\\\\\\\} EXPORTS {//////////////////////////}
+
+Imports IO_Others from IO_Others;
+
+Procedure SetFontHeight(newht: integer);
+procedure SetUpCommands;
+Procedure EraseScreen;
+procedure FixScreen;
+Procedure GetAdr(which: Integer; var baseX, baseY: Integer);
+Procedure InvertSel(sel: Integer);
+Procedure SetCur(newOrd: Integer);
+procedure ReadChar;  {read curOrd}
+procedure WriteChar;
+Function FindChar(Var charOrd: integer): boolean;
+procedure MainLoop;
+Procedure SetArrows;
+Procedure InitSelect;
+Procedure SetBaseLine(newVal: integer; eraseOld: boolean);
+Function Confirm: boolean;
+Function DoFontHt(specHeight: Integer): Integer;
+Function DoFontWidth(specWidth: Integer): Integer;
+
+Const FF = Chr(12); 
+
+Var dotCurs : CurPatPtr;
+
+{\\\\\\\\\\\\\\\\\\\\\\\\\\\\} PRIVATE {//////////////////////////}
+Imports IO_Unit from IO_Unit;
+imports ioerrors from ioerrors;
+imports FontEd from FontEd;
+imports XScreen from XScreen;
+imports TransUtils from TransUtils;
+
+{$R+}
+
+PROCEDURE SelXor(topX, topY, width, height, which: integer; grey: boolean);
+              forward;
+
+Const blinkRate = 20;
+      arrowC = Chr(25);
+      LF = Chr(10);
+      BS = Chr(8);
+      CtrlU = Chr(21);
+      titComment = 'COMMENT                    | CLEAR';
+      byeMessage = '        Writing Transcript...';
+      
+Const NumMenus = 17;
+      DefFH = 13;
+      DefFW = 9;
+      sep = 2;
+      headerSize = 19;
+      W1w = 13*9+11; {Command (13)}
+      W1h = 14*DefFH+14;     {13+1}
+      W2w = 6*9+11;  {Mode (6)}
+      W2h = 4*DefFH+14;      {3+1}
+      W3w = 7*9+11;  {Confirm (7)}
+      W3h = 3*DefFH+14;      {2+1}
+      W4w = 5*9+11;  {Width (5)}
+      W4h = 2*DefFH+14;      {1+1}
+      W5w = 8*9+11;  {Function (8)}
+      W5h = 2*DefFH+14;      {1+1}
+      W6w = 5*9+11;  {Ascii (5)}
+      W6h = 2*DefFH+14;      {1+1}
+      W7w = 6*9+11;  {BaseLn (6)}
+      W7h = 2*DefFH+14;      {1+1}
+      W9w = 7*9+11; {Font Ht (7)}
+      W9h = 2*DefFH+14;      {1+1}
+      W8w = winWidth;
+      W8h = 2*DefFH+14;      {1+1}
+      W10w = winWidth;
+      W10h = 4*NumBits+14; {Comment}
+      W11w = 11*9+11; {Fixed Width (11)}
+      W11h = 3*DefFH+14; {2+1}
+      W11s = 767-W11w; {flush left}
+      W12w = 4*9+11;  {Ord (4)}
+      W12h = 2*13+14;      {1+1}
+      W14w = 10*9+11;  {Direction (10)}
+      W14h = 3*13+14;      {2+1}
+      W15w = 6*9+11;  {Italic (6)}
+      W15h = 3*13+14;      {2+1}
+      W16w = 5*9+11;  {Bold (5)}
+      W16h = 3*13+14;      {2+1}
+      W17w = 59;      {Char}
+      W17h = 57+headerSize-2;   
+      W17x = 20*16-4;
+      W17y = littleY-headerSize;
+      
+      W9s = w11s-sep-w9w; {flush left next to w11}
+      
+      ArrowStart = (w2h+w4h+w6h+sep*3+5)*48+43;
+      
+      GreyWW=((w1w+63) div 64) * 4; {round up to nearest multiple of 4 words}
+
+Type GreyArea = Array[0..DefFH+2] of Array[0..GreyWW-1] of integer;
+Var greySpare: ARRAY [1..5] of ^GreyArea;
+    posAr: ARRAY[1..NumMenus] of RECORD
+                                  topX, topY, width, height: Integer;
+                                 END;
+
+Procedure InitPosAr;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Sets all values in PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   begin
+   posAr[1].topX := winXStart;
+   posAr[1].topY := 0;
+   posAr[1].width := w1w;
+   posAr[1].height := w1h;
+   posAr[2].topX := winXStart+W1w+sep;
+   posAr[2].topY := 0;
+   posAr[2].width := w2w;
+   posAr[2].height := w2h;
+   posAr[3].topX := winXStart+w11w+sep;
+   posAr[3].topY := w2h+w4h+w6h+w14h+4*sep;
+   posAr[3].width := w3w;
+   posAr[3].height := w3h;
+   posAr[4].topX := winXStart+w1w+sep;
+   posAr[4].topY := w2h+sep;
+   posAr[4].width := w4w;
+   posAr[4].height := w4h;
+   posAr[5].topX := winXStart+w1w+w2w+2*sep;
+   posAr[5].topY := w2h+sep;
+   posAr[5].width := w5w;
+   posAr[5].height := w5h;
+   posAr[6].topX := winXStart+w1w+sep;
+   posAr[6].topY := w2h+w4h+sep*2;
+   posAr[6].width := w6w;
+   posAr[6].height := w6h;
+   posAr[7].topX := winXStart+w1w+w2w+w12w+3*sep;
+   posAr[7].topY := w2h+w4h+sep*2;
+   posAr[7].width := w7w;
+   posAr[7].height := w7h;
+   posAr[8].topX := winXStart;
+   posAr[8].topY := w2h+w4h+w6h+w14h+w11h+5*sep;
+   posAr[8].width := w8w;
+   posAr[8].height := w8h;
+   posAr[9].topX := winXStart+w11w+w3w+2*sep;
+   posAr[9].topY := w2h+w4h+w6h+w14h+4*sep;
+   posAr[9].width := w9w;
+   posAr[9].height := w9h;
+   posAr[10].topX := winXStart;
+   posAr[10].topY := w2h+w4h+w6h+w14h+w11h+w8h+6*sep;
+   posAr[10].width := w10w;
+   posAr[10].height := w10h;
+   posAr[11].topX := winXStart;
+   posAr[11].topY := w2h+w4h+w6h+w14h+4*sep;
+   posAr[11].width := w11w;
+   posAr[11].height := w11h;
+   posAr[12].topX := winXStart+w1w+w6w+2*sep;
+   posAr[12].topY := w2h+w4h+sep*2;
+   posAr[12].width := w12w;
+   posAr[12].height := w12h;
+   posAr[13].topX := 43*16;
+   posAr[13].topY := w2h+w4h+w6h+sep*3+5;
+   posAr[13].width := 55;
+   posAr[13].height := 55;
+   posAr[14].topX := winXStart+w1w+sep;
+   posAr[14].topY := w2h+w4h+w6h+3*sep;
+   posAr[14].width := w14w;
+   posAr[14].height := w14h;
+   posAr[15].topX := winXStart+W1w+W2w+sep*2;
+   posAr[15].topY := 0;
+   posAr[15].width := w15w;
+   posAr[15].height := w15h;
+   posAr[16].topX := winXStart+W1w+W2w+w15w+sep*3;
+   posAr[16].topY := 0;
+   posAr[16].width := w16w;
+   posAr[16].height := w16h;
+   posAr[17].topX := w17x;
+   posAr[17].topY := w17y;
+   posAr[17].width := w17w;
+   posAr[17].height := w17h;
+   end; {InitPosAr}
+
+procedure SetUpCommands;
+   var temp: integer;
+   begin
+   SCurOff;
+   SetArrows;
+   SCurChr(chr(127));  {del}
+
+   with posAr[1] do CreateWindow(1, topX, topY, width, height, 'COMMAND');
+   ChangeWindow(1);
+   WriteLn('ALL BLACK');
+   WriteLn('ALL WHITE');
+   WriteLn('ALL INVERT');
+   WriteLn('BOX');
+   WriteLn('CHAR READ');
+   WriteLn('CHAR WRITE');
+   WriteLn('GET FONT FILE');
+   WriteLn('INIT');
+   WriteLn('JOIN');
+   WriteLn('LINE');
+   WriteLn('PUT FONT FILE');
+   WriteLn('REFRESH');
+   Write  ('QUIT');
+
+   with posAr[2] do CreateWindow(2, topX, topY, width, height, 'MODE');
+   ChangeWindow(2);
+   WriteLn('BLACK');
+   WriteLn('WHITE');
+   Write('TOGGLE');
+   with posAr[2] do SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9,
+                           defFH, 1, false);
+
+   with posAr[3] do CreateWindow(3, topX, topY, width, height, 'CONFIRM');
+   ChangeWindow(3);
+   WriteLn('YES');
+   Write('NO');
+
+   with posAr[4] do CreateWindow(4, topX, topY, width, height, 'WIDTH');
+   ChangeWindow(4);
+   Write(curWidth:3);
+
+   with posAr[5] do CreateWindow(5, topX, topY, width, height, 'FUNCTION');
+   ChangeWindow(5);
+   Write(curFunction:5);
+
+   with posAr[6] do CreateWindow(6, topX, topY, width, height, 'ASC');
+   ChangeWindow(6);
+   Write(Chr(curOrd));
+
+   with posAr[7] do CreateWindow(7, topX, topY, width, height, 'BASELN');
+   ChangeWindow(7);
+   Write(curBaseLine:4);
+
+   with posAr[8] do CreateWindow(8,topX,topY, width, height, 'FONT FILE NAME');
+   ChangeWindow(8);
+   Write(curFont);
+
+   with posAr[9] do CreateWindow(9, topX, topY, width, height, 'FONT HT');
+   ChangeWindow(9);
+   Write(fontHeight:4);
+
+   with posAr[10] do CreateWindow(10, topX, topY, width, height, titComment);
+   ChangeWindow(10);
+   SCurOff;
+
+   with posAr[11] do CreateWindow(11,topX, topY, width, height, 'FIXED WIDTH');
+   ChangeWindow(11);
+   WriteLn('YES');
+   Write  ('NO');
+   if fixedWidth then temp := 0 else temp := 1;
+   with posAr[11] do SelXor(topX+4,topY+headerSize+temp*DefFH,width-9,
+                           defFH, 1, false);
+
+   with posAr[12] do CreateWindow(12,topX, topY, width, height, 'ORD');
+   ChangeWindow(12);
+   Write('#',curOrd:1:8);
+
+   with posAr[14] do CreateWindow(14,topX, topY, width, height, 'DIRECTION');
+   ChangeWindow(14);
+   WriteLn('LEFT',arrowC,'RIGHT');
+   Write  ('RIGHT',arrowC,'LEFT');
+   with posAr[14] do SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,
+                            width-9,defFH, 14, false);
+
+   with posAr[15] do CreateWindow(15,topX, topY, width, height, 'ITALIC');
+   ChangeWindow(15);
+   WriteLn('TRUE');
+   Write  ('FALSE');
+   with posAr[15] do SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,
+                            width-9,defFH, 15, false);
+
+   with posAr[16] do CreateWindow(16,topX, topY, width, height, 'BOLD');
+   ChangeWindow(16);
+   WriteLn('TRUE');
+   Write  ('FALSE');
+   with posAr[16] do SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,
+                            width-9,defFH, 16, false);
+
+   with posAr[17] do CreateWindow(17,topX, topY, width, height, 'CHAR');
+
+   ChangeWindow(0);
+
+   end;  {SetUpCommands}
+
+Procedure InitSelect;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Sets up arrays needed for selection, grey spares, cursor and
+          smalldot.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+    var i,j,k,w: integer;
+    f: File Of CursorPattern;
+(*    newCurs: CurPatPtr;
+*)  begin
+    {**set new cursor and dotCurs**}
+    Reset(f, 'Fonted.cursor');
+    NEW(0, 4, dotCurs);
+(*    NEW(0, 4, newCurs);
+*)    get(f);  {past arrows}
+    get(f);  {past newCursor--not used}
+    dotCurs^ := f^;
+(*    IOLoadCursor(newCurs, 4, 4);
+    DISPOSE(newCurs);
+*)    Close(f);
+    InitPosAr;
+    {**Write grey into 3 grey squares**}
+       {GreyW is an array holding the bit width of the three grey spares,
+        greyWW is word width of buffers}
+    for k := 1 to 5 do
+       begin
+       if k < 4 then w := k
+       else if k = 4 then w := 14
+       else if k = 5 then w := 16;
+       NEW(0,4,greySpare[k]);
+       for i := 0 to defFH+2 do
+           for j := 0 to greyWW-1 do
+              if i mod 2 = 0 then greySpare[k]^[i][j] := #122222
+                           else greySpare[k]^[i][j] := #055555;
+       {now remove parts that should be white}
+       {right} RasterOp(RXor, (greyWW*16+4-posAr[w].width-11),
+                     defFH+3, posAr[w].width-11+4, 0, GreyWW, greySpare[k],
+                     posAr[w].width-11+4, 0, GreyWW, greySpare[k]);
+       {hole}  RasterOp(RXor, posAr[w].width-11, defFH-1, 2, 2, GreyWW,
+                     greySpare[k], 2, 2, GreyWW, greySpare[k]);
+       end;
+    end;
+
+PROCEDURE SelXor(topX, topY, width, height, which: integer; grey: boolean);
+    {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    Abstract: XOrs picture of menu item sel or draws grey box around.
+    Parameters: first 4 are parameters of box to select.  If not grey then
+                uses Black xor, otherwise grey.  If grey, width and height
+                params are ignored and which determines where to go
+    Environment:  Uses greySpare.
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+       var ys, yH, yts: Integer;
+           greyN: integer;
+       begin
+       if which = 11 then which := 3  {use same grey as 3}
+       else if which=15 then which := 2
+       else if (which <= 0) or (which > NumMenus) then
+            begin
+            Write('IMPOSSIBLE IN SelXor: val= ',which:1);
+            exit(SelXor);
+            end;
+       if which = 14 then greyN := 4
+       else if which > 14 then greyN := 5
+       else greyN := which;
+     {first check if scrolled off screen}
+       if not grey then RasterOp(RNot, width, height, topX,topY, DestWords,
+                           DestPtr, topX, topY, DestWords, DestPtr)
+       else RasterOp(RXor, posAr[which].width-11+4, defFH+3, topX, topY,
+                       DestWords, DestPtr, 0,0, GreyWW, greySpare[greyN]);
+       end; {SelXor}
+
+Procedure WaitNoPress;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: waits until press off
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var x,y: integer;
+       press: boolean;
+   begin
+   repeat
+     press := GetAction(x,y,TRUE,buttons);
+   until not press;
+   end;
+
+Function GetInChar(var c: char; lookForPress: boolean): boolean;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: waits for character and returns it after writing it.
+Parameters: sets c to char read. if lookForPress then exits on press
+Returns: returns true if press otherwise false
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var press, existsChar: boolean;
+       x,y: integer;
+   begin
+   repeat
+     press := GetCharAction(x,y,true,buttons,existsChar,c);
+   until existsChar or (lookForPress and press);
+   if existsChar then XSPutChr(chr(LOr(ord(c), #200)));
+   GetInChar := press and lookForPress;
+   end; {GetInChar}
+
+Function FindMenu(var press: boolean): integer;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Checks the current cursor position for being inside any menu.
+Parameters: press is set with the tabswitch value
+Returns: If inside a menu, returns that menu number otherwise returns -1.
+Environment:  Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var tabx, taby, i: integer;
+   begin
+   press := GetAction(tabX, tabY, TRUE, buttons);
+   for i := 1 to NumMenus do
+      with posAr[i] do
+         if (tabX > topX) and (tabY > topY) and (tabX < topX+width) and 
+            (tabY < topY+height) then begin
+                                      FindMenu := i;
+                                      exit(FindMenu);
+                                      end;
+   FindMenu := -1;
+   end; {FindMenu}
+
+FUNCTION CheckCurs(menu: integer): integer;
+    {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    Abstract: Watches cursor and greys menu item over.  Uses histerisis.  Works
+              only for windows with multiple items in them.  Loops until press
+              or cursor goes outside the menu
+    Parameters: menu is menu are inside of.
+    Returns: -1 if cursor goes outside box otherwise index of command on top of
+             when press (0..num-1).
+    Environment:  Requires nothing selected on entry. Uses PosAr.
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+      CONST hist = 3;
+      var lastSel, curSel, x, y, lastSelBot, lastSelTop, lastSelRight, 
+            lastSelLeft: integer;
+          press: boolean;
+      label 1,2;
+      begin
+      lastSel := -1;
+      curSel := -1;
+      with posAr[menu] do
+        while true do
+          begin
+          press := GetAction(x,y, TRUE, buttons);
+          if (curSel <> -1) and
+              (y < lastSelBot+hist) and (y > lastSelTop-hist) and 
+               (x < lastSelRight+hist) and (x > lastSelLeft-hist) then goto 2;
+          if (y < topY) or (y> topY+height-9) or (x < topX) or (x > topX+width)
+                  then begin
+                       CheckCurs := -1;
+                       if curSel <> -1 then SelXor(topX+3,topY+headerSize+
+                                  curSel*DefFH-2,0,0,menu, true);
+                       exit(CheckCurs);
+                       end;
+          if y < topY+headerSize then begin  {in header}
+                                      curSel := -1;
+                                      goto 1;
+                                      end;
+         {here must be a good selection!!!}
+          lastSelLeft := topX;
+          lastSelRight := topX+width;
+          curSel := ((y-topY-headerSize) div defFH);
+          lastSelTop := topY+headerSize+curSel*defFH;
+          lastSelBot := lastSelTop+defFH-1;
+       1: if (curSel <> lastSel) then
+               begin
+               if lastSel <> -1 then
+                 SelXor(topX+3,topY+headerSize+lastSel*DefFH-2,0,0,menu, true);
+               lastSel := curSel;
+               end;
+          if curSel <> -1 then
+               SelXor(topX+3,topY+headerSize+curSel*DefFH-2,0,0,menu, true);
+       2: if press then
+                if curSel <> -1 then
+                            begin
+                            CheckCurs := curSel;
+                            SelXor(topX+3,topY+headerSize+ curSel*DefFH-2,0,0,
+                              menu, true);
+                            exit(CheckCurs);
+                            end
+                else IOBeep;  {press in header}
+          end {loop}
+  end; {CheckCurs}
+
+FUNCTION Confirm: boolean;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Waits for confimation.  Blinks confirm box until yes or no selected
+          or press outside the box (= no).
+Returns: true iff press over YES. false if press anywhere else
+Environment:  Requires nothing selected on entry. Uses PosAr.
+Calls: CheckCurs, SelXor
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var oldTime, line: integer;
+       time: Double;
+       on,press: Boolean;
+   begin
+   Confirm := false;
+   WaitNoPress;
+   IOGetTime(time);
+   oldTime := time[0]-blinkRate-1; {make first loop do invert}
+   on := false;
+   with posAr[3] do
+    repeat
+      IOGetTime(time);
+      if time[0]-oldTime > blinkRate then begin
+                                 on := not on;
+                                 SelXor(topX,topY,width, height, 3, false);
+                                 oldTime := time[0];
+                                 end;
+      if FindMenu(press) = 3 then begin
+                           if on then begin
+                                    SelXor(topX,topY,width,height,3,false);
+                                    on := false;
+                                    end;
+                           line := CheckCurs(3);
+                           if (line = 0) and press then Confirm := true;
+                           end;      
+    until press;
+   WaitNoPress;
+   if on then SelXor(posAr[3].topX, posAr[3].topY, posAr[3].width,
+                     posAr[3].height, 3, false);
+   end; {Confirm}
+
+Procedure SetFontHeight(newHt: integer);
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Sets fontHeight and fixes window.
+Parameters: newHt is new value.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   begin
+   fontHeight := newHt;
+   ChangeWindow(9);
+   Write(fontHeight:4);
+   end; {SetFontHeight}
+   
+FUNCTION DoFontHt(specHeight: Integer): integer;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Blinks FontHt box until press, if inside, then reads new font height
+          and returns it else returns specHeight.
+Returns: new height
+Parameters: specHeight is the height of the new font
+SideEffects: leave FontHt window messed up.
+Environment:  Uses PosAr.
+Calls: ReadNumber
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  Handler BadNumber;
+    begin
+    WaitNoPress;
+    exit(DoFontHt);
+    end;
+   var oldTime, newHt,menu: integer;
+       time: Double;
+       on,press: Boolean;
+   begin
+   DoFontHt := specHeight;
+   WaitNoPress;
+   IOGetTime(time);
+   oldTime := time[0]-blinkRate-1;
+   on := false;
+   ChangeWindow(9);
+   Write(FF,'New=',specHeight:1);
+   with posAr[9] do
+    repeat
+      IOGetTime(time);
+      if time[0]-oldTime > blinkRate then begin
+                                 on := not on;
+                                 SelXor(topX, topY, width, height, 9, false);
+                                 oldTime := time[0];
+                                 end;
+       menu := FindMenu(press);
+    until press;
+   if on then SelXor(posAr[9].topX, posAr[9].topY, posAr[9].width,
+                     posAr[9].height, 9, false);
+   if menu = 9 then begin
+                    Write(FF, ':: ');
+                    press := ReadNumber(newHt, specHeight, false);
+                    DoFontHt := newHt; 
+                    end;
+   WaitNoPress;
+   end; {DoFontHt}
+
+Function DoFontWidth(specWidth: Integer): Integer;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Blinks Width box until press, if inside, then reads new width
+          and returns it else returns specWidth.
+Returns: new width
+Parameters: specwidth is the width of the new font
+SideEffects: leave Width window messed up.
+Environment:  Uses PosAr.
+Calls: ReadNumber
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  Handler BadNumber;
+    begin
+    WaitNoPress;
+    exit(DoFontWidth);
+    end;
+   var oldTime, newWidth,menu: integer;
+       time: Double;
+       on,press: Boolean;
+   begin
+   DoFontWidth := specWidth;
+   WaitNoPress;
+   IOGetTime(time);
+   oldTime := time[0]-blinkRate-1;
+   on := false;
+   ChangeWindow(4);
+   Write(FF,'Nw=',specWidth:1);
+   with posAr[4] do
+    repeat
+      IOGetTime(time);
+      if time[0]-oldTime > blinkRate then begin
+                                 on := not on;
+                                 SelXor(topX, topY, width, height, 4, false);
+                                 oldTime := time[0];
+                                 end;
+       menu := FindMenu(press);
+    until press;
+   if on then SelXor(posAr[4].topX, posAr[4].topY, posAr[4].width,
+                     posAr[4].height, 4, false);
+   if menu = 4 then begin
+                    Write(FF, ':: ');
+                    press :=  ReadNumber(newWidth, specWidth, false);
+                    DoFontWidth := newWidth; 
+                    end;
+   WaitNoPress;
+   end; {DoFontWidth}
+
+PROCEDURE DoQuit;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Initialized cursor and screen and exits main program
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  var i: integer;
+      s: String;
+  begin
+  s := ByeMessage;
+  XSChangeWindow(10);  {Comment window uses scrFont}
+  XSPutChr(FF);
+  XSSetBold(true);
+  for i := 1 to 3 do XSPutChr(LF);
+  for i := 1 to length(s) do XSPutChr(s[i]);
+  CloseTranscript;
+  ScreenReset;
+  exit(FontEd);
+  end; {DoQuit}
+
+PROCEDURE DoWidth;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in Width box.  If press inside then
+          reads new value.
+SideEffects: may set new width value.
+Environment:  Uses PosAr.
+Calls: ReadNumber
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  Handler BadNumber;
+     begin
+     IOBeep;
+     SetWidth(curWidth, true);
+     WaitNoPress;
+     exit(DoWidth);
+     end;
+  var newWd: integer;
+       press: boolean;
+   begin
+   with posAr[4] do SelXor(topX, topY, width, height, 4, false);
+   while FindMenu(press) = 4 do
+       if press then
+           if fixedWidth then IOBeep
+           else begin
+                with posAr[4] do SelXor(topX, topY, width, height, 4, false);
+                ChangeWindow(4);
+                Write(FF, ':: ');
+                press :=  ReadNumber(newWd, curWidth, false);
+                SetWidth(newWd, true);
+                WaitNoPress;
+                exit(DoWidth);
+                end;
+   with posAr[4] do SelXor(topX, topY, width, height, 4, false);
+   end; {DoWidth}
+
+PROCEDURE DoAscii;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in Ascii box.  If press inside then
+          reads new value.
+SideEffects: may set new curOrd.
+Environment:  Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var c: Char;
+       press: boolean;
+   begin
+   with posAr[6] do SelXor(topX, topY, width, height, 6, false);
+   while FindMenu(press) = 6 do
+               if press then begin
+                             with posAr[6] do SelXor(topX, topY, width, height,
+                                                     6, false);
+                             ChangeWindow(6);
+                             Write(FF, ':: ');
+                             SCurOn;
+                             press := GetInChar(c, false);
+                             SCurOff;
+                             SetCur(ord(c));
+                             WaitNoPress;
+                             exit(DoAscii);
+                             end;
+   with posAr[6] do SelXor(topX, topY, width, height, 6, false);
+   end; {DoAscii}
+
+PROCEDURE DoOrd;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in Ascii box.  If press inside then
+          reads new value.
+SideEffects: may set new curOrd.
+Environment:  Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   Handler BadNumber;
+     begin
+     IOBeep;
+     SetCur(curOrd);
+     WaitNoPress;
+     exit(DoOrd);
+     end;
+   var newOrd: integer;
+       press: boolean;
+   begin
+   with posAr[12] do SelXor(topX, topY, width, height, 12, false);
+   while FindMenu(press) = 12 do
+           if press then
+               begin
+               with posAr[12] do SelXor(topX, topY, width, height, 12, false);
+               ChangeWindow(12);
+               Write(FF, ':');
+               press := ReadNumber(newOrd, curOrd, false);
+               SetCur(newOrd);
+               WaitNoPress;
+               exit(DoOrd);
+               end;
+   with posAr[12] do SelXor(topX, topY, width, height, 12, false);
+   end; {DoOrd}
+
+PROCEDURE XorArrow(which: Direction);
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Xors the arrow refered to by which if which <> noDir.
+SideEffects: may alter picture.
+Environment:  Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+  var x, y: integer;
+  begin
+  with posAr[13] do
+    case which of 
+      noDir : exit(XorArrow);
+      up : begin
+           x := topX+19;
+           y := topY;
+           end;
+      down: begin
+            x := topX+19;
+            y := topY+38;
+            end;
+      left: begin
+            x := topX;
+            y := topY+19;
+            end;
+      right: begin
+             x := topX+38;
+             y := topY+19;
+             end;
+      end;
+  RasterOp(RNot, 17, 17, x, y, DestWords, DestPtr, x, y, DestWords, DestPtr);
+  end;  {XorArrow}
+    
+PROCEDURE DoMove;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in Move box.  If press inside then
+          moves picture in the direction specified by arrow over which
+          pressed.
+SideEffects: may alter picture.
+Environment:  Uses PosAr.
+Calls: MoveOne
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var x, y: integer;
+       dir, lastDir: Direction;
+       press: boolean;
+   begin
+   lastDir := noDir;
+   dir := noDir;
+   while FindMenu(press) = 13 do
+     with PosAr[13] do
+        begin
+        press := GetAction(x,y,TRUE, buttons);
+        if (x >= topX+19) and (x < topX+36) then {up or down}
+            if (y >= topY) and (y < topY+17) then dir := up
+            else if (y >= topY+38) and (y < topY+56) then dir := down
+                 else dir := noDir
+        else if (y >=topY+19) and (y < topY+36) then {left of right}
+                if (x >= topX) and (x < topX+17) then dir := left
+                else if (x >= topX+38) and (x < topX+56) then dir := right
+                     else dir := noDir
+             else dir := noDir;
+        if dir <> lastDir then begin
+                               XorArrow(lastDir);
+                               XorArrow(dir);
+                               lastDir := dir;
+                               end;
+        if press then begin
+                      if dir <> noDir then begin
+                                           XorArrow(dir);
+                                           MoveOne(dir);
+                                           WaitNoPress;
+                                           exit(DoMove);
+                                           end
+                      else IOBeep;
+                      end;
+        end;
+   XorArrow(dir);
+   end; {DoMove}
+
+PROCEDURE DoFunction;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in Function box.  If press inside then
+          reads new value.
+SideEffects: may set new IOCurs Function.
+Environment:  Uses PosAr.
+Calls: ReadNumber
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   Handler BadNumber;
+      begin
+      IOBeep;
+      Write(FF, curFunction:5);
+      WaitNoPress;
+      Exit(doFunction);
+      end;
+   var i: integer;
+       press: boolean;
+   begin
+   with posAr[5] do SelXor(topX, topY, width, height, 5, false);
+   while FindMenu(press) = 5 do
+               if press then begin
+                             with posAr[5] do SelXor(topX, topY, width, height,
+                                                     5, false);
+                             ChangeWindow(5);
+                             Write(FF, ':: ');
+                             press := ReadNumber(i,6,false);
+                             if (i > 7) or (i < 2) then Raise BadNumber
+                             else begin
+                                  Write(FF, i:5);
+                                  curFunction := i;
+                                  IOSetFunction(RECAST(i, CursFunction));
+                                  end;
+                             WaitNoPress;
+                             exit(DoFunction);
+                             end;
+   with posAr[5] do SelXor(topX, topY, width, height, 5, false);
+   end; {DoFunction}
+
+PROCEDURE DoBaseLine;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in BaseLine box.  If press inside then
+          reads new value.
+SideEffects: may set new baseline.
+Environment:  Uses PosAr.
+Calls: ReadNumber
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   Handler BadNumber;
+      begin
+      IOBeep;
+      Write(FF, curBaseLine:4);
+      WaitNoPress;
+      Exit(DoBaseLine);
+      end;
+   var i: integer; 
+       press: boolean;
+   begin
+   with posAr[7] do SelXor(topX, topY, width, height, 7, false);
+   while FindMenu(press) =7 do
+   if press then
+              begin
+              with posAr[7] do SelXor(topX, topY, width, height, 7, false);
+              ChangeWindow(7);
+              Write(FF, ':: ');
+              press := ReadNumber(i,curBaseLine,false);
+              if (i > fontHeight) or (i < 0) then Raise BadNumber
+              else SetBaseLine(i, true);
+              WaitNoPress;
+              exit(DoBaseLine);
+              end;
+   with posAr[7] do SelXor(topX, topY, width, height, 7, false);
+   end; {DoBaseLine}
+
+PROCEDURE DoFontName;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles cursor as long as in FontName box.  If press inside then
+          reads new value.
+SideEffects: may set curFont.
+Environment:  Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var newName: String;
+       press: boolean;
+   begin
+   with posAr[8] do SelXor(topX, topY, width, height, 8, false);
+   while FindMenu(press) =8 do
+   if press then
+              begin
+              with posAr[8] do SelXor(topX, topY, width, height, 8, false);
+              ChangeWindow(8);
+              Write(FF, ':: ');
+              press := ReadString(newName, false);
+              if newName = '' then begin
+                                   IOBeep;
+                                   Write(FF, curFont);
+                                   end
+              else begin
+                   Write(FF, newName);
+                   curFont := newName;
+                   end;
+              WaitNoPress;
+              exit(DoFontName);
+              end;
+   with posAr[8] do SelXor(topX, topY, width, height, 7, false);
+   end; {DoFontName}
+
+Procedure DoComment;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the Comment window.
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var c: Char;
+       i,x,y: Integer;
+       leave,erase,press : boolean;
+   begin
+   with posAr[10] do SelXor(topX, topY, width, height, 10, false);
+   while FindMenu(press) = 10 do
+      if press then
+         begin
+         with posAr[10] do begin
+                           SelXor(topX, topY, width, height, 10, false);
+                           press := GetAction(x,y,TRUE, buttons);
+                           erase := (y < topY+headerSize) and
+                                    (x > topX+width-(7*13));
+                           end;
+         WaitNoPress;
+         XSChangeWindow(10);  {Comment window uses scrFont}
+         ChangeTitle('<Press to exit>');
+         XSSetFont(scrFont);
+         XSCurChr('_');
+         XSCurOn;
+         if erase then XSPutChr(FF);
+         XSSetItalic(not isNotItalic);
+         XSSetBold(not isNotBold);
+         XSSetDirection(curDir);
+         InvertSel(curOrd);  {so not black when reading}
+         repeat 
+            leave := GetInChar(c, true);
+            if c = CR then begin
+                           XSPutChr(CR);
+                           XSPutChr(LF);
+                           end;
+         until leave;
+         InvertSel(curOrd);  {restore}
+         XSCurOff;
+         XSSetFont(MakePtr(FontSeg, 0, FontPtr));
+         ChangeTitle(titComment);
+         XSCurChr(chr(127)); {Del}
+         WaitNoPress;
+         exit(DoComment);
+         end;
+   with posAr[10] do SelXor(topX, topY, width, height, 10, false);
+   end;  {DoComment}
+
+Procedure DoMode;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the mode menu.  Changes the mode to the specified
+          value.  Press outside is no change
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var line: integer;
+   begin
+   line := CheckCurs(2);
+   if line > 2 then line := 2;
+   if (line >= 0) and (line <> ord(mode)) then 
+    with posAr[2] do
+      begin
+      SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9, defFH,
+              1, false);  {remove old one}
+      mode := RECAST(line, Funct);
+      SelXor(topX+4,topY+headerSize+ord(mode)*DefFH,width-9, defFH,
+              1, false);
+      end;   
+   WaitNoPress;
+   end;  {DoMode}
+
+Procedure DoItalic;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the Italic menu.  Changes the style to the specified
+          value.  Press outside is no change
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var line: integer;
+   begin
+   line := CheckCurs(15);
+   if line > 1 then line := 1;
+   if (line >= 0) and (line <> ord(isNotItalic)) then 
+    with posAr[15] do
+      begin
+      SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,width-9, defFH,
+              1, false);  {remove old one}
+      isNotItalic := RECAST(line, BOOLEAN);
+      SelXor(topX+4,topY+headerSize+ord(isNotItalic)*DefFH,width-9, defFH,
+              1, false);
+      end;   
+   WaitNoPress;
+   end;  {DoItalic}
+
+Procedure DoBold;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the bold menu.  Changes the style to the specified
+          value.  Press outside is no change
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var line: integer;
+   begin
+   line := CheckCurs(16);
+   if line > 1 then line := 1;
+   if (line >= 0) and (line <> ord(isNotBold)) then 
+    with posAr[16] do
+      begin
+      SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,width-9, defFH,
+              1, false);  {remove old one}
+      isNotBold := RECAST(line, BOOLEAN);
+      SelXor(topX+4,topY+headerSize+ord(isNotBold)*DefFH,width-9, defFH,
+              1, false);
+      end;   
+   WaitNoPress;
+   end;  {DoBold}
+
+Procedure DoDir;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the Dir menu.  Changes the Dir to the specified
+          value.  Press outside is no change
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var line: integer;
+   begin
+   line := CheckCurs(14);
+   if line > 1 then line := 1;
+   if (line >= 0) and (line <> ord(curDir)) then 
+    with posAr[14] do
+      begin
+      SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,width-9, defFH,
+              1, false);  {remove old one}
+      curDir := RECAST(line, XSDirection);
+      XSSetDirection(curDir);
+      SelXor(topX+4,topY+headerSize+ord(curDir)*DefFH,width-9, defFH,
+              1, false);
+      end;   
+   WaitNoPress;
+   end;  {DoDir}
+
+Procedure DoFixedWidth;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the fixedWidth menu.  Changes FixedWidth to value
+          specified.  Press outside is no change.  If changing from not to
+          yes, then new fixed width is width of current char.
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var line, oldLine, i: integer;
+   begin
+   if fixedWidth then oldLine := 0 else oldLine := 1;
+   line := CheckCurs(11);
+   if line > 1 then line := 1;
+   if (line >= 0) and (line <> oldLine) then 
+    with posAr[11] do
+      begin
+      SelXor(topX+4,topY+headerSize+oldLine*DefFH,width-9, defFH,
+              11, false);  {remove old one}
+      if line = 0 then if confirm then
+                          begin
+                          maxWidth := DoFontWidth(maxWidth);
+                          fixedWidth := true;
+                          for i := 0 to 127 do
+                              begin
+                              widths[i] := maxWidth;
+                              ScrFont^.index[i].Width := maxWidth;
+                              end;
+                          SetWidth(maxWidth, true);
+                          end
+                       else line := 1 {not confirm}
+      else fixedWidth := false;
+      SelXor(topX+4,topY+headerSize+line*DefFH,width-9, defFH,
+              11, false);
+      end;   
+   WaitNoPress;
+   end;  {DoFixedWidth}
+
+Procedure DoCommand;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Handles press in the COMMAND menu.  Calls the appropriate procedure
+          to do the specified action.
+Environment:  Requires nothing selected on entry. Uses PosAr.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var com, ht: integer;
+       erase: boolean;
+   begin
+   com := CheckCurs(1);
+   if com >= 0 then 
+    with posAr[1] do
+      begin
+      SelXor(topX+4,topY+headerSize+com*DefFH,width-9, defFH, 1, false);
+      erase := true;
+      case com of
+          0 : begin
+              WaitNoPress;
+              All(true);
+              end;
+          1 : begin
+              WaitNoPress;
+              All(false);
+              end;
+          2 : begin
+              WaitNoPress;
+              InvertAll;
+              end;
+          3 : Box;
+          4 : begin
+              WaitNoPress;
+              ReadChar;
+              end;
+          5 : begin
+              WaitNoPress;
+              WriteChar;
+              end;
+          6 : if Confirm then erase := not ReadFontFile;
+          7 : if Confirm then begin
+                              Init;
+                              erase := false;
+                              end;
+          8 : begin
+              WaitNoPress;
+              JoinChar;
+              end;
+          9 : FLine;
+         10 : if Confirm then WriteFontFile;
+         11 : begin
+              WaitNoPress;
+              FixScreen;
+              end;
+         otherwise : if Confirm then DoQuit;
+         end;
+      if erase then SelXor(topX+4,topY+headerSize+com*DefFH,width-9, defFH,
+                            1, false);
+      end;   
+   end;  {DoCommand}
+
+Procedure LookForMenu;
+{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Abstract: Checks if cursor in any window and if so calls that menu handler.
+Environment:  Requires nothing selected on entry. Uses PosAr.
+Calls: FindMenu and lots of handlers
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
+   var press: boolean;
+   begin
+   case FindMenu(press) of
+          1 : DoCommand;
+          2 : DoMode;
+          3 : ;
+          4 : DoWidth;
+          5 : DoFunction;
+          6 : DoAscii;
+          7 : DoBaseLine;
+          8 : DoFontName;
+          9 : ;
+         10 : DoComment;
+         11 : DoFixedWidth;
+         12 : DoOrd;
+         13 : DoMove;
+         14 : DoDir;
+         15 : DoItalic;
+         16 : DoBold;
+         otherwise : ;
+         end;
+   end;  {LookForMenu}
+
+Procedure EraseScreen;
+   begin
+   curOrd := -1;
+   CreateWindow(0, 0, 0, 768, 1024, '');
+   Write('            FontEditor - ',FontVersion);
+   MakeScrFont;
+   SetUpCommands;
+   end; {EraseScreen}
+
+Procedure SetBaseLine(newVal: integer; eraseOld: boolean);
+   begin
+   if eraseOld then DotHLine(curBaseLine);
+   if newVal <= fontHeight then curBaseLine := newVal;
+   ScrFont^.base := curBaseLine;
+   DotHLine(curBaseLine);
+   ChangeWindow(7);
+   Write(FF, curBaseLine:4);
+   ChangeWindow(0);
+   end;
+
+procedure FixScreen;
+   var x,y: quad;
+       w: integer;
+   begin
+   RasterOp(RXor, winXStart-1,yBaseTop-1+NumBits*8,
+               0,yBaseTop-1,DestWords,DestPtr,
+               0,yBaseTop-1,DestWords,DestPtr);
+   for y := 0 to fontHeight-1 do
+     for x := 0 to curWidth-1 do
+      if GetBit(y,x) then RasterOp(RXNor,7,7,xBase+1+x*8,yBase+1+y*8,DestWords,
+               DestPtr, xBase+1+x*8, yBase+1+y*8,DestWords, DestPtr);
+   for y := 0 to MaxBit do
+      for w := 0 to MaxWord do 
+         SetDestWord(y,w);
+   DisplayBoard;
+   SetWidth(curWidth, false);
+   SetBaseLine(curBaseLine, false);
+   end;  {FixScreen}
+   
+Procedure GetAdr(which: Integer; var baseX, baseY: Integer);
+   begin
+   baseX := (which mod CharsPerLine) * NumBits;
+   baseY := CharYStart + (which div CharsPerLine)* FontHeight;
+   end;  {GetAdr}
+
+Procedure InvertSel(sel: Integer);
+   var baseX, baseY: Integer;
+   begin
+   GetAdr(sel, baseX, baseY);
+   RasterOp(1, NumBits, fontHeight, baseX, baseY, DestWords, DestPtr,
+                                    baseX, baseY, DestWords, DestPtr);
+   end;  {InvertSel}
+
+Procedure SetCur(newOrd: Integer);
+   begin
+   if curOrd <> -1 then InvertSel(curOrd);
+   curOrd := newOrd;
+   InvertSel(curOrd);
+   ChangeWindow(6);
+   Write(FF, ' ');
+   if newOrd < ord(' ') then Write('^',chr(newOrd+ord('@')))
+   else write(chr(newOrd));
+   ChangeWindow(12);
+   Write(FF,'#',newOrd:1:8);
+   ChangeWindow(0);
+   end;  {SetCur}
+
+procedure ReadChar;  {read curOrd}
+   var baseX, baseY: integer;
+   begin
+   GetAdr(curOrd, baseX, baseY);
+   InvertSel(curOrd);
+   RasterOp(RXor, NumBits, NumBits, 0,0, 4, curChar,  {erase old picture}
+                                    0,0, 4, curChar);
+   RasterOp(RRpl, NumBits, FontHeight, 0,0, 4, curChar,
+                  baseX, baseY, DestWords, DestPtr);
+   InvertSel(curOrd);
+   curWidth := widths[curOrd];
+   if curWidth = 0 then 
+      if fixedWidth then curWidth := maxWidth
+      else curWidth := NumBits;
+   curXMax := xBase+curWidth*8;
+   FixScreen;  {calls SetWidth}
+   end;  {ReadChar}
+
+procedure WriteChar;
+   var baseX, baseY: integer;
+   begin
+   GetAdr(curOrd, baseX, baseY);
+   widths[curOrd] := curWidth;
+   ScrFont^.index[curOrd].Width := curWidth;
+   RasterOp(RRpl, NumBits, fontHeight, baseX, baseY, DestWords, DestPtr,
+                  0,0, 4, curChar);
+   InvertSel(curOrd);
+   end;  {WriteChar}
+
+{Sets x,y to upper left corner of box to use (in Bits); sets charOrd to 
+ ordinal of box}
+
+Function FindChar(Var charOrd: integer): boolean;
+  var x, y: integer;
+      press: boolean;
+  begin
+  FindChar := False;
+  press := GetAction(x,y,TRUE, buttons);
+  if not press then exit(FindChar);
+  if (y < charYStart) or (y >= charYStart+numLines*fontHeight) or
+          (x >= charsPerLine*NumBits) then FindChar := false
+  else begin
+       x := (x div NumBits);
+       y := ((y - charYStart) div fontHeight);
+       charOrd := y*charsPerLine + x;
+       if charOrd < 128 then FindChar := true
+       else FindChar := false;
+       end;
+  end;  {FindChar}
+
+procedure MainLoop;
+   var c: char;
+       fileName: STRING;
+       f: Text;
+       fid: FileId;
+       status, tabx, taby, count, blks, i, x,y: integer;
+       dir : Direction;
+       val, ok, press: boolean;
+       m : Funct;
+   label 1,2;
+   begin
+   while true do
+      begin
+      LookForMenu;
+      {check for cursor pressed over a square}
+      CheckBaseLineDot;
+      CheckWidthDot;
+      press := GetAction(tabx,taby,TRUE, buttons);
+      If press then
+          begin
+          if (tabx < xBase) or (taby < yBase) or (tabx >= curXMax) or (taby >= curYMax) then if FindChar(i) then SetCur(i)
+             else IOBeep
+          else if (not justDown) or (lastx <> (tabx-xBase) div 8) or 
+                            (lasty <> (taby-yBase) div 8 ) then {new point}
+                    begin
+                    lasty := (taby-yBase) div 8;
+                    lastx := (tabx-xBase) div 8;
+                    justDown := true;
+                    if buttons.white then m := Black
+                    else if buttons.green then m := White
+                    else if buttons.blue then m := Toggle
+                    else m := mode;
+                    CursPt(lasty, lastx, m);
+                    end;
+          end {pt exists}
+       else justDown := false;  {no point}
+       end; {loop}
+   end;  {MainLoop}
+
+Procedure SetArrows;
+   var f: File Of Integer;
+       x, y: integer;
+   begin
+   Reset(f, 'Fonted.cursor');
+   for y:= 0 to 63 do
+      for x := 0 to 3 do
+        begin
+       {$R-}
+        DestPtr^[ArrowStart+y*48+x] := f^;
+       {$R+}
+        get(f);
+        end;
+   Close(f);
+   end.  {SetArrows}
+

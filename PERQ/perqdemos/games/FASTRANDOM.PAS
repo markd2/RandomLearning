@@ -1,1 +1,254 @@
-module FastRandom;{------------------------------------------------------------------------     RandomNumbers - Random number generator.      J. P. Strait    15 Sep 80.      Copyright (C) Three Rivers Computer Corporation, 1980.                  Random is a feedback shift-register pseudo-random number generator.      The algorithm used is one described in the article:                 'Generalized Feedback Shift Register Pseudorandom Number                 Generator'           T. G. Lewis and W. H. Payne           JACM Vol. 20, No. 3, July 1973, pp. 456-468.                 Random produces multidimensional pseudo-random numbers equally      distributed in the interval -32768..32767 and has a period of      2^98.      There is currently no way to seed the generator.      ------------------------------------------------------------------------}{------------------------------------------------------------------------  Change log:            28 Jul 81  BAM  V1.4  Change so parameters are pointers.      28 Jul 81  JPS  V1.3  1) Use microcode.                            2) Allow user to supply the random table in order                               to be able to save and restore the sequence and                               maintain the sequence between programs.       1 Jun 81  BAM  V1.2  Add comments.      17 Sep 80  JPS  V1.1  Correct an error in the table.------------------------------------------------------------------------}{////////////////////////////} exports {\\\\\\\\\\\\\\\\\\\\\\\\\}const RanSize = 98;   { size of table }type RanTable = array[0..RanSize-1] of Integer;type pRanTable = ^RanTable;procedure RandomTable( table: pRanTable );procedure InitRandom( table: pRanTable );function Random: integer;function RandomRange( Min, Max: Integer ): integer;procedure NormalRandom;{////////////////////////////} private {\\\\\\\\\\\\\\\\\\\\\\\\\}const RandomVersion = '1.4';      {Include Random.Dfs}      SetRan = 3840;      GetRan = 3848;      Ran = 3856;            Pm1 = 97;      Qm1 = 26;            P = 98;            {$ifc P <> RanSize then}      {$Message P <> RanSize}      {$endc}            var I, J: integer;    tab: pRanTable;  imports ControlStore from ControlStore;procedure RandomTable( table: pRanTable );{------------------------------------------------------------------------  Abstract: Initialize the random number table.  Every time this is             called, the random numbers start over at the same place.             the control store is also loaded with Random.Bin.------------------------------------------------------------------------} var RandomBin: MicroFile; begin { InitTable }  Table^[ 0] := #020651;  Table^[ 1] := #147643;  Table^[ 2] := #164707;  Table^[ 3] := #125262;  Table^[ 4] := #104256;  Table^[ 5] := #074760;  Table^[ 6] := #114470;  Table^[ 7] := #052607;  Table^[ 8] := #045551;  Table^[ 9] := #134031;  Table^[10] := #024107;  Table^[11] := #030766;  Table^[12] := #154073;  Table^[13] := #114777;  Table^[14] := #024540;  Table^[15] := #111012;  Table^[16] := #011042;  Table^[17] := #104067;  Table^[18] := #056332;  Table^[19] := #142244;  Table^[20] := #131107;  Table^[21] := #034074;  Table^[22] := #052641;  Table^[23] := #163046;  Table^[24] := #026303;  Table^[25] := #131352;  Table^[26] := #077724;  Table^[27] := #002462;  Table^[28] := #110775;  Table^[29] := #127346;  Table^[30] := #020100;  Table^[31] := #137011;  Table^[32] := #136163;  Table^[33] := #145552;  Table^[34] := #144223;  Table^[35] := #134111;  Table^[36] := #075001;  Table^[37] := #075221;  Table^[38] := #176705;  Table^[39] := #000210;  Table^[40] := #103625;  Table^[41] := #120246;  Table^[42] := #062614;  Table^[43] := #016147;  Table^[44] := #054723;  Table^[45] := #151200;  Table^[46] := #105223;  Table^[47] := #021001;  Table^[48] := #016224;  Table^[49] := #073377;  Table^[50] := #150716;  Table^[51] := #014557;  Table^[52] := #112613;  Table^[53] := #037466;  Table^[54] := #002677;  Table^[55] := #052542;  Table^[56] := #063572;  Table^[57] := #105462;  Table^[58] := #106436;  Table^[59] := #063302;  Table^[60] := #053171;  Table^[61] := #133243;  Table^[62] := #113130;  Table^[63] := #123222;  Table^[64] := #072371;  Table^[65] := #041043;  Table^[66] := #163614;  Table^[67] := #037432;  Table^[68] := #147330;  Table^[69] := #153403;  Table^[70] := #130306;  Table^[71] := #056455;  Table^[72] := #175640;  Table^[73] := #120567;  Table^[74] := #100601;  Table^[75] := #042371;  Table^[76] := #154635;  Table^[77] := #051133;  Table^[78] := #074252;  Table^[79] := #174525;  Table^[80] := #163223;  Table^[81] := #052022;  Table^[82] := #022564;  Table^[83] := #135512;  Table^[84] := #021760;  Table^[85] := #006743;  Table^[86] := #006451;  Table^[87] := #067445;  Table^[88] := #106210;  Table^[89] := #025417;  Table^[90] := #066566;  Table^[91] := #062723;  Table^[92] := #124224;  Table^[93] := #144643;  Table^[94] := #164502;  Table^[95] := #025342;  Table^[96] := #003521;  Table^[97] := #024050;  Reset(RandomBin, 'Random.Bin');  LoadControlStore(RandomBin);  Close(RandomBin);  LoadExpr(Pm1);  LoadExpr(Qm1);  LoadExpr(LOr(Shift(SetRan,8),Shift(SetRan,-8)));  InLineByte(191 {JCS}) end { InitTable };procedure InitRandom( table: pRanTable );{------------------------------------------------------------------------  Abstract: Initialize the random number generator without restarting            the random sequence.------------------------------------------------------------------------} begin { InitRandom }  tab := table;  LoadExpr(Pm1);  LoadExpr(Qm1);  LoadExpr(LOr(Shift(SetRan,8),Shift(SetRan,-8)));  InLineByte(191 {JCS}) end { InitRandom };Procedure NormalRandom;{------------------------------------------------------------------------  Abstract: Normalizes the table so that it can be saved and restored later.------------------------------------------------------------------------} var I, J: Integer;     T: RanTable; begin { NormalRandom }   LoadExpr(LOr(Shift(GetRan,8),Shift(GetRan,-8)));   InLineByte(191 {JCS});   StorExpr(I);   StorExpr(J);   T := Tab^;   for I := 0 to Pm1 do      Tab^[(I + Pm1 - J) mod P] := T[I] end { NormalRandom };Function Random: Integer;{------------------------------------------------------------------------  Abstract: Returns a random number.  Returns: A random 16-bit number.------------------------------------------------------------------------} var R: Integer; begin { Random }   LoadAdr(Tab);   InLineByte(239 {LDDW});   LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));   InLineByte(228 {TLATE1});   InLineByte(191 {JCS});   StorExpr(R);   Random := R end { Random };Function RandomRange( Min, Max: Integer ): Integer;{------------------------------------------------------------------------  Abstract: Returns a random number.  Returns: A random 16-bit number.------------------------------------------------------------------------} var R: Integer; begin { RandomRange }   LoadAdr(Tab);   InLineByte(239 {LDDW});   LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));   InLineByte(228 {TLATE1});   InLineByte(191 {JCS});   StorExpr(R);   R := R mod (Max - Min + 1);   if R < 0 then RandomRange := R + Max + 1   else RandomRange := R + Min end { RandomRange }.
+module FastRandom;
+{------------------------------------------------------------------------
+
+     RandomNumbers - Random number generator.
+      J. P. Strait    15 Sep 80.
+      Copyright (C) Three Rivers Computer Corporation, 1980.
+      
+      
+      Random is a feedback shift-register pseudo-random number generator.
+      The algorithm used is one described in the article:
+      
+           'Generalized Feedback Shift Register Pseudorandom Number
+                 Generator'
+           T. G. Lewis and W. H. Payne
+           JACM Vol. 20, No. 3, July 1973, pp. 456-468.
+           
+      Random produces multidimensional pseudo-random numbers equally
+      distributed in the interval -32768..32767 and has a period of
+      2^98.
+
+      There is currently no way to seed the generator.
+      
+------------------------------------------------------------------------}
+
+{------------------------------------------------------------------------
+  Change log:
+      
+      28 Jul 81  BAM  V1.4  Change so parameters are pointers.
+      28 Jul 81  JPS  V1.3  1) Use microcode.
+                            2) Allow user to supply the random table in order
+                               to be able to save and restore the sequence and
+                               maintain the sequence between programs.
+       1 Jun 81  BAM  V1.2  Add comments.
+      17 Sep 80  JPS  V1.1  Correct an error in the table.
+------------------------------------------------------------------------}
+
+{////////////////////////////} exports {\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+
+const RanSize = 98;   { size of table }
+
+
+type RanTable = array[0..RanSize-1] of Integer;
+type pRanTable = ^RanTable;
+
+procedure RandomTable( table: pRanTable );
+procedure InitRandom( table: pRanTable );
+function Random: integer;
+function RandomRange( Min, Max: Integer ): integer;
+procedure NormalRandom;
+
+
+{////////////////////////////} private {\\\\\\\\\\\\\\\\\\\\\\\\\}
+
+const RandomVersion = '1.4';
+      {Include Random.Dfs}
+      SetRan = 3840;
+      GetRan = 3848;
+      Ran = 3856;
+      
+      Pm1 = 97;
+      Qm1 = 26;
+      
+      P = 98;
+      
+      {$ifc P <> RanSize then}
+      {$Message P <> RanSize}
+      {$endc}
+            
+
+var I, J: integer;
+    tab: pRanTable;
+  
+imports ControlStore from ControlStore;
+
+
+
+procedure RandomTable( table: pRanTable );
+{------------------------------------------------------------------------
+  Abstract: Initialize the random number table.  Every time this is
+             called, the random numbers start over at the same place.
+             the control store is also loaded with Random.Bin.
+------------------------------------------------------------------------}
+ var RandomBin: MicroFile;
+ begin { InitTable }
+  Table^[ 0] := #020651;
+  Table^[ 1] := #147643;
+  Table^[ 2] := #164707;
+  Table^[ 3] := #125262;
+  Table^[ 4] := #104256;
+  Table^[ 5] := #074760;
+  Table^[ 6] := #114470;
+  Table^[ 7] := #052607;
+  Table^[ 8] := #045551;
+  Table^[ 9] := #134031;
+  Table^[10] := #024107;
+  Table^[11] := #030766;
+  Table^[12] := #154073;
+  Table^[13] := #114777;
+  Table^[14] := #024540;
+  Table^[15] := #111012;
+  Table^[16] := #011042;
+  Table^[17] := #104067;
+  Table^[18] := #056332;
+  Table^[19] := #142244;
+  Table^[20] := #131107;
+  Table^[21] := #034074;
+  Table^[22] := #052641;
+  Table^[23] := #163046;
+  Table^[24] := #026303;
+  Table^[25] := #131352;
+  Table^[26] := #077724;
+  Table^[27] := #002462;
+  Table^[28] := #110775;
+  Table^[29] := #127346;
+  Table^[30] := #020100;
+  Table^[31] := #137011;
+  Table^[32] := #136163;
+  Table^[33] := #145552;
+  Table^[34] := #144223;
+  Table^[35] := #134111;
+  Table^[36] := #075001;
+  Table^[37] := #075221;
+  Table^[38] := #176705;
+  Table^[39] := #000210;
+  Table^[40] := #103625;
+  Table^[41] := #120246;
+  Table^[42] := #062614;
+  Table^[43] := #016147;
+  Table^[44] := #054723;
+  Table^[45] := #151200;
+  Table^[46] := #105223;
+  Table^[47] := #021001;
+  Table^[48] := #016224;
+  Table^[49] := #073377;
+  Table^[50] := #150716;
+  Table^[51] := #014557;
+  Table^[52] := #112613;
+  Table^[53] := #037466;
+  Table^[54] := #002677;
+  Table^[55] := #052542;
+  Table^[56] := #063572;
+  Table^[57] := #105462;
+  Table^[58] := #106436;
+  Table^[59] := #063302;
+  Table^[60] := #053171;
+  Table^[61] := #133243;
+  Table^[62] := #113130;
+  Table^[63] := #123222;
+  Table^[64] := #072371;
+  Table^[65] := #041043;
+  Table^[66] := #163614;
+  Table^[67] := #037432;
+  Table^[68] := #147330;
+  Table^[69] := #153403;
+  Table^[70] := #130306;
+  Table^[71] := #056455;
+  Table^[72] := #175640;
+  Table^[73] := #120567;
+  Table^[74] := #100601;
+  Table^[75] := #042371;
+  Table^[76] := #154635;
+  Table^[77] := #051133;
+  Table^[78] := #074252;
+  Table^[79] := #174525;
+  Table^[80] := #163223;
+  Table^[81] := #052022;
+  Table^[82] := #022564;
+  Table^[83] := #135512;
+  Table^[84] := #021760;
+  Table^[85] := #006743;
+  Table^[86] := #006451;
+  Table^[87] := #067445;
+  Table^[88] := #106210;
+  Table^[89] := #025417;
+  Table^[90] := #066566;
+  Table^[91] := #062723;
+  Table^[92] := #124224;
+  Table^[93] := #144643;
+  Table^[94] := #164502;
+  Table^[95] := #025342;
+  Table^[96] := #003521;
+  Table^[97] := #024050;
+  Reset(RandomBin, 'Random.Bin');
+  LoadControlStore(RandomBin);
+  Close(RandomBin);
+  LoadExpr(Pm1);
+  LoadExpr(Qm1);
+  LoadExpr(LOr(Shift(SetRan,8),Shift(SetRan,-8)));
+  InLineByte(191 {JCS})
+ end { InitTable };
+
+procedure InitRandom( table: pRanTable );
+{------------------------------------------------------------------------
+  Abstract: Initialize the random number generator without restarting
+            the random sequence.
+------------------------------------------------------------------------}
+ begin { InitRandom }
+  tab := table;
+  LoadExpr(Pm1);
+  LoadExpr(Qm1);
+  LoadExpr(LOr(Shift(SetRan,8),Shift(SetRan,-8)));
+  InLineByte(191 {JCS})
+ end { InitRandom };
+
+Procedure NormalRandom;
+{------------------------------------------------------------------------
+  Abstract: Normalizes the table so that it can be saved and restored later.
+------------------------------------------------------------------------}
+ var I, J: Integer;
+     T: RanTable;
+ begin { NormalRandom }
+   LoadExpr(LOr(Shift(GetRan,8),Shift(GetRan,-8)));
+   InLineByte(191 {JCS});
+   StorExpr(I);
+   StorExpr(J);
+   T := Tab^;
+   for I := 0 to Pm1 do
+      Tab^[(I + Pm1 - J) mod P] := T[I]
+ end { NormalRandom };
+
+Function Random: Integer;
+{------------------------------------------------------------------------
+  Abstract: Returns a random number.
+  Returns: A random 16-bit number.
+------------------------------------------------------------------------}
+ var R: Integer;
+ begin { Random }
+   LoadAdr(Tab);
+   InLineByte(239 {LDDW});
+   LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));
+   InLineByte(228 {TLATE1});
+   InLineByte(191 {JCS});
+   StorExpr(R);
+   Random := R
+ end { Random };
+
+Function RandomRange( Min, Max: Integer ): Integer;
+{------------------------------------------------------------------------
+  Abstract: Returns a random number.
+  Returns: A random 16-bit number.
+------------------------------------------------------------------------}
+ var R: Integer;
+ begin { RandomRange }
+   LoadAdr(Tab);
+   InLineByte(239 {LDDW});
+   LoadExpr(LOr(Shift(Ran,8),Shift(Ran,-8)));
+   InLineByte(228 {TLATE1});
+   InLineByte(191 {JCS});
+   StorExpr(R);
+   R := R mod (Max - Min + 1);
+   if R < 0 then RandomRange := R + Max + 1
+   else RandomRange := R + Min
+ end { RandomRange }.
