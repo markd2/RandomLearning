@@ -39,12 +39,15 @@ go
 * `configure show`
 * `configure enable rs232`
 * `> settings assign rs232 device A RSX:`
+* `copy BLAH.PAS rsx:\Users\markd\Downloads\BLAH.PAS` - note only works for 7-bit text files.
 
 
 # Programming
 
 "if you want to compile a program immediately after editing it, you
 need not specify its name since the Shell remembers the last file edited, compiled, linked, or run"
+
+It's little endian
 
 ## Pascal
 
