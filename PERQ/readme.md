@@ -47,7 +47,28 @@ go
 "if you want to compile a program immediately after editing it, you
 need not specify its name since the Shell remembers the last file edited, compiled, linked, or run"
 
+# random unfiled factoids
+
 It's little endian
+
+file size information (courtesy of 
+
+so, a file with "hi\r" is `1  32`
+
+one block, in the last block, are 32 bits.  So four bytes, assuming there's an EOF
+marker?  Doing a dir/size, seeing some last-block-bits of 4096.  Guessing that fills
+up the block precisely?  SEG files seems to all have that behavior
+
+e.g.
+```
+tree.cursor     1       4096
+tree.Pas        6       1832
+tree.Pas$       6       1560   (34 bytes shorter than latest version)
+tree.RUN        3       2480
+tree.SEG        6       4096
+```
+
+
 
 ## Pascal
 
