@@ -66,6 +66,16 @@ begin
     end;
 end; { LoadPicture }
 
+
+procedure DrawRect(x, y, w, h: Integer);
+begin
+    Line(DrawLine, x, y, x+w, y, SScreenP);
+    Line(DrawLine, x, y+h, x+w,   y+h, SScreenP);
+    Line(DrawLine, x, y, x, y+h, SScreenP);
+    Line(DrawLine, x+w, y, x+w, y+h, SScreenP);
+end;
+
+
 var
     w, h, scanLen: Integer;
     destination: RasterPtr;  { the stars... }
@@ -80,9 +90,11 @@ begin
     
     RasterOp(RRpl,
              w, h,
-             30, 30,  { destination x/y }
+             30, 430,  { destination x/y }
              SScreenW, SScreenP,  { destination line-length and buffer addr }
              0, 0, { source position }
              scanLen, destination);
+             
+    DrawRect(30, 430, w, h);
 end.
      
