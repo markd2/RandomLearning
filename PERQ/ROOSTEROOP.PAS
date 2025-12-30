@@ -4,6 +4,7 @@ imports Raster from Raster;
 imports FileSystem from FileSystem; { pDirBlk, FileID }
 imports MultiRead from MultiRead; { MultiRead }
 imports Memory from Memory; { CreateSegment, MakePtr }
+imports Screen from Screen; { SScreenW, SScreenP }
 
 const
     inputFileName = '3RCC.PIC';
@@ -45,6 +46,8 @@ begin
         width := tmpBuf^.Buffer[0];
         height := tmpBuf^.Buffer[1];
         
+        destBase := MakePtr(segNum, 256, RasterPtr);
+        
         { correctness-check scan lenght and file size }
         scanLength := LAnd(width + 63, LNot(#77)) div 16; {63 == #77 == 111111}
         if scanLength <> tmpBuf^.Buffer[2] then begin
@@ -69,8 +72,17 @@ var
 
 (* MAIN *)
 begin
+    ScreenInit;
     if LoadPicture('3RCC.PIC', w, h, scanLen, destination) then begin
         Writeln('Woo!');
+        Writeln('width ', w:1, ' height ', h:1, ' scanlen ', scanLen:1);
     end;
+    
+    RasterOp(RRpl,
+             w, h,
+             30, 30,  { destination x/y }
+             SScreenW, SScreenP,  { destination line-length and buffer addr }
+             0, 0, { source position }
+             scanLen, destination);
 end.
      
