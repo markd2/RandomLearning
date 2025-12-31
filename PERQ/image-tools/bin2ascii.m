@@ -3,11 +3,12 @@
 #import <errno.h>
 #import <string.h>
 
-// exhale-perc.m - take a binary file, and generate a perc-style ascii interchange
+// clang -g -Wall -framework Foundation -o bin2ascii bin2ascii.m
+
+// bin2ascii.m - take a binary file, and generate a perc-style ascii interchange
 //    file (the format is mine - laughably stupid) - ascii decimal value for each byte
 //    on its own line.
 
-// clang -g -Wall -framework Foundation -o exhale-perq exhale-perq.m
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {

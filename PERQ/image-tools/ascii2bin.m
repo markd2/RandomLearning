@@ -1,10 +1,10 @@
-x2#import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 #import <stdio.h>
 
-// inhale-perq.m - go from ascii interchange format to a binary file
+// ascii2bin.m - go from ascii interchange format to a binary file
 // be sure to convert newlines with mac2unix
 
-// clang -g -Wall -framework Foundation -o inhale-perq inhale-perq.m
+// clang -g -Wall -framework Foundation -o ascii2bin ascii2bin.m
 
 
 // file format is ascii, one byte (decimal) per line.
