@@ -3,12 +3,12 @@
 #import <errno.h>
 #import <string.h>
 
+// clang -g -Wall -framework Foundation -o ascii2bin ascii2bin.m
+
 // ascii2bin.m - go from ascii interchange format to a binary file
 // be sure to convert newlines with mac2unix coming in
 
-// clang -g -Wall -framework Foundation -o ascii2bin ascii2bin.m
-
-// file format is ascii, one byte (decimal) per line.  This is trivial to generate
+// input file format is ascii, one byte (decimal) per line.  This is trivial to generate
 // from the PERQ Pascal side.
 // e.g.
 //      137
