@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+x2#import <Foundation/Foundation.h>
 #import <stdio.h>
 
 // inhale-perq.m - go from ascii interchange format to a binary file
