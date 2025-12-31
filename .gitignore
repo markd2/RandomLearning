@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/emacs,macos,swift,swiftpackagemanager
 # Edit at https://www.toptal.com/developers/gitignore?templates=emacs,macos,swift,swiftpackagemanager
 
+exhale-perq
+inhale-perq
+
 oopack
 
 # cmake stuffs
