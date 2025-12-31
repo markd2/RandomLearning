@@ -1,4 +1,4 @@
-program Exhale;
+program BIN2ASCII;
 { takes the input file, and emits a text file of the bytes of the input file.
   This should allow it to be transmitted out of perqEmu to the Mac, where it
   can be re-hydrated and examined (especially things like picture files,
