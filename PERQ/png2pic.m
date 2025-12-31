@@ -116,7 +116,7 @@ void WritePERQBitmapFile(const char *path,
     WriteBE16(f, (uint16_t)widthBits);
     WriteBE16(f, (uint16_t)height);
     WriteBE16(f, (uint16_t)wordsPerRow);
-    WriteBE16(f, (uint16_t)blocks);
+    WriteBE16(f, (uint16_t)blocks + 1);
 
     // ---- Pad header to next block boundary ----
     for (size_t i = 4; i < 256; i++) {
