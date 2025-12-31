@@ -4,6 +4,7 @@
 #import <ImageIO/ImageIO.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
+// clang -g -Wall -framework Foundation -framework CoreGraphics -framework ImageIO -framework UniformTypeIdentifiers -o pic2png pic2png.m
 
 // take a perq "PIC" format and convert it to PNG so it can read by mac image
 // editing tools.
@@ -15,7 +16,6 @@
 //    - scan line length (2 bytes, little endian) number of words in a scan line, times 4
 //    - block count - (2 bytes, little endian) number of blocks in the file
 
-// clang -g -Wall -framework Foundation -framework CoreGraphics -framework ImageIO -framework UniformTypeIdentifiers -o pic2png pic2png.m
 
 
 // courtesy of robot overlords
@@ -158,7 +158,7 @@ int main(int argc, char *argv[]) {
     void *blah = ConvertPERQBitmap((const uint16_t *)imageDataStart, width, height);
 
     Write1BitBitmapToPNG(blah, width, height, bytesPerRow,
-                         @"snork.png");
+                         @"snork-temp.png");
 
     return EXIT_SUCCESS;
 
