@@ -31,20 +31,6 @@ int main(int argc, char *argv[]) {
         // printf("got %hhx\n", blah);
     }
 
-#if 0
-    while (!feof(file) && !ferror(file)) {
-        amountRead = fread(buffer, 
-                           sizeof(char),                  // size of item
-                           sizeof(buffer) / sizeof(char), // number of items
-                           file);
-        if (amountRead == sizeof(buffer)) {
-            fprintf(stderr, "got unexpectedly long line.  run mac2unix on the file to fix newlines\n");
-            return EXIT_FAILURE;
-        }
-        printf("grooby read %zu -  %s\n", amountRead, buffer);
-    }
-#endif
-
     return EXIT_SUCCESS;
 
 } // main
