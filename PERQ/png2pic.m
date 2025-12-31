@@ -4,6 +4,7 @@
 #import <ImageIO/ImageIO.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
+// clang -g -Wall -framework Foundation -framework CoreGraphics -framework ImageIO -framework UniformTypeIdentifiers -o png2pic png2pic.m
 
 // take a perq "PIC" format and convert it to PNG so it can read by mac image
 // editing tools.
@@ -15,7 +16,6 @@
 //    - scan line length (2 bytes, little endian) number of words in a scan line, times 4
 //    - block count - (2 bytes, little endian) number of blocks in the file
 
-// clang -g -Wall -framework Foundation -framework CoreGraphics -framework ImageIO -framework UniformTypeIdentifiers -o png2pic png2pic.m
 
 
 // courtesy of our robot overlords
