@@ -15,16 +15,18 @@
 //    - height (2 bytes, little endian), height in scanlines
 //    - scan line length (2 bytes, little endian) number of words in a scan line, times 4
 //    - block count - (2 bytes, little endian) number of blocks in the file
+//    - then block after block of binary data for the raster, word-oriented.
+//      LSB first within 16-bit word.  1 = black, 0 = white pixel
+//
+// Not really an official format (as far as I've been able to tell) but is supported
+// by the "SIGUTILS.PAS" found in `sys:Users>demo>` , and my own adaption of 
+// GetFastPicture (renamed LoadPicture)
 
-
-
-// courtesy of robot overlords
-
-void Write1BitBitmapToPNG(const void *bitmapData,
-                          size_t widthBits,
-                          size_t height,
-                          size_t bytesPerRow,
-                          NSString *outputPath)
+void saveBitmapToPNG(const void *bitmapData,
+                     size_t width,
+                     size_t height,
+                     size_t bytesPerRow,
+                     NSString *outputPath)
 {
     // Create data provider (no copy)
     CGDataProviderRef provider =
@@ -43,71 +45,56 @@ void Write1BitBitmapToPNG(const void *bitmapData,
     CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
 
     CGImageRef image = CGImageCreate(
-        widthBits,          // width (pixels)
-        height,             // height (pixels)
-        1,                  // bits per component
-        1,                  // bits per pixel
-        bytesPerRow,        // bytes per row
+        width,
+        height,
+        1,             // bits per component
+        1,             // bits per pixel
+        bytesPerRow,
         colorSpace,
         bitmapInfo,
         provider,
-        NULL,               // decode
-        false,              // should interpolate
+        NULL,          // decode
+        false,         // should interpolate
         kCGRenderingIntentDefault
     );
 
     if (!image) {
-        NSLog(@"Failed to create CGImage");
+        NSLog(@"could not create image");
+        CGDataProviderRelease(provider);
         return;
     }
 
-    NSURL *url = [NSURL fileURLWithPath:outputPath];
-
+    // Get set up to write to the output path
+    NSURL *url = [NSURL fileURLWithPath: outputPath];
     CGImageDestinationRef destination =
         CGImageDestinationCreateWithURL(
             (__bridge CFURLRef)url,
             (CFStringRef)UTTypePNG.identifier,
-            1,
-            NULL
+            1,    // count
+            NULL  // options
         );
 
-    CGImageDestinationAddImage(destination, image, NULL);
+    CGImageDestinationAddImage(destination, image, NULL /*properties*/);
 
     if (!CGImageDestinationFinalize(destination)) {
         NSLog(@"Failed to write PNG");
     }
 
-    // Cleanup
     CFRelease(destination);
     CGImageRelease(image);
     CGColorSpaceRelease(colorSpace);
     CGDataProviderRelease(provider);
-} // Write1BitBitmapToPNG
+} // saveBitmapToPNG
 
 
-/*
-PERQ monochrome framebuffers use:
-Property	PERQ
-Pixel depth	1 bit
-Word size	16-bit
-Scanline alignment	64 bits
-Bit order	LSB first within 16-bit word
-Pixel polarity	1 = black, 0 = white
-Word endianness	Big-endian (Motorola-style)
-
-Core Graphics expects:
-MSB-first per byte
-0 = black, 1 = white
-Byte-oriented scanlines
-*/
-
-
-uint8_t *ConvertPERQBitmap(const uint16_t *src,
-                           size_t widthBits,
-                           size_t height)
+// jiggle the bytes around so that making a PNG from the bucket of bits
+// has the pixels in the correct order.
+uint8_t *byteswapPERQBitmap(const uint16_t *src,
+                            size_t width,
+                            size_t height)
 {
     // PERQ scanlines are 64-bit aligned
-    size_t wordsPerRow = ((widthBits + 63) & ~63) / 16;
+    size_t wordsPerRow = ((width + 63) & ~63) / 16;
     size_t bytesPerRow = wordsPerRow * 2;
 
     uint8_t *dst = malloc(bytesPerRow * height);
@@ -126,39 +113,44 @@ uint8_t *ConvertPERQBitmap(const uint16_t *src,
     }
 
     return dst;
-}
+
+} // byteswapPERQBitmap
 
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "%s filename - converts PERQ PIC to PNG\n",
-                argv[0]);
+    if (argc != 3) {
+        fprintf(stderr, "%s input-perq-pic-binary output-png\n", argv[0]);
+        fprintf(stderr, "   convert PERQ PIC binary image into a PNG\n");
         return EXIT_FAILURE;
     }
 
-    int fd = open(argv[1], O_RDONLY);
-    if (fd == -1) {
+    int inputPicFd = open(argv[1], O_RDONLY);
+    if (inputPicFd == -1) {
         fprintf(stderr, "error opening %s - %d - %s", argv[1], errno, strerror(errno));
         return EXIT_FAILURE;
     }
     unsigned char buffer[1024 * 1024];  // sufficiently big for any perq image file
 
-    read(fd, buffer, sizeof(buffer));
+    read(inputPicFd, buffer, sizeof(buffer));
+    close(inputPicFd);
 
+    // Trust the file, for better or worse
     short width = ((short *)buffer)[0];
     short height = ((short *)buffer)[1];
     short scanLen = ((short *)buffer)[2];
-    short blockCount = ((short *)buffer)[3];
-    printf("%d %d %d %d\n", width, height, scanLen, blockCount);
+    // short blockCount = ((short *)buffer)[3];  // we really don't need this
 
     short bytesPerRow = ((width + 63) & ~63) / 8;
+    if (scanLen != bytesPerRow / 2) {
+        fprintf(stderr, "scan length is sus - calc %d and from file %d\n",
+                bytesPerRow, scanLen);
+    }
 
     unsigned char *imageDataStart = &buffer[512];  // blocks are 256 words
     
-    void *blah = ConvertPERQBitmap((const uint16_t *)imageDataStart, width, height);
+    void *blah = byteswapPERQBitmap((const uint16_t *)imageDataStart, width, height);
 
-    Write1BitBitmapToPNG(blah, width, height, bytesPerRow,
-                         @"snork-temp.png");
+    saveBitmapToPNG(blah, width, height, bytesPerRow, @(argv[2]));
 
     return EXIT_SUCCESS;
 
