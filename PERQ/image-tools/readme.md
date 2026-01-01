@@ -15,8 +15,14 @@ programs in caps are PERQ Pascal programs, built and run on the PERQ
 * `ascii2bin` - same as ASCII2BIN, but mac-side
 * `pic2png` - convert a PERQ "pic" format (described in SIGUTILS.PAS) to png
 * `png2pic` - convert a png to a PERQ "pic"
+* `ROOSTEROOP` - display a .pic file on the PERQ side.
 
 ## Typical workflow
+
+all of the "2" programs take two arguments.  First is the sourece filename,
+second is where to save the converted data.
+
+ROOSTEROOP takes a single argument, the name of a .pic file
 
 ### Get an existing image off of PERQemu (optional)
 
