@@ -9,14 +9,6 @@ const
     programName = 'CmdFun';
 
 
-procedure Error(err: String);
-begin
-    Writeln(err);
-    exit(CmdFun);
-end; { Error }
-
-
-
 procedure Usage;
 begin
     Writeln(programName, ': thing1 thing2');
@@ -24,6 +16,24 @@ begin
     Writeln('    Unless it''s a thursday');
     exit(CmdFun);
 end; { Usage }
+
+
+procedure TwoFiles(var thing1, thing2: String);
+var
+    appname: CString;
+    isSwitch: Boolean;  { unused }
+    ch: Char;
+begin
+   ch := NextId(appname, isSwitch);  { consume application name }
+   if ch = CCR then Usage; { got app name but no files }
+   
+   ch := NextId(thing1, isSwitch);
+   if ch = CCR then Usage; { got file1, but ran out before getting file2 }
+   
+   ch := NextId(thing2, isSwitch);
+   if ch <> CCR then Usage;  { got file1 and file2, but there's still more }
+
+end; { TwoFiles}
 
 
 var
@@ -34,15 +44,7 @@ var
     
 begin {main}
    Writeln(UsrCmdLine);
-   
-   ch := NextId(cmdId, isSwitch);  { consume application name }
-   if ch = CCR then Usage; { got app name but no files }
-   
-   ch := NextId(file1, isSwitch);
-   if ch = CCR then Usage; { got file1, but ran out before getting file2 }
-   
-   ch := NextId(file2, isSwitch);
-   if ch <> CCR then Usage;  { got file1 and file2, but there's still more }
+   TwoFiles(file1, file2);
    
    Writeln('WOOT!  Got ', file1, ' and ', file2);   
 end.
