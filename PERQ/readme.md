@@ -783,3 +783,36 @@ Can replay stuff with `Editor/Replay`
 It'll replay against the prior-save file (SPLUNGE.XYZ$)
 
 
+## Argument parsing
+
+CmdParse
+
+pArgRec (ins and outs for Copy program)
+which is a ^ArgRec;
+ArgRect is a name ("CString" and a next pointer)
+
+CString is a str255
+
+there's a SwitchRec (and pSwitchRec), with the switch and arg (CString), a pointer to
+the corresponding arg, and a next pointer
+
+```
+Function ParseCmdArgs(var inputs, outputs: pArgRec; var switches: pSwitchRec;
+                      var err: String): boolean;
+```
+
+this falls over with somethng like `BLAH OOP ACK`, wanting commas and `~` symbols.
+
+CMDFUN.PAS has a simpler usage of `NextId`
+
+```
+Function NextID(var id: CString; var isSwitch: Boolean): Char;
+```
+
+it noms the next symbol and puts into id.  If it's a switch, sets isSwitch (both
+are `var` paramters), and returns a character, the next "significant" bit of text.
+If there's nothing less, then CCR (carriage return, ascii 13).  Not sure why this
+is called "C"CR. Unless they really enjoyed cowbell.
+
+
+
