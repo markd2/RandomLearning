@@ -5,10 +5,9 @@ imports FileSystem from FileSystem; { pDirBlk, FileID }
 imports MultiRead from MultiRead; { MultiRead }
 imports Memory from Memory; { CreateSegment, MakePtr }
 imports Screen from Screen; { SScreenW, SScreenP }
+imports CmdParse from CmdParse; { NextId }
+imports System from System; { UsrCmdLine }
 
-const
-    inputFileName = '3RCC.PIC';
-    
 
 { stuff from SIGUTILS }
 
@@ -75,15 +74,31 @@ begin
     Line(DrawLine, x+w, y, x+w, y+h, SScreenP);
 end;
 
+procedure Usage;
+begin
+    writeln('roosteroop image-file-name');
+    Writeln('    displays PIC file');
+    exit(Rooster_oop);
+end; { Usage }
+
 
 var
     w, h, scanLen: Integer;
     destination: RasterPtr;  { the stars... }
+    imageFilename: String;
+    ch: Char;
+    isSwitch: Boolean;
+    appname: String;
 
 (* MAIN *)
 begin
+    ch := NextId(appname, isSwitch); { consume application name }
+    if ch = CCR then Usage; { got app name, but no file }
+    ch := NextId(imageFilename, isSwitch);
+    if ch <> CCR then Usage; { got filename, but there's more stuff }
+    
     ScreenInit;
-    if LoadPicture('3RCC.PIC', w, h, scanLen, destination) then begin
+    if LoadPicture(imageFilename, w, h, scanLen, destination) then begin
         Writeln('Woo!');
         Writeln('width ', w:1, ' height ', h:1, ' scanlen ', scanLen:1);
     end;
@@ -95,6 +110,6 @@ begin
              0, 0, { source position }
              scanLen, destination);
              
-    DrawRect(30, 430, w, h);
+    DrawRect(30-1, 430-1, w+2, h+2);
 end.
      
