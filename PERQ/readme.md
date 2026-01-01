@@ -44,6 +44,8 @@ go
 
 # Programming
 
+Spike programs saved in `spikes`.
+
 "if you want to compile a program immediately after editing it, you
 need not specify its name since the Shell remembers the last file edited, compiled, linked, or run"
 
