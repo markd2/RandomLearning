@@ -818,3 +818,21 @@ is called "C"CR. Unless they really enjoyed cowbell.
 
 
 
+# Fun stuff
+
+* 8-character symbols
+* case insensitive symbols. can't do stuff like `card: Card`, so have to mess with
+  plurals, prefixes, etc.  And doing CardRef so the (more frequent) reference to
+  e.g. a card property be the simpler
+* there is no concept of a "mouse up" - you get a continuous stream of button presses
+  when a button is held down.  So lots of stuff is "click, show something, drag". like
+  in the editor - no drag-selection, but a click/click/click
+* No break/continue in loops
+  - so pyramid of death more often
+* for loop doesn't have a Step
+* pascal is even more semicolon obsessed than C.  (end of procedure and function signatures, separate parameters)
+* editor is full of footguns (thinking "I've done a bunch of editing, so I'll exit to compile", which throws away all your edits.  Also INS and DEL are RIGHT NEXT TO EACH OTHER.
+
+"execution of an undefined QCode"
+
+* dir/size is bizarre
