@@ -22,12 +22,11 @@ procedure DrawCard(var cv: CardView);
 var
     highlightRect: GRect;
 begin
+    EraseRect(cv.rect);
     StrokeRect(cv.rect);
     if cv.isHighlighted then begin
         highlightRect := RectInset(cv.rect, 2, 3);
         StrokeRect(highlightRect);
-    end else begin
-        EraseRect(highlightRect);
     end;
 end. { DrawCard }
 

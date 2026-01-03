@@ -32,10 +32,10 @@ end;
 
 function RectInset(rect: GRect; widthInset: Integer; heightInset: Integer): GRect;
 begin
-    RectInset.origin.x := rect.origin.x - widthInset;
-    RectInset.size.width := rect.size.width + 2 * widthInset;
-    RectInset.origin.y := rect.origin.y - heightInset;
-    RectInset.size.height := rect.size.height + 2 * heightInset;
+    RectInset.origin.x := rect.origin.x + widthInset;
+    RectInset.size.width := rect.size.width - 2 * widthInset;
+    RectInset.origin.y := rect.origin.y + heightInset;
+    RectInset.size.height := rect.size.height - 2 * heightInset;
 end;
 
 

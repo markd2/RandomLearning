@@ -16,21 +16,9 @@ private
 
 procedure EraseRect(rect: GRect);
 begin
-    with rect do begin
-    Line(EraseLine,
-         origin.x, origin.y, origin.x + size.width, origin.y,
-         SScreenP);
-    Line(EraseLine,
-         origin.x, origin.y + size.height, origin.x + size.width, origin.y + size.height,
-         SScreenP);
-    Line(EraseLine,
-         origin.x, origin.y, origin.x, origin.y + size.height,
-         SScreenP);
-    Line(EraseLine,
-         origin.x + size.width, origin.y, origin.x + size.width, origin.y + size.height,
-         SScreenP);
-    end;
-
+    RasterOp(RXor, rect.size.width, rect.size.height,
+             rect.origin.x, rect.origin.y, SScreenW, SScreenP,
+             rect.origin.x, rect.origin.y, SScreenW, SScreenP);
 end; { EraseRect }
 
 

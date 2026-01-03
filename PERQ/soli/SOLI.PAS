@@ -11,6 +11,7 @@ imports FileUtils from FileUtils; { FSAddToTitleLine }
 const
     CardWidth = 40;
     CardHeight = 56;  { 1:1.4 ratio }
+    CardCount = 5;
 
 type
     MouseButton = (LeftButton, MiddleButton, RightButton, BottomButton);
@@ -19,13 +20,35 @@ type
 var
     fullDeck: Deck;
     i: Integer;
-    views: array[1..5] of CardView;
+    views: array[1..CardCount] of CardView;
     shouldQuit: Boolean;
+    selectedIndex: Integer; { -1 for unselected }
 
 
 procedure MouseMove(pointer: GPoint);
+var
+    i: Integer;
+    unhilight: Boolean;
 begin
-    Writeln('mouse move to ', pointer.x, pointer.y);
+    unhilight := True;
+    for i := 1 to CardCount do begin
+        if PointInRect(pointer, views[i].rect) then begin
+            unhilight := False;
+        end;
+        if PointInRect(pointer, views[i].rect) and (selectedIndex <> i) then begin
+            if selectedIndex <> -1 then begin
+                views[selectedIndex].isHighlighted := False;
+                DrawCard(views[selectedIndex]);
+            end;
+            views[i].isHighlighted := True;
+            selectedIndex := i;
+            DrawCard(views[i]);
+        end;
+    end;
+    if unhilight and (selectedIndex <> -1) then begin
+        views[selectedIndex].isHighlighted := False;
+        DrawCard(views[selectedIndex]);
+    end;
 end;
 
 
@@ -70,7 +93,7 @@ procedure RenderCards;
 var
     i: Integer;
 begin
-    for i := 1 to 5 do begin
+    for i := 1 to CardCount do begin
         DrawCard(views[i]);
     end;
 end; { RenderCards }
@@ -81,17 +104,18 @@ begin
     FSAddToTitleLine('Soli');
     IOSetModeTablet(RelTablet);
     IOCursorMode(TrackCursor);
+    selectedIndex := -1;
     
     fullDeck := MakeFullDeck;
     
-    for i := 1 to 5 do begin
+    for i := 1 to CardCount do begin
         with views[i] do begin
             card := fullDeck[i];
-            rect.origin.x := i * 30;
-            rect.origin.y := i * 45;
+            rect.origin.x := i * 45;
+            rect.origin.y := i * 66;
             rect.size.width := CardWidth;
             rect.size.height := CardHeight;
-            isHighlighted := i = 3;
+            isHighlighted := False;
         end;
     end;
     
