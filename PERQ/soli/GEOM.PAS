@@ -19,8 +19,25 @@ type
     end;
     
 function PointInRect(point: GPoint; rect: GRect): Boolean;
-    
+function RectInset(rect: GRect; widthInset: Integer; heightInset: Integer): GRect;
+function EqualPoints(thing1, thing2: GPoint): Boolean;
+
 private
+
+function EqualPoints(thing1, thing2: GPoint): Boolean;
+begin
+    EqualPoints := (thing1.x = thing2.x) and (thing1.y = thing2.y);
+end;
+
+
+function RectInset(rect: GRect; widthInset: Integer; heightInset: Integer): GRect;
+begin
+    RectInset.origin.x := rect.origin.x - widthInset;
+    RectInset.size.width := rect.size.width + 2 * widthInset;
+    RectInset.origin.y := rect.origin.y - heightInset;
+    RectInset.size.height := rect.size.height + 2 * heightInset;
+end;
+
 
 function PointInRect(point: GPoint; rect: GRect): Boolean;
 begin

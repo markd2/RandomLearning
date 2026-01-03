@@ -7,12 +7,12 @@ type
     Ranks = (Aces, Twos, Threes, Fours, Fives, Sixes, Sevens,
              Eights, Nines, Tens, Jacks, Queens, Kings);
     
-    Card = record
+    CardRec = record
         suit: Suits;
         rank: Ranks;
     end;
     
-    Deck = array[1..52] of Card;
+    Deck = array[1..52] of CardRec;
     
 function MakeFullDeck: Deck;
 
