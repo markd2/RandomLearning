@@ -6,12 +6,15 @@ imports Geom from Geom;
 imports GrafUtil from GrafUtil;
 imports CardView from CardView;
 imports IO_Others from IO_Others; { IOReadTablet }
+imports IO_Unit from IO_Unit; { IOCRead }
+imports IOErrors from IOErrors; { IOEIOC }
 imports FileUtils from FileUtils; { FSAddToTitleLine }
 
 const
     CardWidth = 40;
     CardHeight = 56;  { 1:1.4 ratio }
-    CardCount = 10;
+    CardCount = 35;
+    CardsPerColumn = 6;
 
 type
     MouseButton = (LeftButton, MiddleButton, RightButton, BottomButton);
@@ -23,6 +26,7 @@ var
     views: array[1..CardCount] of CardView;
     shouldQuit: Boolean;
     selectedIndex: Integer; { -1 for unselected }
+    x, y: Integer { card layout }
 
 
 procedure MouseMove(pointer: GPoint);
@@ -64,16 +68,26 @@ begin
 end;
 
 
+procedure Keypress(ch: Char);
+begin
+    if (ch = 'q') or (ch = 'Q') then exit(Soli);
+end;
+
 
 procedure EventLoop;
 var
     pointer: GPoint;
     lastPoint: GPoint;
+    ch: Char;
 begin
     lastPoint.x := -1; lastPoint.y := -1;
     
     shouldQuiet := False;
     while not shouldQuit do begin
+        if IOCRead(TransKey, ch) = IOEIOC then begin
+            Keypress(ch);
+        end;
+        
         IOReadTablet(pointer.x, pointer.y);
         
         if not EqualPoints(pointer, lastPoint) then begin
@@ -102,21 +116,28 @@ end; { RenderCards }
 
 begin
     writeln(chr(12));
-    FSAddToTitleLine('Soli');
+    FSAddToTitleLine('Soli - press ''q'' to quit');
     IOSetModeTablet(RelTablet);
     IOCursorMode(TrackCursor);
     selectedIndex := -1;
     
     fullDeck := MakeFullDeck;
     
+    x := 45;
+    y := 60;
     for i := 1 to CardCount do begin
         with views[i] do begin
             card := fullDeck[i];
-            rect.origin.x := i * 45;
-            rect.origin.y := i * 66;
+            rect.origin.x := x;
+            rect.origin.y := y;
             rect.size.width := CardWidth;
             rect.size.height := CardHeight;
             isHighlighted := False;
+        end;
+        y := y + 60;
+        if i mod CardsPerColumn = 0 then begin
+            x := x + 55;
+            y := 60;
         end;
     end;
     
