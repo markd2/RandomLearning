@@ -11,7 +11,7 @@ imports FileUtils from FileUtils; { FSAddToTitleLine }
 const
     CardWidth = 40;
     CardHeight = 56;  { 1:1.4 ratio }
-    CardCount = 5;
+    CardCount = 10;
 
 type
     MouseButton = (LeftButton, MiddleButton, RightButton, BottomButton);
@@ -28,27 +28,28 @@ var
 procedure MouseMove(pointer: GPoint);
 var
     i: Integer;
-    unhilight: Boolean;
+    underPointerIndex: Integer;
 begin
-    unhilight := True;
+    underPointerIndex := -1;
+    
     for i := 1 to CardCount do begin
         if PointInRect(pointer, views[i].rect) then begin
-            unhilight := False;
-        end;
-        if PointInRect(pointer, views[i].rect) and (selectedIndex <> i) then begin
-            if selectedIndex <> -1 then begin
-                views[selectedIndex].isHighlighted := False;
-                DrawCard(views[selectedIndex]);
-            end;
-            views[i].isHighlighted := True;
-            selectedIndex := i;
-            DrawCard(views[i]);
+            underPointerIndex := i;
         end;
     end;
-    if unhilight and (selectedIndex <> -1) then begin
-        views[selectedIndex].isHighlighted := False;
-        DrawCard(views[selectedIndex]);
+    
+    if underPointerIndex <> selectedIndex then begin
+        if underPointerIndex <> -1 then begin
+            views[underPointerIndex].isHighlighted := True;
+            DrawCard(views[underPointerIndex]);
+        end;
+        if selectedIndex <> -1 then begin
+            views[selectedIndex].isHighlighted := False;
+            DrawCard(views[selectedIndex]);
+        end;
+        selectedIndex := underPointerIndex;
     end;
+    
 end;
 
 
