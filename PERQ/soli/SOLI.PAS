@@ -5,9 +5,7 @@ imports Card from Card;
 imports Geom from Geom;
 imports GrafUtil from GrafUtil;
 imports CardView from CardView;
-imports IO_Others from IO_Others; { IOReadTablet }
-imports IO_Unit from IO_Unit; { IOCRead }
-imports IOErrors from IOErrors; { IOEIOC }
+imports Events from Events;
 imports FileUtils from FileUtils; { FSAddToTitleLine }
 
 const
@@ -16,9 +14,7 @@ const
     CardCount = 35;
     CardsPerColumn = 6;
 
-type
-    MouseButton = (LeftButton, MiddleButton, RightButton, BottomButton);
-   
+ 
 
 var
     fullDeck: Deck;
@@ -26,7 +22,8 @@ var
     views: array[1..CardCount] of CardView;
     shouldQuit: Boolean;
     selectedIndex: Integer; { -1 for unselected }
-    x, y: Integer { card layout }
+    x, y: Integer; { card layout }
+    ev: Event;
 
 
 procedure MouseMove(pointer: GPoint);
@@ -73,36 +70,6 @@ begin
     if (ch = 'q') or (ch = 'Q') then exit(Soli);
 end;
 
-
-procedure EventLoop;
-var
-    pointer: GPoint;
-    lastPoint: GPoint;
-    ch: Char;
-begin
-    lastPoint.x := -1; lastPoint.y := -1;
-    
-    shouldQuiet := False;
-    while not shouldQuit do begin
-        if IOCRead(TransKey, ch) = IOEIOC then begin
-            Keypress(ch);
-        end;
-        
-        IOReadTablet(pointer.x, pointer.y);
-        
-        if not EqualPoints(pointer, lastPoint) then begin
-            MouseMove(pointer);
-            if TabWhite then MouseClick(pointer, LeftButton);
-            if TabGreen then MouseClick(pointer, RightButton);
-            if TabYellow then MouseClick(pointer, MiddleButton);
-            if TabBlue then MouseClick(pointer, BottomButton);
-        end;
-        lastPoint := pointer;
-        
-    end;
-end; { EventLoop }
-
-
     
 procedure RenderCards;
 var
@@ -117,8 +84,6 @@ end; { RenderCards }
 begin
     writeln(chr(12));
     FSAddToTitleLine('Soli - press ''q'' to quit');
-    IOSetModeTablet(RelTablet);
-    IOCursorMode(TrackCursor);
     selectedIndex := -1;
     
     fullDeck := MakeFullDeck;
@@ -143,5 +108,15 @@ begin
     
     RenderCards;
     
-    EventLoop;
+    InitEvent;
+    
+    while not shouldQuit do begin
+        ev := GetNextEvent;
+        
+        case ev.etype of
+            Move: MouseMove(ev.pointer);
+            Click: MouseClick(ev.pointer, ev.button);
+            Key: Keypress(ev.key);
+        end;
+    end;
 end.

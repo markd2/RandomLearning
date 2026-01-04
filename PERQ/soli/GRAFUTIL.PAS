@@ -3,8 +3,6 @@ module GrafUtil;
 exports
 
 imports Geom from Geom;
-imports Raster from Raster;
-imports Screen from Screen;
 
 procedure StrokeRect(rect: GRect);
 
@@ -13,6 +11,9 @@ procedure EraseRect(rect: GRect);
 
 
 private
+
+imports Raster from Raster;
+imports Screen from Screen;
 
 procedure EraseRect(rect: GRect);
 begin
