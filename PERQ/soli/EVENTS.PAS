@@ -5,8 +5,9 @@ exports
 imports Geom from Geom;
 
 type
-    MouseButton = (LeftButton, MiddleButton, RightButton, BottomButton);
-    EventType = (Move, Click, Key);
+    MouseButton = (LeftButton, MiddleButton, RightButton,
+                   BottomButton, NoButton);
+    EventType = (Move, Click, Release, Key);
     
     Event = record
         pointer: GPoint;
@@ -29,12 +30,14 @@ imports IOErrors from IOErrors; { IOEIOC }
 
 var
     lastPoint: GPoint;
+    lastButton: MouseButton;
     inited: Boolean;
 
 procedure InitEvent;
 begin
     lastPoint.x := -1;
     lastPoint.y := -1;
+    lastButton := NoButton;
     IOSetModeTablet(RelTable);
     IOCursorMode(TrackCursor);
     inited := True;
@@ -61,20 +64,30 @@ begin
         
         
         GetNextEvent.eType := Click;
-        if TabWhite then begin
+        if TabWhite and (lastButton <> LeftButton) then begin
+            lastButton := LeftButton;
             GetNextEvent.button := LeftButton;
             exit(GetNextEvent);
         end;
-        if TabGreen then begin
+        if TabGreen and (lastButton <> RightButton) then begin
+            lastButton := RightButton;
             GetNextEvent.button := RightButton;
             exit(GetNextEvent);
         end;
-        if TabYellow then begin
+        if TabYellow and (lastButton <> MiddleButton) then begin
+            lastButton := MiddleButton;
             GetNextEvent.button := MiddleButton;
             exit(GetNextEvent);
         end;
-        if TabBlue then begin
+        if TabBlue and (lastButton <> BottomButton) then begin
+            lastButton := BottomButton;
             GetNextEvent.button := BottomButton;
+            exit(GetNextEvent);
+        end;
+        if (lastButton <> NoButton) and (not TabSwitch) then begin
+            GetNextEvent.eType := Release;
+            GetNextEvent.button := lastButton;
+            lastButton := NoButton;
             exit(GetNextEvent);
         end;
         

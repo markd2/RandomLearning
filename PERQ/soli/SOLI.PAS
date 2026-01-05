@@ -14,7 +14,6 @@ const
     CardCount = 35;
     CardsPerColumn = 6;
 
- 
 
 var
     fullDeck: Deck;
@@ -65,9 +64,24 @@ begin
 end;
 
 
+procedure MouseRelease(pointer: GPoint; button: MouseButton);
+begin
+    case button of
+        LeftButton: Writeln('release Left button');
+        MiddleButton: Writeln('release Middle button');
+        RightButton: Writeln('release Right button');
+        BottomButton: Writeln('release Bottom button');
+    end;
+end;
+
+
 procedure Keypress(ch: Char);
 begin
-    if (ch = 'q') or (ch = 'Q') then exit(Soli);
+    Writeln('keypress: ', ord(ch):1, ' ', ch);
+    if (ch = 'q') or (ch = 'Q') then begin
+        Writeln('quitting');
+        exit(Soli);
+    end;
 end;
 
     
@@ -82,6 +96,7 @@ end; { RenderCards }
              
 
 begin
+    shouldQuit := False;
     writeln(chr(12));
     FSAddToTitleLine('Soli - press ''q'' to quit');
     selectedIndex := -1;
@@ -117,6 +132,7 @@ begin
             Move: MouseMove(ev.pointer);
             Click: MouseClick(ev.pointer, ev.button);
             Key: Keypress(ev.key);
+            Release: MouseRelease(ev.pointer, ev.button);
         end;
     end;
 end.
