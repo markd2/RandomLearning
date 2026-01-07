@@ -839,3 +839,6 @@ is called "C"CR. Unless they really enjoyed cowbell.
 * Pascal variant syntax is odd.  (like, one fewer end than reasonable)
 * no `return` in pascal.  needing to exit(ProcName);
 
+
+IOSetModeTablet(RelTable);
+IOCursorMode(TrackCursor);
