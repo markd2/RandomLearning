@@ -17,13 +17,27 @@ Lots o docs at http://www.bitsavers.org/pdf/perq/
 
 # Running macstyles:
 
+Launching perqemu:
+
 ```
 brew install sdl2 sdl2_image
 brew install --cask --no-quarantine wine-stable
 cd $WHEREVER
 wine PERQemu.exe
-go
 ```
+
+configuring and launching:
+
+```
+configure memory 2048
+configure enable rs232
+settings assign rs232 device A RSX
+go
+...
+save harddisk
+reset
+```
+
 
 # Lobbing in and Running
 
