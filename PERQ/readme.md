@@ -857,3 +857,14 @@ is called "C"CR. Unless they really enjoyed cowbell.
 
 IOSetModeTablet(RelTable);
 IOCursorMode(TrackCursor);
+
+
+* be sure to have a CR after the `end.`, otherwise you'll get an 
+  "unexpected end of input" that'll kill half an hour sifting through
+  your program.
+
+# FileSystem
+
+* `makedir` - create a directory
+* `path` - cd
+* `findstring` - like grep. `findstring blah,*.pas`
