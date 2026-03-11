@@ -23,6 +23,9 @@ to go to an address
 to deposit memory and move on
 12.
 
+Do _not_ use just a dot to go through memory, that drops zeros
+everywhere.  Need to see if there's another command to do that.
+
 (uppercase letters)
 
 show contents of next address <return>
@@ -34,7 +37,7 @@ L/Q - load or save a program using paper tape punch format.
 saving.  End address in 17f7 and 17f8 in little endian
 
 so say saving from 0200...02FF
-17f7space
+17F7space
 FF.  low byte
 02.  high byte
 0200space
@@ -48,6 +51,8 @@ about 6 seconds per line. one page as about 12 lines.  so a minute and a half
 feels longer.
 
 Use L to load
+and no CR after the L
+
 
 
 
