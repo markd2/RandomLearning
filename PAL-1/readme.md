@@ -71,3 +71,19 @@ How to step (christopher):
     - $F3: Accumulator
     - $F4: Y
     - $F5: X
+
+
+```
+0200: 4C 06 02            JMP START
+0203: 42 0E 0B      TABLE $42, $0E, $0B
+0206: A2 00         START LDX #00
+0208: 8D 03 02      LOOP  LDA TABLE,X
+020B: 95 F9               STA F9,X
+020D: E8                  INX
+020E: E0 03               CPX #03
+0210: D0 F6               BNE LOOP
+0212: 20 1F 1F            JSR SCANDS
+0215: 4C 06 02            JMP LOOP
+```
+
+(the 8D for LDA should be a BD)
