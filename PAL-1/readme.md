@@ -28,7 +28,7 @@ everywhere.  Need to see if there's another command to do that.
 
 (uppercase letters)
 
-show contents of next address <return>
+show contents of next address <return>  (don't use dot for this)
 show contents of prior address <LF/^J)
 
 G - run at the current address
@@ -42,6 +42,7 @@ FF.  low byte
 02.  high byte
 0200space
 Q
+
 
 
 10ms delay per char and 100ms per line recommended  0.010  .1
@@ -60,3 +61,13 @@ BITZ
 
 0200..027E  save F as well for safety
 
+How to step (christopher): 
+* slide SST switch to ON
+* load the start address
+* each GO will execute the next instruction, and dump values into memory:
+    - $EF $F0 : Program counter
+    - $F1: Processor flags
+    - $F2: Stack pointer
+    - $F3: Accumulator
+    - $F4: Y
+    - $F5: X
