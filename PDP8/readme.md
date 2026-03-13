@@ -105,3 +105,11 @@ cat /tmp/pidp8-in > /dev/tty.usbmodem00011 &
 ^E
 reset
 boot rk
+
+
+https://hackaday.com/2017/08/10/getting-started-with-blinking-lights-on-old-iron/
+  - https://www.youtube.com/watch?v=yUZrn7qTGcs
+
+https://www.youtube.com/watch?v=S2r_GujSc6w
+
+
