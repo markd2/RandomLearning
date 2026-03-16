@@ -72,7 +72,6 @@ Once you understand the big picture, read the manuals you’ll use most.
 
 (courtesy of https://raymii.org/s/articles/Running_ADVENT-on-the-PDP-8-with-SIMH.html)
 
-
 ```
 .R FRTS
 *ADVENT
@@ -111,5 +110,24 @@ https://hackaday.com/2017/08/10/getting-started-with-blinking-lights-on-old-iron
   - https://www.youtube.com/watch?v=yUZrn7qTGcs
 
 https://www.youtube.com/watch?v=S2r_GujSc6w
+
+
+Running adventure
+
+```
+.R FRTS
+*ADVENT
+<esc>
+```
+
+
+Running BASIC
+
+EX TICTAC.BA
+
+
+BASIC
+OLD
+TICTAC
 
 
