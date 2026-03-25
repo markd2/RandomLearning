@@ -29,11 +29,19 @@
 @property (strong) IBOutlet ClickableImageView *segment5;
 @property (strong) IBOutlet ClickableImageView *segment6;
 
+@property (strong) IBOutlet NSTextField *hexLabel;
+
 @property (assign) char segmentMask;
 @end// extension
 
 
 @implementation AppDelegate
+
+- (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
+    self.segmentMask = 1 << 7;  // Kim Notes has the high be always set.
+    [self updateUI];
+} // applicationDidFinishLunching
+
 
 - (BOOL) applicationSupportsSecureRestorableState: (NSApplication *) app {
     return YES;
@@ -41,7 +49,33 @@
 
 
 - (IBAction) segmentClicked: (ClickableImageView *) sender {
-    NSLog(@"OOGIE");
+    NSInteger clickedMask = 1 << sender.tag;
+
+    if (self.segmentMask & clickedMask) { // is on, turn off
+        self.segmentMask &= ~clickedMask;
+    } else { // is off, turn on
+        self.segmentMask |= clickedMask;
+    }
+    [self updateUI];
 } // segmentClicked
+
+
+- (void) updateUI {
+    self.hexLabel.stringValue = [NSString stringWithFormat: @"%02X",
+                                          (unsigned char)self.segmentMask];
+
+    NSImage *horizOn = [NSImage imageNamed: @"horizontal-on"];
+    NSImage *vertOn = [NSImage imageNamed: @"vertical-on"];
+    NSImage *horizOff = [NSImage imageNamed: @"horizontal-off"];
+    NSImage *vertOff = [NSImage imageNamed: @"vertical-off"];
+
+    self.segment0.image = (self.segmentMask & (1 << 0)) ? horizOn : horizOff;
+    self.segment1.image = (self.segmentMask & (1 << 1)) ? vertOn : vertOff;
+    self.segment2.image = (self.segmentMask & (1 << 2)) ? vertOn : vertOff;
+    self.segment3.image = (self.segmentMask & (1 << 3)) ? horizOn : horizOff;
+    self.segment4.image = (self.segmentMask & (1 << 4)) ? vertOn : vertOff;
+    self.segment5.image = (self.segmentMask & (1 << 5)) ? vertOn : vertOff;
+    self.segment6.image = (self.segmentMask & (1 << 6)) ? horizOn : horizOff;
+} // updateUI
 
 @end // AppDelegate

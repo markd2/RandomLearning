@@ -14,6 +14,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="hexLabel" destination="v1l-lG-2ge" id="vpm-kb-wu7"/>
+                <outlet property="segment0" destination="xiS-4C-TMp" id="gc2-Ha-HLi"/>
+                <outlet property="segment1" destination="40Q-gb-ctS" id="5IA-Gu-yKD"/>
+                <outlet property="segment2" destination="FDh-0w-UWY" id="7gm-Fr-hfI"/>
+                <outlet property="segment3" destination="zgE-6D-qGb" id="6zi-Qr-ph9"/>
+                <outlet property="segment4" destination="Wgi-xR-5sm" id="f18-AS-uQE"/>
+                <outlet property="segment5" destination="Jn1-fb-gLN" id="0Hb-Ox-bPs"/>
+                <outlet property="segment6" destination="I7b-PA-iYJ" id="Qby-W2-s4j"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
