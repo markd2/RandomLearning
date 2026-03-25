@@ -689,40 +689,61 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="355"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xiS-4C-TMp">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xiS-4C-TMp" customClass="ClickableImageView">
                         <rect key="frame" x="59" y="294" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="horizontal-off" id="Xj6-1F-bjc"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="78g-7t-Lqj"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7b-PA-iYJ">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="I7b-PA-iYJ" customClass="ClickableImageView">
                         <rect key="frame" x="67" y="163" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="horizontal-off" id="I0L-a4-Fwd"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="pNs-tS-7RB"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgE-6D-qGb">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="zgE-6D-qGb" customClass="ClickableImageView">
                         <rect key="frame" x="67" y="20" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="horizontal-off" id="UlJ-si-clp"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="DGO-Yk-zES"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-gb-ctS">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-gb-ctS" customClass="ClickableImageView">
                         <rect key="frame" x="217" y="185" width="30" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="vertical-off" id="PRe-IS-fpT"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="dIz-5c-WVS"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jn1-fb-gLN">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jn1-fb-gLN" customClass="ClickableImageView">
                         <rect key="frame" x="29" y="163" width="30" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="vertical-off" id="P6R-zP-XOE"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="czw-ho-jvj"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-0w-UWY">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-0w-UWY" customClass="ClickableImageView">
                         <rect key="frame" x="225" y="35" width="30" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="vertical-off" id="9lv-4i-IBq"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="cuC-f5-M9m"/>
+                        </connections>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wgi-xR-5sm">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wgi-xR-5sm" customClass="ClickableImageView">
                         <rect key="frame" x="29" y="20" width="30" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="vertical-off" id="rJI-3r-Hrp"/>
+                        <connections>
+                            <action selector="segmentClicked:" target="Voe-Tx-rLC" id="hai-UQ-YZB"/>
+                        </connections>
                     </imageView>
                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1l-lG-2ge">
                         <rect key="frame" x="328" y="163" width="97" height="51"/>
