@@ -91,7 +91,6 @@ How to step (christopher):
 KIM SUBROUTINES
 
 ```
-
 CALL         ADDRESS   ARG           RESULT
 JSR AK	     1EFE      --            A
     CHECK FOR KEY DEPRESSED
@@ -134,6 +133,22 @@ JSR OUTSP    1E9E      --            --
     A = FF
     X PRESERVED
     Y = FF
+```
 
-JSR OUTPUT  1F4E
-    DISPLAY CUSTOM SEGMENTS - 7 segment pattern in A
+Displaying custom LED patterns (from Kim-1 notes)
+
+1. Store $7F into PADD ($1741)
+
+2. Select a digit by storing into SBD ($1742) (these increase by 2)
+
+- digit 1 : `$09`
+- digit 1 : `$0B`
+- digit 1 : `$0D`
+- digit 1 : `$0F`
+- digit 1 : `$11`
+- digit 1 : `$13`
+
+3. store lit patterns into SAD ($1740)
+
+4. delay 1/2 ms and move to the next digit (farmer brown does a wrap-around inc loop of zero-page address $73)
+
