@@ -87,3 +87,53 @@ How to step (christopher):
 ```
 
 (the 8D for LDA should be a BD)
+
+KIM SUBROUTINES
+
+```
+
+CALL         ADDRESS   ARG           RESULT
+JSR AK	     1EFE      --            A
+    CHECK FOR KEY DEPRESSED
+    A = 0 (KEY DOWN), A != 0 (NO KEY DOWN)
+    CLOBBERS X AND Y
+
+JSR GETKEY   1F6A      --            A
+    GET KEY FROM KEYBOARD
+    A > 15 ILLEGAL
+    OR NO KEY
+
+JSR SCANS    1F1F      F9, FA, FB    --
+    DISPLAY F9, FA, FB
+    CLOBBERS A, X, Y
+
+JSR GETCH    1E5A      --            A
+    PUT CHARACTER FROM TTY IN A
+    X PRESERVED
+    Y = FF
+
+JSR PRTBYT   1E3B      A             --
+    PRINTS A AS 2 HEX CHARACTER
+    A AND X PRESERVED
+    Y = FF
+
+JSR PRTPNT   1E1E      FB, FA        --
+    PRINTS CONTENTS OF FA & FB ON TTY
+    CLOBBERS A
+    X PRESERVED
+    Y = FF
+
+JST OUTCH    1EA0      A             --
+    PRINT ASCII CHAR IN A ON TTY
+    X PRESERVED
+    Y = FF
+    A = FF
+
+JSR OUTSP    1E9E      --            --
+    PRINT A SPACE
+    A = FF
+    X PRESERVED
+    Y = FF
+
+JSR OUTPUT  1F4E
+    DISPLAY CUSTOM SEGMENTS - 7 segment pattern in A
