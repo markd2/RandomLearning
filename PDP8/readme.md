@@ -131,3 +131,93 @@ OLD
 TICTAC
 
 
+--------------------------------------------------
+# a demo(e)
+
+https://www.youtube.com/watch?v=oMRDAD1JNWo
+
+* Stop
+* (put program in at address 10 (octal))
+* so set switches to 10, and then load address - lights on top line match the switches
+* first instruction.  put in HLT opcode is 7402, and DEPosit
+  - notice "memory buffer" shows 7402
+  - notice "address" shows the address we entered
+  - notice the ProgramCounter lights have added 1 binary)
+  - (so you could continue to DEP more instructions)
+* now run it by putting in 10 - see the address / top line update
+* press start
+  - it ran and halted
+  - notice PC ticked over to show _next_ instruction it would run
+  - notice OPR light is on - HLT is in the operation category
+
+increment the accumulator. - six instruction, incr the accum five times.
+
+* 0010 and load address
+* 7001 is the increment accumulator so put that into the switches
+* press DEP five times. (so run it five times
+* then 7402 to halt after the add and DEPosit that
+* let's examine memory
+* 0010 and load address.
+* see what's at that address with EXAMine
+  - shows the memory buffer, which is 7001
+  - increments the program counter
+* keep EXAM and they're the same, and eventually will get the 7102
+* LOAD ADDR with 0010 still on switches
+* then can press start - what do you expect to happen (accum goes to
+  five very quickly)
+* we can do more interesting things.  Go back to 0010 with LOAD ADDR.
+* toggle the SINGLE INSTruction toggle
+* now CONTinue will just execute one instruction
+  - notice the program counter is one ahead - might be a pi thing, or
+    maybe not - like it's expected to be one ahead, but it's two ahead,
+    so it's probably preftecthed the _next_ instruction
+
+so now for a loop
+* now for a two-instruction program.  increment accumulator, and jump
+  to the beginning
+* go back to 0100 and LOAD ADDR.  Turn off SING INST switch
+* 7001 for increment accumulator, DEPosit
+* 5 + address to jump to - so 5010
+  - (video showed the instruction jmp lamp lights up. mine did not)
+* now do the examine again
+  - 0100 and LOAD ADDr
+  - EXAM - see 7001
+  - EXAM - see 5010 (I am not seeing the instruction lamps follow along)
+  - load address and press start. What do you expect to happen?
+    - the accumulator totally fills up, because it's adding and overflowing
+      so fast
+    - notice the opr and jmp lamps are flashing
+    - video has fetch and execute flashing, but just fetch i sdoing that for me
+* STOP / CONTINUE and see the accumulator have different values
+* put on SING INST
+* CONT CONT CONT
+  - see the light bounce between OPR and JMP (increment jump)
+  - see the accumulator increment by one
+
+* say wanted to slow it down?
+* say add a delay loop - one more instruction, ISZ - increment
+  and skip if zero
+  - increments a location, if zero, it'll skip the next instruction
+  - essentially doing it 4096 times
+* turn off SING INST
+* 0100 and LOAD ADDr
+* 7001 and DEPosit - first instruction, increment acunulator
+* 2___ - increment and skip if zero
+   - 2 plus address of what we want to increment.
+   - address 3-4 is popular with demos, so do that
+   - 2034 DEP
+* next instruction is the jmp for the delay loop, that'll
+  get skipped if the increment wraps around to zero
+* we'll jump (5___) to the increment and set, which happens
+  to be at the address 11.  so
+  - 5011 DEP
+  - that's the inner loop
+* jump back to the beginning
+  - 5010 DEP
+* then go to 0010 load addrr, and then exam the program
+* then start, can single 
+
+0010: 7001   IAC       // accumulator++
+0011: 2034   ISZ 0034  // memory[0034]++, skip next if zero
+0012: 5011   JMP 0011
+0013: 5010   JMP 0010
