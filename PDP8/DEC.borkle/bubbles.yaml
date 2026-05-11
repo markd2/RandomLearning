@@ -190,7 +190,7 @@
   text: ''
   formattingOptions: []
   position:
-  - 5.38825288318452e+3
+  - 5.66754731677827e+3
   - 2.32835937500008e+2
   width: 1.6e+2
   connections:
@@ -661,13 +661,19 @@
       length: 4
     - location: 68
       length: 1
+    - location: 123
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 45
   text: Straight 8
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.47413783482143e+3
-  - 6.29060828749987e+2
+  - 1.47408017113095e+3
+  - 6.28854355535701e+2
   width: 7e+1
   connections:
     indexes:
@@ -675,29 +681,41 @@
       length: 1
     - location: 46
       length: 1
+    - location: 108
+      length: 1
+    - location: 125
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 46
   text: 'Flip Chips
 
-    4k 12-bit words core memory'
+    4k 12-bit words core memory
+
+    1.5ms cycle time, 3.0ms instruction time for instructions that hit memory'
   formattingOptions: []
   position:
-  - 1.3345256725e+3
-  - 5.44755583214272e+2
-  width: 1.1e+2
+  - 1.22035528559524e+3
+  - 5.18929690357129e+2
+  width: 2e+2
   connections:
     indexes:
     - location: 45
       length: 1
     - location: 49
       length: 1
-  _effectiveHeight: 4.2e+1
+    - location: 60
+      length: 1
+  _effectiveHeight: 5.6e+1
 - ID: 47
   text: PDP-8/S
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.48823381696429e+3
-  - 7.00428016249986e+2
+  - 1.48817615327381e+3
+  - 7.002215430357e+2
   width: 6e+1
   connections:
     indexes:
@@ -709,11 +727,13 @@
 - ID: 48
   text: 'S for Serial.
 
-    S for Slow'
+    S for Slow
+
+    1966.'
   formattingOptions: []
   position:
-  - 1.39335658482143e+3
-  - 7.05921874999986e+2
+  - 1.39582868303572e+3
+  - 6.90410342261891e+2
   width: 8e+1
   connections:
     indexes:
@@ -721,39 +741,45 @@
       length: 1
     - location: 50
       length: 1
-  _effectiveHeight: 2.8e+1
+    - location: 121
+      length: 1
+  _effectiveHeight: 4.2e+1
 - ID: 49
   text: Nickname was retconned after 8.S came out.  "straight cabinet"
   formattingOptions: []
   position:
-  - 1.31806082589286e+3
-  - 6.10386160714272e+2
+  - 1.26113374255953e+3
+  - 6.00596354166653e+2
   width: 1.3e+2
   connections:
     indexes:
     - location: 46
-      length: 1
-    - location: 60
       length: 1
   _effectiveHeight: 5.6e+1
 - ID: 50
   text: serial artihmetic unit - slower, but reduced costs for under $10,000
   formattingOptions: []
   position:
-  - 1.28393136160714e+3
-  - 8.04169645714272e+2
+  - 1.22301432291666e+3
+  - 7.78187502857129e+2
   width: 1.3e+2
   connections:
     indexes:
     - location: 48
       length: 1
+    - location: 120
+      length: 1
   _effectiveHeight: 5.6e+1
 - ID: 51
   text: LINC-8
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.48883370535714e+3
-  - 7.7152734374999e+2
+  - 1.50033296130952e+3
+  - 7.87656436011895e+2
   width: 6e+1
   connections:
     indexes:
@@ -763,12 +789,14 @@
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 52
-  text: based on PDP-8 design. two-processors.  Could run PDP-8 code, or original
+  text: 'based on PDP-8 design. two-processors.  Could run PDP-8 code, or original
     LINC CPU code
+
+    $38,500 ($390,680)'
   formattingOptions: []
   position:
-  - 1.44354631696429e+3
-  - 8.10737723214276e+2
+  - 1.40215680803572e+3
+  - 8.49374255952371e+2
   width: 1.4e+2
   connections:
     indexes:
@@ -776,13 +804,13 @@
       length: 1
     - location: 53
       length: 1
-  _effectiveHeight: 5.6e+1
+  _effectiveHeight: 7e+1
 - ID: 53
   text: Eventually became the single-processor PDP-12
   formattingOptions: []
   position:
-  - 1.43342633928571e+3
-  - 8.98820870535705e+2
+  - 1.21879650297619e+3
+  - 8.96315290178562e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -791,10 +819,14 @@
   _effectiveHeight: 2.8e+1
 - ID: 54
   text: PDP-8/I
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.47084542410714e+3
-  - 9.60296874999994e+2
+  - 1.47078776041666e+3
+  - 9.60090401785708e+2
   width: 6e+1
   connections:
     indexes:
@@ -802,9 +834,15 @@
       length: 1
     - location: 65
       length: 1
+    - location: 109
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 55
   text: PDP-8/L
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.49015625e+3
@@ -814,9 +852,17 @@
     indexes:
     - location: 44
       length: 1
+    - location: 126
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 56
-  text: Intersil 6100
+  text: 'Intersil 6100 /
+
+    Harris 6120'
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.78476562500001e+3
@@ -828,15 +874,17 @@
       length: 1
     - location: 57
       length: 1
-  _effectiveHeight: 1.4e+1
+    - location: 114
+      length: 2
+  _effectiveHeight: 2.8e+1
 - ID: 57
   text: 'PDP-8 on a chip, produced by Intersil
 
     Allows PDP-8 software to be run after the official EOL of the PDP-8 product line'
   formattingOptions: []
   position:
-  - 1.98013671875001e+3
-  - 9.83619977678567e+2
+  - 1.98769624255953e+3
+  - 1.0286720610119e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -844,7 +892,7 @@
       length: 1
   _effectiveHeight: 7e+1
 - ID: 58
-  text: over 50,000 units sold in its lifetime
+  text: over 50,000 units sold in its lifetime. (also seen clames of 300,000)
   formattingOptions: []
   position:
   - 1.60970703125002e+3
@@ -854,7 +902,7 @@
     indexes:
     - location: 35
       length: 1
-  _effectiveHeight: 2.8e+1
+  _effectiveHeight: 4.2e+1
 - ID: 59
   text: To reduce implementation costs, it leaves out a number of commonly used functions
     (like bitwise-OR) that have to be explicitly written
@@ -873,20 +921,26 @@
     of a small household refrigerator
   formattingOptions: []
   position:
-  - 1.23031529017862e+3
-  - 6.89097098214312e+2
+  - 1.2472088913691e+3
+  - 4.19353794642884e+2
   width: 1.4e+2
   connections:
     indexes:
-    - location: 49
+    - location: 46
+      length: 1
+    - location: 119
       length: 1
   _effectiveHeight: 7e+1
 - ID: 61
   text: PDP-8/E
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.75282645089288e+3
-  - 6.38366071428596e+2
+  - 6.3815959821431e+2
   width: 6e+1
   connections:
     indexes:
@@ -894,75 +948,111 @@
       length: 1
     - location: 66
       length: 1
+    - location: 110
+      length: 1
+    - location: 122
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 62
   text: PDP-8/F
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.75221540178573e+3
-  - 7.25439174107168e+2
+  - 7.25232700892882e+2
   width: 6e+1
   connections:
     indexes:
     - location: 44
+      length: 1
+    - location: 127
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 63
   text: PDP-8/M
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.77806082589288e+3
-  - 8.29872767857168e+2
+  - 8.29666294642882e+2
   width: 6e+1
   connections:
     indexes:
     - location: 44
+      length: 1
+    - location: 128
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 64
   text: PDP-8/A
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.78405970982145e+3
-  - 8.99758370535739e+2
+  - 8.99551897321453e+2
   width: 6e+1
   connections:
     indexes:
     - location: 44
       length: 1
+    - location: 129
+      length: 1
   _effectiveHeight: 1.4e+1
 - ID: 65
-  text: Return to faster fully parallel implementation using TTL MSI logic. Most surviving
+  text: '1968
+
+    Return to faster fully parallel implementation using TTL MSI logic ICs. Most surviving
     PDP-8s are from this era
+
+    250 pounds
+
+    $12,800 ($121,305)'
   formattingOptions: []
   position:
-  - 1.26769531250004e+3
-  - 9.51675223214312e+2
-  width: 1.6e+2
+  - 1.21814174107147e+3
+  - 9.58741815476217e+2
+  width: 2.3e+2
   connections:
     indexes:
     - location: 54
       length: 1
-  _effectiveHeight: 5.6e+1
+  _effectiveHeight: 8.4e+1
 - ID: 66
-  text: Common and well-regarded b/c of many types of I/ devices available for it
+  text: '1970
+
+    Common and well-regarded b/c of many types of I/O devices available for it.
+
+    1.2 ms instruction time, or 2.6 for memory instructions
+
+    Considered to be the definitive machine
+
+    $6,500 ($55,250)'
   formattingOptions: []
   position:
-  - 1.88798549107145e+3
-  - 6.39992745535739e+2
+  - 1.85963169642859e+3
+  - 5.54365885416691e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 61
       length: 1
-  _effectiveHeight: 4.2e+1
+  _effectiveHeight: 1.26e+2
 - ID: 67
   text: last models introduced in 1979 "CMOS-8s", based on CMOS micrprocessors. Overpriced
     and it failed
   formattingOptions: []
   position:
-  - 1.92964843750002e+3
-  - 9.09616071428603e+2
+  - 1.92862351190478e+3
+  - 9.59480282738127e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -971,10 +1061,14 @@
   _effectiveHeight: 5.6e+1
 - ID: 68
   text: CMOS-8s
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
   - 1.80103515625002e+3
-  - 9.54091517857174e+2
+  - 9.53885044642888e+2
   width: 7e+1
   connections:
     indexes:
@@ -1173,3 +1267,888 @@
     - location: 79
       length: 1
   _effectiveHeight: 8.4e+1
+- ID: 83
+  text: Deep Architecture
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 1.65424156886311e+3
+  - 1.37314255161199e+3
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 84
+      length: 2
+    - location: 88
+      length: 2
+    - location: 93
+      length: 1
+    - location: 101
+      length: 1
+    - location: 105
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 84
+  text: '12-bit words and addressing
+
+
+    -2048 to +2047
+
+    For larger numbers and floating point, ''an interpreter was used that stored a
+    single value with a two-word/24 bit signifcand and one-word 12-bit exponent.
+
+
+    This was not fast, it allowed the PDP-8 to perform the same sorts of programs
+    as more expensive and awkward to use machines like the IBM 1130 and System/360'
+  formattingOptions: []
+  position:
+  - 1.25310596618454e+3
+  - 1.41715379565288e+3
+  width: 2e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 1.96e+2
+- ID: 85
+  text: Historical lineage - used ideas from original LINC designed by W.A. Clark
+    and C.E. Molnar, who were themselves inspirted by Seymour Cray's CDC 160 minicomputer
+  formattingOptions: []
+  position:
+  - 1.54336296309388e+3
+  - 1.27403519160068e+3
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+    - location: 86
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 86
+  text: LINC was designed to be easily interfaced with laboratory equipment, and the
+    PDP-5 and PDP-8 included similar features
+  formattingOptions: []
+  position:
+  - 1.60917456165157e+3
+  - 1.18424432621606e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 85
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 87
+  text: ''
+  formattingOptions: []
+  position:
+  - 3.92870121606338e+2
+  - 9.87126095871048e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 88
+  text: address 4096 12-bit words, or 6k in modern terms. Can also add a memory expansion
+    unit that can switch banks of memoris using an IOT (input/output transfer) instruction.
+  formattingOptions: []
+  position:
+  - 1.78661179736317e+3
+  - 1.22078925945379e+3
+  width: 2.5e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 89
+  text: "magnetic core memory with a 1.5 \xB5s cycle time (0.667 mhz)\nA typical two-cycle
+    (fetch/execute) memory-reference instruction runs at 0.333 mips"
+  formattingOptions: []
+  position:
+  - 1.82205499387254e+3
+  - 1.29274719887955e+3
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 90
+  text: Six-bit character codes were in widespread use at the time, so one word could
+    effeciently store two characters.
+  formattingOptions: []
+  position:
+  - 1.35525483630948e+3
+  - 1.34191331845233e+3
+  width: 2.3e+2
+  connections:
+    indexes:
+    - location: 91
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 91
+  text: A six-bit teleprinter code ("teletypesetting", or TTS) was in widespread use
+    by the news wire services, and an early application for the PDP-8 was typesetting
+    using this code.
+  formattingOptions: []
+  position:
+  - 1.25181547619042e+3
+  - 1.21282291666662e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 90
+      length: 1
+    - location: 92
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 92
+  text: coding idea - a typesetter
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.29143229166662e+3
+  - 1.16382366071423e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 91
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 93
+  text: INSTRUCTIONS
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.84220982142853e+3
+  - 1.42316703869042e+3
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+    - location: 94
+      length: 1
+    - location: 96
+      length: 1
+    - location: 100
+      length: 1
+    - location: 116
+      length: 1
+    - location: 141
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 94
+  text: 3-bit opcode, so only 8 major instructions
+  formattingOptions: []
+  position:
+  - 1.97707031249996e+3
+  - 1.42155989583328e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+    - location: 95
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 95
+  text: assemblers added additional mnemonics, which assembler translates into OPR
+    or IOT instructions
+  formattingOptions: []
+  position:
+  - 2.15783482142853e+3
+  - 1.4087287946428e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 94
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 96
+  text: 3 (4 with EAE) programmer-visible registers.
+  formattingOptions: []
+  position:
+  - 1.99961170014875e+3
+  - 1.51110149274548e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+    - location: 97
+      length: 3
+    - location: 107
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 97
+  text: 12-bit accumulator
+  formattingOptions: []
+  position:
+  - 2.16960495721719e+3
+  - 1.49525002325143e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 98
+  text: 12-bit program counter
+  formattingOptions: []
+  position:
+  - 2.16935570126481e+3
+  - 1.53138655598952e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 99
+  text: single-bit link register
+  formattingOptions: []
+  position:
+  - 2.171785016741e+3
+  - 1.56724779110857e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 100
+  text: "non-visible registers are \n- memory-buffer register\n- memory-address register\nand
+    are used for purposes.\ne.g. memory buffer register provides arithmetic operands,
+    is part of the instruction register(?), and stores data to rewrite the core memory,
+    which is erased when read"
+  formattingOptions: []
+  position:
+  - 2.37053129650289e+3
+  - 1.48572435360856e+3
+  width: 2.5e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 101
+  text: I/O
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.64797061011889e+3
+  - 1.44166964285705e+3
+  width: 3e+1
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+    - location: 102
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 102
+  text: 'single interrupt shared by all devices
+
+    I/O buss accessed by I/O instructions
+
+    DMA channel.
+
+    The programmed bus typically runs low to medium-speed peripherals (printers, ttys,
+    paper tape punches and readers)
+
+    while DMA us used for CRTs with a light pen, A/D converters, D/A converters, tape
+    drives, and disk drives'
+  formattingOptions: []
+  position:
+  - 1.49393229166651e+3
+  - 1.48831398809514e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 101
+      length: 1
+  _effectiveHeight: 1.96e+2
+- ID: 103
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.20972842261679e+2
+  - 2.0050550595237e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 104
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 104
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.22287946428345e+2
+  - 1.41717931499989e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 103
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 105
+  text: 'to save money, it uses inexpensive main memory for many purposes that are
+    served by more expensive Flip-Fop registers in other computers such as auxillary
+    counters and subroutine linkage.
+
+    (c.f. Gordon Bell book)'
+  formattingOptions: []
+  position:
+  - 1.67168526785692e+3
+  - 1.51887202333336e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 83
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 106
+  text: basic models use software for * and / . You can get an EAE (Extended Arithmetic
+    Element) to get * and / with an additional register, the MQ register
+  formattingOptions: []
+  position:
+  - 2.37699335007417e+3
+  - 1.61648886253727e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 107
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 107
+  text: MQ - Multiplier/Quotient register
+  formattingOptions: []
+  position:
+  - 2.16938918340751e+3
+  - 1.60249704706107e+3
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 96
+      length: 1
+    - location: 106
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 108
+  text: EAE option
+  formattingOptions: []
+  position:
+  - 1.43347656249974e+3
+  - 6.54649553571456e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 45
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 109
+  text: EAE option
+  formattingOptions: []
+  position:
+  - 1.44564174107117e+3
+  - 9.36442708333371e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 54
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 110
+  text: EAE option
+  formattingOptions: []
+  position:
+  - 1.73109933035689e+3
+  - 6.01716145833355e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 111
+  text: PiDP-8
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 8.8549107142572e+1
+  - 7.88209821428592e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 112
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 112
+  text: Includes EAE support
+  formattingOptions: []
+  position:
+  - 7.49813988066727e+0
+  - 8.57886160714306e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 111
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 113
+  text: 'the front panel is an 8/I, the simulation defaults to a 8/e
+
+    supports both MOde A and Mode B EAE instructions'
+  formattingOptions: []
+  position:
+  - 2.07886903333048e+2
+  - 8.25856770357094e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 111
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 114
+  text: includes EAE
+  formattingOptions: []
+  position:
+  - 1.78625744047587e+3
+  - 1.05917150297611e+3
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 56
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 115
+  text: 1975-1982
+  formattingOptions: []
+  position:
+  - 1.89433593749968e+3
+  - 1.0608195684523e+3
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 56
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 116
+  text: Simplicity of Design
+  formattingOptions: []
+  position:
+  - 1.88771205357109e+3
+  - 1.37913616071422e+3
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+    - location: 117
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 117
+  text: unecessary features were removed and logic is shared when possible.
+  formattingOptions: []
+  position:
+  - 2.08181547619014e+3
+  - 1.34764620535708e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 116
+      length: 1
+    - location: 118
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 118
+  text: instructions use autoincrement, autoclear, and indirect access to increase
+    the software's sped, reduce memory usage, and substitute inexpensive memory for
+    expensive registers
+  formattingOptions: []
+  position:
+  - 2.10991443452347e+3
+  - 1.2666156994047e+3
+  width: 2.7e+2
+  connections:
+    indexes:
+    - location: 117
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 119
+  text: 'Required 75 small modules and 25 double-sized modules.
+
+    All but 2 from the R series Flip-Chi module family'
+  formattingOptions: []
+  position:
+  - 1.41690662202345e+3
+  - 4.18140997023715e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 60
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 120
+  text: mostly R-series flip chips, reduced logic gates by using a serial, single-bit-wide
+    data path.
+  formattingOptions: []
+  position:
+  - 1.22209821428536e+3
+  - 6.91334821428474e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 50
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 121
+  text: "small case, about the size of a bread box.\n 84 pounds\n$10,000 ($101,470)"
+  formattingOptions: []
+  position:
+  - 1.38092819940439e+3
+  - 7.47754092261807e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 48
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 122
+  text: 'larger, more capable, and further reengineered for better value.
+
+    Uses TTL in integrated circuits.
+
+    core memory redesigned
+
+    Ises OMNIBUS in place of the wire-wrapped backplane
+
+    Fewer, larger boards to improve price and efficiency
+
+    90 pounds'
+  formattingOptions: []
+  position:
+  - 2.02727864583298e+3
+  - 6.09722098214164e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 123
+  text: DECmate
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 1.78154947916636e+3
+  - 1.0990543154761e+3
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 124
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 124
+  text: used Harris 6120
+  formattingOptions: []
+  position:
+  - 1.86956845238061e+3
+  - 1.10680915178561e+3
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 123
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 125
+  text: '1965: semi-discrete components, used some hybrid ICs. DTL.
+
+    250 pounds
+
+    $18,000 ($188,450)'
+  formattingOptions: []
+  position:
+  - 1.44484747023772e+3
+  - 5.39727678571312e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 45
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 126
+  text: 'Lower-cost counterpart to PDP-8I - 80 pounds
+
+    $8,500 ($80,550)'
+  formattingOptions: []
+  position:
+  - 1.39020089285676e+3
+  - 1.06951190476179e+3
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 55
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 127
+  text: 'lower-cost 8/E counterpart. 1972
+
+    57 pounds
+
+    $???'
+  formattingOptions: []
+  position:
+  - 1.83235677083295e+3
+  - 7.16403645833204e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 62
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 128
+  text: '1972
+
+    OEM PDP-8/F with altered front panel
+
+    57 pounds
+
+    $5,000 ($39,450)'
+  formattingOptions: []
+  position:
+  - 1.86531436011865e+3
+  - 7.87398809523687e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 63
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 129
+  text: '1974
+
+    LSI logic allowed the CPU to fit on a single board
+
+    $1,835 ($11,248.75)'
+  formattingOptions: []
+  position:
+  - 1.8857812499996e+3
+  - 8.81422247023695e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 64
+      length: 1
+    - location: 130
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 130
+  text: apple ][ was 1298 in 1977, with 4K RAM. 48K was $2638 (14,356.64)
+  formattingOptions: []
+  position:
+  - 2.07984561011863e+3
+  - 8.8140364583322e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 129
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 131
+  text: Operating Systems
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 2.71911214192717e+3
+  - 1.26424869791665e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 132
+      length: 1
+    - location: 134
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 132
+  text: 'early systems had no pre-installed softare.
+
+    You''d hand-enter via a switch bank a "Rim Loader", which bootstrapped reading
+    from the Teletype Model 33 paper tape reader.  You''d then program using paper
+    tape input and output'
+  formattingOptions: []
+  position:
+  - 2.91384602864592e+3
+  - 1.24068749999998e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 131
+      length: 1
+    - location: 133
+      length: 1
+    - location: 135
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 133
+  text: there were paper tape versions of programming langauges, like FOCAL and a
+    4K FORTRAN compiler and runtime
+  formattingOptions: []
+  position:
+  - 2.908876953125e+3
+  - 1.14576318359376e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 132
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 134
+  text: towards the end of the PDP-8 era, there were actual operating systems
+  formattingOptions: []
+  position:
+  - 2.71810546875002e+3
+  - 1.31941552734375e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 131
+      length: 1
+    - location: 136
+      length: 5
+  _effectiveHeight: 4.2e+1
+- ID: 135
+  text: 'RIM: "Read In Mode" paper tape format for reading directly into memory'
+  formattingOptions: []
+  position:
+  - 2.97130126953127e+3
+  - 1.40225244140628e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 132
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 136
+  text: 'OS/8
+
+    on the PiDP-8'
+  formattingOptions: []
+  position:
+  - 2.72986083984377e+3
+  - 1.38409570312503e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 134
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 137
+  text: 'COS-300 / COS-310
+
+    multi-user commercial systems
+
+    "Commercial Operating System", a DEC product
+
+    Supported DIBOL, also IBM RPG'
+  formattingOptions: []
+  position:
+  - 2.73510742187502e+3
+  - 1.42820458984378e+3
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 134
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 138
+  text: 'RTS-8
+
+    real-time'
+  formattingOptions: []
+  position:
+  - 2.73417480468752e+3
+  - 1.51204736328128e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 134
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 139
+  text: WPS-8 - dedicated single-user word processing
+  formattingOptions: []
+  position:
+  - 2.73637451171877e+3
+  - 1.55590234375003e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 134
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 140
+  text: 'TSS-8 - timesharing, users can lob-in with 110-baud terminals to program
+
+    Included special versions of BASIC, FORTRAN similar to FORTRAN-1 (no user-written
+    subroutines or functions)
+
+    ALGOL subset, FOCAL, and PAL-D assembler'
+  formattingOptions: []
+  position:
+  - 2.73364990234378e+3
+  - 1.62071679687503e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 134
+      length: 1
+  _effectiveHeight: 1.4e+2
+- ID: 141
+  text: actual instruction set bit layout - see paper notes
+  formattingOptions: []
+  position:
+  - 1.8487377929689e+3
+  - 1.55452783203136e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 93
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 142
+  text: Memory Pages
+  formattingOptions: []
+  position:
+  - 1.8386694335941e+3
+  - 1.59936181640641e+3
+  width: 1e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
