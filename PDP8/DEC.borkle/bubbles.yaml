@@ -1,0 +1,1175 @@
+- ID: 1
+  text: DIGITAL EQUIMENT CORPORATION
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 2.26197265625e+2
+  - 1.49777994791667e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 2
+    - location: 7
+      length: 1
+    - location: 21
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 2
+  text: 1957-1998
+  formattingOptions: []
+  position:
+  - 1.27067057291667e+2
+  - 1.75443359375e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+    - location: 11
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 3
+  text: Founders
+  formattingOptions: []
+  position:
+  - 4.22073567708333e+2
+  - 1.20495442708333e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+    - location: 4
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 4
+  text: Ken Olsen
+  formattingOptions: []
+  position:
+  - 5.13984375e+2
+  - 1.46052083333333e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 3
+      length: 1
+    - location: 6
+      length: 1
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 5
+  text: Harlan Anderson
+  formattingOptions: []
+  position:
+  - 4.97063802083333e+2
+  - 6.58893229166666e+1
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 3
+      length: 1
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 6
+  text: 'president untl 1992
+
+    (foced to resign after business nosedive)'
+  formattingOptions: []
+  position:
+  - 5.68860677083333e+2
+  - 1.99453776041664e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 7
+  text: best known for minicomputers starting early 1960s (PDP line)
+  formattingOptions: []
+  position:
+  - 1.88512369791667e+2
+  - 2.15404296874998e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+    - location: 8
+      length: 2
+  _effectiveHeight: 4.2e+1
+- ID: 8
+  text: PDP-8, PDP-11, and VAX most popular models
+  formattingOptions: []
+  position:
+  - 2.34765624999998e+1
+  - 3.28233072916664e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 7
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 9
+  text: microcomputers and RISC workstations eroded the minicomputer niche
+  formattingOptions: []
+  position:
+  - 2.03017578125e+2
+  - 2.97367187499998e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 7
+      length: 1
+    - location: 10
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 10
+  text: '1990s - mini sales collapsed, and high-end market (e.g. VAX-9000) were failures.
+
+    Workstation, file server, and DEC Alpha kind of starting making inroads, but too
+    late'
+  formattingOptions: []
+  position:
+  - 1.9845703125e+2
+  - 3.62402994791664e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 9
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 11
+  text: '1998 acquired by Compaq - largest merger at the time in the history of the
+    industry
+
+    HP Bought Compaq in 2002'
+  formattingOptions: []
+  position:
+  - 1.05891927083333e+1
+  - 2.38434895833331e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 12
+  text: Worked at MIT Lincoln Laboratory on various projects
+  formattingOptions: []
+  position:
+  - 6.52659505208334e+2
+  - 1.13070312500001e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 2
+    - location: 15
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 13
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.5425037202381e+3
+  - 4.30055989583333e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 14
+  text: ''
+  formattingOptions: []
+  position:
+  - 5.38825288318452e+3
+  - 2.32835937500008e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 15
+  text: Some of the first "interactivity" research, where operators had direct control
+    over programs running in real-time
+  formattingOptions: []
+  position:
+  - 8.60097656250003e+2
+  - 1.01100911458333e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+    - location: 16
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 16
+  text: '"Whirlwind" for the air force'
+  formattingOptions: []
+  position:
+  - 8.56559244791669e+2
+  - 1.97018880208333e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 15
+      length: 1
+    - location: 17
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 17
+  text: Rebuilding using transistors instead of vacuum tubes.
+  formattingOptions: []
+  position:
+  - 1.03788736979166e+3
+  - 1.89720703125001e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 16
+      length: 1
+    - location: 18
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 18
+  text: 'Built a small 18-bit machine - TX-0 in 1956
+
+    - TX-2 was 36-bits, with a monsterous 64 kWords of core memory.
+
+    TX-0s were stripped of memory, but one given to MIT'
+  formattingOptions: []
+  position:
+  - 1.03775716145833e+3
+  - 2.40091796875001e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 19
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 19
+  text: 'Ken and Harlan noticed students would line up for hours to get to use the
+    TX-0, over a faster IBM machine
+
+
+    The draw of interactive computing was so strong they felt there was a market for
+    a small machine didcated to this role (a commercialized TX-0)'
+  formattingOptions: []
+  position:
+  - 8.07819010416663e+2
+  - 2.41455729166667e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 20
+  text: 'Sell to users where the real-time opreation would be more important than
+    outright performance.
+
+    And would cost much less than the larger systems available.
+
+    Could serve users that needed a lower-cost solution dedicated to a specific task,
+    where a larger 36-bit machine would be overkill'
+  formattingOptions: []
+  position:
+  - 8.10579427083334e+2
+  - 3.73154947916667e+2
+  width: 3.8e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 7e+1
+- ID: 21
+  text: not "computer"
+  formattingOptions: []
+  position:
+  - 4.05058593750002e+2
+  - 2.32891276041676e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 1
+      length: 1
+    - location: 22
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 22
+  text: 1957, seeking capital, american business community was hostile to investing
+    in computer companies (coming and then getting wiped out by the next technological
+    improvement)
+  formattingOptions: []
+  position:
+  - 3.67565104166669e+2
+  - 2.74714192708343e+2
+  width: 2.2e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+    - location: 25
+      length: 1
+    - location: 29
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 23
+  text: Stan Olsen
+  formattingOptions: []
+  position:
+  - 3.39046223958336e+2
+  - 6.82623697916767e+1
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 24
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 24
+  text: Ken's brother
+  formattingOptions: []
+  position:
+  - 3.76250000000002e+2
+  - 2.88255208333433e+1
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 25
+  text: 'Georges Dorlot of American Research and Development Corporation (AR&D) suggested
+    to focus less on computers, and ditch "Digital Computer Corporation"
+
+    For $70K, they got 70% share of the company (daaaammmnnnn)'
+  formattingOptions: []
+  position:
+  - 4.00390625000002e+2
+  - 3.65573567708343e+2
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 22
+      length: 1
+    - location: 26
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 26
+  text: two-phased business plan
+  formattingOptions: []
+  position:
+  - 3.94251302083336e+2
+  - 4.77370442708343e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 25
+      length: 1
+    - location: 27
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 27
+  text: Set computer modules as stand-alone devices that could be purchased and wired
+    together
+  formattingOptions: []
+  position:
+  - 2.92418619791669e+2
+  - 5.30195963541677e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 28
+  text: if these modules proved popular, then the company could use them to developer
+    a complete computer
+  formattingOptions: []
+  position:
+  - 4.74059244791669e+2
+  - 5.2354882812501e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 26
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 29
+  text: Began operations in a civil-war era textile mill in Maynard, MA, with lots
+    of inexpensive manufacturing space
+  formattingOptions: []
+  position:
+  - 6.1366861979167e+2
+  - 2.72861979166676e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 22
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 30
+  text: ''
+  formattingOptions: []
+  position:
+  - 7.5172061011907e+1
+  - 1.33842280505953e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 31
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 31
+  text: ''
+  formattingOptions: []
+  position:
+  - 9.8228701636907e+1
+  - 1.74952957589286e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 32
+  text: Digital Modules
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.84537760416689e+1
+  - 5.55218750000013e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 33
+      length: 1
+    - location: 37
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 33
+  text: part of DEC's product line into the 1970s
+  formattingOptions: []
+  position:
+  - 2.17466517857142e+1
+  - 6.08879464285713e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+    - location: 34
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 34
+  text: eventually morphed into Flip Chips
+  formattingOptions: []
+  position:
+  - 1.90457603571428e+1
+  - 6.65422435892862e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 33
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 35
+  text: PDP-8
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.52237722928571e+3
+  - 5.21104939285775e+1
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 36
+      length: 1
+    - location: 40
+      length: 1
+    - location: 44
+      length: 1
+    - location: 58
+      length: 2
+    - location: 69
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 36
+  text: in 1962, Lincoln Laboratory used some of the System Building Blocks to make
+    a small 12-bit machine and attached it to a variety of AtoD I/O devices to make
+    it easy to interface with various analog lab equipment
+  formattingOptions: []
+  position:
+  - 1.49510881696428e+3
+  - 1.04275672500006e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+    - location: 38
+      length: 2
+  _effectiveHeight: 1.26e+2
+- ID: 37
+  text: System Building Blocks
+  formattingOptions: []
+  position:
+  - 1.334765625e+2
+  - 5.1381808035715e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 38
+  text: The LINC attracted intense interest in the scientific community - considered
+    the first real minicomputer. - small and inexpensive enough to be dedicated to
+    a single task even in a small lab.
+  formattingOptions: []
+  position:
+  - 1.68369977678571e+3
+  - 9.56484375000034e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 36
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 39
+  text: '1963 DEC took the LINC basic logic design but stripped away the A/D systems
+    to make the PDP-5.
+
+    Advert in 1964 : "Now you can own the PDp-5 computer for what a core memory alone
+    used to cost: $27,000"
+
+    116 PDP-5s were produced.
+
+    Like other machines, it inspired a series of newer models based on the same basic
+    design that would go on to be more famous than its parent'
+  formattingOptions: []
+  position:
+  - 1.24734095982143e+3
+  - 1.61320870535721e+2
+  width: 2.2e+2
+  connections:
+    indexes:
+    - location: 36
+      length: 1
+  _effectiveHeight: 1.54e+2
+- ID: 40
+  text: 'March 22, 1965, introduced the PDP-8
+
+    Replaced the older PDP-5 modules with the new R-Series FlipChip modules.
+
+    Repackaged into a small tabletop case, with attractive smoke plastic over the
+    CPU'
+  formattingOptions: []
+  position:
+  - 1.51301060267857e+3
+  - 2.86853794642865e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 41
+  text: sold standard with 4kWords of 12-bit core memory and a teletype Model 33 ASR
+    for basic I/O for only $18,000
+  formattingOptions: []
+  position:
+  - 1.71368303571428e+3
+  - 2.32791294642865e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+    - location: 42
+      length: 2
+  _effectiveHeight: 5.6e+1
+- ID: 42
+  text: 'considered first _real_ minicomputer with its sub-25,000 price.
+
+    Median price of a house in the US was $20,000 to $21,500'
+  formattingOptions: []
+  position:
+  - 1.71164899553571e+3
+  - 3.22919642857151e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 43
+  text: 1450 "Straight Eight" machines produced before being replaced by newer implementations
+    of the same basic design
+  formattingOptions: []
+  position:
+  - 1.86612444196429e+3
+  - 1.28720424107156e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 44
+  text: Models
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 1.63268415178571e+3
+  - 8.05670758928578e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+    - location: 45
+      length: 1
+    - location: 47
+      length: 1
+    - location: 51
+      length: 1
+    - location: 54
+      length: 3
+    - location: 61
+      length: 4
+    - location: 68
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 45
+  text: Straight 8
+  formattingOptions: []
+  position:
+  - 1.47413783482143e+3
+  - 6.29060828749987e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 46
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 46
+  text: 'Flip Chips
+
+    4k 12-bit words core memory'
+  formattingOptions: []
+  position:
+  - 1.3345256725e+3
+  - 5.44755583214272e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 45
+      length: 1
+    - location: 49
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 47
+  text: PDP-8/S
+  formattingOptions: []
+  position:
+  - 1.48823381696429e+3
+  - 7.00428016249986e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 48
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 48
+  text: 'S for Serial.
+
+    S for Slow'
+  formattingOptions: []
+  position:
+  - 1.39335658482143e+3
+  - 7.05921874999986e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 47
+      length: 1
+    - location: 50
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 49
+  text: Nickname was retconned after 8.S came out.  "straight cabinet"
+  formattingOptions: []
+  position:
+  - 1.31806082589286e+3
+  - 6.10386160714272e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 46
+      length: 1
+    - location: 60
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 50
+  text: serial artihmetic unit - slower, but reduced costs for under $10,000
+  formattingOptions: []
+  position:
+  - 1.28393136160714e+3
+  - 8.04169645714272e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 48
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 51
+  text: LINC-8
+  formattingOptions: []
+  position:
+  - 1.48883370535714e+3
+  - 7.7152734374999e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 52
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 52
+  text: based on PDP-8 design. two-processors.  Could run PDP-8 code, or original
+    LINC CPU code
+  formattingOptions: []
+  position:
+  - 1.44354631696429e+3
+  - 8.10737723214276e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 51
+      length: 1
+    - location: 53
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 53
+  text: Eventually became the single-processor PDP-12
+  formattingOptions: []
+  position:
+  - 1.43342633928571e+3
+  - 8.98820870535705e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 54
+  text: PDP-8/I
+  formattingOptions: []
+  position:
+  - 1.47084542410714e+3
+  - 9.60296874999994e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 65
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 55
+  text: PDP-8/L
+  formattingOptions: []
+  position:
+  - 1.49015625e+3
+  - 1.03095814732142e+3
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 56
+  text: Intersil 6100
+  formattingOptions: []
+  position:
+  - 1.78476562500001e+3
+  - 1.00913058035714e+3
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 57
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 57
+  text: 'PDP-8 on a chip, produced by Intersil
+
+    Allows PDP-8 software to be run after the official EOL of the PDP-8 product line'
+  formattingOptions: []
+  position:
+  - 1.98013671875001e+3
+  - 9.83619977678567e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 56
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 58
+  text: over 50,000 units sold in its lifetime
+  formattingOptions: []
+  position:
+  - 1.60970703125002e+3
+  - 4.0916297500019e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 59
+  text: To reduce implementation costs, it leaves out a number of commonly used functions
+    (like bitwise-OR) that have to be explicitly written
+  formattingOptions: []
+  position:
+  - 1.87865513392859e+3
+  - 4.43621680357371e+1
+  width: 2.2e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 60
+  text: diode-transistor logic package on flip chip cards in a machine about the size
+    of a small household refrigerator
+  formattingOptions: []
+  position:
+  - 1.23031529017862e+3
+  - 6.89097098214312e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 49
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 61
+  text: PDP-8/E
+  formattingOptions: []
+  position:
+  - 1.75282645089288e+3
+  - 6.38366071428596e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 66
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 62
+  text: PDP-8/F
+  formattingOptions: []
+  position:
+  - 1.75221540178573e+3
+  - 7.25439174107168e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 63
+  text: PDP-8/M
+  formattingOptions: []
+  position:
+  - 1.77806082589288e+3
+  - 8.29872767857168e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 64
+  text: PDP-8/A
+  formattingOptions: []
+  position:
+  - 1.78405970982145e+3
+  - 8.99758370535739e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 65
+  text: Return to faster fully parallel implementation using TTL MSI logic. Most surviving
+    PDP-8s are from this era
+  formattingOptions: []
+  position:
+  - 1.26769531250004e+3
+  - 9.51675223214312e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 54
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 66
+  text: Common and well-regarded b/c of many types of I/ devices available for it
+  formattingOptions: []
+  position:
+  - 1.88798549107145e+3
+  - 6.39992745535739e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 61
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 67
+  text: last models introduced in 1979 "CMOS-8s", based on CMOS micrprocessors. Overpriced
+    and it failed
+  formattingOptions: []
+  position:
+  - 1.92964843750002e+3
+  - 9.09616071428603e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 68
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 68
+  text: CMOS-8s
+  formattingOptions: []
+  position:
+  - 1.80103515625002e+3
+  - 9.54091517857174e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+    - location: 67
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 69
+  text: Chief engineer of the initial PDP-8, Edson de Castro, later founded Data General
+  formattingOptions: []
+  position:
+  - 1.27931082589291e+3
+  - 6.34274553571548e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 70
+  text: Architecture
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
+  formattingOptions: []
+  position:
+  - 2.19282087053572e+3
+  - 7.83800223214333e+1
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 35
+      length: 1
+    - location: 71
+      length: 3
+  _effectiveHeight: 1.4e+1
+- ID: 71
+  text: low-cost, simplicity, expandability, and careful engineering for value.  a.k.a.
+    "value-engineered computer design"
+  formattingOptions: []
+  position:
+  - 2.29414620535715e+3
+  - 1.63599330357195e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 70
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 72
+  text: historical signifcance was low cost and high volume made a computer available
+    to many new customers for many new uses
+  formattingOptions: []
+  position:
+  - 2.31243582589286e+3
+  - 1.19119419642862e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 70
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 73
+  text: because of low complexity, it made programming cumbersome.  Leading to lots
+    of code doing the required mechanics as opposed to describing the algorithm
+  formattingOptions: []
+  position:
+  - 2.10380580357143e+3
+  - 1.27439732142862e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 70
+      length: 1
+    - location: 74
+      length: 1
+    - location: 76
+      length: 1
+    - location: 79
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 74
+  text: c.f. "pages and fields"
+  formattingOptions: []
+  position:
+  - 1.95325334821429e+3
+  - 2.23536272321434e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+    - location: 75
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 75
+  text: 'also, subtracting numbers requires doing your own 2s complement and adding
+
+
+    A conditional jump is doing a skip over an unconditional jump
+
+
+    inadveertent recursion of a subroutine produces bugs that are difficult to trace
+    to the subroutine in question'
+  formattingOptions: []
+  position:
+  - 1.89753627232144e+3
+  - 2.59755580357148e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 74
+      length: 1
+  _effectiveHeight: 1.68e+2
+- ID: 76
+  text: eventually programmer time became more expensive, so subsequent architecutres
+    emphasized ease of programming, using larger and more intutive instruction sets
+  formattingOptions: []
+  position:
+  - 2.10325892857143e+3
+  - 2.52194196428573e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+    - location: 77
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 77
+  text: eventually most machine code was genetated by compilers and report generators
+  formattingOptions: []
+  position:
+  - 2.29863560267857e+3
+  - 2.11694754464287e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 76
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 79
+  text: NOT RISC
+  formattingOptions: []
+  position:
+  - 2.5031919642857e+3
+  - 1.60428013392858e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 73
+      length: 1
+    - location: 80
+      length: 3
+  _effectiveHeight: 1.4e+1
+- ID: 80
+  text: RISC is load/store - computation only between registers. PDP-8 has memory/accumulator
+    instructions (like TAD - fetching data and adding to accumulator)
+  formattingOptions: []
+  position:
+  - 2.64845703124997e+3
+  - 1.56456501785746e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 79
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 81
+  text: very limited general-purpose regiters on the PDP-8 - essentially only one
+    12-bit accumulator
+  formattingOptions: []
+  position:
+  - 2.6357784598214e+3
+  - 1.39420761785717e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 79
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 82
+  text: 'while there are few instructions, they''re complex - highly specialized and
+    often multi-cycle
+
+    RISC is simple single-cycle instructions'
+  formattingOptions: []
+  position:
+  - 2.64813058035712e+3
+  - 2.29616071428571e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 79
+      length: 1
+  _effectiveHeight: 8.4e+1
