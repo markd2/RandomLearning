@@ -1492,10 +1492,10 @@
       length: 1
   _effectiveHeight: 2.8e+1
 - ID: 97
-  text: 12-bit accumulator
+  text: AC - 12-bit accumulator
   formattingOptions: []
   position:
-  - 2.16960495721719e+3
+  - 2.16952683221719e+3
   - 1.49525002325143e+3
   width: 1.6e+2
   connections:
@@ -1504,7 +1504,7 @@
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 98
-  text: 12-bit program counter
+  text: PC - 12-bit program counter
   formattingOptions: []
   position:
   - 2.16935570126481e+3
@@ -1516,7 +1516,7 @@
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 99
-  text: single-bit link register
+  text: L - single-bit link register
   formattingOptions: []
   position:
   - 2.171785016741e+3
@@ -1574,14 +1574,14 @@
     drives, and disk drives'
   formattingOptions: []
   position:
-  - 1.49393229166651e+3
-  - 1.48831398809514e+3
-  width: 1.6e+2
+  - 1.45982584635401e+3
+  - 1.48520119512639e+3
+  width: 2.1e+2
   connections:
     indexes:
     - location: 101
       length: 1
-  _effectiveHeight: 1.96e+2
+  _effectiveHeight: 1.54e+2
 - ID: 103
   text: ''
   formattingOptions: []
@@ -1614,8 +1614,8 @@
     (c.f. Gordon Bell book)'
   formattingOptions: []
   position:
-  - 1.67168526785692e+3
-  - 1.51887202333336e+3
+  - 1.67812569754442e+3
+  - 1.46858393739586e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -2141,14 +2141,258 @@
     indexes:
     - location: 93
       length: 1
+    - location: 142
+      length: 1
+    - location: 150
+      length: 1
   _effectiveHeight: 2.8e+1
 - ID: 142
   text: Memory Pages
+  fillColorRGB:
+    red: 8.93993e-1
+    green: 9.92872e-1
+    blue: 1e+0
   formattingOptions: []
   position:
-  - 1.8386694335941e+3
-  - 1.59936181640641e+3
+  - 1.52420898437535e+3
+  - 1.67795800781266e+3
   width: 1e+2
   connections:
-    indexes: []
+    indexes:
+    - location: 141
+      length: 1
+    - location: 143
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 143
+  text: the way the instruction word operates, it divides the 4096 word memory into
+    128 word pages.
+  formattingOptions: []
+  position:
+  - 1.37429199218787e+3
+  - 1.72737451171895e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 142
+      length: 1
+    - location: 144
+      length: 1
+    - location: 146
+      length: 1
+    - location: 148
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 144
+  text: Z selects the current page (that the PC is on) if set, and zero-page (0000-0177)
+  formattingOptions: []
+  position:
+  - 1.25084228515662e+3
+  - 1.80435449218769e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 143
+      length: 1
+    - location: 145
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 145
+  text: 'zero-page is at a premium because it can be directly accessed from anywhere
+
+    0000 is where any interrupt service routine must start
+
+    0010-0017 are auto-incrementing preceding any indirect reference through them'
+  formattingOptions: []
+  position:
+  - 1.23368164062537e+3
+  - 1.88415185546894e+3
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 144
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 146
+  text: the standard assember places constant values for arithmetic in the current
+    page.
+  formattingOptions: []
+  position:
+  - 1.56638916015662e+3
+  - 1.72023583984394e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 143
+      length: 1
+    - location: 147
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 147
+  text: cross-page jumps and subroutine calls use an indirect address in the current
+    page
+  formattingOptions: []
+  position:
+  - 1.67908691406288e+3
+  - 1.87842919921895e+3
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 146
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 148
+  text: it was important to write routines to fit within 128-word pages, or arrange
+    routines to minimize page transitions because those required an extra word
+  formattingOptions: []
+  position:
+  - 1.50756835937544e+3
+  - 1.81909326171896e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 143
+      length: 1
+    - location: 149
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 149
+  text: 'bumming extra words deserved the extra time
+
+
+    Like, deliberatly placing code at the end of a page to achieve a free transition
+    to the next page as the PC was incremented.'
+  formattingOptions: []
+  position:
+  - 1.51843750000045e+3
+  - 1.94627587890646e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 148
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 150
+  text: Basic Instructions
+  formattingOptions: []
+  position:
+  - 1.88794433593809e+3
+  - 1.62617333984402e+3
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 141
+      length: 1
+    - location: 151
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 151
+  text: "000 - AND - bitwise AND the memory op  and AC\n001 - TAD - Two's complement
+    add the memory op to <L, AC> \n    12-bit signed value in (AC) with carry in L\n010
+    - ISZ - increment the memory operand and skip the next instruction if result is
+    zero\n011 - DCA - deposite AC into memory op and clear AC\n100 - JMS - jump to
+    subroutine, storing return address in first word of subroutine\n101 - JMP - jump
+    jump jump jump jump jump jump jump \n110 - IOT - Input.output transfer\n111 -
+    OPR - microcode operations"
+  formattingOptions: []
+  position:
+  - 1.78967529296936e+3
+  - 1.67355615234404e+3
+  width: 3.5e+2
+  connections:
+    indexes:
+    - location: 150
+      length: 1
+    - location: 152
+      length: 1
+    - location: 156
+      length: 1
+  _effectiveHeight: 1.54e+2
+- ID: 152
+  text: IOT
+  formattingOptions: []
+  position:
+  - 2.16794189453195e+3
+  - 1.67997460937533e+3
+  width: 3e+1
+  connections:
+    indexes:
+    - location: 151
+      length: 1
+    - location: 153
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 153
+  text: The CPU defined few of the IOT instructions, but provided a framework.  Most
+    IOT instructions were defined by the individual I/O devices
+  formattingOptions: []
+  position:
+  - 2.15604248046946e+3
+  - 1.72881250000034e+3
+  width: 2.3e+2
+  connections:
+    indexes:
+    - location: 152
+      length: 1
+    - location: 154
+      length: 2
+  _effectiveHeight: 5.6e+1
+- ID: 154
+  text: 'Bits 3-8 select an I/O device.  Some are standardized by convention:
+
+    00 - handled by processor and not sent to any I/O device. affect the procesor
+    as a whole.  e.g. ION(6001) enables interrupt processing, and IOFF(6002) disables
+    it.
+
+    01 - high speed paper tape reader
+
+    02 - high speed paper tape punch
+
+    03 - console keyboard and any associated low-speed paper tape reader
+
+    04 - console printer (and any associated low-spee paper tape punch)'
+  formattingOptions: []
+  position:
+  - 2.16222167968823e+3
+  - 1.80929345703159e+3
+  width: 3.1e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 1.54e+2
+- ID: 155
+  text: 'bits 9-11 select the function(s) to do. Simple devices have standard ways.
+    More complex devices have their own documented function sets
+
+    bit 11 - skip the next instruction if the I/O device is ready
+
+    bit 10 - clears AC
+
+    bit 9 - moves a word between AC and the device, initiates another i/O transfer,
+    and clears the device''s "ready" flag
+
+    These ops take place "in a well-defined order" that gives useful results if more
+    than one bit is set.'
+  formattingOptions: []
+  position:
+  - 2.48465332031325e+3
+  - 1.72765527343784e+3
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 153
+      length: 1
+  _effectiveHeight: 1.82e+2
+- ID: 156
+  text: OPR
+  formattingOptions: []
+  position:
+  - 1.91759033203204e+3
+  - 1.86497216796912e+3
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 151
+      length: 1
   _effectiveHeight: 1.4e+1
