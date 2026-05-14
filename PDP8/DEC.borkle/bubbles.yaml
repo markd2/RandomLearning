@@ -1038,8 +1038,8 @@
     $6,500 ($55,250)'
   formattingOptions: []
   position:
-  - 1.85963169642859e+3
-  - 5.54365885416691e+2
+  - 1.86246222527474e+3
+  - 5.31989082532076e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -1846,8 +1846,8 @@
     90 pounds'
   formattingOptions: []
   position:
-  - 2.02727864583298e+3
-  - 6.09722098214164e+2
+  - 2.06091145833298e+3
+  - 6.02835078983395e+2
   width: 2.1e+2
   connections:
     indexes:
@@ -2395,4 +2395,14 @@
     indexes:
     - location: 151
       length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 158
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.00741586538526e+3
+  - 1.47594891826934e+3
+  width: 1.6e+2
+  connections:
+    indexes: []
   _effectiveHeight: 1.4e+1
