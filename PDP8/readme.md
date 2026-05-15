@@ -68,6 +68,9 @@ Once you understand the big picture, read the manuals you’ll use most.
 
 ## Stuff
 
+pidp8i stop
+
+
 ### Running Adventure
 
 (courtesy of https://raymii.org/s/articles/Running_ADVENT-on-the-PDP-8-with-SIMH.html)
@@ -221,3 +224,56 @@ so now for a loop
 0011: 2034   ISZ 0034  // memory[0034]++, skip next if zero
 0012: 5011   JMP 0011
 0013: 5010   JMP 0010
+
+
+### RUNNING FOCAL
+
+use `UWF16K` to run the UWFOCAL
+
+```
+.R UWF16K
+*ASK "input number",X
+input number23
+*type X,!"!!"
+ 2.300000000E+01
+!!*
+*
+```
+
+
+### Running Fortran
+
+make a .FT file, say HERRO.FT
+
+```
+.R F4
+*HERRO,HERRO,HERRO<HERRO
+
+.EXE HERRO.RL
+```
+
+that made a .RL
+
+shortcut to compile, link, load, save, and execute is
+
+```
+.R F4
+* PROG/G<esc>
+```
+
+THis made a .LD.
+
+don't understand what the difference is and why it picked one over the other.
+
+
+### Running PAL assembly
+
+.PA file
+
+```
+PAL PROG
+EXE PROG.BN
+```
+
+Supposedly we can do `LOAD/G PROG` to run it, but I get "GPROG OPTION UNKNOWN"
+
