@@ -160,17 +160,22 @@
       length: 1
   _effectiveHeight: 2.8e+1
 - ID: 13
-  text: Univ of CA, Berkeley (BSD)
+  text: 'Univ of CA, Berkeley (BSD)
+
+    They worked hard to excise AT&T code so it could be freely distributed without
+    intereference from AT&T''s lawyers.'
   formattingOptions: []
   position:
-  - 6.99564302884617e+2
-  - 7.75299879807688e+2
+  - 6.08314302884617e+2
+  - 8.56183293269226e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 12
       length: 1
-  _effectiveHeight: 1.4e+1
+    - location: 88
+      length: 1
+  _effectiveHeight: 8.4e+1
 - ID: 14
   text: Microsoft (Xenix)
   formattingOptions: []
@@ -320,8 +325,8 @@
   text: Version 7 (1979) was the final widely-released Reasearch Unix
   formattingOptions: []
   position:
-  - 6.17632211538461e+2
-  - 8.63680288461545e+2
+  - 5.85252403846153e+2
+  - 7.71204326923083e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -824,8 +829,8 @@
     Increased memory bus width to 32 bits from 16'
   formattingOptions: []
   position:
-  - 2.89927453928576e+2
-  - 1.34367856857144e+3
+  - 2.43707502005499e+2
+  - 1.39448085222529e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -1160,6 +1165,8 @@
       length: 1
     - location: 81
       length: 1
+    - location: 85
+      length: 1
   _effectiveHeight: 7e+1
 - ID: 81
   text: gave the team enough credibility to get a more powerful PDP-11 model
@@ -1214,12 +1221,109 @@
       length: 2
   _effectiveHeight: 7e+1
 - ID: 85
-  text: ''
+  text: Paper published in 1974 in Communications of the ACM. Resulted in a flurry
+    of requests for the software
   formattingOptions: []
   position:
-  - -6.77734374997665e+0
-  - 1.20612460293616e+3
+  - 4.1978665865408e+1
+  - 1.20744972312847e+3
   width: 1.6e+2
   connections:
+    indexes:
+    - location: 80
+      length: 1
+    - location: 86
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 86
+  text: 'Put AT&T in a bind - a US Gov consent decree prevent the company from selling
+    products not directly related to telephony, in return for a legal monopoly in
+    running the country''s long-distance phone service.
+
+    So they couldn''t sell Unix as a product
+
+    So they, for a nominal fee, would license teh source to anyone who asked.
+
+    Also prevened AT&T from supporting Unix
+
+    "Bell Labs researches proudly displayed their Unix policy at conferences with
+    "No advertising, no support, no bug fixes, playment in advance"'
+  formattingOptions: []
+  position:
+  - 2.805078125e+2
+  - 1.18887259846157e+3
+  width: 3.3e+2
+  connections:
+    indexes:
+    - location: 85
+      length: 1
+    - location: 87
+      length: 1
+  _effectiveHeight: 1.54e+2
+- ID: 87
+  text: 'Unix users therefore started banding together.
+
+    Usenix user group acted as a clearinghouse for the exchange of Unix software in
+    the US.
+
+    Eventually started to resemble the opensource world we have today'
+  formattingOptions: []
+  position:
+  - 4.48740985576923e+2
+  - 1.3997402451065e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 86
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 88
+  text: 'This interference slowed developent of 386-chip versions, like 386BSD.
+
+    Torvalds says that had this existed, he wouldn''t have created the Linux kernel.'
+  formattingOptions: []
+  position:
+  - 6.00414663461542e+2
+  - 9.72198177798806e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 89
+  text: 'Links (in no particular order)
+
+    * First edition of V1 unix kernel, PDP-11/20
+
+    * https://spectrum.ieee.org/the-strange-birth-and-long-life-of-unix
+
+    * https://medium.com/@joseph.crick/lessons-from-the-development-of-unix-8a324caaf1b4
+
+    * https://en.wikipedia.org/wiki/Single_UNIX_Specification
+
+    * https://en.wikipedia.org/wiki/OSF/1
+
+    * https://en.wikipedia.org/wiki/Unix_International
+
+    * https://en.wikipedia.org/wiki/X/Open
+
+    * https://en.wikipedia.org/wiki/PDP-7
+
+    * https://en.wikipedia.org/wiki/Multics
+
+    * https://en.wikipedia.org/wiki/Space_Travel_(video_game)
+
+    * https://en.wikipedia.org/wiki/Interdata_7/32_and_8/32
+
+    * https://en.wikipedia.org/wiki/Unix
+
+    '
+  formattingOptions: []
+  position:
+  - 1.09813401442308e+3
+  - 5.02582793183429e+2
+  width: 4.9e+2
+  connections:
     indexes: []
-  _effectiveHeight: 1.4e+1
+  _effectiveHeight: 1.96e+2
