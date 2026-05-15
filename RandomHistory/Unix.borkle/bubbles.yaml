@@ -44,11 +44,583 @@
   text: ''
   formattingOptions: []
   position:
-  - 7.625703125e+2
-  - 4.3276953125e+2
+  - 1.11774759615385e+3
+  - 4.46489483173077e+2
   width: 1.6e+2
   connections:
     indexes:
     - location: 1
       length: 1
   _effectiveHeight: 1.4e+1
+- ID: 6
+  text: UNIX
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
+  formattingOptions: []
+  position:
+  - 2.08094951923077e+2
+  - 1.60972956730769e+2
+  width: 4e+1
+  connections:
+    indexes:
+    - location: 7
+      length: 2
+    - location: 20
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 7
+  text: Family of multi-tasking, multi-user operating systems that derive from the
+    original AT&T Unix
+  formattingOptions: []
+  position:
+  - 1.09314903846154e+2
+  - 3.80072076923076e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 8
+  text: "development started in 1969 at the Bell Labels research center by \nKen Thompson\nDennis
+    Ritchie\nand others"
+  formattingOptions: []
+  position:
+  - 3.25712139423077e+2
+  - 9.15498798076862e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+    - location: 11
+      length: 1
+    - location: 18
+      length: 2
+  _effectiveHeight: 8.4e+1
+- ID: 9
+  text: Ken Thompson
+  formattingOptions: []
+  position:
+  - 5.46186899038461e+2
+  - 2.7397235576917e+1
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 10
+  text: Dennis Ritchie
+  formattingOptions: []
+  position:
+  - 2.95970552884615e+2
+  - 2.90348557692246e+1
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 11
+  text: originally intended for use inside the Bell System, AT&T licensed it to outside
+    parties in the late 1970s
+  formattingOptions: []
+  position:
+  - 5.34921875e+2
+  - 8.02668269230707e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 12
+  text: variety of academic and commercial variants
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 7.48638822115387e+2
+  - 8.08490985576919e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 13
+      length: 5
+    - location: 25
+      length: 1
+    - location: 29
+      length: 1
+    - location: 34
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 13
+  text: Univ of CA, Berkeley (BSD)
+  formattingOptions: []
+  position:
+  - 6.99564302884617e+2
+  - 7.75299879807688e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 14
+  text: Microsoft (Xenix)
+  formattingOptions: []
+  position:
+  - 7.36838942307694e+2
+  - 7.39449519230765e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 15
+  text: Sun (SunOS / Solaris)
+  formattingOptions: []
+  position:
+  - 7.81328125000002e+2
+  - 6.91895432692304e+2
+  width: 1.3e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 16
+  text: HP/HPE (HP-UX)
+  formattingOptions: []
+  position:
+  - 8.49636418269233e+2
+  - 7.2502944711538e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 17
+  text: IBM (AIX), mainframe subsystem thing (?name?)
+  formattingOptions: []
+  position:
+  - 8.76556490384617e+2
+  - 7.61480769230765e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 18
+  text: early versions ("Research Unix") ran on systems like the PDP-11 and VAX
+  formattingOptions: []
+  position:
+  - 3.58659855769231e+2
+  - 2.20242788461531e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 19
+  text: used on minicomputers and mainframes from the 1970s onwards
+  formattingOptions: []
+  position:
+  - 5.80913461538461e+2
+  - 1.60636418269224e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 8
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 20
+  text: The first portable Operating System - almost the entire thing written in C,
+    allowing it to work on numerous platforms
+  formattingOptions: []
+  position:
+  - 1.41856971153822e+1
+  - 1.14299278846147e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 21
+  text: characterized by a modular design
+  formattingOptions: []
+  position:
+  - 6.8902644230769e+2
+  - 2.39149038461531e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 22
+      length: 2
+    - location: 40
+      length: 1
+    - location: 43
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 22
+  text: 'a.k.a "The Unix Philosophy"
+
+    The OS should provide a set of simple tools, each of which performs a limited
+    well-defined function.'
+  formattingOptions: []
+  position:
+  - 5.56787862115382e+2
+  - 3.26733169230769e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+    - location: 44
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 23
+  text: an inode-based filesystem and IPC (pipes) serve as the main means of communication.
+  formattingOptions: []
+  position:
+  - 7.56712740384613e+2
+  - 3.19061899038462e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+    - location: 24
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 24
+  text: plus a shell-scripting and command language (unix shell) used to combine the
+    tools to perform complex workflows
+  formattingOptions: []
+  position:
+  - 7.33182091346151e+2
+  - 4.113125e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 25
+  text: Version 7 (1979) was the final widely-released Reasearch Unix
+  formattingOptions: []
+  position:
+  - 6.17632211538461e+2
+  - 8.63680288461545e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 26
+  text: UNIX System III in 1982
+  formattingOptions: []
+  position:
+  - 1.02248497596154e+3
+  - 9.4837079326927e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 27
+  text: '1983 - AT&T combined with versions from others and released as unix system
+    V
+
+
+    Closed-source, so UC-B continued developing BSD as an alternative'
+  formattingOptions: []
+  position:
+  - 1.00272836538461e+3
+  - 1.0095306490385e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 28
+      length: 1
+    - location: 30
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 28
+  text: 'System V flavors like SGI IRIX
+
+    BSD flavors like SunOS (pre-Solaris)'
+  formattingOptions: []
+  position:
+  - 9.79606370192305e+2
+  - 1.13423617788465e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 27
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 29
+  text: Silicon Graphics (IRIX)
+  formattingOptions: []
+  position:
+  - 6.36201923076922e+2
+  - 7.07289062500006e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 30
+  text: Timelinnage of unix itself
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.19347355769231e+3
+  - 1.04659194711542e+3
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 26
+      length: 2
+    - location: 33
+      length: 1
+    - location: 35
+      length: 5
+    - location: 45
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 31
+  text: ''
+  formattingOptions: []
+  position:
+  - 5.74828725961536e+2
+  - 1.51165204326923e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 32
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 32
+  text: ''
+  formattingOptions: []
+  position:
+  - 6.7168269230769e+2
+  - 1.11378545673076e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 31
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 33
+  text: '1989 - AT&T alongside Sun merged SysV, BSD,SunOS, and Xenix.  System V Release
+    4 (SVR4)
+
+    Also OSF/1 from other vendors
+
+    Most commercial Unix vendors changed their distros to be SVR4 with BSD features
+
+    a.k.a. the Unix International consortium'
+  formattingOptions:
+  - options: 2
+    rangeStart: 209
+    rangeLength: 18
+  position:
+  - 1.32071514423076e+3
+  - 1.14512259230771e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 1.68e+2
+- ID: 34
+  text: 'OSF/1 (open software foundation)
+
+    mach kernel
+
+    DEC Alpha native OS
+
+    MIPS, DEC, HP PA-RISC'
+  formattingOptions: []
+  position:
+  - 8.8057692307692e+2
+  - 6.27385216346115e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 35
+  text: '1994 - sold Unix System V to Novell
+
+    Merging of UI and OSF into a new OSF
+
+    Novel transfered the UNIX trademark to X/Open'
+  formattingOptions: []
+  position:
+  - 1.28768028846153e+3
+  - 9.09137019230763e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 36
+  text: 1992 - OSF/1
+  formattingOptions: []
+  position:
+  - 1.3323016826923e+3
+  - 1.09633954326924e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 37
+  text: '1993 - major members of UI and OSF announced COSE
+
+    (common open software environment)'
+  formattingOptions: []
+  position:
+  - 1.33021033653846e+3
+  - 1.01062439903847e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 38
+  text: 1996 - UI and OSF merged with X/Open, forming The Open Group
+  formattingOptions: []
+  position:
+  - 1.15680889423076e+3
+  - 8.62286057692312e+2
+  width: 1.4e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 39
+  text: '1987 - X/Open the Open Group for Unix Systems
+
+
+    Consortium of several European UNIX systems manufacturers'
+  formattingOptions: []
+  position:
+  - 1.14749399038461e+3
+  - 1.1566280048077e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 40
+  text: 'Meant to be a convenient platform for programmers developing softare to be
+    run on it and other systems
+
+    Rather than for non-programmers'
+  formattingOptions: []
+  position:
+  - 7.80505558894228e+2
+  - 1.29534029447106e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+    - location: 41
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 41
+  text: Not designed to support multi-tasking or to be portable in the beginning
+  formattingOptions: []
+  position:
+  - 7.7770094651442e+2
+  - 6.27446664663364e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 40
+      length: 1
+    - location: 42
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 42
+  text: later it gradually gained multi-tasking and multi-user capabilities with time-sharing
+  formattingOptions: []
+  position:
+  - 7.83141902043267e+2
+  - 3.42450420672117e+0
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 43
+  text: '* Use of plain text for storing data
+
+    * Hierarchical file system
+
+    *treating devices and some forms of IPC as files
+
+    *Use of a large number of sofftware tools (small programs that can be strung together
+    through a command-line interpreter using pipes'
+  formattingOptions: []
+  position:
+  - 9.41304086538469e+2
+  - 2.25939903846152e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 44
+  text: "Bria Kernighan and Rob Pike summarized in \"The Unix Programming Environment\"
+    \n\"The power of a system comes more from the relationships among programs than
+    from the programs themselves"
+  formattingOptions: []
+  position:
+  - 5.27100360576931e+2
+  - 4.3242127403846e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 22
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 45
+  text: in early 80s, users began seeing Unix as a potential universal operating system,
+    for computers of all sizes
+  formattingOptions: []
+  position:
+  - 9.76577524038468e+2
+  - 8.27397235576965e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 30
+      length: 1
+  _effectiveHeight: 5.6e+1
