@@ -152,3 +152,13 @@ Displaying custom LED patterns (from Kim-1 notes)
 
 4. delay 1/2 ms and move to the next digit (farmer brown does a wrap-around inc loop of zero-page address $73)
 
+=======
+
+==================================================
+
+Jim Tranter first book of KIM code.
+
+https://github.com/jefftranter/6502/tree/master/asm/KIM-1/TheFirstBookOfKIM
+
+punchtape file format
+https://srecord.sourceforge.net/man/man5/srec_mos_tech.5.html
