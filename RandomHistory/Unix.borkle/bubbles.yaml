@@ -44,8 +44,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 1.11774759615385e+3
-  - 4.46489483173077e+2
+  - 1.34095630151099e+3
+  - 4.25563143887363e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -68,6 +68,10 @@
     - location: 7
       length: 2
     - location: 20
+      length: 1
+    - location: 74
+      length: 1
+    - location: 83
       length: 1
   _effectiveHeight: 1.4e+1
 - ID: 7
@@ -219,8 +223,8 @@
   text: early versions ("Research Unix") ran on systems like the PDP-11 and VAX
   formattingOptions: []
   position:
-  - 3.58659855769231e+2
-  - 2.20242788461531e+2
+  - 4.39287645947802e+2
+  - 2.1479077953296e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -256,8 +260,8 @@
   text: characterized by a modular design
   formattingOptions: []
   position:
-  - 6.8902644230769e+2
-  - 2.39149038461531e+2
+  - 1.00976304945055e+3
+  - 2.1213452953296e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -275,8 +279,8 @@
     well-defined function.'
   formattingOptions: []
   position:
-  - 5.56787862115382e+2
-  - 3.26733169230769e+2
+  - 8.77524469258239e+2
+  - 2.99718660302198e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -289,8 +293,8 @@
   text: an inode-based filesystem and IPC (pipes) serve as the main means of communication.
   formattingOptions: []
   position:
-  - 7.56712740384613e+2
-  - 3.19061899038462e+2
+  - 1.07744934752747e+3
+  - 2.92047390109891e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -304,8 +308,8 @@
     tools to perform complex workflows
   formattingOptions: []
   position:
-  - 7.33182091346151e+2
-  - 4.113125e+2
+  - 1.05391869848901e+3
+  - 3.84297991071429e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -406,8 +410,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 5.74828725961536e+2
-  - 1.51165204326923e+3
+  - 5.85024038461536e+2
+  - 2.01534344951923e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -418,8 +422,8 @@
   text: ''
   formattingOptions: []
   position:
-  - 6.7168269230769e+2
-  - 1.11378545673076e+3
+  - 6.8187800480769e+2
+  - 1.61747686298076e+3
   width: 1.6e+2
   connections:
     indexes:
@@ -542,8 +546,8 @@
     Rather than for non-programmers'
   formattingOptions: []
   position:
-  - 7.80505558894228e+2
-  - 1.29534029447106e+2
+  - 1.10124216603708e+3
+  - 1.02519520518535e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -556,8 +560,8 @@
   text: Not designed to support multi-tasking or to be portable in the beginning
   formattingOptions: []
   position:
-  - 7.7770094651442e+2
-  - 6.27446664663364e+1
+  - 1.09843755365728e+3
+  - 3.5730157537765e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -570,8 +574,8 @@
   text: later it gradually gained multi-tasking and multi-user capabilities with time-sharing
   formattingOptions: []
   position:
-  - 7.83141902043267e+2
-  - 3.42450420672117e+0
+  - 1.10387850918612e+3
+  - -2.35900047218502e+1
   width: 1.6e+2
   connections:
     indexes:
@@ -589,12 +593,14 @@
     through a command-line interpreter using pipes'
   formattingOptions: []
   position:
-  - 9.41304086538469e+2
-  - 2.25939903846152e+2
+  - 1.26204069368133e+3
+  - 1.98925394917581e+2
   width: 2.1e+2
   connections:
     indexes:
     - location: 21
+      length: 1
+    - location: 82
       length: 1
   _effectiveHeight: 1.12e+2
 - ID: 44
@@ -603,8 +609,8 @@
     from the programs themselves"
   formattingOptions: []
   position:
-  - 5.27100360576931e+2
-  - 4.3242127403846e+2
+  - 8.47836967719788e+2
+  - 4.05406765109889e+2
   width: 1.6e+2
   connections:
     indexes:
@@ -624,3 +630,596 @@
     - location: 30
       length: 1
   _effectiveHeight: 5.6e+1
+- ID: 46
+  text: Origins and Development timeline
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 2.19416852678573e+2
+  - 2.8383203124999e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 47
+      length: 1
+    - location: 49
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 47
+  text: mid 1960s when MIT, Bell Labs, and GE were developing multics - a timesharing
+    OS for the GE 645 mainframe
+  formattingOptions: []
+  position:
+  - 4.31473214285726e+1
+  - 3.36770089285709e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 46
+      length: 1
+    - location: 48
+      length: 1
+    - location: 50
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 48
+  text: 'Multiplexed information and computing service.
+
+    Early influential time-sharing OS
+
+    >this>kind>of>paths
+
+    has ''ls'' and e.g.  ''change_dir'''
+  formattingOptions: []
+  position:
+  - 2.53217075892858e+2
+  - 3.31756138392851e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 47
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 49
+  text: 'First on PDP-7, then PDP-11
+
+    18-bit word, 4K words
+
+    DECsys, then Unix (Unics)
+
+    120 sold
+
+    paper-tape and DECtape drives'
+  formattingOptions: []
+  position:
+  - 4.39871651785726e+1
+  - 2.06237165178578e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 46
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 50
+  text: 1969 - Ken Thompson wrote the first UNIX system (punning Unics vs Multics)
+    in assembly langauge, as the OS for SPACE TRAVEL, a game which requires graphics
+    to depict the motion of the planets
+  formattingOptions: []
+  position:
+  - 4.48911830357154e+1
+  - 4.33477678571435e+2
+  width: 2.4e+2
+  connections:
+    indexes:
+    - location: 47
+      length: 1
+    - location: 51
+      length: 1
+    - location: 75
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 51
+  text: "SPACE TRAVEL is a fly around a scale solar system and land on stuff, being
+    affected by gravity.  Ported from Multics eventually to the PDP-7.  An *ABANDONDED*
+    PDP-7 \"to play it for free\". (it was bought by AT&T for circuit analysis)\nKen
+    Thompson was a gamer.\nKT developed his own OS for this game, which became the
+    core of Unix\n\n\"Because Ken was now familiar with the \u20187 and knew he could
+    use it as much as he wanted, the first version of Unix was written on this PDP-7.\""
+  formattingOptions:
+  - options: 2
+    rangeStart: 330
+    rangeLength: 141
+  position:
+  - 3.61590401785715e+2
+  - 4.32417410714292e+2
+  width: 4.4e+2
+  connections:
+    indexes:
+    - location: 50
+      length: 1
+  _effectiveHeight: 1.26e+2
+- ID: 52
+  text: 1970 - Ported to PDP-11 assembly language
+  formattingOptions: []
+  position:
+  - 6.0943080357148e+1
+  - 8.26678013392864e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+    - location: 84
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 53
+  text: '1973 - Version 4 Unix was rewritten in C
+
+    Still had much PDP-11 specific code not suitable for porting'
+  formattingOptions: []
+  position:
+  - 5.62890625000052e+1
+  - 9.93184706964292e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 54
+      length: 1
+    - location: 80
+      length: 1
+    - location: 84
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 54
+  text: KT had challenges during the kernel port due to C evolving, which originally
+    lacked structures.
+  formattingOptions: []
+  position:
+  - 3.62592075892862e+2
+  - 1.02220161186471e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 53
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 55
+  text: 1977 - first port to another platform of Version 6 by University of Wollongong
+    for the Interdata 7/32
+  formattingOptions: []
+  position:
+  - 3.08370535714338e+1
+  - 1.32940864311471e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 56
+      length: 2
+  _effectiveHeight: 5.6e+1
+- ID: 56
+  text: 1977-78 - Bell labs port of Version 7 to the Interdata 8/32
+  formattingOptions: []
+  position:
+  - 4.35044642857195e+1
+  - 1.41804145561471e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 55
+      length: 1
+    - location: 57
+      length: 1
+    - location: 59
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 57
+  text: '32-bit minicomputers, first under $10,000 ($54,400) in 1973
+
+    8/32 > 7/32, has a writable control store, floating point processor, high-speed
+    data handling extensions.
+
+    Increased memory bus width to 32 bits from 16'
+  formattingOptions: []
+  position:
+  - 2.89927453928576e+2
+  - 1.34367856857144e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 55
+      length: 2
+  _effectiveHeight: 1.26e+2
+- ID: 58
+  text: 2026 - Tape discovered with V4 unix discovered and univ of utah and recovered
+    by the CHM
+  formattingOptions: []
+  position:
+  - 3.14257812500052e+1
+  - 1.88090138865044e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 64
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 59
+  text: 1975 - first source license to Research Unix sold to UIUC department of CS
+  formattingOptions: []
+  position:
+  - 3.81333705357195e+1
+  - 1.48297728150758e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 56
+      length: 1
+    - location: 60
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 60
+  text: late 70s through early 80s - Unix in academic circles (e.g. BSD and SysV source
+    licenses) led to large-scale adoption by commercial startups
+  formattingOptions: []
+  position:
+  - 2.55440848214337e+1
+  - 1.55386734847187e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 59
+      length: 1
+    - location: 61
+      length: 2
+  _effectiveHeight: 8.4e+1
+- ID: 61
+  text: leading to unix fragmenting (see timelinnage), into similar and mutually incompatible
+    systems
+  formattingOptions: []
+  position:
+  - 2.38616071428576e+2
+  - 1.58001969222187e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 60
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 62
+  text: late 80s, AT&T Unix System Laboratories and Sun developed SysVR4
+  formattingOptions: []
+  position:
+  - 6.04352678571463e+1
+  - 1.66445328597186e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 60
+      length: 1
+    - location: 63
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 63
+  text: 1990s - OS of choice for 90% of the world's top 500 fastest supercomputers
+  formattingOptions: []
+  position:
+  - 3.64787946428606e+1
+  - 1.74349067436472e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 62
+      length: 1
+    - location: 64
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 64
+  text: 90s unix wars, CDE / COSE / etc elided.  too new)
+  formattingOptions: []
+  position:
+  - 1.84570312500037e+1
+  - 1.82550239311472e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 58
+      length: 1
+    - location: 63
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 65
+  text: DEC influence
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 7.30228794642861e+2
+  - 1.34792984847186e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 66
+      length: 8
+  _effectiveHeight: 1.4e+1
+- ID: 66
+  text: because PDP-7 (assembly langauge) and PDP-11 (assembly, then C) were the original
+    development platform
+  formattingOptions: []
+  position:
+  - 6.48353794642861e+2
+  - 1.24836511632901e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 67
+  text: 1970-1972 - PDP-11/20 and PDP-11/45, necessitating rewrite from PDP-7 assembly
+    to a higher-level languge (initially B, then C) "b/c of the PDP-11's word-addressable
+    architecture"
+  formattingOptions: []
+  position:
+  - 6.25332031250004e+2
+  - 1.38924681275758e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 68
+  text: C language - Dennis Ritchie designed C to interface directly with PDP-11 hardware,
+    allowing the unix kernel to be rewritten in a high-level language
+  formattingOptions: []
+  position:
+  - 8.28981584821432e+2
+  - 1.24710953597186e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 8.4e+1
+- ID: 69
+  text: 1975 - PDP-11/70 - the standard research platform for Unix's development of
+    networking and enhanced file systems
+  formattingOptions: []
+  position:
+  - 8.20231584821432e+2
+  - 1.47108833061472e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 70
+  text: 1978 - VAX . The 32-bit port ("32V") was critical, but DEC didn't support
+    them well, leading to signifcant development of virtual memory systems by BSD
+  formattingOptions: []
+  position:
+  - 9.81141183035718e+2
+  - 1.35493319668615e+3
+  width: 2.3e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 71
+  text: 1977 - first ported to non-DEC hardware
+  formattingOptions: []
+  position:
+  - 9.07307477678575e+2
+  - 1.43132549579329e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 72
+  text: 'The PDP-7 being abandoned, meant KT had a computer all to himself
+
+    Plus wife and kid were away for a month, so he had time'
+  formattingOptions: []
+  position:
+  - 6.43376116071432e+2
+  - 1.51580373240045e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 73
+  text: The limitations of the PDP series forced KT and team to be highly efficient
+    in their designs
+  formattingOptions: []
+  position:
+  - 8.14218750000004e+2
+  - 1.58445328597188e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 65
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 74
+  text: '"Un-multiplxed Information and Computing Service", or Unics.  Eventually
+    morphed into Unix - preserved paper tapes had UNIX written on it'
+  formattingOptions: []
+  position:
+  - 2.44972098214289e+2
+  - 1.94284037321511e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 75
+  text: 1969 - Initially cross-developed on the GE-645, but by 1969 was able to write
+    OS code on the PDP-7 itself
+  formattingOptions: []
+  position:
+  - 2.66099330357161e+1
+  - 5.21824937757671e+2
+  width: 2.6e+2
+  connections:
+    indexes:
+    - location: 50
+      length: 1
+    - location: 76
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 76
+  text: 1969 - realizing the PDP-7 was a dead-end, wouldn't be able to sustain their
+    skunkworks for long, plus the lab's management wasn't going to allow any more
+    OS research
+  formattingOptions: []
+  position:
+  - 4.0527343750002e+1
+  - 5.91253903392931e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 75
+      length: 1
+    - location: 77
+      length: 2
+  _effectiveHeight: 7e+1
+- ID: 77
+  text: 'They wanted one of the new PDP-11s, and said they wanted to make a word-processing
+    system. That they would _have_ to write an OS to support the text editor and formatter
+    was almost a footnote
+
+    (ah! So that''s why there''s tools like nroff and groff)'
+  formattingOptions: []
+  position:
+  - 2.96582031250002e+2
+  - 5.9368598686473e+2
+  width: 2.2e+2
+  connections:
+    indexes:
+    - location: 76
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 78
+  text: 'May 1970, ordered their PDP-11
+
+    Disk drives took > six months to appear'
+  formattingOptions: []
+  position:
+  - 5.92438616071458e+1
+  - 7.46124602936158e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 1
+    - location: 76
+      length: 1
+    - location: 79
+      length: 1
+  _effectiveHeight: 5.6e+1
+- ID: 79
+  text: 'Disk drives took an additional six months after delivery to apper.  So they
+    continued on the PDP-7.
+
+    Once the drives appeared, they brought over `roff` (derived from `runoff` used
+    on an earlier time-sharing system)'
+  formattingOptions: []
+  position:
+  - 3.10655691964289e+2
+  - 7.24423546250041e+2
+  width: 2.1e+2
+  connections:
+    indexes:
+    - location: 78
+      length: 1
+  _effectiveHeight: 9.8e+1
+- ID: 80
+  text: 'Some year - its first real-world test within Bell Labs was t hree typists
+    from AT&T''s patents department using it to write, edit, and format patent applications.
+
+    Making a note here, huge success'
+  formattingOptions: []
+  position:
+  - 2.1992187500003e+1
+  - 1.10310283954335e+3
+  width: 2.5e+2
+  connections:
+    indexes:
+    - location: 53
+      length: 1
+    - location: 81
+      length: 1
+  _effectiveHeight: 7e+1
+- ID: 81
+  text: gave the team enough credibility to get a more powerful PDP-11 model
+  formattingOptions: []
+  position:
+  - 3.31132812500003e+2
+  - 1.11538799579335e+3
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 80
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 82
+  text: initially, files limited to 64K, and names no more than six characters long
+  formattingOptions: []
+  position:
+  - 1.30056919642858e+3
+  - 1.36707750257619e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 43
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 83
+  text: 'The 34 syscalls are still in use today on modern unix and linux systems.
+
+    First-edition unix was a powerful environment for software development, but was
+    just 4200 LoC and 16K of main memory when it ran'
+  formattingOptions: []
+  position:
+  - 4.55675223214308e+2
+  - 2.88228397579035e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 6
+      length: 1
+  _effectiveHeight: 1.12e+2
+- ID: 84
+  text: 1973 - system was mature enough for them to present a paper on its deisgn
+    and implementation at an ACM symposium
+  formattingOptions: []
+  position:
+  - 1.02036830357376e+1
+  - 8.87790339543301e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 52
+      length: 2
+  _effectiveHeight: 7e+1
+- ID: 85
+  text: ''
+  formattingOptions: []
+  position:
+  - -6.77734374997665e+0
+  - 1.20612460293616e+3
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
