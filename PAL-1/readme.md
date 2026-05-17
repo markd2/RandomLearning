@@ -162,3 +162,26 @@ https://github.com/jefftranter/6502/tree/master/asm/KIM-1/TheFirstBookOfKIM
 
 punchtape file format
 https://srecord.sourceforge.net/man/man5/srec_mos_tech.5.html
+
+
+--------------------------------------------------
+
+KIM Monitor
+
+9600/8/N/1
+set jumper on mobo
+RS / Return in Serial terminal
+
+move to address $1234
+1234 (space)
+
+Deposit value 17 and advance
+17.  (dot)
+
+Exampine memory and advance
+CR
+
+To hook up monitor vectors:
+$17FA: 00 1C
+$17FE: 00 1C
+
