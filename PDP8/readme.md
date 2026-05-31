@@ -277,3 +277,24 @@ EXE PROG.BN
 
 Supposedly we can do `LOAD/G PROG` to run it, but I get "GPROG OPTION UNKNOWN"
 
+
+
+```
+DIR RKA0:
+
+(simh) attach dt0 foc71-omsi.tu56
+.DIR DTA0:
+.COPY DSK:<DTA0:*.*
+```
+
+```
+EXE FOCAL.BN
+
+ERASE *
+
+
+LOGICAL EXIT
+
+```
+
+
