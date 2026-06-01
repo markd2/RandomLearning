@@ -78,6 +78,7 @@ DO - like GOSUB
       returns to the DO, bypassing the rest of the group
   - can use variables.  `SET X = 5.24; DO X`.  That's pretty spif
     - helps avoid complex / memory nomming IF statements
+    - but they can't start with 'A' (?!)
 ERASE
   - ERASE 2.0 - delete the 2.0 group
   - ERASE 7.11 - delete the line
@@ -122,11 +123,18 @@ TYPE - like print
     - alone on line
   - TYPE %
     - formats output in powers-of-ten
+  - the format stuff can be done inline too.  `TYPE %2,A,%5.04,B,!`
 
 WRITE
   - without argument to list out all indirect staments
   - can do WRITE 2.0 (all group 2 lines)
   - WRITE 2.1 - that line
+
+## SUBSCRIPTS
+
+can have unique subscripts from -2048 through 2047.
+TOtal number is limited by choices you have made in your lifetime
+the symbol table will output only subscripts between 0 and 99
 
 ## LIBERRY COMMANDS
 
@@ -206,6 +214,8 @@ LOGICAL EXIT
       receives an answer of YES or '4,5'
 Open output files are closed with LIBRARY SAVE or DELETE, or if LIBRARY
 GOSUB is given by a non-saved program
+
+BKNUMZ is the saved from from NUMZ, FILE CREATED IS NUMBRZ
 
 OPEN INPUT
   - switch input to the file name
@@ -365,12 +375,85 @@ FOUT - character ouput
 ?        ATTEMPT TO READ PAST END-OF-FILE (INPUT IS
          SWITCHED TO TERMINAL AND PROGRAM CONTINUES)
 
+## ASCII TABLE
+
+DECIMAL ASCII CODES:
+
+FOR FIN( ) AND FOUT( ):
+
+(decimal. high bit *is* set)
+CODE CHARACTER      CD. CHAR.  CD. CHAR.
+---- -----------    --- -----  --- -----
+ 128 CTRL/SHFT/P    160 SPACE  193 A
+     (LEADER)       161 !      194 B
+ 129 CTRL/A         162 "      195 C
+ 130 CTRL/B         163 #      196 D
+ 131 CTRL/C         164 $      197 E
+ 132 CTRL/D         165 %      198 F
+ 133 CTRL/E         166 &      199 G
+ 134 CTRL/F         167 '      200 H
+ 135 CTRL/G         168 (      201 I
+ 136 CTRL/H         169 )      202 J
+ 137 CTRL/I         170 *      203 K
+ 138 LINE FEED      171 +      204 L
+ 139 CTRL/K         172 ,      205 M
+ 140 CTRL/L         173 -      206 N
+ 141 RETURN         174 .      207 O
+ 142 CTRL/N         175 /      208 P
+ 143 CTRL/O         176 0      209 Q
+ 144 CTRL/P         177 1      210 R
+ 145 CTRL/Q         178 2      211 S
+ 146 CTRL/R         179 3      212 T
+ 147 CTRL/S         180 4      213 U
+ 148 CTRL/T         181 5      214 V
+ 149 CTRL/U         182 6      215 W
+ 150 CTRL/V         183 7      216 X
+ 151 CTRL/W         184 8      217 Y
+ 152 CTRL/X         185 9      218 Z
+ 153 CTRL/Y         186 :      219 [
+ 154 CTRL/Z         187 ;      220 \
+ 155 CTRK/SHFT/K    188 <      221 ]
+ 156 CTRL/SHFT/L    189 =      222 ^
+ 157 CTRL/SHFT/M    190 >      223 _
+ 158 CTRL/SHFT/N    191 ?      253 ALT MODE
+ 159 CTRL/SHFT/O    192 @      255 RUBOUT
+
+
+# FC from foc71-omsi.tu56
+
+ERRORS.FD   8
+ERASE .FD   1
+HANGWD.FD   2
+HELP  .FC   6
+CATLOG.FC   3
+FADTES.FC   1
+LISTAL.FD   4
+INTRST.FC   3
+CHISQR.FC   5
+STAT1 .FC   6
+STAT2 .FC   5
+ADDEX .FC   2
+BARON .FC   6
+TRIANG.FC   4
+CALNDR.FC   3
+HANGMN.FC   5
+HANOI .FC   5
+PLOTER.FC   5
+POLAR .FC   4
+GRAPH .FC   5
+HARMON.FC   4
+WEB   .FC   3
+BTLSHP.FC   7
+PRINC .FD   1
+PRINC .FC   1
+
 
 ## Random
 
 do we need high-bit set for input?
 
 no real string processing - purely numerical
+  - well, FIN / FOUT, plus 0ABC for strings
 
 F71 has "extended library features with device-independent chaining and
 subroutine calls between programs"
@@ -389,6 +472,12 @@ for TEktronix T-4002
 PS/8 datafiles compatible with Edit and TECO-8.
 Program files saved as core images
 
-# FC from foc71-omsi.tu56
+nverting a FC file into a data file
 
-
+YES/NO
+22.78 COMMENT: 'YES OR NO' SUBROUTINE
+22.80 ASK "ANSWER YES OR NO ?  ",AN
+22.82 IF (AN-0YES)22.84,22.86
+22.84 IF (AN-0NO)22.8,22.88,22.8
+22.86 SET X=2;RETURN
+22.88 SET X=1;RETURN
