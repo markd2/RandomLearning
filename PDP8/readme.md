@@ -4,6 +4,7 @@ Stuff to read
 
 * https://homepage.cs.uiowa.edu/~jones/pdp8/UI-8/guide.shtml
 * https://bigdanzblog.wordpress.com/2014/05/23/editing-files-on-a-pdp-8-using-os8-edit/
+* https://bigdanzblog.wordpress.com/2014/05/27/creating-a-very-simple-pdp-8-assembler-pal8-program/
 
 
 
@@ -275,7 +276,15 @@ PAL PROG
 EXE PROG.BN
 ```
 
-Supposedly we can do `LOAD/G PROG` to run it, but I get "GPROG OPTION UNKNOWN"
+assemble and generate the listing
+
+```
+PAL PROG,PROG<PROG/H
+```
+
+Supposedly we can do `LOAD/G PROG` to run it, but I get "GPROG OPTION UNKNOWN" 
+
+And now I tried it and it worked :shrug:
 
 
 
@@ -298,3 +307,14 @@ LOGICAL EXIT
 ```
 
 
+## SimH stuffs
+
+`HLT` will stop the sim (except on pidp8, because can do panel stuff)
+
+examine a range of memory, and look at the accumulator
+```
+sim> e 200-206
+...
+sim> e ac
+...
+```
