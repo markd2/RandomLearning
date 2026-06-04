@@ -2,6 +2,7 @@
 
 * https://homepage.cs.uiowa.edu/~dwjones/pdp8/focal/
 * https://homepage.cs.uiowa.edu/~dwjones/pdp8/focal/UWFocal.pdf
+* https://softwarepreservation.computerhistory.org/FOCAL/
 
 ### (focal-booklet.pdf)
 
