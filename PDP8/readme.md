@@ -1,11 +1,14 @@
 # PDP-8
 
-Stuff to read
+Stuff to read / references
 
 * https://homepage.cs.uiowa.edu/~jones/pdp8/UI-8/guide.shtml
 * https://bigdanzblog.wordpress.com/2014/05/23/editing-files-on-a-pdp-8-using-os8-edit/
 * https://bigdanzblog.wordpress.com/2014/05/27/creating-a-very-simple-pdp-8-assembler-pal8-program/
-
+* https://mark.people.clemson.edu/subroutines/pdp8.html
+* https://github.com/rrutt/PDP8/blob/master/SW/KeyEcho.pal
+  - needed to fix ascii (high bits set!)
+  - tweaked to exit-exit on escape
 
 
 ## PiDP-8
@@ -307,6 +310,26 @@ LOGICAL EXIT
 ```
 
 
+str, .  'str...' - store the address at the symbol reference,
+then the goodies.  If put into an auto-increment register,
+the next access will pre-increment, skipping this address, and
+pointing to the first character. VERY CLEVER
+
+### sending character to terminal
+
+courtesy of bigdanzblog.wordpress.com
+
+```
+TTYO,   0
+
+        TLS
+        TSF
+        JMP .-1
+        CLA
+        JMP I TTYO
+```
+
+
 ## SimH stuffs
 
 `HLT` will stop the sim (except on pidp8, because can do panel stuff)
@@ -318,3 +341,21 @@ sim> e 200-206
 sim> e ac
 ...
 ```
+1
+2 6 | 3 1
+8 4 | 2 6 8 | 4 2 1
+
+240
+1 0 | 1 0 0 | 0 0 0
+
+space = 240
+escape = 233
+CR = 215
+BS = 377
+LF = 212
+Q = 0321
+
+
+Looks like there may be a "strip control codes" when using simh console,
+vt100 escape codes do not work.
+
