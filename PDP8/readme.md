@@ -359,3 +359,6 @@ Q = 0321
 Looks like there may be a "strip control codes" when using simh console,
 vt100 escape codes do not work.
 
+```
+.SET TTY SCOPE
+```
