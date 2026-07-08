@@ -1,0 +1,3 @@
+.R PFOCAL
+
+FOR I = 1,2,10; TYPE I,!

@@ -362,3 +362,43 @@ vt100 escape codes do not work.
 ```
 .SET TTY SCOPE
 ```
+
+copy a file (bk12fp.pa is the new file, copiedf rom bk12ai.pa)
+
+```
+.COPY BK12FP.PA<BK12AI.PA
+```
+
+copying files off of OS 8 (run on the pi)
+
+```
+$ cd ~/pidp8i/
+$ 
+```
+
+
+the "FP" search is for using the front panel switches as input.
+the OSR instruction is 7404 at address 201
+
+
+Some SIMH things
+
+```
+simh> go 7600   - resume OS
+simh> examine 0215  - examine the contents of that address
+```
+
+```
+PAL BINARY,LISTING<SOURCE/OPTION
+```
+
+/H tells the assembler to Halt on errors or omit the internal symbol
+table from the listing file - it optimizes the listing format for standard
+terminal viewing.
+
+or skip the file:
+
+```
+PAL BKCHAR,TTY:<BKCHAR/H
+```
+
