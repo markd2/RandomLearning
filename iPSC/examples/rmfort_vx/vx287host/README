@@ -1,0 +1,16 @@
+
+
+     *************   /usr/ipsc/examples/rmfort_vx/vx287host/README   ***********
+
+
+   This directory contains an example program designed to allow you to run
+   a typical VX application using the iPSC Simulator.  You can build 
+   one program in this directory:
+
+
+	host.e - This host program shows how to call several of the veclib
+	         routines. 
+
+
+   Host.e can be made using the makefile.  To execute the application, type
+   "host.e".  For more information, see the iPSC SIMULATOR USER'S GUIDE.

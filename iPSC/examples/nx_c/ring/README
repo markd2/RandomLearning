@@ -1,0 +1,24 @@
+
+
+ **************  /usr/ipsc/examples/nx_c/ring/README  *****************
+
+
+This directory contains the C source and make files for the ring example
+that is described in chapter 3 of the Program Development Guide. 
+
+The only prerequisites for running the example are that you be the "owner" of 
+the cube and that the dynamic loader be installed on it. It is suggested that 
+you copy the example directory to your own user directory.  In other words, you 
+should first execute commands like these three:
+	1) cp /usr/ipsc/examples/nx_c/ring/* <user directory>
+	2) getcube
+	3) load -c dim
+where "dim" is the dimension (1-7) of the cube, dimension 0 will not work
+for this example.
+
+The makefile is included to create the example programs from source.
+Type "make" from within this directory to create the executable programs.
+  
+To actually execute the example just type "host", after running the make
+file.
+

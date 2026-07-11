@@ -1,0 +1,37 @@
+
+
+ **************  /usr/ipsc/examples/nx_c/pi/README  *****************
+
+
+This directory contains the C source and make files for the pi example.
+This example computes an approximation of pi by calculating the area
+under the curve using the n-point quadrature rule.  The host program
+sets up the specific problem, then it collects and reports the results.
+Each node performs its part of the calculation independently of the other
+nodes and reports back to the host via message passing.  Each node sends 
+the total area of its rectangles to the host using a special command,
+GOP, which resides in the library "/usr/ipsc/protocode/commutl/c/commlib.a".
+This command sums the quantities in these messages so that the host sees
+a total rather than individual messages from each node.
+
+The prerequisites for running the example are that you be the "owner" of 
+the cube, load the node operating system on it, and have the "commutl"
+protocode software installed on your system.  Copy the example directory
+to your own user directory if you want to make or change any of these files.
+In other words, you should first execute commands like these three:
+	1) cp /usr/ipsc/examples/nx_c/pi/* <user directory>
+	2) getcube
+	3) load -c
+
+The makefile is included to create the example programs from source.
+Type "make" from within your directory to create the executable programs
+(host and node).
+  
+To actually execute the example you should load the node process onto the
+nodes and then execute the host process.  To do this type:
+
+	load node
+	host
+
+The host program will ask for 'n', the number of rectangles to use in
+approximating pi.  Enter zero or a negative value to exit the program.

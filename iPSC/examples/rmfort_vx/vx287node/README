@@ -1,0 +1,18 @@
+
+
+     *************   /usr/ipsc/examples/rmfort_vx/vx287node/README   ***********
+
+
+   This directory contains example programs designed to allow you to run
+   a typical VX application using a standard iPSC.  You can build two 
+   programs in this directory:
+
+
+	dlinpack.e - Double precision version of the standard linpack benchmark.
+
+	slinpack.e - Single precision version of the standard linpack benchmark.
+
+
+   All programs can be made using the makefile.  To execute, load the
+   application onto the cube (e.g., type "load dlinpack.e").  For more
+   information, see the iPSC USER'S GUIDE.

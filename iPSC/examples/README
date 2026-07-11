@@ -1,0 +1,18 @@
+
+
+
+ *****************  /usr/ipsc/examples/README  ********************
+
+
+    This directory contains example programs for the iPSC.  Two directories,
+    nx_c and nx_rmf, are C and FORTRAN language versions of example programs.  
+    The other directory, rmfort_vx, contains subdirectories that include 
+    examples for using the VX machine (if you have installed vector software),
+    using veclib routines in a standard cube, and using veclib routines with
+    the simulator on a 310.  Each of the sub-directories has its own README
+    file with more information on using the examples.
+
+    The language examples are documented in the iPSC Program Development Guide, 
+    chapters 3 and 4 and the VX example is documented in the iPSC VX User's
+    Guide. 
+

@@ -1,0 +1,12 @@
+
+
+ *****************  /usr/ipsc/examples/rmfort_vx/README  ********************
+
+
+    This directory contains example programs designed to demonstrate
+    VX functionality.  Two sub-directories, vx287host and vx287node,
+    are designed to show VX functionality on the host and a standard
+    iPSC cube.  Additional sub-directories will be present if the optional
+    vector (vx) and/or vast software has been installed.  These contain
+    programs designed to run on a VX machine.
+

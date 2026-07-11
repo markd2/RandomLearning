@@ -1,0 +1,110 @@
+
+
+ ************  /usr/ipsc/examples/nx_rmf/fp_excp_hand/README  ***************
+
+
+iPSC Floating Point Exception Handling for FORTRAN Programmers
+
+With this release (R3.1) when programming in FORTRAN, floating point 
+exceptions, type 16 interrupts on the nodes and type 8 interrupts on XENIX, 
+are no longer masked.  In previous releases floating point interrupts were 
+masked and exceptions were ignored.  In Release 3.1 when an exception occurs 
+in a node or host program the default NX and FORTRAN floating point exception 
+handlers perform the proper IEEE math corrections.  You do not need to perform
+any action for this to occur.
+
+The purpose of the host and node program examples is to demonstrate  how
+floating point errors are corrected.  Both node.f and host.f generate floating 
+point errors, the exception handlers correct the errors and the programs 
+continue as if the errors had never occurred.  To use these files, please 
+copy them into your own working directory.
+
+  
+This directory contains the following files:
+
+     1.  Source code for test programs, called node.f and host.f.
+         "Node" runs on a node and "host" runs on the host.  The node 
+ 	 program puts its output in SYSLOG, and does not require a 
+	 host program.  The host program writes results to the 
+	 screen.  To build the executable programs
+	 type:  make all.
+
+     2.  Source for dhex, which prints floating point numbers in hexadecimal 
+	 format with reasonable byte order.
+
+     3.  A makefile to generate the test programs. You may use this makefile 
+	 as an example of how to link your application in with the exception 
+         handler.
+
+
+To execute the example on the host just type:
+
+	host
+
+To execute the example on the node type:
+
+	getcube
+	load -c 0
+	load node   - results are sent to the logfile
+
+
+TECHNICAL NOTES:
+
+
+As you know, the Intel 8087 was designed, and first shipments made, before
+the IEEE floating point standard was finally adopted.  The 8087, and hence
+the 80287 used in the iPSC, conforms to draft 8 of the standard, rather than
+to the final, official, draft 10.  The primary difference between the two
+drafts concerns the handling of denormal numbers.  For 64-bit arithmetic
+(Fortran double precision), these are floating point numbers in the range
+from 2.0**(-1022) to 2.0**(-1074), or roughly 2.22E-308 to 4.94E-324.
+The difficulty, and controversy, occurs when denormal numbers are involved
+in arithmetic operations that yield results in the normal range, greater
+than 2.0**(-1022).  We call such results "promoted denormals".  For example:
+
+            X = 1.0E-305
+            Y = 1.0E+10
+            Z = X/Y
+            A = (X/Y)*Y
+            B = 1.0E0 + X/Y
+
+The quantity Z, whose value is 1.0E-315, is a denormal number.  It is
+generated correctly by  Fortran, running on any 8087 machine, with 
+no special exception handling.  No trouble so far.  The difficulties 
+occur with the next two statements, both of which produce "promoted 
+denormals".  The quantity A should be equal to X, except that several 
+bits of accuracy have been lost because the intermediate denormal result 
+is represented with less relative precision.  Should the user be warned 
+of this loss of accuracy?  The value stored in B should be exactly 1.0 
+since X/Y is numerically negligible compared to 1.0.  Should the warning 
+that might be expected for A also be generated for B?
+
+Draft 8 provides for a "warning mode" to signal the promotion of denormals.
+But it was judged to be of such esoteric utility that draft 10 makes no 
+mention of warning mode.  The 8087 allows for software implementation of 
+warning mode, but, as far as we know, such software has never been written.
+
+The 8087 produces a NaN, a special bit pattern signifying "Not a Number",
+for a promoted denormal.  If the last bit of the 8087 control word is on,
+then NaN's propagate through subsequent arithmetic operations, producing
+further NaN's.  In this case, both A and B would be NaN's.  It might be
+argued that such a result is reasonable for A, but we think that it is hard
+to justify for B.  The value loaded into the control word is set so that 
+exceptions are not masked.  In this case, any attempt to store a NaN, or 
+to do arithmetic involving a NaN, is trapped and declared illegal.  The 
+result is Exception 16, a dead program, and little helpful traceback 
+information.
+
+Fortunately, we can now do better than either of these cases.  The exception
+handler, now built-in to the runtime library on the host and into the
+operating system on the nodes, allows the generation of a result close
+to X for A, an exact 1.0 for B, and continued execution of any subsequent
+statements.
+
+
+HOST / NODE PROGRAM DIFFERENCES:
+
+Installing a floating point exception handler requires no special steps
+for node or host programs.  In both cases exceptions are handled and
+the proper fixup occurs without the user process ever knowing that the 
+exception occurred.
