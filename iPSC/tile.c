@@ -3,16 +3,10 @@
 #include <stdio.h>   /* for printf() */
 #include <assert.h>  /* For assert() */
 
-char graphicsChars[] = { 0137, 0140, 0141, 0142, 0143, 0144, 0145,
-                         0146, 0147, 0150 };
-
-#define ESC 27
-
+/* From the MarkD Substandard Library */
 #define ON 1
 #define OFF 0
 
-
-/* From the MarkD Substandard Library */
 void grafmode();  /* onoff */
 void gotoRC();    /* row, column */
 void cls();
@@ -39,14 +33,14 @@ typedef struct Tile {
 } Tile;
 
 void drawTile();  /* tile*, row, column */
-
+void drawAllTheTiles();
 
 #define kRowCount 4
 #define kColumnCount 8
 Tile tiles[kRowCount * kColumnCount];
 
 #define kColumnWidth 10
-#define kRowHeight 3
+#define kRowHeight 4
 
 char buffer[1024];  /* icky, I know */
 
@@ -70,23 +64,35 @@ int main(argc, argv)
     }
 
 
-    grafmode(ON);
-
-    grafmode(OFF);
-
     cls();
+
+    for (i = 0; i < 20; i++) {
+        int j;
+
+        drawAllTheTiles();
+        for (j = 0; j < 8; j++) {
+            tiles[random() % (kRowCount * kColumnCount)].status = random() % kStatusCount;
+        }    
+        sleep(1);
+    } 
+
+    printf("\n\n\n");
+    return 0;
+}
+
+void drawAllTheTiles() {
+    int row, column;
 
     for (row = 0; row < kRowCount; row++) {
         for (column = 0; column < kColumnCount; column++) {
-            /* kColumnWidth / kRowHeight */
             drawTile(&tiles[row * kColumnCount + column],
                      row * kRowHeight + 1,
                      column * kColumnWidth + 1);
         }
     }
 
-    printf("\n");
-    return 0;
+    gotoRC(kRowCount * kRowHeight + 2, 1);
+    fflush(stdout);
 }
 
 /* tile's play */
@@ -96,10 +102,21 @@ void drawTile(tile, row, column)
     int row;
     int column;
 {
-    gotoRC(row, column);
+    grafmode(ON); {
+        gotoRC(row, column);
+        printf("lqqqqqqqqk");
+        gotoRC(row+1, column);
+        printf("x        x");
+        gotoRC(row+2, column);
+        printf("x        x");
+        gotoRC(row+3, column);
+        printf("mqqqqqqqqj");
+    } grafmode(OFF);
+
+    gotoRC(row + 1, column + 1);
     printf("%d: %s", tile->nodeNumber, tile->label);
-    gotoRC(row + 1, column);
-    printf(" (%s)", statusDesc[tile->status]);
+    gotoRC(row + 2, column + 2);
+    printf("(%s)", statusDesc[tile->status]);
 } 
 
 /* MSL below */
@@ -125,32 +142,6 @@ void gotoRC(row, column)
     printf("\033[%d;%dH", row, column);
 }
 
-
-
 void cls() {
     printf("\033[2J");
 }
-
-/* do some graphics characters */
-grafcharTest() {
-    int i;
-    printf("\033(0");
-
-    for (i = 0; i < sizeof(graphicsChars) / sizeof(*graphicsChars); i++) {
-        printf("%d:%c    ", i, graphicsChars[i]);
-    }
-    printf("\033(B");
-}
-
-
-/* Random grab bag of stuff - like turn on bold / underscore, etc */
-grabBag() {
-
-    printf("\033(B\n");   
-    printf("org2\n"); 
-
-    printf("\033[0m\033[1mBold\033[4munderscore\033[5mblink\033[7mreverse\n");
-
-    printf("\033#6DoubleWidth\n");
-    printf("\033[0m\n"); /* turn off attributts */
-} 
