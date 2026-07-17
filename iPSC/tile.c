@@ -19,29 +19,55 @@ void cls();
 
 /* tile-specific stuffs */
 
+typedef enum TileStatus {
+    kStatusIdle,
+    kStatusProcessing,
+    kStatusFinished,
+    kStatusError,
+
+    kStatusCount
+} TileStatus;
+
+char *statusDesc[] = {
+    "idle", "proc", "fin", "err"
+};
+
 typedef struct Tile {
     int nodeNumber;
-    int status;
+    TileStatus status;
     char *label;
 } Tile;
 
 void drawTile();  /* tile*, row, column */
 
 
+#define kRowCount 4
+#define kColumnCount 8
+Tile tiles[kRowCount * kColumnCount];
+
+#define kColumnWidth 10
+#define kRowHeight 3
+
+char buffer[1024];  /* icky, I know */
+
 int main(argc, argv)
     int argc;
     char **argv;
 {
     int row, column;
-    char *label = "hello";
+    int i;
+    int length;
+    char *string;
 
-    Tile tile;
-    tile.nodeNumber = 5;
-    tile.status = 0;
-    tile.label = label;
-
-    row = 5;
-    column = 30;
+    for (i = 0; i < kRowCount * kColumnCount; i++) {
+         tiles[i].nodeNumber = i;
+         tiles[i].status = i % kStatusCount;
+         length = sprintf(buffer, "%d", i * 17);
+         string = (char *)malloc(length + 1);
+         string[length] = '\000';
+         strcpy(string, buffer);	
+         tiles[i].label = string;
+    }
 
 
     grafmode(ON);
@@ -49,12 +75,15 @@ int main(argc, argv)
     grafmode(OFF);
 
     cls();
-/*
-    gotoRC(row, column);
-    printf("%s", label);
-*/
 
-    drawTile(&tile, row, column);
+    for (row = 0; row < kRowCount; row++) {
+        for (column = 0; column < kColumnCount; column++) {
+            /* kColumnWidth / kRowHeight */
+            drawTile(&tiles[row * kColumnCount + column],
+                     row * kRowHeight + 1,
+                     column * kColumnWidth + 1);
+        }
+    }
 
     printf("\n");
     return 0;
@@ -70,8 +99,8 @@ void drawTile(tile, row, column)
     gotoRC(row, column);
     printf("%d: %s", tile->nodeNumber, tile->label);
     gotoRC(row + 1, column);
-    printf("   (processing)");
-}
+    printf(" (%s)", statusDesc[tile->status]);
+} 
 
 /* MSL below */
 
