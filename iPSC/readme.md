@@ -24,3 +24,7 @@ So this talks VT-100/ANSI directly.
 
 ![](assets/tile-1.png)
 
+Step 2 - actually use the DEC graphics characters.  Plus change values
+and update them
+
+![](assets/tile-2.mov)
