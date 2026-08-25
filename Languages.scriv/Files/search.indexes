@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
+            <Title>Yay Languages</Title>
+            <Text>Notes on programming languages, with a particular emphasis on the classic languages and implementations.
+
+Each language has its own folder which has the generic blurbage, and inside of that are documents for each specific implementation (e.g. VAX FORTRAN or Tektronix BASIC), and maybe subdocuments for better organization. 
+</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>
