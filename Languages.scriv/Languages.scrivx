@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.5.2-17487" Device="Ultrabook" Author="" Modified="2026-08-25 16:54:15 -0400" ModID="789B0FEB-E822-4447-B4C2-81ED4FA84701">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.5.2-17487" Device="Ultrabook" Author="" Modified="2026-09-16 09:06:23 -0700" ModID="99F68223-D33B-4436-96AA-6D0894336A06">
     <Binder>
-        <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
+        <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
             <Title>Draft</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <Children>
-                <BinderItem UUID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1" Type="Text" Created="2024-07-07 17:19:38 -0400" Modified="2026-08-25 16:54:15 -0400">
+                <BinderItem UUID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1" Type="Text" Created="2024-07-07 14:19:38 -0700" Modified="2026-08-25 13:54:15 -0700">
                     <Title>Yay Languages</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -16,7 +16,7 @@
                         <TextSelection>325,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="0BD39E6F-5ABC-4A56-91E3-887B61F72966" Type="Folder" Created="2026-08-25 16:52:08 -0400" Modified="2026-08-25 16:52:31 -0400">
+                <BinderItem UUID="0BD39E6F-5ABC-4A56-91E3-887B61F72966" Type="Folder" Created="2026-08-25 13:52:08 -0700" Modified="2026-08-25 13:52:31 -0700">
                     <Title>BASIC</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -25,7 +25,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem UUID="02D28D17-9900-4F4A-B1EC-FE9266F19B13" Type="Text" Created="2026-08-25 16:52:47 -0400" Modified="2026-08-25 16:52:52 -0400">
+                        <BinderItem UUID="02D28D17-9900-4F4A-B1EC-FE9266F19B13" Type="Text" Created="2026-08-25 13:52:47 -0700" Modified="2026-08-25 13:52:52 -0700">
                             <Title>Tektronix</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -36,7 +36,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem UUID="4CF964B6-3611-498F-9B06-557EF2CEFC92" Type="Folder" Created="2026-08-25 16:52:04 -0400" Modified="2026-08-25 16:52:34 -0400">
+                <BinderItem UUID="4CF964B6-3611-498F-9B06-557EF2CEFC92" Type="Folder" Created="2026-08-25 13:52:04 -0700" Modified="2026-08-25 13:52:34 -0700">
                     <Title>PASCAL</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -45,7 +45,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="C2F8A02C-C4E9-40DD-878E-1437AED8E963" Type="Folder" Created="2026-08-25 16:52:03 -0400" Modified="2026-08-25 16:52:36 -0400">
+                <BinderItem UUID="C2F8A02C-C4E9-40DD-878E-1437AED8E963" Type="Folder" Created="2026-08-25 13:52:03 -0700" Modified="2026-08-25 13:52:36 -0700">
                     <Title>FORTRAN</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -56,13 +56,13 @@
                 </BinderItem>
             </Children>
         </BinderItem>
-        <BinderItem UUID="94D5FC1E-44EA-4DFB-A8B8-029A495C48DB" Type="ResearchFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
+        <BinderItem UUID="94D5FC1E-44EA-4DFB-A8B8-029A495C48DB" Type="ResearchFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
             <Title>Research</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
         </BinderItem>
-        <BinderItem UUID="850215C0-5EE2-42DA-9314-A7AD31CD8EAA" Type="TrashFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
+        <BinderItem UUID="850215C0-5EE2-42DA-9314-A7AD31CD8EAA" Type="TrashFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
             <Title>Trash</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -122,15 +122,15 @@
         </StatusItems>
     </StatusSettings>
     <ProjectTargets Notify="No">
-        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2026-08-26 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="47" Characters="325" Date="2026-08-25 16:51:50 -0400"/>
+        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 17:40:58 -0700" IgnoreDeadline="Yes">0</DraftTarget>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2026-09-17 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2026-09-16 09:06:22 -0700"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2026-08-25 00:00:00 -0400">
-        <DraftWordCount>47</DraftWordCount>
-        <DraftCharCount>325</DraftCharCount>
+    <RecentWritingHistory Date="2026-09-16 00:00:00 -0700">
+        <DraftWordCount>0</DraftWordCount>
+        <DraftCharCount>0</DraftCharCount>
         <OtherWordCount>0</OtherWordCount>
         <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
-    <PrintSettings PaperSize="611.999993,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>
