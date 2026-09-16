@@ -1,10 +1,590 @@
 - ID: 1
-  text: ''
+  text: Bit and Bit, what is bit!
+  fillColorRGB:
+    red: 8.96043e-1
+    green: 9.97437e-1
+    blue: 9.42763e-1
   formattingOptions: []
   position:
-  - 1.0438671875e+2
-  - 1.16609375e+2
+  - 3.45175189393939e+1
+  - 1.85056818181818e+1
   width: 1.6e+2
   connections:
     indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 2
+  text: What IS a bit?
+  formattingOptions: []
+  position:
+  - 8.28906249999999e+1
+  - 1.87666666666672e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 3
+      length: 2
+    - location: 9
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 3
+  text: Binary Digit
+  formattingOptions: []
+  position:
+  - 7.19921874999999e+1
+  - 2.71921223958339e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 4
+  text: a two-state value
+  formattingOptions: []
+  position:
+  - 1.3193359375e+2
+  - 6.33665364583386e+1
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+    - location: 5
+      length: 4
+  _effectiveHeight: 1.4e+1
+- ID: 5
+  text: 0 / 1
+  formattingOptions: []
+  position:
+  - 2.85358072916667e+2
+  - 9.08919270833862e+0
+  width: 4e+1
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 6
+  text: high / low voltage
+  formattingOptions: []
+  position:
+  - 2.8259765625e+2
+  - 4.55182291666719e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 7
+  text: magnetism - disk or in core memory, N or S indicates whether it's on or off
+  formattingOptions: []
+  position:
+  - 2.71354166666666e+2
+  - 7.86334635416719e+1
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 8
+  text: Holes in paper - paper tape or punch cards
+  formattingOptions: []
+  position:
+  - 2.15771484375e+2
+  - 1.44222656250005e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 4
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 9
+  text: fundamental data type of digital computation
+  formattingOptions: []
+  position:
+  - 2.28606770833333e+2
+  - 2.08539062500005e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 2
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 10
+  text: GROUPING BITS
+  formattingOptions: []
+  position:
+  - 4.32431640625e+2
+  - 2.61364583333339e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 11
+      length: 2
+    - location: 14
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 11
+  text: '0100100101010010101'
+  formattingOptions: []
+  position:
+  - 4.00198567708333e+2
+  - 1.92796875000005e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 12
+  text: 'octal - 3 bits, 0...7
+
+    8 values representable'
+  formattingOptions: []
+  position:
+  - 6.27093098958333e+2
+  - 1.77162109375005e+2
+  width: 1.1e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 13
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 13
+  text: very popular before the 8 bit byte took over the world
+  formattingOptions: []
+  position:
+  - 5.94567057291666e+2
+  - 1.34180338541672e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 12
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 14
+  text: 'hexadecimal - 4 bits, 0...F
+
+    16 values repesntable'
+  formattingOptions: []
+  position:
+  - 5.5771484375e+2
+  - 3.04352864583339e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 10
+      length: 1
+    - location: 15
+      length: 2
+  _effectiveHeight: 2.8e+1
+- ID: 15
+  text: '8-bit number, represent as two 4-bit hex numbers
+
+    0x4A   $4A'
+  formattingOptions: []
+  position:
+  - 5.44010416666666e+2
+  - 3.61227864583339e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 16
+  text: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+  formattingOptions: []
+  position:
+  - 6.23603515625e+2
+  - 2.66960286458339e+2
+  width: 1.8e+2
+  connections:
+    indexes:
+    - location: 14
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 17
+  text: Computer Word Sizes
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 1.35934244791667e+2
+  - 5.97953125000005e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+    - location: 24
+      length: 2
+    - location: 31
+      length: 1
+    - location: 34
+      length: 1
+    - location: 39
+      length: 1
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 18
+  text: PDP-8
+  formattingOptions: []
+  position:
+  - 1.20800781249999e+1
+  - 7.59544925208333e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 19
+      length: 2
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 19
+  text: '1965'
+  formattingOptions: []
+  position:
+  - 1.90364583333333e+1
+  - 7.01673828125e+2
+  width: 4e+1
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 20
+  text: 12-bit-address
+  formattingOptions: []
+  position:
+  - 1.13053385416667e+2
+  - 7.38080078125e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+    - location: 22
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 21
+  text: Address Sizes
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 6.22858072916666e+2
+  - 4.35567057291667e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 41
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 22
+  text: 4K / 4096 words, ~6K byte
+  formattingOptions: []
+  position:
+  - 1.71761067708333e+2
+  - 7.81426432291667e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 20
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 23
+  text: 12-bit-word
+  formattingOptions: []
+  position:
+  - 2.74576822916664e+1
+  - 8.07396484375e+2
+  width: 8e+1
+  connections:
+    indexes:
+    - location: 18
+      length: 1
+    - location: 26
+      length: 1
+    - location: 28
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 24
+  text: how much mathing can you do in one gulp
+  formattingOptions: []
+  position:
+  - 1.31337890625e+2
+  - 3.20788411458334e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 25
+  text: already know its math prowess
+  formattingOptions: []
+  position:
+  - 4.25055338541666e+2
+  - 6.04089192708332e+2
+  width: 1.9e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 26
+  text: each instruction is one word
+  formattingOptions: []
+  position:
+  - -1.56575520833368e+0
+  - 8.52569010416666e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 27
+  text: ''
+  formattingOptions: []
+  position:
+  - 2.94205729166663e+1
+  - 9.26195312499999e+2
+  width: 1.6e+2
+  connections:
+    indexes: []
+  _effectiveHeight: 1.4e+1
+- ID: 28
+  text: stuff is crunched down
+  formattingOptions: []
+  position:
+  - 1.72044270833333e+2
+  - 8.24567708333332e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 23
+      length: 1
+    - location: 29
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 29
+  text: fewer convenience opcodes
+  formattingOptions: []
+  position:
+  - 3.58313802083333e+2
+  - 8.29320312499999e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 28
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 30
+  text: addressing can be awkward if the address is in with the insturuction
+  formattingOptions: []
+  position:
+  - 2.95387369791666e+2
+  - 8.78408854166666e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 28
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 31
+  text: PDP-11
+  formattingOptions: []
+  position:
+  - 2.96536455e+2
+  - 6.29310550208325e+2
+  width: 6e+1
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 32
+      length: 2
+  _effectiveHeight: 1.4e+1
+- ID: 32
+  text: 16-bit word
+  formattingOptions: []
+  position:
+  - 2.29811197916666e+2
+  - 6.7480859708333e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 31
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 33
+  text: '18-bit address
+
+    22 with MMU'
+  formattingOptions: []
+  position:
+  - 3.15758463541666e+2
+  - 6.82725260416668e+2
+  width: 9e+1
+  connections:
+    indexes:
+    - location: 31
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 34
+  text: Motorola 68000
+  formattingOptions: []
+  position:
+  - 4.83955078124999e+2
+  - 6.74870442708334e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 35
+      length: 4
+  _effectiveHeight: 1.4e+1
+- ID: 35
+  text: 32-bit processor
+  formattingOptions: []
+  position:
+  - 4.41487630208333e+2
+  - 7.34512369791667e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 34
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 36
+  text: 24-bit address bus
+  formattingOptions: []
+  position:
+  - 5.72929687499999e+2
+  - 7.15869791666667e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 34
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 37
+  text: mac madness
+  formattingOptions: []
+  position:
+  - 5.61634114583333e+2
+  - 7.75410807291667e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 34
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 38
+  text: 16 bit PCs?
+  formattingOptions: []
+  position:
+  - 5.92242838541666e+2
+  - 6.41807291666667e+2
+  width: 7e+1
+  connections:
+    indexes:
+    - location: 34
+      length: 1
+    - location: 42
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 39
+  text: Data Path Width
+  fillColorRGB:
+    red: 1e+0
+    green: 9.0283e-1
+    blue: 9.76506e-1
+  formattingOptions: []
+  position:
+  - 2.89690755208333e+2
+  - 4.24089192708334e+2
+  width: 1e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 40
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 40
+  text: how much data can it gulp from memory in one go
+  formattingOptions: []
+  position:
+  - 3.35413411458333e+2
+  - 5.00651692708335e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 39
+      length: 1
+  _effectiveHeight: 2.8e+1
+- ID: 41
+  text: how much memory can you access without jumping through hoops
+  formattingOptions: []
+  position:
+  - 5.99228515625e+2
+  - 4.81087893958339e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 21
+      length: 1
+  _effectiveHeight: 4.2e+1
+- ID: 42
+  text: Amiga, ST, Mac, etc
+  formattingOptions: []
+  position:
+  - 6.69153645833334e+2
+  - 6.09173828125006e+2
+  width: 1.6e+2
+  connections:
+    indexes:
+    - location: 38
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 43
+  text: 64-bit
+  formattingOptions: []
+  position:
+  - 9.18945312500002e+1
+  - 4.21351562500002e+2
+  width: 5e+1
+  connections:
+    indexes:
+    - location: 44
+      length: 1
+  _effectiveHeight: 1.4e+1
+- ID: 44
+  text: modeern machines
+  formattingOptions: []
+  position:
+  - 6.16666633333332e+1
+  - 4.91205081458335e+2
+  width: 1.2e+2
+  connections:
+    indexes:
+    - location: 17
+      length: 1
+    - location: 43
+      length: 1
   _effectiveHeight: 1.4e+1
