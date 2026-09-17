@@ -1,0 +1,55 @@
+ADC,Add with carry
+AND,And (with accumulator)
+ASL,Arithmetic shift left
+BIT,Bit test
+BRK,break / interrupt
+CLC,clear carry
+CLD,clear decimal
+CLI,clear interrupt disable
+CLV,clera overflow
+CMP,compare (with accumulator)
+CPX,compare with X register
+CPY,compare with Y register
+DEC,decrement
+DEX,decrement X register
+DEY,decrement Y register
+EOR,exclusive-or (with accumulator)
+INC,increment
+INX,increment X register
+INY,increment Y register
+JMP,jump jump jump jump
+JSR,jump subroutine (paired with RTS)
+LDA,load accumulator
+LDX,load X register
+LSR,logical shift right
+NOP,no operation
+ORA,or with accumulator
+PHA,push accumulator
+PHP,push processor status
+PLA,pull accumulator
+PLP,pull proccessor status
+ROL,rotate left
+ROR,rotate right
+RTI,return from interrupt
+RTS,return from subroutine (paired with JSR)
+SBC,subtract with carry
+SEC,set carry
+SED,set decimal
+SEI,set interrupt disable
+STA,store accumulator
+STX,store X register
+STY,store Y register
+TAX,transfer accumulator to X register
+TAY,transfer accumulator to Y register
+TSX,transfer stack pointer to X register
+TXA,transfer X register to accumulator
+TXS,transfer X register to stack pointer
+TYA,transfer Y to accumulator
+BCC,branch on carry clear
+BCS,branch on carry set
+BEQ,branch on equal (zero flag set)
+BMI,branch on minues (negative flag set)
+BNE,branch not equal (zero clear)
+BPL,branch on plus (negative clear)
+BVC,branch on overflow clear
+BCS,branch on overfloat set
