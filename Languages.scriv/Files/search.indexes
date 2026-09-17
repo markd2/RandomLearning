@@ -8,5 +8,86 @@
 Each language has its own folder which has the generic blurbage, and inside of that are documents for each specific implementation (e.g. VAX FORTRAN or Tektronix BASIC), and maybe subdocuments for better organization. 
 </Text>
         </Document>
+        <Document ID="02D28D17-9900-4F4A-B1EC-FE9266F19B13">
+            <Title>Tektronix</Title>
+            <Text>Commands are unique in their first three characters. (not sure if that's officially stated, or just from inspection, but the overview commands show three letters)
+
+The docs are kind of cool - two syntax diagrams, one with abbrevations and type of argument "string, numeric, string, string", and then a second one with what the arguments represent "blood type, weight, shoe size, dog's maiden name"
+</Text>
+        </Document>
+        <Document ID="5B172470-E802-4CF3-A532-E44FF5BA6700">
+            <Title>Glossary</Title>
+            <Text>Glossary:
+
+* Graphics System - product name
+* GS - Graphics System
+* GPIB - General Purpose Interface Bus
+
+</Text>
+        </Document>
+        <Document ID="3FDE49AD-F302-43F8-8CAF-2FCF85FC719E">
+            <Title>Flow Comtrol</Title>
+            <Text>GOTO - if you GO TO a line, then you're in single-step mode - it sets the program counter, and can STEP PROGRAM on the keyboard
+
+GO TO value OF 100,200,300,400 - use value to choose which line to go to
+
+GOSUB TO value OF 100,200,300 - same but with gosub
+
+</Text>
+        </Document>
+        <Document ID="70B69A78-9E25-4652-B7C3-5F9065601223">
+            <Title>Environtment commands</Title>
+            <Text>Environment Commands
+
+There is an "environment" of values that control different aspects of things. Some are legit BASIC commands, some are done via the device escape hatch of PRINT @1,2:3,4,5  where 1 is the device, 2 is the command to send to the device, and 3,4,5 (could be just one, could be more) are the parameters to that command.
+
+FUZZ
+Control how floating point numbers are compared.  Takes 1 or 2 parameters
+
+FUZZ 12, +-1.0E-64  (defaults)
+
+The first one is the number of digits (ignoring decimal point) to use when comparing two non-zero numbers together. Essentially controlling the epsilon of the comparisons
+
+The second argument is the magnitude of the number to consider a zero.  In floating-point land, there's a discontinuity between the smallest represented positive / negative integer (+-8.9... E-304) and actual zero, so this bridges that gap
+
+SET DEGREE / RADIAN / GRAD
+Controls the representation of the angles that trigonometric functions work with.  Should be obvious
+
+ALPHASCALE/ALPHAROTATE, etc
+These are commands sent to peripheral devices on the GPIB (general purpose interface bus) to control things like how much to scale alphanumerics (text) and rotating them. We don't have that connected to our 405Xs, so generally ignoring
+
+CHARSIZE
+4054 only.  There's 5 or 6 different font sizes, which can give you a massive screen density of text.  The 4054 is not working, so don't care
+
+FONT
+Choose different display fonts.  Some are language fonts (such as for English or Dutch), and some are "graphics" and "business" fonts.  Need to play with these to see what's actually in the fonts.
+
+</Text>
+        </Document>
+        <Document ID="9024B750-05F7-4548-B85B-2D529A5EDDCE">
+            <Title>Random stuffs</Title>
+            <Text>has MIN and MAX
+
+precedence of operators
+
+High to low
+
+	1.	(
+	2.	functions
+	3.	monadic + - NOT
+	4.	^ (Exponentiation)
+	5.	* /
+	6.	+ -
+	7.	MIN MAX
+	8.	relational  e.g. =  &lt;&gt;  &lt;= ...
+	9.	AND OR
+	10.	USING and comma
+	11.	) and semicolon
+	12.	OF THEN STEP TO  and symbols @ # % =
+	13.	all other keywords
+	14.	CR
+
+</Text>
+        </Document>
     </Documents>
 </SearchIndexes>

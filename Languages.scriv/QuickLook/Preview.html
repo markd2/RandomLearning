@@ -101,9 +101,74 @@
 <ul>
 <li>
 <p class="itemTitle">Tektronix</p>
+<p class="itemText">Commands are unique in their first three characters. (not sure if that's officially stated, or just from inspection, but the overview commands show three letters)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The docs are kind of cool - two syntax diagrams, one with abbrevations and type of argument "string, numeric, string, string", and then a second one with what the arguments represent "blood type, weight, shoe size, dog's maiden name"</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Glossary</p>
+<p class="itemText">Glossary:</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* Graphics System - product name</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* GS - Graphics System</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* GPIB - General Purpose Interface Bus</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Environtment commands</p>
+<p class="itemText">Environment Commands</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There is an "environment" of values that control different aspects of things. Some are legit BASIC commands, some are done via the device escape hatch of PRINT @1,2:3,4,5<span class="Apple-converted-space">  </span>where 1 is the device, 2 is the command to send to the device, and 3,4,5 (could be just one, could be more) are the parameters to that command.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">FUZZ</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Control how floating point numbers are compared.<span class="Apple-converted-space">  </span>Takes 1 or 2 parameters</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">FUZZ 12, +-1.0E-64<span class="Apple-converted-space">  </span>(defaults)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">The first one is the number of digits (ignoring d...</p>
+</li>
+<li>
+<p class="itemTitle">Flow Comtrol</p>
+<p class="itemText">GOTO - if you GO TO a line, then you're in single-step mode - it sets the program counter, and can STEP PROGRAM on the keyboard</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">GO TO value OF 100,200,300,400 - use value to choose which line to go to</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">GOSUB TO value OF 100,200,300 - same but with gosub</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Random stuffs</p>
+<p class="itemText">has MIN and MAX</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">precedence of operators</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">High to low</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>1. (</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>2. functions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>3. monadic + - NOT</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>4. ^ (Exponentiation)</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>5. * /</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>6. + -</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>7. MIN MAX</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>8. relational<span class="Apple-converted-space">  </span>e.g. =<span class="Apple-converted-space">  </span>&lt;&gt;<span class="Apple-converted-space">  </span>&lt;= ...</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>9. AND OR</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>10. USING and comma</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>11. ) and semicolon</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>12. OF THEN STEP TO<span class="Apple-converted-space">  </span>and symbols @ # % =</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>13. all other keywords</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>14. CR</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
 </ul>
-<hr class="afterTitle"/>
+</ul>
+<hr class="afterText"/>
 
 <li>
 <p class="topLevelItemTitle">PASCAL</p>

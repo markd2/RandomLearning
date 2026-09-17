@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Palatino-Bold;\f2\froman\fcharset0 Palatino-Roman;
+\f3\fmodern\fcharset0 Courier;\f4\froman\fcharset0 Palatino-Italic;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb360\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::1><$Scr_Ps::0>
+\f1\b\fs36 Environment Commands\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::1><!$Scr_Ps::0>
+\f2\fs36 \
+There is an "environment" of values that control different aspects of things. Some are legit BASIC commands, some are done via the device escape hatch of 
+\f3 PRINT @1,2:3,4,5
+\f2   where 1 is the device, 2 is the command to send to the device, and 3,4,5 (could be just one, could be more) are the parameters to that command.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl264\slmult1\sb360\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <$ScrKeepWithNext><$Scr_H::2><$Scr_Ps::1>
+\f1\b\fs36 FUZZ\
+\pard\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2880\tx3600\tx4320\fi360\sl264\slmult1\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 <!$Scr_H::2><!$Scr_Ps::1>
+\f2\fs36 Control how floating point numbers are compared.  Takes 1 or 2 parameters\
+
+\f3 \
+FUZZ 12, +-1.0E-64
+\f2   (defaults)\
+\
+The first one is the number of digits (ignoring decimal point) to use when comparing two non-zero numbers together. Essentially controlling the epsilon of the comparisons\
+\
+The second argument is the magnitude of the number to consider a zero.  In floating-point land, there's a discontinuity between the smallest represented positive / negative integer (+-8.9... E-304) and actual zero, so this bridges that gap\
+\
+SET DEGREE / RADIAN / GRAD\
+Controls the representation of the angles that trigonometric functions work with.  Should be obvious\
+\
+ALPHASCALE/ALPHAROTATE, etc\
+These are commands sent to peripheral devices on the GPIB (general purpose interface bus) to control things like how much to scale alphanumerics (text) and rotating them. 
+\f4\i We don't have that connected to our 405Xs, so generally ignoring
+\f2\i0 \
+\
+CHARSIZE\
+4054 only.  There's 5 or 6 different font sizes, which can give you a massive screen density of text.  
+\f4\i The 4054 is not working, so don't care
+\f2\i0 \
+\
+FONT\
+Choose different display fonts.  Some are language fonts (such as for English or Dutch), and some are "graphics" and "business" fonts.  
+\f4\i Need to play with these to see what's actually in the fonts.
+\f2\i0 \
+\
+}
