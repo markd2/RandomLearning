@@ -21,12 +21,32 @@
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
+		<key>3FDE49AD-F302-43F8-8CAF-2FCF85FC719E</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>4CF964B6-3611-498F-9B06-557EF2CEFC92</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
 		</dict>
 		<key>5641A8C0-884F-4C39-9C47-EB7BFACB73F1</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>5B172470-E802-4CF3-A532-E44FF5BA6700</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>70B69A78-9E25-4652-B7C3-5F9065601223</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>9024B750-05F7-4548-B85B-2D529A5EDDCE</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -49,11 +69,25 @@
 		<key>SupportingID</key>
 		<string></string>
 	</dict>
+	<key>fullScreenBackgroundFade</key>
+	<real>1</real>
+	<key>fullScreenHorizontalPaperPosition</key>
+	<integer>2</integer>
+	<key>fullScreenInspectorMode</key>
+	<integer>0</integer>
+	<key>fullScreenInspectorVisible</key>
+	<false/>
+	<key>fullScreenPaperHeight</key>
+	<integer>-1</integer>
+	<key>fullScreenPaperWidth</key>
+	<integer>1378</integer>
 	<key>fullScreenTextEditorSettings</key>
 	<dict>
 		<key>textScaleFactor</key>
 		<real>1.25</real>
 	</dict>
+	<key>fullScreenVerticalPaperPosition</key>
+	<integer>2</integer>
 	<key>inspectorSplitFrames</key>
 	<array>
 		<string>{{0, 0}, {1078, 776}}</string>
@@ -67,14 +101,14 @@
 		<real>1</real>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 0}, {1078, 716}}</string>
+	<string>{{0, 327}, {719, 547}}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>textScaleFactor</key>
 		<real>1</real>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>37 245 1590 834 0 0 1728 1079 </string>
+	<string>482 266 1246 665 0 0 1728 1079 </string>
 	<key>supportingDocumentEditor.dockedQRTextSettings</key>
 	<dict>
 		<key>textScaleFactor</key>
