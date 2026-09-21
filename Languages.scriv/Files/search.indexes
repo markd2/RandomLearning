@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SearchIndexes Version="1.0">
     <Documents>
+        <Document ID="34EFA1B7-786F-414B-825D-843CAB3B67E0">
+            <Title>Program Structure</Title>
+            <Text>Program Structure
+
+Because there's really no Tektronix 405X IDE available, you'll want to do program design and organization in some kind of external document. You can party like it's 1979 by using a legal pad (or some kind of engineering notebook) and a pencil, or maybe a text file on a computer.  Keeping track of what the program is about, and what sections of line numbers belong to whatever logical components that you're using.
+
+Traditionally programs start at line 100. This is s nice round line number that skips over all of the User-Definable key definitions from lines 4 through 84. You have three lines of code at the very start that you can use for a GOTO 100, maybe set up an interrupt handler or two first-thing.
+
+Some ideas - using the tape append to load common routines.
+This could also be a good place to talk about the renumbering features
+</Text>
+            <Notes>maybe have a diagram with the the initial trampoline, the user-definable keys, and then the rest of the program.  Perhaps with subroutines sketched out.
+</Notes>
+        </Document>
         <Document ID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1">
             <Title>Yay Languages</Title>
             <Text>Notes on programming languages, with a particular emphasis on the classic languages and implementations.
@@ -15,6 +29,10 @@ Each language has its own folder which has the generic blurbage, and inside of t
 The docs are kind of cool - two syntax diagrams, one with abbrevations and type of argument "string, numeric, string, string", and then a second one with what the arguments represent "blood type, weight, shoe size, dog's maiden name"
 </Text>
         </Document>
+        <Document ID="D54AF827-0EF2-43E9-BA07-C73AA46CFEEA">
+            <Title>Array</Title>
+            <Text>Array Variables</Text>
+        </Document>
         <Document ID="5B172470-E802-4CF3-A532-E44FF5BA6700">
             <Title>Glossary</Title>
             <Text>Glossary:
@@ -25,6 +43,13 @@ The docs are kind of cool - two syntax diagrams, one with abbrevations and type 
 
 </Text>
         </Document>
+        <Document ID="818BDFC6-AD96-4948-A0E6-BDBEC37BB655">
+            <Title>Analysis of actual programs</Title>
+            <Text>Analysis of actual programs
+
+</Text>
+            <Notes>Maybe grab one of the demo programs and take it apart.  There may be some cool techniques in there.  But also could be educational about what the realities of programming for this critter is.</Notes>
+        </Document>
         <Document ID="3FDE49AD-F302-43F8-8CAF-2FCF85FC719E">
             <Title>Flow Comtrol</Title>
             <Text>GOTO - if you GO TO a line, then you're in single-step mode - it sets the program counter, and can STEP PROGRAM on the keyboard
@@ -34,6 +59,151 @@ GO TO value OF 100,200,300,400 - use value to choose which line to go to
 GOSUB TO value OF 100,200,300 - same but with gosub
 
 </Text>
+        </Document>
+        <Document ID="0BD39E6F-5ABC-4A56-91E3-887B61F72966">
+            <Title>BASIC</Title>
+        </Document>
+        <Document ID="C2F8A02C-C4E9-40DD-878E-1437AED8E963">
+            <Title>FORTRAN</Title>
+        </Document>
+        <Document ID="9024B750-05F7-4548-B85B-2D529A5EDDCE">
+            <Title>Random stuffs</Title>
+            <Text>has MIN and MAX
+
+precedence of operators
+
+High to low
+
+	1.	(
+	2.	functions
+	3.	monadic + - NOT
+	4.	^ (Exponentiation)
+	5.	* /
+	6.	+ -
+	7.	MIN MAX
+	8.	relational  e.g. =  &lt;&gt;  &lt;= ...
+	9.	AND OR
+	10.	USING and comma
+	11.	) and semicolon
+	12.	OF THEN STEP TO  and symbols @ # % =
+	13.	all other keywords
+	14.	CR
+
+</Text>
+        </Document>
+        <Document ID="2B803C34-FBE4-4C9F-9146-39012BC3E9CD">
+            <Title>Variables</Title>
+            <Text>Tektronix BASIC, like many BASICs, limit your variable names to two characters.  GC BASIC is more limited than say AppleSoft.  In AppleSoft you can have variables of arbitrary length, but so long as the first two characters are unique (and there are no embedded keywords to confuse the tokenizer) 
+
+GC BASIC requires each numeric variable be a single alphabetic character. You can also append a digit to a single letter for more variables. Two alphabetics are not allowed.  So, A, A0, A9 are legal, but AA is not.
+
+String variables are a single letter with a dollar-sign (mentally pronounced "string" by many folks), such as A$ (A-string).  That means you have 26 strings, max, in your program. Use them wisely.  OBTW, there are no string arrays.  More about strings in another place.
+
+</Text>
+            <Notes>* Is the BASIC parser correctly called a tokenizer, or is there a better term?
+</Notes>
+        </Document>
+        <Document ID="6F26EE04-F1D7-4651-967E-1F3C38C68AC2">
+            <Title>Interrupt Handling</Title>
+            <Text>"Interrupts" are out-of-band / spontaneous changes to program control flow.  Like "On Error Goto" in applesoft and other BASICS.  When an interrupt happens, the current statement finishes executing, then a GOSUB happens to a previously registered line number.  Once the interrupt has been serviced, then you RETURN to resume the program where it left off.
+
+There's four different kinds of interrupts. Three are device related
+* SRQ - System Request. Some piece of hardware wants attention, so it raises its virtual hand saying "hey!  I need to tell you something"
+* EOI - End Or Identify (sometimes referred to End Or Identity).  Basically, some device has ended its communication, whether it has delivered the last byte of a data payload, or delivered the last byte of a an identify string.
+* EOF - End of File. When doing an INPUT from tape, you've consumed the last record, and then you try to consume a record that doesn't exist
+* SIZE - The only software interrupt, happens when you have numeric overflow (exceeding 1 += E304).  By default, overflowing like this will terminate the program with an error.  If you know how to handle that case (or you're processing data, that with user error can overflow some calculation), then you can branch to a "hey!  you messed up!" handler and perhaps try to figure out what's wrong, or start the process over from the beginning an give the user a second chance to make a good impression.
+
+Register an interrupt handler with ON interrupt-name THEN line-number.  Say you wanted to have a handler for each of the interrupts.
+
+100 ON SRQ THEN 1000
+110 ON EOI THEN 1100
+120 ON EOF THEN 1200
+130 ON SIZE THEN 1300
+...
+1000 REM Handle System Request
+1099 RETURN
+
+1100 REM Handle EOI
+1199 RETURN
+
+etc.
+
+So, what do you do when a handler gets called?  For EOF, you know to stop gathering input, and perhaps move on to more intensive processing.  For a SIZE, you don't really know what caused the problem, so you'll need to adapt somehow (most likely by reevaluating whatever data you have, filtering it, and restarting your work). 
+
+For EOI, I don't know what you're supposed to do.
+
+For SRQ, there's a status byte that could be interesting. To read it, you'll want to POLL interesting devices to see which one needs attention.  POLL takes a couple of "out parameter" variables (that get filled in my the call before it returns to you), as well as a list of device addresses that you want to query.
+For example:
+100 POLL D, R; 13; 22; 55; 5
+
+POLL will check each device address in the order they're given. "Hey device 13, you need anything? No?  ok, device 22, you need anything?  You do? Cool!".  When POLL returns, D (or whatever legal variable name you use) will be filled in with the position in the list of device addresses (not the actual address) of the device that triggered the SRQ.  The other variable is filled with the SRQ payload.  
+
+So, riffing on the prior example
+100 ON SRQ THEN 1000
+...
+1000 REM Handle System Request
+1010 POLL A9,D9;13;22;55;5
+1020 IF A9 = 13 THEN GOTO 1500  (or whatever the handler for device 13 is, which knows to look in D9 for the value)
+
+Don't forget that BASIC is one big happy namespace, and if someone in a far-flung part of the program uses the same variable name that your handler does, you could have a difficult to track down bug.  This is why the example uses A9/D9 (address/data).  Presumably folks who are using multiple D-named variables will be using D0, D1, etc, the variable names that occur numerically earlier.
+come to think of it, that could be a way of namespacing things - particular subroutines / modules / etc could stake claim to their own variable digit.   
+
+
+
+
+</Text>
+            <Notes>TO CHECK
+* GPIB about how SRQ / EOI are handled at a hardware level
+* POLL - does EOI provide a status byte. or just SRQ. Do you even need to POLL an EOI?
+* POLL - what happens if you call it and there's no device that needs service?  (the simulator blocks)
+* Get a proper list of common device addresses for the POLL example
+* EOF - does it happen after the last record has been read, or does it happen when you try to read and there's nothing there?
+* Doublecheck the extent of the SIZE overflow value.
+* Question about doing a RETURN from an ON THEN. The reference manual implies that the first return will  bail out of the handler entirely, but does that count inner GOSUBs?  Is it possible to call subroutines from inside of the interrupt handler?
+</Notes>
+        </Document>
+        <Document ID="7438A8F8-5B9E-4665-83CE-8203E5884903">
+            <Title>String</Title>
+            <Text>String Variables
+
+Reminder that you have a maximum of 26 string variables available to your entire program, starting with A$ and going through Z$.  There are no arrays of strings, but there is syntax that looks like arrays, for strings.
+
+You can DIM an array to have a particular amount of storage (defaulting to 72, which is also the length of the BASIC interpreter type-in keyboard entry buffer).</Text>
+        </Document>
+        <Document ID="BDD68F68-79DE-4108-807A-1A270B2E79AE">
+            <Title>ScrivHints</Title>
+            <Text>Indent a binder item with command-control-rightArrow.  Up/down/left/right work as you would expect following on from that.
+</Text>
+        </Document>
+        <Document ID="E5F9C650-C662-43B4-B14E-DEBD6FD3972D">
+            <Title>User-Definable Keys</Title>
+            <Text>User-Definable Keys
+
+Kind of a misnomer (see scriv notes).  These keys act like modern function keys - press an F-key to get some behavior, potentially interrupting the current program to handle them.  The user has 20 of these on the keyboard - ten physical keys, plus the shift modifier
+
+(insert picture of the keys)
+
+When you type one of the user-definable keys, you tell the program to finish whatever instruction it is currently running, then GOSUB a particular line of code.  The line number to jump to is calculated from the key number by multiplying it by four.  Press UDKey number one, that jumps to line four.  Press UDKey number 13 (shift-3), and it jumps to line 52.  
+
+(insert illustration of the "jump table")
+
+You have four lines of code to do you work, and you are expected terminate your work with an END, STOP, or RETURN.  END to gracefully end your program (and close open files), STOP to generate a visible error message to the user, or RETURN to tell BASIC to pick up where it left off.
+
+This isn't enforced.  Line 52 can happily continue on to line 56 (handler for UDKey 14), but this might not be what you expect.  If line 56 is actually en medias res for UDKey 13's handler, the user pressing UDKey 14 would jump into the middle of that, perhaps leading to hilarity (or mayhem).  Or maybe you can do something clever with UDKey 13 setting up some specific condition that a more general handler for UDKey 14 could use. (Similar to the logic of a fall-through branch in a C-style switch statement.)
+
+
+
+
+</Text>
+            <Notes>Double-check the Environment stuff - is there an environment setting that will let you make UDKeys interrupt the program, or wait for convenient times like INPUT?
+
+"User-definable" but it's purely under program control. Is the idea if the user wants to define a new key, they add new code to the program?  What if it's a shared program (or something in a provided tape) and they don't want to save over the original?  Is there a way to define a macro kind of thing "press this to type a string instead of jumping to Key*4"?
+
+Just think it's an odd name, especially one that's plastered all over the reference manual and screened on the case.
+</Notes>
+        </Document>
+        <Document ID="4CF964B6-3611-498F-9B06-557EF2CEFC92">
+            <Title>PASCAL</Title>
         </Document>
         <Document ID="70B69A78-9E25-4652-B7C3-5F9065601223">
             <Title>Environtment commands</Title>
@@ -61,31 +231,6 @@ CHARSIZE
 
 FONT
 Choose different display fonts.  Some are language fonts (such as for English or Dutch), and some are "graphics" and "business" fonts.  Need to play with these to see what's actually in the fonts.
-
-</Text>
-        </Document>
-        <Document ID="9024B750-05F7-4548-B85B-2D529A5EDDCE">
-            <Title>Random stuffs</Title>
-            <Text>has MIN and MAX
-
-precedence of operators
-
-High to low
-
-	1.	(
-	2.	functions
-	3.	monadic + - NOT
-	4.	^ (Exponentiation)
-	5.	* /
-	6.	+ -
-	7.	MIN MAX
-	8.	relational  e.g. =  &lt;&gt;  &lt;= ...
-	9.	AND OR
-	10.	USING and comma
-	11.	) and semicolon
-	12.	OF THEN STEP TO  and symbols @ # % =
-	13.	all other keywords
-	14.	CR
 
 </Text>
         </Document>
