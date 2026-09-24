@@ -1,0 +1,26 @@
+DMG	Original GameBoy - originally "Dot Matrix Game"
+SGB	Super GameBoy - SNES plug-in cartridge
+CGB	GameBoy Color
+RGBDS	(rednex) GameBoy Development System. de-facto assembly language programming environment for modern GameBoy programming
+Pandocs	Extensive gameboy technical reference
+DMG-01	Original original gameboy model number
+Cartridge	Holds the game - along optionally with an MBC and ERAM
+Console	The hardware you hold in your hand to play a game
+D-Pad	The four-way controller. Can do diagonals (e.g. TOP-LEFT), but not TOP-BOTTOM
+Select Button	The select button on the Joypad. Uses of Select is to change settings, switch options, or toggle items inside of games.  Used for menu navigation and in-game actions. Can also be used as a shortcut.
+Joypad	Collective name for D-Pad, select, start, and A/B buttons
+Active Components	Things that actually do stuff.  Composed of the CPU and PPU
+CPU	You know what this is
+PPU     Picture Processing Unit
+ROM	On the cartridge
+Rom Image	The code and assets compiled and then put on to a cartridge
+ERAM	External RAM, optional ram on the cartridge. Needs an MBC to work. Typically used for battery-backed-up save states
+MBC	Memory Bank Controller, allows for extended ROM and RAM on a cartridge via bank switching
+VRAM	Video RAM. 8K
+WRAM	Work RAM. 8K
+HRAM	High RAM.  Small (127 bytes) work area, along with smaller/faster instructions for access
+OAM	Object-Attribute Memory (160 bytes). Contains sprite configuration settings
+Sprite	independently movable object. like characters or projectiles
+I/O Registers	128 Bytes. How to commnicate with internl devices
+IE	Interrupt-enable register.  Five bits are significant (TBDiscussed). 8 bits
+Memory Map	Addresses where the passive components are located in memory

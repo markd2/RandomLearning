@@ -1,0 +1,8 @@
+ROM memory map	0000...7FFF (cartridge).  32K.  Instructions and assets
+VRAM memory map	8000...9FFF (console).  8K.  Stores graphics and control for PPU
+ERAM memory map	A000...BFFF (cartridge).  8K.  External RAM, often used for game saves
+WRAM memory map	C000...DFFF (console).  8K.  Working RAM
+OAM memory map	FE00...FE9F (console). 160 bytes. Sprite attributes
+I/O memory map	FF00...FF7F (console). 128 bytes. Control registers for internal devices
+HRAM memory map	FF80...FFFE (console). 127 bytes. Temporary data storage
+IE memory map	FFFF...FFFF (console).  1 byte.  interrupt-enable register
