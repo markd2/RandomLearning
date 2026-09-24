@@ -119,6 +119,29 @@
 <p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
 <li>
+<p class="itemTitle">Variables</p>
+<p class="itemText">Tektronix BASIC, like many BASICs, limit your variable names to two characters.<span class="Apple-converted-space">  </span>GC BASIC is more limited than say AppleSoft.<span class="Apple-converted-space">  </span>In AppleSoft you can have variables of arbitrary length, but so long as the first two characters are unique (and there are no embedded keywords to confuse the tokenizer)<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">GC BASIC requires each numeric variable be a single alphabetic character. You can also append a digit to a single letter for more variables. Two alphabetics are not allowed.<span class="Apple-converted-space">  </span>So, A, A0, A9 are legal, b...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">Array</p>
+<p class="itemText">Array Variables</p>
+</li>
+<li>
+<p class="itemTitle">String</p>
+<p class="itemText">String Variables</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Reminder that you have a maximum of 26 string variables available to your entire program, starting with A$ and going through Z$.<span class="Apple-converted-space">  </span>There are no arrays of strings, but there is syntax that looks like arrays, for strings.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">You can DIM an array to have a particular amount of storage (defaulting to 72, which is also the length of the BASIC interpreter type-in keyboard entry buffer).</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
 <p class="itemTitle">Environtment commands</p>
 <p class="itemText">Environment Commands</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
@@ -163,6 +186,42 @@
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>12. OF THEN STEP TO<span class="Apple-converted-space">  </span>and symbols @ # % =</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>13. all other keywords</span></p></p>
 <p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>14. CR</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Interrupt Handling</p>
+<p class="itemText">"Interrupts" are out-of-band / spontaneous changes to program control flow.<span class="Apple-converted-space">  </span>Like "On Error Goto" in applesoft and other BASICS.<span class="Apple-converted-space">  </span>When an interrupt happens, the current statement finishes executing, then a GOSUB happens to a previously registered line number.<span class="Apple-converted-space">  </span>Once the interrupt has been serviced, then you RETURN to resume the program where it left off.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">There's four different kinds of interrupts. Three are device related</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">* SRQ - System Request. Some piece of hardware wants attention, so it rais...</p>
+</li>
+<li>
+<p class="itemTitle">Program Structure</p>
+<p class="itemText">Program Structure</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Because there's really no Tektronix 405X IDE available, you'll want to do program design and organization in some kind of external document. You can party like it's 1979 by using a legal pad (or some kind of engineering notebook) and a pencil, or maybe a text file on a computer.<span class="Apple-converted-space">  </span>Keeping track of what the program is about, and what sections of line numbers belong to whatever logical components that you're using.</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Traditionally programs start at line 100. This is s nice round l...</p>
+</li>
+<hr class="afterText"/>
+<ul>
+<li>
+<p class="itemTitle">User-Definable Keys</p>
+<p class="itemText">User-Definable Keys</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Kind of a misnomer (see scriv notes).<span class="Apple-converted-space">  </span>These keys act like modern function keys - press an F-key to get some behavior, potentially interrupting the current program to handle them.<span class="Apple-converted-space">  </span>The user has 20 of these on the keyboard - ten physical keys, plus the shift modifier</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">(insert picture of the keys)</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">When you type one of the user-definable keys, you tell the program to finish whatever instruction it is currently running, then GOSUB a particular line of code.<span class="Apple-converted-space">  </span>The line number to ...</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="itemTitle">Analysis of actual programs</p>
+<p class="itemText">Analysis of actual programs</span></p></p>
 <p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
 <p class="itemText"><p class="p1"><span class="s1"></p>
 </li>
