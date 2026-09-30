@@ -22,6 +22,7 @@ C Read in the file from disk
 
 C Binary Search Goodness
       INTEGER BSEARCH
+      INTEGER BSEARCH2
       INTEGER INDEX
 
       OPEN(UNIT=10, FILE="search-source.txt", STATUS='OLD', IOSTAT=IOS)
@@ -50,18 +51,39 @@ C         PRINT *, NUMBERS(I)
       END DO
 
 C Now do some searches
-      INDEX = BSEARCH(NUMBERS, 999999, N)
+      INDEX = BSEARCH2(NUMBERS, 999999, N)
       PRINT *, INDEX
       END
 
-      INTEGER FUNCTION BSEARCH(NUMS, VAL, SIZE)
-      INTEGER VAL, SIZE
+
+C Binary search, but compactified
+
+      INTEGER FUNCTION BSEARCH(NUMS,VAL,SIZE)
+      INTEGER VAL,SIZE,L,R,M
       REAL NUMS(SIZE)
       
-      INTEGER L, R, MID
-      INTEGER RESULT = -1
+      L = 1
+      R = SIZE
+ 10   IF (L. GT. R) GOTO 30
+      M = (L+R) / 2
+      IF (NUMS(M) - VAL) 11,20,12
 
-      L = 0
+ 11   L = M + 1
+      GOTO 10
+ 12   R = M - 1
+      GOTO 10
+
+ 20   BSEARCH = M
+      RETURN
+ 30   BSEARCH = -1
+      RETURN
+      END
+
+      INTEGER FUNCTION BSEARCH2(NUMS, VAL, SIZE)
+      INTEGER VAL, SIZE, L, R, M
+      REAL NUMS(SIZE)
+
+      L = 1
       R = SIZE
 
       DO WHILE (L .LE. R)
@@ -70,8 +92,8 @@ C Now do some searches
          PRINT *, 'MID', MID, NUMS(MID), 'L ', L, 'R ', R
 
          IF (NUMS(MID) .EQ. VAL) THEN
-            RESULT = MID
-            EXIT
+            BSEARCH = MID
+            RETURN
          ELSE IF (VAL .LT. NUMS(MID)) THEN
             R = MID - 1
          ELSE
@@ -79,5 +101,5 @@ C Now do some searches
          END IF
       END DO
 
-      BSEARCH = RESULT
+      BSEARCH = -1
       END
