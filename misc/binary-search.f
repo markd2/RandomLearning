@@ -44,20 +44,40 @@ C        EOF (NEGATIVE IOS) OR ERROR (POSITIVE), EXIT LOOP
 
       CLOSE(10)
 
-      PRINT *, 'WE DONE DID READ ', N, 'NUMBERS:'
+C      PRINT *, 'WE DONE DID READ ', N, 'NUMBERS:'
       DO I = 1, N
-         PRINT *, NUMBERS(I)
+C         PRINT *, NUMBERS(I)
       END DO
 
 C Now do some searches
-      INDEX = BSEARCH(NUMBERS, 42, N)
+      INDEX = BSEARCH(NUMBERS, 999999, N)
       PRINT *, INDEX
       END
 
-      INTEGER FUNCTION BSEARCH(ARR, VAL, SIZE)
+      INTEGER FUNCTION BSEARCH(NUMS, VAL, SIZE)
       INTEGER VAL, SIZE
-      REAL ARR(SIZE)
+      REAL NUMS(SIZE)
+      
+      INTEGER L, R, MID
+      INTEGER RESULT = -1
 
-      BSEARCH=44
+      L = 0
+      R = SIZE
 
+      DO WHILE (L .LE. R)
+         MID = L + (R - L) / 2
+
+         PRINT *, 'MID', MID, NUMS(MID), 'L ', L, 'R ', R
+
+         IF (NUMS(MID) .EQ. VAL) THEN
+            RESULT = MID
+            EXIT
+         ELSE IF (VAL .LT. NUMS(MID)) THEN
+            R = MID - 1
+         ELSE
+            L = MID + 1
+         END IF
+      END DO
+
+      BSEARCH = RESULT
       END
