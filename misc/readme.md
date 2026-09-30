@@ -12,3 +12,16 @@ lose some of the EDT editor functionality. Not that you care.  Thank you
 for reading. who are you, and are you enjoying yourself? If so, drop me
 a line at markd@borkware.com)
 
+```
+brew install gcc
+```
+
+Will give gfortran. Run like any standard compiler:
+
+```
+% gfortran test.f -o test
+% ./test
+```
+
+WRITE to device 6.
+
