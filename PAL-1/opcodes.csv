@@ -53,3 +53,17 @@ BNE,branch not equal (zero clear)
 BPL,branch on plus (negative clear)
 BVC,branch on overflow clear
 BCS,branch on overfloat set
+
+What branch for <	BCC
+What branch for >=	BCS
+What branch for ==	BEQ
+What branch for !=	BNE
+What are the processor status flags?	C Carry  Z Zero  I Interrupt Disable  D Decimal mode  B Break command  V Overflow  N Negative
+What addressing mode is ***,X	X register indexed absolute addressing. Take the 16 address from the operand and add X register
+What addressing mode is ***,Y	Y register indexed absolute addressing. Take the 16 address from the operand and add Y register
+What addressing mode is JMP ($1234)	Indirect. Go to the address indicated, use the two bytes there as an address to jump to  JMP is the only instruction that can do it.
+What addressing mode is LDA ($40,X)	Indexed Indirect.  Take the zero-page address as the base of a table of pointers.  Use X to find the X'th item. Then grab the two bytes there to use as an address. X is the only register that can be used for this
+What addressing mode is LDA ($40),Y	Indirect Indexed. One of the most common indirect addressing modes.  A zero-page location has a 16-bit address.  Take that, then add Y.  Y is the only register that can be used for this.
+What is the RTS JMP trick?	A way of faking an indirect JMP by explicitly pushing an address (minus one) on the stack, then calling RTS
+LDY	Load Y register from operand  Can change: Z N
+

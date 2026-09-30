@@ -1,0 +1,18 @@
+; page 41 from the book.  Bascially a loop
+
+def ROM_HEADER_ADDRESS    equ $0100
+def ROM_MAIN_ADDRESS      equ $0150
+
+section "header", rom0[ROM_HEADER_ADDRESS]
+    di
+    jr main
+
+section "main", rom0[ROM_MAIN_ADDRESS]
+main:
+    ld a, 0
+    .loop
+        ld [$C000], a   ; [$C000] = A, so initialize that location in memory
+                        ; $C000 is start of WRAM
+        inc a
+        jr .loop        ; forever and ever
+        
