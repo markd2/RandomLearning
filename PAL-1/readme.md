@@ -1,5 +1,9 @@
 # PAL-1
 
+things to eventually read:
+* https://6502.org/tutorials/compare_beyond.html
+* https://www.nesdev.org/obelisk-6502-guide/reference.html
+
 USing a PL2303-DB9 serial cable.  Needing a driver from "prolific" for it
 (available in the mac app store)
 
