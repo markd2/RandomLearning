@@ -1,5 +1,14 @@
 include "../utils.rgbinc"
 
+def TILES_COUNT			equ (384)
+def BYTES_PER_TILE              equ (16)
+def TILES_BYTE_SIZE             equ (TILES_COUNT * BYTES_PER_TILE)
+def TILEMAP_BYTE_SIZE           equ (1024)
+def GRAPHICS_DATA_SIZE          equ (TILES_BYTE_SIZE + TILEMAP_BYTE_SIZE)
+def GRAPHICS_DATA_ADDRESS_END   equ ($8000)
+def GRAPHICS_DATA_ADDRESS_START	\
+    equ (GRAPHICS_DATA_ADDRESS_END - GRAPHICS_DATA_SIZE)
+
 section "sample", rom0
 
 InitSample:
@@ -10,3 +19,7 @@ UpdateSample:
 
 export InitSample
 export UpdateSample
+
+section "graphics_data", rom0[GRAPHICS_DATA_ADDRESS_START]
+incbin "tileset.chr"
+incbin "background.tlm"
