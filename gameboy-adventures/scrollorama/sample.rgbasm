@@ -22,6 +22,9 @@ macro LoadGraphicsDataIntoVRAM
         jr nz, .load_tile\@
 endm
 
+section "vblank_interrupt", rom0[$0040]
+    reti
+
 section "sample", rom0
 
 InitSample:
@@ -33,12 +36,23 @@ InitSample:
     ; turn LCD on plus flags
     ld a, LCDCF_ON | LCDCF_BG8800 | LCDCF_BG9800 | LCDCF_BGON
     ld [rLCDC], a
+
+    ld a, IEF_VBLANK
+    ld [rIE], a
+    ei
     ret
 
 UpdateSample:
+    halt
+
     ld a, [rSCX]
     inc a
     ld [rSCX], a
+
+    ld a, [rSCY]
+    inc a
+    inc a
+    ld [rSCY], a
 
     ret
 
