@@ -36,10 +36,10 @@ InitSample:
     ret
 
 UpdateSample:
-    ld a, 50
+    ld a, [rSCX]
+    inc a
     ld [rSCX], a
-    ld a, 75
-    ld [rSCY], a
+
     ret
 
 export InitSample
