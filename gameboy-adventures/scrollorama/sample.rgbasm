@@ -25,10 +25,13 @@ endm
 section "sample", rom0
 
 InitSample:
+    ld a, %11100100
+    ld [rBGP], a
+
     LoadGraphicsDataIntoVRAM
 
-    ; turn LCD on
-    ld a, LCDCF_ON
+    ; turn LCD on plus flags
+    ld a, LCDCF_ON | LCDCF_BG8800 | LCDCF_BG9800 | LCDCF_BGON
     ld [rLCDC], a
     ret
 
