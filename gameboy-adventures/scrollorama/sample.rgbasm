@@ -26,17 +26,38 @@ macro LoadGraphicsDataIntoVRAM
         jr nz, .load_tile\@
 endm
 
+macro InitOAM
+    ld c, OAM_COUNT
+    ; Set the Y of every sprite to zero - that puts it off the top of the visible
+    ; screen - otherwise we'll get omelette du garbage of sprites.
+    ; Don't need to initialize :all-the-things: - enough to shove it off screen
+    ; so it won't get drawn. If it won't get drawn, who cares what the other
+    ; configurations are?
+    ld hl, _OAMRAM + OAMA_Y
+    ld de, sizeof_OAM_ATTRS
+    .init_oam\@
+        ld [hl], 0
+        add hl, de
+        dec c
+        jr nz, .init_oam\@
+endm
+
+
 section "vblank_interrupt", rom0[$0040]
     reti
 
 section "sample", rom0
 
 InitSample:
-    ; set palette
+    ; set palette(s)
     ld a, %11100100
     ld [rBGP], a
+    ld [rOBP0], a    ; first sprite palette
+    ld a, %00011011
+    ld [rOBP1], a    ; second sprite palette
 
     LoadGraphicsDataIntoVRAM
+    InitOAM
 
     ; place the window at the bottom of the LCD
     ld a, 7
@@ -46,7 +67,7 @@ InitSample:
 
     ; turn LCD on plus flags
     ld a, LCDCF_ON | LCDCF_WINON | LCDCF_WIN9C00 | \
-          LCDCF_BG8800 | LCDCF_BG9800 | LCDCF_BGON
+          LCDCF_BG8800 | LCDCF_BG9800 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
     ld [rLCDC], a
 
     ld a, IEF_VBLANK
@@ -65,6 +86,19 @@ UpdateSample:
     inc a
     inc a
     ld [rSCY], a
+
+    ; set up first sprite
+def SPRITE_0_ADDRESS equ (_OAMRAM)
+    copy [SPRITE_0_ADDRESS + OAMA_X], 16
+    copy [SPRITE_0_ADDRESS + OAMA_Y], 32
+    copy [SPRITE_0_ADDRESS + OAMA_TILEID], 16
+    copy [SPRITE_0_ADDRESS + OAMA_FLAGS], OAMF_PAL0
+
+def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
+    copy [SPRITE_1_ADDRESS + OAMA_X], 80
+    copy [SPRITE_1_ADDRESS + OAMA_Y], 80
+    copy [SPRITE_1_ADDRESS + OAMA_TILEID], 0
+    copy [SPRITE_1_ADDRESS + OAMA_FLAGS], OAMF_PAL0 | OAMF_XFLIP
 
     ret
 
