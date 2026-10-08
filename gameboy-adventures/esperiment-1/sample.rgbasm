@@ -14,6 +14,7 @@ def GRAPHICS_DATA_ADDRESS_START	\
 
 
 def WINDOW equ ($9C00)
+def TILES equ ($8000)
 
 def LINE_COUNT equ (3)    ; controlled by b
 
@@ -87,19 +88,45 @@ UpdateSample:
     halt
 
     ; set up first sprite
+def SPRITE_0_INDEX equ (16)
 def SPRITE_0_ADDRESS equ (_OAMRAM)
     copy [SPRITE_0_ADDRESS + OAMA_X], 16
     copy [SPRITE_0_ADDRESS + OAMA_Y], 32
-    copy [SPRITE_0_ADDRESS + OAMA_TILEID], 16
+    copy [SPRITE_0_ADDRESS + OAMA_TILEID], SPRITE_0_INDEX
     copy [SPRITE_0_ADDRESS + OAMA_FLAGS], OAMF_PAL0
 
+def SPRITE_1_INDEX equ (0)
 def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
     copy [SPRITE_1_ADDRESS + OAMA_X], 80
     copy [SPRITE_1_ADDRESS + OAMA_Y], 80
-    copy [SPRITE_1_ADDRESS + OAMA_TILEID], 0
+    copy [SPRITE_1_ADDRESS + OAMA_TILEID], SPRITE_1_INDEX
     copy [SPRITE_1_ADDRESS + OAMA_FLAGS], OAMF_PAL0 | OAMF_XFLIP
 
 IF 1
+    ; change sprite tiles in code
+    ld hl, TILES
+    ld b, BYTES_PER_TILE
+.loop3:
+    ld a, [hl]
+    rrca
+    ld [hl+], a
+    dec b
+    jr nz, .loop3
+
+    ; they're 2x tall, so muck with the next tile
+    ld hl, TILES + BYTES_PER_TILE
+    ld b, BYTES_PER_TILE
+.loop4:
+    ld a, [hl]
+    rlca    ; OTHER WAY! DO THE TWIST!
+    ld [hl+], a
+    dec b
+    jr nz, .loop4
+
+
+ENDC
+
+IF 0
     ; infinite scroll
     ld a, [rSCX]
     inc a
@@ -111,7 +138,7 @@ IF 1
     ld [rSCY], a
 ENDC
 
-IF 1
+IF 0
     ; rotate the tiles (not the indexes themselves) so it does a barberpole
     ld b, LINE_COUNT
     ld hl, WINDOW   ; point to start of line

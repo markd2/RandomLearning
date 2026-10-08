@@ -87,3 +87,4 @@ are some things I tried.
   me with the 160-px-visible but tilemaps 256-px-wide, so needing to skip
   the off-screen indices
 * rotate window tiles (move whole indexes but leaving their bits unshifted)
+* change the tiles for a sprite on frame update
