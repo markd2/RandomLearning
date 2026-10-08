@@ -99,7 +99,7 @@ def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
     copy [SPRITE_1_ADDRESS + OAMA_TILEID], 0
     copy [SPRITE_1_ADDRESS + OAMA_FLAGS], OAMF_PAL0 | OAMF_XFLIP
 
-IF 0
+IF 1
     ; infinite scroll
     ld a, [rSCX]
     inc a
@@ -193,7 +193,7 @@ IF 0
     ; roll the bg palette continually to the right.  VERY trippy
     ld a, [rBGP]  ; get current
     rrca  ; roll out the barrel
-    rrca  ; roll out the barrel
+    rrca  ; roll out the barrel  - by two-bit color
     ld [rBGP], a
 ENDC
 
