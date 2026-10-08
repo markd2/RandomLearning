@@ -110,6 +110,51 @@ def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
     ld [rSCY], a
 
 IF 1
+    ; rotate the tiles (not the indexes themselves) so it does a barberpole
+    ld b, LINE_COUNT
+    ld hl, WINDOW   ; point to start of line
+
+.loop2:
+    ; starts at start of current line
+
+    ; point to end of visible window tiles
+    ld de, WINDOW_TILE_ROW_COUNT - 1
+    add hl, de
+
+    ; snarf the last one and put it on the stack
+    ld a, [hl]
+    ld d, 0
+    ld e, a     ; de (16 bits, ripe for pushing) is 00INDX
+    push de
+
+    ; *scan = *scan-- the rest of the loop
+    ld c, WINDOW_TILE_ROW_COUNT - 1
+.line_loop2:
+    dec hl      ; *scan--
+    ld a, [hl]  ; a = *scan
+    inc hl      ; *scan++
+    ld [hl], a  ; *scan = a
+    dec hl      ; *scan--
+
+    dec c
+    jr nz, .line_loop2
+
+
+    ; hl should now be pointing at the first tile of the line.
+    ; pop off the stack and put that savdd index into position
+    pop de
+    ld [hl], e
+
+    ; hl still pointing at beginning of the line
+    ; scoot it to the next line
+    ld de, WINDOW_TILE_ROW_COUNT + WINDOW_TILE_ROW_SKIP
+    add hl, de
+
+    dec b
+    jr nz, .loop2
+ENDC
+
+IF 0
     ; muck with window contents by rotating the index in-place
     ; b is the line count (3,2,1, break at zero)
     ; hl is the scan starting at the tilemap start ($9C00)
@@ -123,22 +168,22 @@ IF 1
     ; start scan at beginning of the window's tile memory
     ld hl, WINDOW
 
-.loop
+.loop1
 
     ld c, WINDOW_TILE_ROW_COUNT
-.line_loop:
+.line_loop1:
     ld a, [hl]    ; *scan
     rrca          ; mutate
     ld [hli], a   ; *scan++ = a
     dec c
-    jr nz, .line_loop
+    jr nz, .line_loop1
 
     ; skip the unused rest of the tilemap row
     ld de, WINDOW_TILE_ROW_SKIP
     add hl, de
 
     dec b
-    jr nz, .loop
+    jr nz, .loop1
 
 ENDC
 
