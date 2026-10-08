@@ -75,3 +75,11 @@ mkdir a ROMS directory, and copy into that.
 cp dingus.md '/Applications/BGB Emulator.app/Contents/SharedSupport/prefix/drive_c/ROMS/'
 ```
 
+--------------------------------------------------
+## Some Fun Self-Inflicted Experiments
+
+While reading through the book and making Notes(tm), various questions
+come to mind, and "huh, what would it look like if I did ____", so here
+are some things I tried.
+
+* Change background palette on frame update

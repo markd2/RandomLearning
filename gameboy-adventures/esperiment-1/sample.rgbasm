@@ -13,6 +13,14 @@ def GRAPHICS_DATA_ADDRESS_START	\
     equ (GRAPHICS_DATA_ADDRESS_END - GRAPHICS_DATA_SIZE)
 
 
+def WINDOW equ ($9C00)
+
+def LINE_COUNT equ (3)    ; controlled by b
+
+def WINDOW_TILE_ROW_COUNT equ (20)  ; controlled by c
+def WINDOW_TILE_ROW_SKIP equ (12)   ; pointer math
+
+
 macro LoadGraphicsDataIntoVRAM
     ld de, GRAPHICS_DATA_ADDRESS_START
     ld hl, _VRAM8000
@@ -101,9 +109,43 @@ def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
     inc a
     ld [rSCY], a
 
+IF 1
+    ; muck with window contents by rotating the index in-place
+    ; b is the line count (3,2,1, break at zero)
+    ; hl is the scan starting at the tilemap start ($9C00)
+    ; a loop increments from 20 to 1, break at zero. That's a line
+    ;   c is that counter
+    ; hl += 12 skipping over off-screen tiles
+    ; do the next line
+    
+    ld b, LINE_COUNT
+
+    ; start scan at beginning of the window's tile memory
+    ld hl, WINDOW
+
+.loop
+
+    ld c, WINDOW_TILE_ROW_COUNT
+.line_loop:
+    ld a, [hl]    ; *scan
+    rrca          ; mutate
+    ld [hli], a   ; *scan++ = a
+    dec c
+    jr nz, .line_loop
+
+    ; skip the unused rest of the tilemap row
+    ld de, WINDOW_TILE_ROW_SKIP
+    add hl, de
+
+    dec b
+    jr nz, .loop
+
+ENDC
+
 IF 0
     ; roll the bg palette continually to the right.  VERY trippy
     ld a, [rBGP]  ; get current
+    rrca  ; roll out the barrel
     rrca  ; roll out the barrel
     ld [rBGP], a
 ENDC
