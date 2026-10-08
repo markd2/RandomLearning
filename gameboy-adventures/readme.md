@@ -75,3 +75,16 @@ mkdir a ROMS directory, and copy into that.
 cp dingus.md '/Applications/BGB Emulator.app/Contents/SharedSupport/prefix/drive_c/ROMS/'
 ```
 
+--------------------------------------------------
+## Some Fun Self-Inflicted Experiments
+
+While reading through the book and making Notes(tm), various questions
+come to mind, and "huh, what would it look like if I did ____", so here
+are some things I tried.
+
+* Change background palette (rotate the index) on frame update
+* Change window tile indexes (rotate the index) on frame update. This caught
+  me with the 160-px-visible but tilemaps 256-px-wide, so needing to skip
+  the off-screen indices
+* rotate window tiles (move whole indexes but leaving their bits unshifted)
+* change the tiles for a sprite on frame update
