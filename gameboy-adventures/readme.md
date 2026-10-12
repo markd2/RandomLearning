@@ -88,3 +88,5 @@ are some things I tried.
   the off-screen indices
 * rotate window tiles (move whole indexes but leaving their bits unshifted)
 * change the tiles for a sprite on frame update
+* change sprite palette index zero
+* animate window around
