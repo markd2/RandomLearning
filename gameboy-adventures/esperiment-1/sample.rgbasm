@@ -127,7 +127,7 @@ roll_sprite_tiles:
 
 ENDC
 
-IF 1
+IF 0
 scroll_window:
     ; scroll window by mucking with rWX / rWY
     ld a, [rWX]
@@ -162,6 +162,30 @@ cycle_sprite_palette_zero:
     and $03       ; mask off all but the top bits leaving index zero
     add a, c      ; bring in higher bits
     ld [rOBP0], a ; update sprite palette
+ENDC
+
+IF 1
+hand_made_tile:
+    jr .code
+.tile:  ; hand-calculated happy face with a hat.
+    dw $3C00
+    dw $FF00
+    dw $007E
+    dw $247E
+    dw $007E
+    dw $427E
+    dw $3C7E
+    dw $0018
+.code:
+    ld de, .tile      ; copy from
+    ld hl, _VRAM8000  ; copy to
+    ld c, 16          ; dis many bytes
+.move:
+    ld a, [de]
+    inc de
+    ld [hli], a
+    dec c
+    jr nz, .move
 ENDC
 
 IF 0
