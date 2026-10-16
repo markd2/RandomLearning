@@ -21,6 +21,26 @@ def LINE_COUNT equ (3)    ; controlled by b
 def WINDOW_TILE_ROW_COUNT equ (20)  ; controlled by c
 def WINDOW_TILE_ROW_SKIP equ (12)   ; pointer math
 
+; --------------------------------------------------
+rsset _RAM   ; beginning of WRAM - $C000
+
+; input struct
+def WRAM_PAD_INPUT      rb sizeof_PAD_INPUT
+
+; background scrolling
+def WRAP_BG_SCX         rb 1
+def WRAP_BG_SCY         rb 1
+
+; window control
+def WRAM_WIN_ENABLE_FLAG        rb 1
+def WRAM_END                    rb 0
+
+def WRAM_USAGE     equ (WRAM_END - _RAM)
+println "WRAM usage: {d:WRAM_USAGE} bytes"
+assert WRAM_USAGE <= $2000, "Too much bytes in WRAM waah"
+; --------------------------------------------------
+
+
 
 macro LoadGraphicsDataIntoVRAM
     ld de, GRAPHICS_DATA_ADDRESS_START
