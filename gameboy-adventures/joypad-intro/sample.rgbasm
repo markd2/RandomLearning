@@ -1,4 +1,4 @@
-include "../utils.rgbinc"
+include "utils.rgbinc"
 
 def TILES_COUNT			equ (384)
 def BYTES_PER_TILE              equ (16)
