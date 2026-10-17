@@ -28,8 +28,8 @@ rsset _RAM   ; beginning of WRAM - $C000
 def WRAM_PAD_INPUT      rb sizeof_PAD_INPUT
 
 ; background scrolling
-def WRAP_BG_SCX         rb 1
-def WRAP_BG_SCY         rb 1
+def WRAM_BG_SCX         rb 1
+def WRAM_BG_SCY         rb 1
 
 ; window control
 def WRAM_WIN_ENABLE_FLAG        rb 1
@@ -78,6 +78,13 @@ section "vblank_interrupt", rom0[$0040]
 section "sample", rom0
 
 InitSample:
+    ; initialize WRAM state
+    InitPadInput WRAM_PAD_INPUT
+    xor a
+    ld [WRAM_BG_SCX], a
+    ld [WRAM_BG_SCY], a
+    ld [WRAM_WIN_ENABLE_FLAG], a
+
     ; set palette(s)
     ld a, %11100100
     ld [rBGP], a
@@ -106,6 +113,18 @@ InitSample:
 
 UpdateSample:
     halt
+
+    ; set the background position
+    copy [rSCX], [WRAM_BG_SCX]
+    copy [rSCY], [WRAM_BG_SCY]
+    
+    ; toggule window on/off
+    ldh a, [rLCDC]     ; get current LCD control
+    and a, ~LCDCF_WINON  ; clear the flag
+    ld hl, WRAM_WIN_ENABLE_FLAG ; load our setting
+    or a, [hl]   ; if it's on, will set flag, likewise other way
+    ldh [rLCDC], a   ; set LCD control with (potentially) updated flag
+
 
     ; set up first sprite
 def SPRITE_0_INDEX equ (16)
@@ -309,6 +328,44 @@ roll_bg_palette:
     rrca  ; roll out the barrel  - by two-bit color
     ld [rBGP], a
 ENDC
+
+    ; ------------------------------
+    ; non VBLANK logic, set values to be picked up on next redraw
+    UpdatePadInput WRAM_PAD_INPUT
+
+    ; d-paddle check
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_LEFT
+    jr nz, .left_checked
+        ld hl, WRAM_BG_SCX
+        dec [hl]
+    .left_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_RIGHT
+    jr nz, .right_checked
+        ld hl, WRAM_BG_SCX
+        inc [hl]
+    .right_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_UP
+    jr nz, .up_checked
+        ld hl, WRAM_BG_SCY
+        dec [hl]
+    .up_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_DOWN
+    jr nz, .down_checked
+        ld hl, WRAM_BG_SCY
+        inc [hl]
+    .down_checked
+
+    ; window toggule
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
+    jr nz, .window_toggle_checked
+        ld a, [WRAM_WIN_ENABLE_FLAG]
+        cpl
+        and a, LCDCF_WINON
+        ld [WRAM_WIN_ENABLE_FLAG], a
+    .window_toggle_checked
 
     ret
 

@@ -10,18 +10,34 @@ macro copy
     ld \1, a
 endm
 
+
+; --------------------------------------------------
+; data structures
+
+; activated keys have their flags _cleared_ because of reasons
 rsreset
 def PAD_INPUT_CURRENT   rb 1
+def PAD_INPUT_PREVIOUS  rb 1
+def PAD_INPUT_PRESSED   rb 1
+def PAD_INPUT_RELEASED  rb 1
 def sizeof_PAD_INPUT    rb 0
-
 
 macro InitPadInput
     ld a, $FF   ; no keys held
     ld [\1 + PAD_INPUT_CURRENT], a
+    ld [\1 + PAD_INPUT_PREVIOUS], a
+    ld [\1 + PAD_INPUT_PRESSED], a
+    ld [\1 + PAD_INPUT_RELEASED], a
 endm
 
-; reads from buttons, stores into PAD_INPUT_CURRENT. Clobbers a and b
+; reads from buttons, stores into PAD_INPUT_CURRENT.
+; Clobbers a, b, c
 macro UpdatePadInput
+    ; stache the previous input state into the struct, as well as register c
+    ld a, [\1 + PAD_INPUT_CURRENT]
+    ld [\1 + PAD_INPUT_PREVIOUS], a
+    ld c, a
+
     ; read the d-pad
     ld a, P1F_GET_DPAD
     ldh [rP1], a
@@ -44,8 +60,10 @@ macro UpdatePadInput
     ldh a, [rP1]
 
     ; merge button's input with b's high nibbage, buttons into low nibbage
-    and a, $0f
+    and a, $0F
     or a, b
+;    ld [\1 + PAD_INPUT_CURRENT], a
+    ld b, a
 
     ; store the current input
     ld [\1 + PAD_INPUT_CURRENT], a
@@ -53,12 +71,35 @@ macro UpdatePadInput
     ; disable input polling
     ld a, P1F_GET_NONE
     ldh [rP1], a    
+
+    ; compute and store pressed buttons
+    ld a, c
+    cpl
+    or a, b
+    ld [\1 + PAD_INPUT_PRESSED], a
+
+    ; compute and store released buttons
+    ld a, b
+    cpl
+    or a, c
+    ld [\1 + PAD_INPUT_RELEASED], a
+
 endm
 
 ; take a structure and input mask, and raises the zero flag 
 ; if all keys in the mask are held.  (down = clear bit)
 macro TestPadInput_HeldAll
     ld a, [\1 + PAD_INPUT_CURRENT]
+    and a, \2
+endm
+
+macro TestPadInput_Pressed
+    ld a, [\1 + PAD_INPUT_PRESSED]
+    and a, \2
+endm
+
+macro TestPadInput_Released
+    ld a, [\1 + PAD_INPUT_RELEASED]
     and a, \2
 endm
 
