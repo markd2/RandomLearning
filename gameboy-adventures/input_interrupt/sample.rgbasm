@@ -1,0 +1,529 @@
+include "utils.rgbinc"
+
+def TILES_COUNT			equ (384)
+def BYTES_PER_TILE              equ (16)
+def TILES_BYTE_SIZE             equ (TILES_COUNT * BYTES_PER_TILE)
+
+def TILEMAPS_COUNT              equ (2)
+def BYTES_PER_TILEMAP           equ (1024)
+def TILEMAPS_BYTE_SIZE          equ (TILEMAPS_COUNT * BYTES_PER_TILEMAP)
+def GRAPHICS_DATA_SIZE          equ (TILES_BYTE_SIZE + TILEMAPS_BYTE_SIZE)
+def GRAPHICS_DATA_ADDRESS_END   equ ($8000)
+def GRAPHICS_DATA_ADDRESS_START	\
+    equ (GRAPHICS_DATA_ADDRESS_END - GRAPHICS_DATA_SIZE)
+
+
+def WINDOW equ ($9C00)
+def TILES equ ($8000)
+
+def LINE_COUNT equ (3)    ; controlled by b
+
+def WINDOW_TILE_ROW_COUNT equ (20)  ; controlled by c
+def WINDOW_TILE_ROW_SKIP equ (12)   ; pointer math
+
+; --------------------------------------------------
+rsset _RAM   ; beginning of WRAM - $C000
+
+def WRAM_IS_VBLANK       rb 1
+def WRAM_INPUT_COUNTER   rb 1
+def WRAM_HUNDREDS_TILE   rb 1
+def WRAM_TENS_TILE       rb 1
+def WRAM_UNITS_TILE      rb 1
+def WRAM_P1_BITS         rb 4
+
+; input struct
+def WRAM_PAD_INPUT      rb sizeof_PAD_INPUT
+
+; background scrolling
+def WRAM_BG_SCX         rb 1
+def WRAM_BG_SCY         rb 1
+
+; window control
+def WRAM_WIN_ENABLE_FLAG        rb 1
+def WRAM_END                    rb 0
+
+def WRAM_USAGE     equ (WRAM_END - _RAM)
+println "WRAM usage: {d:WRAM_USAGE} bytes"
+assert WRAM_USAGE <= $2000, "Too much bytes in WRAM waah"
+; --------------------------------------------------
+
+
+
+macro LoadGraphicsDataIntoVRAM
+    ld de, GRAPHICS_DATA_ADDRESS_START
+    ld hl, _VRAM8000
+    .load_tile\@
+        ld a, [de]
+        inc de
+        ld [hli], a
+        ld a, d
+        ; don't really care about low byte, just the transition to highbyte $80
+        cp a, high(GRAPHICS_DATA_ADDRESS_END)
+        jr nz, .load_tile\@
+endm
+
+macro InitOAM
+    ld c, OAM_COUNT
+    ; Set the Y of every sprite to zero - that puts it off the top of the visible
+    ; screen - otherwise we'll get omelette du garbage of sprites.
+    ; Don't need to initialize :all-the-things: - enough to shove it off screen
+    ; so it won't get drawn. If it won't get drawn, who cares what the other
+    ; configurations are?
+    ld hl, _OAMRAM + OAMA_Y
+    ld de, sizeof_OAM_ATTRS
+    .init_oam\@
+        ld [hl], 0
+        add hl, de
+        dec c
+        jr nz, .init_oam\@
+endm
+
+
+section "vblank_interrupt", rom0[$0040]
+vblank_interrupt:
+    ; "any register used in an interrupt should be pushed and popped to
+    ; avoid any nasty timing-dependent bugs
+    push af
+    ld a, 1
+    ld [WRAM_IS_VBLANK], a
+    pop af
+    reti
+
+section "joypad_interrupt", rom0[$0060]
+joypad_interrupt:
+    push af
+    push hl
+
+    ; counter update
+    ld hl, WRAM_INPUT_COUNTER
+    inc [hl]
+    
+    ; bits' tile indices update
+    ld a, [rP1]
+
+    ld hl, WRAM_P1_BITS
+    ld [hl], TILE_UI_NUMBER_0 + 1
+    bit 0, a
+    jr nz, .skip_bit_0
+        ld [hl], TILE_UI_NUMBER_0
+    .skip_bit_0
+
+    inc hl
+    ld [hl], TILE_UI_NUMBER_0 + 1
+    bit 1, a
+    jr nz, .skip_bit_1
+        ld [hl], TILE_UI_NUMBER_0
+    .skip_bit_1
+
+    inc hl
+    ld [hl], TILE_UI_NUMBER_0 + 1
+    bit 2, a
+    jr nz, .skip_bit_2
+        ld [hl], TILE_UI_NUMBER_0
+    .skip_bit_2
+
+    inc hl
+    ld [hl], TILE_UI_NUMBER_0 + 1
+    bit 3, a
+    jr nz, .skip_bit_3
+        ld [hl], TILE_UI_NUMBER_0
+    .skip_bit_3
+
+    pop hl
+    pop af
+    reti
+
+
+section "sample", rom0
+
+InitSample:
+    ; initialize WRAM state
+    InitPadInput WRAM_PAD_INPUT
+    xor a
+    ld [WRAM_BG_SCX], a
+    ld [WRAM_BG_SCY], a
+    ld [WRAM_WIN_ENABLE_FLAG], a
+
+    ld [WRAM_INPUT_COUNTER], a
+    ld [WRAM_IS_VBLANK], a
+def TILE_UI_NUMBER_0           equ (80)
+
+    ld a, TILE_UI_NUMBER_0
+    ld [WRAM_HUNDREDS_TILE], a
+    ld [WRAM_TENS_TILE], a
+    ld [WRAM_UNITS_TILE], a
+
+    ld a, TILE_UI_NUMBER_0 + 1
+    ld [WRAM_P1_BITS + 1], a
+    ld [WRAM_P1_BITS + 2], a
+    ld [WRAM_P1_BITS + 3], a
+
+    ld a, 0   ; all keys
+    ; ld a, P1F_GET_BTN   ; buttons only
+    ; ld a, P1F_GET_DPAD  ; dpad only
+    ld [rP1], a
+
+    ; enable interrupts
+    ld a, IEF_HILO | IEF_VBLANK
+    ld [rIE], a
+    ei
+
+    ; set palette(s)
+    ld a, %11100100
+    ld [rBGP], a
+    ld [rOBP0], a    ; first sprite palette
+    ld a, %00011011
+    ld [rOBP1], a    ; second sprite palette
+
+    LoadGraphicsDataIntoVRAM
+    InitOAM
+
+    ; place the window at the bottom of the LCD
+    ld a, 7
+    ld [rWX], a
+    ld a, 120
+    ld [rWY], a
+
+    ; turn LCD on plus flags
+    ld a, LCDCF_ON | LCDCF_WINON | LCDCF_WIN9C00 | \
+          LCDCF_BG8800 | LCDCF_BG9800 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+    ld [rLCDC], a
+
+;    ld a, IEF_VBLANK
+;    ld [rIE], a
+;    ei
+
+    ret
+
+UpdateSample:
+    ld hl, WRAM_IS_VBLANK
+    xor a
+    .wait_vblank
+        halt
+        cp a, [hl]
+        jr z, .wait_vblank
+        ld [hl], a
+
+    ; update counter's tiles
+    ld hl, _SCRN0 + (7 * SCRN_VX_B) + 13
+    ld a, [WRAM_HUNDREDS_TILE]
+    ld [hli], a
+    ld a, [WRAM_TENS_TILE]
+    ld [hli], a
+    ld a, [WRAM_UNITS_TILE]
+    ld [hli], a
+
+    ; update the bits' tiles
+    ld hl, _SCRN0 + (9 * SCRN_VX_B) + 12
+    ld a, [WRAM_P1_BITS + 0]
+    ld [hli], a
+    ld a, [WRAM_P1_BITS + 1]
+    ld [hli], a
+    ld a, [WRAM_P1_BITS + 2]
+    ld [hli], a
+    ld a, [WRAM_P1_BITS + 3]
+    ld [hli], a
+
+    ; compute tile indices
+    ld a, [WRAM_INPUT_COUNTER]
+    ; compute hundreds into b. a updated to remove hundreds
+    ld b, $FF
+    .hundreds
+        inc b
+        sub a, 100
+    jr nc, .hundreds
+    add a, 100
+
+    ; set up the tile id for the hundreds
+    ld c, a
+    ld a, TILE_UI_NUMBER_0
+    add a, b
+    ld [WRAM_HUNDREDS_TILE], a
+    ld a, c
+    
+    ; compute the tens into b
+    ; a is also updated to remove the tens
+    ld b, $FF
+    .tens
+        inc b
+        sub a, 10
+    jr nc, .tens
+    add a, 10
+
+    ; set up the tile id for the tens
+    ld c, a
+    ld a, TILE_UI_NUMBER_0
+    add a, b
+    ld [WRAM_TENS_TILE], a
+    ld a,c
+
+    ; at this point, a has the units
+    ; set up the tile id for the units
+    ld b, TILE_UI_NUMBER_0
+    add a, b
+    ld [WRAM_UNITS_TILE], a
+
+    ; set the background position
+    copy [rSCX], [WRAM_BG_SCX]
+    copy [rSCY], [WRAM_BG_SCY]
+    
+    ; toggule window on/off
+    ldh a, [rLCDC]     ; get current LCD control
+    and a, ~LCDCF_WINON  ; clear the flag
+    ld hl, WRAM_WIN_ENABLE_FLAG ; load our setting
+    or a, [hl]   ; if it's on, will set flag, likewise other way
+    ldh [rLCDC], a   ; set LCD control with (potentially) updated flag
+
+
+    ; set up first sprite
+def SPRITE_0_INDEX equ (16)
+def SPRITE_0_ADDRESS equ (_OAMRAM)
+    copy [SPRITE_0_ADDRESS + OAMA_X], 16
+    copy [SPRITE_0_ADDRESS + OAMA_Y], 32
+    copy [SPRITE_0_ADDRESS + OAMA_TILEID], SPRITE_0_INDEX
+    copy [SPRITE_0_ADDRESS + OAMA_FLAGS], OAMF_PAL0
+
+def SPRITE_1_INDEX equ (0)
+def SPRITE_1_ADDRESS equ (_OAMRAM + sizeof_OAM_ATTRS)
+    copy [SPRITE_1_ADDRESS + OAMA_X], 80
+    copy [SPRITE_1_ADDRESS + OAMA_Y], 80
+    copy [SPRITE_1_ADDRESS + OAMA_TILEID], SPRITE_1_INDEX
+    copy [SPRITE_1_ADDRESS + OAMA_FLAGS], OAMF_PAL0 | OAMF_XFLIP
+
+IF 0
+roll_sprite_tiles:
+    ; change sprite tiles in code
+    ld hl, TILES
+    ld b, BYTES_PER_TILE
+.loop3:
+    ld a, [hl]
+    rrca
+    ld [hl+], a
+    dec b
+    jr nz, .loop3
+
+    ; they're 2x tall, so muck with the next tile
+    ld hl, TILES + BYTES_PER_TILE
+    ld b, BYTES_PER_TILE
+.loop4:
+    ld a, [hl]
+    rlca    ; OTHER WAY! DO THE TWIST!
+    ld [hl+], a
+    dec b
+    jr nz, .loop4
+
+
+ENDC
+
+IF 0
+scroll_window:
+    ; scroll window by mucking with rWX / rWY
+    ld a, [rWX]
+    inc a
+    cp a, 160
+    jr nz, .use_x_value
+    ld a, 0
+.use_x_value
+    ld [rWX], a
+
+    ld a, [rWY]
+    inc a
+    inc a
+    cp a, 160
+    jr nz, .use_y_value
+    ld a, 0
+.use_y_value
+    ld [rWY], a
+ENDC
+
+IF 0
+cycle_sprite_palette_zero:
+    ; muck with color of sprite palette index zero (The transparancy one)
+    ; a misunderstanding (and learning opp) - the index zero used in sprites
+    ; for transparency has no relation to the OBP0, whose bottom two bits
+    ; are ignored.
+    ld a, [rOBP0]
+    and a, $FC    ; clear bottom two bits
+    ld c, a       ; stuff it away
+    ld a, [rOBP0]
+    add a, 1      ; add. don't care about carry
+    and $03       ; mask off all but the top bits leaving index zero
+    add a, c      ; bring in higher bits
+    ld [rOBP0], a ; update sprite palette
+ENDC
+
+IF 0
+hand_made_tile:
+    jr .code
+.tile:  ; hand-calculated happy face with a hat.
+    dw $3C00
+    dw $FF00
+    dw $007E
+    dw $247E
+    dw $007E
+    dw $427E
+    dw $3C7E
+    dw $0018
+.code:
+    ld de, .tile      ; copy from
+    ld hl, _VRAM8000  ; copy to
+    ld c, 16          ; dis many bytes
+.move:
+    ld a, [de]
+    inc de
+    ld [hli], a
+    dec c
+    jr nz, .move
+ENDC
+
+IF 0
+infinite_scroll:
+    ; infinite scroll
+    ld a, [rSCX]
+    inc a
+    ld [rSCX], a
+
+    ld a, [rSCY]
+    inc a
+    inc a
+    ld [rSCY], a
+ENDC
+
+IF 0
+rotate_tiles:
+    ; rotate the tiles (not the indexes themselves) so it does a barberpole
+    ld b, LINE_COUNT
+    ld hl, WINDOW   ; point to start of line
+
+.loop2:
+    ; starts at start of current line
+
+    ; point to end of visible window tiles
+    ld de, WINDOW_TILE_ROW_COUNT - 1
+    add hl, de
+
+    ; snarf the last one and put it on the stack
+    ld a, [hl]
+    ld d, 0
+    ld e, a     ; de (16 bits, ripe for pushing) is 00INDX
+    push de
+
+    ; *scan = *scan-- the rest of the loop
+    ld c, WINDOW_TILE_ROW_COUNT - 1
+.line_loop2:
+    dec hl      ; *scan--
+    ld a, [hl]  ; a = *scan
+    inc hl      ; *scan++
+    ld [hl], a  ; *scan = a
+    dec hl      ; *scan--
+
+    dec c
+    jr nz, .line_loop2
+
+
+    ; hl should now be pointing at the first tile of the line.
+    ; pop off the stack and put that savdd index into position
+    pop de
+    ld [hl], e
+
+    ; hl still pointing at beginning of the line
+    ; scoot it to the next line
+    ld de, WINDOW_TILE_ROW_COUNT + WINDOW_TILE_ROW_SKIP
+    add hl, de
+
+    dec b
+    jr nz, .loop2
+ENDC
+
+IF 0
+rotate_window_tile_indexes:
+    ; muck with window contents by rotating the index in-place
+    ; b is the line count (3,2,1, break at zero)
+    ; hl is the scan starting at the tilemap start ($9C00)
+    ; a loop increments from 20 to 1, break at zero. That's a line
+    ;   c is that counter
+    ; hl += 12 skipping over off-screen tiles
+    ; do the next line
+    
+    ld b, LINE_COUNT
+
+    ; start scan at beginning of the window's tile memory
+    ld hl, WINDOW
+
+.loop1
+
+    ld c, WINDOW_TILE_ROW_COUNT
+.line_loop1:
+    ld a, [hl]    ; *scan
+    rrca          ; mutate
+    ld [hli], a   ; *scan++ = a
+    dec c
+    jr nz, .line_loop1
+
+    ; skip the unused rest of the tilemap row
+    ld de, WINDOW_TILE_ROW_SKIP
+    add hl, de
+
+    dec b
+    jr nz, .loop1
+
+ENDC
+
+IF 0
+roll_bg_palette:
+    ; roll the bg palette continually to the right.  VERY trippy
+    ld a, [rBGP]  ; get current
+    rrca  ; roll out the barrel
+    rrca  ; roll out the barrel  - by two-bit color
+    ld [rBGP], a
+ENDC
+
+    ; ------------------------------
+    ; non VBLANK logic, set values to be picked up on next redraw
+    UpdatePadInput WRAM_PAD_INPUT
+
+    ; d-paddle check
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_LEFT
+    jr nz, .left_checked
+        ld hl, WRAM_BG_SCX
+        dec [hl]
+    .left_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_RIGHT
+    jr nz, .right_checked
+        ld hl, WRAM_BG_SCX
+        inc [hl]
+    .right_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_UP
+    jr nz, .up_checked
+        ld hl, WRAM_BG_SCY
+        dec [hl]
+    .up_checked
+
+    TestPadInput_HeldAll WRAM_PAD_INPUT, PADF_DOWN
+    jr nz, .down_checked
+        ld hl, WRAM_BG_SCY
+        inc [hl]
+    .down_checked
+
+    ; window toggule
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
+    jr nz, .window_toggle_checked
+        ld a, [WRAM_WIN_ENABLE_FLAG]
+        cpl
+        and a, LCDCF_WINON
+        ld [WRAM_WIN_ENABLE_FLAG], a
+    .window_toggle_checked
+
+    ret
+
+export InitSample
+export UpdateSample
+
+section "graphics_data", rom0[GRAPHICS_DATA_ADDRESS_START]
+incbin "tileset.chr"
+;incbin "background.tlm"
+incbin "input_interrupt.tlm"
+incbin "window.tlm"
+

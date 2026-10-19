@@ -402,3 +402,56 @@ or skip the file:
 PAL BKCHAR,TTY:<BKCHAR/H
 ```
 
+----------
+
+C234567
+
+pdp-8
+
+.FT extension
+^L exit input mode
+
+.COMPILE PROG.BN,TTY:<PROG.FT
+
+.R FORT
+*PROG.BN,PROG.LS<PROG.FT
+
+*BKNUM.BN,BKNUM.LS<BKNUM.FT
+R - READ
+L - LIST
+#C - CHANGE
+#D - DELETE
+#I - INSERT - "MAKE THIS NEW STUFF LINE #"
+
+
+PDP-11
+GOLD-7-EXIT-KP(ENTER)
+
+
+.FOR extension
+
+FORTRAN/LIST:TT: BKNUM
+
+(error flows off screen)
+
+LINK BKNUM,FORLIB
+run bknum
+
+
+OS/8 - 6.2
+RT-11 - 6.3, also has PROTECC feature
+
+RT-11 has forground/background
+OS/8 have to do yourself
+
+1. Turn on Interrupts: Issue the ION (Interrupt On) instruction.
+2. Intercept the Hardware Vector: When any hardware interrupt occurs (like a keyboard keypress or a clock tick), the PDP-8 hardware automatically forces a jump to memory address 0003 in Page 0.
+3. Write an ISR: You 
+
+VMS: SPAWN/NOWAIT RUN OOPACK.EXE
+
+OS/8: DEV:NAME.EX
+RT-11: DEVn:NAME.EXT
+(can use dy0 / dy1 to show)
+VMS:  NODE::DEVICE:[DIR.SUBDIR]FILENAME.TYPE;VERSION
+
