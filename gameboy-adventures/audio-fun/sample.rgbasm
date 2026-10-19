@@ -26,6 +26,7 @@ rsset _RAM   ; beginning of WRAM - $C000
 
 ; input struct
 def WRAM_PAD_INPUT      rb sizeof_PAD_INPUT
+def WRAM_FRAME_COUNTER  rb 1
 
 ; background scrolling
 def WRAM_BG_SCX         rb 1
@@ -80,6 +81,13 @@ section "sample", rom0
 InitSample:
     ; initialize WRAM state
     InitPadInput WRAM_PAD_INPUT
+    copy [WRAM_FRAME_COUNTER], $FF
+
+    ; setup sound stuffage
+    copy [rNR52], AUDENA_ON
+    copy [rNR50], $77
+    copy [rNR51], $FF
+
     xor a
     ld [WRAM_BG_SCX], a
     ld [WRAM_BG_SCY], a
@@ -366,6 +374,38 @@ ENDC
         and a, LCDCF_WINON
         ld [WRAM_WIN_ENABLE_FLAG], a
     .window_toggle_checked
+
+
+; !!! HERE
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
+    jr nz, .no_start_sound_1
+        ; play sound 1
+        copy [rNR10], $00
+        copy [rNR11], $80
+        copy [rNR12], $F3
+        copy [rNR13], $83
+        copy [rNR14], $87
+        ; activate counter to play sound 2 after a delay
+        copy [WRAM_FRAME_COUNTER], 4
+    .no_start_sound_1
+
+    ; skip counter check if the counter is disabled ($FF)
+    ld a, $FF
+    ld hl, WRAM_FRAME_COUNTER
+    cp a, [hl]
+    jr z, .no_trigger_sound_2
+        ; play sound 2 when counter reaches zero
+        dec [hl]
+        jr nz, .no_trigger_sound_2
+            ; play sound 2
+            copy [rNR10], $00
+            copy [rNR11], $80
+            copy [rNR12], $F3
+            copy [rNR13], $C1
+            copy [rNR14], $87
+            ; deactivate counter
+            dec [hl]
+    .no_trigger_sound_2
 
     ret
 
