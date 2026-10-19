@@ -376,7 +376,8 @@ ENDC
     .window_toggle_checked
 
 
-; !!! HERE
+; play bling
+IF 0
     TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
     jr nz, .no_start_sound_1
         ; play sound 1
@@ -406,6 +407,30 @@ ENDC
             ; deactivate counter
             dec [hl]
     .no_trigger_sound_2
+ENDC
+
+; Play C (A button) or A (B button) 4
+IF 1
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
+    jr nz, .button_a
+        ld de, $C60B
+        jr .play_sound
+    .button_a
+
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_B
+    jr nz, .button_b
+        ld de, $C6D6
+        jr .play_sound
+    .button_b
+
+    .play_sound
+    copy [rNR10], $00
+    copy [rNR11], $80
+    copy [rNR12], $F0
+    copy [rNR13], e
+    copy [rNR14], d
+ENDC
+; !!! HERE
 
     ret
 
