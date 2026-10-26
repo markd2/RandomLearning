@@ -20,6 +20,7 @@ def LINE_COUNT equ (3)    ; controlled by b
 
 def WINDOW_TILE_ROW_COUNT equ (20)  ; controlled by c
 def WINDOW_TILE_ROW_SKIP equ (12)   ; pointer math
+def TIME_BETWEEN_NOTES          equ (20)
 
 ; --------------------------------------------------
 rsset _RAM   ; beginning of WRAM - $C000
@@ -39,6 +40,7 @@ def WRAM_CHANNEL_VOLUME         rb 1
 def WRAM_STEP_LENGTH    rb 1
 
 def WRAM_STOP_COUNTER    rb 1
+def WRAM_NOTE_INDEX  rb 1
 
 def WRAM_END                    rb 0
 
@@ -46,7 +48,6 @@ def WRAM_USAGE     equ (WRAM_END - _RAM)
 println "WRAM usage: {d:WRAM_USAGE} bytes"
 assert WRAM_USAGE <= $2000, "Too much bytes in WRAM waah"
 ; --------------------------------------------------
-
 
 
 macro LoadGraphicsDataIntoVRAM
@@ -78,6 +79,11 @@ macro InitOAM
         jr nz, .init_oam\@
 endm
 
+section "notes", rom0
+Notes:
+dw $060b, $0642, $0672, $0689, $06b2, $06d6, $06f7, $0706
+dw $06f7, $06d6, $06b2, $0689, $0672, $0642, $060b, $0000
+
 
 section "vblank_interrupt", rom0[$0040]
     reti
@@ -94,6 +100,8 @@ InitSample:
     copy [rNR52], AUDENA_ON
     copy [rNR50], $77
     copy [rNR51], $FF
+
+    copy [WRAM_NOTE_INDEX], 0
 
     xor a
     ld [WRAM_BG_SCX], a
@@ -682,7 +690,7 @@ def TILE_INDEX_ZERO equ (80)
     .play_sound
 ENDC
 
-IF 1
+IF 0
 ; play frequency sleep.  A for Add, B for Subtract
     TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
     jr nz, .play_sound_add
@@ -713,6 +721,64 @@ IF 1
         copy [rNR13], $00
         copy [rNR14], $C0
     .stop_sound
+ENDC
+
+; play a melody
+IF 1
+    TestPadInput_Pressed WRAM_PAD_INPUT, PADF_A
+    jr nz, .start_notes
+        xor a
+        ld [WRAM_NOTE_INDEX], a
+        
+        copy [rNR10], $00
+        copy [rNR11], $80
+        copy [rNR12], $F0
+
+        ld hl, Notes
+        ld a, [hli]
+        ld [rNR13], a
+        ld a, [hl]
+        or a, $80
+        ld [rNR14], a
+
+        copy [WRAM_FRAME_COUNTER], TIME_BETWEEN_NOTES
+    .start_notes
+
+    ; switch through notes
+    ld a, $FF
+    ld hl, WRAM_FRAME_COUNTER
+    xor a, [hl]
+    jr z, .play_notes
+        ; decrease the timer and play the next sound when zero is reached
+        dec [hl]
+        jr nz, .sound_switch
+            ld a, [WRAM_NOTE_INDEX]
+            inc a
+            ld [WRAM_NOTE_INDEX], a
+
+            sla a     ; notes are 2-bytes, so scale the note index
+            ld d, 0
+            ld e, a   ; will get added to Notes base pointer
+
+            ld hl, Notes
+            add hl, de
+
+            ld a, [hli]
+            or a, a   ; don't change accumulator, but set conditional bits
+            jr nz, .stop_sound  ; have we hit the 0 value at the end of list
+                copy [rNR12], $00
+                copy [rNR14], $C0
+                ld a, $FF
+                ld [WRAM_FRAME_COUNTER], a
+                jr .play_notes
+            .stop_sound
+        
+            ld [rNR13], a
+            ld a, [hli]
+            ld [rNR14], a
+            copy [WRAM_FRAME_COUNTER], TIME_BETWEEN_NOTES
+        .sound_switch
+    .play_notes
 ENDC
 ; !!! HERE
 
