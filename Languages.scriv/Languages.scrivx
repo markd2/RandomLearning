@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.5.2-17487" Device="Ultrabook" Author="" Modified="2026-09-21 13:39:27 -0700" ModID="80F45233-3AB9-46E3-98B3-004F8CBF757A">
+<ScrivenerProject Identifier="8D152ED7-0010-4EC8-8E7D-7B9DAA814AFE" Version="2.0" Creator="SCRMAC-3.5.2-17487" Device="Ultrabook" Author="" Modified="2026-10-27 19:45:39 -0400" ModID="4548176D-FF51-4A7E-9543-3C834401E6D3">
     <Binder>
-        <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
+        <BinderItem UUID="EEB95526-2598-43E6-870E-29423D12B7D5" Type="DraftFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Draft</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <Children>
-                <BinderItem UUID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1" Type="Text" Created="2024-07-07 14:19:38 -0700" Modified="2026-08-25 13:54:15 -0700">
+                <BinderItem UUID="5641A8C0-884F-4C39-9C47-EB7BFACB73F1" Type="Text" Created="2024-07-07 17:19:38 -0400" Modified="2026-08-25 16:54:15 -0400">
                     <Title>Yay Languages</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -16,7 +16,7 @@
                         <TextSelection>325,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="0BD39E6F-5ABC-4A56-91E3-887B61F72966" Type="Folder" Created="2026-08-25 13:52:08 -0700" Modified="2026-08-25 13:52:31 -0700">
+                <BinderItem UUID="0BD39E6F-5ABC-4A56-91E3-887B61F72966" Type="Folder" Created="2026-08-25 16:52:08 -0400" Modified="2026-08-25 16:52:31 -0400">
                     <Title>BASIC</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -25,16 +25,16 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem UUID="02D28D17-9900-4F4A-B1EC-FE9266F19B13" Type="Text" Created="2026-08-25 13:52:47 -0700" Modified="2026-08-26 11:12:37 -0700">
+                        <BinderItem UUID="02D28D17-9900-4F4A-B1EC-FE9266F19B13" Type="Folder" Created="2026-08-25 16:52:47 -0400" Modified="2026-08-26 14:12:37 -0400">
                             <Title>Tektronix</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>398,0</TextSelection>
+                                <TextSelection>100,0</TextSelection>
                             </TextSettings>
                             <Children>
-                                <BinderItem UUID="5B172470-E802-4CF3-A532-E44FF5BA6700" Type="Text" Created="2026-08-25 14:53:54 -0700" Modified="2026-08-26 11:02:11 -0700">
+                                <BinderItem UUID="5B172470-E802-4CF3-A532-E44FF5BA6700" Type="Text" Created="2026-08-25 17:53:54 -0400" Modified="2026-08-26 14:02:11 -0400">
                                     <Title>Glossary</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -43,7 +43,7 @@
                                         <TextSelection>107,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem UUID="2B803C34-FBE4-4C9F-9146-39012BC3E9CD" Type="Text" Created="2026-09-21 13:00:56 -0700" Modified="2026-09-21 13:07:13 -0700">
+                                <BinderItem UUID="2B803C34-FBE4-4C9F-9146-39012BC3E9CD" Type="Text" Created="2026-09-21 16:00:56 -0400" Modified="2026-09-21 16:07:13 -0400">
                                     <Title>Variables</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -53,7 +53,7 @@
                                         <TextSelection>786,0</TextSelection>
                                     </TextSettings>
                                     <Children>
-                                        <BinderItem UUID="D54AF827-0EF2-43E9-BA07-C73AA46CFEEA" Type="Text" Created="2026-09-21 13:07:17 -0700" Modified="2026-09-21 13:11:04 -0700">
+                                        <BinderItem UUID="D54AF827-0EF2-43E9-BA07-C73AA46CFEEA" Type="Text" Created="2026-09-21 16:07:17 -0400" Modified="2026-09-21 16:11:04 -0400">
                                             <Title>Array</Title>
                                             <MetaData>
                                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -62,7 +62,7 @@
                                                 <TextSelection>15,0</TextSelection>
                                             </TextSettings>
                                         </BinderItem>
-                                        <BinderItem UUID="7438A8F8-5B9E-4665-83CE-8203E5884903" Type="Text" Created="2026-09-21 13:11:05 -0700" Modified="2026-09-21 13:39:27 -0700">
+                                        <BinderItem UUID="7438A8F8-5B9E-4665-83CE-8203E5884903" Type="Text" Created="2026-09-21 16:11:05 -0400" Modified="2026-09-21 16:39:27 -0400">
                                             <Title>String</Title>
                                             <MetaData>
                                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -73,7 +73,7 @@
                                         </BinderItem>
                                     </Children>
                                 </BinderItem>
-                                <BinderItem UUID="70B69A78-9E25-4652-B7C3-5F9065601223" Type="Text" Created="2026-08-26 11:02:09 -0700" Modified="2026-08-26 11:11:02 -0700">
+                                <BinderItem UUID="70B69A78-9E25-4652-B7C3-5F9065601223" Type="Text" Created="2026-08-26 14:02:09 -0400" Modified="2026-08-26 14:11:02 -0400">
                                     <Title>Environtment commands</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -82,7 +82,7 @@
                                         <TextSelection>1613,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem UUID="3FDE49AD-F302-43F8-8CAF-2FCF85FC719E" Type="Text" Created="2026-09-09 09:41:40 -0700" Modified="2026-09-09 09:43:11 -0700">
+                                <BinderItem UUID="3FDE49AD-F302-43F8-8CAF-2FCF85FC719E" Type="Text" Created="2026-09-09 12:41:40 -0400" Modified="2026-09-09 12:43:11 -0400">
                                     <Title>Flow Comtrol</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -91,7 +91,7 @@
                                         <TextSelection>128,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem UUID="9024B750-05F7-4548-B85B-2D529A5EDDCE" Type="Text" Created="2026-09-09 11:26:13 -0700" Modified="2026-09-09 11:28:10 -0700">
+                                <BinderItem UUID="9024B750-05F7-4548-B85B-2D529A5EDDCE" Type="Text" Created="2026-09-09 14:26:13 -0400" Modified="2026-09-09 14:28:10 -0400">
                                     <Title>Random stuffs</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -100,7 +100,7 @@
                                         <TextSelection>309,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem UUID="6F26EE04-F1D7-4651-967E-1F3C38C68AC2" Type="Text" Created="2026-09-21 12:26:40 -0700" Modified="2026-09-21 13:21:17 -0700">
+                                <BinderItem UUID="6F26EE04-F1D7-4651-967E-1F3C38C68AC2" Type="Text" Created="2026-09-21 15:26:40 -0400" Modified="2026-09-21 16:21:17 -0400">
                                     <Title>Interrupt Handling</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -110,7 +110,7 @@
                                         <TextSelection>3663,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem UUID="34EFA1B7-786F-414B-825D-843CAB3B67E0" Type="Text" Created="2026-09-21 13:11:49 -0700" Modified="2026-09-21 13:37:02 -0700">
+                                <BinderItem UUID="34EFA1B7-786F-414B-825D-843CAB3B67E0" Type="Text" Created="2026-09-21 16:11:49 -0400" Modified="2026-09-21 16:37:02 -0400">
                                     <Title>Program Structure</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -123,7 +123,7 @@
                                         <Bookmark BinderUUID="6F26EE04-F1D7-4651-967E-1F3C38C68AC2"/>
                                     </Bookmarks>
                                     <Children>
-                                        <BinderItem UUID="E5F9C650-C662-43B4-B14E-DEBD6FD3972D" Type="Text" Created="2026-09-21 13:23:02 -0700" Modified="2026-09-21 13:36:10 -0700">
+                                        <BinderItem UUID="E5F9C650-C662-43B4-B14E-DEBD6FD3972D" Type="Text" Created="2026-09-21 16:23:02 -0400" Modified="2026-09-21 16:36:10 -0400">
                                             <Title>User-Definable Keys</Title>
                                             <MetaData>
                                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -135,7 +135,7 @@
                                         </BinderItem>
                                     </Children>
                                 </BinderItem>
-                                <BinderItem UUID="818BDFC6-AD96-4948-A0E6-BDBEC37BB655" Type="Text" Created="2026-09-21 13:17:35 -0700" Modified="2026-09-21 13:20:48 -0700">
+                                <BinderItem UUID="818BDFC6-AD96-4948-A0E6-BDBEC37BB655" Type="Text" Created="2026-09-21 16:17:35 -0400" Modified="2026-09-21 16:20:48 -0400">
                                     <Title>Analysis of actual programs</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -147,9 +147,18 @@
                                 </BinderItem>
                             </Children>
                         </BinderItem>
+                        <BinderItem UUID="1732FABB-4BAF-4E27-959A-E71229652A06" Type="Folder" Created="2026-10-27 19:39:23 -0400" Modified="2026-10-27 19:45:39 -0400">
+                            <Title>Atari 800</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>0,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem UUID="4CF964B6-3611-498F-9B06-557EF2CEFC92" Type="Folder" Created="2026-08-25 13:52:04 -0700" Modified="2026-08-25 13:52:34 -0700">
+                <BinderItem UUID="4CF964B6-3611-498F-9B06-557EF2CEFC92" Type="Folder" Created="2026-08-25 16:52:04 -0400" Modified="2026-08-25 16:52:34 -0400">
                     <Title>PASCAL</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -158,7 +167,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="C2F8A02C-C4E9-40DD-878E-1437AED8E963" Type="Folder" Created="2026-08-25 13:52:03 -0700" Modified="2026-08-25 13:52:36 -0700">
+                <BinderItem UUID="C2F8A02C-C4E9-40DD-878E-1437AED8E963" Type="Folder" Created="2026-08-25 16:52:03 -0400" Modified="2026-08-25 16:52:36 -0400">
                     <Title>FORTRAN</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -169,19 +178,19 @@
                 </BinderItem>
             </Children>
         </BinderItem>
-        <BinderItem UUID="94D5FC1E-44EA-4DFB-A8B8-029A495C48DB" Type="ResearchFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
+        <BinderItem UUID="94D5FC1E-44EA-4DFB-A8B8-029A495C48DB" Type="ResearchFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Research</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
         </BinderItem>
-        <BinderItem UUID="850215C0-5EE2-42DA-9314-A7AD31CD8EAA" Type="TrashFolder" Created="2023-07-06 17:40:59 -0700" Modified="2023-07-06 17:40:59 -0700">
+        <BinderItem UUID="850215C0-5EE2-42DA-9314-A7AD31CD8EAA" Type="TrashFolder" Created="2023-07-06 20:40:59 -0400" Modified="2023-07-06 20:40:59 -0400">
             <Title>Trash</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
         </BinderItem>
-        <BinderItem UUID="BDD68F68-79DE-4108-807A-1A270B2E79AE" Type="Text" Created="2026-09-21 13:10:07 -0700" Modified="2026-09-21 13:10:47 -0700">
+        <BinderItem UUID="BDD68F68-79DE-4108-807A-1A270B2E79AE" Type="Text" Created="2026-09-21 16:10:07 -0400" Modified="2026-09-21 16:10:47 -0400">
             <Title>ScrivHints</Title>
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -244,15 +253,15 @@
         </StatusItems>
     </StatusSettings>
     <ProjectTargets Notify="No">
-        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 17:40:58 -0700" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2026-09-22 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="1261" Characters="7275" Date="2026-09-21 13:33:28 -0700"/>
+        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2023-07-06 20:40:58 -0400" IgnoreDeadline="Yes">0</DraftTarget>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2026-10-28 01:00:00 -0400" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="154" Characters="871" Date="2026-10-27 19:39:16 -0400"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2026-09-21 00:00:00 -0700">
-        <DraftWordCount>1261</DraftWordCount>
-        <DraftCharCount>7275</DraftCharCount>
-        <OtherWordCount>19</OtherWordCount>
-        <OtherCharCount>123</OtherCharCount>
+    <RecentWritingHistory Date="2026-10-27 00:00:00 -0400">
+        <DraftWordCount>154</DraftWordCount>
+        <DraftCharCount>871</DraftCharCount>
+        <OtherWordCount>0</OtherWordCount>
+        <OtherCharCount>0</OtherCharCount>
     </RecentWritingHistory>
-    <PrintSettings PaperSize="611.99999,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
+    <PrintSettings PaperSize="611.999993,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>
