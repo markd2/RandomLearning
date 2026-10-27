@@ -1,0 +1,28 @@
+include "../hardware.rgbinc"
+
+macro DisableLCD
+    ; wait for vblank
+    .wait_vblank\@
+        ld a, [rLY]
+        cp a, SCRN_Y
+        jr nz, .wait_vblank\@
+    ; turn it off
+    xor a
+    ld [rLCDC], a
+endm
+
+section "header", rom0[$0100]
+entrypoint:
+    di
+    jp main
+    ds ($0150 - @), 0
+
+; --------------------------------------------------
+
+section "main", rom0
+main:
+    DisableLCD
+    call InitSample
+    .loop
+        call UpdateSample
+        jr .loop
