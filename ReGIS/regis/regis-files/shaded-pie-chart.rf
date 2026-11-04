@@ -1,0 +1,30 @@
+P[300,320]
+W(S1,S'/')
+W(I2)
+C[+150]
+W(S0)
+C[+150]
+P[+150]
+W(S' ')
+W(R)
+C(C,A+45)[300,320]
+V[300, 320]
+P[+25,-7]
+W(S1)
+P[+150]
+C(C,A+45)[-150]
+V[325,313]
+W(I3)
+P[220,200]
+T(S2)' other'
+P[220,233]
+T' 90.%'
+P[505,205]
+T'Administrative'
+P[505,233]
+T'10.0%'
+P[50,25]
+T(S3,I-20)'Administrative Costs Are'
+P[50,85]
+T'Small Portion of Total'
+

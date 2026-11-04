@@ -1,0 +1,10 @@
+# Screen Scale
+P[150,150]
+C[+100]
+P[-50]
+T'SCALE'
+S(S2)
+S(S1)
+S(S(X2))
+S(S(Y2))
+S(S1)

@@ -1,0 +1,18 @@
+# Text Complement
+
+P[600,100]
+W(S1,I2)
+P[,+300]
+V[-125]
+W(I1)
+V[-125]
+W(I0)
+V[0125]
+W(I3)
+V[-125]
+W(S0)
+
+P[,-200]
+W(C)
+T(S3)'COMPLEMENT WRITING STYLE'
+W(R)

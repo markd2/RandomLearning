@@ -1,0 +1,11 @@
+# Line Pattern Chart
+# the P2 line is drawing in the wrong place in Countour
+P[100,100]
+V[,+300][+400]
+W(P2)
+P[100,-80]
+C(S) [] [+100,-30][+100,-50],[+100,-30][+100,-20][](E)
+W(P4)
+P[100,300]
+C(S) [] [+100][+100,-40][+100,-20][+100,-40][](E)
+W(P1)
