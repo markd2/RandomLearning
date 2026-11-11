@@ -1,0 +1,28 @@
+
+howdy: proc options(main);
+     dcl infile file stream input;
+     dcl line char(2048) varying;
+     dcl eof bit(1) init('0'b);
+ 
+     dcl line_count fixed bin(31) init(0);
+     dcl total fixed dec(15) init(0);
+ 
+     on endfile(infile) eof = '1'b;
+ 
+     open file(infile) title('howdy.txt');
+ 
+     get file(infile) edit(line) (a);
+ 
+     do while (¬eof);
+         line_count = line_count + 1;
+         put skip list('Line', line_count, 'Length:', length(line));
+         get file(infile) edit(line) (a);
+         total = total + LENGTH(line);
+     end;
+     close file(infile);
+     put skip list('Total lines:', line_count);
+     put skip list('Total:', total);
+ 
+ end howdy;
+     
+ 

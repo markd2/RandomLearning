@@ -27,6 +27,8 @@ I ended up no longer having the time.  It's all love, though.
 
 # Deets
 
+## Compiler
+
 [Iron Spring](https://iron-spring.com) has a PL/I compiler for Linux. There's not a native one for
 the Mac (which is my usual daily driver).  I have access to VAXen and
 IBM mainframes here at the museum.  So I could run simh or hercules at
@@ -36,4 +38,24 @@ a new language, especially one that's a chonker like PL/I, will be enough.
 I've gotten that installed.  Files in this directory are pl/i playing, and
 advent of code jazz will be over at my somewhat embarassing [Advent of Code Repo](https://github.com/markd2/adventofcode).
 
+## Emacs Mode
+
+No pl1 mode in the standard emacs package ecosystem. There is a mode at 
+https://github.com/marcox1/iron-main . Do a `M-x package-vc-install`, then
+paste in that URL.  Finally, add this verbage to your `.emacs.`:
+
+```
+(require 'pl1-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(pli\\|pl1\\)\\'" . pl1-mode))
+```
+
+To insert the PL/I "not" character `¬`: `Ctrl-X 8 [RET] 00ac [RET]`
+
+
+# Building
+
+There's a makefile here taken from "SA_Make" from the iron-spring samples
+directory, that compiles a stand-alone sample linking against the PL/I
+library (not anything C-related).  I'm planning on staying inside the 
+iron-spring ecosystem, so that's ok.  `make blah` is good enough.
 

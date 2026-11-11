@@ -1,0 +1,13 @@
+Hello.
+This
+is
+a
+text
+file
+similar
+to
+advent
+of
+code
+input
+files.
