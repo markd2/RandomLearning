@@ -41,7 +41,7 @@ advent of code jazz will be over at my somewhat embarassing [Advent of Code Repo
 ## Emacs Mode
 
 No pl1 mode in the standard emacs package ecosystem. There is a mode at 
-https://github.com/marcox1/iron-main . Do a `M-x package-vc-install`, then
+https://github.com/marcoxa/iron-main . Do a `M-x package-vc-install`, then
 paste in that URL.  Finally, add this verbage to your `.emacs.`:
 
 ```
