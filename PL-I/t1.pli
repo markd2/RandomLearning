@@ -3,25 +3,37 @@
  */
 
 
+
+
+/* simple columns */
+/*
+flongwaffle: procedure options (main);
+    declare (str1, str2) character(100) varying;
+    declare (counter, datacount) decimal;
+    get list (datacount);
+    listloop: do counter = 2 to datacount by 2;
+        get list (str1);
+        get list (str2);
+        put skip list (str1, str2);
+    end listloop;
+end flongwaffle;
+*/
+
 /* exercise - print inner and outer 10 of a list of 9 numbers (was 30, but that many is annoying */
+/*
 program: procedure options (main);
     declare (value, i) decimal;
 
-    loop: do i = 1 to 3;
+    loop: do i = 1 to 9;
         get list (value);
-        put skip list (value);
+
+        if i <= 3 | i >= 7 THEN DO; 
+            put skip list (value);
+        end;
         end loop;
 
-    loop2: do i = 1 to 3;
-        get list (value);
-        end loop2;
-
-    loop3: do i = 1 to 3;
-        get list (value);
-        put skip list (value);
-        end loop3;
-
     end program;
+*/
 
 /* exercise - read a datalist of N numbers, and print those out one per line in read-order */
 /*
