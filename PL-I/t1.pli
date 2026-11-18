@@ -1,0 +1,84 @@
+/* Thing 1 - an almagam of language trivia glommed together from "Programming
+ * for Poets" (from Cornell, 1978).
+ */
+
+
+/* exercise - print inner and outer 10 of a list of 9 numbers (was 30, but that many is annoying */
+program: procedure options (main);
+    declare (value, i) decimal;
+
+    loop: do i = 1 to 3;
+        get list (value);
+        put skip list (value);
+        end loop;
+
+    loop2: do i = 1 to 3;
+        get list (value);
+        end loop2;
+
+    loop3: do i = 1 to 3;
+        get list (value);
+        put skip list (value);
+        end loop3;
+
+    end program;
+
+/* exercise - read a datalist of N numbers, and print those out one per line in read-order */
+/*
+program: procedure options (main);
+    declare values(20) decimal;
+    declare (datacount) decimal;
+    declare i decimal;
+
+    get list (datacount);
+    fetchloop: do  i = 1 to datacount by 1;
+        get list (values(i));
+        end fetchloop;
+
+    printloop: do i = 1 to datacount;
+         put skip list(fixed(values(i)));
+         end printloop;
+
+    put skip list('done!');
+
+    end program;
+*/
+
+/*
+program: procedure options (main);
+    declare (st) character(100) varying;
+
+    declare (loopcount) decimal;
+    declare (linecount, nbrLines) decimal;
+    declare (datacount) decimal;
+
+    get list (datacount);
+    printloop: do loopcount = 1 to datacount by 1;
+        get list (nbrLines);
+        get list (st);
+        lineloop: do datacount = 1 to nbrLines;
+           put skip list (st);
+           end lineloop;
+        end printloop;
+    end program;
+*/
+
+/*
+program: procedure options (main);
+   declare (str) character(100) varying;
+   get list(str);
+   put skip list(str);
+   end program;
+*/
+   
+
+/*
+program: procedure options(main);
+    declare (number1, number2, sum) decimal;
+    get list (number1, number2);
+    sum = number1 + number2;
+    sum = sum + .7;
+    put skip list (fixed(sum));
+    put skip list (sum);
+    end program0;
+*/
