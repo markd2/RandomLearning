@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include <fcntl.h>  /* for open() */
+#include <sys/errno.h>
+#include <sys/types.h>
+#include <sys/dir.h> /* for opendir() and friends */
+
+extern int errno;
 
 /* Demo program exercising ReGIS GrAPHICS.
  * program arguments:
@@ -7,7 +12,7 @@
  *   -e : erase the screen / reset regis graphics
  *   -s dirname : run an auto-advancing slide show of regis (.rf) files in
  *                the given directory
- *   -i dirname : run ineractive slide show with user controls
+ *   -i dirname : run interactive slide show with user controls
  *   -f filename : blort that file to the screen and exit
  */
 
@@ -25,7 +30,7 @@ typedef enum {
  static char *prolog = "\033PpS(E)T[+9,+0](S1,H2,S[9,20],M[1,2],D0,I0)";
 static char *terminator = "\033\\";
 
-void usage(); void blortFile();
+void usage(); void blortFile(); void blortDirectory(); void erase();
 
 typedef struct Mode {
     ProgramMode mode;
@@ -76,7 +81,8 @@ int main(argc, argv)
 
     switch (programMode.mode) {
         case pmSingle: blortFile(programMode.argument); break;
-        case pmErase: printf("ERASE\n"); break;
+        case pmSlideShow: blortDirectory(programMode.argument); break;
+        case pmErase: erase(); break;
         case pmError: printf("ERROR\n"); usage(); break;
     }
 
@@ -85,6 +91,12 @@ int main(argc, argv)
     return 0;
 
 } /* main */
+
+
+void erase() {
+    printf("%s", prolog);
+    printf("%s\n", terminator);
+} /* erase */
 
 
 void blortFile(filename)
@@ -108,6 +120,67 @@ void blortFile(filename)
 
     printf("%s", terminator);
 } /* blortFile */
+
+
+int hasSuffix(string, suffix)
+    char *string;
+    char *suffix;
+{
+    int slen = strlen(string);
+    int xlen = strlen(suffix);
+    char *sscan, *xscan, *xstop;
+
+    if (xlen > slen) return 0;
+
+    sscan = string + slen - xlen;
+    xscan = suffix;
+    xstop = xscan + xlen;
+
+    while (xscan < xstop) {
+        if (*xscan != *sscan) return 0;
+        xscan++;
+        sscan++;
+    }
+
+    return 1;
+} /* hasSuffix */
+
+
+void blortDirectory(dirname)
+    char *dirname;
+{
+    DIR *dirp;
+    int fileCount;
+    int result;
+    struct direct *entry;
+struct fourAcgs *oopack;
+
+
+    dirp = opendir(dirname);
+    if (dirp == NULL) {
+        fprintf(stderr, "could not open directory '%s' - errno %d\n", 
+                dirname, errno);
+        return;
+    }
+
+    result = chdir(dirname);
+    if (result != 0) {
+        fprintf(stderr, "could not chdir to '%s' - errno %d\n",
+                dirname, errno);
+        return;
+    }
+
+    /* for now, just walk in return order.  TODO: sort names first */
+    while ((entry = readdir(dirp)) != NULL) {
+        printf("%d: %s\n", entry->d_namlen, entry->d_name);
+        if (!hasSuffix(entry->d_name, ".rf")) continue;
+        blortFile(entry->d_name);
+    }
+    
+    
+    closedir(dirp);
+
+} /* blortDirectory */
 
 
 void usage() {
