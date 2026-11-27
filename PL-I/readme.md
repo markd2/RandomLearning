@@ -1,5 +1,8 @@
 # PL/I
 
+(tmux tricks - split vertically with ^B % , switch with ^B o
+)
+
 Maybe doing Advent of Code 2026 in PL/I.
 
 Good lord why? 
@@ -82,11 +85,15 @@ iron-spring ecosystem, so that's ok.  `make blah` is good enough.
 - numbers will print in scientific notation. Use `fixed(numvar)` to print out decimal styles
   (truncating decimals)
 - declare string with `declare (str) character(100) varying;`
+- typos in varaible names are implicitly given types.  got bitten by that...
 
 
 ### Misc
 
 Comments are `/* ... */`, newlines ok.  Can't nest.
+
+Whitespace between tokens is fine, as are newlines. Jsut don't split an element (like a keyword or
+literal string)
 
 
 ### loops
@@ -140,5 +147,12 @@ Print out multiple values with `PUT SKIP LIST (OOP, ACK, BILL);`
 
 They print out in tab stops. five columns is standard. (poet-book) "PL/I has very elaborate and flexible
 facilities for formatting output", which I'll get to eventually. Appendix B.4 has some more info
+
+When entering values, put a space after the name
+```
+'oop' |----
+'ack' |----
+'greeble' |----
+```
 
 

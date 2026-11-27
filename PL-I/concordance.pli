@@ -1,0 +1,68 @@
+/* concordance - make a concordance and sort it.  From page 162 of "Programming
+ * for Poets"
+ */
+
+program: procedure options(main);
+    declare word(74) character(100) varying;
+    declare freq(74) decimal;
+    declare (linenbr, start, lastline) decimal;
+    declare newword character(100) varying;
+    declare wordnbr decimal;
+    declare (lsofar, posnofl) decimal;
+    declare tempfreq decimal;
+    declare tempword character(100) varying;
+    declare title character(100) varying;
+
+    get list (title);
+    lastline = 0;
+
+    dataloop: do wordnbr = 1 to 10000 by 1;
+        get list (newword);
+        if newword = ')LAST(' then go to tableFinished;
+        findLoop: do linenbr = 1 to lastline by 1;
+            if newword = word(linenbr) then do;
+                freq(linenbr) = freq(linenbr) + 1;
+                go to findOver;
+            end;
+        end findLoop;
+        lastline = lastline + 1;
+        if lastline > 74 then do;
+            lastline = 74;
+            put skip list ('->-> ERROR: Table Overflow');
+            put skip list (' ', 'last line has been overlaid');
+            put skip list (' ' , 'word:', word(lastline), 'freq:', fixed(freq(lastline)));
+            put skip list (' ');
+        end;
+        word(lastline) = newWord;
+        freq(lastline) = 1;
+        findover:;
+    end dataloop;
+    tableFinished:;
+
+    moveLarge: do start = 1 to lastline - 1 by 1;
+        lsofar = freq(start);
+        posnofl = start;
+        findLarge: do linenbr = start + 1 to lastLine by 1;
+            if freq(lineNbr) > lsofar then do;
+                lsofar = freq(linenbr);
+                posnofl = linenbr;
+            end;
+        end findLarge;
+        tempfreq = freq(start);
+        freq(start) = freq(posnofl);
+        freq(posnofl) = tempfreq;
+        tempword = word(start);
+        word(start) = word(posnofl);
+        word(posnofl) = tempword;
+    end moveLarge;
+    put skip list ('Word usage frequencies in:', title);
+    put skip list (' ');
+    put skip list (' ', 'WORD', 'FREQUENCY');
+    put skip list (' ');
+    printloop: do linenbr = 1 to lastline by 1;
+        put skip list (' ', word(linenbr), fixed(freq(linenbr)));
+    end printloop;
+    put skip list (' ');
+    put skip list (' ', '    end of table');
+end program;
+
