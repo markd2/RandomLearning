@@ -1,0 +1,71 @@
+/* pspack - the PS-PACK stats package from page 173 of "Programming for Poets"
+ */
+
+program: procedure options(main);
+    declare command character(100) varying;
+    declare (li, me, ma, mi, ra, sd, lm) character(10) varying;
+    declare (cnbr, dnbr, qty) decimal;
+    declare value decimal;
+    declare (sum, sumsq, avg, large, small, diff) decimal;
+    declare (sumsqdev, meansqdev) decimal;
+    declare (stddev, lower, upper) decimal;
+
+    commandLoop: do cnbr = 1 to 10000;
+        get list (command);
+        if command = 'NUMBERS' then go to lastCommand;
+        if command = 'LIST' then li = 'YES';
+        if command = 'MEAN' then me = 'YES';
+        if command = 'MAX' then ma = 'YES';
+        if command = 'MIN' then mi = 'YES';
+        if command = 'RANGE' then ra = 'YES';
+        if command = 'SDEV' then sd = 'YES';
+        if command = 'LIMITS' then lm = 'YES';
+    end commandLoop;
+    lastCommand:;
+
+    get list (qty);
+    sum = 0;
+    sumsq = 0;
+    large = -10000;
+    small = 10000;
+
+    put skip list ('PS-PACK STATISTICAL ROUTINE');
+    put skip list (' ');
+    put skip list (' ', fixed(qty), 'numbers given');
+    put skip list (' ');
+
+    if li = 'YES' then put skip list ('list of data values:');
+    dataloop: do dnbr = 1 to qty;
+        get list (value);
+        if LI = 'YES' then put skip list (' ', value);
+        sum = sum + value;
+        sumsq = sumsq + (value * value);
+        if value > large then large = value;
+        if value < small then small = value;
+    end dataloop;
+
+    if li = 'YES' then put skip list ('end of data list');
+    put skip list (' ');
+
+    put skip list ('RESULTS-------');
+    avg = sum / qty;
+    if me = 'YES' then put skip list (' ', 'mean is:', avg);
+    if ma = 'YES' then put skip list (' ', 'maximum is:', large);
+    if mi = 'YES' then put skip list (' ', 'minimum is:', small);
+    diff = large = small;
+    if ra = 'YES' then put skip list (' ', 'range is:', diff);
+    sumsqdev = sumsq - ((sum * sum) / qty);
+    meansqdev = sumsqdev / (qty - 1);
+    stddev = sqrt(meansqdev);
+    if sd = 'YES' then put skip list (' ', 'std dev is:', stddev);
+    if lm = 'YES' then do;
+        lower = avg - (1.96 * (stddev / sqrt(qty)));
+        upper = avg + (1.96 * (stddev / sqrt(qty)));
+        put skip list (' ', '95 percent confidence limits on the mean');
+        put skip list (' ', '    lower limit is:', lower);
+        put skip list (' ', '    upper limit is:', upper);
+    end;
+    put skip list (' ');
+    put skip list ('end of ps-pack results');
+end program;
+
